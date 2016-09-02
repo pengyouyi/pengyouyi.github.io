@@ -180,18 +180,91 @@
 2.在finder下－－－－》前往－－－》前往文件夹，然后输入/etc<br>
 3.可以在terminal 输入 &quot;open /etc&quot;。</p>
 
-<h2 id="hhhh">启动hhhh</h2>
+<h2 id=">设置虚拟主机</h2>
 
-<p>在终端运行&quot;sudo vi /etc/apache2/httpd.conf&quot;，打开Apche的配置文件<br>
-在httpd.conf中找到&quot;#Include /private/etc/apache2/extra/httpd-vhosts.conf&quot;，去掉前面的&quot;＃&quot;，保存并退出。<br>
-运行&quot;sudo apachectl restart&quot;，重启Apache后就开启了虚拟主机配置功能。<br>
-运行&quot;sudo vi /etc/apache2/extra/httpd-vhosts.conf&quot;，就打开了配置虚拟主机文件httpd-vhost.conf，配置虚拟主机了。需要注意的是该文件默认开启了两个作为例子的虚拟主机：</p>
+<p>1.在终端运行&quot;sudo vi /etc/apache2/httpd.conf&quot;，打开Apche的配置文件<br>
+2.在httpd.conf中找到&quot;#Include /private/etc/apache2/extra/httpd-vhosts.conf&quot;，去掉前面的&quot;＃&quot;，保存并退出。<br>
+3.运行&quot;sudo apachectl restart&quot;，重启Apache后就开启了虚拟主机配置功能。<br>
+4.运行&quot;sudo vi /etc/apache2/extra/httpd-vhosts.conf&quot;，就打开了配置虚拟主机文件httpd-vhost.conf，配置虚拟主机了。需要注意的是该文件默认开启了两个作为例子的虚拟主机：</p>
 
-<h2 id="hhhh">hhhh</h2>
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</pre></td><td class="code"><pre><span class="c1">#&lt;VirtualHost *:80&gt;</span>
+<span class="c1">#    ServerAdmin webmaster@dummy-host.example.com</span>
+<span class="c1">#    DocumentRoot "/usr/docs/dummy-host.example.com"</span>
+<span class="c1">#    ServerName dummy-host.example.com</span>
+<span class="c1">#    ServerAlias www.dummy-host.example.com</span>
+<span class="c1">#    ErrorLog "/private/var/log/apache2/dummy-host.example.com-error_log"</span>
+<span class="c1">#    CustomLog "/private/var/log/apache2/dummy-host.example.com-access_log" common</span>
+<span class="c1">#&lt;/VirtualHost&gt;</span>
 
-<h2 id=">启动中文</h2>
+<span class="c1">#&lt;VirtualHost *:80&gt;</span>
+<span class="c1">#    ServerAdmin webmaster@dummy-host2.example.com</span>
+<span class="c1">#   DocumentRoot "/usr/docs/dummy-host2.example.com"</span>
+<span class="c1">#    ServerName dummy-host2.example.com</span>
+<span class="c1">#    ErrorLog "/private/var/log/apache2/dummy-host2.example.com-error_log"</span>
+<span class="c1">#    CustomLog "/private/var/log/apache2/dummy-host2.example.com-access_log" common</span>
+<span class="c1">#&lt;/VirtualHost&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h2 id="hhhh">hhhh</h2>
+<p>而实际上，这两个虚拟主机是不存在的，在没有配置任何其他虚拟主机时，可能会导致访问localhost时出现如下提示：</p>
+
+<p>Forbidden<br>
+You don&#39;t have permission to access /index.php on this server<br>
+最简单的办法就是在它们每行前面加上#，注释掉就好了，这样既能参考又不导致其他问题。</p>
+
+<p>5.增加如下配置</p>
+
+<figure class="highlight"><pre><code class="language-linenos" data-lang="linenos">&lt;VirtualHost *:80&gt;
+    DocumentRoot "/Users/pengyouyi/workplaces"
+    ServerName mysites
+    ErrorLog "/private/var/log/apache2/sites-error_log"
+    CustomLog "/private/var/log/apache2/sites-access_log" common
+    &lt;Directory "/Users/pengyouyi/workplaces"&gt;
+        Options Indexes FollowSymLinks Includes ExecCGI
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre></figure>
+
+<p>保存退出，并重启Apache。</p>
+
+<p>6.运行“sudo vi /etc/hosts”，打开hosts配置文件，加入&quot;127.0.0.1 mysites&quot;，这样就可以配置完成sites虚拟主机了，可以访问&quot;mysites&quot;了</p>
+
+<p><strong>注意:</strong> 以上代码适用于 Apache HTTP Server Version 2.4</p>
+<div class="highlight"><pre><code class="language-" data-lang="">Apache 2.4 configuration:
+Require all denied
+</code></pre></div><div class="highlight"><pre><code class="language-" data-lang="">Apache 2.2 configuration:
+Order deny,allow
+Deny from all
+</code></pre></div>
+<p>Apache HTTP Server Version 2.2 可用如下代码</p>
+
+<figure class="highlight"><pre><code class="language-linenos" data-lang="linenos">&lt;VirtualHost *:80&gt;
+    DocumentRoot "/Users/pengyouyi/workplaces"
+    ServerName mysites
+    ErrorLog "/private/var/log/apache2/sites-error_log"
+    CustomLog "/private/var/log/apache2/sites-access_log" common
+    &lt;Directory "/Users/pengyouyi/workplaces"/&gt;
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Order deny,allow
+                Allow from all
+      &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre></figure>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -289,7 +362,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/#mac" title="mac">mac<sup>3</sup></a></li>
+			<li><a href="/categories/#mac" title="mac">mac<sup>2</sup></a></li>
 		  
 		
 		</ul>
@@ -302,7 +375,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/#mac" title="mac">mac<sup>3</sup></a></li>
+				<li><a href="/tags/#mac" title="mac">mac<sup>2</sup></a></li>
 			
 		
 			
@@ -310,7 +383,7 @@
 			
 		
 			
-				<li><a href="/tags/#端口使用" title="端口使用">端口使用<sup>2</sup></a></li>
+				<li><a href="/tags/#端口使用" title="端口使用">端口使用<sup>1</sup></a></li>
 			
 		
 		</ul>
