@@ -38,6 +38,12 @@ pengyouyideMacBook-Pro:~ pengyouyi$ kill -9 236
 ```
 参数说明: -9表示强制杀死
 
+## 如何查看github的服务器ip
+* windows下按Win+R，输入cmd后回车，在命令行里输入`ping pengyouyi.github.io`，回车后会看到一个IP，就是它了。
+* 如果是mac，可以在终端输入`dig pengyouyi.github.io`，同样回车后会看到一个对应的IP地址。
+
+
+
 
 
 
