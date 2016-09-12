@@ -165,13 +165,13 @@
 <h2 id="apache">启动Apache</h2>
 
 <p>打开&quot;终端(terminal)&quot;,输入 apachectl -v 查看Apache版本。</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">pengyouyideMacBook</span><span class="o">-</span><span class="no">Pro</span><span class="ss">:~</span> <span class="n">pengyouyi</span><span class="err">$</span> <span class="n">apachectl</span> <span class="o">-</span><span class="n">v</span>
-<span class="no">Server</span> <span class="ss">version: </span><span class="no">Apache</span><span class="o">/</span><span class="mi">2</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">18</span> <span class="p">(</span><span class="no">Unix</span><span class="p">)</span>
-<span class="no">Server</span> <span class="ss">built:   </span><span class="no">Feb</span> <span class="mi">20</span> <span class="mi">2016</span> <span class="mi">20</span><span class="p">:</span><span class="mo">03</span><span class="p">:</span><span class="mi">19</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pengyouyideMacBook-Pro:~ pengyouyi<span class="nv">$ </span>apachectl -v
+Server version: Apache/2.4.18 <span class="o">(</span>Unix<span class="o">)</span>
+Server built:   Feb 20 2016 20:03:19
 </code></pre></div>
 <p>接着输入 apachectl start ,这样就启动Apache。</p>
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">pengyouyideMacBook</span><span class="o">-</span><span class="no">Pro</span><span class="ss">:~</span> <span class="n">pengyouyi</span><span class="err">$</span> <span class="n">apachectl</span> <span class="n">start</span>
-<span class="no">This</span> <span class="n">operation</span> <span class="n">requires</span> <span class="n">root</span><span class="o">.</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">pengyouyideMacBook-Pro:~ pengyouyi<span class="nv">$ </span>apachectl start
+This operation requires root.
 </code></pre></div>
 <p>检查Apache是否启动成功,打开chrome浏览器在地址栏输入&quot;localhost&quot;,可以看到内容为&quot;It works!&quot;的页面。其位于“/Library（资源库）/WebServer/Documents/”下，这就是Apache的默认根目录。</p>
 
@@ -180,14 +180,14 @@
 2.在finder下－－－－》前往－－－》前往文件夹，然后输入/etc<br>
 3.可以在terminal 输入 &quot;open /etc&quot;。</p>
 
-<h2 id=">设置虚拟主机</h2>
+<h2 id="virtual-host">设置虚拟主机-Virtual host</h2>
 
 <p>1.在终端运行&quot;sudo vi /etc/apache2/httpd.conf&quot;，打开Apche的配置文件<br>
 2.在httpd.conf中找到&quot;#Include /private/etc/apache2/extra/httpd-vhosts.conf&quot;，去掉前面的&quot;＃&quot;，保存并退出。<br>
 3.运行&quot;sudo apachectl restart&quot;，重启Apache后就开启了虚拟主机配置功能。<br>
 4.运行&quot;sudo vi /etc/apache2/extra/httpd-vhosts.conf&quot;，就打开了配置虚拟主机文件httpd-vhost.conf，配置虚拟主机了。需要注意的是该文件默认开启了两个作为例子的虚拟主机：</p>
 
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
@@ -202,22 +202,22 @@
 13
 14
 15
-16</pre></td><td class="code"><pre><span class="c1">#&lt;VirtualHost *:80&gt;</span>
-<span class="c1">#    ServerAdmin webmaster@dummy-host.example.com</span>
-<span class="c1">#    DocumentRoot "/usr/docs/dummy-host.example.com"</span>
-<span class="c1">#    ServerName dummy-host.example.com</span>
-<span class="c1">#    ServerAlias www.dummy-host.example.com</span>
-<span class="c1">#    ErrorLog "/private/var/log/apache2/dummy-host.example.com-error_log"</span>
-<span class="c1">#    CustomLog "/private/var/log/apache2/dummy-host.example.com-access_log" common</span>
-<span class="c1">#&lt;/VirtualHost&gt;</span>
+16</pre></td><td class="code"><pre>#<span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
+#    ServerAdmin webmaster@dummy-host.example.com
+#    DocumentRoot "/usr/docs/dummy-host.example.com"
+#    ServerName dummy-host.example.com
+#    ServerAlias www.dummy-host.example.com
+#    ErrorLog "/private/var/log/apache2/dummy-host.example.com-error_log"
+#    CustomLog "/private/var/log/apache2/dummy-host.example.com-access_log" common
+#<span class="nt">&lt;/VirtualHost&gt;</span>
 
-<span class="c1">#&lt;VirtualHost *:80&gt;</span>
-<span class="c1">#    ServerAdmin webmaster@dummy-host2.example.com</span>
-<span class="c1">#   DocumentRoot "/usr/docs/dummy-host2.example.com"</span>
-<span class="c1">#    ServerName dummy-host2.example.com</span>
-<span class="c1">#    ErrorLog "/private/var/log/apache2/dummy-host2.example.com-error_log"</span>
-<span class="c1">#    CustomLog "/private/var/log/apache2/dummy-host2.example.com-access_log" common</span>
-<span class="c1">#&lt;/VirtualHost&gt;</span><span class="w">
+#<span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
+#    ServerAdmin webmaster@dummy-host2.example.com
+#   DocumentRoot "/usr/docs/dummy-host2.example.com"
+#    ServerName dummy-host2.example.com
+#    ErrorLog "/private/var/log/apache2/dummy-host2.example.com-error_log"
+#    CustomLog "/private/var/log/apache2/dummy-host2.example.com-access_log" common
+#<span class="nt">&lt;/VirtualHost&gt;</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>而实际上，这两个虚拟主机是不存在的，在没有配置任何其他虚拟主机时，可能会导致访问localhost时出现如下提示：</p>
@@ -228,17 +228,28 @@ You don&#39;t have permission to access /index.php on this server<br>
 
 <p>5.增加如下配置</p>
 
-<figure class="highlight"><pre><code class="language-linenos" data-lang="linenos">&lt;VirtualHost *:80&gt;
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td><td class="code"><pre><span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
     DocumentRoot "/Users/pengyouyi/workplaces"
     ServerName mysites
     ErrorLog "/private/var/log/apache2/sites-error_log"
     CustomLog "/private/var/log/apache2/sites-access_log" common
-    &lt;Directory "/Users/pengyouyi/workplaces"&gt;
+    <span class="nt">&lt;Directory</span> <span class="err">"/Users/pengyouyi/workplaces"</span><span class="nt">&gt;</span>
         Options Indexes FollowSymLinks Includes ExecCGI
         AllowOverride All
         Require all granted
-    &lt;/Directory&gt;
-&lt;/VirtualHost&gt;</code></pre></figure>
+    <span class="nt">&lt;/Directory&gt;</span>
+<span class="nt">&lt;/VirtualHost&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>保存退出，并重启Apache。</p>
 
@@ -253,18 +264,38 @@ Deny from all
 </code></pre></div>
 <p>Apache HTTP Server Version 2.2 可用如下代码</p>
 
-<figure class="highlight"><pre><code class="language-linenos" data-lang="linenos">&lt;VirtualHost *:80&gt;
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td><td class="code"><pre><span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
     DocumentRoot "/Users/pengyouyi/workplaces"
     ServerName mysites
     ErrorLog "/private/var/log/apache2/sites-error_log"
     CustomLog "/private/var/log/apache2/sites-access_log" common
-    &lt;Directory "/Users/pengyouyi/workplaces"/&gt;
+    <span class="nt">&lt;Directory</span> <span class="err">"/Users/pengyouyi/workplaces"</span><span class="nt">&gt;</span>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride None
                 Order deny,allow
                 Allow from all
-      &lt;/Directory&gt;
-&lt;/VirtualHost&gt;</code></pre></figure>
+      <span class="nt">&lt;/Directory&gt;</span>
+<span class="nt">&lt;/VirtualHost&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="apache">停止Apache服务</h2>
+<div class="highlight"><pre><code class="language-" data-lang="">apachectl stop
+</code></pre></div>
+<p><strong>注意:</strong><br>
+当使用apachectl start 或者 apacheclt stop,出现以下结果时,表示权限不够<br>
+This operation requires root.<br>
+尝试:<code>sudo apachectl stsrt</code> 或者 <code>sudo apachectl stop</code> 可解决</p>
   
 	</div>
 	<footer class="article-footer clearfix">

@@ -158,18 +158,15 @@
 		
 		<h1 id="vue-js">Vue.js初学</h1>
 
-<h2 id="a">简介-A</h2>
-
-<p>Vue.js 是用于构建交互式的 Web  界面的库。它提供了 MVVM 数据绑定和一个可组合的组件系统，具有简单、灵活的 API。从技术上讲， Vue.js 集中在 MVVM 模式上的视图模型层，并通过双向数据绑定连接视图和模型。实际的 DOM 操作和输出格式被抽象出来成指令和过滤器。相比其它的 MVVM 框架，Vue.js 更容易上手。</p>
-
-<h2 id="b">安装-B</h2>
-
-<p>去Vue官方网站<a href="https://vuejs.org.cn/">https://vuejs.org.cn/</a> 直接下载vue.js,用&lt;script&gt;标签引入, 也可通过NPM和Bower安装,详见<a href="http://cn.vuejs.org/guide/installation.html">http://cn.vuejs.org/guide/installation.html</a><br>
+<p><strong>a.简介-introduction</strong><br>
+Vue.js 是用于构建交互式的 Web  界面的库。它提供了 MVVM 数据绑定和一个可组合的组件系统，具有简单、灵活的 API。从技术上讲， Vue.js 集中在 MVVM 模式上的视图模型层，并通过双向数据绑定连接视图和模型。实际的 DOM 操作和输出格式被抽象出来成指令和过滤器。相比其它的 MVVM 框架，Vue.js 更容易上手。<br>
+<strong>b.安装-install</strong><br>
+去Vue官方网站<a href="https://vuejs.org.cn/">https://vuejs.org.cn/</a> 直接下载vue.js,用&lt;script&gt;标签引入, 也可通过NPM和Bower安装,详见<a href="http://cn.vuejs.org/guide/installation.html">http://cn.vuejs.org/guide/installation.html</a><br>
 <img src="/assets/img/article-img/vuejs.png" alt=""></p>
 
-<h1 id="m">起步*M</h1>
+<h1 id="start">起步-start</h1>
 
-<h2 id="hello-world-c">Hello world　-C</h2>
+<p><strong>Hello world</strong></p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -193,8 +190,7 @@
 20
 21
 22
-23
-24</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+23</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -207,7 +203,6 @@
         {{ message }}
     
     <span class="nt">&lt;/div&gt;</span>
-
 <span class="nt">&lt;script&gt;</span>
 <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
     <span class="na">el</span><span class="p">:</span> <span class="s1">'#app'</span><span class="p">,</span>
@@ -226,9 +221,10 @@
 <img src=http://chuantu.biz/t5/32/1473256100x1928747743.png />
 </div>
 
-<h2 id="d">双向数据绑定-D</h2>
+<h1 id="binding">数据绑定语法-binding</h1>
 
-<p><img src="http://www.runoob.com/wp-content/uploads/2015/12/7248453.png" class="img-center"></p>
+<p><strong>a.双向数据绑定-two-way</strong><br>
+<img src="http://www.runoob.com/wp-content/uploads/2015/12/7248453.png" class="img-center"></p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -291,7 +287,237 @@
 <img src=http://chuantu.biz/t5/32/1473257301x3340468422.png />
 </div>
 
-<h2 id="e">列表渲染-E</h2>
+<p><strong>c.取消双向数据绑定-cancle</strong><br>
+以上实例中  会根据输入框 input 的改变而改变，如果你不想让其变化可以修改为：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">
+  {{* message }}
+
+</code></pre></div>
+<p><strong>c.绑定Js表达式</strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">
+    {{ number + 1 }}
+    {{ ok ? 'YES' : 'NO' }}
+    {{ message.split('').reverse().join('') }}
+
+</code></pre></div>
+<h1 id="calculation">计算属性-calculation</h1>
+
+<p><strong>a.computed</strong></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>计算<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"example"</span><span class="nt">&gt;</span>
+    
+        a = {{ a }} ,b = {{ b }}
+    
+    <span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#example"</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">a</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">b</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+<img src=http://chuantu.biz/t5/33/1473389459x3340469626.png />
+</div>
+
+<p><strong>b.计算属性VS .watch</strong><br>
+html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div>
+<p>js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#demo'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">firstName</span><span class="p">:</span> <span class="s1">'Foo'</span><span class="p">,</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="s1">'Bar'</span><span class="p">,</span>
+    <span class="na">fullName</span><span class="p">:</span> <span class="s1">'Foo Bar'</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="nx">vm</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">'firstName'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">fullName</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span>
+<span class="p">})</span>
+
+<span class="nx">vm</span><span class="p">.</span><span class="nx">$watch</span><span class="p">(</span><span class="s1">'lastName'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">fullName</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="nx">val</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>$watch 过于复杂,与下面computed方法是等价的<br>
+js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#demo'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">firstName</span><span class="p">:</span> <span class="s1">'Foo'</span><span class="p">,</span>
+    <span class="na">lastName</span><span class="p">:</span> <span class="s1">'Bar'</span>
+  <span class="p">},</span>
+  <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">fullName</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<p><strong>c.计算setter</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// ...</span>
+<span class="nl">computed</span><span class="p">:</span> <span class="p">{</span>
+  <span class="nl">fullName</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// getter</span>
+    <span class="nl">get</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span>
+    <span class="p">},</span>
+    <span class="c1">// setter</span>
+    <span class="nx">set</span><span class="err">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">names</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">names</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">names</span><span class="p">[</span><span class="nx">names</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// ...</span>
+</code></pre></div>
+<p>现在在调用 vm.fullName = &#39;John Doe&#39; 时，setter 会被调用，vm.firstName 和 vm.lastName 也会有相应更新</p>
+
+<h1 id="class-style">Class与Style绑定</h1>
+
+<p><strong>a.对象语法-syntax</strong><br>
+html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"static"</span> <span class="na">v-bind:class=</span><span class="s">"{ 'class-a': isA, 'class-b': isB }"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div>
+<p>js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">data</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nl">isA</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nx">isB</span><span class="err">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>渲染为:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"static class-a"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div>
+<p>当 isA 和 isB 变化时，class 列表将相应地更新。例如，如果 isB 变为 true，class 列表将变为 &quot;static class-a class-b&quot;<br>
+你也可以直接绑定数据里的一个对象:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">v-bind:class=</span><span class="s">"classObject"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div>
+<p>js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">data</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nl">classObject</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'class-a'</span><span class="err">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s1">'class-b'</span><span class="err">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>b.数组语法-array</strong><br>
+html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">v-bind:class=</span><span class="s">"[classA, classB]"</span><span class="nt">&gt;</span>
+</code></pre></div>
+<p>js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">data</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nl">classA</span><span class="p">:</span> <span class="s1">'class-a'</span><span class="p">,</span>
+  <span class="nx">classB</span><span class="err">:</span> <span class="s1">'class-b'</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>渲染为:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"class-a class-b"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div>
+<p><strong>c.绑定内联样式-inline</strong><br>
+html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">v-bind:style=</span><span class="s">"styleObject"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div>
+<p>js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">data</span><span class="err">:</span> <span class="p">{</span>
+  <span class="nl">styleObject</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="s1">'red'</span><span class="p">,</span>
+    <span class="nx">fontSize</span><span class="err">:</span> <span class="s1">'13px'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>d.自动添加前缀-prefix</strong><br>
+当 v-bind:style 使用需要厂商前缀的 CSS 属性时，如 transform，Vue.js 会自动侦测并添加相应的前缀</p>
+
+<h1 id="if">条件渲染-if</h1>
+
+<p><strong>a.v-if</strong><br>
+在字符串模板中，如 Handlebars，我们得像这样写一个条件块：<br>
+html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- Handlebars 模板 --&gt;</span>
+
+{{#if ok}}
+  <span class="nt">&lt;h1&gt;</span>Yes<span class="nt">&lt;/h1&gt;</span>
+{{/if}}
+
+</code></pre></div>
+<p>在 Vue.js，我们使用 v-if 指令实现同样的功能：</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">v-if=</span><span class="s">"Math.random() &gt; 0.5"</span><span class="nt">&gt;</span>
+    随机数大于 0.5
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">v-else</span><span class="nt">&gt;</span>
+    随机数不大于 0.5
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+<p><strong>b.template v-if</strong><br>
+因为 v-if 是一个指令，需要将它添加到一个元素上。但是如果我们想切换多个元素呢？此时我们可以把一个&lt;template&gt; 元素当做包装元素，并在上面使用 v-if，最终的渲染结果不会包含它。</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;template</span> <span class="na">v-if=</span><span class="s">"ok"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Title<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Paragraph 1<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;p&gt;</span>Paragraph 2<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+</code></pre></div>
+<p><strong>c.v-show</strong> <br>
+v-show作用与v-if类似，不同的是v-show的元素会始终渲染并保持在 DOM 中,且v-show不支持&lt;template&gt;标签。 </p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;h1</span> <span class="na">v-show=</span><span class="s">"ok"</span><span class="nt">&gt;</span>Hello!<span class="nt">&lt;/h1&gt;</span>
+ </code></pre></figure>
+
+<h1 id="list">列表渲染-list</h1>
+
+<p><strong>a.列表输出</strong></p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -322,7 +548,9 @@
 27
 28
 29
-30</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+30
+31
+32</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -333,7 +561,9 @@
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;ul&gt;</span>
             <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"todo in todos"</span><span class="nt">&gt;</span>
-                
+            
+                {{ todo.text }}
+            
             <span class="nt">&lt;/li&gt;</span>
         <span class="nt">&lt;/ul&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
@@ -360,10 +590,584 @@
 <img src=http://chuantu.biz/t5/32/1473257879x3340468422.png />
 </div>
 
-<h1 id="z">更多-Z</h1>
+<p><strong>b.多维数组实例</strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"example-2"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in items"</span><span class="nt">&gt;</span>
+
+    {{ message }} - {{ $index }} - {{ item.text }}
+
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">var</span> <span class="nx">example2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#example-2'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">message</span><span class="p">:</span> <span class="s2">"你好，世界"</span><span class="p">,</span>
+    <span class="na">items</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span> <span class="na">text</span><span class="p">:</span> <span class="s2">"learn Js"</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">text</span><span class="p">:</span> <span class="s2">"learn Vue.js"</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="na">text</span><span class="p">:</span> <span class="s2">"learn Css"</span> <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+<img src=http://chuantu.biz/t5/33/1473414544x3340469626.png />
+</div>
+
+<p><strong>对象v-for</strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"repeat-object"</span> <span class="na">class=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"value in object"</span><span class="nt">&gt;</span>
+
+    {{ $key }} : {{ value }}
+
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#repeat-object'</span><span class="p">,</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">object</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">FirstName</span><span class="p">:</span> <span class="s1">'John'</span><span class="p">,</span>
+      <span class="na">LastName</span><span class="p">:</span> <span class="s1">'Doe'</span><span class="p">,</span>
+      <span class="na">Age</span><span class="p">:</span> <span class="mi">30</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+<img src=http://chuantu.biz/t5/33/1473578549x1928750147.png />
+</div>
+
+<h1 id="processor">方法与事件处理器-processor</h1>
+
+<p><strong>v-on</strong></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>方法与事件处理器<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;button</span> <span class="na">v-on:click=</span><span class="s">"greet"</span><span class="nt">&gt;</span>greet<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span><span class="s1">'#app'</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="s1">'vue.js'</span>
+    <span class="p">},</span>
+    <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">greet</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s1">'Hello '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">'!'</span><span class="p">);</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">tagName</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+<span class="c1">//vm.greet();</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>内联语句处理器</strong><br>
+html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"example-2"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">v-on:click=</span><span class="s">"say('hi')"</span><span class="nt">&gt;</span>Say Hi<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">v-on:click=</span><span class="s">"say('what')"</span><span class="nt">&gt;</span>Say What<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+<p>js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#example-2'</span><span class="p">,</span>
+  <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">say</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">alert</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<h1 id="form">表单控件绑定-form</h1>
+
+<p><strong>text</strong></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>双向数据绑定<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>
+        
+        {{ message }}
+        
+        <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">v-model=</span><span class="s">"message"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">message</span><span class="p">:</span> <span class="s2">"hello vue.js"</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>checkbox</strong></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>双向数据绑定-checkbox<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">id=</span><span class="s">"checkbox"</span> <span class="na">v-model=</span><span class="s">"checked"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"checkbox"</span><span class="nt">&gt;</span>{{ checked }}<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">checked</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+<img src=http://chuantu.biz/t5/33/1473645645x3340469530.png />
+</div>
+
+<p>多个勾选框,绑定到同一个数组</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>双向数据绑定-checkbox<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">id=</span><span class="s">"jack"</span> <span class="na">value=</span><span class="s">"Jack"</span> <span class="na">v-model=</span><span class="s">"checkedNames"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"jack"</span><span class="nt">&gt;</span>Jack<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">id=</span><span class="s">"john"</span> <span class="na">value=</span><span class="s">"John"</span> <span class="na">v-model=</span><span class="s">"checkedNames"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"john"</span><span class="nt">&gt;</span>John<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="na">id=</span><span class="s">"mike"</span> <span class="na">value=</span><span class="s">"Mike"</span> <span class="na">v-model=</span><span class="s">"checkedNames"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"mike"</span><span class="nt">&gt;</span>Mike<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;span&gt;</span>Checked names: {{ checkedNames | json }}<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">checkedNames</span><span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+<img src=http://chuantu.biz/t5/33/1473646734x3340469530.png />
+</div>
+
+<p><strong>radio</strong></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>双向数据绑定-radio<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">id=</span><span class="s">"one"</span> <span class="na">value=</span><span class="s">"one"</span> <span class="na">v-model=</span><span class="s">"picked"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"one"</span><span class="nt">&gt;</span>one<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">id=</span><span class="s">"two"</span> <span class="na">value=</span><span class="s">"two"</span> <span class="na">v-model=</span><span class="s">"picked"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"two"</span><span class="nt">&gt;</span>two<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">id=</span><span class="s">"three"</span> <span class="na">value=</span><span class="s">"three"</span> <span class="na">v-model=</span><span class="s">"picked"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"three"</span><span class="nt">&gt;</span>three<span class="nt">&lt;/label&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;span&gt;</span>Checked names: {{ picked }}<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+<img src=http://chuantu.biz/t5/33/1473647543x3340469530.png />
+</div>
+
+<p><strong>select</strong></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>双向数据绑定-select<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">""</span> <span class="na">id=</span><span class="s">""</span> <span class="na">v-model=</span><span class="s">"selected"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span>  <span class="na">selected</span><span class="nt">&gt;</span>A<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>B<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>C<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;span&gt;</span>selected: {{ selected }}<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+<img src=http://chuantu.biz/t5/33/1473649192x3340469530.png />
+</div>
+
+<p><strong>select 多选</strong></p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>双向数据绑定-select<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;select</span> <span class="na">name=</span><span class="s">""</span> <span class="na">id=</span><span class="s">""</span> <span class="na">v-model=</span><span class="s">"selected"</span> <span class="na">multiple</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;option</span>  <span class="na">selected</span><span class="nt">&gt;</span>A<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>B<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;option&gt;</span>C<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+<span class="nt">&lt;span&gt;</span>selected: {{ selected | json }}<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span> <span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">selected</span><span class="p">:</span> <span class="p">[</span> <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+<img src=http://chuantu.biz/t5/33/1473650325x3340469530.png />
+</div>
+
+<p>multiple 属性规定可同时选择多个选项</p>
+
+<ul>
+<li>对于 windows：按住 Ctrl 按钮来选择多个选项</li>
+<li>对于 Mac：按住 command 按钮来选择多个选项
+动态选项，用 v-for 渲染：</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>双向数据绑定-select<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;select</span> <span class="na">v-model=</span><span class="s">"selected"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;option</span> <span class="na">v-for=</span><span class="s">"option in options"</span> <span class="na">v-bind:value=</span><span class="s">"option.value"</span><span class="nt">&gt;</span>
+    
+  <span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+<span class="nt">&lt;span&gt;</span>Selected: {{ selected }}<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s2">"#app"</span> <span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">selected</span><span class="p">:</span> <span class="s1">'A'</span><span class="p">,</span>
+    <span class="na">options</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="na">text</span><span class="p">:</span> <span class="s1">'One'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'A'</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="na">text</span><span class="p">:</span> <span class="s1">'Two'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'B'</span> <span class="p">},</span>
+      <span class="p">{</span> <span class="na">text</span><span class="p">:</span> <span class="s1">'Three'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'C'</span> <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+<img src=http://chuantu.biz/t5/33/1473650853x3340469530.png />
+</div>
+
+<p><strong>绑定value</strong></p>
+
+<h1 id="more">更多-more</h1>
 
 <ul>
 <li><a href="http://cn.vuejs.org/guide/">http://cn.vuejs.org/guide/</a></li>
+<li><a href="http://cn.vuejs.org/api/">http://cn.vuejs.org/api/</a></li>
 <li><a href="http://www.runoob.com/w3cnote/vue-js-quickstart.html">http://www.runoob.com/w3cnote/vue-js-quickstart.html</a></li>
 </ul>
   

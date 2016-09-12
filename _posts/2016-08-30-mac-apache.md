@@ -16,13 +16,13 @@ description: MAC下配置Apache
 ## 启动Apache
 
 打开"终端(terminal)",输入 apachectl -v 查看Apache版本。
-```ruby
+```bash
 pengyouyideMacBook-Pro:~ pengyouyi$ apachectl -v
 Server version: Apache/2.4.18 (Unix)
 Server built:   Feb 20 2016 20:03:19
 ```
 接着输入 apachectl start ,这样就启动Apache。
-```ruby
+```bash
 pengyouyideMacBook-Pro:~ pengyouyi$ apachectl start
 This operation requires root.
 ```
@@ -33,14 +33,14 @@ Apache的安装目录在：/etc/apache2/，etc默认是隐藏的。有三种方�
 2.在finder下－－－－》前往－－－》前往文件夹，然后输入/etc
 3.可以在terminal 输入 "open /etc"。
 
-## 设置虚拟主机
+## 设置虚拟主机-Virtual host
 
 1.在终端运行"sudo vi /etc/apache2/httpd.conf"，打开Apche的配置文件
 2.在httpd.conf中找到"#Include /private/etc/apache2/extra/httpd-vhosts.conf"，去掉前面的"＃"，保存并退出。
 3.运行"sudo apachectl restart"，重启Apache后就开启了虚拟主机配置功能。
 4.运行"sudo vi /etc/apache2/extra/httpd-vhosts.conf"，就打开了配置虚拟主机文件httpd-vhost.conf，配置虚拟主机了。需要注意的是该文件默认开启了两个作为例子的虚拟主机：
 
-{% highlight ruby linenos %}
+{% highlight xml linenos %}
 
 #<VirtualHost *:80>
 #    ServerAdmin webmaster@dummy-host.example.com
@@ -68,7 +68,7 @@ You don't have permission to access /index.php on this server
 
 5.增加如下配置
 
-{% highlight linenos %}
+{% highlight xml linenos %}
 <VirtualHost *:80>
     DocumentRoot "/Users/pengyouyi/workplaces"
     ServerName mysites
@@ -97,13 +97,13 @@ Order deny,allow
 Deny from all
 ```
 Apache HTTP Server Version 2.2 可用如下代码
-{% highlight linenos %}
+{% highlight xml linenos %}
 <VirtualHost *:80>
     DocumentRoot "/Users/pengyouyi/workplaces"
     ServerName mysites
     ErrorLog "/private/var/log/apache2/sites-error_log"
     CustomLog "/private/var/log/apache2/sites-access_log" common
-    <Directory "/Users/pengyouyi/workplaces"/>
+    <Directory "/Users/pengyouyi/workplaces">
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride None
                 Order deny,allow
@@ -111,6 +111,14 @@ Apache HTTP Server Version 2.2 可用如下代码
       </Directory>
 </VirtualHost>
 {% endhighlight %}
+
+## 停止Apache服务
+    apachectl stop
+**注意:**
+当使用apachectl start 或者 apacheclt stop,出现以下结果时,表示权限不够
+This operation requires root.
+尝试:`sudo apachectl stsrt` 或者 `sudo apachectl stop` 可解决
+
 
 
 
