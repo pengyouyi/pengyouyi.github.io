@@ -1,5 +1,5 @@
 
-        <!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html >
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     
     
     
-    <title>彭友谊的博客</title>
+    <title>设计模式 MVC & MVVM | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -20,14 +20,14 @@
 
     <meta name="description" content="page.description">
     
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     
-    <meta property="og:title" content="">
-    <meta property="og:url" content="/">
+    <meta property="og:title" content="设计模式 MVC & MVVM">
+    <meta property="og:url" content="/design/pattern/2016/09/21/MVC&MVVM">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="">
+    <meta property="og:description" content="设计模式 MVC & MVVM 区别">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="">
+    <meta name="twitter:title" content="设计模式 MVC & MVVM">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -138,15 +138,13 @@
 
     </header>
     <div id="container">
-      <div id="main">
+      
 
+
+<div id="main" class="post" itemscope itemprop="blogPost">
   
-  
-  
-  
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
+	<article itemprop="articleBody"> 
+	<header class="article-info clearfix">
   <h1 itemprop="name">
     
       <a href="/design/pattern/2016/09/21/MVC&MVVM" title="设计模式 MVC & MVVM" itemprop="url">设计模式 MVC & MVVM</a>
@@ -160,20 +158,91 @@
     
   </p>
 </header>
-    <div class="article-content">
-        
-        <h1 id="mvc-amp-mvvm">设计模式 MVC &amp; MVVM 区别</h1>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article toc-content">
+		
+			<!--<%- toc(item.content) %>-->
+		
+		</div>
+		
+		<h1 id="mvc-amp-mvvm">设计模式 MVC &amp; MVVM 区别</h1>
 
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/design/pattern/2016/09/21/MVC&MVVM#more">Read More</a>
-          
-       </p>
-    </div>
-    
-    <footer class="article-footer clearfix">
+<p><strong>一、MVC</strong><br>
+MVC模式的意思是，软件可以分成三个部分。</p>
+
+<div class="rd">
+<img src=http://image.beekka.com/blog/2015/bg2015020104.png />
+</div>
+
+<blockquote>
+<ul>
+<li><strong>视图（View）：</strong>用户界面。代表了UI组件，像CSS，JQuery，html等。他只负责展示从controller接收到的数据。也就是把model转化成UI。</li>
+<li><strong>控制器（Controller）：</strong>业务逻辑。负责处理流入的请求。它通过View来接受用户的输入，之后利用Model来处理用户的数据，最后把结果返回给View。Controll就是View和Model之间的一个协调者。</li>
+<li><strong>模型（Model）：</strong>数据保存。代表了描述业务路逻辑，业务模型、数据操作、数据模型的一系列类的集合。这层也定义了数据修改和操作的业务规则。</li>
+</ul>
+</blockquote>
+
+<p>各部分之间的通信方式如下</p>
+
+<div class="rd">
+<img src=http://image.beekka.com/blog/2015/bg2015020105.png />
+</div>
+
+<ul>
+<li>1.View 传送指令到 Controller</li>
+<li>2.Controller 完成业务逻辑后，要求 Model 改变状态</li>
+<li>3.Model 将新的数据发送到 View，用户得到反馈</li>
+</ul>
+
+<p>所有通信都是单向的</p>
+
+<p><strong>二、互动模式</strong><br>
+接受用户指令时，MVC 可以分成两种方式。一种是通过 View 接受指令，传递给 Controller</p>
+
+<div class="rd">
+<img src=http://image.beekka.com/blog/2015/bg2015020106.png />
+</div>
+
+<p>另一种是直接通过controller接受指令</p>
+
+<div class="rd">
+<img src=http://image.beekka.com/blog/2015/bg2015020107.png />
+</div>
+
+<p><strong>三、MVP</strong><br>
+MVP 模式将 Controller 改名为 Presenter，同时改变了通信方向</p>
+
+<div class="rd">
+<img src=http://image.beekka.com/blog/2015/bg2015020109.png />
+</div>
+
+<ol>
+<li>各部分之间的通信，都是双向的。</li>
+<li>View 与 Model 不发生联系，都通过 Presenter 传递。</li>
+<li>View 非常薄，不部署任何业务逻辑，称为&quot;被动视图&quot;（Passive View），即没有任何主动性，而 Presenter非常厚，所有逻辑都部署在那里</li>
+</ol>
+
+<blockquote>
+<p>1.Model<br>
+Model层代表了描述业务逻辑和数据的一系列类的集合。它也定义了数据修改和操作的业务规则。<br>
+2.View<br>
+View代表了UI组件，像CSS，JQuery，html等。他只负责展示从Presenter接收到的数据。也就是把模型（非Modle层模型）转化成UI。<br>
+3.Presenter<br>
+Presenter负责处理View背后所有的UI事件。它通过View接收用户输入，之后利用Model来处理用户的数据，最后把结果返回给View。与View和Controller不同，View和Presenter之间是完全解耦的，他们通过接口来交互。另外，presenter不像controller处理进入的请求</p>
+</blockquote>
+
+<p><strong>四、MVVM</strong><br>
+MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致</p>
+
+<div class="rd">
+<img src=http://image.beekka.com/blog/2015/bg2015020110.png />
+</div>
+
+<p>唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。Angular 和 Ember 都采用这种模式</p>
+  
+	</div>
+	<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
@@ -213,475 +282,51 @@
 
 
 
-
-<div class="comments-count">
+	<div class="article-share" id="share">
 	
-	  	<span></span>
-		<a href="/design/pattern/2016/09/21/MVC&MVVM#comments" class="ds-thread-count comments-count-link" data-thread-key="_posts/2016-09-21-MVC&MVVM.md" data-count-type="comments">&nbsp;</a>
+	  <div data-url="/design/pattern/2016/09/21/MVC&MVVM" data-title="设计模式 MVC & MVVM | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  </div>
 	
-</div>
-
-</footer>
-    </article>
+	</div>
 
 
-
-
-
-
-  
-  
-  
-  
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/js/2016/09/20/webpack" title="Webpack初学" itemprop="url">Webpack初学</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
-		
-  <p class="article-time">
-    <time datetime="2016-09-20 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-09-20</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="webpack">Webpack初学</h1>
-
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/js/2016/09/20/webpack#more">Read More</a>
-          
-       </p>
-    </div>
-    
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <!--
-  <%- list_categories(item.categories, {
-      show_count: false,
-      class: 'article-category',
-      style: 'none',
-      separator: '►'
-  }) %>
-  -->
-  
-  <a class="article-category-link" href="/categories/#Js">Js</a>
-  
-</div>
-
-
-  <div class="article-tags">
-  <!--
-  <% var tags = [];
-    item.tags.forEach(function(tag){
-      tags.push('<a href="' + config.root + tag.path + '">' + tag.name + '</a>');
-    }); %>-->
-  <span></span> <!--<%- tags.join('') %>-->
-  
-  
-  <a href="/tags/#Webpack">Webpack</a>
-  
-  <a href="/tags/#模块加载器">模块加载器</a>
-  
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
+</footer>   
+	</article>
 	
-	  	<span></span>
-		<a href="/js/2016/09/20/webpack#comments" class="ds-thread-count comments-count-link" data-thread-key="_posts/2016-09-20-webpack.md" data-count-type="comments">&nbsp;</a>
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/js/2016/09/20/webpack" title="Webpack初学">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Webpack初学</span>
+</a>
+</div>
+
+
+</nav>
+
 	
-</div>
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="_posts/2016-09-21-MVC&MVVM.md" data-title="设计模式 MVC & MVVM" data-url="/design/pattern/2016/09/21/MVC&MVVM"></div>
+</section>
 
-</footer>
-    </article>
 
+</div>  
 
 
 
-
-
-  
-  
-  
-  
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/js/2016/09/07/handlebars.js" title="handlebars.js初学" itemprop="url">handlebars.js初学</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
-		
-  <p class="article-time">
-    <time datetime="2016-09-07 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-09-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="handlebars-js">handlebars.js初学</h1>
-
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/js/2016/09/07/handlebars.js#more">Read More</a>
-          
-       </p>
-    </div>
-    
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <!--
-  <%- list_categories(item.categories, {
-      show_count: false,
-      class: 'article-category',
-      style: 'none',
-      separator: '►'
-  }) %>
-  -->
-  
-  <a class="article-category-link" href="/categories/#Js">Js</a>
-  
-</div>
-
-
-  <div class="article-tags">
-  <!--
-  <% var tags = [];
-    item.tags.forEach(function(tag){
-      tags.push('<a href="' + config.root + tag.path + '">' + tag.name + '</a>');
-    }); %>-->
-  <span></span> <!--<%- tags.join('') %>-->
-  
-  
-  <a href="/tags/#handlebars">handlebars</a>
-  
-  <a href="/tags/#js">js</a>
-  
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/js/2016/09/07/handlebars.js#comments" class="ds-thread-count comments-count-link" data-thread-key="_posts/2016-09-07-handlebars.js.md" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-    </article>
-
-
-
-
-
-
-  
-  
-  
-  
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/js/2016/09/07/Vue.js" title="Vue.js初学" itemprop="url">Vue.js初学</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
-		
-  <p class="article-time">
-    <time datetime="2016-09-07 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-09-07</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="vue-js">Vue.js初学</h1>
-
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/js/2016/09/07/Vue.js#more">Read More</a>
-          
-       </p>
-    </div>
-    
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <!--
-  <%- list_categories(item.categories, {
-      show_count: false,
-      class: 'article-category',
-      style: 'none',
-      separator: '►'
-  }) %>
-  -->
-  
-  <a class="article-category-link" href="/categories/#Js">Js</a>
-  
-</div>
-
-
-  <div class="article-tags">
-  <!--
-  <% var tags = [];
-    item.tags.forEach(function(tag){
-      tags.push('<a href="' + config.root + tag.path + '">' + tag.name + '</a>');
-    }); %>-->
-  <span></span> <!--<%- tags.join('') %>-->
-  
-  
-  <a href="/tags/#Vue">Vue</a>
-  
-  <a href="/tags/#js">js</a>
-  
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/js/2016/09/07/Vue.js#comments" class="ds-thread-count comments-count-link" data-thread-key="_posts/2016-09-07-Vue.js.md" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-    </article>
-
-
-
-
-
-
-  
-  
-  
-  
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/mac/2016/08/30/mac-view-port-usage" title="mac查看端口占用情况" itemprop="url">mac查看端口占用情况</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
-		
-  <p class="article-time">
-    <time datetime="2016-08-30 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-08-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="mac">MAC下查看某个端口被哪个程序占用及杀进程方法</h2>
-
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/mac/2016/08/30/mac-view-port-usage#more">Read More</a>
-          
-       </p>
-    </div>
-    
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <!--
-  <%- list_categories(item.categories, {
-      show_count: false,
-      class: 'article-category',
-      style: 'none',
-      separator: '►'
-  }) %>
-  -->
-  
-  <a class="article-category-link" href="/categories/#mac">mac</a>
-  
-</div>
-
-
-  <div class="article-tags">
-  <!--
-  <% var tags = [];
-    item.tags.forEach(function(tag){
-      tags.push('<a href="' + config.root + tag.path + '">' + tag.name + '</a>');
-    }); %>-->
-  <span></span> <!--<%- tags.join('') %>-->
-  
-  
-  <a href="/tags/#mac">mac</a>
-  
-  <a href="/tags/#端口使用">端口使用</a>
-  
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/mac/2016/08/30/mac-view-port-usage#comments" class="ds-thread-count comments-count-link" data-thread-key="_posts/2016-08-30-mac-view-port-usage.md" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-    </article>
-
-
-
-
-
-
-  
-  
-  
-  
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/mac/2016/08/30/mac-apache" title="mac 配置Apache" itemprop="url">mac 配置Apache</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
-		
-  <p class="article-time">
-    <time datetime="2016-08-30 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-08-30</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="mac-apache">MAC下配置Apache</h2>
-
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/mac/2016/08/30/mac-apache#more">Read More</a>
-          
-       </p>
-    </div>
-    
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <!--
-  <%- list_categories(item.categories, {
-      show_count: false,
-      class: 'article-category',
-      style: 'none',
-      separator: '►'
-  }) %>
-  -->
-  
-  <a class="article-category-link" href="/categories/#mac">mac</a>
-  
-</div>
-
-
-  <div class="article-tags">
-  <!--
-  <% var tags = [];
-    item.tags.forEach(function(tag){
-      tags.push('<a href="' + config.root + tag.path + '">' + tag.name + '</a>');
-    }); %>-->
-  <span></span> <!--<%- tags.join('') %>-->
-  
-  
-  <a href="/tags/#mac">mac</a>
-  
-  <a href="/tags/#Apache">Apache</a>
-  
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/mac/2016/08/30/mac-apache#comments" class="ds-thread-count comments-count-link" data-thread-key="_posts/2016-08-30-mac-apache.md" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-    </article>
-
-
-
-
-
-
-
-  <nav id="page-nav" class="clearfix">
-  <nav id="page-nav" class="clearfix">
-    
-    
-    <span class="page-number current">1</span>
-    
-    
-     
-  </nav>
-  </nav>
-
-</div>
 
 
       
       
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside toc-content">
+ 
+ <!--<%- toc(item.content) %>-->
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
@@ -880,6 +525,11 @@ $(document).ready(function(){
   });
   
   
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
   
   $(window).resize(function(){
     getSize(); 
@@ -890,12 +540,100 @@ $(document).ready(function(){
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
       
+      $('#toc.toc-aside').css('display', 'none');
+      
     }
   });
 });
 </script>
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.toc-content').toc();
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
 
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+/*
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      //$('.hoverqrcode').hide();
+  });
+  */
+});   
+</script>
 
 
 
@@ -986,5 +724,5 @@ $(document).ready(function(){
 
 <!-- Tiny_search End -->
   </body>
- </html>
+</html>
 
