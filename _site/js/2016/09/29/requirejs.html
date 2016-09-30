@@ -7,7 +7,7 @@
     
     
     
-    <title>mac 配置Apache | 彭友谊的博客</title>
+    <title>requirejs初学 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="mac 配置Apache">
-    <meta property="og:url" content="/mac/2016/08/30/mac-apache">
+    <meta property="og:title" content="requirejs初学">
+    <meta property="og:url" content="/js/2016/09/29/requirejs">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="MAC下配置Apache">
+    <meta property="og:description" content="requirejs初学">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="mac 配置Apache">
+    <meta name="twitter:title" content="requirejs初学">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -147,14 +147,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/mac/2016/08/30/mac-apache" title="mac 配置Apache" itemprop="url">mac 配置Apache</a>
+      <a href="/js/2016/09/29/requirejs" title="requirejs初学" itemprop="url">requirejs初学</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-08-30 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-08-30</time>
+    <time datetime="2016-09-29 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-09-29</time>
     
   </p>
 </header>
@@ -166,146 +166,204 @@
 		
 		</div>
 		
-		<h2 id="mac-apache">MAC下配置Apache</h2>
+		<h1 id="requirejs">requirejs初学</h1>
 
-<p>我使用的Mac OS X版本是10.11.6，Mac自带了Apache环境。<br>
-1.启动Apache<br>
-2.设置虚拟主机</p>
-
-<h2 id="apache">启动Apache</h2>
-
-<p>打开&quot;终端(terminal)&quot;,输入 apachectl -v 查看Apache版本。</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">pengyouyideMacBook-Pro:~ pengyouyi<span class="nv">$ </span>apachectl -v
-Server version: Apache/2.4.18 <span class="o">(</span>Unix<span class="o">)</span>
-Server built:   Feb 20 2016 20:03:19
+<p><strong>a.为什么要使用requireJS</strong><br>
+很久之前，我们所有的JS文件写到一个js文件里面去进行加载，但是当业务越来越复杂的时候，需要分成多个JS文件进行加载，比如在页面中head内分别引入a.js，b.js，c.js等，如下所示：</p>
+<div class="highlight"><pre><code class="language-" data-lang="">&lt;script src="js/app/a.js"&gt;&lt;/script&gt;
+&lt;script src="js/app/b.js"&gt;&lt;/script&gt;
+&lt;script src="js/app/c.js"&gt;&lt;/script&gt;
 </code></pre></div>
-<p>接着输入 apachectl start ,这样就启动Apache。</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">pengyouyideMacBook-Pro:~ pengyouyi<span class="nv">$ </span>apachectl start
-This operation requires root.
+<p>这段代码依次加载多个js文件。这样的写法有很大的缺点。</p>
+
+<ol>
+<li>页面在加载的时候，是从页面自上往下加载及渲染的，当页面上有多个分散的js文件时候，页面会先加载及解析头部的JS文件(同步加载)，页面被堵塞了，其次分散的js请求数多了，网页失去响应的时间就会变长。</li>
+<li>由于JS文件存在依赖关系，比如上面的b.js要依赖于a.js,所以务必保证a.js优先引入到页面上来且先加载，要严格保证加载顺序，依赖性最大的文件一定要放到最后加载。但是当依赖关系很复杂的时候，代码的编写和维护就会变得困难了。</li>
+</ol>
+
+<p><strong>b.使用requireJS的优点有哪些？</strong></p>
+
+<blockquote>
+<p>（1）实现js文件的异步加载，避免网页失去响应；<br>
+（2）管理模块之间的依赖性，便于代码的编写和维护。</p>
+</blockquote>
+
+<p><strong>c.引用-reference</strong><br>
+去requirejs官网下载<a href="http://www.requirejs.cn/docs/download.html">http://www.requirejs.cn/docs/download.html</a>,在页面头部head标签内引入requireJS，如下：<br>
+<code>&lt;script src=&quot;js/require.js&quot;&gt;&lt;/script&gt;</code>，但是加载这个文件也会造成网页失去响应，我们可以加上 defer 和 async这个属性。如下：<code>&lt;script src=&quot;js/require.js&quot; defer async=&quot;true&quot; &gt;&lt;/script&gt;</code></p>
+
+<h1 id="data-main">data-main入口点</h1>
+
+<p>接下来，看看requireJS启动加载脚本的初始化方式，requireJS支持属性 data-main 这个属性来加载初始化的JS文件，如下：<br>
+<code>&lt;script src=&quot;js/require.js&quot; defer async=&quot;true&quot; data-main=&quot;js/app.js&quot;&gt;&lt;/script&gt;</code><br>
+上面的意思是：先异步加载requireJS文件，完成后继续异步加载app.js文件<br>
+上面的app.js后的.js可以去掉，因为requireJS源码已经默认都是以后缀JS文件结尾的。</p>
+
+<h1 id="define">如何定义模块文件-define</h1>
+
+<p>RequireJS编写模块不同于其他脚本文件，它良好的使用define来定义一个作用域避免全局空间污染，它可以显示出其依赖关系，并以函数(定义此模块的那个函数)参数的形式将这些依赖进行注入。</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">-demo
+   index.html
+   -js
+        require.js
+        app.js
+        -app
+            a.js
+            b.js
+            c.js
+            d1.js
+            ....
+            d6.js
+        -lib
+            jquery.js
+            backbone.js
+            underscore.js
+</code></pre></div><div class="highlight"><pre><code class="language-html" data-lang="html">//index.html
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>require<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">data-main=</span><span class="s">"js/app.js"</span> <span class="na">src=</span><span class="s">"js/require.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </code></pre></div>
-<p>检查Apache是否启动成功,打开chrome浏览器在地址栏输入&quot;localhost&quot;,可以看到内容为&quot;It works!&quot;的页面。其位于“/Library（资源库）/WebServer/Documents/”下，这就是Apache的默认根目录。</p>
-
-<p>Apache的安装目录在：/etc/apache2/，etc默认是隐藏的。有三种方式查看：<br>
-1.dock下右键Finder，选择&quot;前往文件夹&quot;，输入&quot;/etc&quot;<br>
-2.在finder下－－－－》前往－－－》前往文件夹，然后输入/etc<br>
-3.可以在terminal 输入 &quot;open /etc&quot;。</p>
-
-<h2 id="virtual-host">设置虚拟主机-Virtual host</h2>
-
-<p>1.在终端运行&quot;sudo vi /etc/apache2/httpd.conf&quot;，打开Apche的配置文件<br>
-2.在httpd.conf中找到&quot;#Include /private/etc/apache2/extra/httpd-vhosts.conf&quot;，去掉前面的&quot;＃&quot;，保存并退出。<br>
-3.运行&quot;sudo apachectl restart&quot;，重启Apache后就开启了虚拟主机配置功能。<br>
-4.运行&quot;sudo vi /etc/apache2/extra/httpd-vhosts.conf&quot;，就打开了配置虚拟主机文件httpd-vhost.conf，配置虚拟主机了。需要注意的是该文件默认开启了两个作为例子的虚拟主机：</p>
-
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16</pre></td><td class="code"><pre>#<span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
-#    ServerAdmin webmaster@dummy-host.example.com
-#    DocumentRoot "/usr/docs/dummy-host.example.com"
-#    ServerName dummy-host.example.com
-#    ServerAlias www.dummy-host.example.com
-#    ErrorLog "/private/var/log/apache2/dummy-host.example.com-error_log"
-#    CustomLog "/private/var/log/apache2/dummy-host.example.com-access_log" common
-#<span class="nt">&lt;/VirtualHost&gt;</span>
-
-#<span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
-#    ServerAdmin webmaster@dummy-host2.example.com
-#   DocumentRoot "/usr/docs/dummy-host2.example.com"
-#    ServerName dummy-host2.example.com
-#    ErrorLog "/private/var/log/apache2/dummy-host2.example.com-error_log"
-#    CustomLog "/private/var/log/apache2/dummy-host2.example.com-access_log" common
-#<span class="nt">&lt;/VirtualHost&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>而实际上，这两个虚拟主机是不存在的，在没有配置任何其他虚拟主机时，可能会导致访问localhost时出现如下提示：</p>
-
-<p>Forbidden<br>
-You don&#39;t have permission to access /index.php on this server<br>
-最简单的办法就是在它们每行前面加上#，注释掉就好了，这样既能参考又不导致其他问题。</p>
-
-<p>5.增加如下配置</p>
-
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11</pre></td><td class="code"><pre><span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
-    DocumentRoot "/Users/pengyouyi/workplaces"
-    ServerName mysites
-    ErrorLog "/private/var/log/apache2/sites-error_log"
-    CustomLog "/private/var/log/apache2/sites-access_log" common
-    <span class="nt">&lt;Directory</span> <span class="err">"/Users/pengyouyi/workplaces"</span><span class="nt">&gt;</span>
-        Options Indexes FollowSymLinks Includes ExecCGI
-        AllowOverride All
-        Require all granted
-    <span class="nt">&lt;/Directory&gt;</span>
-<span class="nt">&lt;/VirtualHost&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>保存退出，并重启Apache。</p>
-
-<p>6.运行“sudo vi /etc/hosts”，打开hosts配置文件，加入&quot;127.0.0.1 mysites&quot;，这样就可以配置完成sites虚拟主机了，可以访问&quot;mysites&quot;了</p>
-
-<p><strong>注意:</strong> 以上代码适用于 Apache HTTP Server Version 2.4</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Apache 2.4 configuration:
-Require all denied
-</code></pre></div><div class="highlight"><pre><code class="language-" data-lang="">Apache 2.2 configuration:
-Order deny,allow
-Deny from all
+<p>在app.js初始化代码如下：</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">require</span><span class="p">([</span><span class="s1">'app/d1'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">d1</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">d1</span><span class="p">);</span>
+<span class="p">})</span>
 </code></pre></div>
-<p>Apache HTTP Server Version 2.2 可用如下代码</p>
-
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12</pre></td><td class="code"><pre><span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
-    DocumentRoot "/Users/pengyouyi/workplaces"
-    ServerName mysites
-    ErrorLog "/private/var/log/apache2/sites-error_log"
-    CustomLog "/private/var/log/apache2/sites-access_log" common
-    <span class="nt">&lt;Directory</span> <span class="err">"/Users/pengyouyi/workplaces"</span><span class="nt">&gt;</span>
-                Options Indexes FollowSymLinks MultiViews
-                AllowOverride None
-                Order deny,allow
-                Allow from all
-      <span class="nt">&lt;/Directory&gt;</span>
-<span class="nt">&lt;/VirtualHost&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<h2 id="apache">停止Apache服务</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">apachectl stop
+<p><strong>a.简单的值对,直接一个对象</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d1.js</span>
+<span class="nx">define</span><span class="p">({</span>
+    <span class="na">color</span><span class="p">:</span> <span class="s2">"black"</span><span class="p">,</span>
+    <span class="na">size</span><span class="p">:</span> <span class="s2">"24px"</span>
+<span class="p">});</span>
 </code></pre></div>
-<p><strong>注意:</strong><br>
-当使用apachectl start 或者 apacheclt stop,出现以下结果时,表示权限不够<br>
-This operation requires root.<br>
-尝试:<code>sudo apachectl stsrt</code> 或者 <code>sudo apachectl stop</code> 可解决</p>
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+ <img src=http://chuantu.biz/t5/36/1475154019x1929192556.png />
+</div>
+
+<div class="rd">
+  <img src=http://chuantu.biz/t5/36/1475154102x3340469628.png />
+</div>
+
+<p><strong>b.函数式定义</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d2.js</span>
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="na">color</span><span class="p">:</span> <span class="s2">"red"</span><span class="p">,</span>
+        <span class="na">size</span><span class="p">:</span> <span class="s2">"30px"</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<p><strong>c.存在依赖的函数式定义</strong><br>
+例如d3.js 依赖a.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d3.js</span>
+<span class="nx">define</span><span class="p">([</span><span class="s1">'./a'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="na">color</span><span class="p">:</span> <span class="s2">"blue"</span><span class="p">,</span>
+        <span class="na">add</span><span class="p">:</span> <span class="nx">a</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//a.js</span>
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="k">return</span><span class="p">{</span>
+        <span class="na">add</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+            <span class="k">return</span> <span class="nx">a</span><span class="o">+</span><span class="nx">b</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<p><strong>d.将模块定义为一个函数</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d4.js</span>
+<span class="nx">define</span><span class="p">([</span><span class="s1">'./a'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<p><strong>e.定义一个命名模块</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d5.js</span>
+ <span class="nx">define</span><span class="p">(</span><span class="s2">"myname"</span><span class="p">,[</span><span class="s1">'./a'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">//todo</span>
+       <span class="p">}</span>
+    <span class="p">);</span>
+</code></pre></div>
+<p><em>以上命名函数写法,移植需要重命名,不推荐使用</em><br>
+<strong>f.简单包装CommonJS来定义模块</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d6.js</span>
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">,</span><span class="nx">module</span><span class="p">){</span>
+
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./a'</span><span class="p">);</span>
+
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">show</span> <span class="o">=</span>  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<h1 id="requirejs">requireJS配置项</h1>
+
+<h2 id="baseurl">baseUrl ：</h2>
+
+<p>所有模块的查找根路径。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//app.js</span>
+<span class="nx">requirejs</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+    <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'js/app'</span>
+<span class="p">});</span>
+
+<span class="nx">requirejs</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">,</span><span class="s1">'c'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">){</span>
+
+<span class="p">});</span>
+</code></pre></div>
+<h2 id="paths">paths:</h2>
+
+<p>是映射那些不直接放在baseUrl指定的目录下的文件。设置paths的起始位置是相对于baseUrl的，除非该path设置是以”/”开头或含有URL协议(&#39;http://&#39;或者&#39;https://&#39;).</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
+<span class="nx">requirejs</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+    <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'js/lib'</span><span class="p">,</span>
+    <span class="na">paths</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">myapp</span><span class="p">:</span> <span class="s1">'../app'</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">require</span><span class="p">([</span><span class="s1">'jquery'</span><span class="p">,</span><span class="s1">'myapp/b'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">"#demo"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<h2 id="shim">shim:</h2>
+
+<p>为那些没有使用define()来声明依赖关系、设置模块的&quot;浏览器全局变量注入&quot;型脚本做依赖和导出配置。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+<span class="err">　　　　</span><span class="na">shim</span><span class="p">:</span> <span class="p">{</span>
+
+<span class="err">　　　　　　</span><span class="s1">'underscore'</span><span class="p">:{</span>
+<span class="err">　　　　　　　　</span><span class="na">exports</span><span class="p">:</span> <span class="s1">'_'</span>
+<span class="err">　　　　　　</span><span class="p">},</span>
+<span class="err">　　　　　　</span><span class="s1">'backbone'</span><span class="p">:</span> <span class="p">{</span>
+<span class="err">　　　　　　　　</span><span class="na">deps</span><span class="p">:</span> <span class="p">[</span><span class="s1">'underscore'</span><span class="p">,</span> <span class="s1">'jquery'</span><span class="p">],</span>
+<span class="err">　　　　　　　　</span><span class="na">exports</span><span class="p">:</span> <span class="s1">'Backbone'</span>
+<span class="err">　　　　　　</span><span class="p">}</span>
+<span class="err">　　　　</span><span class="p">}</span>
+<span class="err">　　</span><span class="p">});</span>
+</code></pre></div>
+<h2 id="map">Map参数：</h2>
+
+<p>Map参数是用来解决同一个模块不同版本的问题<br>
+building...</p>
+
+<h1 id="more">更多-more</h1>
+
+<ul>
+<li><a href="http://www.requirejs.cn/docs/api.html">http://www.requirejs.cn/docs/api.html</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/11/require_js.html">http://www.ruanyifeng.com/blog/2012/11/require_js.html</a></li>
+<li><a href="http://www.cnblogs.com/tugenhua0707/p/4067220.html">http://www.cnblogs.com/tugenhua0707/p/4067220.html</a></li>
+</ul>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -322,7 +380,7 @@ This operation requires root.<br>
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#mac">mac</a>
+  <a class="article-category-link" href="/categories/#Js">Js</a>
   
 </div>
 
@@ -336,9 +394,7 @@ This operation requires root.<br>
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#mac">mac</a>
-  
-  <a href="/tags/#Apache">Apache</a>
+  <a href="/tags/#requirejs">requirejs</a>
   
   </div>
 
@@ -348,7 +404,7 @@ This operation requires root.<br>
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/mac/2016/08/30/mac-apache" data-title="mac 配置Apache | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2016/09/29/requirejs" data-title="requirejs初学 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -359,11 +415,19 @@ This operation requires root.<br>
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/js/2016/09/22/react" title="react初学">
+  <strong>上一篇：</strong><br/>
+  <span>
+  react初学</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/mac/2016/08/30/mac-view-port-usage"  title="mac查看端口占用情况">
+<a href="/js/2016/09/30/seajs"  title="seajs初学">
  <strong>下一篇：</strong><br/> 
- <span>mac查看端口占用情况
+ <span>seajs初学
 </span>
 </a>
 </div>
@@ -372,7 +436,7 @@ This operation requires root.<br>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-08-30-mac-apache.md" data-title="mac 配置Apache" data-url="/mac/2016/08/30/mac-apache"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-09-29-requirejs.md" data-title="requirejs初学" data-url="/js/2016/09/29/requirejs"></div>
 </section>
 
 

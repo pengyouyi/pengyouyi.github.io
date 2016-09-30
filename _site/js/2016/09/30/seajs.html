@@ -7,7 +7,7 @@
     
     
     
-    <title>mac 配置Apache | 彭友谊的博客</title>
+    <title>seajs初学 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="mac 配置Apache">
-    <meta property="og:url" content="/mac/2016/08/30/mac-apache">
+    <meta property="og:title" content="seajs初学">
+    <meta property="og:url" content="/js/2016/09/30/seajs">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="MAC下配置Apache">
+    <meta property="og:description" content="seajs初学">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="mac 配置Apache">
+    <meta name="twitter:title" content="seajs初学">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -147,14 +147,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/mac/2016/08/30/mac-apache" title="mac 配置Apache" itemprop="url">mac 配置Apache</a>
+      <a href="/js/2016/09/30/seajs" title="seajs初学" itemprop="url">seajs初学</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-08-30 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-08-30</time>
+    <time datetime="2016-09-30 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-09-30</time>
     
   </p>
 </header>
@@ -166,146 +166,209 @@
 		
 		</div>
 		
-		<h2 id="mac-apache">MAC下配置Apache</h2>
+		<h1 id="seajs">seajs初学</h1>
 
-<p>我使用的Mac OS X版本是10.11.6，Mac自带了Apache环境。<br>
-1.启动Apache<br>
-2.设置虚拟主机</p>
+<p><strong>a.什么是seaJS</strong></p>
 
-<h2 id="apache">启动Apache</h2>
+<blockquote>
+<p>SeaJS是一个遵循CommonJS规范的JavaScript模块加载框架，可以像 Node.js 一般书写模块代码;<br>
+可以实现JavaScript的模块化开发及加载机制。</p>
+</blockquote>
 
-<p>打开&quot;终端(terminal)&quot;,输入 apachectl -v 查看Apache版本。</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">pengyouyideMacBook-Pro:~ pengyouyi<span class="nv">$ </span>apachectl -v
-Server version: Apache/2.4.18 <span class="o">(</span>Unix<span class="o">)</span>
-Server built:   Feb 20 2016 20:03:19
+<p><strong>b.引用-reference</strong><br>
+去seajs官网下载<a href="http://seajs.org/docs/#downloads">http://seajs.org/docs/#downloads</a>,在页面头部head标签内引入seaJS，如下：<br>
+<code>&lt;script src=&quot;js/sea.js&quot; id=&quot;seajsnode&quot;&gt;&lt;/script&gt;</code>，注意，这里加上了id=&quot;seajsnode&quot;，原因如下：</p>
+
+<ul>
+<li>1. SeaJS加载自身的script标签的其他属性（如data-config、data-main）等来实现不同的功能</li>
+<li>2. SeaJS内部通过document.getElementById(&quot;seajsnode&quot;)来获取这个script标签</li>
+</ul>
+
+<h1 id="eajs-use">入口-eajs.use</h1>
+
+<p>seajs.use 用来在页面中加载一个或多个模块。<br>
+example,如下文件结构</p>
+<div class="highlight"><pre><code class="language-" data-lang="">-helloSeajs
+     index.html
+    -js
+        seajs
+        main.js
+        a.js
+</code></pre></div><div class="highlight"><pre><code class="language-html" data-lang="html">//index.html
+<span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>seajs<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/sea.js"</span> <span class="na">id=</span><span class="s">"seajsnode"</span> <span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s2">"main"</span><span class="p">);</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    hi
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </code></pre></div>
-<p>接着输入 apachectl start ,这样就启动Apache。</p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">pengyouyideMacBook-Pro:~ pengyouyi<span class="nv">$ </span>apachectl start
-This operation requires root.
+<blockquote>
+<p>attention，以上index.html引用main.js的目录是相对于seajs所在的路劲</p>
+</blockquote>
+
+<p>在调用 seajs.use 之前，需要先引入 sea.js 文件</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 加载一个模块</span>
+<span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'mian'</span><span class="p">);</span>
+
+<span class="c1">// 加载一个模块，在加载完成时，执行回调</span>
+<span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+<span class="p">});</span>
+
+<span class="c1">// 加载多个模块，在加载完成时，执行回调</span>
+<span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s1">'main'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">main</span><span class="p">,</span> <span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">main</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+  <span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+<span class="p">});</span>
 </code></pre></div>
-<p>检查Apache是否启动成功,打开chrome浏览器在地址栏输入&quot;localhost&quot;,可以看到内容为&quot;It works!&quot;的页面。其位于“/Library（资源库）/WebServer/Documents/”下，这就是Apache的默认根目录。</p>
+<h1 id="seajs-config">seajs.config 配置</h1>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">seajs</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
 
-<p>Apache的安装目录在：/etc/apache2/，etc默认是隐藏的。有三种方式查看：<br>
-1.dock下右键Finder，选择&quot;前往文件夹&quot;，输入&quot;/etc&quot;<br>
-2.在finder下－－－－》前往－－－》前往文件夹，然后输入/etc<br>
-3.可以在terminal 输入 &quot;open /etc&quot;。</p>
+  <span class="c1">// 设置路径，方便跨目录调用</span>
+  <span class="na">paths</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'arale'</span><span class="p">:</span> <span class="s1">'https://a.alipayobjects.com/arale'</span><span class="p">,</span>
+    <span class="s1">'jquery'</span><span class="p">:</span> <span class="s1">'https://a.alipayobjects.com/jquery'</span>
+  <span class="p">},</span>
 
-<h2 id="virtual-host">设置虚拟主机-Virtual host</h2>
+  <span class="c1">// 设置别名，方便调用</span>
+  <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'class'</span><span class="p">:</span> <span class="s1">'arale/class/1.0.0/class'</span><span class="p">,</span>
+    <span class="s1">'jquery'</span><span class="p">:</span> <span class="s1">'jquery/jquery/1.10.1/jquery'</span>
+  <span class="p">}</span>
 
-<p>1.在终端运行&quot;sudo vi /etc/apache2/httpd.conf&quot;，打开Apche的配置文件<br>
-2.在httpd.conf中找到&quot;#Include /private/etc/apache2/extra/httpd-vhosts.conf&quot;，去掉前面的&quot;＃&quot;，保存并退出。<br>
-3.运行&quot;sudo apachectl restart&quot;，重启Apache后就开启了虚拟主机配置功能。<br>
-4.运行&quot;sudo vi /etc/apache2/extra/httpd-vhosts.conf&quot;，就打开了配置虚拟主机文件httpd-vhost.conf，配置虚拟主机了。需要注意的是该文件默认开启了两个作为例子的虚拟主机：</p>
-
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16</pre></td><td class="code"><pre>#<span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
-#    ServerAdmin webmaster@dummy-host.example.com
-#    DocumentRoot "/usr/docs/dummy-host.example.com"
-#    ServerName dummy-host.example.com
-#    ServerAlias www.dummy-host.example.com
-#    ErrorLog "/private/var/log/apache2/dummy-host.example.com-error_log"
-#    CustomLog "/private/var/log/apache2/dummy-host.example.com-access_log" common
-#<span class="nt">&lt;/VirtualHost&gt;</span>
-
-#<span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
-#    ServerAdmin webmaster@dummy-host2.example.com
-#   DocumentRoot "/usr/docs/dummy-host2.example.com"
-#    ServerName dummy-host2.example.com
-#    ErrorLog "/private/var/log/apache2/dummy-host2.example.com-error_log"
-#    CustomLog "/private/var/log/apache2/dummy-host2.example.com-access_log" common
-#<span class="nt">&lt;/VirtualHost&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>而实际上，这两个虚拟主机是不存在的，在没有配置任何其他虚拟主机时，可能会导致访问localhost时出现如下提示：</p>
-
-<p>Forbidden<br>
-You don&#39;t have permission to access /index.php on this server<br>
-最简单的办法就是在它们每行前面加上#，注释掉就好了，这样既能参考又不导致其他问题。</p>
-
-<p>5.增加如下配置</p>
-
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11</pre></td><td class="code"><pre><span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
-    DocumentRoot "/Users/pengyouyi/workplaces"
-    ServerName mysites
-    ErrorLog "/private/var/log/apache2/sites-error_log"
-    CustomLog "/private/var/log/apache2/sites-access_log" common
-    <span class="nt">&lt;Directory</span> <span class="err">"/Users/pengyouyi/workplaces"</span><span class="nt">&gt;</span>
-        Options Indexes FollowSymLinks Includes ExecCGI
-        AllowOverride All
-        Require all granted
-    <span class="nt">&lt;/Directory&gt;</span>
-<span class="nt">&lt;/VirtualHost&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>保存退出，并重启Apache。</p>
-
-<p>6.运行“sudo vi /etc/hosts”，打开hosts配置文件，加入&quot;127.0.0.1 mysites&quot;，这样就可以配置完成sites虚拟主机了，可以访问&quot;mysites&quot;了</p>
-
-<p><strong>注意:</strong> 以上代码适用于 Apache HTTP Server Version 2.4</p>
-<div class="highlight"><pre><code class="language-" data-lang="">Apache 2.4 configuration:
-Require all denied
-</code></pre></div><div class="highlight"><pre><code class="language-" data-lang="">Apache 2.2 configuration:
-Order deny,allow
-Deny from all
+<span class="p">});</span>
 </code></pre></div>
-<p>Apache HTTP Server Version 2.2 可用如下代码</p>
+<h1 id="define">define 定义模块</h1>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12</pre></td><td class="code"><pre><span class="nt">&lt;VirtualHost</span> <span class="err">*:80</span><span class="nt">&gt;</span>
-    DocumentRoot "/Users/pengyouyi/workplaces"
-    ServerName mysites
-    ErrorLog "/private/var/log/apache2/sites-error_log"
-    CustomLog "/private/var/log/apache2/sites-access_log" common
-    <span class="nt">&lt;Directory</span> <span class="err">"/Users/pengyouyi/workplaces"</span><span class="nt">&gt;</span>
-                Options Indexes FollowSymLinks MultiViews
-                AllowOverride None
-                Order deny,allow
-                Allow from all
-      <span class="nt">&lt;/Directory&gt;</span>
-<span class="nt">&lt;/VirtualHost&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<h2 id="apache">停止Apache服务</h2>
-<div class="highlight"><pre><code class="language-" data-lang="">apachectl stop
+<p>Sea.js 推崇一个模块一个文件，遵循统一的写法：<br>
+define define(factory)<br>
+define 接受 factory 参数，factory 可以是一个函数，也可以是一个对象或字符串。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//a.js</span>
+<span class="nx">define</span><span class="p">({</span>
+    <span class="s2">"my"</span><span class="p">:</span><span class="s2">"pengyouyi"</span>
+<span class="p">})</span>
 </code></pre></div>
-<p><strong>注意:</strong><br>
-当使用apachectl start 或者 apacheclt stop,出现以下结果时,表示权限不够<br>
-This operation requires root.<br>
-尝试:<code>sudo apachectl stsrt</code> 或者 <code>sudo apachectl stop</code> 可解决</p>
+<p>or</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//a.js</span>
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">,</span><span class="nx">module</span><span class="p">){</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">sayhi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">);</span>
+    <span class="p">};</span>
+ <span class="p">})</span>
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//a.js</span>
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">,</span><span class="nx">module</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="nx">a</span><span class="p">.</span><span class="nx">sayhi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s2">"#demo"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"hello seajs"</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>index.html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>seajs<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/sea.js"</span> <span class="na">id=</span><span class="s">"seajsnode"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s2">"main"</span><span class="p">,</span><span class="s2">"a"</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">main</span><span class="p">,</span><span class="nx">a</span><span class="p">){</span>
+            <span class="c1">//console.log(a)</span>
+            <span class="nx">a</span><span class="p">.</span><span class="nx">sayhi</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+<blockquote>
+<p>attention: 上面var $ = require(&quot;jquery&quot;)的使用，需要按照CMD定义封装一次jQuery原文件</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="c1">//jquery源代码</span>
+    <span class="k">return</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noConflict</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>define 更多<a href="https://github.com/seajs/seajs/issues/242">https://github.com/seajs/seajs/issues/242</a></p>
+
+<h1 id="require">require</h1>
+
+<p>require 用来获取指定模块的接口。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//main.js</span>
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+    <span class="nx">a</span><span class="p">.</span><span class="nx">sayhi</span><span class="p">();</span>
+<span class="p">})</span>
+</code></pre></div>
+<p><strong><em>attention</em></strong></p>
+
+<blockquote>
+<p>1.模块 factory 构造方法的第一个参数 必须 命名为 require ,    不能是req等其他的<br>
+2.不要重命名 require 函数，或在任何作用域中给 require 重新赋值。    如var req = require; ...are error<br>
+3.require 的参数值 必须 是字符串直接量。    require(myModule); ... are error</p>
+</blockquote>
+
+<p>require 更多<a href="https://github.com/seajs/seajs/issues/259">https://github.com/seajs/seajs/issues/259</a></p>
+
+<h1 id="require-async">require.async</h1>
+
+<p>用来在模块内部异步加载一个或多个模块。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//other.js</span>
+<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// 异步加载一个模块，在加载完成时，执行回调</span>
+  <span class="nx">require</span><span class="p">.</span><span class="nx">async</span><span class="p">(</span><span class="s1">'./b'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">b</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="c1">// 异步加载多个模块，在加载完成时，执行回调</span>
+  <span class="nx">require</span><span class="p">.</span><span class="nx">async</span><span class="p">([</span><span class="s1">'./c'</span><span class="p">,</span> <span class="s1">'./d'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">c</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+    <span class="nx">d</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
+  <span class="p">});</span>
+
+<span class="p">});</span>
+</code></pre></div>
+<h1 id="exports">exports</h1>
+
+<p>用来在模块内部对外提供接口。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">){</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s2">"bar"</span><span class="p">;</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<h1 id="module-exports">module.exports</h1>
+
+<p>与 exports 类似，用来在模块内部对外提供接口。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">foo</span><span class="p">:</span> <span class="s1">'bar'</span><span class="p">,</span>
+    <span class="na">doSomething</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+  <span class="p">};</span>
+<span class="p">});</span>
+</code></pre></div>
+<h1 id="more">更多-more</h1>
+
+<ul>
+<li><a href="https://github.com/seajs/seajs/issues/266">https://github.com/seajs/seajs/issues/266</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2012/11/require_js.html">http://www.ruanyifeng.com/blog/2012/11/require_js.html</a></li>
+<li><a href="http://www.cnblogs.com/tugenhua0707/p/4067220.html">http://www.cnblogs.com/tugenhua0707/p/4067220.html</a></li>
+</ul>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -322,7 +385,7 @@ This operation requires root.<br>
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#mac">mac</a>
+  <a class="article-category-link" href="/categories/#Js">Js</a>
   
 </div>
 
@@ -336,9 +399,7 @@ This operation requires root.<br>
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#mac">mac</a>
-  
-  <a href="/tags/#Apache">Apache</a>
+  <a href="/tags/#seajs">seajs</a>
   
   </div>
 
@@ -348,7 +409,7 @@ This operation requires root.<br>
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/mac/2016/08/30/mac-apache" data-title="mac 配置Apache | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2016/09/30/seajs" data-title="seajs初学 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -359,20 +420,20 @@ This operation requires root.<br>
 	
 <nav class="article-nav clearfix">
  
-
-<div class="next">
-<a href="/mac/2016/08/30/mac-view-port-usage"  title="mac查看端口占用情况">
- <strong>下一篇：</strong><br/> 
- <span>mac查看端口占用情况
-</span>
+ <div class="prev" >
+ <a href="/js/2016/09/29/requirejs" title="requirejs初学">
+  <strong>上一篇：</strong><br/>
+  <span>
+  requirejs初学</span>
 </a>
 </div>
+
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-08-30-mac-apache.md" data-title="mac 配置Apache" data-url="/mac/2016/08/30/mac-apache"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-09-30-seajs.md" data-title="seajs初学" data-url="/js/2016/09/30/seajs"></div>
 </section>
 
 
