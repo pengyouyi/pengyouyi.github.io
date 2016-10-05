@@ -4,13 +4,60 @@
  <title>彭友谊的博客</title>
  <link href="" rel="self"/>
  <link href=""/>
- <updated>2016-09-30T23:37:56+08:00</updated>
+ <updated>2016-10-05T12:50:21+08:00</updated>
  <id></id>
  <author>
    <name>pengyouyi</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>requirejs和seajs的区别</title>
+   <link href="/js/2016/10/04/requirejs&&seajs"/>
+   <updated>2016-10-04T00:00:00+08:00</updated>
+   <id>/js/2016/10/04/requirejs&&seajs</id>
+   <content type="html">&lt;h1 id=&quot;requirejs-seajs&quot;&gt;requirejs和seajs的区别&lt;/h1&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;区别&lt;/th&gt;
+&lt;th&gt;RequireJS(除了是模块加载器，还是文件加载器)&lt;/th&gt;
+&lt;th&gt;seaJS&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;遵循的规范不同&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;遵循 AMD（异步模块定义）规范，预执行，相对来讲解析模块时间短，停顿次数少。也就是RequireJS会先尽早地执行(依赖)模块, 相当于所有的require都被提前了, 而且模块执行的顺序也不一定100%按照代码中出现的顺序。&lt;/td&gt;
+&lt;td&gt;遵循 CMD （通用模块定义）规范，可以像   Node.js  一般书写模块代码 ，可以说是浏览器端的node.js懒执行，解析模块时间长，停顿次数多，但是，执行模块的顺序也是严格按照模块在代码中出现(require)的顺序&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;定位&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;想成为浏览器端的模块加载器，同时也想成为 Rhino / Node 等环境的模块加载器&lt;/td&gt;
+&lt;td&gt;则专注于 Web 浏览器端，同时通过 Node 扩展的方式可以很方便跑在 Node 环境中&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;推广理念&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;RequireJS 在尝试让第三方类库修改自身来支持 RequireJS，目前只有少数社区采纳&lt;/td&gt;
+&lt;td&gt;Sea.js 不强推，采用自主封装的方式来“海纳百川”，目前已有较成熟的封装策略&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;代码质量有差异&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;RequireJS 是没有明显的 bug，&lt;/td&gt;
+&lt;td&gt;SeaJS 是明显没有 bug&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;插件机制&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;RequireJS 采取的是在源码中预留接口的形式，插件类型比较单一&lt;/td&gt;
+&lt;td&gt;Sea.js 采取的是通用事件机制，具有丰富的可扩展接口，插件类型更丰富&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://zccst.iteye.com/blog/2084545&quot;&gt;http://zccst.iteye.com/blog/2084545&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>seajs初学</title>
@@ -22,7 +69,7 @@
 &lt;p&gt;&lt;strong&gt;a.什么是seaJS&lt;/strong&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;SeaJS是一个遵循CommonJS规范的JavaScript模块加载框架，可以像 Node.js 一般书写模块代码;&lt;br&gt;
+&lt;p&gt;SeaJS是一个遵循 CMD （通用模块定义）规范的JavaScript模块加载框架，可以像 Node.js 一般书写模块代码;&lt;br&gt;
 可以实现JavaScript的模块化开发及加载机制。&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -245,7 +292,8 @@ define 接受 factory 参数，factory 可以是一个函数，也可以是一�
 
 &lt;blockquote&gt;
 &lt;p&gt;（1）实现js文件的异步加载，避免网页失去响应；&lt;br&gt;
-（2）管理模块之间的依赖性，便于代码的编写和维护。&lt;/p&gt;
+（2）管理模块之间的依赖性，便于代码的编写和维护；&lt;br&gt;
+（3）遵循AMD（异步模块定义）规范。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;strong&gt;c.引用-reference&lt;/strong&gt;&lt;br&gt;

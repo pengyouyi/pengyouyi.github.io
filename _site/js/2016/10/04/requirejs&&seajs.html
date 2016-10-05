@@ -7,7 +7,7 @@
     
     
     
-    <title>设计模式 MVC & MVVM | 彭友谊的博客</title>
+    <title>requirejs和seajs的区别 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="设计模式 MVC & MVVM">
-    <meta property="og:url" content="/design/pattern/2016/09/21/MVC&MVVM">
+    <meta property="og:title" content="requirejs和seajs的区别">
+    <meta property="og:url" content="/js/2016/10/04/requirejs&&seajs">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="设计模式 MVC & MVVM 区别">
+    <meta property="og:description" content="requirejs和seajs的区别">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="设计模式 MVC & MVVM">
+    <meta name="twitter:title" content="requirejs和seajs的区别">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -147,14 +147,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/design/pattern/2016/09/21/MVC&MVVM" title="设计模式 MVC & MVVM" itemprop="url">设计模式 MVC & MVVM</a>
+      <a href="/js/2016/10/04/requirejs&&seajs" title="requirejs和seajs的区别" itemprop="url">requirejs和seajs的区别</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-09-21 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-09-21</time>
+    <time datetime="2016-10-04 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-04</time>
     
   </p>
 </header>
@@ -166,80 +166,45 @@
 		
 		</div>
 		
-		<h1 id="mvc-amp-mvvm">设计模式 MVC &amp; MVVM 区别</h1>
+		<h1 id="requirejs-seajs">requirejs和seajs的区别</h1>
 
-<p><strong>一、MVC</strong><br>
-MVC模式的意思是，软件可以分成三个部分。</p>
+<table><thead>
+<tr>
+<th>区别</th>
+<th>RequireJS(除了是模块加载器，还是文件加载器)</th>
+<th>seaJS</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>遵循的规范不同</strong></td>
+<td>遵循 AMD（异步模块定义）规范，预执行，相对来讲解析模块时间短，停顿次数少。也就是RequireJS会先尽早地执行(依赖)模块, 相当于所有的require都被提前了, 而且模块执行的顺序也不一定100%按照代码中出现的顺序。</td>
+<td>遵循 CMD （通用模块定义）规范，可以像   Node.js  一般书写模块代码 ，可以说是浏览器端的node.js懒执行，解析模块时间长，停顿次数多，但是，执行模块的顺序也是严格按照模块在代码中出现(require)的顺序</td>
+</tr>
+<tr>
+<td><strong>定位</strong></td>
+<td>想成为浏览器端的模块加载器，同时也想成为 Rhino / Node 等环境的模块加载器</td>
+<td>则专注于 Web 浏览器端，同时通过 Node 扩展的方式可以很方便跑在 Node 环境中</td>
+</tr>
+<tr>
+<td><strong>推广理念</strong></td>
+<td>RequireJS 在尝试让第三方类库修改自身来支持 RequireJS，目前只有少数社区采纳</td>
+<td>Sea.js 不强推，采用自主封装的方式来“海纳百川”，目前已有较成熟的封装策略</td>
+</tr>
+<tr>
+<td><strong>代码质量有差异</strong></td>
+<td>RequireJS 是没有明显的 bug，</td>
+<td>SeaJS 是明显没有 bug</td>
+</tr>
+<tr>
+<td><strong>插件机制</strong></td>
+<td>RequireJS 采取的是在源码中预留接口的形式，插件类型比较单一</td>
+<td>Sea.js 采取的是通用事件机制，具有丰富的可扩展接口，插件类型更丰富</td>
+</tr>
+</tbody></table>
 
-<div class="rd">
-<img src=http://image.beekka.com/blog/2015/bg2015020104.png />
-</div>
+<h1 id="more">更多-more</h1>
 
-<blockquote>
-<ul>
-<li><strong>视图（View）：</strong>用户界面。代表了UI组件，像CSS，JQuery，html等。他只负责展示从controller接收到的数据。也就是把model转化成UI。</li>
-<li><strong>控制器（Controller）：</strong>业务逻辑。负责处理流入的请求。它通过View来接受用户的输入，之后利用Model来处理用户的数据，最后把结果返回给View。Controll就是View和Model之间的一个协调者。</li>
-<li><strong>模型（Model）：</strong>数据保存。代表了描述业务路逻辑，业务模型、数据操作、数据模型的一系列类的集合。这层也定义了数据修改和操作的业务规则。</li>
-</ul>
-</blockquote>
-
-<p>各部分之间的通信方式如下</p>
-
-<div class="rd">
-<img src=http://image.beekka.com/blog/2015/bg2015020105.png />
-</div>
-
-<ul>
-<li>1.View 传送指令到 Controller</li>
-<li>2.Controller 完成业务逻辑后，要求 Model 改变状态</li>
-<li>3.Model 将新的数据发送到 View，用户得到反馈</li>
-</ul>
-
-<p>所有通信都是单向的</p>
-
-<p><strong>二、互动模式</strong><br>
-接受用户指令时，MVC 可以分成两种方式。一种是通过 View 接受指令，传递给 Controller</p>
-
-<div class="rd">
-<img src=http://image.beekka.com/blog/2015/bg2015020106.png />
-</div>
-
-<p>另一种是直接通过controller接受指令</p>
-
-<div class="rd">
-<img src=http://image.beekka.com/blog/2015/bg2015020107.png />
-</div>
-
-<p><strong>三、MVP</strong><br>
-MVP 模式将 Controller 改名为 Presenter，同时改变了通信方向</p>
-
-<div class="rd">
-<img src=http://image.beekka.com/blog/2015/bg2015020109.png />
-</div>
-
-<ol>
-<li>各部分之间的通信，都是双向的。</li>
-<li>View 与 Model 不发生联系，都通过 Presenter 传递。</li>
-<li>View 非常薄，不部署任何业务逻辑，称为&quot;被动视图&quot;（Passive View），即没有任何主动性，而 Presenter非常厚，所有逻辑都部署在那里</li>
-</ol>
-
-<blockquote>
-<p>1.Model<br>
-Model层代表了描述业务逻辑和数据的一系列类的集合。它也定义了数据修改和操作的业务规则。<br>
-2.View<br>
-View代表了UI组件，像CSS，JQuery，html等。他只负责展示从Presenter接收到的数据。也就是把模型（非Modle层模型）转化成UI。<br>
-3.Presenter<br>
-Presenter负责处理View背后所有的UI事件。它通过View接收用户输入，之后利用Model来处理用户的数据，最后把结果返回给View。与View和Controller不同，View和Presenter之间是完全解耦的，他们通过接口来交互。另外，presenter不像controller处理进入的请求</p>
-</blockquote>
-
-<p><strong>四、MVVM</strong><br>
-MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一致</p>
-
-<div class="rd">
-<img src=http://image.beekka.com/blog/2015/bg2015020110.png />
-</div>
-
-<p>唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。Angular 和 Ember 都采用这种模式</p>
+<p><a href="http://zccst.iteye.com/blog/2084545">http://zccst.iteye.com/blog/2084545</a></p>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -256,9 +221,7 @@ MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一�
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#design">design</a>
-  
-  <a class="article-category-link" href="/categories/#pattern">pattern</a>
+  <a class="article-category-link" href="/categories/#Js">Js</a>
   
 </div>
 
@@ -272,9 +235,9 @@ MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一�
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#MVC">MVC</a>
+  <a href="/tags/#requirejs">requirejs</a>
   
-  <a href="/tags/#MVVM">MVVM</a>
+  <a href="/tags/#seajs">seajs</a>
   
   </div>
 
@@ -284,7 +247,7 @@ MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一�
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/design/pattern/2016/09/21/MVC&MVVM" data-title="设计模式 MVC & MVVM | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2016/10/04/requirejs&&seajs" data-title="requirejs和seajs的区别 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -296,27 +259,19 @@ MVVM 模式将 Presenter 改名为 ViewModel，基本上与 MVP 模式完全一�
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2016/09/20/webpack" title="Webpack初学">
+ <a href="/js/2016/09/30/seajs" title="seajs初学">
   <strong>上一篇：</strong><br/>
   <span>
-  Webpack初学</span>
+  seajs初学</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/js/2016/09/22/react"  title="react初学">
- <strong>下一篇：</strong><br/> 
- <span>react初学
-</span>
-</a>
-</div>
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-09-21-MVC&MVVM.md" data-title="设计模式 MVC & MVVM" data-url="/design/pattern/2016/09/21/MVC&MVVM"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-10-04-requirejs&&seajs.md" data-title="requirejs和seajs的区别" data-url="/js/2016/10/04/requirejs&&seajs"></div>
 </section>
 
 

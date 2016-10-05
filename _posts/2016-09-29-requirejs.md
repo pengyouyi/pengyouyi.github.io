@@ -22,7 +22,8 @@ description: requirejs初学
 **b.使用requireJS的优点有哪些？**
 
 > （1）实现js文件的异步加载，避免网页失去响应；
-> （2）管理模块之间的依赖性，便于代码的编写和维护。
+> （2）管理模块之间的依赖性，便于代码的编写和维护；
+> （3）遵循AMD（异步模块定义）规范。
 
 **c.引用-reference**
 去requirejs官网下载[http://www.requirejs.cn/docs/download.html](http://www.requirejs.cn/docs/download.html),在页面头部head标签内引入requireJS，如下：
