@@ -204,7 +204,6 @@ Map参数是用来解决同一个模块不同版本的问题
 building...
 
 
-
 # 更多-more
 * [http://www.requirejs.cn/docs/api.html](http://www.requirejs.cn/docs/api.html)
 * [http://www.ruanyifeng.com/blog/2012/11/require_js.html](http://www.ruanyifeng.com/blog/2012/11/require_js.html)
