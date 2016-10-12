@@ -7,7 +7,7 @@
     
     
     
-    <title>Webpack初学 | 彭友谊的博客</title>
+    <title>CSS面试题 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="Webpack初学">
-    <meta property="og:url" content="/js/2016/09/20/webpack">
+    <meta property="og:title" content="CSS面试题">
+    <meta property="og:url" content="/css/2016/10/12/CSS">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="Webpack初学">
+    <meta property="og:description" content="CSS面试题">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Webpack初学">
+    <meta name="twitter:title" content="CSS面试题">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -147,14 +147,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/09/20/webpack" title="Webpack初学" itemprop="url">Webpack初学</a>
+      <a href="/css/2016/10/12/CSS" title="CSS面试题" itemprop="url">CSS面试题</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-09-20 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-09-20</time>
+    <time datetime="2016-10-12 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-12</time>
     
   </p>
 </header>
@@ -166,219 +166,298 @@
 		
 		</div>
 		
-		<h1 id="webpack">Webpack初学</h1>
+		<h1 id="css">CSS面试题</h1>
 
-<p><strong>a.简介-introduction</strong></p>
+<h1 id="box-model">box model</h1>
 
-<blockquote>
-<p>1.一个打包工具<br>
-2.一个模块加载工具<br>
-3.各种资源(例如JS（含JSX）、coffee、样式（含less/sass）、图片等)都可以当成模块来处理</p>
-</blockquote>
+<ul>
+<li>介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？</li>
+</ul>
 
-<p><strong>WebPack的优势</strong></p>
+<p>（1）有两种， IE 盒子模型、W3C 盒子模型；<br>
+（2）盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border)；<br>
+（3）区  别： IE的content部分把 border 和 padding计算了进去;</p>
 
-<blockquote>
-<p>1.webpack 是以 commonJS 的形式来书写脚本滴，但对 AMD/CMD 的支持也很全面，方便旧项目进行代码迁移。<br>
- 2.能被模块化的不仅仅是 JS 了。<br>
- 3.开发便捷，能替代部分 grunt/gulp 的工作，比如打包、压缩混淆、图片转base64等。<br>
- 4.扩展性强，插件机制完善，特别是支持 React 热插拔（见 react-hot-loader ）的功能让人眼前一亮<br>
- 5.代码分割，提供按需加载的能力<br>
- 6.发布工具</p>
-</blockquote>
+<p>解决IE8及更早版本不兼容问题可以在HTML页面声明 &lt;!DOCTYPE html&gt;即可。</p>
 
-<p><strong>b.安装-install</strong><br>
-首先需要安装Node.js，node自带了包管理工具npm。<br>
-<code>$ npm install webpack -g</code><br>
-常规项目还是把依赖写入 package.json 包去更人性化：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm init
-$ npm install webpack --save-dev
-$ npm install webpack-dev-server --save-dev
+<p>在 CSS 中定义的宽和高，其实都是内容区域的宽和高，padding，border 和 margin 被排除在盒子尺寸之外。</p>
+
+<p>所以对于一个定义了宽度的盒子来说，其尺寸的计算方式：</p>
+
+<p>实际宽度 = margin(left+right) + border(left+right) + padding(left+right) + width(定义的值)</p>
+
+<p>实际高度 = margin(top+bottom) + border(top+bottom) + padding(top+bottom) + height(定义的值)</p>
+
+<p>可以利用 margin 调整两个元素之间的距离，用 padding 调整内容与元素边框之间的距离（留白）。这是标准的盒模型</p>
+
+<h1 id="selector">selector</h1>
+
+<ul>
+<li>CSS选择符有哪些？哪些属性可以继承？</li>
+</ul>
+
+<p>1.id选择器（ # myid）<br>
+2.类选择器（.myclassname）<br>
+3.标签选择器（div, h1, p）<br>
+4.相邻选择器（h1 + p）<br>
+5.子选择器（ul &gt; li）<br>
+6.后代选择器（li a）<br>
+7.通配符选择器（ * ）<br>
+8.属性选择器（a[rel = &quot;external&quot;]）<br>
+9.伪类选择器（a:hover, li:nth-child）</p>
+
+<p>可继承的样式： font-size font-family color, UL LI DL DD DT;</p>
+
+<p>不可继承的样式：border padding margin width height ;</p>
+
+<h1 id="selector-priority">Selector priority</h1>
+
+<ul>
+<li>CSS优先级算法如何计算？
+优先级就近原则，同权重情况下样式定义最近者为准;</li>
+</ul>
+
+<p>载入样式以最后载入的定位为准;</p>
+
+<p>优先级为:<br>
+   !important &gt;  id &gt; class &gt; tag<br>
+    important 比 内联优先级高</p>
+
+<h1 id="pseudo-class">Pseudo class</h1>
+
+<ul>
+<li>CSS3新增伪类有那些？</li>
+</ul>
+
+<p>举例：</p>
+<div class="highlight"><pre><code class="language-" data-lang="">p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:last-of-type  选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-of-type  选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-child        选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
+p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
+
+:after          在元素之前添加内容,也可以用来做清除浮动。
+:before         在元素之后添加内容
+:enabled        
+:disabled       控制表单控件的禁用状态。
+:checked        单选框或复选框被选中。
 </code></pre></div>
-<h1 id="configure">配置-configure</h1>
+<h1 id="div-center">div center</h1>
 
-<p>每个项目下都必须配置有一个 webpack.config.js，它的作用如同常规的 gulpfile.js/Gruntfile.js ，就是一个配置项，告诉 webpack 它需要做什么<br>
-<strong>看看下方的示例</strong></p>
+<ul>
+<li>如何居中div？</li>
+</ul>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42</pre></td><td class="code"><pre><span class="kd">var</span> <span class="nx">webpack</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">);</span>
-
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">//插件项</span>
-    <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
-        <span class="c1">//提公用js到common.js文件中</span>
-        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">(</span><span class="s1">'common.js'</span><span class="p">),</span>
-        <span class="c1">//将样式统一发布到style.css中</span>
-        <span class="k">new</span> <span class="nx">ExtractTextPlugin</span><span class="p">(</span><span class="s2">"style.css"</span><span class="p">,</span> <span class="p">{</span>
-            <span class="na">allChunks</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="na">disable</span><span class="p">:</span> <span class="kc">false</span>
-        <span class="p">}),</span>
-        <span class="c1">//使用ProvidePlugin加载使用频率高的模块</span>
-        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">ProvidePlugin</span><span class="p">({</span>
-            <span class="na">$</span><span class="p">:</span> <span class="s2">"webpack-zepto"</span>
-        <span class="p">})</span>
-    <span class="p">],</span>
-    <span class="c1">//页面入口文件配置</span>
-    <span class="na">entry</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">index</span> <span class="p">:</span> <span class="s1">'./src/main.js'</span>
-    <span class="p">},</span>
-    <span class="c1">//入口文件输出配置</span>
-    <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">path</span><span class="p">:</span> <span class="nx">__dirname</span> <span class="o">+</span><span class="s1">'/dist/'</span><span class="p">,</span>
-        <span class="na">filename</span><span class="p">:</span> <span class="s1">'[name].js'</span>
-    <span class="p">},</span>
-    <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
-        <span class="c1">//加载器配置</span>
-        <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'style-loader!css-loader'</span> <span class="p">},</span>
-            <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">scss$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'style!css!sass?sourceMap'</span><span class="p">},</span>
-            <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.(</span><span class="sr">png|jpg</span><span class="se">)</span><span class="sr">$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'url-loader?limit=8192'</span><span class="p">}</span>
-        <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="c1">//其它解决方案配置</span>
-    <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">extensions</span><span class="p">:</span> <span class="p">[</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'.js'</span><span class="p">,</span> <span class="s1">'.json'</span><span class="p">,</span> <span class="s1">'.scss'</span><span class="p">],</span>
-        <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
-            <span class="na">filter</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'src/filters'</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">};</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p><strong>entry</strong><br>
-entry是页面入口文件配置，可以是一个文件或者多个入口文件，可以是对象格式或者数组格式。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">entry: {
-    index : './src/main.js'
-}
-entry:['./src/main.js','./src/index.js']
+<p>水平居中：给div设置一个宽度，然后添加margin:0 auto属性</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">div</span><span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span><span class="m">200px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span><span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+ <span class="p">}</span>
 </code></pre></div>
-<p><strong>output</strong><br>
-output 是对应输出项配置,主要包括path,filename和publishPath属性。path代表输出的路径，filename代表输出的文件名称，publishPath代表静态资源发布后的前缀地址<br>
-<strong>module.loaders</strong><br>
-module.loaders 是最关键的一块配置。它告知 webpack 每一种文件都需要使用什么加载器来处理。点击这里可以查看loader list</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">module</span><span class="err">:</span> <span class="p">{</span>
-    <span class="c1">//加载器配置</span>
-    <span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
-        <span class="c1">//.css 文件使用 style-loader 和 css-loader 来处理</span>
-        <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'style-loader!css-loader'</span> <span class="p">},</span>
-        <span class="c1">//.scss 文件使用 style-loader、css-loader 和 sass-loader 来编译处理</span>
-        <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">scss$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'style!css!sass?sourceMap'</span><span class="p">},</span>
-        <span class="c1">//图片文件使用 url-loader 来处理，小于8kb的直接转为base64</span>
-        <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.(</span><span class="sr">png|jpg</span><span class="se">)</span><span class="sr">$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'url-loader?limit=8192'</span><span class="p">}</span>
-    <span class="p">]</span>
+<p>让绝对定位的div居中</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"> <span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">bottom</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">right</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">pink</span><span class="p">;</span>     <span class="c">/* 方便看效果 */</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>loader主要有3种使用方式：</p>
+<p>水平垂直居中一</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="err">确定容器的宽高</span> <span class="err">宽</span><span class="nt">500</span> <span class="err">高</span> <span class="nt">300</span> <span class="err">的层</span>
+<span class="err">设置层的外边距</span>
+<span class="o">//</span><span class="nt">div</span><span class="err">的父元素需要设定高度，否则</span><span class="nt">top</span><span class="err">无效</span>
+<span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>     <span class="c">/* 相对定位或绝对定位均可 */</span>
+    <span class="nl">width</span><span class="p">:</span><span class="m">500px</span><span class="p">;</span> 
+    <span class="nl">height</span><span class="p">:</span><span class="m">300px</span><span class="p">;</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">-150px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">-250px</span><span class="p">;</span>      <span class="c">/* 外边距为自身宽高的一半 */</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">pink</span><span class="p">;</span>     <span class="c">/* 方便看效果 */</span>
+ <span class="p">}</span>
+</code></pre></div>
+<p>水平垂直居中二</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"> <span class="err">未知容器的宽高，利用</span> <span class="err">`</span><span class="nt">transform</span><span class="err">`</span> <span class="err">属性</span>
 
-<p>1、在页面里面引用资源使用<br>
-<code>require(&quot;url-loader?mimetype=image/png!./file.png&quot;);</code></p>
+<span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>     <span class="c">/* 相对定位或绝对定位均可 */</span>
+    <span class="nl">width</span><span class="p">:</span><span class="m">500px</span><span class="p">;</span> 
+    <span class="nl">height</span><span class="p">:</span><span class="m">300px</span><span class="p">;</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="m">-50%</span><span class="p">,</span> <span class="m">-50%</span><span class="p">);</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">pink</span><span class="p">;</span>     <span class="c">/* 方便看效果 */</span>
 
-<p>2、在webpack.config.js文件夹中使用<br>
-<code>{ test: /.png$/, loader: &quot;url?mimetype=image/png&quot; };</code></p>
-
-<p>3、在命令行中编译使用<br>
-<code>webpack --module-bind &quot;png=url-loader?mimetype=image/png&quot;;</code></p>
-
-<p>如上，&quot;-loader&quot;其实是可以省略不写的，多个loader之间用“!”连接起来。<br>
-注意所有的加载器都需要通过 npm 来加载，并建议查阅它们对应的 readme 来看看如何使用。<br>
-拿最后一个 url-loader 来说，它会将样式中引用到的图片转为模块来处理，使用该加载器需要先进行安装：<br>
-npm install url-loader -save-dev<br>
-配置信息的参数“?limit=8192”表示将所有小于8kb的图片都转为base64形式（其实应该说超过8kb的才使用 url-loader 来映射到文件，否则转为data url形式）。也可以使用file-loader来加载资源文件。<br>
-<strong>plugins</strong><br>
-plugins 是插件项，这里我们使用了一个 CommonsChunkPlugin 的插件，它用于提取多个入口文件的公共脚本部分，然后生成一个 common.js 来方便多页面之间进行复用<br>
-如上，包含两种：<br>
-1、第一种webpack自带的一些插件：webpack.ProvidePlugin、webpack.optimize.CommonsChunkPlugin，<br>
-2、另外一种则通过npm包安装的：ExtractTextPlugin<br>
-<strong>resolve</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">resolve</span><span class="err">:</span> <span class="p">{</span>
-    <span class="c1">// require时省略的扩展名，如：require('module') 不需要module.js</span>
-    <span class="nl">extension</span><span class="p">:</span> <span class="p">[</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'.js'</span><span class="p">],</span>
-    <span class="c1">//别名</span>
-    <span class="nx">alias</span><span class="err">:</span> <span class="p">{</span>
-        <span class="nl">filter</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'src/filters'</span><span class="p">)</span>
-    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h1 id="webpack">运行 webpack</h1>
+<p>水平垂直居中三</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="err">利用</span> <span class="nt">flex</span> <span class="err">布局</span>
+<span class="err">实际使用时应考虑兼容性</span>
 
-<p>webpack 的执行也很简单，直接执行</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ webpack --display-error-details
-</code></pre></div>
-<h1 id="demo1-entry-file">demo1-Entry file</h1>
+<span class="nc">.container</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span> 
+    <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>        <span class="c">/* 垂直居中 */</span>
+    <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>    <span class="c">/* 水平居中 */</span>
 
-<p>For example, main.js is an entry file.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">// main.js
-document.write('&lt;h1&gt;Hello World&lt;/h1&gt;');
+<span class="p">}</span>
+<span class="nc">.container</span> <span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">pink</span><span class="p">;</span>     <span class="c">/* 方便看效果 */</span>
+<span class="p">}</span>  
 </code></pre></div>
-<p>index.html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+<h1 id="display">display</h1>
+
+<ul>
+<li>display有哪些值？说明他们的作用。</li>
+</ul>
+
+<p>block         块类型。默认宽度为父元素宽度，可设置宽高，换行显示。<br>
+none          缺省值。象行内元素类型一样显示。<br>
+inline        行内元素类型。默认宽度为内容宽度，不可设置宽高，同行显示。<br>
+inline-block  默认宽度为内容宽度，可以设置宽高，同行显示。<br>
+list-item     象块类型元素一样显示，并添加样式列表标记。<br>
+table         此元素会作为块级表格来显示。<br>
+inherit       规定应该从父元素继承 display 属性的值。</p>
+
+<h1 id="position">position</h1>
+
+<ul>
+<li>position的值relative和absolute定位原点是？</li>
+</ul>
+
+<p>absolute<br>
+生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。<br>
+fixed （老IE不支持）<br>
+生成绝对定位的元素，相对于浏览器窗口进行定位。<br>
+relative<br>
+生成相对定位的元素，相对于其正常位置进行定位。<br>
+static<br>
+默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）。<br>
+inherit<br>
+规定从父元素继承 position 属性的值。</p>
+
+<h1 id="css3-new-features">css3 new features</h1>
+
+<ul>
+<li>CSS3有哪些新特性？</li>
+</ul>
+
+<p>新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）<br>
+圆角           （border-radius:8px）<br>
+多列布局        （multi-column layout）<br>
+阴影和反射        （Shadow\Reflect）<br>
+文字特效      （text-shadow、）<br>
+文字渲染      （Text-decoration）<br>
+线性渐变      （gradient）<br>
+旋转          （transform）<br>
+增加了旋转,缩放,定位,倾斜,动画，多背景<br>
+transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:</p>
+
+<h1 id="triangle">Triangle</h1>
+
+<ul>
+<li>用纯CSS创建一个三角形的原理是什么？</li>
+</ul>
+
+<p>把上、左、右三条边隐藏掉（颜色设为 transparent）</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nf">#demo</span><span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> 
+  <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>  
+  <span class="nl">border-width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>  
+  <span class="nl">border-style</span><span class="p">:</span> <span class="nb">solid</span><span class="p">;</span>  
+  <span class="nl">border-color</span><span class="p">:</span> <span class="nb">transparent</span> <span class="nb">transparent</span> <span class="no">red</span> <span class="nb">transparent</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
-<p>Webpack follows webpack.config.js to build bundle.js.</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// webpack.config.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">entry</span><span class="p">:</span> <span class="s1">'./main.js'</span><span class="p">,</span>
-  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">filename</span><span class="p">:</span> <span class="s1">'bundle.js'</span>
-  <span class="p">}</span>
-<span class="p">};</span>
+<h1 id="12px">12px</h1>
+
+<ul>
+<li>Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,</li>
+</ul>
+
+<p>可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决</p>
+
+<h1 id="hover">hover</h1>
+
+<ul>
+<li>超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:</li>
+</ul>
+
+<p>L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}</p>
+
+<h1 id="li">li</h1>
+
+<ul>
+<li>li与li之间有看不见的空白间隔是什么原因引起的？有什么解决办法？</li>
+</ul>
+
+<p>行框的排列会受到中间空白（回车\空格）等的影响，因为空格也属于字符,这些空白也会被应用样式，占据空间，所以会有间隔，把字符大小设为0，就没有空格了。</p>
+
+<h1 id="css-init">css init</h1>
+
+<ul>
+<li>为什么要初始化CSS样式。</li>
+</ul>
+
+<p>因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。</p>
+
+<p>当然，初始化样式会对SEO有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化。</p>
+
+<p>最简单的初始化方法： * {padding: 0; margin: 0;} （强烈不建议）</p>
+
+<p>淘宝的样式初始化代码：</p>
+<div class="highlight"><pre><code class="language-" data-lang="">body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
+h1, h2, h3, h4, h5, h6{ font-size:100%; }
+address, cite, dfn, em, var { font-style:normal; }
+code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
+small{ font-size:12px; }
+ul, ol { list-style:none; }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; }
+sup { vertical-align:text-top; }
+sub{ vertical-align:text-bottom; }
+legend { color:#000; }
+fieldset, img { border:0; }
+button, input, select, textarea { font-size:100%; }
+table { border-collapse:collapse; border-spacing:0; }
 </code></pre></div>
-<p>Launch the server, visit <a href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> .</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ webpack-dev-server
-</code></pre></div>
+<h1 id="css-weight">css weight</h1>
+
+<ul>
+<li>css定义的权重</li>
+</ul>
+
+<p>/<em>权重为1</em>/<br>
+div{<br>
+}<br>
+/<em>权重为10</em>/<br>
+.class1{<br>
+}<br>
+/<em>权重为100</em>/<br>
+#id1{<br>
+}<br>
+/<em>权重为100+1=101</em>/<br>
+#id1 div{<br>
+}<br>
+/<em>权重为10+1=11</em>/<br>
+.class1 div{<br>
+}<br>
+/<em>权重为10+10+1=21</em>/<br>
+.class1 .class2 div{<br>
+}</p>
+
+<p>如果权重相同，则最后定义的样式会起作用，但是应该避免这种情况出现</p>
+
 <h1 id="more">更多-more</h1>
 
 <ul>
-<li><a href="http://webpack.github.io/docs/">http://webpack.github.io/docs/</a></li>
-<li><a href="https://github.com/ruanyf/webpack-demos#demo01-entry-file-source">最好懂的Webpack教程--阮一峰</a></li>
+<li><a href="https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers">https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers</a></li>
 </ul>
   
 	</div>
@@ -396,7 +475,7 @@ document.write('&lt;h1&gt;Hello World&lt;/h1&gt;');
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#Js">Js</a>
+  <a class="article-category-link" href="/categories/#CSS">CSS</a>
   
 </div>
 
@@ -410,9 +489,7 @@ document.write('&lt;h1&gt;Hello World&lt;/h1&gt;');
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#Webpack">Webpack</a>
-  
-  <a href="/tags/#模块加载器">模块加载器</a>
+  <a href="/tags/#面试题">面试题</a>
   
   </div>
 
@@ -422,7 +499,7 @@ document.write('&lt;h1&gt;Hello World&lt;/h1&gt;');
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/09/20/webpack" data-title="Webpack初学 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/css/2016/10/12/CSS" data-title="CSS面试题 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -434,27 +511,19 @@ document.write('&lt;h1&gt;Hello World&lt;/h1&gt;');
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2016/09/07/handlebars.js" title="handlebars.js初学">
+ <a href="/html/2016/10/11/html" title="HTML面试题">
   <strong>上一篇：</strong><br/>
   <span>
-  handlebars.js初学</span>
+  HTML面试题</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/design/pattern/2016/09/21/MVC&MVVM"  title="设计模式 MVC & MVVM">
- <strong>下一篇：</strong><br/> 
- <span>设计模式 MVC & MVVM
-</span>
-</a>
-</div>
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-09-20-webpack.md" data-title="Webpack初学" data-url="/js/2016/09/20/webpack"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-10-12-CSS.md" data-title="CSS面试题" data-url="/css/2016/10/12/CSS"></div>
 </section>
 
 
