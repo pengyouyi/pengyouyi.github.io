@@ -7,7 +7,7 @@
     
     
     
-    <title>requirejs和seajs的区别 | 彭友谊的博客</title>
+    <title>CSS Lint检测规范 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="requirejs和seajs的区别">
-    <meta property="og:url" content="/js/2016/10/03/requirejs&&seajs">
+    <meta property="og:title" content="CSS Lint检测规范">
+    <meta property="og:url" content="/css/2016/10/16/css-lint">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="requirejs和seajs的区别">
+    <meta property="og:description" content="CSS Lint检测规范">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="requirejs和seajs的区别">
+    <meta name="twitter:title" content="CSS Lint检测规范">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -138,14 +138,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/10/03/requirejs&&seajs" title="requirejs和seajs的区别" itemprop="url">requirejs和seajs的区别</a>
+      <a href="/css/2016/10/16/css-lint" title="CSS Lint检测规范" itemprop="url">CSS Lint检测规范</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-03 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-03</time>
+    <time datetime="2016-10-16 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-16</time>
     
   </p>
 </header>
@@ -157,45 +157,250 @@
 		
 		</div>
 		
-		<h1 id="requirejs-seajs">requirejs和seajs的区别</h1>
+		<h1 id="css-lint">CSS Lint检测规范</h1>
 
-<table><thead>
-<tr>
-<th>区别</th>
-<th>RequireJS(除了是模块加载器，还是文件加载器)</th>
-<th>seaJS</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><strong>遵循的规范不同</strong></td>
-<td>遵循 AMD（异步模块定义）规范，预执行，相对来讲解析模块时间短，停顿次数少。也就是RequireJS会先尽早地执行(依赖)模块, 相当于所有的require都被提前了, 而且模块执行的顺序也不一定100%按照代码中出现的顺序。</td>
-<td>遵循 CMD （通用模块定义）规范，可以像   Node.js  一般书写模块代码 ，可以说是浏览器端的node.js懒执行，解析模块时间长，停顿次数多，但是，执行模块的顺序也是严格按照模块在代码中出现(require)的顺序</td>
-</tr>
-<tr>
-<td><strong>定位</strong></td>
-<td>想成为浏览器端的模块加载器，同时也想成为 Rhino / Node 等环境的模块加载器</td>
-<td>则专注于 Web 浏览器端，同时通过 Node 扩展的方式可以很方便跑在 Node 环境中</td>
-</tr>
-<tr>
-<td><strong>推广理念</strong></td>
-<td>RequireJS 在尝试让第三方类库修改自身来支持 RequireJS，目前只有少数社区采纳</td>
-<td>Sea.js 不强推，采用自主封装的方式来“海纳百川”，目前已有较成熟的封装策略</td>
-</tr>
-<tr>
-<td><strong>代码质量有差异</strong></td>
-<td>RequireJS 是没有明显的 bug，</td>
-<td>SeaJS 是明显没有 bug</td>
-</tr>
-<tr>
-<td><strong>插件机制</strong></td>
-<td>RequireJS 采取的是在源码中预留接口的形式，插件类型比较单一</td>
-<td>Sea.js 采取的是通用事件机制，具有丰富的可扩展接口，插件类型更丰富</td>
-</tr>
-</tbody></table>
+<p>CSS Lint是一个开源的校验CSS文件质量的工具，最初是由Nicholas C. Zakas和Nicole Sullivan编写的，最初版本在Velocity会议上于2011年6月发布。CSS Lint的检测规则包括错误的和警告，当选择器或属性书写不正确、漏掉了大括号、多写了分号等时，会提示解析错误，解析错误优先提示。为了让css代码拥有更好性能，更标准，CSS Lint的检测规则有：</p>
+
+<ol>
+<li>盒模型(box-model)</li>
+</ol>
+
+<p>(1)当设定width的同时，还设置了border,border-left,border-right,padding,padding-left,padding-right中的任意一个，那么必须显示设置box-sizing</p>
+
+<p>(2)当设定height的同时，还设置了border,border-top,border-bottom,padding,padding-top,padding-bottom中的任意一个，那么必须显示设置box-sizing</p>
+
+<ol>
+<li>box-sizing(box-sizing) </li>
+</ol>
+
+<p>即使设置了box-sizing，仍然会warn，因为ie67不支持此属性</p>
+
+<ol>
+<li>display(display-property-grouping)</li>
+</ol>
+
+<p>(1)当设为inline时，不允许设置width, height, margin, margin-top, margin-bottom, float.</p>
+
+<p>(2)当设为inline-block时，不允许设置float.</p>
+
+<p>(3)当设为block时，不允许设置vertical-align.</p>
+
+<p>(4)当设为table-*时，不允许设置margin, float.</p>
+
+<ol>
+<li>样式冗余(display-property-grouping)</li>
+</ol>
+
+<p>(1)同样属性名以及属性值,在同一个容器中不允许声明两遍</p>
+
+<p>(2)相同的属性名(但不同值)，必须放在一起，不允许被其他属性隔开</p>
+
+<ol>
+<li>空的样式规则(empty-rules)</li>
+</ol>
+
+<p>不允许出现空的样式规则</p>
+
+<p>6.使用已知样式，方式拼写错误(known-properties)</p>
+
+<p>(1)csslint不会检测以横线(-)开头的属性名</p>
+
+<p>(2)属性名和属性值的拼写都会检查</p>
+
+<p>7.链式class(known-properties)</p>
+
+<p>(1)不允许对相连的class(即链式class,类似于.foo.bar这样的)设置样式</p>
+
+<p>(2)可以新增一个class来代替链式class</p>
+
+<ol>
+<li>vendor前缀(compatible-vendor-prefixes)</li>
+</ol>
+
+<p>当出现以下样式时，应该拥有vender前缀，此时csslint会逐个检查Firefox(-moz),Safari/Chrome(-webkit),Opera(-o),以及Internet Explorer(-ms)前缀是否齐全，若少一种前缀，则会warn。</p>
+
+<p>animation<br>
+animation-delay<br>
+animation-direction<br>
+animation-duration<br>
+animation-fill-mode<br>
+animation-iteration-count<br>
+animation-name<br>
+animation-play-state<br>
+animation-timing-function<br>
+appearance<br>
+border-end<br>
+border-end-color<br>
+border-end-style<br>
+border-end-width<br>
+border-image<br>
+border-radius<br>
+border-start<br>
+border-start-color<br>
+border-start-style<br>
+border-start-width<br>
+box-align<br>
+box-direction<br>
+box-flex<br>
+box-lines<br>
+box-ordinal-group<br>
+box-orient<br>
+box-pack<br>
+box-sizing<br>
+box-shadow<br>
+column-count<br>
+column-gap<br>
+column-rule<br>
+column-rule-color<br>
+column-rule-style<br>
+column-rule-width<br>
+column-width<br>
+hyphens<br>
+line-break<br>
+margin-end<br>
+margin-start<br>
+marquee-speed<br>
+marquee-style<br>
+padding-end<br>
+padding-start<br>
+tab-size<br>
+text-size-adjust<br>
+transform<br>
+transform-origin<br>
+transition<br>
+transition-delay<br>
+transition-duration<br>
+transition-property<br>
+transition-timing-function<br>
+user-modify<br>
+user-select<br>
+word-break<br>
+writing-mode<br>
+9.渐变样式(gradients)</p>
+
+<p>对于渐变样式，不同浏览器有不同的属性名称，不仅仅是前缀不同,区别如下</p>
+
+<p>Internet Explorer 10+: -ms-linear-gradient , -ms-radial-gradient<br>
+Firefox 3.6+: -moz-linear-gradient , -moz-radial-gradient<br>
+Opera: -o-linear-gradient, -o-radial-gradient for<br>
+Safari 5+ and Chrome: -webkit-linear-gradient, -webkit-radial-gradient<br>
+Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient</p>
+
+<p>csslint会检查与渐变(gradient)相关的样式，若以上样式只写了一个或几个，且没有写全，则会warn</p>
+
+<p>10.不带vendor前缀的标准属性(vendor-prefix)</p>
+
+<p>要将不带vendor前缀的标准属性样式，放在带vendor前缀的属性的后面</p>
+
+<p>11.向后兼容的的颜色样式(fallback-colors)</p>
+
+<ol>
+<li>文本反向缩进</li>
+</ol>
+
+<p>(1)当为text-indent的值设置为-99，或者更小的值(比如-100,-999)的时候,必须加上direction: ltr</p>
+
+<p>(2)csslint只检测text-indent的值，而不检测其的单位(em, px)。</p>
+
+<ol>
+<li>字体过多(font-faces)</li>
+</ol>
+
+<p>当使用超过5个字体时，会warn</p>
+
+<ol>
+<li>@import(import)</li>
+</ol>
+
+<p>(1)可以将多个css合并为一个</p>
+
+<p>(2)使用多个<link>标签引入多个css文件</p>
+
+<ol>
+<li>正则式的选择符(regex-selectors)</li>
+</ol>
+
+<p>(1)不允许使用类似于正则语法(*=, |=, ^=, $=, ~=)的css选择符</p>
+
+<p>16.通配符选择符(universal-selector)</p>
+
+<p>不能将通配符(*)作为选择符的关键部分(key part)</p>
+
+<p>17.属性选择符(unqualified-attributes)</p>
+
+<p>同上面的通配符一样，属性选择符不能作为选择符的关键部分(key part)</p>
+
+<p>18.零的单位(zero-units)</p>
+
+<p>19.高级选择符(overqualified-elements)</p>
+
+<p>(1)若某个class紧跟(无空白符)在多个不同的元素后面, 则合法</p>
+
+<p>(2)上面这条规则中，若不是多个，而只是一个的时候，则会warn</p>
+
+<p>20.属性简写(shorthand)</p>
+
+<p>(1)当在一个样式规则中，同时设置了margin-left, margin-right, margin-top, margin-bottom, 则会warn。</p>
+
+<p>(2)当在一个样式规则中，同时设置了padding-left, padding-right, padding-top, padding-bottom , 则会warn。</p>
+
+<ol>
+<li>背景图片冗余(duplicate-background-images)</li>
+</ol>
+
+<p>(1)当多个样式需要使用同一张图片作为背景图片的时候，如果在这些样式规则中重复设定background-image, 则会warn</p>
+
+<p>(2)当多个样式需要使用同一张图片作为背景图片的时候，应该新建一个class样式用于指定background-image，其他样式则用于设定background-position</p>
+
+<ol>
+<li>浮动(floats)</li>
+</ol>
+
+<p>(1)当使用float超过10次时，csslint会warn</p>
+
+<p>(2)在某些情况下，可以使用grid systems代替频繁的float</p>
+
+<ol>
+<li>字体大小(font-sizes)</li>
+</ol>
+
+<p>尽可能少用font-size，而应该设定几个样式规则用于对于不同的字体大小，然后在需要设定字体大小的地方添加需要的样式规则</p>
+
+<ol>
+<li>id选择符(ids)</li>
+</ol>
+
+<p>使用class选择符代替id选择符</p>
+
+<ol>
+<li>!important(important)</li>
+</ol>
+
+<p>不允许使用!important</p>
+
+<ol>
+<li>outline(outline-none)</li>
+</ol>
+
+<p>(1)只有在包含伪类:focus的样式规则中，才能移除(设为none或者0)outline样式</p>
+
+<p>(2)在包含伪类:focus的样式规则中，移除outline样式的同时，必须要使用其他样式</p>
+
+<ol>
+<li>heading样式(qualified-headings, unique-headings)</li>
+</ol>
+
+<p>(1)heading样式(h1-h6)应该全局化。也就是说在整个网站中，heading样式应该以常量形式出现。</p>
+
+<p>(2)不要对heading样式做局部定制，也就是说(h1-h6)不能作为css规则的关键部分(key part)。</p>
 
 <h1 id="more">更多-more</h1>
 
-<p><a href="http://zccst.iteye.com/blog/2084545">http://zccst.iteye.com/blog/2084545</a></p>
+<ul>
+<li><a href="http://csslint.net/">csslint.net</a></li>
+<li><a href="http://www.biaodianfu.com/css-style-guide.html">http://www.biaodianfu.com/css-style-guide.html</a></li>
+<li><a href="http://itindex.net/detail/48755-html-css-%E4%BB%A3%E7%A0%81">http://itindex.net/detail/48755-html-css-%E4%BB%A3%E7%A0%81</a></li>
+</ul>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -212,7 +417,7 @@
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#Js">Js</a>
+  <a class="article-category-link" href="/categories/#CSS">CSS</a>
   
 </div>
 
@@ -226,9 +431,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#requirejs">requirejs</a>
-  
-  <a href="/tags/#seajs">seajs</a>
+  <a href="/tags/#CSS">CSS</a>
   
   </div>
 
@@ -238,7 +441,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/10/03/requirejs&&seajs" data-title="requirejs和seajs的区别 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/css/2016/10/16/css-lint" data-title="CSS Lint检测规范 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -250,18 +453,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/mac/2016/10/01/mac-shell" title="mac下shell使用">
+ <a href="/css/2016/10/16/css-class-name" title="CSS 命名推荐">
   <strong>上一篇：</strong><br/>
   <span>
-  mac下shell使用</span>
+  CSS 命名推荐</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/js/2016/10/04/Babel"  title="babel">
+<a href="/css/2016/10/16/css-style-rules"  title="CSS书写规范、顺序">
  <strong>下一篇：</strong><br/> 
- <span>babel
+ <span>CSS书写规范、顺序
 </span>
 </a>
 </div>
@@ -270,7 +473,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-10-03-requirejs&&seajs.md" data-title="requirejs和seajs的区别" data-url="/js/2016/10/03/requirejs&&seajs"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-10-16-css-lint.md" data-title="CSS Lint检测规范" data-url="/css/2016/10/16/css-lint"></div>
 </section>
 
 

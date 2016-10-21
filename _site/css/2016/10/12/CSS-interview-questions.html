@@ -7,7 +7,7 @@
     
     
     
-    <title>requirejs和seajs的区别 | 彭友谊的博客</title>
+    <title>CSS面试题 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="requirejs和seajs的区别">
-    <meta property="og:url" content="/js/2016/10/03/requirejs&&seajs">
+    <meta property="og:title" content="CSS面试题">
+    <meta property="og:url" content="/css/2016/10/12/CSS-interview-questions">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="requirejs和seajs的区别">
+    <meta property="og:description" content="CSS面试题">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="requirejs和seajs的区别">
+    <meta name="twitter:title" content="CSS面试题">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -138,14 +138,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/10/03/requirejs&&seajs" title="requirejs和seajs的区别" itemprop="url">requirejs和seajs的区别</a>
+      <a href="/css/2016/10/12/CSS-interview-questions" title="CSS面试题" itemprop="url">CSS面试题</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-03 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-03</time>
+    <time datetime="2016-10-12 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-12</time>
     
   </p>
 </header>
@@ -157,45 +157,299 @@
 		
 		</div>
 		
-		<h1 id="requirejs-seajs">requirejs和seajs的区别</h1>
+		<h1 id="css">CSS面试题</h1>
 
-<table><thead>
-<tr>
-<th>区别</th>
-<th>RequireJS(除了是模块加载器，还是文件加载器)</th>
-<th>seaJS</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><strong>遵循的规范不同</strong></td>
-<td>遵循 AMD（异步模块定义）规范，预执行，相对来讲解析模块时间短，停顿次数少。也就是RequireJS会先尽早地执行(依赖)模块, 相当于所有的require都被提前了, 而且模块执行的顺序也不一定100%按照代码中出现的顺序。</td>
-<td>遵循 CMD （通用模块定义）规范，可以像   Node.js  一般书写模块代码 ，可以说是浏览器端的node.js懒执行，解析模块时间长，停顿次数多，但是，执行模块的顺序也是严格按照模块在代码中出现(require)的顺序</td>
-</tr>
-<tr>
-<td><strong>定位</strong></td>
-<td>想成为浏览器端的模块加载器，同时也想成为 Rhino / Node 等环境的模块加载器</td>
-<td>则专注于 Web 浏览器端，同时通过 Node 扩展的方式可以很方便跑在 Node 环境中</td>
-</tr>
-<tr>
-<td><strong>推广理念</strong></td>
-<td>RequireJS 在尝试让第三方类库修改自身来支持 RequireJS，目前只有少数社区采纳</td>
-<td>Sea.js 不强推，采用自主封装的方式来“海纳百川”，目前已有较成熟的封装策略</td>
-</tr>
-<tr>
-<td><strong>代码质量有差异</strong></td>
-<td>RequireJS 是没有明显的 bug，</td>
-<td>SeaJS 是明显没有 bug</td>
-</tr>
-<tr>
-<td><strong>插件机制</strong></td>
-<td>RequireJS 采取的是在源码中预留接口的形式，插件类型比较单一</td>
-<td>Sea.js 采取的是通用事件机制，具有丰富的可扩展接口，插件类型更丰富</td>
-</tr>
-</tbody></table>
+<h1 id="box-model">box model</h1>
+
+<ul>
+<li>介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？</li>
+</ul>
+
+<p>（1）有两种， IE 盒子模型、W3C 盒子模型；<br>
+（2）盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border)；<br>
+（3）区  别： IE的content部分把 border 和 padding计算了进去;</p>
+
+<p>解决IE8及更早版本不兼容问题可以在HTML页面声明 &lt;!DOCTYPE html&gt;即可。</p>
+
+<p>在 CSS 中定义的宽和高，其实都是内容区域的宽和高，padding，border 和 margin 被排除在盒子尺寸之外。</p>
+
+<p>所以对于一个定义了宽度的盒子来说，其尺寸的计算方式：</p>
+
+<p>实际宽度 = margin(left+right) + border(left+right) + padding(left+right) + width(定义的值)</p>
+
+<p>实际高度 = margin(top+bottom) + border(top+bottom) + padding(top+bottom) + height(定义的值)</p>
+
+<p>可以利用 margin 调整两个元素之间的距离，用 padding 调整内容与元素边框之间的距离（留白）。这是标准的盒模型</p>
+
+<h1 id="selector">selector</h1>
+
+<ul>
+<li>CSS选择符有哪些？哪些属性可以继承？</li>
+</ul>
+
+<p>1.id选择器（ # myid）<br>
+2.类选择器（.myclassname）<br>
+3.标签选择器（div, h1, p）<br>
+4.相邻选择器（h1 + p）<br>
+5.子选择器（ul &gt; li）<br>
+6.后代选择器（li a）<br>
+7.通配符选择器（ * ）<br>
+8.属性选择器（a[rel = &quot;external&quot;]）<br>
+9.伪类选择器（a:hover, li:nth-child）</p>
+
+<p>可继承的样式： font-size font-family color, UL LI DL DD DT;</p>
+
+<p>不可继承的样式：border padding margin width height ;</p>
+
+<h1 id="selector-priority">Selector priority</h1>
+
+<ul>
+<li>CSS优先级算法如何计算？
+优先级就近原则，同权重情况下样式定义最近者为准;</li>
+</ul>
+
+<p>载入样式以最后载入的定位为准;</p>
+
+<p>优先级为:<br>
+   !important &gt;  id &gt; class &gt; tag<br>
+    important 比 内联优先级高</p>
+
+<h1 id="pseudo-class">Pseudo class</h1>
+
+<ul>
+<li>CSS3新增伪类有那些？</li>
+</ul>
+
+<p>举例：</p>
+<div class="highlight"><pre><code class="language-" data-lang="">p:first-of-type 选择属于其父元素的首个 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:last-of-type  选择属于其父元素的最后 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-of-type  选择属于其父元素唯一的 &lt;p&gt; 元素的每个 &lt;p&gt; 元素。
+p:only-child        选择属于其父元素的唯一子元素的每个 &lt;p&gt; 元素。
+p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &lt;p&gt; 元素。
+
+:after          在元素之前添加内容,也可以用来做清除浮动。
+:before         在元素之后添加内容
+:enabled        
+:disabled       控制表单控件的禁用状态。
+:checked        单选框或复选框被选中。
+</code></pre></div>
+<h1 id="div-center">div center</h1>
+
+<ul>
+<li>如何居中div？</li>
+</ul>
+
+<p>水平居中：给div设置一个宽度，然后添加margin:0 auto属性</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">div</span><span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span><span class="m">200px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span><span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+ <span class="p">}</span>
+</code></pre></div>
+<p>让绝对定位的div居中</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"> <span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">bottom</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">right</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">pink</span><span class="p">;</span>     <span class="c">/* 方便看效果 */</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>水平垂直居中一</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="err">确定容器的宽高</span> <span class="err">宽</span><span class="nt">500</span> <span class="err">高</span> <span class="nt">300</span> <span class="err">的层</span>
+<span class="err">设置层的外边距</span>
+<span class="o">//</span><span class="nt">div</span><span class="err">的父元素需要设定高度，否则</span><span class="nt">top</span><span class="err">无效</span>
+<span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>     <span class="c">/* 相对定位或绝对定位均可 */</span>
+    <span class="nl">width</span><span class="p">:</span><span class="m">500px</span><span class="p">;</span> 
+    <span class="nl">height</span><span class="p">:</span><span class="m">300px</span><span class="p">;</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">margin</span><span class="p">:</span> <span class="m">-150px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">-250px</span><span class="p">;</span>      <span class="c">/* 外边距为自身宽高的一半 */</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">pink</span><span class="p">;</span>     <span class="c">/* 方便看效果 */</span>
+ <span class="p">}</span>
+</code></pre></div>
+<p>水平垂直居中二</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"> <span class="err">未知容器的宽高，利用</span> <span class="err">`</span><span class="nt">transform</span><span class="err">`</span> <span class="err">属性</span>
+
+<span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>     <span class="c">/* 相对定位或绝对定位均可 */</span>
+    <span class="nl">width</span><span class="p">:</span><span class="m">500px</span><span class="p">;</span> 
+    <span class="nl">height</span><span class="p">:</span><span class="m">300px</span><span class="p">;</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="m">-50%</span><span class="p">,</span> <span class="m">-50%</span><span class="p">);</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">pink</span><span class="p">;</span>     <span class="c">/* 方便看效果 */</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>水平垂直居中三</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="err">利用</span> <span class="nt">flex</span> <span class="err">布局</span>
+<span class="err">实际使用时应考虑兼容性</span>
+
+<span class="nc">.container</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span> 
+    <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>        <span class="c">/* 垂直居中 */</span>
+    <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>    <span class="c">/* 水平居中 */</span>
+
+<span class="p">}</span>
+<span class="nc">.container</span> <span class="nt">div</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="no">pink</span><span class="p">;</span>     <span class="c">/* 方便看效果 */</span>
+<span class="p">}</span>  
+</code></pre></div>
+<h1 id="display">display</h1>
+
+<ul>
+<li>display有哪些值？说明他们的作用。</li>
+</ul>
+
+<p>block         块类型。默认宽度为父元素宽度，可设置宽高，换行显示。<br>
+none          缺省值。象行内元素类型一样显示。<br>
+inline        行内元素类型。默认宽度为内容宽度，不可设置宽高，同行显示。<br>
+inline-block  默认宽度为内容宽度，可以设置宽高，同行显示。<br>
+list-item     象块类型元素一样显示，并添加样式列表标记。<br>
+table         此元素会作为块级表格来显示。<br>
+inherit       规定应该从父元素继承 display 属性的值。</p>
+
+<h1 id="position">position</h1>
+
+<ul>
+<li>position的值relative和absolute定位原点是？</li>
+</ul>
+
+<p>absolute<br>
+生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。<br>
+fixed （老IE不支持）<br>
+生成绝对定位的元素，相对于浏览器窗口进行定位。<br>
+relative<br>
+生成相对定位的元素，相对于其正常位置进行定位。<br>
+static<br>
+默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）。<br>
+inherit<br>
+规定从父元素继承 position 属性的值。</p>
+
+<h1 id="css3-new-features">css3 new features</h1>
+
+<ul>
+<li>CSS3有哪些新特性？</li>
+</ul>
+
+<p>新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）<br>
+圆角           （border-radius:8px）<br>
+多列布局        （multi-column layout）<br>
+阴影和反射        （Shadow\Reflect）<br>
+文字特效      （text-shadow、）<br>
+文字渲染      （Text-decoration）<br>
+线性渐变      （gradient）<br>
+旋转          （transform）<br>
+增加了旋转,缩放,定位,倾斜,动画，多背景<br>
+transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:</p>
+
+<h1 id="triangle">Triangle</h1>
+
+<ul>
+<li>用纯CSS创建一个三角形的原理是什么？</li>
+</ul>
+
+<p>把上、左、右三条边隐藏掉（颜色设为 transparent）</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nf">#demo</span><span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> 
+  <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>  
+  <span class="nl">border-width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>  
+  <span class="nl">border-style</span><span class="p">:</span> <span class="nb">solid</span><span class="p">;</span>  
+  <span class="nl">border-color</span><span class="p">:</span> <span class="nb">transparent</span> <span class="nb">transparent</span> <span class="no">red</span> <span class="nb">transparent</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="12px">12px</h1>
+
+<ul>
+<li>Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,</li>
+</ul>
+
+<p>可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决</p>
+
+<h1 id="hover">hover</h1>
+
+<ul>
+<li>超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:</li>
+</ul>
+
+<p>L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}</p>
+
+<h1 id="li">li</h1>
+
+<ul>
+<li>li与li之间有看不见的空白间隔是什么原因引起的？有什么解决办法？</li>
+</ul>
+
+<p>行框的排列会受到中间空白（回车\空格）等的影响，因为空格也属于字符,这些空白也会被应用样式，占据空间，所以会有间隔，把字符大小设为0，就没有空格了。</p>
+
+<h1 id="css-init">css init</h1>
+
+<ul>
+<li>为什么要初始化CSS样式。</li>
+</ul>
+
+<p>因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。</p>
+
+<p>当然，初始化样式会对SEO有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化。</p>
+
+<p>最简单的初始化方法： * {padding: 0; margin: 0;} （强烈不建议）</p>
+
+<p>淘宝的样式初始化代码：</p>
+<div class="highlight"><pre><code class="language-" data-lang="">body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
+h1, h2, h3, h4, h5, h6{ font-size:100%; }
+address, cite, dfn, em, var { font-style:normal; }
+code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
+small{ font-size:12px; }
+ul, ol { list-style:none; }
+a { text-decoration:none; }
+a:hover { text-decoration:underline; }
+sup { vertical-align:text-top; }
+sub{ vertical-align:text-bottom; }
+legend { color:#000; }
+fieldset, img { border:0; }
+button, input, select, textarea { font-size:100%; }
+table { border-collapse:collapse; border-spacing:0; }
+</code></pre></div>
+<h1 id="css-weight">css weight</h1>
+
+<ul>
+<li>css定义的权重</li>
+</ul>
+
+<p>/<em>权重为1</em>/<br>
+div{<br>
+}<br>
+/<em>权重为10</em>/<br>
+.class1{<br>
+}<br>
+/<em>权重为100</em>/<br>
+#id1{<br>
+}<br>
+/<em>权重为100+1=101</em>/<br>
+#id1 div{<br>
+}<br>
+/<em>权重为10+1=11</em>/<br>
+.class1 div{<br>
+}<br>
+/<em>权重为10+10+1=21</em>/<br>
+.class1 .class2 div{<br>
+}</p>
+
+<p>如果权重相同，则最后定义的样式会起作用，但是应该避免这种情况出现</p>
 
 <h1 id="more">更多-more</h1>
 
-<p><a href="http://zccst.iteye.com/blog/2084545">http://zccst.iteye.com/blog/2084545</a></p>
+<ul>
+<li><a href="https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers">https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers</a></li>
+</ul>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -212,7 +466,7 @@
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#Js">Js</a>
+  <a class="article-category-link" href="/categories/#CSS">CSS</a>
   
 </div>
 
@@ -226,9 +480,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#requirejs">requirejs</a>
-  
-  <a href="/tags/#seajs">seajs</a>
+  <a href="/tags/#面试题">面试题</a>
   
   </div>
 
@@ -238,7 +490,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/10/03/requirejs&&seajs" data-title="requirejs和seajs的区别 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/css/2016/10/12/CSS-interview-questions" data-title="CSS面试题 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -250,18 +502,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/mac/2016/10/01/mac-shell" title="mac下shell使用">
+ <a href="/html/2016/10/11/html-interview-questions" title="HTML面试题">
   <strong>上一篇：</strong><br/>
   <span>
-  mac下shell使用</span>
+  HTML面试题</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/js/2016/10/04/Babel"  title="babel">
+<a href="/css/2016/10/16/css-class-name"  title="CSS 命名推荐">
  <strong>下一篇：</strong><br/> 
- <span>babel
+ <span>CSS 命名推荐
 </span>
 </a>
 </div>
@@ -270,7 +522,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-10-03-requirejs&&seajs.md" data-title="requirejs和seajs的区别" data-url="/js/2016/10/03/requirejs&&seajs"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-10-12-CSS-interview-questions.md" data-title="CSS面试题" data-url="/css/2016/10/12/CSS-interview-questions"></div>
 </section>
 
 
