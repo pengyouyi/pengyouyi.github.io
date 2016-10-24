@@ -41,9 +41,9 @@ description: CSS面试题
 8.属性选择器（a[rel = "external"]）
 9.伪类选择器（a:hover, li:nth-child）
 
-可继承的样式： font-size font-family color, UL LI DL DD DT;
+可继承的样式： font-size font-family color, ul li dl dd dt（字体属性，列表相关）;
 
-不可继承的样式：border padding margin width height ;
+不可继承的样式：border padding margin width height (盒模型相关的属性);
 
 # Selector priority
 - CSS优先级算法如何计算？
@@ -208,6 +208,7 @@ transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:
 - 超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
 
 L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
+记忆顺序：喜欢（L-o-V-e），讨厌（H-A-t-e）
 
 # li 
 - li与li之间有看不见的空白间隔是什么原因引起的？有什么解决办法？

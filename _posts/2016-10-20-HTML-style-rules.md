@@ -1,12 +1,12 @@
 ---
 layout: post
-title: HTML编码规范
+title: HTML5编码规范
 tags:
-- CSS
-categories: CSS
+- HTML
+categories: HTML
 description: HTML编码规范
 ---
-# google的HTML编码规范
+# google的HTML5编码规范
 
 # General Style Rules
 - 协议protocol

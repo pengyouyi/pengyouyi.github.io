@@ -7,7 +7,7 @@
     
     
     
-    <title>babel | 彭友谊的博客</title>
+    <title>HTML元素嵌套规范 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="babel">
-    <meta property="og:url" content="/js/2016/10/04/Babel">
+    <meta property="og:title" content="HTML元素嵌套规范">
+    <meta property="og:url" content="/html/2016/10/20/HTML-element-nest">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="babel">
+    <meta property="og:description" content="HTML元素嵌套规范">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="babel">
+    <meta name="twitter:title" content="HTML元素嵌套规范">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -138,14 +138,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/10/04/Babel" title="babel" itemprop="url">babel</a>
+      <a href="/html/2016/10/20/HTML-element-nest" title="HTML元素嵌套规范" itemprop="url">HTML元素嵌套规范</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-04 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-04</time>
+    <time datetime="2016-10-20 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-20</time>
     
   </p>
 </header>
@@ -157,118 +157,110 @@
 		
 		</div>
 		
-		<h1 id="babel">Babel是什么</h1>
+		<h1 id="html">HTML元素嵌套规范</h1>
 
-<blockquote>
-<p>Babel 是一个 JavaScript 编译器，可以将ES6代码转为ES5代码，从而在现有环境执行。</p>
-</blockquote>
+<p>HTML元素按功能分类<br>
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element">https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element</a></p>
 
-<h1 id="babel">安装Babel</h1>
+<p>1、块级元素<br>
+一般用来搭建网站架构、布局、承载内容……它包括以下这些标签： <br>
+address、blockquote、center、dir、div、dl、dt、dd、fieldset、form、h1~h6、hr、isindex、menu、noframes、noscript、ol、p、pre、table、ul <br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements">https://developer.mozilla.org/en-US/docs/Web/HTML/Block-level_elements</a></p>
 
-<p>babel-cli 是babel解释器的客户端主程序</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install -g babel-cli
+<p>2、内嵌元素<br>
+一般用在网站内容之中的某些细节或部位，用以“强调、区分样式、上标、下标、锚点”等等，下面这些标签都属于内嵌元素： <br>
+a、abbr、acronym、b、bdo、big、br、cite、code、dfn、em、font、i、img、input、kbd、label、q、s、samp、select、small、span、strike、strong、sub、sup、textarea、tt、u、var <br>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements">https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements</a></p>
+
+<h1 id="html">HTML 标签的嵌套规则</h1>
+
+<p>1.块元素可以包含内联元素或某些块元素，但内联元素却不能包含块元素，它只能包含其它的内联元素：</p>
+<div class="highlight"><pre><code class="language-" data-lang="">[div][h1][/h1][p][/p][/div] —— 对
+[a href=”#”][span][/span][/a] —— 对
+[span][div][/div][/span] —— 错
 </code></pre></div>
-<p><strong>在项目内运行 babel-cli</strong><br>
-初始化项目</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm init
+<p>2.块级元素不能放在[p]里面：</p>
+<div class="highlight"><pre><code class="language-" data-lang="">[p][ol][li][/li][/ol][/p] —— 错
+[p][div][/div][/p] —— 错
 </code></pre></div>
-<p>安装babel-cli</p>
-<div class="highlight"><pre><code class="language-" data-lang="">npm install --save-dev babel-cli
+<p>3.有几个特殊的块级元素只能包含内嵌元素，不能再包含块级元素，这几个特殊的标签是：</p>
+<div class="highlight"><pre><code class="language-" data-lang="">h1、h2、h3、h4、h5、h6、p、dt
 </code></pre></div>
-<p>安装ec2015的转化器,因为ec2015语法并不是所有浏览器都兼容</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install --save-dev babel-preset-es2015
+<p>4.li 内可以包含 div 标签 <br>
+这一条其实不必单独列出来的，但是网上许多人对此有些疑惑，就在这里略加说明：<br>
+li 和 div 标签都是装载内容的容器，地位平等，没有级别之分（例如：h1、h2 这样森严的等级制度^_^），要知道，li 标签连它的父级 ul 或者是 ol 都可以容纳的，为什么有人会觉得 li 偏偏容纳不下一个 div 呢？别把 li 看得那么小气嘛，别看 li 长得挺瘦小，其实 li 的胸襟很大滴……</p>
+
+<p>5.块级元素与块级元素并列、内嵌元素与内嵌元素并列：</p>
+<div class="highlight"><pre><code class="language-" data-lang="">[div][h2][/h2][p][/p][/div] —— 对
+[div][a href=”#”][/a][span][/span][/div] —— 对
+[div][h2][/h2][span][/span][/div] —— 错
+</code></pre></div><div class="highlight"><pre><code class="language-" data-lang="">a元素里不可以嵌套交互式元素(&lt;a&gt;、&lt;button&gt;、&lt;select&gt;等)
+[pre]标签不能包含[img],[object],[big],[samll],[sub]和[sup]标签
+[button]标签不能包 含[input],[select],[textarea],[label],[button],[form],[fieldset],[iframe] 和[isindex]标签
+[label]标签不能包含其他[label]标签
+[form]标签不能包含其他[form]标签
 </code></pre></div>
-<p>安装react转码规则</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install --save-dev babel-preset-react
-</code></pre></div>
-<h1 id="babelrc">配置文件.babelrc</h1>
+<h1 id="html5">HTML5的元素嵌套规则</h1>
 
-<p>然后在项目的根目录下新建一个 .babelrc 文件，写入:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="p">{</span><span class="w">
-    </span><span class="nt">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"es2015"</span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><em>notice</em></strong> </p>
+<p>元素的分类不再是块元素或内联元素这样来分类（其实从来就没有这样分） 而是按照如下分类来分：<br>
+Flow（流式元素）、Heading（标题元素）、Sectioning（章节元素）、Phrasing（段落元素）、<br>
+Embedded（嵌入元素）、Interactive（交互元素）、Metadata（元数据元素）</p>
 
-<blockquote>
-<p>所有Babel工具和模块的使用，都必须先写好.babelrc 。</p>
-</blockquote>
+<p><strong>Flow（流式元素）</strong></p>
 
-<p>此时babel已安装好，可以使用bable命令对文件进行转码输出了</p>
+<p>在应用程序和文档的主体部分中使用的大部分元素都被分类为流式元素。</p>
 
-<h1 id="babel">babel基本用法</h1>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># 转码结果输出到标准输出</span>
-<span class="gp">$ </span>babel example.js
+<p>a， abbr， address， area（如果它是map元素的后裔）， article， aside， audio， b， bdi， bdo， blockquote， br， button， canvas， cite， code， command， datalist， del， details， dfn， div， dl，em， embed， fieldset， figure， footer， form， h1， h2， h3， h4， h5， h6， header， hgroup， hr， i， iframe， img， input， ins， kbd， keygen， label， map， mark， math， menu， meter，nav， noscript， object， ol， output， p， pre， progress， q， ruby， s， samp， script， section， select， small， span， strong， style（如果该元素设置了scoped属性）， sub， sup， svg， table，textarea， time， u， ul， var， video， wbr， text</p>
 
-<span class="c"># 转码结果写入一个文件</span>
-<span class="c"># --out-file 或 -o 参数指定输出文件</span>
-<span class="gp">$ </span>babel example.js --out-file compiled.js
-<span class="c"># 或者</span>
-<span class="gp">$ </span>babel example.js -o compiled.js
+<p><strong>Heading（标题元素）</strong></p>
 
-<span class="c"># 整个目录转码,把src文件中所有的文件转码到lib文件夹中对应文件名下，</span>
-<span class="c"># --out-dir 或 -d 参数指定输出目录</span>
-<span class="gp">$ </span>babel src --out-dir lib
-<span class="c"># 或者</span>
-<span class="gp">$ </span>babel src -d lib
+<p>标题式元素定义一个区块/章节（section）（无论是明确的使用章节式内容的元素标记，或者标题式内容自身所隐含的）的标题。</p>
 
-<span class="c"># -s 参数生成source map文件</span>
-<span class="gp">$ </span>babel src -d lib -s
-</code></pre></div>
-<p>延伸babel在项目中的使用<br>
-修改package.json</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">//...</span><span class="w">
-  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"babel src -d lib"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"babel-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"babel-preset-es2015"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"babel-preset-react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>转码的时候，就执行下面的命令。</p>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>npm run build
-</code></pre></div>
-<h1 id="babel-demo">babel demo</h1>
+<p>h1， h2， h3， h4， h5， h6， hgroup</p>
 
-<p>Project-file-name/es2015/index.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
-<p>我们来利用babel转化一下，命令行执行：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ babel ./es2015/index.js --out-file ./es2015/index-build.js
-</code></pre></div>
-<p>index-build.js就是转换后的js：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">"use strict"</span><span class="p">;</span>
+<p><strong>Sectioning（章节元素）</strong></p>
 
-<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
-<h1 id=">浏览器环境</h1>
+<p>章节式元素是用于定义标题及页脚范围的元素。</p>
 
-<p>通过安装5.x版本的babel-core模块获取。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install babel-core@5
-</code></pre></div>
-<p>运行上面的命令以后，就可以在当前目录的node_modules/babel-core/子目录里面，找到babel的浏览器版本browser.js（未精简）和browser.min.js（已精简）<br>
-然后，将下面的代码插入网页。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;script src="node_modules/babel-core/browser.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/babel"&gt;
-// Your ES6 code
-&lt;/script&gt;
-</code></pre></div>
-<h1 id="babel-es6-to-es5">babel 在线转换ES6 to ES5</h1>
+<p>article， aside， nav， section</p>
 
-<p><a href="https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=">https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=</a></p>
+<p><strong>Phrasing（段落元素）</strong></p>
+
+<p>段落式元素是文档中的文本、标记段落级文本的元素。</p>
+
+<p>a（如果其只包含段落式元素）， abbr， area（如果它是map元素的后裔）， audio， b， bdi， bdo， br， button， canvas， cite， code， command， datalist， del（如果其只包含段落式元素）， dfn， em， embed， i，iframe， img， input， ins（如果其只包含段落式元素）， kbd， keygen， label， map（如果其只包含段落式元素）， mark， math， meter， noscript， object， output， progress， q， ruby， s， samp， script，select， small， span， strong， sub， sup， svg， textarea， time， u， var， video， wbr， text</p>
+
+<p><strong>Embedded（嵌入元素）</strong></p>
+
+<p>嵌入式元素是引用或插入到文档中其他资源的元素。</p>
+
+<p>audio， canvas， embed， iframe， img， math， object， svg， video</p>
+
+<p><strong>Interactive（交互元素）</strong></p>
+
+<p>交互式元素是专门用于与用户交互的元素。</p>
+
+<p>a， audio（如果设置了controls属性）， button， details， embed， iframe， img（如果设置了usemap属性）， input（如果type属性不为hidden状态）， keygen， label， menu（如果type属性为toolbar状态），object（如果设置了usemap属性）， select， textarea， video（如果设置了controls属性）</p>
+
+<p><strong>Metadata（元数据元素）</strong></p>
+
+<p>元数据元素是可以被用于说明其他内容的表现或行为，或者在当前文档和其他文档之间建立联系的元素</p>
+
+<p>base，command，link，meta，noscript，script，style，title</p>
+
+<p><strong>详细Elements</strong> Categories   、Parents†、Children<br>
+<a href="https://www.w3.org/TR/html5/index.html#elements-1">https://www.w3.org/TR/html5/index.html#elements-1</a></p>
 
 <h1 id="more">更多-more</h1>
 
 <ul>
-<li><a href="http://babeljs.cn/">http://babeljs.cn/</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2016/01/babel.html">http://www.ruanyifeng.com/blog/2016/01/babel.html</a></li>
+<li><a href="http://www.w3.org/">W3C国际站</a></li>
+<li><a href="http://www.chinaw3c.org/">W3C中国</a></li>
+<li><a href="http://www.w3.org/TR/html5/">W3C HTML5</a></li>
+<li><a href="http://www.w3.org/TR/CSS21/">W3C CSS21</a></li>
+<li><a href="http://www.w3.org/TR/">W3C标准聚合</a></li>
+<li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/">whatwg</a></li>
+<li><a href="http://dev.w3.org/csswg/">csswg</a></li>
 </ul>
   
 	</div>
@@ -286,7 +278,7 @@
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#Js">Js</a>
+  <a class="article-category-link" href="/categories/#HTML">HTML</a>
   
 </div>
 
@@ -300,7 +292,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#babel">babel</a>
+  <a href="/tags/#HTML">HTML</a>
   
   </div>
 
@@ -310,7 +302,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/10/04/Babel" data-title="babel | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/html/2016/10/20/HTML-element-nest" data-title="HTML元素嵌套规范 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -322,18 +314,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2016/10/03/requirejs&&seajs" title="requirejs和seajs的区别">
+ <a href="/css/2016/10/16/css-style-rules" title="CSS书写规范、顺序">
   <strong>上一篇：</strong><br/>
   <span>
-  requirejs和seajs的区别</span>
+  CSS书写规范、顺序</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/js/2016/10/05/ES6"  title="ES6">
+<a href="/html/2016/10/20/HTML-style-rules"  title="HTML5编码规范">
  <strong>下一篇：</strong><br/> 
- <span>ES6
+ <span>HTML5编码规范
 </span>
 </a>
 </div>
@@ -342,7 +334,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-10-04-Babel.md" data-title="babel" data-url="/js/2016/10/04/Babel"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-10-20-HTML-element-nest.md" data-title="HTML元素嵌套规范" data-url="/html/2016/10/20/HTML-element-nest"></div>
 </section>
 
 
