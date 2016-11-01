@@ -65,9 +65,12 @@ a元素里不可以嵌套交互式元素(<a>、<button>、<select>等)
 Flow（流式元素）、Heading（标题元素）、Sectioning（章节元素）、Phrasing（段落元素）、
 Embedded（嵌入元素）、Interactive（交互元素）、Metadata（元数据元素）
 
+<img src="/assets/images/2016/10-11-12/html5-nesting.png" alt="html5-nesting.png">
+
 **Flow（流式元素）**
 
-在应用程序和文档的主体部分中使用的大部分元素都被分类为流式元素。
+所有可以放在body标签内，构成文档内容的元素均属于Flow元素。
+因此，除了base, link, meta, style, title等只能放在head标签内的元素外，剩下的所有元素均属于Flow元素。
 
 a， abbr， address， area（如果它是map元素的后裔）， article， aside， audio， b， bdi， bdo， blockquote， br， button， canvas， cite， code， command， datalist， del， details， dfn， div， dl，em， embed， fieldset， figure， footer， form， h1， h2， h3， h4， h5， h6， header， hgroup， hr， i， iframe， img， input， ins， kbd， keygen， label， map， mark， math， menu， meter，nav， noscript， object， ol， output， p， pre， progress， q， ruby， s， samp， script， section， select， small， span， strong， style（如果该元素设置了scoped属性）， sub， sup， svg， table，textarea， time， u， ul， var， video， wbr， text
 
@@ -88,6 +91,8 @@ article， aside， nav， section
 段落式元素是文档中的文本、标记段落级文本的元素。
 
 a（如果其只包含段落式元素）， abbr， area（如果它是map元素的后裔）， audio， b， bdi， bdo， br， button， canvas， cite， code， command， datalist， del（如果其只包含段落式元素）， dfn， em， embed， i，iframe， img， input， ins（如果其只包含段落式元素）， kbd， keygen， label， map（如果其只包含段落式元素）， mark， math， meter， noscript， object， output， progress， q， ruby， s， samp， script，select， small， span， strong， sub， sup， svg， textarea， time， u， var， video， wbr， text
+
+一个不太精确的类比是：HTML5中的Phrasing元素大致就是HTML4中所定义的inline元素。
 
 **Embedded（嵌入元素）**
 
