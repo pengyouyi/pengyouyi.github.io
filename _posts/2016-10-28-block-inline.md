@@ -113,6 +113,8 @@ demo-2
 2.两个span标签之间有空隙，解决办法写法<span class="a">1</span><span class="b">2</span>相连，或者用注释等办法，或下面的方法。
 3.给span设置margin:0;padding:0;两个span元素中间仍有空隙。
 
+思考，display:inline的元素之间的空隙是如何产生的，enter换行符？待研究。。。
+
 # 替换元素与非替换元素-replaceable
 从元素本身的特点来讲，可以分为替换和不可替换元素。
 
