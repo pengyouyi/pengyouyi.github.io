@@ -4,7 +4,7 @@
  <title>彭友谊的博客</title>
  <link href="" rel="self"/>
  <link href=""/>
- <updated>2016-11-16T15:46:20+08:00</updated>
+ <updated>2016-11-17T00:44:47+08:00</updated>
  <id></id>
  <author>
    <name>pengyouyi</name>
@@ -17,9 +17,215 @@
    <link href="/css/2016/11/16/css-clear-float"/>
    <updated>2016-11-16T00:00:00+08:00</updated>
    <id>/css/2016/11/16/css-clear-float</id>
-   <content type="html">&lt;h1 id=&quot;&gt;清除浮动带来的影响，以及清除浮动应用的原理&lt;/h1&gt;
+   <content type="html">&lt;h1 id=&quot;&gt;清除浮动带来的影响，以及清除浮动各自应用的原理&lt;/h1&gt;
 
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+&lt;h1 id=&quot;&gt;浮动工作原理&lt;/h1&gt;
+
+&lt;p&gt;浮动的框可以左右移动，直至它的外边缘遇到包含框或者另一个浮动框的边缘。浮动框不属于文档中的普通流，当一个元素浮动之后，不会影响到块级框的布局而只会影响内联框（通常是文本）的排列，文档中的普通流就会表现得和浮动框不存在一样，当浮动框高度超出包含框的时候，也就会出现包含框不会自动伸高来闭合浮动元素（“高度塌陷”现象）。顾名思义，就是漂浮于普通流之上，像浮云一样，但是只能左右浮动。&lt;/p&gt;
+
+&lt;h1 id=&quot;&gt;为什么要清除浮动&lt;/h1&gt;
+
+&lt;p&gt;当元素设置浮动属性后，会对相邻的元素产生影响，相邻元素特指紧邻后面的元素，紧邻其后的元素会受到浮动元素的影响；&lt;br&gt;
+浮动的元素脱离了普通流，这样使得包含它的父元素并不会因为这个浮动元素的存在而自动撑高，这样就会造成高度塌陷；&lt;br&gt;
+这样可能&lt;br&gt;
+影响兄弟元素还是高度塌陷的问题，会使布局错乱，所以我们需要想办法来清除浮动带来的额外影响。&lt;/p&gt;
+
+&lt;h1 id=&quot;&gt;清除浮动的方法&lt;/h1&gt;
+
+&lt;p&gt;清除浮动的实质包括三种：CSS clear、BFC特性和触发haslayout。&lt;/p&gt;
+
+&lt;h2 id=&quot;1-div-height&quot;&gt;1，父级div定义 height&lt;/h2&gt;
+
+&lt;p&gt;原理：父级div手动定义height，就解决了父级div无法自动获取到高度的问题。 &lt;/p&gt;
+
+&lt;p&gt;优点：简单、代码少、容易掌握 &lt;/p&gt;
+
+&lt;p&gt;缺点：只适合高度固定的布局，要给出精确的高度，如果高度和父级div不一样时，会产生问题 &lt;/p&gt;
+
+&lt;p&gt;建议：不推荐使用，只建议高度固定的布局时使用 &lt;/p&gt;
+
+&lt;h2 id=&quot;css-clear&quot;&gt;CSS clear清除浮动&lt;/h2&gt;
+
+&lt;p&gt;清除浮动的属性有clear:left | right | both；&lt;/p&gt;
+
+&lt;p&gt;在浮动元素末尾添加一个新标签，例如：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”clear:both;”&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt; (清除float:left 和 float:right的影响)
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”clear:left;”&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt; (清除float:left的影响，如果是float:right造成的浮动影响这样写无用)
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;”clear:right;”&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt; (清除float:right的影响，如果是float:left造成的浮动影响这样写无用)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&quot;2-div-clear-both&quot;&gt;2，结尾处加空div标签 clear:both&lt;/h3&gt;
+
+&lt;p&gt;css&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;c&quot;&gt;/*清除浮动代码*/&lt;/span&gt; 
+&lt;span class=&quot;nc&quot;&gt;.clearfloat&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;both&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;html&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;div1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; 
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float-left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Left&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt; 
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float-right&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Right&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt; 
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;clearfloat&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt; 
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;原理：添加一个空div，利用css提高的clear:both清除浮动，让父级div能自动获取到高度 &lt;/p&gt;
+
+&lt;p&gt;优点：简单、代码少、浏览器支持好、不容易出现怪问题 &lt;/p&gt;
+
+&lt;p&gt;缺点：添加无意义的空标签，有违结构与表现的分离&lt;/p&gt;
+
+&lt;p&gt;建议：不推荐使用，但此方法是以前主要使用的一种清除浮动方法 &lt;/p&gt;
+
+&lt;h3 id=&quot;3-br-html&quot;&gt;3，使用br标签及自身html属性&lt;/h3&gt;
+
+&lt;p&gt;html&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;box1 left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;box1   float:left;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;box2 left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;box2   float:left;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;br&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;clear=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;all&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;br clear=&quot;left &quot; /&amp;gt;
+    &amp;lt;br clear=&quot;right&quot; /&amp;gt; --&amp;gt;&lt;/span&gt; 
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;原理：br 有 clear=“all | left | right | none” 属性&lt;/p&gt;
+
+&lt;p&gt;优点：比空标签方式语义稍强，代码量较少&lt;/p&gt;
+
+&lt;p&gt;缺点：同样有违结构与表现的分离&lt;/p&gt;
+
+&lt;p&gt;建议：不推荐使用&lt;/p&gt;
+
+&lt;h2 id=&quot;bfc&quot;&gt;触发浮动元素父元素的BFC来闭合浮动&lt;/h2&gt;
+
+&lt;p&gt;BFC（Block formatting contexts），块级格式上下文，是页面上的一个隔离的独立容器，容器里面的子元素与容器外部元素不会相互影响，即BFC阻止外边距叠加、不重叠浮动并且可以包含浮动。因此我们常利用这点来闭合浮动，以达到消除浮动的副作用。&lt;/p&gt;
+
+&lt;p&gt;触发 BFC 的条件如下：&lt;br&gt;
+1.根元素(整个页面就是一个大的BFC)；&lt;br&gt;
+2.float为 left | right；&lt;br&gt;
+3.overflow为 hidden | auto | scroll；&lt;br&gt;
+4.display为 inline-block | table-cell | table-caption | flex | inline-flex；&lt;br&gt;
+5.position为 absolute | fixed；&lt;/p&gt;
+
+&lt;h3 id=&quot;4-div-overflow-hidden&quot;&gt;4，父级div定义 overflow:hidden&lt;/h3&gt;
+
+&lt;p&gt;css&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;overflow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+    &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;zoom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;html&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap clear&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float-left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;box1   float:left;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float-left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;box2   float:left;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;原理：触发父元素生成BFC，包含浮动元素，且浮动元素的高度也纳入父元素计算。&lt;/p&gt;
+
+&lt;p&gt;优点：简单，代码少，浏览器支持好&lt;/p&gt;
+
+&lt;p&gt;缺点：超出的尺寸的会被隐藏&lt;/p&gt;
+
+&lt;p&gt;建议：在确定不会有什么被剪裁的情况下，放心使用。&lt;/p&gt;
+
+&lt;h3 id=&quot;4-div-overflow-auto&quot;&gt;4，父级div定义 overflow:auto&lt;/h3&gt;
+
+&lt;p&gt;原理：同上overflow:hidden&lt;/p&gt;
+
+&lt;p&gt;优点：简单、代码少、浏览器支持好 &lt;/p&gt;
+
+&lt;p&gt;缺点：内部宽高超过父级div时，会出现滚动条。 &lt;/p&gt;
+
+&lt;p&gt;建议：不推荐使用，如果你需要出现滚动条或者确保你的代码不会出现滚动条就使用吧。 &lt;/p&gt;
+
+&lt;h3 id=&quot;5-div&quot;&gt;5，父级div 也一起浮动&lt;/h3&gt;
+
+&lt;p&gt;原理：也是利用父元素形成BFC。 &lt;/p&gt;
+
+&lt;p&gt;优点：没有优点 &lt;/p&gt;
+
+&lt;p&gt;缺点：会产生新的浮动问题。 &lt;/p&gt;
+
+&lt;p&gt;建议：不推荐使用&lt;/p&gt;
+
+&lt;h3 id=&quot;6-display-table&quot;&gt;6，父元素设置display:table&lt;/h3&gt;
+
+&lt;p&gt;原理：display:table 本身并不会创建BFC，但是它会产生匿名框(anonymous boxes)，而匿名框中的display:table-cell可以创建新的BFC，换句话说，触发块级格式化上下文的是匿名框，而不是display:table。所以通过display:table和display:table-cell创建的BFC效果是不一样的。&lt;/p&gt;
+
+&lt;p&gt;优点：结构语义化完全正确，代码量极少&lt;/p&gt;
+
+&lt;p&gt;缺点：盒模型属性已经改变，由此造成的一系列问题&lt;/p&gt;
+
+&lt;p&gt;建议：不推荐使用&lt;/p&gt;
+
+&lt;h2 id=&quot;haslayout&quot;&gt;触发haslayout来闭合浮动&lt;/h2&gt;
+
+&lt;h3 id=&quot;7-after-clear-zoom-1&quot;&gt;7，:after+clear+zoom:1&lt;/h3&gt;
+
+&lt;p&gt;给浮动元素添加伪元素after，并为伪元素定义clear:both；对于不支持:after伪元素的浏览器如IE6~7，可以通过触发haslayout来达到闭合浮动的目的。&lt;br&gt;
+css&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.clearfix&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:after&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;block&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;both&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;visibility&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.clearfix&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+    &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;zoom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;/* zoom:1是为了触发IE6~7中的haslayout */&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;html&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap clearfix&quot;&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float-left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;float:left;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float-left&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;float:left;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;1) display:block 使生成的元素以块级元素显示,占满剩余空间;&lt;br&gt;
+2) height:0 避免生成内容破坏原有布局的高度。&lt;br&gt;
+3) visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;&lt;br&gt;
+4）通过 content:”.”生成内容作为最后一个元素，至于content里面是点还是看不见的空格&amp;quot;020&amp;quot;(content: &amp;quot;020&amp;quot;; content: &amp;quot; &amp;quot;; )抑或其他都是可以的，例如oocss里面就有经典的 content:”XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX”,有些版本可能content 里面内容为空,不推荐这样做的,firefox直到7.0 content:”” 仍然会产生额外的空隙；&lt;br&gt;
+5）zoom：1 触发IE hasLayout。&lt;/p&gt;
+
+&lt;p&gt;上述，除了clear：both用来闭合浮动的，其他代码无非都是为了隐藏掉content生成的内容，这也就是其他版本的闭合浮动为什么会有font-size：0，line-height：0。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.positioniseverything.net/easyclearing.html&quot;&gt;http://www.positioniseverything.net/easyclearing.html&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;http://stackoverflow.com/questions/211383/what-methods-of-clearfix-can-i-use&quot;&gt;http://stackoverflow.com/questions/211383/what-methods-of-clearfix-can-i-use&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;优点：结构和语义化完全正确,代码量居中&lt;/p&gt;
+
+&lt;p&gt;缺点：复用方式不当会造成代码量增加&lt;/p&gt;
+
+&lt;h3 id=&quot;8&quot;&gt;8，大师手笔&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.clearfix&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;::after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;both&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.clearfix&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+    &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;zoom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that you should always use the double colon, ::, for before and after, unless you need to support IE8. A double colon is standard for pseudo-elements, and the single-colon implementation is deprecated and support could well be dropped in the future.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://nicolasgallagher.com/micro-clearfix-hack/&quot;&gt;http://nicolasgallagher.com/micro-clearfix-hack/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[完整例子参见]（&lt;a href=&quot;http://jsfiddle.net/necolas/K538S/%EF%BC%89&quot;&gt;http://jsfiddle.net/necolas/K538S/）&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Nicolas Gallagher原文中还有:before是为了处理margin边距重叠,如下。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.cf&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:before&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.cf&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:after&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.cf&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;:after&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;both&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.cf&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;err&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;zoom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This “micro clearfix” generates pseudo-elements and sets their display to table. This creates an anonymous table-cell and a new block formatting context that means the :before pseudo-element prevents top-margin collapse. The :after pseudo-element is used to clear the floats. As a result, there is no need to hide any generated content and the total amount of code needed is reduced.&lt;/p&gt;
+
+&lt;p&gt;Including the :before selector is not necessary to clear the floats, but it prevents top-margins from collapsing in modern browsers. &lt;/p&gt;
 </content>
  </entry>
  
@@ -661,7 +867,7 @@ Boxes in the normal flow belong to a formatting context, which may be block or i
    <link href="/css/2016/11/10/css-float"/>
    <updated>2016-11-10T00:00:00+08:00</updated>
    <id>/css/2016/11/10/css-float</id>
-   <content type="html">&lt;h1 id=&quot;float&quot;&gt;深入理解float&lt;/h1&gt;
+   <content type="html">&lt;h1 id=&quot;float-float&quot;&gt;深入理解float的设计初衷以及float带来的影响&lt;/h1&gt;
 
 &lt;h1 id=&quot;float&quot;&gt;float定义&lt;/h1&gt;
 
@@ -1357,7 +1563,7 @@ PS：如果想要元素超出，可以设置margin属性。&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;p&gt;4的移动过程发生卡主现象。&lt;br&gt;
-总结浮动元素同时浮动的规律：&lt;br&gt;
+总结浮动元素同时浮动的规律（个人观点，不准确）：&lt;br&gt;
 1.多个浮动元素，同时浮动的规律，后一个浮动元素（无论浮动方向是否与前一个元素浮动方向相同），浮动查找要待的位置，都从前一个元素的top线找起，同时俩元素top齐平，若有它待的地儿，就乖乖待着；&lt;br&gt;
 2.接上1的条件，即使有它的上方也有够它待的地方，后一个元素的top线也不会高与前一个元素的top线，不会顶上去，哈哈，先来的是老大，不能爬到它上头去；看看元素5的的表现就明白了。&lt;br&gt;
 3.接上1的条件，如果没有后一个元素能待的地方，它就从前一个元素的bottom线开始查找地方，如果还没找到够大的地儿，就继续一层一层往下找，功夫不负有心人，总会找到的嘛；&lt;br&gt;
