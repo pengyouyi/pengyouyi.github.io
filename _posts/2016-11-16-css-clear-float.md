@@ -227,8 +227,8 @@ This “micro clearfix” generates pseudo-elements and sets their display to ta
 
 Including the :before selector is not necessary to clear the floats, but it prevents top-margins from collapsing in modern browsers. 
 
-
-
+## 更多-more
+- [http://w3help.org/zh-cn/casestudies/001](http://w3help.org/zh-cn/casestudies/001)
 
 
 
