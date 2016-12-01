@@ -393,7 +393,7 @@ demo- 2
 </div>
 ```
 
-# 视口居中-Within Viewport
+# 视口居中- Within Viewport
 ```html
 <!DOCTYPE html>
 <html lang="en">
