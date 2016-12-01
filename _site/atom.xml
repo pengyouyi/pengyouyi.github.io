@@ -4,13 +4,162 @@
  <title>彭友谊的博客</title>
  <link href="" rel="self"/>
  <link href=""/>
- <updated>2016-11-30T22:49:15+08:00</updated>
+ <updated>2016-12-01T21:29:26+08:00</updated>
  <id></id>
  <author>
    <name>pengyouyi</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>编写高效的CSS选择器</title>
+   <link href="/css/2016/12/01/css-selector-effective"/>
+   <updated>2016-12-01T00:00:00+08:00</updated>
+   <id>/css/2016/12/01/css-selector-effective</id>
+   <content type="html">&lt;h1 id=&quot;css-css&quot;&gt;CSS渲染规则、CSS选择器的效率&lt;/h1&gt;
+
+&lt;h1 id=&quot;css&quot;&gt;&lt;a href=&quot;https://css-tricks.com/efficiently-rendering-css/&quot;&gt;浏览器对css选择器的渲染规则&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/5797014/why-do-browsers-match-CSS-selectors-from-right-to-left&quot;&gt;样式系统从最右边的选择符开始向左进行匹配规则（右-&amp;gt;左）&lt;/a&gt;。&lt;br&gt;
+只要当前选择符的左边还有其他选择符，样式系统就会继续向左移动，直到找到和规则匹配的元素，或者因为不匹配而退出。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;div.nav &amp;gt; ul li a[title]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;上述例子，浏览器首先会尝试在你的HTML标签中寻找“a[title]”元素，接着在匹配“li和ul”，最后在去匹配“div.nav”。&lt;/p&gt;
+
+&lt;p&gt;选择器的最后一部分，也就是选择器的最右边（在这个例子中就是a[title]部分）部分被称为“关键选择器”，它将决定你的选择器的效率如何？是高还是低。&lt;/p&gt;
+
+&lt;h1 id=&quot;css&quot;&gt;决定css选择器性能的关键点&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;1.首先选择器对性能的影响源于&lt;strong&gt;浏览器匹配选择器和文档元素时所消耗的时间&lt;/strong&gt;，所以优化选择器的原则是应尽量避免使用消耗更多匹配时间的选择器。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2.最右侧的选择器对于性能就起着&lt;strong&gt;关键性的作用&lt;/strong&gt;，它是最先开始查找的，如果最右侧是#id选择器那么性能就很高，如果是标签选择器那么性能就会大打折扣。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;css&quot;&gt;&lt;a href=&quot;http://csswizardry.com/2011/09/writing-efficient-css-selectors/&quot;&gt;CSS选择器的效率（从高到低）&lt;/a&gt;&lt;/h1&gt;
+
+&lt;p&gt;Google 资深web开发工程师 Steve Souders 对 CSS 选择器的执行效率从高到低做了一个排序：&lt;/p&gt;
+
+&lt;p&gt;1.id选择器（#myid）&lt;br&gt;
+2.类选择器（.myclassname）&lt;br&gt;
+3.标签选择器（div,h1,p）&lt;br&gt;
+4.相邻选择器（h1+p）&lt;br&gt;
+5.子选择器（ul &amp;gt; li）&lt;br&gt;
+6.后代选择器（li a）&lt;br&gt;
+7.通配符选择器（*）&lt;br&gt;
+8.属性选择器（a[rel=&amp;quot;external&amp;quot;]）&lt;br&gt;
+9.伪类选择器（a:hover, li:nth-child）&lt;/p&gt;
+
+&lt;p&gt;id选择器的性能是最高的，但是id具有唯一性&lt;br&gt;
+class选择器次之，具有共性，常使用之&lt;br&gt;
+如果你非常在意页面的性能那千万别使用CSS3选择器。实际上，在所有浏览器中，用 class 和 id 来渲染，比那些使用同胞，后代选择器，子选择器（sibling, descendant and child selectors）对页面性能的改善更值得关注。&lt;/p&gt;
+
+&lt;h1 id=&quot;guidelines-for-efficient-css&quot;&gt;Guidelines for efficient CSS&lt;/h1&gt;
+
+&lt;h2 id=&quot;avoid-universal-rules&quot;&gt;Avoid universal rules&lt;/h2&gt;
+
+&lt;p&gt;Make sure a rule doesn’t end up in the universal category!&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;#content * {..}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;don-t-qualify-id-rules-with-tag-names-or-classes&quot;&gt;Don’t qualify ID rules with tag names or classes&lt;/h2&gt;
+
+&lt;div class=&quot;show&quot;&gt;
+  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
+    button#backButton {…}
+  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
+    .menu-left#newMenuIcon {…}
+  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
+    #backButton {…}
+  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
+    #newMenuIcon {…}
+&lt;/div&gt;
+
+&lt;p&gt;id在HTML中是唯一的，也就是说一个HTML页面只限定有一个id为“XX”的元素，而不限制拥有这个ID元素的标签名，所以,在button#backButton {…}中,button标签完全是无意义的，可以，而且应该去掉，button#backButton {…}与#backButton {…}是等价的。在#backButton前多写了button,只会引起样式系统向左移动，继续查找页面元素，损耗页面性能，延长页面渲染时间。&lt;/p&gt;
+
+&lt;h2 id=&quot;don-t-qualify-class-rules-with-tag-names&quot;&gt;Don’t qualify class rules with tag names&lt;/h2&gt;
+
+&lt;div class=&quot;show&quot;&gt;
+  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
+    treecell.indented {…}
+  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
+    .treecell-indented {…}
+  &lt;div class=&quot;correct&quot;&gt;BEST&lt;/div&gt;
+    .hierarchy-deep {…}
+&lt;/div&gt;
+
+&lt;h2 id=&quot;use-the-most-specific-category-possible&quot;&gt;Use the most specific category possible&lt;/h2&gt;
+
+&lt;div class=&quot;show&quot;&gt;
+  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
+  treeitem[mailfolder=&quot;true&quot;] &gt; treerow &gt; treecell {…}
+  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
+  .treecell-mailfolder {…}
+&lt;/div&gt;
+
+&lt;p&gt;尽量选择最具体的方式,避免使用多层标签选择器。使用 class 选择器替换，减少css查找&lt;/p&gt;
+
+&lt;h2 id=&quot;avoid-the-descendant-selector&quot;&gt;Avoid the descendant selector&lt;/h2&gt;
+
+&lt;p&gt;后代选择器在CSS中是最昂贵的选择器。贵得要命——尤其是把它和标签或通配符放在一起！&lt;/p&gt;
+
+&lt;div class=&quot;show&quot;&gt;
+  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
+  treeitem[mailfolder=&quot;true&quot;] &gt; treerow &gt; treecell {…}
+  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
+  .treecell-mailfolder {…}
+&lt;/div&gt;
+
+&lt;h2 id=&quot;tag-category-rules-should-never-contain-a-child-selector&quot;&gt;Tag category rules should never contain a child selector&lt;/h2&gt;
+
+&lt;div class=&quot;show&quot;&gt;
+  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
+  treehead &gt; treerow &gt; treecell {…}
+  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
+  .treecell-header {…}
+&lt;/div&gt;
+
+&lt;h2 id=&quot;question-all-usages-of-the-child-selector&quot;&gt;Question all usages of the child selector&lt;/h2&gt;
+
+&lt;div class=&quot;show&quot;&gt;
+  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
+  treeitem[IsImapServer=”true”] &gt; treerow &gt; .tree-folderpane-icon {…}
+  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
+  .tree-folderpane-icon[IsImapServer=”true”] {…}
+&lt;/div&gt;
+
+&lt;h2 id=&quot;rely-on-inheritance&quot;&gt;Rely on inheritance&lt;/h2&gt;
+
+&lt;div class=&quot;show&quot;&gt;
+  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
+  #bookmarkMenuItem &gt; .menu-left { list-style-image: url(blah) }
+  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
+  #bookmarkMenuItem { list-style-image: url(blah) }
+&lt;/div&gt;
+
+&lt;h2 id=&quot;use-moz-image-region&quot;&gt;Use -moz-image-region!&lt;/h2&gt;
+
+&lt;h2 id=&quot;use-scoped-stylesheets&quot;&gt;Use scoped stylesheets&lt;/h2&gt;
+
+&lt;h2 id=&quot;avoid-vendor-specific-features-unless-necessary&quot;&gt;Avoid vendor-specific features unless necessary&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;summary：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;1.避免使用通配符&lt;br&gt;
+2.不使用标签名或类名修饰ID规则：如果规则使用ID选择器作为关键选择器，不要给规则添加标签名。因为ID本身就是唯一的，添加标签名会不必要地降低匹配效率。&lt;br&gt;
+3.不使用标签名修饰类：相较于标签，类更具独特性。&lt;br&gt;
+4.尽量选择最具体的方式：造成低效的最简单粗暴的原因就是在标签上使用太多规则。给元素添加类可以更快细分到类方式，可以减少规则去匹配标签的时间。&lt;br&gt;
+5.关于后代选择器和子选择器：避免使用后代选择器，非要用的话建议用子选择器代替，但子选择器也要慎用，标签规则永远不要包含子选择器。&lt;br&gt;
+6.利用可继承性：没必要在一般内容上声明样式。&lt;/p&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://css-tricks.com/efficiently-rendering-css/&quot;&gt;https://css-tricks.com/efficiently-rendering-css/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://csswizardry.com/2011/09/writing-efficient-css-selectors/&quot;&gt;http://csswizardry.com/2011/09/writing-efficient-css-selectors/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>js中的this</title>
@@ -352,6 +501,7 @@ p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里�
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/&quot;&gt;http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>
@@ -2860,17 +3010,6 @@ position:relative会保留自己在z-index:0层的占位，left、top、right、
  </entry>
  
  <entry>
-   <title>css垂直居中</title>
-   <link href="/css/2016/11/01/css-verticle-center"/>
-   <updated>2016-11-01T00:00:00+08:00</updated>
-   <id>/css/2016/11/01/css-verticle-center</id>
-   <content type="html">&lt;h1 id=&quot;css&quot;&gt;css垂直居中&lt;/h1&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-</content>
- </entry>
- 
- <entry>
    <title>js事件委托</title>
    <link href="/js/2016/10/31/js-event-delegate"/>
    <updated>2016-10-31T00:00:00+08:00</updated>
@@ -3545,7 +3684,10 @@ ID选择器  id &lt;br&gt;
 &lt;h2 id=&quot;css&quot;&gt;css优先级&lt;/h2&gt;
 
 &lt;p&gt;!important &amp;gt; id &amp;gt; class &amp;gt; tag&lt;br&gt;
-!important &amp;gt; （内联样式）Inline style &amp;gt; 内部样式）Internal style sheet &amp;gt; （外部样式）External style sheet &lt;/p&gt;
+!important &amp;gt; （内联样式）Inline style &amp;gt; （内部样式）Internal style sheet &amp;gt; （外部样式）External style sheet &lt;/p&gt;
+
+&lt;p&gt;note：&lt;br&gt;
+&lt;code&gt;&amp;lt;style&amp;gt;&amp;lt;/style&amp;gt; 同 &amp;lt;link /&amp;gt; 同级，应用取决于&amp;lt;style&amp;gt;标签和&amp;lt;link /&amp;gt; 标签的先后顺序&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;有个例外的情况，就是如果外部样式放在内部样式的后面，则外部样式将覆盖内部样式。&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;

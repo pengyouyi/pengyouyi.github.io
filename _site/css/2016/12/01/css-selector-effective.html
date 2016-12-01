@@ -7,7 +7,7 @@
     
     
     
-    <title>css垂直居中 | 彭友谊的博客</title>
+    <title>编写高效的CSS选择器 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="css垂直居中">
-    <meta property="og:url" content="/css/2016/11/01/css-verticle-center">
+    <meta property="og:title" content="编写高效的CSS选择器">
+    <meta property="og:url" content="/css/2016/12/01/css-selector-effective">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="css垂直居中">
+    <meta property="og:description" content="编写高效的CSS选择器">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="css垂直居中">
+    <meta name="twitter:title" content="编写高效的CSS选择器">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -138,14 +138,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/css/2016/11/01/css-verticle-center" title="css垂直居中" itemprop="url">css垂直居中</a>
+      <a href="/css/2016/12/01/css-selector-effective" title="编写高效的CSS选择器" itemprop="url">编写高效的CSS选择器</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-11-01 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-11-01</time>
+    <time datetime="2016-12-01 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-12-01</time>
     
   </p>
 </header>
@@ -157,9 +157,147 @@
 		
 		</div>
 		
-		<h1 id="css">css垂直居中</h1>
+		<h1 id="css-css">CSS渲染规则、CSS选择器的效率</h1>
+
+<h1 id="css"><a href="https://css-tricks.com/efficiently-rendering-css/">浏览器对css选择器的渲染规则</a></h1>
+
+<p><a href="http://stackoverflow.com/questions/5797014/why-do-browsers-match-CSS-selectors-from-right-to-left">样式系统从最右边的选择符开始向左进行匹配规则（右-&gt;左）</a>。<br>
+只要当前选择符的左边还有其他选择符，样式系统就会继续向左移动，直到找到和规则匹配的元素，或者因为不匹配而退出。</p>
+<div class="highlight"><pre><code class="language-" data-lang="">div.nav &gt; ul li a[title]
+</code></pre></div>
+<p>上述例子，浏览器首先会尝试在你的HTML标签中寻找“a[title]”元素，接着在匹配“li和ul”，最后在去匹配“div.nav”。</p>
+
+<p>选择器的最后一部分，也就是选择器的最右边（在这个例子中就是a[title]部分）部分被称为“关键选择器”，它将决定你的选择器的效率如何？是高还是低。</p>
+
+<h1 id="css">决定css选择器性能的关键点</h1>
+
+<ul>
+<li><p>1.首先选择器对性能的影响源于<strong>浏览器匹配选择器和文档元素时所消耗的时间</strong>，所以优化选择器的原则是应尽量避免使用消耗更多匹配时间的选择器。</p></li>
+<li><p>2.最右侧的选择器对于性能就起着<strong>关键性的作用</strong>，它是最先开始查找的，如果最右侧是#id选择器那么性能就很高，如果是标签选择器那么性能就会大打折扣。</p></li>
+</ul>
+
+<h1 id="css"><a href="http://csswizardry.com/2011/09/writing-efficient-css-selectors/">CSS选择器的效率（从高到低）</a></h1>
+
+<p>Google 资深web开发工程师 Steve Souders 对 CSS 选择器的执行效率从高到低做了一个排序：</p>
+
+<p>1.id选择器（#myid）<br>
+2.类选择器（.myclassname）<br>
+3.标签选择器（div,h1,p）<br>
+4.相邻选择器（h1+p）<br>
+5.子选择器（ul &gt; li）<br>
+6.后代选择器（li a）<br>
+7.通配符选择器（*）<br>
+8.属性选择器（a[rel=&quot;external&quot;]）<br>
+9.伪类选择器（a:hover, li:nth-child）</p>
+
+<p>id选择器的性能是最高的，但是id具有唯一性<br>
+class选择器次之，具有共性，常使用之<br>
+如果你非常在意页面的性能那千万别使用CSS3选择器。实际上，在所有浏览器中，用 class 和 id 来渲染，比那些使用同胞，后代选择器，子选择器（sibling, descendant and child selectors）对页面性能的改善更值得关注。</p>
+
+<h1 id="guidelines-for-efficient-css">Guidelines for efficient CSS</h1>
+
+<h2 id="avoid-universal-rules">Avoid universal rules</h2>
+
+<p>Make sure a rule doesn’t end up in the universal category!</p>
+<div class="highlight"><pre><code class="language-" data-lang="">#content * {..}
+</code></pre></div>
+<h2 id="don-t-qualify-id-rules-with-tag-names-or-classes">Don’t qualify ID rules with tag names or classes</h2>
+
+<div class="show">
+  <div class="incorrect">BAD</div>
+    button#backButton {…}
+  <div class="incorrect">BAD</div>
+    .menu-left#newMenuIcon {…}
+  <div class="correct">GOOD</div>
+    #backButton {…}
+  <div class="correct">GOOD</div>
+    #newMenuIcon {…}
+</div>
+
+<p>id在HTML中是唯一的，也就是说一个HTML页面只限定有一个id为“XX”的元素，而不限制拥有这个ID元素的标签名，所以,在button#backButton {…}中,button标签完全是无意义的，可以，而且应该去掉，button#backButton {…}与#backButton {…}是等价的。在#backButton前多写了button,只会引起样式系统向左移动，继续查找页面元素，损耗页面性能，延长页面渲染时间。</p>
+
+<h2 id="don-t-qualify-class-rules-with-tag-names">Don’t qualify class rules with tag names</h2>
+
+<div class="show">
+  <div class="incorrect">BAD</div>
+    treecell.indented {…}
+  <div class="correct">GOOD</div>
+    .treecell-indented {…}
+  <div class="correct">BEST</div>
+    .hierarchy-deep {…}
+</div>
+
+<h2 id="use-the-most-specific-category-possible">Use the most specific category possible</h2>
+
+<div class="show">
+  <div class="incorrect">BAD</div>
+  treeitem[mailfolder="true"] > treerow > treecell {…}
+  <div class="correct">GOOD</div>
+  .treecell-mailfolder {…}
+</div>
+
+<p>尽量选择最具体的方式,避免使用多层标签选择器。使用 class 选择器替换，减少css查找</p>
+
+<h2 id="avoid-the-descendant-selector">Avoid the descendant selector</h2>
+
+<p>后代选择器在CSS中是最昂贵的选择器。贵得要命——尤其是把它和标签或通配符放在一起！</p>
+
+<div class="show">
+  <div class="incorrect">BAD</div>
+  treeitem[mailfolder="true"] > treerow > treecell {…}
+  <div class="correct">GOOD</div>
+  .treecell-mailfolder {…}
+</div>
+
+<h2 id="tag-category-rules-should-never-contain-a-child-selector">Tag category rules should never contain a child selector</h2>
+
+<div class="show">
+  <div class="incorrect">BAD</div>
+  treehead > treerow > treecell {…}
+  <div class="correct">GOOD</div>
+  .treecell-header {…}
+</div>
+
+<h2 id="question-all-usages-of-the-child-selector">Question all usages of the child selector</h2>
+
+<div class="show">
+  <div class="incorrect">BAD</div>
+  treeitem[IsImapServer=”true”] > treerow > .tree-folderpane-icon {…}
+  <div class="correct">GOOD</div>
+  .tree-folderpane-icon[IsImapServer=”true”] {…}
+</div>
+
+<h2 id="rely-on-inheritance">Rely on inheritance</h2>
+
+<div class="show">
+  <div class="incorrect">BAD</div>
+  #bookmarkMenuItem > .menu-left { list-style-image: url(blah) }
+  <div class="correct">GOOD</div>
+  #bookmarkMenuItem { list-style-image: url(blah) }
+</div>
+
+<h2 id="use-moz-image-region">Use -moz-image-region!</h2>
+
+<h2 id="use-scoped-stylesheets">Use scoped stylesheets</h2>
+
+<h2 id="avoid-vendor-specific-features-unless-necessary">Avoid vendor-specific features unless necessary</h2>
+
+<p><strong>summary：</strong></p>
+
+<p>1.避免使用通配符<br>
+2.不使用标签名或类名修饰ID规则：如果规则使用ID选择器作为关键选择器，不要给规则添加标签名。因为ID本身就是唯一的，添加标签名会不必要地降低匹配效率。<br>
+3.不使用标签名修饰类：相较于标签，类更具独特性。<br>
+4.尽量选择最具体的方式：造成低效的最简单粗暴的原因就是在标签上使用太多规则。给元素添加类可以更快细分到类方式，可以减少规则去匹配标签的时间。<br>
+5.关于后代选择器和子选择器：避免使用后代选择器，非要用的话建议用子选择器代替，但子选择器也要慎用，标签规则永远不要包含子选择器。<br>
+6.利用可继承性：没必要在一般内容上声明样式。</p>
 
 <h1 id="more">更多-more</h1>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS">https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS</a></li>
+<li><a href="https://css-tricks.com/efficiently-rendering-css/">https://css-tricks.com/efficiently-rendering-css/</a></li>
+<li><a href="http://csswizardry.com/2011/09/writing-efficient-css-selectors/">http://csswizardry.com/2011/09/writing-efficient-css-selectors/</a></li>
+</ul>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -190,7 +328,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#布局">布局</a>
+  <a href="/tags/#性能">性能</a>
   
   </div>
 
@@ -200,7 +338,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/css/2016/11/01/css-verticle-center" data-title="css垂直居中 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/css/2016/12/01/css-selector-effective" data-title="编写高效的CSS选择器 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -212,27 +350,19 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2016/10/31/js-event-delegate" title="js事件委托">
+ <a href="/js/2016/11/30/js-this" title="js中的this">
   <strong>上一篇：</strong><br/>
   <span>
-  js事件委托</span>
+  js中的this</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/css/2016/11/08/css-position"  title="css布局position属性">
- <strong>下一篇：</strong><br/> 
- <span>css布局position属性
-</span>
-</a>
-</div>
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-11-01-css-verticle-center.md" data-title="css垂直居中" data-url="/css/2016/11/01/css-verticle-center"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-12-01-css-selector-effective.md" data-title="编写高效的CSS选择器" data-url="/css/2016/12/01/css-selector-effective"></div>
 </section>
 
 
@@ -267,7 +397,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Js" title="Js">Js<sup>13</sup></a></li>
+			<li><a href="/categories/#Js" title="Js">Js<sup>14</sup></a></li>
 		  
 		
 		  
@@ -284,10 +414,6 @@
 		
 		  
 			<li><a href="/categories/#HTML" title="HTML">HTML<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/#js" title="js">js<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -376,7 +502,7 @@
 			
 		
 			
-				<li><a href="/tags/#布局" title="布局">布局<sup>6</sup></a></li>
+				<li><a href="/tags/#布局" title="布局">布局<sup>5</sup></a></li>
 			
 		
 			
@@ -393,6 +519,10 @@
 		
 			
 				<li><a href="/tags/#this" title="this">this<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#性能" title="性能">性能<sup>1</sup></a></li>
 			
 		
 		</ul>

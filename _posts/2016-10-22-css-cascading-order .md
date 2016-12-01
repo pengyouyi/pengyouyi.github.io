@@ -179,7 +179,10 @@ ID选择器  id
 
 ## css优先级
 !important > id > class > tag
-!important > （内联样式）Inline style > 内部样式）Internal style sheet > （外部样式）External style sheet 
+!important > （内联样式）Inline style > （内部样式）Internal style sheet > （外部样式）External style sheet 
+
+note：
+`<style></style> 同 <link /> 同级，应用取决于<style>标签和<link /> 标签的先后顺序`
 
 有个例外的情况，就是如果外部样式放在内部样式的后面，则外部样式将覆盖内部样式。
 ```html
