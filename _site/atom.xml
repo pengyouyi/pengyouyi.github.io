@@ -4,13 +4,443 @@
  <title>彭友谊的博客</title>
  <link href="" rel="self"/>
  <link href=""/>
- <updated>2016-12-02T19:36:23+08:00</updated>
+ <updated>2016-12-14T00:04:19+08:00</updated>
  <id></id>
  <author>
    <name>pengyouyi</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>js中的if语句</title>
+   <link href="/js/2016/12/13/js-if"/>
+   <updated>2016-12-13T00:00:00+08:00</updated>
+   <id>/js/2016/12/13/js-if</id>
+   <content type="html">&lt;h1 id=&quot;js-if&quot;&gt;js中的if语句&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;statement&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;sattement1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;statement2&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;condition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;statement1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;statement2&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;statement3&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;其中condition可以是任意表达式，而且对这个表达式求值的结果不一定是布尔值。&lt;br&gt;
+ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转化为一个布尔值。&lt;/p&gt;
+
+&lt;h1 id=&quot;boolean-rules&quot;&gt;Boolean()转换rules&lt;/h1&gt;
+
+&lt;p&gt;各种数据类型及其对应的转换规则。&lt;/p&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;数据类型&lt;/th&gt;
+&lt;th&gt;转换为true的值&lt;/th&gt;
+&lt;th&gt;转换为false的值&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Boolean&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Undefined&lt;/td&gt;
+&lt;td&gt;不适用&lt;/td&gt;
+&lt;td&gt;undefined&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;String&lt;/td&gt;
+&lt;td&gt;任何非空字符串&lt;/td&gt;
+&lt;td&gt;&amp;quot;&amp;quot;(空字符串)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Number&lt;/td&gt;
+&lt;td&gt;任何非零数字值（包括负数、正负无穷大）&lt;/td&gt;
+&lt;td&gt;0和NaN&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Object&lt;/td&gt;
+&lt;td&gt;任何对象(包括{ }、[ ] )&lt;/td&gt;
+&lt;td&gt;null&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Function&lt;/td&gt;
+&lt;td&gt;all(所有的)&lt;/td&gt;
+&lt;td&gt;no(无)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;Boolean()转换未声明的变量会报错。&lt;/p&gt;
+
+&lt;h1 id=&quot;boolean-demo&quot;&gt;Boolean()转换的demo&lt;/h1&gt;
+
+&lt;h2 id=&quot;boolean&quot;&gt;Boolean类型&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;undefined&quot;&gt;Undefined类型&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Error: Uncaught ReferenceError: x is not defined&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;string&quot;&gt;String类型&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;false&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;str4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;str4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;number&quot;&gt;Number类型&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;Infinity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;Infinity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;object&quot;&gt;Object类型&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;peng&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[];&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;function&quot;&gt;Function类型&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){};&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){};&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;f3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Boolean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;f3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>js中的闭包</title>
+   <link href="/js/2016/12/09/js-closure"/>
+   <updated>2016-12-09T00:00:00+08:00</updated>
+   <id>/js/2016/12/09/js-closure</id>
+   <content type="html">&lt;h1 id=&quot;what-is&quot;&gt;what is闭包，闭包的应用场景&lt;/h1&gt;
+
+&lt;h1 id=&quot;what-is-closure&quot;&gt;what is closure&lt;/h1&gt;
+
+&lt;p&gt;闭包是指有权访问另一个函数作用域中的变量。&lt;br&gt;
+创建闭包的常见方式，就是在一个函数内部创建另一个函数。&lt;/p&gt;
+
+&lt;p&gt;通俗解释：&lt;br&gt;
+Javascript允许使用内部函数---即函数定义和函数表达式位于另一个函数的函数体内。而且，这些内部函数可以访问它们所在的外部函数中声明的所有局部变量、参数和声明的其他内部函数。当其中一个这样的内部函数在包含它们的外部函数之外被调用时，就会形成闭包。&lt;/p&gt;
+
+&lt;h1 id=&quot;variable-scope&quot;&gt;variable scope&lt;/h1&gt;
+
+&lt;p&gt;JavaScript中是没有块级作用域的。&lt;br&gt;
+变量的作用域无非就是两种：全局变量和局部变量。 &lt;br&gt;
+Javascript语言的特殊之处，就在于函数内部可以直接读取全局变量。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 999&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;另一方面，在函数外部自然无法读取函数内的局部变量。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// error&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这里有一个地方需要注意，函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量！&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 999&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;access-to-outer-variables&quot;&gt;Access to outer variables&lt;/h1&gt;
+
+&lt;p&gt;在函数的内部，再定义一个函数。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 999&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;在上面的代码中，函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1就是不可见的。这就是Javascript语言特有的&amp;quot;链式作用域&amp;quot;结构（chain scope），子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。&lt;/p&gt;
+
+&lt;p&gt;既然f2可以读取f1中的局部变量，那么只要把f2作为返回值，我们不就可以在f1外部读取它的内部变量了吗！&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 999&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;此处f2函数，就是闭包。&lt;/p&gt;
+
+&lt;h1 id=&quot;&gt;闭包的几种写法和用法&lt;/h1&gt;
+
+&lt;p&gt;// ## 给函数添加一些属性&lt;br&gt;
+// &lt;code&gt;js&lt;br&gt;
+// function Circle(r) { &lt;br&gt;
+//   this.r = r; &lt;br&gt;
+// } &lt;br&gt;
+// Circle.PI = 3.14159; &lt;br&gt;
+// Circle.prototype.area = function() { &lt;br&gt;
+//   return Circle.PI * this.r * this.r; &lt;br&gt;
+// } &lt;br&gt;
+// var c = new Circle(1.0); &lt;br&gt;
+// alert(c.area()); //3.14159&lt;br&gt;
+//&lt;/code&gt;&lt;br&gt;
+// ## 是声明一个变量，将一个函数当作值赋给变量&lt;br&gt;
+// ```js&lt;br&gt;
+// var Circle = function() { &lt;br&gt;
+//   var obj = new Object(); &lt;br&gt;
+//   obj.PI = 3.14159; &lt;/p&gt;
+
+&lt;p&gt;//   obj.area = function( r ) { &lt;br&gt;
+//     return this.PI * r * r; &lt;br&gt;
+//   } &lt;br&gt;
+//   return obj; &lt;br&gt;
+// } &lt;br&gt;
+// var c = new Circle(); &lt;br&gt;
+// alert( c.area( 1.0 ) ); //3.14159&lt;br&gt;
+// &lt;code&gt;&lt;br&gt;
+// ## 这种方法使用较多，也最为方便。var obj = {}就是声明一个空的对象&lt;br&gt;
+//&lt;/code&gt;js&lt;br&gt;
+// var Circle={ &lt;br&gt;
+//   &amp;quot;PI&amp;quot;:3.14159, &lt;br&gt;
+//   &amp;quot;area&amp;quot;:function(r){ &lt;br&gt;
+//     return this.PI * r * r; &lt;br&gt;
+//   } &lt;br&gt;
+// }; &lt;br&gt;
+// alert( Circle.area(1.0) );//3.14159&lt;br&gt;
+// ```&lt;/p&gt;
+
+&lt;h1 id=&quot;the-uses-of-closures&quot;&gt;The Uses of Closures&lt;/h1&gt;
+
+&lt;h2 id=&quot;one&quot;&gt;one：可以读取函数内部的变量，&lt;/h2&gt;
+
+&lt;h2 id=&quot;two&quot;&gt;two：让这些变量的值始终保持在内存中。&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;nAdd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;f2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;f1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 999&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;nAdd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1000&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;在这段代码中，result实际上就是闭包f2函数。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，函数f1中的局部变量n一直保存在内存中，并没有在f1调用后被自动清除。&lt;/p&gt;
+
+&lt;p&gt;为什么会这样呢？原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，而f2的存在依赖于f1，因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。&lt;/p&gt;
+
+&lt;p&gt;这段代码中另一个值得注意的地方，就是“nAdd=function(){n+=1}”这一行，首先在nAdd前面没有使用var关键字，因此 nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个&lt;/p&gt;
+
+&lt;p&gt;匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;inc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//控制台输出1&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//控制台输出2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;note-the-use-of-closure-points&quot;&gt;Note the use of closure points&lt;/h1&gt;
+
+&lt;p&gt;1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。&lt;/p&gt;
+
+&lt;p&gt;2）闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。&lt;/p&gt;
+
+&lt;p&gt;// # 闭包的应用场景&lt;br&gt;
+// # 闭包原理&lt;br&gt;
+// # 闭包与this&lt;br&gt;
+// # 垃圾回收机制&lt;/p&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;more&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures&quot;&gt;https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html&quot;&gt;http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.sitepoint.com/demystifying-javascript-closures-callbacks-iifes/&quot;&gt;https://www.sitepoint.com/demystifying-javascript-closures-callbacks-iifes/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://medium.freecodecamp.com/lets-learn-javascript-closures-66feb44f6a44#.3k2l1ktm2&quot;&gt;https://medium.freecodecamp.com/lets-learn-javascript-closures-66feb44f6a44#.3k2l1ktm2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>js中的函数定义</title>
+   <link href="/js/2016/12/08/js-function-definition"/>
+   <updated>2016-12-08T00:00:00+08:00</updated>
+   <id>/js/2016/12/08/js-function-definition</id>
+   <content type="html">&lt;h1 id=&quot;js&quot;&gt;js中的函数定义&lt;/h1&gt;
+
+&lt;h2 id=&quot;declaration&quot;&gt;函数声明-declaration&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;expression&quot;&gt;函数表达式-expression&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;functiona&quot;&gt;Functiona构造函数&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;num1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;num2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;return num1 + num2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 不推荐使用&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;declaretion-amp-expression&quot;&gt;declaretion &amp;amp; expression&lt;/h2&gt;
+
+&lt;p&gt;the differcence between a function declaretion and a function expression&lt;/p&gt;
+
+&lt;p&gt;函数声明作为一种声明，当然会在预编译阶级有所动作（声明提前），而函数表达式则不会。&lt;br&gt;
+另一个区别是，函数声明不能直接加一对括号让它们执行。&lt;br&gt;
+第三个区别，表达式还可以继续细分，表达式是由常量，变量，操作符，函数等组合而成，计算以后返回一个结果值，至少也会返回一个undefined。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>js中的匿名函数</title>
+   <link href="/js/2016/12/08/js-anonymous-function"/>
+   <updated>2016-12-08T00:00:00+08:00</updated>
+   <id>/js/2016/12/08/js-anonymous-function</id>
+   <content type="html">&lt;h1 id=&quot;js&quot;&gt;js中的匿名函数&lt;/h1&gt;
+
+&lt;h1 id=&quot;what-is-anonymous-function&quot;&gt;what is anonymous function&lt;/h1&gt;
+
+&lt;p&gt;第一种方式，创建匿名函数，形如以下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//代码&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;匿名函数例子&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt; 
+  &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;})(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这里创建了一个匿名函数(在第一个括号内)，第二个括号用于调用该匿名函数，并传入参数。括号是表达式，是表达式就有返回值，所以可以在后面加一对括号让它们执行.&lt;/p&gt;
+
+&lt;p&gt;第二种方式，创建匿名函数，函数表达式的右侧。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;右边的函数就是一个匿名函数，创造完毕函数后，又将该函数赋给了变量double。&lt;/p&gt;
+
+&lt;h2 id=&quot;self-executing-anonymous-function&quot;&gt;self-executing anonymous function&lt;/h2&gt;
+
+&lt;p&gt;为什么(function {// code})();可以被执行, 而function {// code}();却会报错?&lt;br&gt;
+// SyntaxError: Unexpected token (&lt;/p&gt;
+
+&lt;p&gt;分析：&lt;br&gt;
+(1). 首先, 要清楚两者的区别:&lt;br&gt;
+(function {// code})是表达式, function {// code}是函数声明.&lt;/p&gt;
+
+&lt;p&gt;(2). 其次, js&amp;quot;预编译&amp;quot;的特点:&lt;br&gt;
+js在&amp;quot;预编译&amp;quot;阶段, 会解释函数声明, 但却会忽略表式.&lt;/p&gt;
+
+&lt;p&gt;(3). 当js执行到function() {//code}();时, 由于function() {//code}在&amp;quot;预编译&amp;quot;阶段已经被解释过, js会跳过function(){//code}, 试图去执行();, 故会报错;&lt;br&gt;
+在解析器解析全局的function或者function内部function关键字的时候，默认是认为function声明，而不是function表达式，如果你不显示告诉编译器，它默认会声明成一个缺少名字的function，并且抛出一个语法错误信息，因为function声明需要一个名字。&lt;/p&gt;
+
+&lt;p&gt;当js执行到(function {// code})();时, 由于(function {// code})是表达式, js会去对它求解得到返回值, 由于返回值是一 个函数, 故而遇到();时, 便会被执行.&lt;/p&gt;
+
+&lt;p&gt;另外， 函数转换为表达式的方法并不一定要靠分组操作符()，我们还可以用void操作符，~操作符，!操作符&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; 
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'water'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//写法有点酷~&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; 
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'water'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;}();&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//据说效率最高~&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; 
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'water'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;}();&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; 
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'water'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;}();&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt; 
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'water'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;}();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;anonymous-function&quot;&gt;anonymous function好处&lt;/h1&gt;
+
+&lt;p&gt;1.避免占用全局变量名&lt;br&gt;
+2.参数保护,函数是独立作用域,传递参数可以保护临时变量,闭包可以保存循环中需要保留的临时变量,还有组件开发时将命名空间传递到函数中用闭包保护起来,即使命名空间被后面的代码重置,原变量被闭包保护将仍然生存&lt;br&gt;
+3.降低风险,因为没有变量名,中间代码又被闭包保护,js注入无法访问,减少被攻击风险&lt;/p&gt;
+
+&lt;p&gt;1.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})()&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// a is not defined(…)&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// c is not defined(…)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;anonymous-function&quot;&gt;anonymous function使用场景&lt;/h1&gt;
+
+&lt;p&gt;一是回调函数，二是直接执行函数。&lt;/p&gt;
+
+&lt;h1 id=&quot;anonymous-function-amp-closure&quot;&gt;anonymous function &amp;amp; closure&lt;/h1&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+</content>
+ </entry>
  
  <entry>
    <title>编写高效的CSS选择器</title>
@@ -497,6 +927,39 @@ p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里�
 
 &lt;p&gt;4.嵌套函数中的this不会继承上层函数的this，如果需要，可以用一个变量保存上层函数的this。&lt;/p&gt;
 
+&lt;h2 id=&quot;this&quot;&gt;番外篇一些关于this的笔试题&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;The Window&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;My Object&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNameFunc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getNameFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getNameFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()());&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// The Window&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// The Window&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;The Window&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;My Object&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getNameFunc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+         &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;that&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　　　&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;that&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　　　&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;　　&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getNameFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getNameFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()());&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// My Object&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// My Object&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -5024,931 +5487,6 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient&lt;/p&gt;
 &lt;li&gt;&lt;a href=&quot;http://csslint.net/&quot;&gt;csslint.net&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://www.biaodianfu.com/css-style-guide.html&quot;&gt;http://www.biaodianfu.com/css-style-guide.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;http://itindex.net/detail/48755-html-css-%E4%BB%A3%E7%A0%81&quot;&gt;http://itindex.net/detail/48755-html-css-%E4%BB%A3%E7%A0%81&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>CSS 命名推荐</title>
-   <link href="/css/2016/10/16/css-class-name"/>
-   <updated>2016-10-16T00:00:00+08:00</updated>
-   <id>/css/2016/10/16/css-class-name</id>
-   <content type="html">&lt;h1 id=&quot;css&quot;&gt;CSS 命名推荐&lt;/h1&gt;
-
-&lt;h1 id=&quot;link&quot;&gt;文件引用link&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;一律使用link的方式调用外部样式&lt;/li&gt;
-&lt;li&gt;不允许在页面中使用&amp;lt;style&amp;gt;块；&lt;/li&gt;
-&lt;li&gt;不允许在 &amp;lt;style&amp;gt;块中使用 @import；&lt;/li&gt;
-&lt;li&gt;不允许使用 style 属性写行内样式。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;name&quot;&gt;name-组成元素&lt;/h1&gt;
-
-&lt;p&gt;命名必须由单词、中划线-或数字组成；&lt;br&gt;
-不允许使用拼音（约定俗成的除外，如：youku, baidu），尤其是缩写的拼音、拼音与英文的混合。&lt;/p&gt;
-
-&lt;pre class=&quot;badcode&quot;&gt;
-不推荐：
-.xiangqing { sRules; }
-.news_list { sRules; }
-.zhuti { sRules; }
-&lt;/pre&gt;
-
-&lt;pre class=&quot;goodcode&quot;&gt;
-推荐：
-.detail { sRules; }
-.news-list { sRules; }
-.topic { sRules; }
-&lt;/pre&gt;
-
-&lt;h1 id=&quot;name&quot;&gt;name-词汇规范&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;不依据表现形式来命名；&lt;/li&gt;
-&lt;li&gt;可根据内容来命名；&lt;/li&gt;
-&lt;li&gt;可根据功能来命名。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class=&quot;badcode&quot;&gt;
-不推荐：
-left, right, center, red, black
-&lt;/pre&gt;
-
-&lt;pre class=&quot;goodcode&quot;&gt;
-推荐：
-nav, aside, news, type, search
-&lt;/pre&gt;
-
-&lt;h1 id=&quot;name&quot;&gt;name-缩写规范&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;保证缩写后还能较为清晰保持原单词所能表述的意思；&lt;/li&gt;
-&lt;li&gt;使用业界熟知的或者约定俗成的。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class=&quot;badcode&quot;&gt;
-不推荐：
-navigation   =&gt;  navi
-header       =&gt;  head
-description  =&gt;  des
-&lt;/pre&gt;
-
-&lt;pre class=&quot;goodcode&quot;&gt;
-推荐：
-navigation   =&gt;  nav
-header       =&gt;  hd
-description  =&gt;  desc
-&lt;/pre&gt;
-
-&lt;h1 id=&quot;name&quot;&gt;name-前缀规范&lt;/h1&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;前缀&lt;/th&gt;
-&lt;th&gt;说明&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;g-&lt;/td&gt;
-&lt;td&gt;全局通用样式命名，前缀g全称为global，一旦修改将影响全站样式&lt;/td&gt;
-&lt;td&gt;g-mod&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;m-&lt;/td&gt;
-&lt;td&gt;模块命名方式&lt;/td&gt;
-&lt;td&gt;m-detail&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;ui-&lt;/td&gt;
-&lt;td&gt;组件命名方式&lt;/td&gt;
-&lt;td&gt;ui-selector&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;js-&lt;/td&gt;
-&lt;td&gt;所有用于纯交互的命名，不涉及任何样式规则。JSer拥有全部定义权限&lt;/td&gt;
-&lt;td&gt;js-switch&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;p&gt;选择器必须是以某个前缀开头&lt;/p&gt;
-
-&lt;pre class=&quot;badcode&quot;&gt;
-不推荐：
-.info { sRules; }
-.current { sRules; }
-.news { sRules; }
-&lt;/pre&gt;
-
-&lt;pre class=&quot;goodcode&quot;&gt;
-推荐：
-.m-detail .info { sRules; }
-.m-detail .current { sRules; }
-.m-detail .news { sRules; }
-&lt;/pre&gt;
-
-&lt;h1 id=&quot;id&quot;&gt;ID命名规范&lt;/h1&gt;
-
-&lt;p&gt;页面框架命名，一般具有唯一性，推荐用ID命名。推荐驼峰式命名。&lt;br&gt;
-页面结构，导航，功能都可用&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;1)页面结构&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;
-容器: container &lt;br&gt;
-页头：header &lt;br&gt;
-内容：content/container &lt;br&gt;
-页面主体：main &lt;br&gt;
-页尾：footer &lt;br&gt;
-导航：nav &lt;br&gt;
-侧栏：sidebar &lt;br&gt;
-栏目：column &lt;br&gt;
-页面外围控制整体佈局宽度：wrapper &lt;br&gt;
-左右中：left right center&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;(2)导航&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;
-导航：nav &lt;br&gt;
-主导航：mainnav &lt;br&gt;
-子导航：subnav &lt;br&gt;
-顶导航：topnav &lt;br&gt;
-边导航：sidebar &lt;br&gt;
-左导航：leftsidebar &lt;br&gt;
-右导航：rightsidebar &lt;br&gt;
-菜单：menu &lt;br&gt;
-子菜单：submenu &lt;br&gt;
-标题: title &lt;br&gt;
-摘要: summary&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;(3)功能&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;
-标志：logo &lt;br&gt;
-广告：banner &lt;br&gt;
-登陆：login &lt;br&gt;
-登录条：loginbar &lt;br&gt;
-注册：register &lt;br&gt;
-搜索：search &lt;br&gt;
-功能区：shop &lt;br&gt;
-标题：title &lt;br&gt;
-加入：joinus &lt;br&gt;
-状态：status &lt;br&gt;
-按钮：btn &lt;br&gt;
-滚动：scroll &lt;br&gt;
-标籤页：tab &lt;br&gt;
-文章列表：list &lt;br&gt;
-提示信息：msg &lt;br&gt;
-当前的: current &lt;br&gt;
-小技巧：tips &lt;br&gt;
-图标: icon &lt;br&gt;
-注释：note &lt;br&gt;
-指南：guild &lt;br&gt;
-服务：service &lt;br&gt;
-热点：hot &lt;br&gt;
-新闻：news &lt;br&gt;
-下载：download &lt;br&gt;
-投票：vote &lt;br&gt;
-合作伙伴：partner &lt;br&gt;
-友情链接：link &lt;br&gt;
-版权：copyright&lt;/p&gt;
-
-&lt;h1 id=&quot;css&quot;&gt;常用css命名规则&lt;/h1&gt;
-
-&lt;p&gt;头：header &lt;br&gt;
-内容：content/container &lt;br&gt;
-尾：footer &lt;br&gt;
-导航：nav &lt;br&gt;
-侧栏：sidebar &lt;br&gt;
-栏目：column &lt;br&gt;
-页面外围控制整体佈局宽度：wrapper &lt;br&gt;
-左右中：left right center &lt;br&gt;
-登录条：loginbar &lt;br&gt;
-标志：logo &lt;br&gt;
-广告：banner &lt;br&gt;
-页面主体：main &lt;br&gt;
-热点：hot &lt;br&gt;
-新闻：news &lt;br&gt;
-下载：download &lt;br&gt;
-子导航：subnav &lt;br&gt;
-菜单：menu &lt;br&gt;
-子菜单：submenu &lt;br&gt;
-搜索：search &lt;br&gt;
-友情链接：friendlink &lt;br&gt;
-页脚：footer &lt;br&gt;
-版权：copyright &lt;br&gt;
-滚动：scroll &lt;br&gt;
-内容：content &lt;br&gt;
-标签：tags &lt;br&gt;
-文章列表：list &lt;br&gt;
-提示信息：msg &lt;br&gt;
-小技巧：tips &lt;br&gt;
-栏目标题：title &lt;br&gt;
-加入：joinus &lt;br&gt;
-指南：guide &lt;br&gt;
-服务：service &lt;br&gt;
-注册：regsiter &lt;br&gt;
-状态：status &lt;br&gt;
-投票：vote &lt;br&gt;
-合作伙伴：partner&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;四、注意事项:&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;
-1.一律小写; &lt;br&gt;
-2.尽量用英文; &lt;br&gt;
-3.不加中槓和下划线; &lt;br&gt;
-4.尽量不缩写，除非一看就明白的单词。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;五、CSS样式表文件命名&lt;/em&gt;&lt;/strong&gt;&lt;br&gt;
-主要的 master.css &lt;br&gt;
-模块 module.css &lt;br&gt;
-基本共用 base.css &lt;br&gt;
-布局、版面 layout.css &lt;br&gt;
-主题 themes.css &lt;br&gt;
-专栏 columns.css &lt;br&gt;
-文字 font.css &lt;br&gt;
-表单 forms.css &lt;br&gt;
-补丁 mend.css &lt;br&gt;
-打印 print.css&lt;/p&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://csscomb.com/online&quot;&gt;css属性在线重排工具&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://jigsaw.w3.org/css-validator/&quot;&gt;css在线校验&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/hoosin/lite/blob/master/Standard/CSS%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.md&quot;&gt;https://github.com/hoosin/lite/blob/master/Standard/CSS%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.md&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://google.github.io/styleguide/htmlcssguide.xml#Protocol&quot;&gt;https://google.github.io/styleguide/htmlcssguide.xml#Protocol&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.h-ui.net/Hui-notes-htmlStructure.shtml&quot;&gt;http://www.h-ui.net/Hui-notes-htmlStructure.shtml&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>CSS面试题</title>
-   <link href="/css/2016/10/12/CSS-interview-questions"/>
-   <updated>2016-10-12T00:00:00+08:00</updated>
-   <id>/css/2016/10/12/CSS-interview-questions</id>
-   <content type="html">&lt;h1 id=&quot;css&quot;&gt;CSS面试题&lt;/h1&gt;
-
-&lt;h1 id=&quot;box-model&quot;&gt;box model&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;（1）有两种， IE 盒子模型、W3C 盒子模型；&lt;br&gt;
-（2）盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border)；&lt;br&gt;
-（3）区  别： IE的content部分把 border 和 padding计算了进去;&lt;/p&gt;
-
-&lt;p&gt;解决IE8及更早版本不兼容问题可以在HTML页面声明 &amp;lt;!DOCTYPE html&amp;gt;即可。&lt;/p&gt;
-
-&lt;p&gt;在 CSS 中定义的宽和高，其实都是内容区域的宽和高，padding，border 和 margin 被排除在盒子尺寸之外。&lt;/p&gt;
-
-&lt;p&gt;所以对于一个定义了宽度的盒子来说，其尺寸的计算方式：&lt;/p&gt;
-
-&lt;p&gt;实际宽度 = margin(left+right) + border(left+right) + padding(left+right) + width(定义的值)&lt;/p&gt;
-
-&lt;p&gt;实际高度 = margin(top+bottom) + border(top+bottom) + padding(top+bottom) + height(定义的值)&lt;/p&gt;
-
-&lt;p&gt;可以利用 margin 调整两个元素之间的距离，用 padding 调整内容与元素边框之间的距离（留白）。这是标准的盒模型&lt;/p&gt;
-
-&lt;h1 id=&quot;selector&quot;&gt;selector&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;CSS选择符有哪些？哪些属性可以继承？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;1.id选择器（ # myid）&lt;br&gt;
-2.类选择器（.myclassname）&lt;br&gt;
-3.标签选择器（div, h1, p）&lt;br&gt;
-4.相邻选择器（h1 + p）&lt;br&gt;
-5.子选择器（ul &amp;gt; li）&lt;br&gt;
-6.后代选择器（li a）&lt;br&gt;
-7.通配符选择器（ * ）&lt;br&gt;
-8.属性选择器（a[rel = &amp;quot;external&amp;quot;]）&lt;br&gt;
-9.伪类选择器（a:hover, li:nth-child）&lt;/p&gt;
-
-&lt;p&gt;可继承的样式： font-size font-family color, ul li dl dd dt（字体属性，列表相关）;&lt;/p&gt;
-
-&lt;p&gt;不可继承的样式：border padding margin width height (盒模型相关的属性);&lt;/p&gt;
-
-&lt;h1 id=&quot;selector-priority&quot;&gt;Selector priority&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;CSS优先级算法如何计算？
-优先级就近原则，同权重情况下样式定义最近者为准;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;载入样式以最后载入的定位为准;&lt;/p&gt;
-
-&lt;p&gt;优先级为:&lt;br&gt;
-   !important &amp;gt;  id &amp;gt; class &amp;gt; tag&lt;br&gt;
-    important 比 内联优先级高&lt;/p&gt;
-
-&lt;h1 id=&quot;pseudo-class&quot;&gt;Pseudo class&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;CSS3新增伪类有那些？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;举例：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;p:first-of-type 选择属于其父元素的首个 &amp;lt;p&amp;gt; 元素的每个 &amp;lt;p&amp;gt; 元素。
-p:last-of-type  选择属于其父元素的最后 &amp;lt;p&amp;gt; 元素的每个 &amp;lt;p&amp;gt; 元素。
-p:only-of-type  选择属于其父元素唯一的 &amp;lt;p&amp;gt; 元素的每个 &amp;lt;p&amp;gt; 元素。
-p:only-child        选择属于其父元素的唯一子元素的每个 &amp;lt;p&amp;gt; 元素。
-p:nth-child(2)  选择属于其父元素的第二个子元素的每个 &amp;lt;p&amp;gt; 元素。
-
-:after          在元素之前添加内容,也可以用来做清除浮动。
-:before         在元素之后添加内容
-:enabled        
-:disabled       控制表单控件的禁用状态。
-:checked        单选框或复选框被选中。
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;div-center&quot;&gt;div center&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如何居中div？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;水平居中：给div设置一个宽度，然后添加margin:0 auto属性&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;auto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;让绝对定位的div居中&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;absolute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;300px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;300px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;auto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;bottom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;/* 方便看效果 */&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;水平垂直居中一&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;err&quot;&gt;确定容器的宽高&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;宽&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;500&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;高&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;300&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;的层&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;设置层的外边距&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;的父元素需要设定高度，否则&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;无效&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;relative&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;/* 相对定位或绝对定位均可 */&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-    &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;300px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-150px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-250px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;      &lt;span class=&quot;c&quot;&gt;/* 外边距为自身宽高的一半 */&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;/* 方便看效果 */&lt;/span&gt;
- &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;水平垂直居中二&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt; &lt;span class=&quot;err&quot;&gt;未知容器的宽高，利用&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;属性&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;absolute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;/* 相对定位或绝对定位均可 */&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-    &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;300px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;50%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;translate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-50%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;-50%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;/* 方便看效果 */&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;水平垂直居中三&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;err&quot;&gt;利用&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;flex&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;布局&lt;/span&gt;
-&lt;span class=&quot;err&quot;&gt;实际使用时应考虑兼容性&lt;/span&gt;
-
-&lt;span class=&quot;nc&quot;&gt;.container&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-    &lt;span class=&quot;nl&quot;&gt;align-items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;        &lt;span class=&quot;c&quot;&gt;/* 垂直居中 */&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;justify-content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;    &lt;span class=&quot;c&quot;&gt;/* 水平居中 */&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;.container&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;pink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;     &lt;span class=&quot;c&quot;&gt;/* 方便看效果 */&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;display&quot;&gt;display&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;display有哪些值？说明他们的作用。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;block         块类型。默认宽度为父元素宽度，可设置宽高，换行显示。&lt;br&gt;
-none          缺省值。象行内元素类型一样显示。&lt;br&gt;
-inline        行内元素类型。默认宽度为内容宽度，不可设置宽高，同行显示。&lt;br&gt;
-inline-block  默认宽度为内容宽度，可以设置宽高，同行显示。&lt;br&gt;
-list-item     象块类型元素一样显示，并添加样式列表标记。&lt;br&gt;
-table         此元素会作为块级表格来显示。&lt;br&gt;
-inherit       规定应该从父元素继承 display 属性的值。&lt;/p&gt;
-
-&lt;h1 id=&quot;position&quot;&gt;position&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;position的值relative和absolute定位原点是？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;absolute&lt;br&gt;
-生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。&lt;br&gt;
-fixed （老IE不支持）&lt;br&gt;
-生成绝对定位的元素，相对于浏览器窗口进行定位。&lt;br&gt;
-relative&lt;br&gt;
-生成相对定位的元素，相对于其正常位置进行定位。&lt;br&gt;
-static&lt;br&gt;
-默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）。&lt;br&gt;
-inherit&lt;br&gt;
-规定从父元素继承 position 属性的值。&lt;/p&gt;
-
-&lt;h1 id=&quot;css3-new-features&quot;&gt;css3 new features&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;CSS3有哪些新特性？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）&lt;br&gt;
-圆角           （border-radius:8px）&lt;br&gt;
-多列布局        （multi-column layout）&lt;br&gt;
-阴影和反射        （Shadow\Reflect）&lt;br&gt;
-文字特效      （text-shadow、）&lt;br&gt;
-文字渲染      （Text-decoration）&lt;br&gt;
-线性渐变      （gradient）&lt;br&gt;
-旋转          （transform）&lt;br&gt;
-增加了旋转,缩放,定位,倾斜,动画，多背景&lt;br&gt;
-transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:&lt;/p&gt;
-
-&lt;h1 id=&quot;triangle&quot;&gt;Triangle&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;用纯CSS创建一个三角形的原理是什么？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;把上、左、右三条边隐藏掉（颜色设为 transparent）&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nf&quot;&gt;#demo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-  &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
-  &lt;span class=&quot;nl&quot;&gt;border-width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
-  &lt;span class=&quot;nl&quot;&gt;border-style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
-  &lt;span class=&quot;nl&quot;&gt;border-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;transparent&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;transparent&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;transparent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;12px&quot;&gt;12px&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决&lt;/p&gt;
-
-&lt;h1 id=&quot;hover&quot;&gt;hover&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}&lt;br&gt;
-记忆顺序：喜欢（L-o-V-e），讨厌（H-A-t-e）&lt;/p&gt;
-
-&lt;h1 id=&quot;li&quot;&gt;li&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;li与li之间有看不见的空白间隔是什么原因引起的？有什么解决办法？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;行框的排列会受到中间空白（回车\空格）等的影响，因为空格也属于字符,这些空白也会被应用样式，占据空间，所以会有间隔，把字符大小设为0，就没有空格了。&lt;/p&gt;
-
-&lt;h1 id=&quot;css-init&quot;&gt;css init&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;为什么要初始化CSS样式。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。&lt;/p&gt;
-
-&lt;p&gt;当然，初始化样式会对SEO有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化。&lt;/p&gt;
-
-&lt;p&gt;最简单的初始化方法： * {padding: 0; margin: 0;} （强烈不建议）&lt;/p&gt;
-
-&lt;p&gt;淘宝的样式初始化代码：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
-body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
-h1, h2, h3, h4, h5, h6{ font-size:100%; }
-address, cite, dfn, em, var { font-style:normal; }
-code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
-small{ font-size:12px; }
-ul, ol { list-style:none; }
-a { text-decoration:none; }
-a:hover { text-decoration:underline; }
-sup { vertical-align:text-top; }
-sub{ vertical-align:text-bottom; }
-legend { color:#000; }
-fieldset, img { border:0; }
-button, input, select, textarea { font-size:100%; }
-table { border-collapse:collapse; border-spacing:0; }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;css-weight&quot;&gt;css weight&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;css定义的权重&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;/&lt;em&gt;权重为1&lt;/em&gt;/&lt;br&gt;
-div{&lt;br&gt;
-}&lt;br&gt;
-/&lt;em&gt;权重为10&lt;/em&gt;/&lt;br&gt;
-.class1{&lt;br&gt;
-}&lt;br&gt;
-/&lt;em&gt;权重为100&lt;/em&gt;/&lt;br&gt;
-#id1{&lt;br&gt;
-}&lt;br&gt;
-/&lt;em&gt;权重为100+1=101&lt;/em&gt;/&lt;br&gt;
-#id1 div{&lt;br&gt;
-}&lt;br&gt;
-/&lt;em&gt;权重为10+1=11&lt;/em&gt;/&lt;br&gt;
-.class1 div{&lt;br&gt;
-}&lt;br&gt;
-/&lt;em&gt;权重为10+10+1=21&lt;/em&gt;/&lt;br&gt;
-.class1 .class2 div{&lt;br&gt;
-}&lt;/p&gt;
-
-&lt;p&gt;如果权重相同，则最后定义的样式会起作用，但是应该避免这种情况出现&lt;/p&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers&quot;&gt;https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>HTML面试题</title>
-   <link href="/html/2016/10/11/html-interview-questions"/>
-   <updated>2016-10-11T00:00:00+08:00</updated>
-   <id>/html/2016/10/11/html-interview-questions</id>
-   <content type="html">&lt;h1 id=&quot;html&quot;&gt;HTML面试题&lt;/h1&gt;
-
-&lt;h1 id=&quot;doctype&quot;&gt;Doctype&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Doctype作用？标准模式与兼容模式各有什么区别?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;（1）、&amp;lt;!DOCTYPE&amp;gt;声明位于位于HTML文档中的第一行，处于 &amp;lt;html&amp;gt; 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。&lt;/p&gt;
-
-&lt;p&gt;（2）、标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。&lt;/p&gt;
-
-&lt;h1 id=&quot;lt-doctype-html-gt&quot;&gt;&amp;lt;!DOCTYPE HTML&amp;gt;&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;HTML5 为什么只需要写 &amp;lt;!DOCTYPE HTML&amp;gt;？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;HTML5 不基于 SGML，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为（让浏览器按照它们应该的方式来运行）；&lt;/p&gt;
-
-&lt;p&gt;而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。&lt;/p&gt;
-
-&lt;h1 id=&quot;block-amp-inline&quot;&gt;block &amp;amp; inline&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;首先：CSS规范规定，每个元素都有display属性，确定该元素的类型，每个元素都有默认的display值，如div的display默认值为“block”，则为“块级”元素；span默认display属性值为“inline”，是“行内”元素。&lt;/p&gt;
-
-&lt;p&gt;（1）行内元素有：a b span img input select strong（图片，表单元素）&lt;br&gt;
-（2）块级元素有：div ul ol li dl dt dd h1 h2 h3 h4…p (标题，列表)&lt;/p&gt;
-
-&lt;p&gt;（3）常见的空元素：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;    \&amp;lt;br\&amp;gt; &amp;lt;hr&amp;gt; &amp;lt;img&amp;gt; &amp;lt;input&amp;gt; &amp;lt;link&amp;gt; &amp;lt;meta&amp;gt;
-    鲜为人知的是：
-    &amp;lt;area&amp;gt; &amp;lt;base&amp;gt; &amp;lt;col&amp;gt; &amp;lt;command&amp;gt; &amp;lt;embed&amp;gt; &amp;lt;keygen&amp;gt; &amp;lt;param&amp;gt; &amp;lt;source&amp;gt; &amp;lt;track&amp;gt; &amp;lt;wbr&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;link-import&quot;&gt;link和@import&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;页面导入样式时，使用link和@import有什么区别？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;（1）link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;&lt;/p&gt;
-
-&lt;p&gt;（2）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;&lt;/p&gt;
-
-&lt;p&gt;（3）import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;&lt;/p&gt;
-
-&lt;h1 id=&quot;browser-kernel&quot;&gt;Browser kernel&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;介绍一下你对浏览器内核的理解？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。&lt;br&gt;
-渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核。&lt;/p&gt;
-
-&lt;p&gt;JS引擎则：解析和执行javascript来实现网页的动态效果。&lt;/p&gt;
-
-&lt;p&gt;最开始渲染引擎和JS引擎并没有区分的很明确，后来JS引擎越来越独立，内核就倾向于只指渲染引擎。&lt;/p&gt;
-
-&lt;h1 id=&quot;browser-core&quot;&gt;Browser core&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;常见的浏览器内核有哪些？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]&lt;br&gt;
-Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等&lt;br&gt;
-Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]&lt;br&gt;
-Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]&lt;/p&gt;
-
-&lt;h1 id=&quot;html5-new-features&quot;&gt;html5 new features&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-&lt;li&gt;HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;绘画 canvas;&lt;br&gt;
-用于媒介回放的 video 和 audio 元素;&lt;br&gt;
-本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;&lt;br&gt;
-sessionStorage 的数据在浏览器关闭后自动删除;&lt;br&gt;
-语意化更好的内容元素，比如 article、footer、header、nav、section;&lt;br&gt;
-表单控件，calendar、date、time、email、url、search;&lt;br&gt;
-新的技术webworker, websocket, Geolocation;&lt;/p&gt;
-
-&lt;p&gt;移除的元素：&lt;br&gt;
-      纯表现的元素：basefont，big，center，font, s，strike，tt，u;&lt;br&gt;
-      对可用性产生负面影响的元素：frame，frameset，noframes；&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;支持HTML5新标签：&lt;br&gt;
- IE8/IE7/IE6支持通过document.createElement方法产生的标签，&lt;br&gt;
- 可以利用这一特性让这些浏览器支持HTML5新标签，&lt;br&gt;
- 浏览器支持新标签后，还需要添加标签默认的样式。&lt;/p&gt;
-
-&lt;p&gt;当然也可以直接使用成熟的框架、比如html5shim;&lt;br&gt;
- &amp;lt;!--[if lt IE 9]&amp;gt;&lt;br&gt;
-    &lt;code&gt;&amp;lt;script&amp;gt; src=&amp;quot;http://html5shim.googlecode.com/svn/trunk/html5.js&amp;quot;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;br&gt;
- &amp;lt;![endif]--&amp;gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;semantic&quot;&gt;语义化-Semantic&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;简述一下你对HTML语义化的理解？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;用正确的标签做正确的事情。&lt;br&gt;
-html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;&lt;br&gt;
-即使在没有样式CSS情况下也以一种文档格式显示，并且是容易阅读的;&lt;br&gt;
-搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;&lt;br&gt;
-使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。&lt;/p&gt;
-
-&lt;h1 id=&quot;offline-storage&quot;&gt;离线储存-Offline storage&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;HTML5的离线储存怎么使用，工作原理能不能解释一下？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件。&lt;br&gt;
-原理：HTML5的离线存储是基于一个新建的.appcache文件的缓存机制(不是存储技术)，通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储了下来。之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。&lt;/p&gt;
-
-&lt;p&gt;如何使用：&lt;br&gt;
-1、页面头部像下面一样加入一个manifest的属性；&lt;br&gt;
-2、在cache.manifest文件的编写离线存储的资源；&lt;br&gt;
-    CACHE MANIFEST&lt;br&gt;
-    #v0.11&lt;br&gt;
-    CACHE:&lt;br&gt;
-    js/app.js&lt;br&gt;
-    css/style.css&lt;br&gt;
-    NETWORK:&lt;br&gt;
-    resourse/logo.png&lt;br&gt;
-    FALLBACK:&lt;br&gt;
-    / /offline.html&lt;br&gt;
-3、在离线状态时，操作window.applicationCache进行需求实现。&lt;/p&gt;
-
-&lt;h1 id=&quot;application-cache&quot;&gt;application cache&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;浏览器是怎么对HTML5的离线储存资源进行管理和加载的呢？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。&lt;br&gt;
-离线的情况下，浏览器就直接使用离线存储的资源。&lt;/p&gt;
-
-&lt;h1 id=&quot;cookies&quot;&gt;cookies&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;请描述一下 cookies，sessionStorage 和 localStorage 的区别？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。&lt;br&gt;
-cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。&lt;br&gt;
-sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。&lt;/p&gt;
-
-&lt;p&gt;存储大小：&lt;br&gt;
-    cookie数据大小不能超过4k。&lt;br&gt;
-    sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。&lt;/p&gt;
-
-&lt;p&gt;有期时间：&lt;br&gt;
-    localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；&lt;br&gt;
-    sessionStorage  数据在当前浏览器窗口关闭后自动删除。&lt;br&gt;
-    cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭&lt;/p&gt;
-
-&lt;h1 id=&quot;iframe&quot;&gt;iframe&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;iframe有那些缺点？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;*iframe会阻塞主页面的Onload事件；&lt;br&gt;
-*搜索引擎的检索程序无法解读这种页面，不利于SEO;&lt;/p&gt;
-
-&lt;p&gt;*iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。&lt;/p&gt;
-
-&lt;p&gt;使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript&lt;br&gt;
-动态给iframe添加src属性值，这样可以绕开以上两个问题。&lt;/p&gt;
-
-&lt;h1 id=&quot;label&quot;&gt;Label&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Label的作用是什么？是怎么用的？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;label&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Name&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Number:&lt;span class=&quot;nt&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;“text“name=&quot;Name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Name&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;label&amp;gt;&lt;/span&gt;Date:&lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;form-close&quot;&gt;form close&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;HTML5的form如何关闭自动完成功能？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;给不想要提示的 form 或某个 input 设置为 autocomplete=off。&lt;/p&gt;
-
-&lt;h1 id=&quot;websocket&quot;&gt;WebSocket&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如何实现浏览器内多个标签页之间的通信?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;WebSocket、SharedWorker；&lt;br&gt;
-也可以调用localstorge、cookies等本地存储方式；&lt;/p&gt;
-
-&lt;p&gt;localstorge另一个浏览上下文里被添加、修改或删除时，它都会触发一个事件，&lt;br&gt;
-我们通过监听事件，控制它的值来进行页面信息通信；&lt;br&gt;
-注意quirks：Safari 在无痕模式下设置localstorge值时会抛出 QuotaExceededError 的异常；&lt;/p&gt;
-
-&lt;h1 id=&quot;websocket&quot;&gt;webSocket&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;webSocket如何兼容低浏览器？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Adobe Flash Socket 、&lt;br&gt;
-ActiveX HTMLFile (IE) 、&lt;br&gt;
-基于 multipart 编码发送 XHR 、&lt;br&gt;
-基于长轮询的 XHR&lt;/p&gt;
-
-&lt;h1 id=&quot;page-visibility&quot;&gt;Page Visibility&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;页面可见性（Page Visibility API） 可以有哪些用途？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;通过 visibilityState 的值检测页面当前是否可见，以及打开网页的时间等;&lt;br&gt;
-在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；&lt;/p&gt;
-
-&lt;h1 id=&quot;circle-click&quot;&gt;circle click&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;如何在页面上实现一个圆形的可点击区域？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;1、map+area或者svg&lt;br&gt;
-2、border-radius&lt;br&gt;
-3、纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等&lt;/p&gt;
-
-&lt;h1 id=&quot;1px&quot;&gt;1px&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;实现不使用 border 画出1px高的线，在不同浏览器的标准模式与怪异模式下都能保持一致的效果。
-&lt;code&gt;
-&amp;lt;div style=&amp;quot;height:1px;overflow:hidden;background:red&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
-&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;verification-code&quot;&gt;Verification Code&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;网页验证码是干嘛的，是为了解决什么安全问题。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;区分用户是计算机还是人的公共全自动程序。可以防止恶意破解密码、刷票、论坛灌水；&lt;br&gt;
-有效防止黑客对某一个特定注册用户用特定程序暴力破解方式进行不断的登陆尝试。&lt;/p&gt;
-
-&lt;h1 id=&quot;title&quot;&gt;title&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;title与h1的区别、b与strong的区别、i与em的区别？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；&lt;/p&gt;
-
-&lt;p&gt;strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：&lt;strong&gt;会重读，而&lt;B&gt;是展示强调内容。&lt;/p&gt;
-
-&lt;p&gt;i内容展示为斜体，em表示强调的文本；&lt;/p&gt;
-
-&lt;p&gt;Physical Style Elements -- 自然样式标签&lt;br&gt;
-b, i, u, s, pre&lt;br&gt;
-Semantic Style Elements -- 语义样式标签&lt;br&gt;
-strong, em, ins, del, code&lt;br&gt;
-应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>flex布局</title>
-   <link href="/css/2016/10/11/flex"/>
-   <updated>2016-10-11T00:00:00+08:00</updated>
-   <id>/css/2016/10/11/flex</id>
-   <content type="html">&lt;h1 id=&quot;flex&quot;&gt;flex布局&lt;/h1&gt;
-
-&lt;h1 id=&quot;demo&quot;&gt;demo&lt;/h1&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;flex布局example&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nf&quot;&gt;#wrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;justify-content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;space-between&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;justify-content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flex-end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;err&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;align-items&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;center&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;flex-direction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;column&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;auto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1000px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;300px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;red&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;footer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;40px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#f60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;.main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;160px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;.list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;margin-right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;.li1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;.li2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;flex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;.main&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;#l3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;40px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;margin-right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;wrap&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;header&amp;gt;&lt;/span&gt;头部&lt;span class=&quot;nt&quot;&gt;&amp;lt;/header&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;main&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;list li1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;1&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;list li2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;2&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;list&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;l3&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;3&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;footer&amp;gt;&lt;/span&gt;脚部&lt;span class=&quot;nt&quot;&gt;&amp;lt;/footer&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-
-
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html&quot;&gt;http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2015/07/flex-examples.html&quot;&gt;http://www.ruanyifeng.com/blog/2015/07/flex-examples.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.alloyteam.com/2015/05/xi-shuo-flexbox-dan-xing-he-zi-bu-ju/&quot;&gt;http://www.alloyteam.com/2015/05/xi-shuo-flexbox-dan-xing-he-zi-bu-ju/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://hopefuture.gitbooks.io/h5-learning/content/css3/flex/index.html&quot;&gt;https://hopefuture.gitbooks.io/h5-learning/content/css3/flex/index.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>

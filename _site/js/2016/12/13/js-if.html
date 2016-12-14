@@ -7,7 +7,7 @@
     
     
     
-    <title>babel | 彭友谊的博客</title>
+    <title>js中的if语句 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="babel">
-    <meta property="og:url" content="/js/2016/10/04/Babel">
+    <meta property="og:title" content="js中的if语句">
+    <meta property="og:url" content="/js/2016/12/13/js-if">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="babel">
+    <meta property="og:description" content="js中的if语句">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="babel">
+    <meta name="twitter:title" content="js中的if语句">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -138,14 +138,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/10/04/Babel" title="babel" itemprop="url">babel</a>
+      <a href="/js/2016/12/13/js-if" title="js中的if语句" itemprop="url">js中的if语句</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-04 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-04</time>
+    <time datetime="2016-12-13 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-12-13</time>
     
   </p>
 </header>
@@ -157,120 +157,145 @@
 		
 		</div>
 		
-		<h1 id="babel">Babel是什么</h1>
-
-<blockquote>
-<p>Babel 是一个 JavaScript 编译器，可以将ES6代码转为ES5代码，从而在现有环境执行。</p>
-</blockquote>
-
-<h1 id="babel">安装Babel</h1>
-
-<p>babel-cli 是babel解释器的客户端主程序</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install -g babel-cli
+		<h1 id="js-if">js中的if语句</h1>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">statement</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">sattement1</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">statement2</span>
+<span class="p">}</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">statement1</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">statement2</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">statement3</span>
+<span class="p">}</span>
 </code></pre></div>
-<p><strong>在项目内运行 babel-cli</strong><br>
-初始化项目</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm init
+<p>其中condition可以是任意表达式，而且对这个表达式求值的结果不一定是布尔值。<br>
+ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转化为一个布尔值。</p>
+
+<h1 id="boolean-rules">Boolean()转换rules</h1>
+
+<p>各种数据类型及其对应的转换规则。</p>
+
+<table><thead>
+<tr>
+<th>数据类型</th>
+<th>转换为true的值</th>
+<th>转换为false的值</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Boolean</td>
+<td>true</td>
+<td>false</td>
+</tr>
+<tr>
+<td>Undefined</td>
+<td>不适用</td>
+<td>undefined</td>
+</tr>
+<tr>
+<td>String</td>
+<td>任何非空字符串</td>
+<td>&quot;&quot;(空字符串)</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>任何非零数字值（包括负数、正负无穷大）</td>
+<td>0和NaN</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>任何对象(包括{ }、[ ] )</td>
+<td>null</td>
+</tr>
+<tr>
+<td>Function</td>
+<td>all(所有的)</td>
+<td>no(无)</td>
+</tr>
+</tbody></table>
+
+<p>Boolean()转换未声明的变量会报错。</p>
+
+<h1 id="boolean-demo">Boolean()转换的demo</h1>
+
+<h2 id="boolean">Boolean类型</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">a</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">b</span><span class="p">));</span> <span class="c1">// false</span>
 </code></pre></div>
-<p>安装babel-cli</p>
-<div class="highlight"><pre><code class="language-" data-lang="">npm install --save-dev babel-cli
+<h2 id="undefined">Undefined类型</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>  
+<span class="kd">var</span> <span class="nx">d</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">c</span><span class="p">));</span> <span class="c1">// false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">d</span><span class="p">));</span> <span class="c1">// false</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span> <span class="c1">// Error: Uncaught ReferenceError: x is not defined</span>
 </code></pre></div>
-<p>安装ec2015的转化器,因为ec2015语法并不是所有浏览器都兼容</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install --save-dev babel-preset-es2015
+<h2 id="string">String类型</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="s2">"a"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">str2</span> <span class="o">=</span> <span class="s2">" "</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">str3</span> <span class="o">=</span> <span class="s2">"false"</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">str4</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">str1</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">str2</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">str3</span><span class="p">));</span> <span class="c1">// true</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">str4</span><span class="p">));</span> <span class="c1">// false</span>
 </code></pre></div>
-<p>安装react转码规则</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install --save-dev babel-preset-react
+<h2 id="number">Number类型</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">num2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">num3</span> <span class="o">=</span> <span class="kc">Infinity</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">num4</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Infinity</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">num5</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">num6</span> <span class="o">=</span> <span class="kc">NaN</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num1</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num2</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num3</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num4</span><span class="p">));</span> <span class="c1">// true</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num5</span><span class="p">));</span> <span class="c1">// false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num6</span><span class="p">));</span> <span class="c1">// false</span>
 </code></pre></div>
-<h1 id="babelrc">配置文件.babelrc</h1>
+<h2 id="object">Object类型</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s2">"peng"</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">obj3</span> <span class="o">=</span> <span class="p">[];</span>
 
-<p>然后在项目的根目录下新建一个 .babelrc 文件，写入:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="p">{</span><span class="w">
-    </span><span class="nt">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"es2015"</span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><em>notice</em></strong> </p>
+<span class="kd">var</span> <span class="nx">obj4</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
 
-<blockquote>
-<p>所有Babel工具和模块的使用，都必须先写好.babelrc 。</p>
-</blockquote>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">obj1</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">obj2</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">obj3</span><span class="p">));</span> <span class="c1">// true</span>
 
-<p>此时babel已安装好，可以使用bable命令对文件进行转码输出了</p>
-
-<h1 id="babel">babel基本用法</h1>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># 转码结果输出到标准输出</span>
-<span class="gp">$ </span>babel example.js
-
-<span class="c"># 转码结果写入一个文件</span>
-<span class="c"># --out-file 或 -o 参数指定输出文件</span>
-<span class="gp">$ </span>babel example.js --out-file compiled.js
-<span class="c"># 或者</span>
-<span class="gp">$ </span>babel example.js -o compiled.js
-
-<span class="c"># 整个目录转码,把src文件中所有的文件转码到lib文件夹中对应文件名下，</span>
-<span class="c"># --out-dir 或 -d 参数指定输出目录</span>
-<span class="gp">$ </span>babel src --out-dir lib
-<span class="c"># 或者</span>
-<span class="gp">$ </span>babel src -d lib
-
-<span class="c"># -s 参数生成source map文件</span>
-<span class="gp">$ </span>babel src -d lib -s
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">obj4</span><span class="p">));</span> <span class="c1">// false</span>
 </code></pre></div>
-<p>延伸babel在项目中的使用<br>
-修改package.json</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">//...</span><span class="w">
-  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"babel src -d lib"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"babel-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"babel-preset-es2015"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"babel-preset-react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>转码的时候，就执行下面的命令。</p>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>npm run build
-</code></pre></div>
-<h1 id="babel-demo">babel demo</h1>
+<h2 id="function">Function类型</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">f1</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
+<span class="kd">var</span> <span class="nx">f2</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">f2</span><span class="p">(){};</span>
+<span class="kd">var</span> <span class="nx">f3</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="kc">false</span> <span class="p">};</span>
 
-<p>Project-file-name/es2015/index.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
-<p>我们来利用babel转化一下，命令行执行：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ babel ./es2015/index.js --out-file ./es2015/index-build.js
-</code></pre></div>
-<p>index-build.js就是转换后的js：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">"use strict"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">f1</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">f2</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">f3</span><span class="p">));</span> <span class="c1">// true</span>
 
-<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
-<h1 id=">浏览器环境</h1>
-
-<p>通过安装5.x版本的babel-core模块获取。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install babel-core@5
-</code></pre></div>
-<p>运行上面的命令以后，就可以在当前目录的node_modules/babel-core/子目录里面，找到babel的浏览器版本browser.js（未精简）和browser.min.js（已精简）<br>
-然后，将下面的代码插入网页。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;script src="node_modules/babel-core/browser.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/babel"&gt;
-// Your ES6 code
-&lt;/script&gt;
-</code></pre></div>
-<h1 id="babel-es6-to-es5">babel 在线转换ES6 to ES5</h1>
-
-<p><a href="https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=">https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=</a></p>
-
-<h1 id="more">更多-more</h1>
-
-<ul>
-<li><a href="http://babeljs.cn/">http://babeljs.cn/</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2016/01/babel.html">http://www.ruanyifeng.com/blog/2016/01/babel.html</a></li>
-</ul>
-  
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">f3</span><span class="p">()));</span> <span class="c1">// false</span>
+</code></pre></div>  
 	</div>
 	<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -300,7 +325,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#babel">babel</a>
+  <a href="/tags/#js函数">js函数</a>
   
   </div>
 
@@ -310,7 +335,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/10/04/Babel" data-title="babel | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2016/12/13/js-if" data-title="js中的if语句 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -322,27 +347,19 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2016/10/03/requirejs&&seajs" title="requirejs和seajs的区别">
+ <a href="/js/2016/12/09/js-closure" title="js中的闭包">
   <strong>上一篇：</strong><br/>
   <span>
-  requirejs和seajs的区别</span>
+  js中的闭包</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/js/2016/10/05/ES6"  title="ES6">
- <strong>下一篇：</strong><br/> 
- <span>ES6
-</span>
-</a>
-</div>
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-10-04-Babel.md" data-title="babel" data-url="/js/2016/10/04/Babel"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-12-13-js-if.md" data-title="js中的if语句" data-url="/js/2016/12/13/js-if"></div>
 </section>
 
 

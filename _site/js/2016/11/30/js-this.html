@@ -488,6 +488,39 @@ p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里�
 
 <p>4.嵌套函数中的this不会继承上层函数的this，如果需要，可以用一个变量保存上层函数的this。</p>
 
+<h2 id="this">番外篇一些关于this的笔试题</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"The Window"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span>
+<span class="err">　　</span><span class="na">name</span> <span class="p">:</span> <span class="s2">"My Object"</span><span class="p">,</span>
+<span class="err">　　</span><span class="na">getNameFunc</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+<span class="err">　　　　</span><span class="k">return</span> <span class="kd">function</span><span class="p">(){</span>
+<span class="err">　　　　　　</span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+<span class="err">　　　　</span><span class="p">};</span>
+<span class="err">　　</span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">object</span><span class="p">.</span><span class="nx">getNameFunc</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">getNameFunc</span><span class="p">()());</span>  <span class="c1">// The Window</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">());</span>  <span class="c1">// The Window</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"The Window"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span>
+<span class="err">　　</span><span class="na">name</span> <span class="p">:</span> <span class="s2">"My Object"</span><span class="p">,</span>
+<span class="err">　　</span><span class="na">getNameFunc</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+         <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+<span class="err">　　　　</span><span class="k">return</span> <span class="kd">function</span><span class="p">(){</span>
+<span class="err">　　　　　　</span><span class="k">return</span> <span class="nx">that</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+<span class="err">　　　　</span><span class="p">};</span>
+<span class="err">　　</span><span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">object</span><span class="p">.</span><span class="nx">getNameFunc</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">getNameFunc</span><span class="p">()());</span>  <span class="c1">// My Object</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">());</span>  <span class="c1">// My Object</span>
+</code></pre></div>
 <h1 id="more">更多-more</h1>
 
 <ul>
@@ -601,7 +634,7 @@ p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里�
 		  
 		
 		  
-			<li><a href="/categories/#Js" title="Js">Js<sup>14</sup></a></li>
+			<li><a href="/categories/#Js" title="Js">Js<sup>18</sup></a></li>
 		  
 		
 		  
@@ -727,6 +760,10 @@ p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里�
 		
 			
 				<li><a href="/tags/#this" title="this">this<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#js函数" title="js函数">js函数<sup>4</sup></a></li>
 			
 		
 		</ul>

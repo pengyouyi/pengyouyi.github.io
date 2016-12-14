@@ -7,7 +7,7 @@
     
     
     
-    <title>babel | 彭友谊的博客</title>
+    <title>js中的函数定义 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="babel">
-    <meta property="og:url" content="/js/2016/10/04/Babel">
+    <meta property="og:title" content="js中的函数定义">
+    <meta property="og:url" content="/js/2016/12/08/js-function-definition">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="babel">
+    <meta property="og:description" content="js中的函数定义">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="babel">
+    <meta name="twitter:title" content="js中的函数定义">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -138,14 +138,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/10/04/Babel" title="babel" itemprop="url">babel</a>
+      <a href="/js/2016/12/08/js-function-definition" title="js中的函数定义" itemprop="url">js中的函数定义</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-04 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-04</time>
+    <time datetime="2016-12-08 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-12-08</time>
     
   </p>
 </header>
@@ -157,119 +157,28 @@
 		
 		</div>
 		
-		<h1 id="babel">Babel是什么</h1>
+		<h1 id="js">js中的函数定义</h1>
 
-<blockquote>
-<p>Babel 是一个 JavaScript 编译器，可以将ES6代码转为ES5代码，从而在现有环境执行。</p>
-</blockquote>
-
-<h1 id="babel">安装Babel</h1>
-
-<p>babel-cli 是babel解释器的客户端主程序</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install -g babel-cli
+<h2 id="declaration">函数声明-declaration</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="kr">double</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>   
+<span class="p">}</span>
 </code></pre></div>
-<p><strong>在项目内运行 babel-cli</strong><br>
-初始化项目</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm init
+<h2 id="expression">函数表达式-expression</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="kr">double</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span> <span class="nx">x</span><span class="p">;</span> 
+<span class="p">}</span>
 </code></pre></div>
-<p>安装babel-cli</p>
-<div class="highlight"><pre><code class="language-" data-lang="">npm install --save-dev babel-cli
+<h2 id="functiona">Functiona构造函数</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">"num1"</span><span class="p">,</span><span class="s2">"num2"</span><span class="p">,</span><span class="s2">"return num1 + num2"</span><span class="p">);</span> <span class="c1">// 不推荐使用</span>
 </code></pre></div>
-<p>安装ec2015的转化器,因为ec2015语法并不是所有浏览器都兼容</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install --save-dev babel-preset-es2015
-</code></pre></div>
-<p>安装react转码规则</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install --save-dev babel-preset-react
-</code></pre></div>
-<h1 id="babelrc">配置文件.babelrc</h1>
+<h2 id="declaretion-amp-expression">declaretion &amp; expression</h2>
 
-<p>然后在项目的根目录下新建一个 .babelrc 文件，写入:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="p">{</span><span class="w">
-    </span><span class="nt">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"es2015"</span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><em>notice</em></strong> </p>
+<p>the differcence between a function declaretion and a function expression</p>
 
-<blockquote>
-<p>所有Babel工具和模块的使用，都必须先写好.babelrc 。</p>
-</blockquote>
-
-<p>此时babel已安装好，可以使用bable命令对文件进行转码输出了</p>
-
-<h1 id="babel">babel基本用法</h1>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># 转码结果输出到标准输出</span>
-<span class="gp">$ </span>babel example.js
-
-<span class="c"># 转码结果写入一个文件</span>
-<span class="c"># --out-file 或 -o 参数指定输出文件</span>
-<span class="gp">$ </span>babel example.js --out-file compiled.js
-<span class="c"># 或者</span>
-<span class="gp">$ </span>babel example.js -o compiled.js
-
-<span class="c"># 整个目录转码,把src文件中所有的文件转码到lib文件夹中对应文件名下，</span>
-<span class="c"># --out-dir 或 -d 参数指定输出目录</span>
-<span class="gp">$ </span>babel src --out-dir lib
-<span class="c"># 或者</span>
-<span class="gp">$ </span>babel src -d lib
-
-<span class="c"># -s 参数生成source map文件</span>
-<span class="gp">$ </span>babel src -d lib -s
-</code></pre></div>
-<p>延伸babel在项目中的使用<br>
-修改package.json</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">//...</span><span class="w">
-  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"babel src -d lib"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"babel-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"babel-preset-es2015"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"babel-preset-react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>转码的时候，就执行下面的命令。</p>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>npm run build
-</code></pre></div>
-<h1 id="babel-demo">babel demo</h1>
-
-<p>Project-file-name/es2015/index.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
-<p>我们来利用babel转化一下，命令行执行：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ babel ./es2015/index.js --out-file ./es2015/index-build.js
-</code></pre></div>
-<p>index-build.js就是转换后的js：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">"use strict"</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
-<h1 id=">浏览器环境</h1>
-
-<p>通过安装5.x版本的babel-core模块获取。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install babel-core@5
-</code></pre></div>
-<p>运行上面的命令以后，就可以在当前目录的node_modules/babel-core/子目录里面，找到babel的浏览器版本browser.js（未精简）和browser.min.js（已精简）<br>
-然后，将下面的代码插入网页。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;script src="node_modules/babel-core/browser.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/babel"&gt;
-// Your ES6 code
-&lt;/script&gt;
-</code></pre></div>
-<h1 id="babel-es6-to-es5">babel 在线转换ES6 to ES5</h1>
-
-<p><a href="https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=">https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=</a></p>
-
-<h1 id="more">更多-more</h1>
-
-<ul>
-<li><a href="http://babeljs.cn/">http://babeljs.cn/</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2016/01/babel.html">http://www.ruanyifeng.com/blog/2016/01/babel.html</a></li>
-</ul>
+<p>函数声明作为一种声明，当然会在预编译阶级有所动作（声明提前），而函数表达式则不会。<br>
+另一个区别是，函数声明不能直接加一对括号让它们执行。<br>
+第三个区别，表达式还可以继续细分，表达式是由常量，变量，操作符，函数等组合而成，计算以后返回一个结果值，至少也会返回一个undefined。</p>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -300,7 +209,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#babel">babel</a>
+  <a href="/tags/#js函数">js函数</a>
   
   </div>
 
@@ -310,7 +219,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/10/04/Babel" data-title="babel | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2016/12/08/js-function-definition" data-title="js中的函数定义 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -322,18 +231,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2016/10/03/requirejs&&seajs" title="requirejs和seajs的区别">
+ <a href="/js/2016/12/08/js-anonymous-function" title="js中的匿名函数">
   <strong>上一篇：</strong><br/>
   <span>
-  requirejs和seajs的区别</span>
+  js中的匿名函数</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/js/2016/10/05/ES6"  title="ES6">
+<a href="/js/2016/12/09/js-closure"  title="js中的闭包">
  <strong>下一篇：</strong><br/> 
- <span>ES6
+ <span>js中的闭包
 </span>
 </a>
 </div>
@@ -342,7 +251,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-10-04-Babel.md" data-title="babel" data-url="/js/2016/10/04/Babel"></div>
+	<div class="ds-thread" data-thread-key="_posts/2016-12-08-js-function-definition.md" data-title="js中的函数定义" data-url="/js/2016/12/08/js-function-definition"></div>
 </section>
 
 
