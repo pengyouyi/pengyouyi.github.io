@@ -1,5 +1,5 @@
 
- <!DOCTYPE HTML>
+        <!DOCTYPE HTML>
 <html >
 <head>
   <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     
     
     
-    <title>babel | 彭友谊的博客</title>
+    <title>彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -20,14 +20,14 @@
 
     <meta name="description" content="page.description">
     
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="website">
     
-    <meta property="og:title" content="babel">
-    <meta property="og:url" content="/js/2016/10/04/Babel">
+    <meta property="og:title" content="">
+    <meta property="og:url" content="/page3/">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="babel">
+    <meta property="og:description" content="">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="babel">
+    <meta name="twitter:title" content="">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -129,150 +129,42 @@
 
     </header>
     <div id="container">
-      
+      <div id="main">
 
-
-<div id="main" class="post" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
-	<header class="article-info clearfix">
+  
+  
+  
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/10/04/Babel" title="babel" itemprop="url">babel</a>
+      <a href="/mac/2016/08/30/mac-apache" title="mac 配置Apache" itemprop="url">mac 配置Apache</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-04 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-04</time>
+    <time datetime="2016-08-30 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-08-30</time>
     
   </p>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article toc-content">
-		
-			<!--<%- toc(item.content) %>-->
-		
-		</div>
-		
-		<h1 id="babel">Babel是什么</h1>
+    <div class="article-content">
+        
+        <h2 id="mac-apache">MAC下配置Apache</h2>
 
-<blockquote>
-<p>Babel 是一个 JavaScript 编译器，可以将ES6代码转为ES5代码，从而在现有环境执行。</p>
-</blockquote>
-
-<h1 id="babel">安装Babel</h1>
-
-<p>babel-cli 是babel解释器的客户端主程序</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install -g babel-cli
-</code></pre></div>
-<p><strong>在项目内运行 babel-cli</strong><br>
-初始化项目</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm init
-</code></pre></div>
-<p>安装babel-cli</p>
-<div class="highlight"><pre><code class="language-" data-lang="">npm install --save-dev babel-cli
-</code></pre></div>
-<p>安装ec2015的转化器,因为ec2015语法并不是所有浏览器都兼容</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install --save-dev babel-preset-es2015
-</code></pre></div>
-<p>安装react转码规则</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install --save-dev babel-preset-react
-</code></pre></div>
-<h1 id="babelrc">配置文件.babelrc</h1>
-
-<p>然后在项目的根目录下新建一个 .babelrc 文件，写入:</p>
-<div class="highlight"><pre><code class="language-" data-lang=""><span class="p">{</span><span class="w">
-    </span><span class="nt">"presets"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"es2015"</span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p><strong><em>notice</em></strong> </p>
-
-<blockquote>
-<p>所有Babel工具和模块的使用，都必须先写好.babelrc 。</p>
-</blockquote>
-
-<p>此时babel已安装好，可以使用bable命令对文件进行转码输出了</p>
-
-<h1 id="babel">babel基本用法</h1>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c"># 转码结果输出到标准输出</span>
-<span class="gp">$ </span>babel example.js
-
-<span class="c"># 转码结果写入一个文件</span>
-<span class="c"># --out-file 或 -o 参数指定输出文件</span>
-<span class="gp">$ </span>babel example.js --out-file compiled.js
-<span class="c"># 或者</span>
-<span class="gp">$ </span>babel example.js -o compiled.js
-
-<span class="c"># 整个目录转码,把src文件中所有的文件转码到lib文件夹中对应文件名下，</span>
-<span class="c"># --out-dir 或 -d 参数指定输出目录</span>
-<span class="gp">$ </span>babel src --out-dir lib
-<span class="c"># 或者</span>
-<span class="gp">$ </span>babel src -d lib
-
-<span class="c"># -s 参数生成source map文件</span>
-<span class="gp">$ </span>babel src -d lib -s
-</code></pre></div>
-<p>延伸babel在项目中的使用<br>
-修改package.json</p>
-<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
-  </span><span class="err">//...</span><span class="w">
-  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"babel src -d lib"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"babel-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"babel-preset-es2015"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"babel-preset-react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<p>转码的时候，就执行下面的命令。</p>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">$ </span>npm run build
-</code></pre></div>
-<h1 id="babel-demo">babel demo</h1>
-
-<p>Project-file-name/es2015/index.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
-<p>我们来利用babel转化一下，命令行执行：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ babel ./es2015/index.js --out-file ./es2015/index-build.js
-</code></pre></div>
-<p>index-build.js就是转换后的js：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="s2">"use strict"</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
-<h1 id=">浏览器环境</h1>
-
-<p>通过安装5.x版本的babel-core模块获取。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm install babel-core@5
-</code></pre></div>
-<p>运行上面的命令以后，就可以在当前目录的node_modules/babel-core/子目录里面，找到babel的浏览器版本browser.js（未精简）和browser.min.js（已精简）<br>
-然后，将下面的代码插入网页。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;script src="node_modules/babel-core/browser.min.js"&gt;&lt;/script&gt;
-&lt;script type="text/babel"&gt;
-// Your ES6 code
-&lt;/script&gt;
-</code></pre></div>
-<h1 id="babel-es6-to-es5">babel 在线转换ES6 to ES5</h1>
-
-<p><a href="https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=">https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=</a></p>
-
-<h1 id="more">更多-more</h1>
-
-<ul>
-<li><a href="http://babeljs.cn/">http://babeljs.cn/</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2016/01/babel.html">http://www.ruanyifeng.com/blog/2016/01/babel.html</a></li>
-</ul>
-  
-	</div>
-	<footer class="article-footer clearfix">
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/mac/2016/08/30/mac-apache#more">Read More</a>
+          
+       </p>
+    </div>
+    
+    <footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
@@ -286,7 +178,7 @@
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#Js">Js</a>
+  <a class="article-category-link" href="/categories/#mac">mac</a>
   
 </div>
 
@@ -300,7 +192,9 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#babel">babel</a>
+  <a href="/tags/#mac">mac</a>
+  
+  <a href="/tags/#Apache">Apache</a>
   
   </div>
 
@@ -308,59 +202,50 @@
 
 
 
-	<div class="article-share" id="share">
-	
-	  <div data-url="/js/2016/10/04/Babel" data-title="babel | 彭友谊的博客" data-tsina="" class="share clearfix">
-	  </div>
-	
-	</div>
 
-
-</footer>   
-	</article>
+<div class="comments-count">
 	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/js/2016/10/03/requirejs&&seajs" title="requirejs和seajs的区别">
-  <strong>上一篇：</strong><br/>
-  <span>
-  requirejs和seajs的区别</span>
-</a>
+	  	<span></span>
+		<a href="/mac/2016/08/30/mac-apache#comments" class="ds-thread-count comments-count-link" data-thread-key="_posts/2016-08-30-mac-apache.md" data-count-type="comments">&nbsp;</a>
+	
 </div>
 
+</footer>
+    </article>
 
-<div class="next">
-<a href="/js/2016/10/05/ES6"  title="ES6">
- <strong>下一篇：</strong><br/> 
- <span>ES6
-</span>
-</a>
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+  <nav id="page-nav" class="clearfix">
+    
+    <a class="extend prev" rel="prev" href="/page2"><span></span>Prev</a>
+    
+    
+    <a class="page-number" href="/">1</a>
+    
+    
+    
+    <a class="page-number" href="/page2">2</a>
+    
+    
+    
+    <span class="page-number current">3</span>
+    
+    
+     
+  </nav>
+  </nav>
+
 </div>
-
-</nav>
-
-	
-<section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="_posts/2016-10-04-Babel.md" data-title="babel" data-url="/js/2016/10/04/Babel"></div>
-</section>
-
-
-</div>  
-
-
-
 
 
       
       
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
-
-  <div id="toc" class="toc-aside toc-content">
- 
- <!--<%- toc(item.content) %>-->
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
@@ -631,11 +516,6 @@ $(document).ready(function(){
   });
   
   
-        getSize();
-        if (myWidth >= 1024) {
-          c.click();
-        }
-  
   
   $(window).resize(function(){
     getSize(); 
@@ -646,100 +526,12 @@ $(document).ready(function(){
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
       
-      $('#toc.toc-aside').css('display', 'none');
-      
     }
   });
 });
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.toc-content').toc();
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
 
-
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-  
-  $('.article-share-qrcode').click(function(){
-    var imgSrc = $('#qrcode-pic').attr('data-src');
-    $('#qrcode-pic').attr('src', imgSrc);
-    $('#qrcode-pic').load(function(){
-        $('.qrcode strong').text(' ');
-    });
-  });
-/*
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      //$('.hoverqrcode').hide();
-  });
-  */
-});   
-</script>
 
 
 
@@ -830,5 +622,5 @@ $(document).ready(function(){
 
 <!-- Tiny_search End -->
   </body>
-</html>
+ </html>
 
