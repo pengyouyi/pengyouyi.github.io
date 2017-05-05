@@ -4,7 +4,7 @@ title: mac 配置Apache
 tags:
 - mac
 - Apache
-categories: mac
+categories: MAC
 description: MAC下配置Apache
 ---
 ## MAC下配置Apache

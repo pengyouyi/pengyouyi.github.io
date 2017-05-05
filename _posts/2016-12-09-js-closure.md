@@ -3,7 +3,7 @@ layout: post
 title: js中的闭包
 tags:
 - js函数
-categories: Js
+categories: JS
 description: js中的闭包
 ---
 

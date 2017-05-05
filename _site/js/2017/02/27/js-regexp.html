@@ -483,7 +483,7 @@ Found ab. Next match starts at 9
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result1</span><span class="p">);</span> <span class="c1">// ["hello", index: 0, input: "hello world"]</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result1</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// hello</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result1</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span> <span class="c1">// 6 </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result1</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span> <span class="c1">// 0</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result2</span><span class="p">);</span> <span class="c1">// null</span>
 </code></pre></div>
@@ -508,6 +508,101 @@ Found ab. Next match starts at 9
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="c1">// 1</span>
 </code></pre></div>
 <h2 id="replace">replace</h2>
+
+<p><strong>定义和用法</strong><br>
+replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
+
+<p><strong>语法</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">regexp</span><span class="o">|</span><span class="nx">substr</span><span class="p">,</span> <span class="nx">newSubstr</span><span class="o">|</span><span class="kd">function</span><span class="p">)</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">regexp</span><span class="o">|</span><span class="nx">substr</span><span class="p">,</span> <span class="nx">newSubStr</span><span class="o">|</span><span class="kd">function</span><span class="p">[,</span> <span class="nx">flags</span><span class="p">]);</span>
+</code></pre></div>
+<p><strong>参数介绍：</strong><br>
+<strong>1)参数一：</strong><br>
+ a)regexp:一个 RegExp 对象.该正则所匹配的内容会被第二个参数的返回值替换掉. <br>
+ b)substr：被替换掉的一个 String. <br>
+<strong>2)参数二：</strong></p>
+
+<ul>
+<li><strong>a) newSubStr：</strong>替换掉第一个参数在原字符串中的匹配部分.该字符串中可以内插一些特殊的变量名. 比如</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>字符</th>
+<th>替换文本</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>$1、$2、...、$99</td>
+<td>与 regexp 中的第 1 到第 99 个子表达式相匹配的文本。</td>
+</tr>
+<tr>
+<td>$&amp;</td>
+<td>与 regexp 相匹配的子串。</td>
+</tr>
+<tr>
+<td>$`</td>
+<td>位于匹配子串左侧的文本。</td>
+</tr>
+<tr>
+<td>$&#39;</td>
+<td>位于匹配子串右侧的文本。</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>直接量符号。</td>
+</tr>
+</tbody></table>
+
+<ul>
+<li><strong>b) function(str,$1[,$2,...,$99],offset,s):</strong>创建新的子串，参数解释如下</li>
+</ul>
+
+<p>str:匹配的子串<br>
+ $1...99:第n个括号子匹配字符串,提供替换的第一个参数是一个正则表达式对象。(对应于$1、$2等。)<br>
+ offset:匹配子串在字符串中的开始位置(从0开始)，例如&quot;abcd&quot;,正则/bc/,offset = 1.<br>
+ s:当前操作的字符串<br>
+<strong>3)参数三(可选)：</strong><br>
+flags:指定正则表达式的匹配模式，可选值：<br>
+g:全局替换<br>
+i:忽略大小写<br>
+m:多行替换<br>
+y:?</p>
+
+<p>str.replace(regexp, newSubstr)</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">'Twas the night before Xmas...'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">newstr</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/xmas/i</span><span class="p">,</span> <span class="s1">'Christmas'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newstr</span><span class="p">);</span>  <span class="c1">// Twas the night before Christmas...</span>
+</code></pre></div>
+<p>str.replace(regexp, function(match))</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s2">"The quick brown fox jumped over the lazy dog."</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">pattern</span> <span class="o">=</span> <span class="sr">/quick|brown|lazy/ig</span><span class="p">;</span>
+
+<span class="nx">a</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span> <span class="nx">pattern</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">replacer</span><span class="p">(</span><span class="nx">match</span><span class="p">){</span>
+    <span class="k">return</span> <span class="nx">match</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+<span class="p">}</span> <span class="p">);</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">test</span><span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">string</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/-</span><span class="se">([\w])</span><span class="sr">/gi</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">match</span><span class="p">){</span>
+        <span class="k">return</span> <span class="s2">"**"</span><span class="o">+</span><span class="nx">match</span><span class="o">+</span><span class="s2">"##"</span><span class="p">;</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">string</span> <span class="o">=</span> <span class="s2">"margin-left-right"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test</span><span class="p">(</span><span class="nx">string</span><span class="p">));</span> <span class="c1">// margin**-l##eft**-r##ight</span>
+</code></pre></div>
+<p>str.replace(regexp, function(match,$1...))</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">replacer</span><span class="p">(</span><span class="nx">match</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">,</span> <span class="nx">p3</span><span class="p">,</span> <span class="nx">offset</span><span class="p">,</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// p1 is nondigits, p2 digits, and p3 non-alphanumerics</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">,</span> <span class="nx">p3</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">' - '</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">newString</span> <span class="o">=</span> <span class="s1">'abc12345#$*%'</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">([^\d]</span><span class="sr">*</span><span class="se">)(\d</span><span class="sr">*</span><span class="se">)([^\w]</span><span class="sr">*</span><span class="se">)</span><span class="sr">/</span><span class="p">,</span> <span class="nx">replacer</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newString</span><span class="p">);</span>  <span class="c1">// abc - 12345 - #$*%</span>
+</code></pre></div>
+<ul>
+<li><a href="http://www.w3school.com.cn/jsref/jsref_replace.asp">http://www.w3school.com.cn/jsref/jsref_replace.asp</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace</a></li>
+<li><a href="http://blog.csdn.net/cuew1987/article/details/17528653">http://blog.csdn.net/cuew1987/article/details/17528653</a></li>
+</ul>
 
 <h2 id="search">search</h2>
 
@@ -563,7 +658,7 @@ Found ab. Next match starts at 9
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#js">js</a>
+  <a class="article-category-link" href="/categories/#JS">JS</a>
   
 </div>
 
@@ -607,6 +702,14 @@ Found ab. Next match starts at 9
 </div>
 
 
+<div class="next">
+<a href="/js/2017/03/01/js-constructor"  title="constructor属性">
+ <strong>下一篇：</strong><br/> 
+ <span>constructor属性
+</span>
+</a>
+</div>
+
 </nav>
 
 	
@@ -642,31 +745,19 @@ Found ab. Next match starts at 9
 		<ul>
 		
 		  
-			<li><a href="/categories/#mac" title="mac">mac<sup>4</sup></a></li>
+			<li><a href="/categories/#MAC" title="MAC">MAC<sup>4</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Js" title="Js">Js<sup>21</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>30</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#design" title="design">design<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/#pattern" title="pattern">pattern<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/#CSS" title="CSS">CSS<sup>14</sup></a></li>
+			<li><a href="/categories/#CSS" title="CSS">CSS<sup>16</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/#HTML" title="HTML">HTML<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/#js" title="js">js<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -703,7 +794,7 @@ Found ab. Next match starts at 9
 			
 		
 			
-				<li><a href="/tags/#模块加载器" title="模块加载器">模块加载器<sup>1</sup></a></li>
+				<li><a href="/tags/#构建工具" title="构建工具">构建工具<sup>1</sup></a></li>
 			
 		
 			
@@ -755,11 +846,11 @@ Found ab. Next match starts at 9
 			
 		
 			
-				<li><a href="/tags/#布局" title="布局">布局<sup>5</sup></a></li>
+				<li><a href="/tags/#布局" title="布局">布局<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#js事件" title="js事件">js事件<sup>1</sup></a></li>
+				<li><a href="/tags/#js事件" title="js事件">js事件<sup>2</sup></a></li>
 			
 		
 			
@@ -779,7 +870,7 @@ Found ab. Next match starts at 9
 			
 		
 			
-				<li><a href="/tags/#js函数" title="js函数">js函数<sup>6</sup></a></li>
+				<li><a href="/tags/#js函数" title="js函数">js函数<sup>9</sup></a></li>
 			
 		
 			
@@ -788,6 +879,14 @@ Found ab. Next match starts at 9
 		
 			
 				<li><a href="/tags/#正则" title="正则">正则<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#jQuery" title="jQuery">jQuery<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#HTTP" title="HTTP">HTTP<sup>1</sup></a></li>
 			
 		
 		</ul>

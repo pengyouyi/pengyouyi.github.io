@@ -3,7 +3,7 @@ layout: post
 title: handlebars.js初学
 tags:
 - handlebars
-categories: Js
+categories: JS
 description: handlebars.js初学
 ---
 # handlebars.js初学

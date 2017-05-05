@@ -3,7 +3,7 @@ layout: post
 title: js事件委托
 tags:
 - 性能
-categories: Js
+categories: JS
 description: js事件委托
 ---
 

@@ -4,7 +4,7 @@ title: requirejs和seajs的区别
 tags:
 - requirejs
 - seajs
-categories: Js
+categories: JS
 description: requirejs和seajs的区别
 ---
 # requirejs和seajs的区别

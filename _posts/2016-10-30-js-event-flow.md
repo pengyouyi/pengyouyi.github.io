@@ -3,7 +3,7 @@ layout: post
 title: js事件机制
 tags:
 - js事件
-categories: Js
+categories: JS
 description: js事件机制
 ---
 

@@ -3,7 +3,7 @@ layout: post
 title: js中的call 、apply 、bind
 tags:
 - js函数
-categories: Js
+categories: JS
 description: js中的call 、apply 、bind
 ---
 

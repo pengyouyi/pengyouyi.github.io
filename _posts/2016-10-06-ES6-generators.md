@@ -3,7 +3,7 @@ layout: post
 title: ES6-Generators
 tags:
 - ES6
-categories: Js
+categories: JS
 description: ES6新特性Generators
 ---
 

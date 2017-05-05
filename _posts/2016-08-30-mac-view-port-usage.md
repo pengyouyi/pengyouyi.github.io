@@ -4,7 +4,7 @@ title: mac查看端口占用情况
 tags:
 - mac
 - 端口使用
-categories: mac
+categories: MAC
 description: MAC下查看某个端口被哪个程序占用及杀进程方法
 ---
 ## MAC下查看某个端口被哪个程序占用及杀进程方法
