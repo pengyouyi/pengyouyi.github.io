@@ -5,10 +5,356 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Fri, 05 May 2017 20:42:15 +0800</lastBuildDate>
-        <pubDate>Fri, 05 May 2017 20:42:15 +0800</pubDate>
+        <lastBuildDate>Wed, 10 May 2017 21:44:24 +0800</lastBuildDate>
+        <pubDate>Wed, 10 May 2017 21:44:24 +0800</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>HTTP方法</title>
+                <description>&lt;h1 id=&quot;http&quot;&gt;HTTP请求方法&lt;/h1&gt;
+
+&lt;p&gt;根据HTTP标准，HTTP请求可以使用多种请求方法。&lt;br&gt;
+HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。&lt;br&gt;
+HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。&lt;/p&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;序号&lt;/th&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;是否包含主体&lt;/th&gt;
+&lt;th&gt;安全&lt;/th&gt;
+&lt;th&gt;幂等&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;GET&lt;/td&gt;
+&lt;td&gt;从服务器获取一份文档&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;是&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;HEAD&lt;/td&gt;
+&lt;td&gt;类似于GET，只从服务器获取文档的首部&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;是&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;PUT&lt;/td&gt;
+&lt;td&gt;与GET相反，将请求的主体部分存储在服务器上&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;是&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;POST&lt;/td&gt;
+&lt;td&gt;向服务器发送需要处理的数据&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;是&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;否&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;TRACE&lt;/td&gt;
+&lt;td&gt;对可能经过代理服务器传送到服务器上去的报文进行追踪&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;？&lt;/td&gt;
+&lt;td&gt;？&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;td&gt;OPTIONS&lt;/td&gt;
+&lt;td&gt;请求服务器告知其支持的各种功能&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;是&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;td&gt;DELETE&lt;/td&gt;
+&lt;td&gt;请求服务器删除请求URL所指定的资源&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;否&lt;/td&gt;
+&lt;td&gt;是&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;名词解释&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;安全性：客户端可以发起请求，并知道它不会改变资源的状态。&lt;br&gt;
+幂等性：保证客户端重复发起某个请求的效果与一次请求的效果一致。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;get&quot;&gt;GET&lt;/h2&gt;
+
+&lt;p&gt;GET方法请求一个指定资源的表示形式. 使用GET的请求应该只被用于获取数据.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;请求：只有header，没有body。&lt;/li&gt;
+&lt;li&gt;响应：对应请求URI的资源表述，通常带有body。响应header中的Content-Type，Content-Length，Content-Language，Last-Modified，ETag等应该和响应body的表述一致。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;GET /hello HTTP/1.1
+Host: localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 200 OK
+Content-Type: application/xml; charset=UTF-8
+Content-Length: 21
+
+&amp;lt;hello&amp;gt;tester&amp;lt;/hello&amp;gt;
+......
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;head&quot;&gt;HEAD&lt;/h2&gt;
+
+&lt;p&gt;HEAD方法与GET方法行为类似，但服务器在响应中只返回首部。不会返回实体的主体部分。&lt;/p&gt;
+
+&lt;p&gt;用处：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;在不获取资源的情况下了解资源的情况（比如：判断其类型）；&lt;br&gt;
+通过查看响应中的状态码，看看某个对象是否存在；&lt;br&gt;
+通过查看首部，测试资源是否被修改了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;服务器必须确保返回的首部与GET请求所返回的首部完全相同。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;请求：只有header，没有body。&lt;/li&gt;
+&lt;li&gt;响应：只有header，没有body。服务器不能添加body。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;GET /hello HTTP/1.1
+Host: localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 200 OK
+Content-Type: application/xml; charset=UTF-8
+Content-Length: 21
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;put&quot;&gt;PUT&lt;/h2&gt;
+
+&lt;p&gt;PUT方法就是让服务器用请求的主体部分来创建一个由所请求的URL命名的新文档，或者，如果那个URL已经存在的话，就用这个主体来替代它。&lt;br&gt;
+因为PUT允许用户对内容进行修改，所以很多Web服务器都要求在执行PUT之前，用密码登录。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;请求：一个资源的表述。请求的body可以与客户端后续收到的GET请求一样,当然，也可以不一样。在某些情况下，服务器也可要求客户端只提供资源的可变部分。&lt;/li&gt;
+&lt;li&gt;响应：更新的状态。可在响应中包含被更新资源的完整表述，但是客户端不能假设响应中包含完整状态，除非响应有一个Content-Location头。如果服务器没有包含这个头，客户端必须提交一个无条件GET请求来获取更新后的表述，带有Last-Modified和/或ETag头。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;创建资源的请求&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;PUT /stu/alice HTTP/1.1
+Host: localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 201 Created
+Location: http://localhost/stu/alice
+Content-Length: 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;更新资源的请求&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;PUT /stu/bob HTTP/1.1
+Host: localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 204 No Content
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;post&quot;&gt;POST&lt;/h2&gt;
+
+&lt;p&gt;向服务器发送需要处理的数据,例如提交表单。&lt;br&gt;
+POST请求可能会导致服务器上新的资源的建立和/或已有资源的修改。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;请求：一个资源的表述。&lt;/li&gt;
+&lt;li&gt;响应：一个资源的表述，或是一个重定向指令。如果body中存在表述，则其URI和请求URI不一致，包含一个带有改资源URI的Content-Location头。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;执行动作&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;POST /prompt/delete HTTP/1.1
+Host: localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 204 No Content
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;创建资源&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;POST /stu/bob HTTP/1.1
+Host: localhost
+Content-Type: application/xml
+
+&amp;lt;student&amp;gt;
+    &amp;lt;name&amp;gt;Bob&amp;lt;/name&amp;gt;
+    &amp;lt;age&amp;gt;22&amp;lt;/age&amp;gt;
+&amp;lt;/student&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 201 Created
+Location: http://localhost/stu/bob
+Content-Location: http://localhost/stu/bob
+Content-Type: application/xml
+
+&amp;lt;student&amp;gt;
+    &amp;lt;name&amp;gt;Bob&amp;lt;/name&amp;gt;
+    &amp;lt;age&amp;gt;22&amp;lt;/age&amp;gt;
+&amp;lt;/student&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;修改资源&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;POST /stu/bob/modify HTTP/1.1
+Host: localhost
+Content-Type: application/json
+
+{
+    &quot;Name&quot;: &quot;Bob&quot;,
+    &quot;Age&quot;: 24
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 303 See Other
+Location: http://localhost/stu/bob
+Content-Type: application/xml
+
+&amp;lt;student&amp;gt;
+    &amp;lt;name&amp;gt;Bob&amp;lt;/name&amp;gt;
+    &amp;lt;age&amp;gt;24&amp;lt;/age&amp;gt;
+&amp;lt;/student&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;trace&quot;&gt;TRACE&lt;/h2&gt;
+
+&lt;p&gt;客户端发起一个请求时，这个请求可能要穿过防火墙、代理、网关或其他一些应用程序。每个中间节点都可能会修改原始的HTTP请求。TRACE方法允许客户端在最终将请求发给服务器时，看看它变成什么样子。&lt;br&gt;
+TRACE方法主要用于诊断；用于验证请求是否如愿穿过了请求/响应链。它也是一种很好的工具，可以用来查看代理和其他应用程序对用户请求所产生效果。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;请求：header与body。&lt;br&gt;
+响应：body中包含整个请求消息。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;TRACE /trace HTTP/1.1
+Host: localhost
+Accept: text/html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 200 OK
+Content-Type: message/http
+
+TRACE /trace HTTP/1.1
+Host: localhost
+Accept: text/html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;options&quot;&gt;OPTIONS&lt;/h2&gt;
+
+&lt;p&gt;OPTIONS 方法请求服务器告知其支持的各种功能。可以询问服务器通常支持哪些方法，或者对某些特殊资源支持哪些方法。&lt;br&gt;
+这为客户端应用程序提供了一种手段，使其不用实际访问那些资源就能判定访问各种资源的最优方式。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;请求：只有header没有body。&lt;br&gt;
+响应：默认只有header，但是也可以在body中添加内容，比如描述性文字&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;OPTIONS /test-options HTTP/1.1
+Host: localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 204 No Content
+Allow: GET, POST, OPTIONS
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;delete&quot;&gt;DELETE&lt;/h2&gt;
+
+&lt;p&gt;请求服务器删除请求URL所指定的资源。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;请求：只有header，没有body。&lt;br&gt;
+响应：成功或失败。body中可以包含操作的状态。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;请求报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;DELETE /doc/old.txt HTTP/1.1
+Host: localhost
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;响应报文&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 204 No Content
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;http&quot;&gt;HTTP请求扩展方法&lt;/h2&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;序号&lt;/th&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;CONNECT&lt;/td&gt;
+&lt;td&gt;HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;td&gt;PATCH&lt;/td&gt;
+&lt;td&gt;实体中包含一个表，表中说明与该URI所表示的原内容的区别。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;MOVE&lt;/td&gt;
+&lt;td&gt;请求服务器将指定的页面移至另一个网络地址。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;11&lt;/td&gt;
+&lt;td&gt;COPY&lt;/td&gt;
+&lt;td&gt;请求服务器将指定的页面拷贝至另一个网络地址。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;12&lt;/td&gt;
+&lt;td&gt;LINK&lt;/td&gt;
+&lt;td&gt;请求服务器建立链接关系。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;UNLINK&lt;/td&gt;
+&lt;td&gt;断开链接关系。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;td&gt;WRAPPED&lt;/td&gt;
+&lt;td&gt;允许客户端发送经过封装的请求。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;Extension-mothed&lt;/td&gt;
+&lt;td&gt;在不改动协议的前提下，可增加另外的方法。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://tools.jb51.net/table/http_request_method&quot;&gt;http://tools.jb51.net/table/http_request_method&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://blog.lucode.net/protocol/http-method-tutorial.html&quot;&gt;http://blog.lucode.net/protocol/http-method-tutorial.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+                <link>/2017/05/09/js-http-methods</link>
+                <guid>/2017/05/09/js-http-methods</guid>
+                <pubDate>Tue, 09 May 2017 00:00:00 +0800</pubDate>
+        </item>
 
         <item>
                 <title>HTTP状态码</title>
@@ -3229,155 +3575,6 @@ js在&amp;quot;预编译&amp;quot;阶段, 会解释函数声明, 但却会忽略
                 <link>/js/2016/12/08/js-anonymous-function</link>
                 <guid>/js/2016/12/08/js-anonymous-function</guid>
                 <pubDate>Thu, 08 Dec 2016 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>编写高效的CSS选择器</title>
-                <description>&lt;h1 id=&quot;css-css&quot;&gt;CSS渲染规则、CSS选择器的效率&lt;/h1&gt;
-
-&lt;h1 id=&quot;css&quot;&gt;&lt;a href=&quot;https://css-tricks.com/efficiently-rendering-css/&quot;&gt;浏览器对css选择器的渲染规则&lt;/a&gt;&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://stackoverflow.com/questions/5797014/why-do-browsers-match-CSS-selectors-from-right-to-left&quot;&gt;样式系统从最右边的选择符开始向左进行匹配规则（右-&amp;gt;左）&lt;/a&gt;。&lt;br&gt;
-只要当前选择符的左边还有其他选择符，样式系统就会继续向左移动，直到找到和规则匹配的元素，或者因为不匹配而退出。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;div.nav &amp;gt; ul li a[title]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;上述例子，浏览器首先会尝试在你的HTML标签中寻找“a[title]”元素，接着在匹配“li和ul”，最后在去匹配“div.nav”。&lt;/p&gt;
-
-&lt;p&gt;选择器的最后一部分，也就是选择器的最右边（在这个例子中就是a[title]部分）部分被称为“关键选择器”，它将决定你的选择器的效率如何？是高还是低。&lt;/p&gt;
-
-&lt;h1 id=&quot;css&quot;&gt;决定css选择器性能的关键点&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;1.首先选择器对性能的影响源于&lt;strong&gt;浏览器匹配选择器和文档元素时所消耗的时间&lt;/strong&gt;，所以优化选择器的原则是应尽量避免使用消耗更多匹配时间的选择器。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;2.最右侧的选择器对于性能就起着&lt;strong&gt;关键性的作用&lt;/strong&gt;，它是最先开始查找的，如果最右侧是#id选择器那么性能就很高，如果是标签选择器那么性能就会大打折扣。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;css&quot;&gt;&lt;a href=&quot;http://csswizardry.com/2011/09/writing-efficient-css-selectors/&quot;&gt;CSS选择器的效率（从高到低）&lt;/a&gt;&lt;/h1&gt;
-
-&lt;p&gt;Google 资深web开发工程师 Steve Souders 对 CSS 选择器的执行效率从高到低做了一个排序：&lt;/p&gt;
-
-&lt;p&gt;1.id选择器（#myid）&lt;br&gt;
-2.类选择器（.myclassname）&lt;br&gt;
-3.标签选择器（div,h1,p）&lt;br&gt;
-4.相邻选择器（h1+p）&lt;br&gt;
-5.子选择器（ul &amp;gt; li）&lt;br&gt;
-6.后代选择器（li a）&lt;br&gt;
-7.通配符选择器（*）&lt;br&gt;
-8.属性选择器（a[rel=&amp;quot;external&amp;quot;]）&lt;br&gt;
-9.伪类选择器（a:hover, li:nth-child）&lt;/p&gt;
-
-&lt;p&gt;id选择器的性能是最高的，但是id具有唯一性&lt;br&gt;
-class选择器次之，具有共性，常使用之&lt;br&gt;
-如果你非常在意页面的性能那千万别使用CSS3选择器。实际上，在所有浏览器中，用 class 和 id 来渲染，比那些使用同胞，后代选择器，子选择器（sibling, descendant and child selectors）对页面性能的改善更值得关注。&lt;/p&gt;
-
-&lt;h1 id=&quot;guidelines-for-efficient-css&quot;&gt;Guidelines for efficient CSS&lt;/h1&gt;
-
-&lt;h2 id=&quot;avoid-universal-rules&quot;&gt;Avoid universal rules&lt;/h2&gt;
-
-&lt;p&gt;Make sure a rule doesn’t end up in the universal category!&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;#content * {..}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;don-t-qualify-id-rules-with-tag-names-or-classes&quot;&gt;Don’t qualify ID rules with tag names or classes&lt;/h2&gt;
-
-&lt;div class=&quot;show&quot;&gt;
-  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
-    button#backButton {…}
-  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
-    .menu-left#newMenuIcon {…}
-  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
-    #backButton {…}
-  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
-    #newMenuIcon {…}
-&lt;/div&gt;
-
-&lt;p&gt;id在HTML中是唯一的，也就是说一个HTML页面只限定有一个id为“XX”的元素，而不限制拥有这个ID元素的标签名，所以,在button#backButton {…}中,button标签完全是无意义的，可以，而且应该去掉，button#backButton {…}与#backButton {…}是等价的。在#backButton前多写了button,只会引起样式系统向左移动，继续查找页面元素，损耗页面性能，延长页面渲染时间。&lt;/p&gt;
-
-&lt;h2 id=&quot;don-t-qualify-class-rules-with-tag-names&quot;&gt;Don’t qualify class rules with tag names&lt;/h2&gt;
-
-&lt;div class=&quot;show&quot;&gt;
-  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
-    treecell.indented {…}
-  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
-    .treecell-indented {…}
-  &lt;div class=&quot;correct&quot;&gt;BEST&lt;/div&gt;
-    .hierarchy-deep {…}
-&lt;/div&gt;
-
-&lt;h2 id=&quot;use-the-most-specific-category-possible&quot;&gt;Use the most specific category possible&lt;/h2&gt;
-
-&lt;div class=&quot;show&quot;&gt;
-  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
-  treeitem[mailfolder=&quot;true&quot;] &gt; treerow &gt; treecell {…}
-  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
-  .treecell-mailfolder {…}
-&lt;/div&gt;
-
-&lt;p&gt;尽量选择最具体的方式,避免使用多层标签选择器。使用 class 选择器替换，减少css查找&lt;/p&gt;
-
-&lt;h2 id=&quot;avoid-the-descendant-selector&quot;&gt;Avoid the descendant selector&lt;/h2&gt;
-
-&lt;p&gt;后代选择器在CSS中是最昂贵的选择器。贵得要命——尤其是把它和标签或通配符放在一起！&lt;/p&gt;
-
-&lt;div class=&quot;show&quot;&gt;
-  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
-  treeitem[mailfolder=&quot;true&quot;] &gt; treerow &gt; treecell {…}
-  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
-  .treecell-mailfolder {…}
-&lt;/div&gt;
-
-&lt;h2 id=&quot;tag-category-rules-should-never-contain-a-child-selector&quot;&gt;Tag category rules should never contain a child selector&lt;/h2&gt;
-
-&lt;div class=&quot;show&quot;&gt;
-  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
-  treehead &gt; treerow &gt; treecell {…}
-  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
-  .treecell-header {…}
-&lt;/div&gt;
-
-&lt;h2 id=&quot;question-all-usages-of-the-child-selector&quot;&gt;Question all usages of the child selector&lt;/h2&gt;
-
-&lt;div class=&quot;show&quot;&gt;
-  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
-  treeitem[IsImapServer=”true”] &gt; treerow &gt; .tree-folderpane-icon {…}
-  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
-  .tree-folderpane-icon[IsImapServer=”true”] {…}
-&lt;/div&gt;
-
-&lt;h2 id=&quot;rely-on-inheritance&quot;&gt;Rely on inheritance&lt;/h2&gt;
-
-&lt;div class=&quot;show&quot;&gt;
-  &lt;div class=&quot;incorrect&quot;&gt;BAD&lt;/div&gt;
-  #bookmarkMenuItem &gt; .menu-left { list-style-image: url(blah) }
-  &lt;div class=&quot;correct&quot;&gt;GOOD&lt;/div&gt;
-  #bookmarkMenuItem { list-style-image: url(blah) }
-&lt;/div&gt;
-
-&lt;h2 id=&quot;use-moz-image-region&quot;&gt;Use -moz-image-region!&lt;/h2&gt;
-
-&lt;h2 id=&quot;use-scoped-stylesheets&quot;&gt;Use scoped stylesheets&lt;/h2&gt;
-
-&lt;h2 id=&quot;avoid-vendor-specific-features-unless-necessary&quot;&gt;Avoid vendor-specific features unless necessary&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;summary：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;1.避免使用通配符&lt;br&gt;
-2.不使用标签名或类名修饰ID规则：如果规则使用ID选择器作为关键选择器，不要给规则添加标签名。因为ID本身就是唯一的，添加标签名会不必要地降低匹配效率。&lt;br&gt;
-3.不使用标签名修饰类：相较于标签，类更具独特性。&lt;br&gt;
-4.尽量选择最具体的方式：造成低效的最简单粗暴的原因就是在标签上使用太多规则。给元素添加类可以更快细分到类方式，可以减少规则去匹配标签的时间。&lt;br&gt;
-5.关于后代选择器和子选择器：避免使用后代选择器，非要用的话建议用子选择器代替，但子选择器也要慎用，标签规则永远不要包含子选择器。&lt;br&gt;
-6.利用可继承性：没必要在一般内容上声明样式。&lt;/p&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://css-tricks.com/efficiently-rendering-css/&quot;&gt;https://css-tricks.com/efficiently-rendering-css/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://csswizardry.com/2011/09/writing-efficient-css-selectors/&quot;&gt;http://csswizardry.com/2011/09/writing-efficient-css-selectors/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <link>/css/2016/12/01/css-selector-effective</link>
-                <guid>/css/2016/12/01/css-selector-effective</guid>
-                <pubDate>Thu, 01 Dec 2016 00:00:00 +0800</pubDate>
         </item>
 
 
