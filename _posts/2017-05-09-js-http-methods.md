@@ -3,7 +3,7 @@ layout: post
 title: HTTP方法
 tags:
 - HTTP
-categories: 
+categories: HTTP
 description: HTTP方法
 ---
 

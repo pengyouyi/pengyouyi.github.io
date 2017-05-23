@@ -3,7 +3,7 @@ layout: post
 title: HTTP状态码
 tags:
 - HTTP
-categories: 
+categories: HTTP
 description: HTTP状态码
 ---
 
@@ -93,6 +93,7 @@ PUT, DELETE, 和 OPTIONS 方法永远不会返回 200 状态码.
 206响应中必须包含Content-Range、Date 以及 ETag 或 Content-Location 首部。
 
 # 重定向status code
+
 |状态码|短语原因|含义|
 |---|---|---|
 |300|Multiple Choices<br/> 【多项选择】|客户端请求了实际指向多个资源的URL|

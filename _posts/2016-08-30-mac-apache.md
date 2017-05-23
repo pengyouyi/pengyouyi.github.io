@@ -16,16 +16,20 @@ description: MAC下配置Apache
 ## 启动Apache
 
 打开"终端(terminal)",输入 apachectl -v 查看Apache版本。
+
 ```bash
 pengyouyideMacBook-Pro:~ pengyouyi$ apachectl -v
 Server version: Apache/2.4.18 (Unix)
 Server built:   Feb 20 2016 20:03:19
 ```
+
 接着输入 apachectl start ,这样就启动Apache。
-```bash
+
+```
 pengyouyideMacBook-Pro:~ pengyouyi$ apachectl start
 This operation requires root.
 ```
+
 检查Apache是否启动成功,打开chrome浏览器在地址栏输入"localhost",可以看到内容为"It works!"的页面。其位于“/Library（资源库）/WebServer/Documents/”下，这就是Apache的默认根目录。
 
 Apache的安装目录在：/etc/apache2/，etc默认是隐藏的。有三种方式查看：
@@ -86,6 +90,7 @@ You don't have permission to access /index.php on this server
 6.运行“sudo vi /etc/hosts”，打开hosts配置文件，加入"127.0.0.1 mysites"，这样就可以配置完成sites虚拟主机了，可以访问"mysites"了
 
 **注意:** 以上代码适用于 Apache HTTP Server Version 2.4
+
 ```
 Apache 2.4 configuration:
 Require all denied
@@ -96,7 +101,9 @@ Apache 2.2 configuration:
 Order deny,allow
 Deny from all
 ```
+
 Apache HTTP Server Version 2.2 可用如下代码
+
 {% highlight xml linenos %}
 <VirtualHost *:80>
     DocumentRoot "/Users/pengyouyi/workplaces"
@@ -113,7 +120,11 @@ Apache HTTP Server Version 2.2 可用如下代码
 {% endhighlight %}
 
 ## 停止Apache服务
-    apachectl stop
+
+```
+apachectl stop
+```
+
 **注意:**
 当使用apachectl start 或者 apacheclt stop,出现以下结果时,表示权限不够
 This operation requires root.
