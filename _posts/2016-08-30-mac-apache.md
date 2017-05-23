@@ -17,18 +17,18 @@ description: MAC下配置Apache
 
 打开"终端(terminal)",输入 apachectl -v 查看Apache版本。
 
-```bash
+{% highlight bash linenos %}
 pengyouyideMacBook-Pro:~ pengyouyi$ apachectl -v
 Server version: Apache/2.4.18 (Unix)
 Server built:   Feb 20 2016 20:03:19
-```
+{% endhighlight %}
 
 接着输入 apachectl start ,这样就启动Apache。
 
-```
+{% highlight bash linenos %}
 pengyouyideMacBook-Pro:~ pengyouyi$ apachectl start
 This operation requires root.
-```
+{% endhighlight %}
 
 检查Apache是否启动成功,打开chrome浏览器在地址栏输入"localhost",可以看到内容为"It works!"的页面。其位于“/Library（资源库）/WebServer/Documents/”下，这就是Apache的默认根目录。
 
@@ -91,16 +91,16 @@ You don't have permission to access /index.php on this server
 
 **注意:** 以上代码适用于 Apache HTTP Server Version 2.4
 
-```
+{% highlight bash linenos %}
 Apache 2.4 configuration:
 Require all denied
-```
+{% endhighlight %}
 
-```
+{% highlight bash linenos %}
 Apache 2.2 configuration:
 Order deny,allow
 Deny from all
-```
+{% endhighlight %}
 
 Apache HTTP Server Version 2.2 可用如下代码
 
@@ -121,9 +121,9 @@ Apache HTTP Server Version 2.2 可用如下代码
 
 ## 停止Apache服务
 
-```
+{% highlight bash linenos %}
 apachectl stop
-```
+{% endhighlight %}
 
 **注意:**
 当使用apachectl start 或者 apacheclt stop,出现以下结果时,表示权限不够
