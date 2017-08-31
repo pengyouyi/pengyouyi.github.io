@@ -35,11 +35,14 @@ GET方法请求一个指定资源的表示形式. 使用GET的请求应该只被
 + 响应：对应请求URI的资源表述，通常带有body。响应header中的Content-Type，Content-Length，Content-Language，Last-Modified，ETag等应该和响应body的表述一致。
 
 请求报文
+
 ```
 GET /hello HTTP/1.1
 Host: localhost
 ```
+
 响应报文
+
 ```
 HTTP/1.1 200 OK
 Content-Type: application/xml; charset=UTF-8
