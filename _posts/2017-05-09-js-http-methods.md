@@ -36,7 +36,7 @@ GET方法请求一个指定资源的表示形式. 使用GET的请求应该只被
 
 请求报文
 
-```
+```js
 GET /hello HTTP/1.1
 Host: localhost
 ```
