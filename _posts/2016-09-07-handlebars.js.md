@@ -9,8 +9,10 @@ description: handlebars.js初学
 # handlebars.js初学
 
 **a.简介-introduction**
+
 Handlebars 是 JavaScript 一个语义模板库，通过对view和data的分离来快速构建web模板。它采用"Logic-less template"（无逻辑模版）的思路，在加载时被预编译，而不是到了客户端执行到代码时再去编译，这样可以保证模板加载和运行的速度。
 利用Handlebars处理HTML模板时，一般步骤如下：
+
 1. 获取模板内容
 2. 预编译模板
 3. 模板数据填充
@@ -19,34 +21,45 @@ Handlebars 是 JavaScript 一个语义模板库，通过对view和data的分离�
 Handlebars兼容Mustache，你可以在Handlebars中导入Mustache模板。
 
 **b.安装-install**
+
 去handlebarsjs官方网站http://handlebarsjs.com/ 直接下载handlebars.js,用\<script\>标签引入, 也可通过NPM和Bower安装,详见[http://handlebarsjs.com/installation.html](http://handlebarsjs.com/installation.html)
 # Getting Started
 Handlebars expressions 是handlebars模板中最基本的单元，使用方法是加两个花括号{% raw %}{{value}}{% endraw %}, handlebars模板会自动匹配相应的数值，对象甚至是函数
 例如:
-```html
+
+{% highlight html linenos %}
 <div class="entry">
   <h1>{% raw %}{{title}}{% endraw %}</h1>
   <div class="body">
-    {% raw %}{{body}}{% endraw %}
+    {% raw %}
+      {{body}}
+    {% endraw %}
   </div>
 </div>
-```
+{% endhighlight %}
+
 你可以使用"script"标签引入handlebars模板：
-```html
+
+{% highlight html linenos %}
 <script id="entry-template" type="text/x-handlebars-template">
   <div class="entry">
     <h1>{% raw %}{{title}}{% endraw %}</h1>
     <div class="body">
-      {% raw %}{{body}}{% endraw %}
+      {% raw %}
+        {{body}}
+      {% endraw %}
     </div>
   </div>
 </script>
-```
+{% endhighlight %}
+
 在javascript中使用Handlebars.compile编译模板
-```html
+
+{% highlight html linenos %}
 var source   = $("#entry-template").html();
 var template = Handlebars.compile(source);
-```
+{% endhighlight %}
+
 你也可以预编译你的模板，然后只需引入更小的运行时库（handlebars.runtime.js），避免在浏览器中编译，提高性能，这在移动设备中显得更重要。
 **完整例子-直接在HTML中渲染**
 {% highlight html linenos %}
@@ -78,7 +91,9 @@ document.getElementById("entry").innerHTML = html;
 </body>
 </html>
 {% endhighlight %}
+
 **完整例子-借用"script"标签**
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
@@ -113,17 +128,21 @@ $("#demo").html(html);
 </body>
 </html>
 {% endhighlight %}
+
 **results in**
-```html
+
+{% highlight html linenos %}
 <div id="entry">
   <h1>My New Post</h1>
   <div class="body">
     This is my first post!
   </div>
 </div>
-```
+{% endhighlight %}
+
 # HTML编码
 在handlebars里，{% raw %}{{expression}}{% endraw %}会返回一个经过编码的HTML，也就是说，如果取出的内容中包含html标签，会被转码成纯文本，不会被当成html解析，实际上就是做了类似这样的操作：把`<`用 `&lt;` 替代。如果你不希望被编码，可以使用{% raw %}{{{{% endraw %}
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
@@ -153,17 +172,21 @@ $("#entry").html(html);
 </body>
 </html>
 {% endhighlight %}
+
 **results in**
-```html
+
+{% highlight html linenos %}
 <div id="entry">
   <h1>All About &lt;p&gt; Tags</h1>
   <div class="body">
     <p>This is a post about &lt;p&gt; tags</p>
   </div>
 </div>
-```
+{% endhighlight %}
+
 handlebars不会编码Handlebars.SafeString。如果你自定义一个helper，返回一段HTML代码，你需要返回new Handlebars.SafeString(result)。此时，你需要手动对内容进行编码：
-```html
+
+{% highlight html linenos %}
 Handlebars.registerHelper('link', function(text, url) {
   text = Handlebars.Utils.escapeExpression(text);
   url  = Handlebars.Utils.escapeExpression(url);
@@ -172,11 +195,13 @@ Handlebars.registerHelper('link', function(text, url) {
 
   return new Handlebars.SafeString(result);
 });
-```
+{% endhighlight %}
+
 这里将会对传入的参数进行编码，返回值是“安全的”，所以就算你不使用{% raw %}{{{{% endraw %}，handlebars也不会再次编码了。
 # 块表达式-Block Expressions
 
 块表达式在Handlebars中由一个代码块，一个开标志\{\{#\}\}，一个闭合标志\{\{/\}\}组成。
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
@@ -221,21 +246,26 @@ $("#demo").html(html);
 </body>
 </html>
 {% endhighlight %}
+
 **results in**
-```html
+
+{% highlight html linenos %}
 <ul>
   <li>Yehuda Katz</li>
   <li>Carl Lerche</li>
   <li>Alan Johnson</li>
 </ul>
-```
+{% endhighlight %}
+
 当我们注册了一个自定义块辅助函数时，Handlebars自动在回调函数中添加了一个可选择对象作为最后一个参数。这个可选择对象拥有一个fn方法，一个hash对象，以及一个inverse方法
 
 options.fn方法：
 
 fn方法接收一个对象（你的数据）作为它在自定义辅助函数块模板中作为上下文来使用的参数。你可以传递任何数据对象，或者如果你想使用引用模板的同样的上下文
 # 路径-paths
+
 **Handlebars支持简单的路径,也支持嵌套路径，可以查找下一级的属性**
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
@@ -273,7 +303,9 @@ $(".entry").html(html);
 </body>
 </html>
 {% endhighlight %}
+
 **嵌套路径同样支持../**
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
@@ -313,8 +345,10 @@ $(".entry").html(html);
 </body>
 </html>
 {% endhighlight %}
+
 # 模板注释 \{\{! \}\} or \{\{!-- --\}\}
-```html
+
+{% highlight html linenos %}
 <div class="entry">
 {% raw %}
     {{! 我是单行注释 }}
@@ -326,8 +360,10 @@ $(".entry").html(html);
     --}}
 {% endraw %}
 </div>
-```
+{% endhighlight %}
+
 # each循环
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
@@ -380,8 +416,10 @@ $(document).ready(function() {
 </body>
 </html>
 {% endhighlight %}
+
 # 指定上下文:with
 with指令可以转移上下文环境，让当前的上下文进入到一个属性中
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
@@ -453,9 +491,11 @@ $("#tableList").html(html);
 </body>
 </html>
 {% endhighlight %}
+
 \{\{#with favorite\}\}表示进入到favorite属性的上下文中，而favorite属性中又是一个list，因此可以用\{\{#each this\}\}进行遍历，表示遍历当前上下文环境，对于每次遍历，都是map结构，取name属性，最终拿到所有兴趣爱好。
 with可以结合handlebars的路径访问一起使用。Handlebars提供了.来访问属性也可以使用../来访问父级属性。
-```html
+
+{% highlight html linenos %}
 {% raw %}
 {{#with person}}
     <h1>{{../company.name}}</h1>
@@ -466,9 +506,12 @@ with可以结合handlebars的路径访问一起使用。Handlebars提供了.来�
      company: {"name": "Rad, Inc." }
 }
 {% endraw %}
-```
+{% endhighlight %}
+
 # this的使用
+
 this表示当前的上下文
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
@@ -504,7 +547,9 @@ $(document).ready(function() {
 </body>
 </html>
 {% endhighlight %}
+
 # if、unless
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
@@ -549,9 +594,12 @@ $("#demo").html(html);
 </body>
 </html>
 {% endhighlight %}
+
 对于if指令，如果返回的为undefined、null、""、[ ]、{ }、false任意一个，都会导致最终结果为假。
 unless则是和if指令相反，当判断的值为false时他会渲染DOM
+
 # 自定义函数辅助函数（function helper）
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
