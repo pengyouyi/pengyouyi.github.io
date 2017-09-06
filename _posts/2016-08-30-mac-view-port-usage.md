@@ -18,9 +18,9 @@ lsof -i:port
 
 port替换成端口号，比如查看63342端口,使用如下
 
-```c
+{% highlight bash linenos %}
 lsof -i:63342
-```
+{% endhighlight %}
 
 参数说明: -i表示网络链接,该命令会同时列出PID，方便kill
 ```c
@@ -34,15 +34,15 @@ webstorm  375 pengyouyi  280u  IPv4 0xe55f36469711deb7      0t0  TCP localhost:6
 ```
 ## 根据PID,使用kill命令杀掉进程
 
-```c
+{% highlight shell linenos %}
 kill -9 PID
-```
+{% endhighlight %}
 
 比如杀掉PID为236的Google浏览器,如下
 
-```c
+{% highlight shell linenos %}
 ...$ kill -9 236
-```
+{% endhighlight %}
 
 参数说明: -9表示强制杀死
 
