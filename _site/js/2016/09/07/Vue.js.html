@@ -472,8 +472,9 @@
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><strong>d.自动添加前缀-prefix</strong><br>
-当 v-bind:style 使用需要厂商前缀的 CSS 属性时，如 transform，Vue.js 会自动侦测并添加相应的前缀</p>
+<p><strong>d.自动添加前缀-prefix</strong></p>
+
+<p>当 v-bind:style 使用需要厂商前缀的 CSS 属性时，如 transform，Vue.js 会自动侦测并添加相应的前缀</p>
 
 <h1 id="if">条件渲染-if</h1>
 
@@ -481,30 +482,48 @@
 
 <p>在字符串模板中，如 Handlebars，我们得像这样写一个条件块：<br>
 html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- Handlebars 模板 --&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="c">&lt;!-- Handlebars 模板 --&gt;</span>
 
 {{#if ok}}
   <span class="nt">&lt;h1&gt;</span>Yes<span class="nt">&lt;/h1&gt;</span>
-{{/if}}
+{{/if}}<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-</code></pre></div>
 <p>在 Vue.js，我们使用 v-if 指令实现同样的功能：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">v-if=</span><span class="s">"Math.random() &gt; 0.5"</span><span class="nt">&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">v-if=</span><span class="s">"Math.random() &gt; 0.5"</span><span class="nt">&gt;</span>
     随机数大于 0.5
 <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">v-else</span><span class="nt">&gt;</span>
     随机数不大于 0.5
-<span class="nt">&lt;/div&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p><strong>b.template v-if</strong></p>
 
 <p>因为 v-if 是一个指令，需要将它添加到一个元素上。但是如果我们想切换多个元素呢？此时我们可以把一个&lt;template&gt; 元素当做包装元素，并在上面使用 v-if，最终的渲染结果不会包含它。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;template</span> <span class="na">v-if=</span><span class="s">"ok"</span><span class="nt">&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="nt">&lt;template</span> <span class="na">v-if=</span><span class="s">"ok"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1&gt;</span>Title<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;p&gt;</span>Paragraph 1<span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;p&gt;</span>Paragraph 2<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;/template&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/template&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p><strong>c.v-show</strong> </p>
 
 <p>v-show作用与v-if类似，不同的是v-show的元素会始终渲染并保持在 DOM 中,且v-show不支持&lt;template&gt;标签。 </p>
@@ -582,12 +601,33 @@ html</p>
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong>b.多维数组实例</strong></p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"example-2"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"item in items"</span><span class="nt">&gt;</span>
-
+  
     {{ message }} - {{ $index }} - {{ item.text }}
-
+  
   <span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;/ul&gt;</span>
 <span class="nt">&lt;script&gt;</span>
@@ -602,8 +642,9 @@ html</p>
     <span class="p">]</span>
   <span class="p">}</span>
 <span class="p">})</span>
-<span class="nt">&lt;/script&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/script&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p><strong>对象v-for</strong></p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"repeat-object"</span> <span class="na">class=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"value in object"</span><span class="nt">&gt;</span>
@@ -691,11 +732,16 @@ html</p>
 <p><strong>内联语句处理器</strong></p>
 
 <p>html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"example-2"</span><span class="nt">&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"example-2"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;button</span> <span class="na">v-on:click=</span><span class="s">"say('hi')"</span><span class="nt">&gt;</span>Say Hi<span class="nt">&lt;/button&gt;</span>
   <span class="nt">&lt;button</span> <span class="na">v-on:click=</span><span class="s">"say('what')"</span><span class="nt">&gt;</span>Say What<span class="nt">&lt;/button&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>js</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
   <span class="na">el</span><span class="p">:</span> <span class="s1">'#example-2'</span><span class="p">,</span>
@@ -1038,8 +1084,7 @@ html</p>
 
 <ul>
 <li>对于 windows：按住 Ctrl 按钮来选择多个选项</li>
-<li>对于 Mac：按住 command 按钮来选择多个选项
-动态选项，用 v-for 渲染：</li>
+<li>对于 Mac：按住 command 按钮来选择多个选项动态选项，用 v-for 渲染：</li>
 </ul>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
@@ -1106,7 +1151,17 @@ html</p>
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong>绑定value</strong></p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- 当选中时，`picked` 为字符串 "a" --&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="c">&lt;!-- 当选中时，`picked` 为字符串 "a" --&gt;</span>
 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">v-model=</span><span class="s">"picked"</span> <span class="na">value=</span><span class="s">"a"</span><span class="nt">&gt;</span>
 
 <span class="c">&lt;!-- `toggle` 为 true 或 false --&gt;</span>
@@ -1115,8 +1170,9 @@ html</p>
 <span class="c">&lt;!-- 当选中时，`selected` 为字符串 "abc" --&gt;</span>
 <span class="nt">&lt;select</span> <span class="na">v-model=</span><span class="s">"selected"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"abc"</span><span class="nt">&gt;</span>ABC<span class="nt">&lt;/option&gt;</span>
-<span class="nt">&lt;/select&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/select&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p><strong>checkbox</strong></p>
 <div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
