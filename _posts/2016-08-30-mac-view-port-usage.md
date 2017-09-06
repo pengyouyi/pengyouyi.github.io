@@ -12,13 +12,13 @@ description: MAC下查看某个端口被哪个程序占用及杀进程方法
 ## lsof命令查看端口使用情况
 通过list open file命令可以查看到当前打开文。
 
-```
+```c
 lsof -i:port
 ```
 
 port替换成端口号，比如查看63342端口,使用如下
 
-```
+```c
 lsof -i:63342
 ```
 
@@ -34,14 +34,14 @@ webstorm  375 pengyouyi  280u  IPv4 0xe55f36469711deb7      0t0  TCP localhost:6
 ```
 ## 根据PID,使用kill命令杀掉进程
 
-```
+```c
 kill -9 PID
 ```
 
 比如杀掉PID为236的Google浏览器,如下
 
-```
-pengyouyideMacBook-Pro:~ pengyouyi$ kill -9 236
+```c
+...$ kill -9 236
 ```
 
 参数说明: -9表示强制杀死
