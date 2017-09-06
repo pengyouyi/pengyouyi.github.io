@@ -12,9 +12,9 @@ description: MAC下查看某个端口被哪个程序占用及杀进程方法
 ## lsof命令查看端口使用情况
 通过list open file命令可以查看到当前打开文。
 
-```c
+{% highlight shell linenos %}
 lsof -i:port
-```
+{% endhighlight %}
 
 port替换成端口号，比如查看63342端口,使用如下
 
