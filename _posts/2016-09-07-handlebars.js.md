@@ -61,7 +61,9 @@ var template = Handlebars.compile(source);
 {% endhighlight %}
 
 你也可以预编译你的模板，然后只需引入更小的运行时库（handlebars.runtime.js），避免在浏览器中编译，提高性能，这在移动设备中显得更重要。
+
 **完整例子-直接在HTML中渲染**
+
 {% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">

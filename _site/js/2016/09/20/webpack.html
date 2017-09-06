@@ -171,25 +171,31 @@
 
 <blockquote>
 <p>1.webpack 是以 commonJS 的形式来书写脚本滴，但对 AMD/CMD 的支持也很全面，方便旧项目进行代码迁移。<br>
- 2.能被模块化的不仅仅是 JS 了。<br>
- 3.开发便捷，能替代部分 grunt/gulp 的工作，比如打包、压缩混淆、图片转base64等。<br>
- 4.扩展性强，插件机制完善，特别是支持 React 热插拔（见 react-hot-loader ）的功能让人眼前一亮<br>
- 5.代码分割，提供按需加载的能力<br>
- 6.发布工具</p>
+2.能被模块化的不仅仅是 JS 了。<br>
+3.开发便捷，能替代部分 grunt/gulp 的工作，比如打包、压缩混淆、图片转base64等。<br>
+4.扩展性强，插件机制完善，特别是支持 React 热插拔（见 react-hot-loader ）的功能让人眼前一亮<br>
+5.代码分割，提供按需加载的能力<br>
+6.发布工具</p>
 </blockquote>
 
-<p><strong>b.安装-install</strong><br>
-首先需要安装Node.js，node自带了包管理工具npm。<br>
+<p><strong>b.安装-install</strong></p>
+
+<p>首先需要安装Node.js，node自带了包管理工具npm。<br>
 <code>$ npm install webpack -g</code><br>
 常规项目还是把依赖写入 package.json 包去更人性化：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ npm init
-$ npm install webpack --save-dev
-$ npm install webpack-dev-server --save-dev
-</code></pre></div>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="gp">$ </span>npm init
+<span class="gp">$ </span>npm install webpack --save-dev
+<span class="gp">$ </span>npm install webpack-dev-server --save-dev<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <h1 id="configure">配置-configure</h1>
 
-<p>每个项目下都必须配置有一个 webpack.config.js，它的作用如同常规的 gulpfile.js/Gruntfile.js ，就是一个配置项，告诉 webpack 它需要做什么<br>
-<strong>看看下方的示例</strong></p>
+<p>每个项目下都必须配置有一个 webpack.config.js，它的作用如同常规的 gulpfile.js/Gruntfile.js ，就是一个配置项，告诉 webpack 它需要做什么</p>
+
+<p><strong>看看下方的示例</strong></p>
 
 <figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -276,18 +282,38 @@ $ npm install webpack-dev-server --save-dev
 <span class="p">};</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><strong>entry</strong><br>
-entry是页面入口文件配置，可以是一个文件或者多个入口文件，可以是对象格式或者数组格式。</p>
-<div class="highlight"><pre><code class="language-" data-lang="">entry: {
-    index : './src/main.js'
-}
-entry:['./src/main.js','./src/index.js']
-</code></pre></div>
-<p><strong>output</strong><br>
-output 是对应输出项配置,主要包括path,filename和publishPath属性。path代表输出的路径，filename代表输出的文件名称，publishPath代表静态资源发布后的前缀地址<br>
-<strong>module.loaders</strong><br>
-module.loaders 是最关键的一块配置。它告知 webpack 每一种文件都需要使用什么加载器来处理。点击这里可以查看loader list</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">module</span><span class="err">:</span> <span class="p">{</span>
+<p><strong>entry</strong></p>
+
+<p>entry是页面入口文件配置，可以是一个文件或者多个入口文件，可以是对象格式或者数组格式。</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nx">entry</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">index</span> <span class="p">:</span> <span class="s1">'./src/main.js'</span>
+<span class="p">}</span>
+<span class="nl">entry</span><span class="p">:[</span><span class="s1">'./src/main.js'</span><span class="p">,</span><span class="s1">'./src/index.js'</span><span class="p">]</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>output</strong></p>
+
+<p>output 是对应输出项配置,主要包括path,filename和publishPath属性。path代表输出的路径，filename代表输出的文件名称，publishPath代表静态资源发布后的前缀地址</p>
+
+<p><strong>module.loaders</strong></p>
+
+<p>module.loaders 是最关键的一块配置。它告知 webpack 每一种文件都需要使用什么加载器来处理。点击这里可以查看loader list</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td><td class="code"><pre><span class="nx">module</span><span class="err">:</span> <span class="p">{</span>
     <span class="c1">//加载器配置</span>
     <span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
         <span class="c1">//.css 文件使用 style-loader 和 css-loader 来处理</span>
@@ -297,8 +323,9 @@ module.loaders 是最关键的一块配置。它告知 webpack 每一种文件�
         <span class="c1">//图片文件使用 url-loader 来处理，小于8kb的直接转为base64</span>
         <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.(</span><span class="sr">png|jpg</span><span class="se">)</span><span class="sr">$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'url-loader?limit=8192'</span><span class="p">}</span>
     <span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>loader主要有3种使用方式：</p>
 
 <p>1、在页面里面引用资源使用<br>
@@ -313,14 +340,19 @@ module.loaders 是最关键的一块配置。它告知 webpack 每一种文件�
 <p>如上，&quot;-loader&quot;其实是可以省略不写的，多个loader之间用“!”连接起来。<br>
 注意所有的加载器都需要通过 npm 来加载，并建议查阅它们对应的 readme 来看看如何使用。<br>
 拿最后一个 url-loader 来说，它会将样式中引用到的图片转为模块来处理，使用该加载器需要先进行安装：<br>
-npm install url-loader -save-dev<br>
-配置信息的参数“?limit=8192”表示将所有小于8kb的图片都转为base64形式（其实应该说超过8kb的才使用 url-loader 来映射到文件，否则转为data url形式）。也可以使用file-loader来加载资源文件。<br>
-<strong>plugins</strong><br>
-plugins 是插件项，这里我们使用了一个 CommonsChunkPlugin 的插件，它用于提取多个入口文件的公共脚本部分，然后生成一个 common.js 来方便多页面之间进行复用<br>
-如上，包含两种：<br>
-1、第一种webpack自带的一些插件：webpack.ProvidePlugin、webpack.optimize.CommonsChunkPlugin，<br>
-2、另外一种则通过npm包安装的：ExtractTextPlugin<br>
-<strong>resolve</strong></p>
+<code>npm install url-loader -save-dev</code><br>
+配置信息的参数“?limit=8192”表示将所有小于8kb的图片都转为base64形式（其实应该说超过8kb的才使用 url-loader 来映射到文件，否则转为data url形式）。也可以使用file-loader来加载资源文件。</p>
+
+<p><strong>plugins</strong></p>
+
+<p>plugins 是插件项，这里我们使用了一个 CommonsChunkPlugin 的插件，它用于提取多个入口文件的公共脚本部分，然后生成一个 common.js 来方便多页面之间进行复用</p>
+
+<p>如上，包含两种：</p>
+
+<p>1、第一种webpack自带的一些插件：webpack.ProvidePlugin、webpack.optimize.CommonsChunkPlugin，<br>
+2、另外一种则通过npm包安装的：ExtractTextPlugin</p>
+
+<p><strong>resolve</strong></p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">resolve</span><span class="err">:</span> <span class="p">{</span>
     <span class="c1">// require时省略的扩展名，如：require('module') 不需要module.js</span>
     <span class="nl">extension</span><span class="p">:</span> <span class="p">[</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'.js'</span><span class="p">],</span>
@@ -333,16 +365,31 @@ plugins 是插件项，这里我们使用了一个 CommonsChunkPlugin 的插件�
 <h1 id="webpack">运行 webpack</h1>
 
 <p>webpack 的执行也很简单，直接执行</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ webpack --display-error-details
-</code></pre></div>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="gp">$ </span>webpack --display-error-details<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <h1 id="demo1-entry-file">demo1-Entry file</h1>
 
 <p>For example, main.js is an entry file.</p>
-<div class="highlight"><pre><code class="language-" data-lang="">// main.js
-document.write('&lt;h1&gt;Hello World&lt;/h1&gt;');
-</code></pre></div>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="c1">// main.js</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">'&lt;h1&gt;Hello World&lt;/h1&gt;'</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>index.html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -351,8 +398,9 @@ document.write('&lt;h1&gt;Hello World&lt;/h1&gt;');
 <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>Webpack follows webpack.config.js to build bundle.js.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// webpack.config.js</span>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
@@ -363,8 +411,10 @@ document.write('&lt;h1&gt;Hello World&lt;/h1&gt;');
 <span class="p">};</span>
 </code></pre></div>
 <p>Launch the server, visit <a href="http://127.0.0.1:8080">http://127.0.0.1:8080</a> .</p>
-<div class="highlight"><pre><code class="language-" data-lang="">$ webpack-dev-server
-</code></pre></div>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>$ webpack-dev-server<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <h1 id="more">更多-more</h1>
 
 <ul>
