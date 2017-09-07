@@ -10,8 +10,8 @@ description: js事件委托
 # js事件委托
 
 # what is Event Delegation
-事件就是onclick，onmouseover，onmouseout，等就是事件。
-事件委托是指目标元素将自身的响应事件委托给其父级元素来响应。
+事件就是onclick，onmouseover，onmouseout，等就是事件。  
+事件委托是指目标元素将自身的响应事件委托给其父级元素来响应。  
 事件委托的工作原理基于浏览器的冒泡机制。
 
 # why use Event Delegation
@@ -21,14 +21,15 @@ description: js事件委托
 
 # how to realize Event Delegation
 比如要实现，点击每个li，弹出里面的内容
-```html
+
+{% highlight html linenos %}
 <ul id="list">
 	<li id="item1">item 1</li>
 	<li id="item2">item 2</li>
 	<li id="item3">item 3</li>
 	<li id="item4">item 4</li>
 </ul>
-```
+{% endhighlight %}
 
 一般做法
 ```js
@@ -54,9 +55,11 @@ oUl.addEventListener("click",function(e){
     }
 },false);
 ```
+
 现在讲的都是document加载完成的现有dom节点下的操作，那么如果是新增的节点，新增的节点会有事件吗？
 正常的添加节点的方法：
-```html
+
+{% highlight html linenos %}
 <input type="button" id="btn" value="新增">
 <ul id="list">
 	<li id="item1">item 1</li>
@@ -64,8 +67,10 @@ oUl.addEventListener("click",function(e){
 	<li id="item3">item 3</li>
 	<li id="item4">item 4</li>
 </ul>
-```
+{% endhighlight %}
+
 一般的做法
+
 ```js
 window.onload = function(){
 	var oUl = document.getElementById("list");
@@ -92,8 +97,10 @@ window.onload = function(){
 	}
 }   
 ```
+
 新增的li是没有事件的，说明添加子节点的时候，事件没有一起添加进去
 一般的解决方案会是这样，将for循环用一个函数包起来，命名为mHover，如下：
+
 ```js
 var oUl = document.getElementById("list");
 var oBtn = document.getElementById("btn");
@@ -120,6 +127,7 @@ function mHover(){
 }
 mHover();
 ```
+
 虽然功能实现了，但又增加了一个dom操作，在优化性能方面是不可取的。
 
 ```js
@@ -153,9 +161,11 @@ oUl.addEventListener("mouseout",function(e){
     }
 },false);
 ```
+
 事件委托的方式，新添加的元素还会有之前的事件。
 
 # The benefits of using event delegation
+
 - 1.管理的函数变少，不需要为每个元素都添加事件监听函数。
 
 - 2.可以动态的增加和修改元素，无需因为元素的改动而修改事件绑定。

@@ -161,8 +161,8 @@
 
 <h1 id="what-is-event-delegation">what is Event Delegation</h1>
 
-<p>事件就是onclick，onmouseover，onmouseout，等就是事件。<br>
-事件委托是指目标元素将自身的响应事件委托给其父级元素来响应。<br>
+<p>事件就是onclick，onmouseover，onmouseout，等就是事件。<br><br>
+事件委托是指目标元素将自身的响应事件委托给其父级元素来响应。<br><br>
 事件委托的工作原理基于浏览器的冒泡机制。</p>
 
 <h1 id="why-use-event-delegation">why use Event Delegation</h1>
@@ -175,13 +175,20 @@
 <h1 id="how-to-realize-event-delegation">how to realize Event Delegation</h1>
 
 <p>比如要实现，点击每个li，弹出里面的内容</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"list"</span><span class="nt">&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"list"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item1"</span><span class="nt">&gt;</span>item 1<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item2"</span><span class="nt">&gt;</span>item 2<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item3"</span><span class="nt">&gt;</span>item 3<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item4"</span><span class="nt">&gt;</span>item 4<span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/ul&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>一般做法</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">oLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
@@ -206,14 +213,22 @@
 </code></pre></div>
 <p>现在讲的都是document加载完成的现有dom节点下的操作，那么如果是新增的节点，新增的节点会有事件吗？<br>
 正常的添加节点的方法：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"btn"</span> <span class="na">value=</span><span class="s">"新增"</span><span class="nt">&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"btn"</span> <span class="na">value=</span><span class="s">"新增"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"list"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item1"</span><span class="nt">&gt;</span>item 1<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item2"</span><span class="nt">&gt;</span>item 2<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item3"</span><span class="nt">&gt;</span>item 3<span class="nt">&lt;/li&gt;</span>
     <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item4"</span><span class="nt">&gt;</span>item 4<span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/ul&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>一般的做法</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">oUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"list"</span><span class="p">);</span>
