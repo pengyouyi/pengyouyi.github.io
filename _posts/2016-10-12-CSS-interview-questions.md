@@ -12,9 +12,9 @@ description: CSS面试题
 # box model
 - 介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？
 
-（1）有两种， IE 盒子模型、W3C 盒子模型；
-（2）盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border)；
-（3）区  别： IE的content部分把 border 和 padding计算了进去;
+（1）有两种， IE 盒子模型、W3C 盒子模型；  
+（2）盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border)；  
+（3）区  别： IE的content部分把 border 和 padding计算了进去;  
 
 解决IE8及更早版本不兼容问题可以在HTML页面声明 \<!DOCTYPE html\>即可。
 
@@ -31,15 +31,15 @@ description: CSS面试题
 # selector
 - CSS选择符有哪些？哪些属性可以继承？
 
-1.id选择器（ # myid）
-2.类选择器（.myclassname）
-3.标签选择器（div, h1, p）
-4.相邻选择器（h1 + p）
-5.子选择器（ul > li）
-6.后代选择器（li a）
-7.通配符选择器（ * ）
-8.属性选择器（a[rel = "external"]）
-9.伪类选择器（a:hover, li:nth-child）
+1.id选择器（ # myid）  
+2.类选择器（.myclassname）  
+3.标签选择器（div, h1, p）  
+4.相邻选择器（h1 + p）  
+5.子选择器（ul > li）  
+6.后代选择器（li a）  
+7.通配符选择器（ * ）  
+8.属性选择器（a[rel = "external"]）  
+9.伪类选择器（a:hover, li:nth-child） 
 
 可继承的样式： font-size font-family color, ul li dl dd dt（字体属性，列表相关）;
 
@@ -59,7 +59,8 @@ description: CSS面试题
 - CSS3新增伪类有那些？
 
 举例：
-```
+
+{% highlight html linenos %}
 p:first-of-type 选择属于其父元素的首个 <p> 元素的每个 <p> 元素。
 p:last-of-type  选择属于其父元素的最后 <p> 元素的每个 <p> 元素。
 p:only-of-type  选择属于其父元素唯一的 <p> 元素的每个 <p> 元素。
@@ -71,7 +72,7 @@ p:nth-child(2)  选择属于其父元素的第二个子元素的每个 <p> 元�
 :enabled        
 :disabled       控制表单控件的禁用状态。
 :checked        单选框或复选框被选中。
-```
+{% endhighlight %}
 
 # div center
 - 如何居中div？
@@ -149,40 +150,44 @@ div {
 # display
 - display有哪些值？说明他们的作用。
  
-block         块类型。默认宽度为父元素宽度，可设置宽高，换行显示。
-none          缺省值。象行内元素类型一样显示。
-inline        行内元素类型。默认宽度为内容宽度，不可设置宽高，同行显示。
-inline-block  默认宽度为内容宽度，可以设置宽高，同行显示。
-list-item     象块类型元素一样显示，并添加样式列表标记。
-table         此元素会作为块级表格来显示。
-inherit       规定应该从父元素继承 display 属性的值。
+block         块类型。默认宽度为父元素宽度，可设置宽高，换行显示。  
+none          缺省值。象行内元素类型一样显示。  
+inline        行内元素类型。默认宽度为内容宽度，不可设置宽高，同行显示。  
+inline-block  默认宽度为内容宽度，可以设置宽高，同行显示。  
+list-item     象块类型元素一样显示，并添加样式列表标记。  
+table         此元素会作为块级表格来显示。  
+inherit       规定应该从父元素继承 display 属性的值。  
 
 # position
 - position的值relative和absolute定位原点是？
 
-absolute
+absolute  
 生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。
-fixed （老IE不支持）
+
+fixed （老IE不支持）  
 生成绝对定位的元素，相对于浏览器窗口进行定位。
-relative
+
+relative  
 生成相对定位的元素，相对于其正常位置进行定位。
-static
+
+static  
 默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）。
-inherit
+
+inherit  
 规定从父元素继承 position 属性的值。
 
 # css3 new features
 - CSS3有哪些新特性？
 
-新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）
-圆角           （border-radius:8px）
-多列布局        （multi-column layout）
-阴影和反射        （Shadow\Reflect）
-文字特效      （text-shadow、）
-文字渲染      （Text-decoration）
-线性渐变      （gradient）
-旋转          （transform）
-增加了旋转,缩放,定位,倾斜,动画，多背景
+新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）  
+圆角           （border-radius:8px）  
+多列布局        （multi-column layout）  
+阴影和反射        （Shadow\Reflect）  
+文字特效      （text-shadow、）  
+文字渲染      （Text-decoration）  
+线性渐变      （gradient）  
+旋转          （transform）  
+增加了旋转,缩放,定位,倾斜,动画，多背景  
 transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:
 
 # Triangle

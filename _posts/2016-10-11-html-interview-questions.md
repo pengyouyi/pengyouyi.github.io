@@ -28,15 +28,14 @@ description: HTML面试题
 
 首先：CSS规范规定，每个元素都有display属性，确定该元素的类型，每个元素都有默认的display值，如div的display默认值为“block”，则为“块级”元素；span默认display属性值为“inline”，是“行内”元素。
 
-（1）行内元素有：a b span img input select strong（图片，表单元素）
-（2）块级元素有：div ul ol li dl dt dd h1 h2 h3 h4…p (标题，列表)
-
+（1）行内元素有：a b span img input select strong（图片，表单元素）  
+（2）块级元素有：div ul ol li dl dt dd h1 h2 h3 h4…p (标题，列表)  
 （3）常见的空元素：
-```
+{% highlight html linenos %}
     \<br\> <hr> <img> <input> <link> <meta>
     鲜为人知的是：
     <area> <base> <col> <command> <embed> <keygen> <param> <source> <track> <wbr>
-```
+{% endhighlight %}
 
 # link和@import
 - 页面导入样式时，使用link和@import有什么区别？
@@ -52,6 +51,7 @@ description: HTML面试题
 - 介绍一下你对浏览器内核的理解？
 
 主要分成两部分：渲染引擎(layout engineer或Rendering Engine)和JS引擎。
+
 渲染引擎：负责取得网页的内容（HTML、XML、图像等等）、整理讯息（例如加入CSS等），以及计算网页的显示方式，然后会输出至显示器或打印机。浏览器的内核的不同对于网页的语法解释会有不同，所以渲染的效果也不相同。所有网页浏览器、电子邮件客户端以及其它需要编辑、显示网络内容的应用程序都需要内核。
 
 JS引擎则：解析和执行javascript来实现网页的动态效果。
@@ -61,58 +61,63 @@ JS引擎则：解析和执行javascript来实现网页的动态效果。
 # Browser core
 - 常见的浏览器内核有哪些？
 
-Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]
-Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等
-Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]
-Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]
+Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]  
+Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等  
+Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]  
+Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]  
 
 # html5 new features
 - html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
 
 1. HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
 
-绘画 canvas;
-用于媒介回放的 video 和 audio 元素;
-本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;
-sessionStorage 的数据在浏览器关闭后自动删除;
-语意化更好的内容元素，比如 article、footer、header、nav、section;
-表单控件，calendar、date、time、email、url、search;
-新的技术webworker, websocket, Geolocation;
+绘画 canvas;  
+用于媒介回放的 video 和 audio 元素;  
+本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;  
+sessionStorage 的数据在浏览器关闭后自动删除;  
+语意化更好的内容元素，比如 article、footer、header、nav、section;  
+表单控件，calendar、date、time、email、url、search;  
+新的技术webworker, websocket, Geolocation;  
 
-  移除的元素：
-      纯表现的元素：basefont，big，center，font, s，strike，tt，u;
-      对可用性产生负面影响的元素：frame，frameset，noframes；
+移除的元素：  
+纯表现的元素：basefont，big，center，font, s，strike，tt，u;  
+对可用性产生负面影响的元素：frame，frameset，noframes；
 
 2. 支持HTML5新标签：
-     IE8/IE7/IE6支持通过document.createElement方法产生的标签，
-     可以利用这一特性让这些浏览器支持HTML5新标签，
-     浏览器支持新标签后，还需要添加标签默认的样式。
+ IE8/IE7/IE6支持通过document.createElement方法产生的标签，
+ 可以利用这一特性让这些浏览器支持HTML5新标签，
+ 浏览器支持新标签后，还需要添加标签默认的样式。
 
-     当然也可以直接使用成熟的框架、比如html5shim;
-     <!--[if lt IE 9]>
-        `<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>`
-     <![endif]-->
+ 当然也可以直接使用成熟的框架、比如html5shim;
+
+ {% highlight html linenos %}
+ <!--[if lt IE 9]>
+    `<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>`
+ <![endif]-->
+ {% endhighlight %}
 
 3. 如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素
 
 # 语义化-Semantic
 - 简述一下你对HTML语义化的理解？
 
-用正确的标签做正确的事情。
-html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;
-即使在没有样式CSS情况下也以一种文档格式显示，并且是容易阅读的;
-搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;
-使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。
+用正确的标签做正确的事情。  
+html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;  
+即使在没有样式CSS情况下也以一种文档格式显示，并且是容易阅读的;  
+搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;  
+使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。   
 
 # 离线储存-Offline storage
 - HTML5的离线储存怎么使用，工作原理能不能解释一下？
 
 在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件。
+
 原理：HTML5的离线存储是基于一个新建的.appcache文件的缓存机制(不是存储技术)，通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储了下来。之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。
 
 如何使用：
 1、页面头部像下面一样加入一个manifest的属性；
 2、在cache.manifest文件的编写离线存储的资源；
+{% highlight html linenos %}
     CACHE MANIFEST
     #v0.11
     CACHE:
@@ -122,6 +127,7 @@ html语义化让页面的内容结构化，结构更清晰，便于对浏览器�
     resourse/logo.png
     FALLBACK:
     / /offline.html
+{% endhighlight %}
 3、在离线状态时，操作window.applicationCache进行需求实现。
 
 # application cache
@@ -133,17 +139,17 @@ html语义化让页面的内容结构化，结构更清晰，便于对浏览器�
 # cookies
 - 请描述一下 cookies，sessionStorage 和 localStorage 的区别？
 
-cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。
-cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。
-sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。
+cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。  
+cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。  
+sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。  
 
 存储大小：
-    cookie数据大小不能超过4k。
-    sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
+    cookie数据大小不能超过4k。  
+    sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。 
 
 有期时间：
-    localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
-    sessionStorage  数据在当前浏览器窗口关闭后自动删除。
+    localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；  
+    sessionStorage  数据在当前浏览器窗口关闭后自动删除。  
     cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
 
 # iframe
@@ -161,12 +167,13 @@ sessionStorage和localStorage不会自动把数据发给服务器，仅在本地
 - Label的作用是什么？是怎么用的？
 
 label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。
-```html
+
+{% highlight html linenos %}
 <label for="Name">Number:</label>
 <input type=“text“name="Name" id="Name"/>
 
 <label>Date:<input type="text" name="B"/></label>
-```
+{% endhighlight %}
 
 # form close
 - HTML5的form如何关闭自动完成功能？
@@ -206,14 +213,15 @@ ActiveX HTMLFile (IE) 、
 
 # 1px
 - 实现不使用 border 画出1px高的线，在不同浏览器的标准模式与怪异模式下都能保持一致的效果。
-```
+
+{% highlight html linenos %}
 <div style="height:1px;overflow:hidden;background:red"></div>
-```
+{% endhighlight %}
 
 # Verification Code
 - 网页验证码是干嘛的，是为了解决什么安全问题。
 
-区分用户是计算机还是人的公共全自动程序。可以防止恶意破解密码、刷票、论坛灌水；
+区分用户是计算机还是人的公共全自动程序。可以防止恶意破解密码、刷票、论坛灌水；  
 有效防止黑客对某一个特定注册用户用特定程序暴力破解方式进行不断的登陆尝试。
 
 # title
@@ -225,9 +233,9 @@ strong是标明重点内容，有语气加强的含义，使用阅读设备阅�
 
 i内容展示为斜体，em表示强调的文本；
 
-Physical Style Elements -- 自然样式标签
-b, i, u, s, pre
-Semantic Style Elements -- 语义样式标签
-strong, em, ins, del, code
+Physical Style Elements -- 自然样式标签  
+b, i, u, s, pre  
+Semantic Style Elements -- 语义样式标签  
+strong, em, ins, del, code  
 应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。
 
