@@ -227,7 +227,7 @@ require.config({
 
 ## Map参数：
 
-Map参数是用来解决同一个模块不同版本的问题
+Map参数是用来解决同一个模块不同版本的问题  
 building...
 
 
