@@ -159,12 +159,17 @@
 		
 		<h1 id="requirejs">requirejs初学</h1>
 
-<p><strong>a.为什么要使用requireJS</strong><br>
-很久之前，我们所有的JS文件写到一个js文件里面去进行加载，但是当业务越来越复杂的时候，需要分成多个JS文件进行加载，比如在页面中head内分别引入a.js，b.js，c.js等，如下所示：</p>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;script src="js/app/a.js"&gt;&lt;/script&gt;
-&lt;script src="js/app/b.js"&gt;&lt;/script&gt;
-&lt;script src="js/app/c.js"&gt;&lt;/script&gt;
-</code></pre></div>
+<p><strong>a.为什么要使用requireJS</strong></p>
+
+<p>很久之前，我们所有的JS文件写到一个js文件里面去进行加载，但是当业务越来越复杂的时候，需要分成多个JS文件进行加载，比如在页面中head内分别引入a.js，b.js，c.js等，如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app/a.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app/b.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app/c.js"</span><span class="nt">&gt;&lt;/script&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>这段代码依次加载多个js文件。这样的写法有很大的缺点。</p>
 
 <ol>
@@ -175,26 +180,49 @@
 <p><strong>b.使用requireJS的优点有哪些？</strong></p>
 
 <blockquote>
-<p>（1）实现js文件的异步加载，避免网页失去响应；<br>
-（2）管理模块之间的依赖性，便于代码的编写和维护；<br>
-（3）遵循AMD（异步模块定义）规范。</p>
+<p>（1）实现js文件的异步加载，避免网页失去响应；<br><br>
+（2）管理模块之间的依赖性，便于代码的编写和维护；<br><br>
+（3）遵循AMD（异步模块定义）规范。  </p>
 </blockquote>
 
-<p><strong>c.引用-reference</strong><br>
-去requirejs官网下载<a href="http://www.requirejs.cn/docs/download.html">http://www.requirejs.cn/docs/download.html</a>,在页面头部head标签内引入requireJS，如下：<br>
-<code>&lt;script src=&quot;js/require.js&quot;&gt;&lt;/script&gt;</code>，但是加载这个文件也会造成网页失去响应，我们可以加上 defer 和 async这个属性。如下：<code>&lt;script src=&quot;js/require.js&quot; defer async=&quot;true&quot; &gt;&lt;/script&gt;</code></p>
+<p><strong>c.引用-reference</strong></p>
+
+<p>去requirejs官网下载<a href="http://www.requirejs.cn/docs/download.html">http://www.requirejs.cn/docs/download.html</a>,在页面头部head标签内引入requireJS，如下：</p>
+
+<p><code>&lt;script src=&quot;js/require.js&quot;&gt;&lt;/script&gt;</code>，但是加载这个文件也会造成网页失去响应，我们可以加上 defer 和 async这个属性。如下：<code>&lt;script src=&quot;js/require.js&quot; defer async=&quot;true&quot; &gt;&lt;/script&gt;</code></p>
 
 <h1 id="data-main">data-main入口点</h1>
 
-<p>接下来，看看requireJS启动加载脚本的初始化方式，requireJS支持属性 data-main 这个属性来加载初始化的JS文件，如下：<br>
-<code>&lt;script src=&quot;js/require.js&quot; defer async=&quot;true&quot; data-main=&quot;js/app.js&quot;&gt;&lt;/script&gt;</code><br>
-上面的意思是：先异步加载requireJS文件，完成后继续异步加载app.js文件<br>
-上面的app.js后的.js可以去掉，因为requireJS源码已经默认都是以后缀JS文件结尾的。</p>
+<p>接下来，看看requireJS启动加载脚本的初始化方式，requireJS支持属性 data-main 这个属性来加载初始化的JS文件，<br>
+如下：</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/require.js"</span> <span class="na">defer</span> <span class="na">async=</span><span class="s">"true"</span> <span class="na">data-main=</span><span class="s">"js/app.js"</span><span class="nt">&gt;&lt;/script&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>上面的意思是：先异步加载requireJS文件，完成后继续异步加载app.js文件</p>
+
+<p>上面的app.js后的.js可以去掉，因为requireJS源码已经默认都是以后缀JS文件结尾的。</p>
 
 <h1 id="define">如何定义模块文件-define</h1>
 
 <p>RequireJS编写模块不同于其他脚本文件，它良好的使用define来定义一个作用域避免全局空间污染，它可以显示出其依赖关系，并以函数(定义此模块的那个函数)参数的形式将这些依赖进行注入。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html">-demo
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</pre></td><td class="code"><pre>-demo
    index.html
    -js
         require.js
@@ -209,8 +237,21 @@
         -lib
             jquery.js
             backbone.js
-            underscore.js
-</code></pre></div><div class="highlight"><pre><code class="language-html" data-lang="html">//index.html
+            underscore.js<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td><td class="code"><pre>//index.html
 <span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
@@ -221,8 +262,9 @@
 <span class="nt">&lt;body&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>在app.js初始化代码如下：</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">require</span><span class="p">([</span><span class="s1">'app/d1'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">d1</span><span class="p">){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">d1</span><span class="p">);</span>
@@ -235,16 +277,6 @@
     <span class="na">size</span><span class="p">:</span> <span class="s2">"24px"</span>
 <span class="p">});</span>
 </code></pre></div>
-<p><strong><em>result display</em></strong></p>
-
-<div class="rd">
- <img src=http://chuantu.biz/t5/36/1475154019x1929192556.png />
-</div>
-
-<div class="rd">
-  <img src=http://chuantu.biz/t5/36/1475154102x3340469628.png />
-</div>
-
 <p><strong>b.函数式定义</strong></p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d2.js</span>
 <span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
@@ -254,8 +286,9 @@
     <span class="p">}</span>
 <span class="p">});</span>
 </code></pre></div>
-<p><strong>c.存在依赖的函数式定义</strong><br>
-例如d3.js 依赖a.js</p>
+<p><strong>c.存在依赖的函数式定义</strong></p>
+
+<p>例如d3.js 依赖a.js</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d3.js</span>
 <span class="nx">define</span><span class="p">([</span><span class="s1">'./a'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span>
     <span class="k">return</span> <span class="p">{</span>
@@ -287,8 +320,9 @@
        <span class="p">}</span>
     <span class="p">);</span>
 </code></pre></div>
-<p><em>以上命名函数写法,移植需要重命名,不推荐使用</em><br>
-<strong>f.简单包装CommonJS来定义模块</strong></p>
+<p><em>以上命名函数写法,移植需要重命名,不推荐使用</em></p>
+
+<p><strong>f.简单包装CommonJS来定义模块</strong></p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d6.js</span>
 <span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">,</span><span class="nx">module</span><span class="p">){</span>
 
