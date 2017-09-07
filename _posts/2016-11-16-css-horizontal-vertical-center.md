@@ -32,14 +32,15 @@ description: css水平垂直居中的方法总结
 }
 ```
 
-```html
+{% highlight html linenos %}
 <div class="vertical">content</div>
-```
-优点：
+{% endhighlight %}
+
+优点：  
 适合在所有浏览器，没有足够空间时，内容不会被切掉。
 
-缺点：
-仅适合应用在文本和图片上，并且这种方法，当你文本不是单行时，效果极差。
+缺点：  
+仅适合应用在文本和图片上，并且这种方法，当你文本不是单行时，效果极差。  
 这种方法对运用在小元素上是非常有用的，比如说让一个button、图片或者单行文本字段。
 
 ## 父元素高度确定的多行文本（inline element）
@@ -51,6 +52,7 @@ description: css水平垂直居中的方法总结
 ## 宽度高度固定DIV水平垂直居中
 
 ### [绝对定位居中(Absolute Centering)技术](https://www.smashingmagazine.com/2013/08/absolute-horizontal-vertical-centering-css/)
+
 ```css
 .wrap {
   position: relative;
@@ -71,14 +73,16 @@ description: css水平垂直居中的方法总结
   border: 1px solid green;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
   <div class="content">center me</div>
 </div>
-```
-必须设置width、height;
-设置overflow:auto来防止内容越界溢出;
-考虑多浏览器兼容性的话 display: table or display: inline-block;
+{% endhighlight %}
+
+必须设置width、height;  
+设置overflow:auto来防止内容越界溢出;  
+考虑多浏览器兼容性的话 display: table or display: inline-block;  
 [https://www.w3.org/TR/CSS21/visudet.html#Computing_widths_and_margins](https://www.w3.org/TR/CSS21/visudet.html#Computing_widths_and_margins)
 
 ### 负margin方法
@@ -101,16 +105,18 @@ description: css水平垂直居中的方法总结
 	background: #eee;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
 	<div class="content">center me</div>
 </div>
-```
-优点：
+{% endhighlight %}
+
+优点：  
 能在各浏览器下工作，结构简单明了，不需增加额外的标签
 
-缺点：
-由于固定死元素的高度，致使没有足哆的空间，当内容超过容器的大小时，要么会被裁掉，要么会出现滚动条。
+缺点：  
+由于固定死元素的高度，致使没有足哆的空间，当内容超过容器的大小时，要么会被裁掉，要么会出现滚动条。  
 边距大小与padding,和是否定义box-sizing: border-box有关，计算需要根据不同情况。
 
 ### padding填充
@@ -129,11 +135,13 @@ description: css水平垂直居中的方法总结
 	background-clip:content-box;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
   <div class="content"></div>
 </div>
-```
+{% endhighlight %}
+
 也可以用css3的calc()动态计算:
 
 缺点：父级元素和子集元素的宽高都需固定。
@@ -164,13 +172,14 @@ description: css水平垂直居中的方法总结
 	background: #eee;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
 	<div class="relative">
 		<div class="content">123</div>
 	</div>
 </div>
-```
+{% endhighlight %}
 
 ## 宽度高度不固定DIV水平居中
 
@@ -185,16 +194,19 @@ CSS3的fit-content的属性值，可以动态计算元素的宽度。
 	background: #eee;	
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
 	<div class="content">123</div>
 </div>
-```
+{% endhighlight %}
 
 ## 宽度高度不固定DIV水平垂直居中
 
 ### transform方法
+
 translate(-50%,-50%)，百分比计算不是以父元素为基准，而是以自己为基准。
+
 ```css
 .wrap {
 	position: relative;
@@ -210,19 +222,21 @@ translate(-50%,-50%)，百分比计算不是以父元素为基准，而是以自
 	background: #eee;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
 	<div class="content">center me</div>
 </div>
-```
-优点：
-1.内容可变高度
+{% endhighlight %}
+
+优点：  
+1.内容可变高度  
 2.代码量少
 
-缺点：
-1.[IE6,7,8不支持](http://caniuse.com/#search=transform)；
-2.属性需要写浏览器厂商前缀；
-3.外部容器需要设置height；
+缺点：  
+1.[IE6,7,8不支持](http://caniuse.com/#search=transform)；  
+2.属性需要写浏览器厂商前缀；  
+3.外部容器需要设置height；  
 4.如果内容包含文字，现在的浏览器合成技术会使文字模糊不清。
 
 # table布局上下文下的水平垂直居中
@@ -243,19 +257,22 @@ translate(-50%,-50%)，百分比计算不是以父元素为基准，而是以自
   background-color: #ccc;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
   <div class='content'>test</div>
 </div>
-```
-优点：
+{% endhighlight %}
+
+优点：  
 width和height的值只能作为最小值，内容总是会扩大单元格、行以及表格的高度。元素的内容不会因为没足够的空间而被切断或者出现难看的滚动条。
 
-缺点：
-这种方法只适合现代浏览器，ie7和ie6都不能识别 display: table ,display: table-cell。
+缺点：  
+这种方法只适合现代浏览器，ie7和ie6都不能识别 display: table ,display: table-cell。  
 [http://quirksmode.org/css/css2/display.html](http://quirksmode.org/css/css2/display.html)
 
 demo- table-cell在IE6-7工作(未验证)
+
 ```css
 .wrap {
   position: relative;
@@ -282,17 +299,21 @@ demo- table-cell在IE6-7工作(未验证)
 }
 /* .content{_display:inline;} */   /*针对ie6 hack*/
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
   <div class="tableCell">
     <div class="content">content</div>
   </div>
 </div>
-```
+{% endhighlight %}
+
 hack解决方法类似上面的relative方法
 
 # 行内块法inline-block
+
 影子元素 ::before ,宽度高度都无需固定
+
 ```css
 .wrap {
   position: relative;
@@ -315,17 +336,19 @@ hack解决方法类似上面的relative方法
   border: 1px solid green;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
   <div class="content">center me</div>
 </div>
-```
+{% endhighlight %}
 
 # [Flex布局居中](http://www.w3cplus.com/css3/a-visual-guide-to-css3-flexbox-properties.html)
 
 宽度高度都无需固定，[兼容IE10+](http://caniuse.com/#search=flex)
 
 demo- 1
+
 ```css
 .wrap {
   display: flex;
@@ -338,13 +361,15 @@ demo- 1
   border: 1px solid red;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
   <div class="content">content</div>
 </div>
-```
+{% endhighlight %}
 
 demo- 2
+
 ```css
 .wrap {
   display: flex;
@@ -356,13 +381,15 @@ demo- 2
   margin: auto;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
   <div class="content">content</div>
 </div>
-```
+{% endhighlight %}
 
 [demo- 3](https://www.smashingmagazine.com/2013/05/centering-elements-with-flexbox/)
+
 ```css
 .wrap {
     display: -webkit-box;
@@ -387,14 +414,16 @@ demo- 2
     align-items: center;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
   <div class="content">content</div>
 </div>
-```
+{% endhighlight %}
 
 # 视口居中- Within Viewport
-```html
+
+{% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -485,11 +514,12 @@ body {
 </script>
 </body>
 </html>
-```
+{% endhighlight %}
 
 
 
 # 更多-more
+
 - [http://codepen.io/shshaw/full/gEiDt](http://codepen.io/shshaw/full/gEiDt)
 - [How to Center Anything With CSS](How to Center Anything With CSS)
 - [https://css-tricks.com/centering-in-the-unknown/](https://css-tricks.com/centering-in-the-unknown/)
