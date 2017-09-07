@@ -20,7 +20,7 @@ DOM2级事件规定事件包括三个阶段：
 
 ③ 事件冒泡阶段
 
-```html
+{% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,37 +31,41 @@ DOM2级事件规定事件包括三个阶段：
 	<div id="myDiv"></div>		
 </body>
 </html>
-```
+{% endhighlight %}
 
 # 事件捕获event capturing
-如果点击div元素，事件捕获的传播顺序
-**  window对象
-(1) document对象
-(2) html
-(3) body
-(4) div
+如果点击div元素，事件捕获的传播顺序  
+**  window对象  
+(1) document对象  
+(2) html  
+(3) body  
+(4) div  
 
-尽管“DOM2级事件”规范要求事件应该从document对象开始传播和结束，但大部分兼容标准的浏览器会继续将事件的捕获和冒泡延伸到window对象。
+尽管“DOM2级事件”规范要求事件应该从document对象开始传播和结束，但大部分兼容标准的浏览器会继续将事件的捕获和冒泡延伸到window对象。  
 由于老版本的浏览器（such as: IE8及以下版本）不支持，所以很少有人使用事件捕获。
 
 # 事件冒泡event bubbling
-如果点击div元素，事件冒泡的传播顺序
-(1) div
-(2) body
-(3) html
-(4) document
-**  window对象
+如果点击div元素，事件冒泡的传播顺序  
+(1) div  
+(2) body  
+(3) html  
+(4) document  
+**  window对象  
 
 所有现代浏览器都支持事件冒泡，可以放心用。
 
 我们在注册事件的时候，通常使用的是 捕获 或者 冒泡 的 一种：
-```
+
+{% highlight js linenos %}
 obj.addEventListener("click", func, true); // 捕获方式
 obj.addEventListener("click", func, false); // 冒泡方式
-```
+{% endhighlight %}
+
 事件只会因为捕获或者冒泡触发一次。
+
 example-1
-```html
+
+{% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -93,14 +97,16 @@ example-1
     </script>
 </body>
 </html>
-```
+{% endhighlight %}
+
 **_result display_**
 <div class="rd">
 <img src="/assets/images/2016/10-11-12/event-bubbling.png" alt="">
 </div>
 
 example-2
-```html
+
+{% highlight html linenos %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,7 +144,8 @@ example-2
     </script>
 </body>
 </html>
-```
+{% endhighlight %}
+
 **_result display_**
 <div class="rd">
 <img src="/assets/images/2016/10-11-12/event-capturing.png" alt="">
