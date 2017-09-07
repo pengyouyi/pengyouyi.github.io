@@ -36,25 +36,31 @@ description: 清除浮动带来的影响，以及清除浮动应用的原理
 清除浮动的属性有clear:left | right | both；
 
 在浮动元素末尾添加一个新标签，例如：
-```html
+
+{% highlight html linenos %}
 <div style=”clear:both;”></div> (清除float:left 和 float:right的影响)
 <div style=”clear:left;”></div> (清除float:left的影响，如果是float:right造成的浮动影响这样写无用)
 <div style=”clear:right;”></div> (清除float:right的影响，如果是float:left造成的浮动影响这样写无用)
-```
+{% endhighlight %}
+
 ### 2，结尾处加空div标签 clear:both 
+
 css
+
 ```css
 /*清除浮动代码*/ 
 .clearfloat { clear:both } 
 ```
+
 html
-```html
+
+{% highlight html linenos %}
 <div class="div1"> 
 	<div class="float-left">Left</div> 
 	<div class="float-right">Right</div> 
 	<div class="clearfloat"></div> 
 </div> 
-```
+{% endhighlight %}
 
 原理：添加一个空div，利用css提高的clear:both清除浮动，让父级div能自动获取到高度 
 
@@ -65,8 +71,10 @@ html
 建议：不推荐使用，但此方法是以前主要使用的一种清除浮动方法 
 
 ### 3，使用br标签及自身html属性
+
 html
-```html
+
+{% highlight html linenos %}
 <div class="wrap">
     <div class="box1 left">box1   float:left;</div>
     <div class="box2 left">box2   float:left;</div>
@@ -74,7 +82,7 @@ html
     <!-- <br clear="left " />
     <br clear="right" /> --> 
 </div>
-```
+{% endhighlight %}
 
 原理：br 有 clear=“all | left | right | none” 属性
 
@@ -90,28 +98,33 @@ html
 
 BFC（Block formatting contexts），块级格式上下文，是页面上的一个隔离的独立容器，容器里面的子元素与容器外部元素不会相互影响，即BFC阻止外边距叠加、不重叠浮动并且可以包含浮动。因此我们常利用这点来闭合浮动，以达到消除浮动的副作用。
 
-触发 BFC 的条件如下：
-1.根元素(整个页面就是一个大的BFC)；
-2.float为 left | right；
-3.overflow为 hidden | auto | scroll；
-4.display为 inline-block | table-cell | table-caption | flex | inline-flex；
-5.position为 absolute | fixed；
+触发 BFC 的条件如下：  
+1.根元素(整个页面就是一个大的BFC)；  
+2.float为 left | right；  
+3.overflow为 hidden | auto | scroll；  
+4.display为 inline-block | table-cell | table-caption | flex | inline-flex；  
+5.position为 absolute | fixed；  
 
 ### 4，父级div定义 overflow:hidden 
+
 css
+
 ```css
 .clear{
     overflow:hidden; 
     *zoom:1;
 }
 ```
+
 html
-```html
+
+{% highlight html linenos %}
 <div class="wrap clear"  >
     <div class="float-left">box1   float:left;</div>
     <div class="float-left">box2   float:left;</div>
 </div>
-```
+{% endhighlight %}
+
 原理：触发父元素生成BFC，包含浮动元素，且浮动元素的高度也纳入父元素计算。
 
 优点：简单，代码少，浏览器支持好
@@ -153,8 +166,11 @@ html
 ##  触发haslayout来闭合浮动
 
 ### 7，:after+clear+zoom:1
+
 给浮动元素添加伪元素after，并为伪元素定义clear:both；对于不支持:after伪元素的浏览器如IE6~7，可以通过触发haslayout来达到闭合浮动的目的。
+
 css
+
 ```css
 .clearfix:after {
     content: ".";
@@ -167,18 +183,20 @@ css
     *zoom: 1;     /* zoom:1是为了触发IE6~7中的haslayout */
 }
 ```
+
 html
-```html
+
+{% highlight html linenos %}
 <div class="wrap clearfix"  >
     <div class="float-left">float:left;</div>
     <div class="float-left">float:left;</div>
 </div>
-```
+{% endhighlight %}
 
-1) display:block 使生成的元素以块级元素显示,占满剩余空间;
-2) height:0 避免生成内容破坏原有布局的高度。
-3) visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;
-4）通过 content:”.”生成内容作为最后一个元素，至于content里面是点还是看不见的空格"020"(content: "020"; content: " "; )抑或其他都是可以的，例如oocss里面就有经典的 content:”XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX”,有些版本可能content 里面内容为空,不推荐这样做的,firefox直到7.0 content:”” 仍然会产生额外的空隙；
+1) display:block 使生成的元素以块级元素显示,占满剩余空间;  
+2) height:0 避免生成内容破坏原有布局的高度。  
+3) visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;  
+4）通过 content:”.”生成内容作为最后一个元素，至于content里面是点还是看不见的空格"020"(content: "020";   content: " "; )抑或其他都是可以的，例如oocss里面就有经典的 content:”XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX”,有些版本可能content 里面内容为空,不推荐这样做的,firefox直到7.0 content:”” 仍然会产生额外的空隙；  
 5）zoom：1 触发IE hasLayout。
 
 上述，除了clear：both用来闭合浮动的，其他代码无非都是为了隐藏掉content生成的内容，这也就是其他版本的闭合浮动为什么会有font-size：0，line-height：0。
@@ -202,11 +220,12 @@ html
     *zoom: 1;   
 }
 ```
+
 Note that you should always use the double colon, ::, for before and after, unless you need to support IE8. A double colon is standard for pseudo-elements, and the single-colon implementation is deprecated and support could well be dropped in the future.
 
 [http://nicolasgallagher.com/micro-clearfix-hack/](http://nicolasgallagher.com/micro-clearfix-hack/)
 
-[完整例子参见]（http://jsfiddle.net/necolas/K538S/）
+[完整例子参见](http://jsfiddle.net/necolas/K538S/)
 
 Nicolas Gallagher原文中还有:before是为了处理margin边距重叠,如下。
 
@@ -223,6 +242,7 @@ Nicolas Gallagher原文中还有:before是为了处理margin边距重叠,如下�
     *zoom: 1;
 }
 ```
+
 This “micro clearfix” generates pseudo-elements and sets their display to table. This creates an anonymous table-cell and a new block formatting context that means the :before pseudo-element prevents top-margin collapse. The :after pseudo-element is used to clear the floats. As a result, there is no need to hide any generated content and the total amount of code needed is reduced.
 
 Including the :before selector is not necessary to clear the floats, but it prevents top-margins from collapsing in modern browsers. 

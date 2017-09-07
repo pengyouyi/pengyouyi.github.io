@@ -189,10 +189,14 @@
 <p>清除浮动的属性有clear:left | right | both；</p>
 
 <p>在浮动元素末尾添加一个新标签，例如：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">”clear:both;”</span><span class="nt">&gt;&lt;/div&gt;</span> (清除float:left 和 float:right的影响)
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">”clear:both;”</span><span class="nt">&gt;&lt;/div&gt;</span> (清除float:left 和 float:right的影响)
 <span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">”clear:left;”</span><span class="nt">&gt;&lt;/div&gt;</span> (清除float:left的影响，如果是float:right造成的浮动影响这样写无用)
-<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">”clear:right;”</span><span class="nt">&gt;&lt;/div&gt;</span> (清除float:right的影响，如果是float:left造成的浮动影响这样写无用)
-</code></pre></div>
+<span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">”clear:right;”</span><span class="nt">&gt;&lt;/div&gt;</span> (清除float:right的影响，如果是float:left造成的浮动影响这样写无用)<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <h3 id="2-div-clear-both">2，结尾处加空div标签 clear:both</h3>
 
 <p>css</p>
@@ -200,12 +204,18 @@
 <span class="nc">.clearfloat</span> <span class="p">{</span> <span class="nl">clear</span><span class="p">:</span><span class="nb">both</span> <span class="p">}</span> 
 </code></pre></div>
 <p>html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"div1"</span><span class="nt">&gt;</span> 
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"div1"</span><span class="nt">&gt;</span> 
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"float-left"</span><span class="nt">&gt;</span>Left<span class="nt">&lt;/div&gt;</span> 
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"float-right"</span><span class="nt">&gt;</span>Right<span class="nt">&lt;/div&gt;</span> 
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"clearfloat"</span><span class="nt">&gt;&lt;/div&gt;</span> 
-<span class="nt">&lt;/div&gt;</span> 
-</code></pre></div>
+<span class="nt">&lt;/div&gt;</span> <span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>原理：添加一个空div，利用css提高的clear:both清除浮动，让父级div能自动获取到高度 </p>
 
 <p>优点：简单、代码少、浏览器支持好、不容易出现怪问题 </p>
@@ -217,14 +227,22 @@
 <h3 id="3-br-html">3，使用br标签及自身html属性</h3>
 
 <p>html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1 left"</span><span class="nt">&gt;</span>box1   float:left;<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box2 left"</span><span class="nt">&gt;</span>box2   float:left;<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;br</span> <span class="na">clear=</span><span class="s">"all"</span> <span class="nt">/&gt;</span>
     <span class="c">&lt;!-- &lt;br clear="left " /&gt;
     &lt;br clear="right" /&gt; --&gt;</span> 
-<span class="nt">&lt;/div&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>原理：br 有 clear=“all | left | right | none” 属性</p>
 
 <p>优点：比空标签方式语义稍强，代码量较少</p>
@@ -237,12 +255,12 @@
 
 <p>BFC（Block formatting contexts），块级格式上下文，是页面上的一个隔离的独立容器，容器里面的子元素与容器外部元素不会相互影响，即BFC阻止外边距叠加、不重叠浮动并且可以包含浮动。因此我们常利用这点来闭合浮动，以达到消除浮动的副作用。</p>
 
-<p>触发 BFC 的条件如下：<br>
-1.根元素(整个页面就是一个大的BFC)；<br>
-2.float为 left | right；<br>
-3.overflow为 hidden | auto | scroll；<br>
-4.display为 inline-block | table-cell | table-caption | flex | inline-flex；<br>
-5.position为 absolute | fixed；</p>
+<p>触发 BFC 的条件如下：<br><br>
+1.根元素(整个页面就是一个大的BFC)；<br><br>
+2.float为 left | right；<br><br>
+3.overflow为 hidden | auto | scroll；<br><br>
+4.display为 inline-block | table-cell | table-caption | flex | inline-flex；<br><br>
+5.position为 absolute | fixed；  </p>
 
 <h3 id="4-div-overflow-hidden">4，父级div定义 overflow:hidden</h3>
 
@@ -253,11 +271,16 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap clear"</span>  <span class="nt">&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap clear"</span>  <span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"float-left"</span><span class="nt">&gt;</span>box1   float:left;<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"float-left"</span><span class="nt">&gt;</span>box2   float:left;<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>原理：触发父元素生成BFC，包含浮动元素，且浮动元素的高度也纳入父元素计算。</p>
 
 <p>优点：简单，代码少，浏览器支持好</p>
@@ -300,8 +323,9 @@
 
 <h3 id="7-after-clear-zoom-1">7，:after+clear+zoom:1</h3>
 
-<p>给浮动元素添加伪元素after，并为伪元素定义clear:both；对于不支持:after伪元素的浏览器如IE6~7，可以通过触发haslayout来达到闭合浮动的目的。<br>
-css</p>
+<p>给浮动元素添加伪元素after，并为伪元素定义clear:both；对于不支持:after伪元素的浏览器如IE6~7，可以通过触发haslayout来达到闭合浮动的目的。</p>
+
+<p>css</p>
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.clearfix</span><span class="nd">:after</span> <span class="p">{</span>
     <span class="nl">content</span><span class="p">:</span> <span class="s1">"."</span><span class="p">;</span>
     <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
@@ -314,15 +338,20 @@ css</p>
 <span class="p">}</span>
 </code></pre></div>
 <p>html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap clearfix"</span>  <span class="nt">&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap clearfix"</span>  <span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"float-left"</span><span class="nt">&gt;</span>float:left;<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"float-left"</span><span class="nt">&gt;</span>float:left;<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</code></pre></div>
-<p>1) display:block 使生成的元素以块级元素显示,占满剩余空间;<br>
-2) height:0 避免生成内容破坏原有布局的高度。<br>
-3) visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;<br>
-4）通过 content:”.”生成内容作为最后一个元素，至于content里面是点还是看不见的空格&quot;020&quot;(content: &quot;020&quot;; content: &quot; &quot;; )抑或其他都是可以的，例如oocss里面就有经典的 content:”XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX”,有些版本可能content 里面内容为空,不推荐这样做的,firefox直到7.0 content:”” 仍然会产生额外的空隙；<br>
+<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>1) display:block 使生成的元素以块级元素显示,占满剩余空间;<br><br>
+2) height:0 避免生成内容破坏原有布局的高度。<br><br>
+3) visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;<br><br>
+4）通过 content:”.”生成内容作为最后一个元素，至于content里面是点还是看不见的空格&quot;020&quot;(content: &quot;020&quot;;   content: &quot; &quot;; )抑或其他都是可以的，例如oocss里面就有经典的 content:”XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX”,有些版本可能content 里面内容为空,不推荐这样做的,firefox直到7.0 content:”” 仍然会产生额外的空隙；<br><br>
 5）zoom：1 触发IE hasLayout。</p>
 
 <p>上述，除了clear：both用来闭合浮动的，其他代码无非都是为了隐藏掉content生成的内容，这也就是其他版本的闭合浮动为什么会有font-size：0，line-height：0。</p>
@@ -348,7 +377,7 @@ css</p>
 
 <p><a href="http://nicolasgallagher.com/micro-clearfix-hack/">http://nicolasgallagher.com/micro-clearfix-hack/</a></p>
 
-<p>[完整例子参见]（<a href="http://jsfiddle.net/necolas/K538S/%EF%BC%89">http://jsfiddle.net/necolas/K538S/）</a></p>
+<p><a href="http://jsfiddle.net/necolas/K538S/">完整例子参见</a></p>
 
 <p>Nicolas Gallagher原文中还有:before是为了处理margin边距重叠,如下。</p>
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.cf</span><span class="nd">:before</span><span class="o">,</span>
