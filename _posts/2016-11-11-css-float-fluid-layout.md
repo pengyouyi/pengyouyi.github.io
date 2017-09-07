@@ -15,12 +15,14 @@ description: css布局之float流体布局
 # float 固定布局
 
 但这种布局带来的问题较多。比如：
-1.容错性比较槽糕，容易出现问题，牵一发而动全身；
-2.砌砖布局需要元素固定尺寸，难以重复使用；
+
+1.容错性比较槽糕，容易出现问题，牵一发而动全身；  
+2.砌砖布局需要元素固定尺寸，难以重复使用；  
 3.在低版本的IE下会有很多问题。
 
 demo- 固定布局
-```html
+
+{% highlight html linenos %}
 <!doctype html>
 <html>
 <head>
@@ -78,16 +80,20 @@ h3 {
 
 </body>
 </html>
-```
+{% endhighlight %}
+
 **_result display_**
 <div class="rd">
     <img src="/assets/images/2016/10-11-12/11-11-1.png" alt="">
 </div>
+
 # float与流体布局
 
 ## float与单侧尺寸固定的流体布局
+
 demo
-```html
+
+{% highlight html linenos %}
 <!doctype html>
 <html>
 <head>
@@ -141,14 +147,16 @@ h3 {
    
 </body>
 </html>
-```
+{% endhighlight %}
+
 **_result display_**
 <div class="rd">
     <img src="/assets/images/2016/10-11-12/11-11-2.png" alt="">
 </div>
 
 ## float与浮动与两侧皆自适应的流体布局
-```html
+
+{% highlight html linenos %}
 <!doctype html>
 <html>
 <head>
@@ -204,7 +212,8 @@ h3 {
 
 </body>
 </html>
-```
+{% endhighlight %}
+
 **_result display_**
 <div class="rd">
     <img src="/assets/images/2016/10-11-12/11-11-3.png" alt="">
