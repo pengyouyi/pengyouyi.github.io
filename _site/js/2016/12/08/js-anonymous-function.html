@@ -183,14 +183,14 @@
 <p>为什么(function {// code})();可以被执行, 而function {// code}();却会报错?<br>
 // SyntaxError: Unexpected token (</p>
 
-<p>分析：<br>
-(1). 首先, 要清楚两者的区别:<br>
+<p>分析：<br><br>
+(1). 首先, 要清楚两者的区别:<br><br>
 (function {// code})是表达式, function {// code}是函数声明.</p>
 
-<p>(2). 其次, js&quot;预编译&quot;的特点:<br>
+<p>(2). 其次, js&quot;预编译&quot;的特点:<br><br>
 js在&quot;预编译&quot;阶段, 会解释函数声明, 但却会忽略表式.</p>
 
-<p>(3). 当js执行到function() {//code}();时, 由于function() {//code}在&quot;预编译&quot;阶段已经被解释过, js会跳过function(){//code}, 试图去执行();, 故会报错;<br>
+<p>(3). 当js执行到function() {//code}();时, 由于function() {//code}在&quot;预编译&quot;阶段已经被解释过, js会跳过function(){//code}, 试图去执行();, 故会报错;<br><br>
 在解析器解析全局的function或者function内部function关键字的时候，默认是认为function声明，而不是function表达式，如果你不显示告诉编译器，它默认会声明成一个缺少名字的function，并且抛出一个语法错误信息，因为function声明需要一个名字。</p>
 
 <p>当js执行到(function {// code})();时, 由于(function {// code})是表达式, js会去对它求解得到返回值, 由于返回值是一 个函数, 故而遇到();时, 便会被执行.</p>
@@ -218,22 +218,26 @@ js在&quot;预编译&quot;阶段, 会解释函数声明, 但却会忽略表式.<
 </code></pre></div>
 <h1 id="anonymous-function">anonymous function好处</h1>
 
-<p>1.避免占用全局变量名<br>
-2.参数保护,函数是独立作用域,传递参数可以保护临时变量,闭包可以保存循环中需要保留的临时变量,还有组件开发时将命名空间传递到函数中用闭包保护起来,即使命名空间被后面的代码重置,原变量被闭包保护将仍然生存<br>
+<p>1.避免占用全局变量名<br><br>
+2.参数保护,函数是独立作用域,传递参数可以保护临时变量,闭包可以保存循环中需要保留的临时变量,还有组件开发时将命名空间传递到函数中用闭包保护起来,即使命名空间被后面的代码重置,原变量被闭包保护将仍然生存<br><br>
 3.降低风险,因为没有变量名,中间代码又被闭包保护,js注入无法访问,减少被攻击风险</p>
 
-<p>1.</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-        <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s2">"a"</span><span class="p">;</span>
-        <span class="nx">b</span> <span class="o">=</span> <span class="s2">"b"</span><span class="p">;</span>
-        <span class="kd">function</span> <span class="nx">c</span><span class="p">(){</span>
-            <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">})()</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>    <span class="c1">// a is not defined(…)</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">());</span>  <span class="c1">// c is not defined(…)</span>
-</code></pre></div>
+<ol>
+<li> 
+<code>js
+(function(){
+    var a = &quot;a&quot;;
+    b = &quot;b&quot;;
+    function c(){
+        return c;
+    }
+})()
+console.log(a);    // a is not defined(…)
+console.log(b);
+console.log(c());  // c is not defined(…)
+</code></li>
+</ol>
+
 <h1 id="anonymous-function">anonymous function使用场景</h1>
 
 <p>一是回调函数，二是直接执行函数。</p>

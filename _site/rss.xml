@@ -5,8 +5,8 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Thu, 07 Sep 2017 21:49:09 +0800</lastBuildDate>
-        <pubDate>Thu, 07 Sep 2017 21:49:09 +0800</pubDate>
+        <lastBuildDate>Thu, 07 Sep 2017 21:54:36 +0800</lastBuildDate>
+        <pubDate>Thu, 07 Sep 2017 21:54:36 +0800</pubDate>
         <ttl>60</ttl>
 
 
@@ -3513,14 +3513,14 @@ Javascript语言的特殊之处，就在于函数内部可以直接读取全局�
 &lt;p&gt;为什么(function {// code})();可以被执行, 而function {// code}();却会报错?&lt;br&gt;
 // SyntaxError: Unexpected token (&lt;/p&gt;
 
-&lt;p&gt;分析：&lt;br&gt;
-(1). 首先, 要清楚两者的区别:&lt;br&gt;
+&lt;p&gt;分析：&lt;br&gt;&lt;br&gt;
+(1). 首先, 要清楚两者的区别:&lt;br&gt;&lt;br&gt;
 (function {// code})是表达式, function {// code}是函数声明.&lt;/p&gt;
 
-&lt;p&gt;(2). 其次, js&amp;quot;预编译&amp;quot;的特点:&lt;br&gt;
+&lt;p&gt;(2). 其次, js&amp;quot;预编译&amp;quot;的特点:&lt;br&gt;&lt;br&gt;
 js在&amp;quot;预编译&amp;quot;阶段, 会解释函数声明, 但却会忽略表式.&lt;/p&gt;
 
-&lt;p&gt;(3). 当js执行到function() {//code}();时, 由于function() {//code}在&amp;quot;预编译&amp;quot;阶段已经被解释过, js会跳过function(){//code}, 试图去执行();, 故会报错;&lt;br&gt;
+&lt;p&gt;(3). 当js执行到function() {//code}();时, 由于function() {//code}在&amp;quot;预编译&amp;quot;阶段已经被解释过, js会跳过function(){//code}, 试图去执行();, 故会报错;&lt;br&gt;&lt;br&gt;
 在解析器解析全局的function或者function内部function关键字的时候，默认是认为function声明，而不是function表达式，如果你不显示告诉编译器，它默认会声明成一个缺少名字的function，并且抛出一个语法错误信息，因为function声明需要一个名字。&lt;/p&gt;
 
 &lt;p&gt;当js执行到(function {// code})();时, 由于(function {// code})是表达式, js会去对它求解得到返回值, 由于返回值是一 个函数, 故而遇到();时, 便会被执行.&lt;/p&gt;
@@ -3548,22 +3548,26 @@ js在&amp;quot;预编译&amp;quot;阶段, 会解释函数声明, 但却会忽略
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id=&quot;anonymous-function&quot;&gt;anonymous function好处&lt;/h1&gt;
 
-&lt;p&gt;1.避免占用全局变量名&lt;br&gt;
-2.参数保护,函数是独立作用域,传递参数可以保护临时变量,闭包可以保存循环中需要保留的临时变量,还有组件开发时将命名空间传递到函数中用闭包保护起来,即使命名空间被后面的代码重置,原变量被闭包保护将仍然生存&lt;br&gt;
+&lt;p&gt;1.避免占用全局变量名&lt;br&gt;&lt;br&gt;
+2.参数保护,函数是独立作用域,传递参数可以保护临时变量,闭包可以保存循环中需要保留的临时变量,还有组件开发时将命名空间传递到函数中用闭包保护起来,即使命名空间被后面的代码重置,原变量被闭包保护将仍然生存&lt;br&gt;&lt;br&gt;
 3.降低风险,因为没有变量名,中间代码又被闭包保护,js注入无法访问,减少被攻击风险&lt;/p&gt;
 
-&lt;p&gt;1.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;})()&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// a is not defined(…)&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// c is not defined(…)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt; 
+&lt;code&gt;js
+(function(){
+    var a = &amp;quot;a&amp;quot;;
+    b = &amp;quot;b&amp;quot;;
+    function c(){
+        return c;
+    }
+})()
+console.log(a);    // a is not defined(…)
+console.log(b);
+console.log(c());  // c is not defined(…)
+&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
 &lt;h1 id=&quot;anonymous-function&quot;&gt;anonymous function使用场景&lt;/h1&gt;
 
 &lt;p&gt;一是回调函数，二是直接执行函数。&lt;/p&gt;
