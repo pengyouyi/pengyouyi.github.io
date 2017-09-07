@@ -210,9 +210,11 @@ transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:
 可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决
 
 # hover
-- 超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
+- 超链接访问过后hover样式就不出现了 
 
-L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
+被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
+
+L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}  
 记忆顺序：喜欢（L-o-V-e），讨厌（H-A-t-e）
 
 # li 
@@ -230,7 +232,7 @@ L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
 最简单的初始化方法： * {padding: 0; margin: 0;} （强烈不建议）
 
 淘宝的样式初始化代码：
-```
+{% highlight html linenos %}
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
 body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
 h1, h2, h3, h4, h5, h6{ font-size:100%; }
@@ -246,26 +248,31 @@ legend { color:#000; }
 fieldset, img { border:0; }
 button, input, select, textarea { font-size:100%; }
 table { border-collapse:collapse; border-spacing:0; }
-```
+{% endhighlight %}
 
 # css weight
 - css定义的权重
 
-/*权重为1*/
+/*权重为1*/  
 div{
 }
-/*权重为10*/
+
+/*权重为10*/  
 .class1{
 }
-/*权重为100*/
+
+/*权重为100*/  
 \#id1{
 }
-/*权重为100+1=101*/
+
+/*权重为100+1=101*/  
 \#id1 div{
 }
-/*权重为10+1=11*/
+
+/*权重为10+1=11*/  
 .class1 div{
 }
+
 /*权重为10+10+1=21*/
 .class1 .class2 div{
 }
