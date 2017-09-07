@@ -161,7 +161,7 @@
 
 <h1 id="global-context">Global context</h1>
 
-<p>全局的this<br>
+<p>全局的this<br><br>
 In the global execution context (outside of any function), this refers to the global object, whether in strict mode or not.</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In web browsers, the window object is also the global object:</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">window</span><span class="p">);</span> <span class="c1">// true</span>
@@ -201,7 +201,7 @@ In the global execution context (outside of any function), this refers to the gl
 
 <h2 id="simple-call">Simple call</h2>
 
-<p>一般函数的 this<br>
+<p>一般函数的 this<br><br>
 Since the following code is not in strict mode, and because the value of this is not set by the call, this will default to the global object:</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span>
   <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
@@ -220,7 +220,6 @@ Since the following code is not in strict mode, and because the value of this is
     <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">f1</span><span class="p">()</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="p">);</span><span class="c1">//true</span>
-
 </code></pre></div>
 <p>严格模式中，函数的 this 为 undefined,因为严格模式禁止this关键字指向全局对象；对于js“严格模式”具体可以看<a href="http://www.ruanyifeng.com/blog/2013/01/javascript_strict_mode.html">阮一峰先生的Javascript 严格模式详解</a></p>
 
@@ -299,8 +298,9 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="p">}</span>
 <span class="nx">person</span><span class="p">.</span><span class="nx">hello</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">);</span><span class="c1">//clever coder says hello world</span>
 </code></pre></div>
-<p>此时内部函数中的this指向全局对象。<br>
-绑定到外层函数对象person上：一般的处理方式是将this作为变量保存下来，一般约定为that或者self。</p>
+<p>此时内部函数中的this指向全局对象。</p>
+
+<p>绑定到外层函数对象person上：一般的处理方式是将this作为变量保存下来，一般约定为that或者self。</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"clever coder"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">name</span> <span class="p">:</span> <span class="s2">"foocoder"</span><span class="p">,</span>
@@ -327,8 +327,9 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="nx">p</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">f</span><span class="p">());</span> <span class="c1">//3</span>
 </code></pre></div>
-<p>通过 var p = Object.create(o) 创建的对象，p 是基于原型 o 创建出的对象。<br>
-p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里面的 this 是可以指向当前对象的，即对象 p。</p>
+<p>通过 var p = Object.create(o) 创建的对象，p 是基于原型 o 创建出的对象。</p>
+
+<p>p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里面的 this 是可以指向当前对象的，即对象 p。</p>
 
 <h3 id="this-with-a-getter-or-setter">this with a getter or setter</h3>
 
@@ -451,8 +452,10 @@ p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里�
 <h2 id="as-a-dom-event-handler">As a DOM event handler</h2>
 
 <p><code>this === e.currentTarget</code></p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>click<span class="nt">&lt;/div&gt;</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>click<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
 
 <span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>               <span class="c1">// &lt;div id="demo"&gt;click&lt;/div&gt;</span>
@@ -464,12 +467,18 @@ p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里�
 <span class="nx">demo</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="nx">f</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="in-an-in-line-event-handler">In an in–line event handler</h2>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span> <span class="na">onclick=</span><span class="s">"console.log(this)"</span><span class="nt">&gt;</span>click<span class="nt">&lt;/div&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span> <span class="na">onclick=</span><span class="s">"console.log(this)"</span><span class="nt">&gt;</span>click<span class="nt">&lt;/div&gt;</span>
 <span class="c">&lt;!-- &lt;div id="demo" onclick="console.log(this)"&gt;click&lt;/div&gt;  --&gt;</span>
 
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span> <span class="na">onclick=</span><span class="s">"console.log( (function(){ return this })() )"</span><span class="nt">&gt;</span>click2<span class="nt">&lt;/div&gt;</span>
-<span class="c">&lt;!-- window对象 --&gt;</span>
-</code></pre></div>
+<span class="c">&lt;!-- window对象 --&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <h2 id="arrow-functions">Arrow functions</h2>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">book</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">author</span><span class="p">:</span> <span class="s1">'John Resig'</span><span class="p">,</span>
