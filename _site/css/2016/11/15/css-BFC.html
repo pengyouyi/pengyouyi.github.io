@@ -188,15 +188,17 @@
 <li><strong>1、<em>Block-level elements and block boxes</em></strong></li>
 </ul>
 
-<p>1）Block-level elements are those elements of the source document that are formatted visually as blocks (e.g., paragraphs). The following values of the &#39;display&#39; property make an element block-level: &#39;block&#39;, &#39;list-item&#39;, and &#39;table&#39;.<br>
-翻译：<br>
+<p>1）Block-level elements are those elements of the source document that are formatted visually as blocks (e.g., paragraphs). The following values of the &#39;display&#39; property make an element block-level: &#39;block&#39;, &#39;list-item&#39;, and &#39;table&#39;.</p>
+
+<p>翻译：<br><br>
 1）块级元素是那种源文档被格式化为可视块（例如，段落）了的元素，然后使这个元素变成块级元素的display属性取值如下： ‘block’, ‘list-item’, 和 ‘table’。</p>
 
-<p>2）Block-level boxes are boxes that participate in a block formatting context. Each block-level element generates a principal block-level box that contains descendant boxes and generated content and is also the box involved in any positioning scheme<br>
-翻译：<br>
+<p>2）Block-level boxes are boxes that participate in a block formatting context. Each block-level element generates a principal block-level box that contains descendant boxes and generated content and is also the box involved in any positioning scheme</p>
+
+<p>翻译：<br><br>
 2）块级盒block-level box是这种参与了块级排版上下文的一种盒子，每个块级元素都生成了一个包含后代盒子和生成的内容的主要块级盒，并且这个盒子参与了任何定位的计算</p>
 
-<p>总结：<br>
+<p>总结：<br><br>
 block-level box:display 属性为 block, list-item, table 的元素，会生成 block-level box。并且参与 block fomatting context；</p>
 
 <ul>
@@ -207,7 +209,7 @@ block-level box:display 属性为 block, list-item, table 的元素，会生成 
 
 <p>2）An inline box is one that is both inline-level and whose contents participate in its containing inline formatting context. A non-replaced element with a &#39;display&#39; value of &#39;inline&#39; generates an inline box. Inline-level boxes that are not inline boxes (such as replaced inline-level elements, inline-block elements, and inline-table elements) are called atomic inline-level boxes because they participate in their inline formatting context as a single opaque box.</p>
 
-<p>总结：<br>
+<p>总结：<br><br>
 inline-level box:display 属性为 inline, inline-block, inline-table 的元素，会生成 inline-level box。并且参与 inline formatting context；</p>
 
 <p><a href="https://www.w3.org/TR/CSS21/visuren.html#box-gen">https://www.w3.org/TR/CSS21/visuren.html#box-gen</a></p>
@@ -240,10 +242,10 @@ inline-level box:display 属性为 inline, inline-block, inline-table 的元素�
 
 <p>2.BFC是Web页面中盒模型布局的CSS渲染模式。它的<a href="https://www.w3.org/TR/CSS2/visuren.html#positioning-scheme">定位体系</a>属于<a href="https://www.w3.org/TR/CSS21/visuren.html#normal-flow">常规文档流</a>。</p>
 
-<p>Positioning schemes:<br>
+<p>Positioning schemes:<br><br>
 2.1 Normal flow. In CSS 2.1, normal flow includes block formatting of block-level boxes, inline formatting of inline-level boxes, and relative positioning of block-level and inline-level boxes.</p>
 
-<p>Normal flow:<br>
+<p>Normal flow:<br><br>
 Boxes in the normal flow belong to a formatting context, which may be block or inline, but not both simultaneously. Block-level boxes participate in a block formatting context. Inline-level boxes participate in an inline formatting context.</p>
 
 <p>在普通流中的 Box(框) 属于一种 formatting context(格式化上下文) ，类型可以是 block ，或者是 inline ，但不能同时属于这两者。并且， Block boxes(块框) 在 block formatting context(块格式化上下文) 里格式化， Inline boxes(块内框) 则在 inline formatting context(行内格式化上下文) 里格式化。</p>
@@ -311,10 +313,10 @@ Boxes in the normal flow belong to a formatting context, which may be block or i
 
 <p>生成BFC的元素不会和在流中的子元素发生空白边折叠。所以解决这种问题的办法是要为两个容器添加具有BFC的包裹容器。</p>
 
-<p><strong>2、创建了 Block Formatting Context 的元素不能与浮动元素重叠；</strong><br>
+<p><strong>2、创建了 Block Formatting Context 的元素不能与浮动元素重叠；</strong><br><br>
  表格的 border-box、块级的替换元素、或是在普通流中创建了新的 block formatting context（如元素的 &#39;overflow&#39; 特性不为 &#39;visible&#39; 时）的元素不可以与位于相同的 block formatting context 中的浮动元素相重叠。</p>
 
-<p><strong>3、Block Formatting Context就是页面上的一个隔离的独立容器，容器里面的子元素不会在布局上影响到外面的元素，反之也是如此；</strong></p>
+<p><strong>3、Block Formatting   Context就是页面上的一个隔离的独立容器，容器里面的子元素不会在布局上影响到外面的元素，反之也是如此；</strong></p>
 
 <p><strong>4、BFC可以包含浮动，且浮动子元素应该参与其高度计算；</strong></p>
 
@@ -328,11 +330,46 @@ Boxes in the normal flow belong to a formatting context, which may be block or i
 
 <h2 id="overlap">不和浮动元素重叠-overlap</h2>
 
-<p>使用BFC来防止文字环绕<br>
-自适应两栏布局</p>
+<p>使用BFC来防止文字环绕</p>
+
+<p>自适应两栏布局</p>
 
 <p>首先我们来看浮动实现文字环绕的效果。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -365,20 +402,21 @@ Boxes in the normal flow belong to a formatting context, which may be block or i
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>文字环绕效果<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p><strong><em>result display</em></strong></p>
 
 <div class="rd">
     <img src="/assets/images/2016/10-11-12/11-15-1.png" alt="">
 </div>
 
-<p>验证开篇定义BFC的第三条：<br>
-每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。<br>
+<p>验证开篇定义BFC的第三条：<br><br>
+每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。<br><br>
 因此，虽然存在浮动的元素aslide，但main的左边依然会与包含块的左边相接触。</p>
 
-<p>那么怎样让main和aside不重叠？<br>
-根据BFC的区域不会与float box重叠。<br>
+<p>那么怎样让main和aside不重叠？<br><br>
+根据BFC的区域不会与float box重叠。<br><br>
 我们可以通过通过触发main生成BFC,来实现自适应两栏布局,或者防止文字环绕效果。</p>
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.main</span> <span class="p">{</span>
     <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
@@ -395,7 +433,37 @@ Boxes in the normal flow belong to a formatting context, which may be block or i
 <h2 id="margin">防止垂直 margin 重叠</h2>
 
 <p>我们先来看看，同一个BFC中的两个垂直窗口的margin发生的重叠现象</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -424,17 +492,54 @@ Boxes in the normal flow belong to a formatting context, which may be block or i
         <span class="nt">&lt;p&gt;</span>3<span class="nt">&lt;/p&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p><strong><em>result display</em></strong></p>
 
 <div class="rd">
     <img src="/assets/images/2016/10-11-12/11-15-3.png" alt="">
 </div>
 
-<p>如果他们属于不同的BFC，他们之间的外边距将不会折叠。<br>
+<p>如果他们属于不同的BFC，他们之间的外边距将不会折叠。<br><br>
 因此，我们可以在p外面包裹一层容器，并触发该容器生成一个BFC。那么两个P便不属于同一个BFC，就不会发生margin重叠了。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -469,21 +574,57 @@ Boxes in the normal flow belong to a formatting context, which may be block or i
         <span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p><strong><em>result display</em></strong></p>
 
 <div class="rd">
     <img src="/assets/images/2016/10-11-12/11-15-4.png" alt="">
 </div>
 
-<p>番外篇：<br>
-还有一个对父元素进行border的设置也可以解决父子元素margin重叠的问题。</p>
+<p>番外篇：</p>
+
+<p>还有一个对父元素进行border的设置也可以解决父子元素margin重叠的问题。</p>
 
 <h2 id="clear">清除元素内部浮动-clear</h2>
 
 <p>我们先来看内部元素浮动，对外部元素带来高度塌陷的现象</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -516,16 +657,17 @@ Boxes in the normal flow belong to a formatting context, which may be block or i
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box"</span><span class="nt">&gt;</span>float: left;<span class="nt">&lt;/div&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p><strong><em>result display</em></strong></p>
 
 <div class="rd">
     <img src="/assets/images/2016/10-11-12/11-15-5.png" alt="">
 </div>
 
-<p>根据上述BFC的特性第4条：<br>
-计算生成了 block formatting context 的元素的高度时，其浮动子元素应该参与计算。<br>
+<p>根据上述BFC的特性第4条：<br><br>
+计算生成了 block formatting context 的元素的高度时，其浮动子元素应该参与计算。<br><br>
 所以，我们可以触发外部容器BFC，高度将重新计算。比如给outer加上属性<code>overflow:hidden</code>触发其BFC。</p>
 
 <p><strong><em>result display</em></strong></p>
@@ -535,7 +677,7 @@ Boxes in the normal flow belong to a formatting context, which may be block or i
 </div>
 
 <p>使用BFC的其它局限 ：<br>
-1.float:left 父容器float解决了其塌陷问题,且浮动元素本身BFC化，带来浮动元素有破坏性和包裹性，那么父容器的父容器怎么办？</p>
+1.float:left   父容器float解决了其塌陷问题,且浮动元素本身BFC化，带来浮动元素有破坏性和包裹性，那么父容器的父容器怎么办？</p>
 
 <p>2.position:absolute 这个脱离文档流有些严重；</p>
 
