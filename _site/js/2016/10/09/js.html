@@ -160,7 +160,17 @@
 		<h1 id="js">js面试题及答案</h1>
 
 <p>knowledge points</p>
-<div class="highlight"><pre><code class="language-" data-lang="">HTML&amp;CSS：
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre>HTML<span class="err">&amp;</span>CSS：
     对Web标准的理解、浏览器内核差异、兼容性、hack、CSS基本功：布局、盒子模型、选择器优先级、
     HTML5、CSS3、Flexbox
 
@@ -169,8 +179,9 @@ JavaScript：
     DOM、BOM、内存泄漏、跨域、异步装载、模板引擎、前端MVC、路由、模块化、Canvas、ECMAScript 6、Nodejs
 
 其他：
-    移动端、响应式、自动化构建、HTTP、离线存储、WEB安全、优化、重构、团队协作、可维护、易用性、SEO、UED、架构、职业生涯、快速学习能力
-</code></pre></div>
+    移动端、响应式、自动化构建、HTTP、离线存储、WEB安全、优化、重构、团队协作、可维护、易用性、SEO、UED、架构、职业生涯、快速学习能力<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <h1 id="length">字节length</h1>
 
 <p>编写一个方法求一个字符串的字节长度</p>
@@ -297,86 +308,87 @@ JavaScript：
 </code></pre></div>
 <h1 id="ff-amp-ie">FF &amp; IE</h1>
 
-<p>说出3条以上ff(firefox)和ie的脚本兼容问题<br>
-1.event</p>
+<p>说出3条以上ff(firefox)和ie的脚本兼容问题<br><br>
+<strong>1.event</strong></p>
 
-<p>IE下是window.event,FF下的event只能在事件发生的现场使用，Firefox必须从源处添加参数传递，IE忽略这个参数。解决方法：event=event||window.event;</p>
+<p>IE下是window.event,FF下的event只能在事件发生的现场使用，Firefox必须从源处添加参数传递，IE忽略这个参数。<br><br>
+解决方法：<code>event=event||window.event;</code></p>
 
-<p>2.鼠标源事件</p>
+<p><strong>2.鼠标源事件</strong></p>
 
 <p>iE下event有x,y属性，firefox下没有，firefox有pageX，pageY属性，解决方法:mx=event.pageX?event.pageX:event.x;</p>
 
-<p>3.事件源问题</p>
+<p><strong>3.事件源问题</strong></p>
 
 <p>IE下event对象有srcElement属性，但是没有target属性，Firefox下有target属性，但是没有srcElement属性，解决方法同上</p>
 
-<p>4.绑定事件</p>
+<p><strong>4.绑定事件</strong></p>
 
 <p>IE下是 element.attachEvent (“onclick”,function);event.detachEvent(“onclick”,function);Firefox下是</p>
 
 <p>element.addEventListener(“click”,function,true);element.removeEventListener(“click”,function,true);</p>
 
-<p>5.阻止冒泡事件</p>
+<p><strong>5.阻止冒泡事件</strong></p>
 
 <p>preventDefault和stopPropagation在IE下无效，IE下是cancelBubble,retrun false在IE和FF下都有效</p>
 
-<p>6.滤镜问题</p>
+<p><strong>6.滤镜问题</strong></p>
 
 <p>IE下是filter.alpha.opacity,firefox下是style.opacity</p>
 
-<p>7.父节点获取：</p>
+<p><strong>7.父节点获取：</strong></p>
 
 <p>IE中支持使用parentElement和parentNode获取父节点。而Firefox只可以使用parentNode。 </p>
 
 <p>解决方法：因为firefox与IE都支持DOM，因此统一使用parentNode来访问父节点。</p>
 
 <h1 id="abcdefg-efg">截取字符串abcdefg的efg</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js">    <span class="nx">str</span> <span class="o">=</span> <span class="s2">"hello world"</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">str</span> <span class="o">=</span> <span class="s2">"hello world"</span><span class="p">;</span>
 
-    <span class="kd">var</span> <span class="nx">slice</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>  <span class="c1">// 第二个参数位置</span>
+<span class="kd">var</span> <span class="nx">slice</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>  <span class="c1">// 第二个参数位置</span>
 
-    <span class="kd">var</span> <span class="nx">substring</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="c1">// 第二个参数位置，同上slice方法</span>
+<span class="kd">var</span> <span class="nx">substring</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="c1">// 第二个参数位置，同上slice方法</span>
 
-    <span class="kd">var</span> <span class="nx">substr</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="c1">// 第二个参数个数</span>
+<span class="kd">var</span> <span class="nx">substr</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span> <span class="c1">// 第二个参数个数</span>
 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">slice</span><span class="p">);</span> <span class="c1">// "lo w" ，array也有这个方法，array最强大的方法splice，改变原数组</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">slice</span><span class="p">);</span> <span class="c1">// "lo w" ，array也有这个方法，array最强大的方法splice，改变原数组</span>
 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span> <span class="c1">// "hello world"  不改变原字符串</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span> <span class="c1">// "hello world"  不改变原字符串</span>
 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">substring</span><span class="p">);</span> <span class="c1">// "lo w"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">substring</span><span class="p">);</span> <span class="c1">// "lo w"</span>
 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">substr</span><span class="p">);</span> <span class="c1">// "lo worl"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">substr</span><span class="p">);</span> <span class="c1">// "lo worl"</span>
 </code></pre></div>
 <h1 id="char">字符串出现最多的char</h1>
 
 <p>判断一个字符串中出现次数最多的字符，统计这个次数</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">str</span> <span class="o">=</span> <span class="s2">"abcaba"</span><span class="p">;</span>
 
-    <span class="kd">function</span> <span class="nx">getMost</span><span class="p">(</span><span class="nx">str</span><span class="p">){</span>
-        <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
-        <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+<span class="kd">function</span> <span class="nx">getMost</span><span class="p">(</span><span class="nx">str</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
 
-            <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">)]){</span>
-                <span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-                <span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">)]</span> <span class="o">++</span> <span class="p">;</span>
-            <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">)]){</span>
+            <span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+            <span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="nx">i</span><span class="p">)]</span> <span class="o">++</span> <span class="p">;</span>
         <span class="p">}</span>
-        <span class="kd">var</span> <span class="nx">max</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 字符出现最多的次数</span>
-        <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span> <span class="c1">//出现次数最多的是哪个字符</span>
-        <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">){</span>
-            <span class="k">if</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">max</span> <span class="p">){</span>
-                <span class="nx">max</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
-                <span class="nx">index</span> <span class="o">=</span> <span class="nx">j</span><span class="p">;</span> 
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="kd">var</span> <span class="nx">newObj</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="na">maxvalue</span><span class="p">:</span><span class="nx">index</span><span class="p">,</span>
-            <span class="na">maxnum</span><span class="p">:</span><span class="nx">max</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">newObj</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getMost</span><span class="p">(</span><span class="nx">str</span><span class="p">).</span><span class="nx">index</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">max</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 字符出现最多的次数</span>
+    <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span> <span class="c1">//出现次数最多的是哪个字符</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">max</span> <span class="p">){</span>
+            <span class="nx">max</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+            <span class="nx">index</span> <span class="o">=</span> <span class="nx">j</span><span class="p">;</span> 
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">newObj</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">maxvalue</span><span class="p">:</span><span class="nx">index</span><span class="p">,</span>
+        <span class="na">maxnum</span><span class="p">:</span><span class="nx">max</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">newObj</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getMost</span><span class="p">(</span><span class="nx">str</span><span class="p">).</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
 <h1 id="html">语义化的HTML</h1>
 
@@ -385,64 +397,70 @@ JavaScript：
 
 <h1 id="load-faster">load faster</h1>
 
-<p>请说出三种减低页面加载时间的方法<br>
-1、压缩css、js文件<br>
-2、合并js、css文件，减少http请求<br>
-3、外部js、css文件放在最底下<br>
-4、减少dom操作，尽可能用变量替代不必要的dom操作</p>
+<p>请说出三种减低页面加载时间的方法</p>
+
+<p>1、压缩css、js文件<br><br>
+2、合并js、css文件，减少http请求<br><br>
+3、外部js、css文件放在最底下<br><br>
+4、减少dom操作，尽可能用变量替代不必要的dom操作  </p>
 
 <h1 id="fouc">FOUC</h1>
 
-<p>什么是FOUC？你如何来避免FOUC？<br>
-由于css引入使用了@import 或者存在多个style标签以及css文件在页面底部引入使得css文件加载在html之后导致页面闪烁、花屏<br>
+<p>什么是FOUC？你如何来避免FOUC？</p>
+
+<p>由于css引入使用了@import 或者存在多个style标签以及css文件在页面底部引入使得css文件加载在html之后导致页面闪烁、花屏<br>
 用link加载css文件，放在head标签里面</p>
 
 <h1 id="ajax">AJAX</h1>
 
-<p>请尽可能详尽的解释AJAX的工作原理<br>
-创建ajax对象（XMLHttpRequest/ActiveXObject(Microsoft.XMLHttp)）<br>
-判断数据传输方式(GET/POST)<br>
-打开链接 open()<br>
-发送 send()<br>
+<p>请尽可能详尽的解释AJAX的工作原理</p>
+
+<p>创建ajax对象（XMLHttpRequest/ActiveXObject(Microsoft.XMLHttp)）<br><br>
+判断数据传输方式(GET/POST)<br><br>
+打开链接 open()<br><br>
+发送 send()<br><br>
 当ajax对象完成第四步（onreadystatechange）数据接收完成，判断http响应状态（status）200-300之间或者304（缓存）执行回调函数</p>
 
 <h1 id="readonly-amp-disable">readonly &amp; disable</h1>
 
-<p>form中的input可以设置为readonly和disable，请问2者有什么区别？<br>
-readonly不可编辑，但可以选择和复制；值可以传递到后台<br>
+<p>form中的input可以设置为readonly和disable，请问2者有什么区别？</p>
+
+<p>readonly不可编辑，但可以选择和复制；值可以传递到后台<br><br>
 disabled不能编辑，不能复制，不能选择；值不可以传递到后台</p>
 
 <h1 id="web">WEB标准</h1>
 
-<p>WEB标准以及W3C标准是什么?<br>
-标签闭合、标签小写、不乱嵌套、使用外链css和js、结构行为表现的分离。</p>
+<p>WEB标准以及W3C标准是什么?</p>
+
+<p>标签闭合、标签小写、不乱嵌套、使用外链css和js、结构行为表现的分离。</p>
 
 <h1 id=">行内元素</h1>
 
-<p>行内元素有哪些?块级元素有哪些?<br>
-行内元素: a b img em br i span input select<br>
+<p>行内元素有哪些?块级元素有哪些?</p>
+
+<p>行内元素: a b img em br i span input select<br><br>
 块级元素：div p h1-h6 form ul dl ol table</p>
 
 <h1 id="css">哪些css属性可以继承?</h1>
 
-<p>可继承： font-size font-family color, ul li dl dd dt;(字体属性和列表属性)<br>
+<p>可继承： font-size font-family color, ul li dl dd dt;(字体属性和列表属性)<br><br>
 不可继承 ：border padding margin width height ;</p>
 
 <h1 id="css">css优先级算法如何计算?</h1>
 
-<p>!important &gt; id &gt; class &gt; 标签<br>
+<p>!important &gt; id &gt; class &gt; 标签<br><br>
 !important 比 内联优先级高</p>
 
 <h1 id=">前端页面由哪三层构成</h1>
 
-<p>前端页面由哪三层构成，分别是什么?作用是什么?<br>
+<p>前端页面由哪三层构成，分别是什么?作用是什么?<br><br>
 结构层 Html(页面结构内容，骨架) 表示层 CSS(网页的样式和外观) 行为层 js(实现网页的交互，动画效果)</p>
 
 <h1 id=">清除浮动的几种方式，各自的优缺点</h1>
 
-<p>1.使用空标签清除浮动clear:both(缺点，增加无意义的标签)<br>
-2.使用overflow:auto(使用zoom:1用于兼容IE)或：overflow:hidden;<br>
-3.是用afert伪元素清除浮动(用于非IE浏览器)</p>
+<p>1.使用空标签清除浮动clear:both(缺点，增加无意义的标签)<br><br>
+2.使用overflow:auto(使用zoom:1用于兼容IE)或：overflow:hidden;<br><br>
+3.是用afert伪元素清除浮动(用于非IE浏览器)  </p>
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.Clearfix</span><span class="nd">:after</span><span class="p">{</span> 
   <span class="nl">content</span><span class="p">:</span><span class="err">””</span><span class="p">;</span> 
   <span class="nl">display</span><span class="p">:</span><span class="nb">block</span><span class="p">;</span> 
@@ -470,132 +488,154 @@ disabled不能编辑，不能复制，不能选择；值不可以传递到后台
 
 <p>实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Number、String、Object、Array、Boolean）进行值复制</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">clone</span><span class="p">(</span><span class="nx">obj</span><span class="p">){</span>
-        <span class="kd">var</span> <span class="nx">o</span><span class="p">;</span>
-        <span class="k">switch</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">case</span> <span class="s2">"undefined"</span><span class="err">:</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="k">case</span> <span class="s2">"string"</span><span class="err">:</span>
-                <span class="nx">o</span> <span class="o">=</span> <span class="nx">obj</span> <span class="o">+</span> <span class="s2">""</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="k">case</span> <span class="s2">"number"</span><span class="err">:</span>
-                <span class="nx">o</span> <span class="o">=</span> <span class="nx">obj</span> <span class="o">-</span> <span class="mi">0</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="k">case</span> <span class="s2">"boolean"</span><span class="err">:</span>
-                <span class="nx">o</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="k">case</span> <span class="s2">"object"</span><span class="err">:</span>
-                <span class="k">if</span><span class="p">(</span><span class="nx">obj</span> <span class="o">===</span> <span class="kc">null</span><span class="p">){</span>
-                    <span class="nx">o</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-                <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">){</span>
-                    <span class="nx">o</span> <span class="o">=</span> <span class="p">[];</span>
-                    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-                        <span class="nx">o</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-                    <span class="p">}</span>
-                <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-                    <span class="nx">o</span> <span class="o">=</span> <span class="p">{};</span>
-                    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">){</span>
-                        <span class="nx">o</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">clone</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">k</span><span class="p">]);</span>
-                    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">o</span><span class="p">;</span>
+    <span class="k">switch</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s2">"undefined"</span><span class="err">:</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s2">"string"</span><span class="err">:</span>
+            <span class="nx">o</span> <span class="o">=</span> <span class="nx">obj</span> <span class="o">+</span> <span class="s2">""</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s2">"number"</span><span class="err">:</span>
+            <span class="nx">o</span> <span class="o">=</span> <span class="nx">obj</span> <span class="o">-</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s2">"boolean"</span><span class="err">:</span>
+            <span class="nx">o</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s2">"object"</span><span class="err">:</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">obj</span> <span class="o">===</span> <span class="kc">null</span><span class="p">){</span>
+                <span class="nx">o</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+            <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">){</span>
+                <span class="nx">o</span> <span class="o">=</span> <span class="p">[];</span>
+                <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+                    <span class="nx">o</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
                 <span class="p">}</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="nl">default</span> <span class="p">:</span>
-                <span class="nx">o</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+                <span class="nx">o</span> <span class="o">=</span> <span class="p">{};</span>
+                <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">k</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">){</span>
+                    <span class="nx">o</span><span class="p">[</span><span class="nx">k</span><span class="p">]</span> <span class="o">=</span> <span class="nx">clone</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">k</span><span class="p">]);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="nl">default</span> <span class="p">:</span>
+            <span class="nx">o</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
 
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">o</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="p">{</span><span class="na">fd</span><span class="p">:</span><span class="s2">"df"</span><span class="p">,</span><span class="na">fde</span><span class="p">:{</span><span class="na">we</span><span class="p">:</span><span class="mi">3</span><span class="p">}};</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">clone</span><span class="p">(</span><span class="nx">s</span><span class="p">));</span>
+    <span class="k">return</span> <span class="nx">o</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="p">{</span><span class="na">fd</span><span class="p">:</span><span class="s2">"df"</span><span class="p">,</span><span class="na">fde</span><span class="p">:{</span><span class="na">we</span><span class="p">:</span><span class="mi">3</span><span class="p">}};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">clone</span><span class="p">(</span><span class="nx">s</span><span class="p">));</span>
 </code></pre></div>
 <h1 id="inherit">继承的使用-inherit</h1>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"red"</span><span class="p">,</span><span class="s2">"blue"</span><span class="p">,</span><span class="s2">"green"</span><span class="p">];</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">showName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-        <span class="p">}</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"red"</span><span class="p">,</span><span class="s2">"blue"</span><span class="p">,</span><span class="s2">"green"</span><span class="p">];</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">showName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="c1">//第一种继承，原型链</span>
-    <span class="kd">function</span> <span class="nx">Pig</span><span class="p">(){</span>
+<span class="p">}</span>
+<span class="c1">//第一种继承，原型链</span>
+<span class="kd">function</span> <span class="nx">Pig</span><span class="p">(){</span>
 
-    <span class="p">}</span>
-    <span class="nx">Pig</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">();</span>  <span class="c1">//继承所有属性和方法，引起引用类型的原型属性会被所有实例共享</span>
+<span class="p">}</span>
+<span class="nx">Pig</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">();</span>  <span class="c1">//继承所有属性和方法，引起引用类型的原型属性会被所有实例共享</span>
 
-    <span class="kd">var</span> <span class="nx">pig1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pig</span><span class="p">();</span>
-    <span class="nx">pig1</span><span class="p">.</span><span class="nx">colors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"black"</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pig1</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span> <span class="c1">// ["red", "blue", "green", "black"]</span>
+<span class="kd">var</span> <span class="nx">pig1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pig</span><span class="p">();</span>
+<span class="nx">pig1</span><span class="p">.</span><span class="nx">colors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"black"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pig1</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span> <span class="c1">// ["red", "blue", "green", "black"]</span>
 
-    <span class="kd">var</span> <span class="nx">pig2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pig</span><span class="p">();</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pig2</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>  <span class="c1">// ["red", "blue", "green", "black"]</span>
-
-
-    <span class="c1">//第二种继承，借用构造函数</span>
-    <span class="kd">function</span> <span class="nx">Cat</span><span class="p">(</span><span class="nx">myname</span><span class="p">){</span>
-        <span class="nx">Animal</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="s2">"Tom"</span><span class="p">);</span> <span class="c1">// call不能继承对象原型上的方法</span>
-    <span class="p">}</span>
-    <span class="kd">var</span> <span class="nx">cat</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">();</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>  <span class="c1">// Tom</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">showName</span><span class="p">());</span> <span class="c1">//Tom</span>
-
-    <span class="kd">function</span> <span class="nx">Dog</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">colors</span><span class="p">){</span>
-        <span class="nx">Animal</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">arguments</span><span class="p">)</span> <span class="p">;</span>  <span class="c1">//同上call</span>
-        <span class="c1">//Animal.apply(this,[nam,colors]) ;</span>
-    <span class="p">}</span>
-    <span class="kd">var</span> <span class="nx">dog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">(</span><span class="s2">"fuwa"</span><span class="p">);</span>  <span class="c1">// uwa</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dog</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">pig2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Pig</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">pig2</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>  <span class="c1">// ["red", "blue", "green", "black"]</span>
 
 
-    <span class="c1">//第三种，组合继承</span>
-    <span class="kd">function</span> <span class="nx">Super</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"red"</span><span class="p">,</span><span class="s2">"blue"</span><span class="p">,</span><span class="s2">"green"</span><span class="p">];</span>
-    <span class="p">}</span>
-    <span class="nx">Super</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="kd">function</span> <span class="nx">Sub</span><span class="p">(</span><span class="nx">myname</span><span class="p">,</span><span class="nx">age</span><span class="p">){</span>
-        <span class="c1">//继承属性</span>
-        <span class="nx">Super</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">myname</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="c1">//第二种继承，借用构造函数</span>
+<span class="kd">function</span> <span class="nx">Cat</span><span class="p">(</span><span class="nx">myname</span><span class="p">){</span>
+    <span class="nx">Animal</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="s2">"Tom"</span><span class="p">);</span> <span class="c1">// call不能继承对象原型上的方法</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">cat</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Cat</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>  <span class="c1">// Tom</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cat</span><span class="p">.</span><span class="nx">showName</span><span class="p">());</span> <span class="c1">//Tom</span>
 
-    <span class="c1">//继承方法</span>
-    <span class="nx">Sub</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Super</span><span class="p">();</span>
-    <span class="nx">Sub</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Sub</span><span class="p">;</span>
-    <span class="nx">Sub</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayAge</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="kd">function</span> <span class="nx">Dog</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">colors</span><span class="p">){</span>
+    <span class="nx">Animal</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">arguments</span><span class="p">)</span> <span class="p">;</span>  <span class="c1">//同上call</span>
+    <span class="c1">//Animal.apply(this,[nam,colors]) ;</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">dog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">(</span><span class="s2">"fuwa"</span><span class="p">);</span>  <span class="c1">// uwa</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dog</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 
-    <span class="kd">var</span> <span class="nx">sub1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sub</span><span class="p">(</span><span class="s2">"peng"</span><span class="p">,</span><span class="mi">23</span><span class="p">);</span>
-    <span class="nx">sub1</span><span class="p">.</span><span class="nx">colors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"black"</span><span class="p">);</span>  <span class="c1">// ["red", "blue", "green", "black"]</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sub1</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>
-    <span class="nx">sub1</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>
-    <span class="nx">sub1</span><span class="p">.</span><span class="nx">sayAge</span><span class="p">();</span>
+<span class="c1">//第三种，组合继承</span>
+<span class="kd">function</span> <span class="nx">Super</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"red"</span><span class="p">,</span><span class="s2">"blue"</span><span class="p">,</span><span class="s2">"green"</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="nx">Super</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">Sub</span><span class="p">(</span><span class="nx">myname</span><span class="p">,</span><span class="nx">age</span><span class="p">){</span>
+    <span class="c1">//继承属性</span>
+    <span class="nx">Super</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">myname</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+<span class="p">}</span>
 
-    <span class="kd">var</span> <span class="nx">sub2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sub</span><span class="p">(</span><span class="s2">"youyi"</span><span class="p">,</span><span class="mi">50</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sub2</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>  <span class="c1">// ["red", "blue", "green"]</span>
-    <span class="nx">sub2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>
-    <span class="nx">sub2</span><span class="p">.</span><span class="nx">sayAge</span><span class="p">();</span>
+<span class="c1">//继承方法</span>
+<span class="nx">Sub</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Super</span><span class="p">();</span>
+<span class="nx">Sub</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Sub</span><span class="p">;</span>
+<span class="nx">Sub</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayAge</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">sub1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sub</span><span class="p">(</span><span class="s2">"peng"</span><span class="p">,</span><span class="mi">23</span><span class="p">);</span>
+<span class="nx">sub1</span><span class="p">.</span><span class="nx">colors</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"black"</span><span class="p">);</span>  <span class="c1">// ["red", "blue", "green", "black"]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sub1</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>
+<span class="nx">sub1</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>
+<span class="nx">sub1</span><span class="p">.</span><span class="nx">sayAge</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">sub2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Sub</span><span class="p">(</span><span class="s2">"youyi"</span><span class="p">,</span><span class="mi">50</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sub2</span><span class="p">.</span><span class="nx">colors</span><span class="p">);</span>  <span class="c1">// ["red", "blue", "green"]</span>
+<span class="nx">sub2</span><span class="p">.</span><span class="nx">sayName</span><span class="p">();</span>
+<span class="nx">sub2</span><span class="p">.</span><span class="nx">sayAge</span><span class="p">();</span>
 </code></pre></div>
 <h1 id="closure">闭包（closure）</h1>
 
-<p>什么是闭包（closure），为什么要用它？<br>
-闭包是指有权访问另一个函数作用域中变量的函数，创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量,利用闭包可以突破作用链域，将函数内部的变量和方法传递到外部。</p>
+<p>什么是闭包（closure），为什么要用它？</p>
+
+<p>闭包是指有权访问另一个函数作用域中变量的函数，创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量,利用闭包可以突破作用链域，将函数内部的变量和方法传递到外部。</p>
 
 <p>闭包的特性：</p>
 
-<p>1.函数内再嵌套函数<br>
-2.内部函数可以引用外层的参数和变量<br>
-3.参数和变量不会被垃圾回收机制回收</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;li&gt;</span> index = 1<span class="nt">&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;</span> index = 2<span class="nt">&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;</span> index = 3<span class="nt">&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;</span> index = 4<span class="nt">&lt;/li&gt;</span>
-        <span class="nt">&lt;li&gt;</span> index = 5<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;/ul&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+<p>1.函数内再嵌套函数<br><br>
+2.内部函数可以引用外层的参数和变量<br><br>
+3.参数和变量不会被垃圾回收机制回收  </p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></td><td class="code"><pre><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 1<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 2<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 3<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 4<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 5<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">ulEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">liEle</span> <span class="o">=</span> <span class="nx">ulEle</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
@@ -608,45 +648,49 @@ disabled不能编辑，不能复制，不能选择；值不可以传递到后台
         <span class="p">})(</span><span class="nx">i</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
+    
+<span class="nt">&lt;/script&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-    <span class="nt">&lt;/script&gt;</span>
-</code></pre></div>
 <h1 id="event">跨浏览器事件处理event</h1>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">addEvent</span><span class="p">(</span><span class="nx">elem</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">handler</span><span class="p">){</span>
-    <span class="err">　　</span><span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">){</span>
-    <span class="err">　　　　</span><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">handler</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="err">　　</span><span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">){</span>
-               <span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
-    <span class="err">　　</span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
-    <span class="err">　　</span>     <span class="nx">elem</span><span class="p">[</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">]</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">;</span>
-          <span class="p">}</span>
-    <span class="p">}</span>
+<span class="err">　　</span><span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">){</span>
+<span class="err">　　　　</span><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">handler</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="err">　　</span><span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">){</span>
+           <span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+<span class="err">　　</span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="err">　　</span>     <span class="nx">elem</span><span class="p">[</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">]</span> <span class="o">=</span> <span class="nx">handler</span><span class="p">;</span>
+      <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h1 id="this">this</h1>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">count</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="na">count</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
 
-      <span class="na">getCount</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
-      <span class="p">}</span>
-    <span class="p">};</span>
+  <span class="na">getCount</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
 
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">User</span><span class="p">.</span><span class="nx">getCount</span><span class="p">());</span>  <span class="c1">// 1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">User</span><span class="p">.</span><span class="nx">getCount</span><span class="p">());</span>  <span class="c1">// 1</span>
 
-    <span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="nx">User</span><span class="p">.</span><span class="nx">getCount</span><span class="p">;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">func</span><span class="p">());</span>  <span class="c1">// undefined</span>
+<span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="nx">User</span><span class="p">.</span><span class="nx">getCount</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">func</span><span class="p">());</span>  <span class="c1">// undefined</span>
 </code></pre></div>
 <h1 id="graceful-degradation">优雅降级 graceful degradation</h1>
 
-<p>什么叫优雅降级和渐进增强？<br>
-渐进增强 progressive enhancement： <br>
-针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。 <br>
-优雅降级 graceful degradation： <br>
-一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。 <br>
-区别： <br>
-a. 优雅降级是从复杂的现状开始，并试图减少用户体验的供给 <br>
-b. 渐进增强则是从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要 <br>
-c. 降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带</p>
+<p>什么叫优雅降级和渐进增强？</p>
+
+<p>渐进增强 progressive enhancement：<br><br>
+针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。 </p>
+
+<p>优雅降级 graceful degradation：<br><br>
+一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。<br><br>
+区别： </p>
+
+<p>a. 优雅降级是从复杂的现状开始，并试图减少用户体验的供给<br><br>
+b. 渐进增强则是从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要<br><br>
+c. 降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带  </p>
 
 <h1 id="js-standard">Js standard</h1>
 
@@ -654,15 +698,15 @@ c. 降级（功能衰减）意味着往回看；而渐进增强则意味着朝�
 <li>说几条写JavaScript的基本规范？</li>
 </ul>
 
-<p>1.不要在同一行声明多个变量。<br>
-2.请使用 ===/!==来比较true/false或者数值<br>
-3.使用对象字面量替代new Array这种形式<br>
-4.不要使用全局函数。<br>
-5.Switch语句必须带有default分支<br>
-6.函数不应该有时候有返回值，有时候没有返回值。<br>
-7.For循环必须使用大括号<br>
-8.If语句必须使用大括号<br>
-9.for-in循环中的变量 应该使用var关键字明确限定作用域，从而避免作用域污染。</p>
+<p>1.不要在同一行声明多个变量。<br><br>
+2.请使用 ===/!==来比较true/false或者数值<br><br>
+3.使用对象字面量替代new Array这种形式<br><br>
+4.不要使用全局函数。<br><br>
+5.Switch语句必须带有default分支<br><br>
+6.函数不应该有时候有返回值，有时候没有返回值。<br><br>
+7.For循环必须使用大括号<br><br>
+8.If语句必须使用大括号<br><br>
+9.for-in循环中的变量 应该使用var关键字明确限定作用域，从而避免作用域污染。  </p>
 
 <h1 id="stack-amp-heap">stack &amp; heap</h1>
 
@@ -670,12 +714,14 @@ c. 降级（功能衰减）意味着往回看；而渐进增强则意味着朝�
 <li>JavaScript有几种类型的值？，你能画一下他们的内存图吗？</li>
 </ul>
 
-<p>栈：原始数据类型（Undefined，Null，Boolean，Number、String） <br>
+<p>栈：原始数据类型（Undefined，Null，Boolean，Number、String）<br><br>
 堆：引用数据类型（对象、数组和函数）</p>
 
-<p>两种类型的区别是：存储位置不同；<br>
-原始数据类型直接存储在栈(stack)中的简单数据段，占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储；<br>
-引用数据类型存储在堆(heap)中的对象,占据空间大、大小不固定,如果存储在栈中，将会影响程序运行的性能；引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体</p>
+<p>两种类型的区别是：存储位置不同；</p>
+
+<p>原始数据类型直接存储在栈(stack)中的简单数据段，占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储；</p>
+
+<p>引用数据类型存储在堆(heap)中的对象,占据空间大、大小不固定,如果存储在栈中，将会影响程序运行的性能；引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其在栈中的地址，取得地址后从堆中获得实体</p>
 
 <h1 id="create-object">create object</h1>
 
@@ -753,30 +799,30 @@ c. 降级（功能衰减）意味着往回看；而渐进增强则意味着朝�
 <li>null，undefined 的区别？</li>
 </ul>
 
-<p>null        表示一个对象是“没有值”的值，也就是值为“空”；<br>
+<p>null        表示一个对象是“没有值”的值，也就是值为“空”；<br><br>
 undefined   表示一个变量没有被声明，不存在这个值，或者被声明了但没有被赋值；</p>
 
-<p>undefined不是一个有效的JSON，而null是；<br>
-undefined的类型(typeof)是undefined；<br>
+<p>undefined不是一个有效的JSON，而null是；<br><br>
+undefined的类型(typeof)是undefined；<br><br>
 null的类型(typeof)是object；</p>
 
-<p>Javascript将未赋值的变量默认值设为undefined；<br>
+<p>Javascript将未赋值的变量默认值设为undefined；<br><br>
 Javascript从来不会将变量设为null。它是用来让程序员表明某个用var声明的变量时没有值的。</p>
 
-<p>typeof undefined<br>
-    //&quot;undefined&quot;<br>
-    undefined :是一个表示&quot;无&quot;的原始值或者说表示&quot;缺少值&quot;，就是此处应该有一个值，但是还没有定义。当尝试读取时会返回 undefined； <br>
-    例如变量被声明了，但没有赋值时，就等于undefined</p>
+<p>typeof undefined<br><br>
+    //&quot;undefined&quot;<br><br>
+    undefined :是一个表示&quot;无&quot;的原始值或者说表示&quot;缺少值&quot;，就是此处应该有一个值，但是还没有定义。当尝试读取时会返回 undefined；<br><br>
+    例如变量被声明了，但没有赋值时，就等于undefined  </p>
 
-<p>typeof null<br>
-    //&quot;object&quot;<br>
-    null : 是一个对象(空对象, 没有任何属性和方法)；<br>
-    例如作为函数的参数，表示该函数的参数不是对象；</p>
+<p>typeof null<br><br>
+    //&quot;object&quot;<br><br>
+    null : 是一个对象(空对象, 没有任何属性和方法)；<br><br>
+    例如作为函数的参数，表示该函数的参数不是对象；  </p>
 
-<p>注意：<br>
-    在验证null时，一定要使用　=== ，因为 == 无法分别 null 和　undefined<br>
-    null == undefined // true<br>
-    null === undefined // false</p>
+<p>注意：<br><br>
+    在验证null时，一定要使用　=== ，因为 == 无法分别 null 和　undefined<br><br>
+    null == undefined // true<br><br>
+    null === undefined // false  </p>
 
 <h1 id="event">event</h1>
 
@@ -867,14 +913,21 @@ Javascript从来不会将变量设为null。它是用来让程序员表明某个
 <li>JSON 的了解</li>
 </ul>
 
-<p>JSON字符串转换为JSON对象:<br>
-var obj =eval(&#39;(&#39;+ str +&#39;)&#39;);<br>
-var obj = str.parseJSON();<br>
-var obj = JSON.parse(str);</p>
+<p>JSON字符串转换为JSON对象:</p>
 
-<p>JSON对象转换为JSON字符串：<br>
-var last=obj.toJSONString();<br>
-var last=JSON.stringify(obj);</p>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span><span class="nb">eval</span><span class="p">(</span><span class="s1">'('</span><span class="o">+</span> <span class="nx">str</span> <span class="o">+</span><span class="s1">')'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">parseJSON</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>JSON对象转换为JSON字符串：</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>var last=obj.toJSONString();
+var last=JSON.stringify(obj);<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h1 id="more">更多-more</h1>
 
