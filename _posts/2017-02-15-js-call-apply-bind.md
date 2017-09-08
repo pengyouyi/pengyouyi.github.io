@@ -35,8 +35,9 @@ fun.apply(thisArg[, argsArray])
 ```
 
 # apply、call 的区别
-对于 apply、call 二者而言，作用完全一样，只是接受参数的方式不太一样。
+对于 apply、call 二者而言，作用完全一样，只是接受参数的方式不太一样。  
 call()方法接受的是若干个参数的列表，而apply()方法接受的是一个包含多个参数的数组。
+
 ```js
 var func = function(arg1, arg2) {
      
@@ -50,6 +51,7 @@ func.apply(this, [arg1, arg2])
 当你的参数是明确知道数量时用 call ，而不确定的时候用 apply，然后把参数 push 进数组传递进去。当参数数量不确定时，函数内部也可以通过 arguments 这个伪数组来遍历所有的参数。
 
 ## 使用call方法调用函数并且指定上下文的'this'
+
 ```js
 function fruits() {}
   
@@ -63,6 +65,7 @@ fruits.prototype = {
 var apple = new fruits;
 apple.say();    //My color is red
 ```
+
 使用call 和 apply 改变 this 指向
 ```js
 banana = {
@@ -71,8 +74,10 @@ banana = {
 apple.say.call(banana);     //My color is yellow
 apple.say.apply(banana);    //My color is yellow
 ```
+
 ## 使用call方法调用父构造函数
 在一个子构造函数中，你可以通过调用父构造函数的 call 方法来实现继承，。下例中，使用 Food 构造函数创建的对象实例都会拥有在 Product 构造函数中添加的 name 属性和 price 属性,但 category 属性是在Food构造函数中定义的。
+
 ```js
 function Product(name, price) {
   this.name = name;
@@ -104,6 +109,7 @@ var cheese = new Food('feta', 5);
 ```
 
 ## 使用call方法调用匿名函数
+
 ```js
 var animals = [
   {species: 'Lion', name: 'King'},
@@ -183,6 +189,7 @@ retrieveX(); // 返回 9, 在这种情况下，"this"指向全局作用域
 var boundGetX = retrieveX.bind(module);
 boundGetX(); // 返回 81
 ```
+
 ## bind()的优雅使用
 在常见的单体模式中，通常我们会使用 _this , that , self 等保存 this
 ```js
@@ -197,7 +204,9 @@ var foo = {
     }
 }
 ```
+
 使用 bind() 可以更加优雅的解决这个问题：
+
 ```js
 var foo = {
     bar : 1,
@@ -210,6 +219,7 @@ var foo = {
 }
 ```
 ## 多次调用bind()
+
 ```js
 var bar = function(){
     console.log(this.x);
@@ -229,8 +239,11 @@ var fiv = {
 var func = bar.bind(foo).bind(sed).bind(fiv);
 func(); //?
 ```
+
 答案是，两次都仍将输出 3 ，而非期待中的 4 和 5 。原因是，在Javascript中，多次 bind() 是无效的。更深层次的原因， bind() 的实现，相当于使用函数在内部包了一个 call / apply ，第二次 bind() 相当于再包住第一次 bind() ,故第二次以后的 bind 是无法生效的。
+
 ## Polyfill（兼容旧浏览器）
+
 bind 函数在 ECMA-262 第五版才被加入；它可能无法在所有浏览器上运行。你可以部份地在脚本开头加入以下代码，就能使它运作，让不支持的浏览器也能使用 bind() 功能。
 
 ```js
@@ -261,6 +274,7 @@ if (!Function.prototype.bind) {
 ```
 
 # apply、call、bind比较
+
 ```js
 var obj = {
     x: 81,
@@ -276,12 +290,13 @@ console.log(foo.getX.bind(obj)());  //81
 console.log(foo.getX.call(obj));    //81
 console.log(foo.getX.apply(obj));   //81
 ```
+
 当你希望改变上下文环境之后并非立即执行，而是回调执行的时候，使用 bind() 方法。而 apply/call 则会立即执行函数。
 
 # Summary
-apply 、 call 、bind 三者都是用来改变函数的this对象的指向的；
-apply 、 call 、bind 三者第一个参数都是this要指向的对象，也就是想指定的上下文；
-apply 、 call 、bind 三者都可以利用后续参数传参；
+apply 、 call 、bind 三者都是用来改变函数的this对象的指向的；  
+apply 、 call 、bind 三者第一个参数都是this要指向的对象，也就是想指定的上下文；  
+apply 、 call 、bind 三者都可以利用后续参数传参；  
 bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调用 。
 
 # 更多-more

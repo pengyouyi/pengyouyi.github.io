@@ -10,10 +10,10 @@ description: js中的伪数组
 # js中的伪数组
 
 ## 原始数据-primitive data
-原始数据 （原始值、原始数据类型）不是一种 object 类型并且没有自己的方法的。
+原始数据 （原始值、原始数据类型）不是一种 object 类型并且没有自己的方法的。  
 在 JavaScript 中，有六种原始数据类型：string，number，boolean，null，undefined，symbol (new in ECMAScript 2015)。
 
-除此之外其他所有的都是对象，包括函数(Function)
+除此之外其他所有的都是对象，包括函数(Function)  
 引用数据类型：Object(Array,Date,RegExp,Function)
 
 所有的原始数据都是不变的（即不能被改变）。
@@ -30,11 +30,12 @@ description: js中的伪数组
 # what is Array-like objects
 定义：
 
-1、拥有length属性；
-2、按索引方式存储数据，也即其它属性（索引）为非负整数(对象中的索引会被当做字符串来处理，这里你可以当做是个非负整数串来理解)；
+1、拥有length属性；  
+2、按索引方式存储数据，也即其它属性（索引）为非负整数(对象中的索引会被当做字符串来处理，这里你可以当做是个非负整数串来理解)；  
 3、不具有数组所具有的方法,如push()、pop()等方法。但仍可以对真正数组遍历方法来遍历它们。
 
 伪数组，就是像数组一样有 length 属性，也有 0、1、2、3 等属性的对象，看起来就像数组一样，但不是数组，比如
+
 ```js
 var fakeArray = {
     length: 3,
@@ -51,6 +52,7 @@ for (var i = 0; i < fakeArray.length; i++) {
 ```
 
 伪数组是一个 Object，而真实的数组是一个 Array。
+
 ```js
 fakeArray instanceof Array === false;
 Object.prototype.toString.call(fakeArray) === "[object Object]";
@@ -80,10 +82,12 @@ function isArrayLike(o) {
 {% endhighlight %}
 
 更简单的办法来判断，用 Array.isArray
+
 ```js
 Array.isArray(fakeArray) === false;
 Array.isArray(arr) === true;
 ```
+
 # Common array-like object
 
 - function内的arguments对象
@@ -112,6 +116,7 @@ console.log(arr01[0]);//a
 var arr02 = [].slice.call(fakeArray01); 
 console.log(arr02[0]);//a 
 ```
+
 slice 可以用来获取数组片段，它返回新数组，不会修改原数组。 
 
 fakeArray01被成功的转换成了Array对象。通过[].slice.call这种形式实现同样的效果,但以prototype的形式执行程序效率更高，同样代码也更加优美。 
@@ -129,8 +134,10 @@ var fakeArray02 = {0:'a',1:'b',length:'num'};//length不是数值
 var arr02 = Array.prototype.slice.call(fakeArray02); 
 alert(arr02[1]);//undefined 
 ```
+
 同样fakeArray01和fakeArray02被转换成了真正的数组，但是数组中的值都为undefined 
 查看 V8 引擎 array.js  的源码，可以将 slice 的内部实现简化为： 
+
 ```js
 function slice(start, end) { 
 var len = ToUint32(this.length), result = []; 
@@ -140,7 +147,9 @@ for(var i = start; i < end; i++) {
 return result; 
 }
 ```
+
 可以看出，slice 并不需要 this 为 array 类型，只需要有 length 属性即可。并且 length 属性可以不为 number 类型，当不能转换为数值时，ToUnit32(this.length) 返回 0. 
+
 根据以上结论可以得出：fakeArray01被转换成了lenth为2的数组，其值都被初始化为undefined,fakeArray02被转换成了length为0的数组，自然访问下标为1的元素返回undefined 
 
 # IE的问题
@@ -164,6 +173,7 @@ var makeArray = function(obj) {
     }
 };
 ```
+
 # demo
 ```js
 var fakeArray = {
@@ -186,6 +196,7 @@ console.log(arr01[1]);  // undefined
 console.log(arr01[2]);  // third
 console.log(arr01[3]);  // undefined
 ```
+
 ```js
 var fakeArray = {
     length: "num",

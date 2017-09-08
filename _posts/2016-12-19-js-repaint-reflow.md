@@ -10,8 +10,9 @@ description: 浏览器重排与重绘
 # repaints & reflows
 
 # what is repaint and reflows
-什么是重排和重绘 ？
+什么是重排和重绘 ？  
 浏览器下载完页面中的所有组件——HTML标记、JavaScript、CSS、图片之后会解析生成两个内部数据结构:
+
 **DOM树**
 > 表示页面结构
 
@@ -90,12 +91,12 @@ console.timeEnd(3);  //  3: 1.190ms
 # when dose a reflow happen
 当页面布局和几何属性改变时就需要“重排”。下述情况中会发生重排。
 
-1、添加或者删除可见的DOM元素
-2、元素位置改变
-3、元素尺寸改变（包括：width height margin border padding 等属性改变）
-4、元素内容改变（例如：一个文本被另一个不同尺寸的图片替代）
-5、页面渲染初始化（这个无法避免）
-6、浏览器窗口尺寸改变
+1、添加或者删除可见的DOM元素  
+2、元素位置改变  
+3、元素尺寸改变（包括：width height margin border padding 等属性改变）  
+4、元素内容改变（例如：一个文本被另一个不同尺寸的图片替代）  
+5、页面渲染初始化（这个无法避免）  
+6、浏览器窗口尺寸改变  
 
 根据改变的范围和程度，渲染树中或大或小的对应部分也需要重新计算。有些改变会触发整个页面的重排：例如，当滚动条出现时。
 
@@ -103,15 +104,18 @@ console.timeEnd(3);  //  3: 1.190ms
 渲染树变化的排队与刷新
 
 由于每次重排都会产生计算消耗，大多数浏览器通过队列化修改并批量执行来优化重排过程。
+
 ```js
 var ele = document.getElementById('myDiv');
 ele.style.borderLeft = '1px';
 ele.style.borderRight = '2px';
 ele.style.padding = '5px';
 ```
+
 乍一想，元素的样式改变了三次，每次改变都会引起重排和重绘，所以总共有三次重排重绘过程，但是浏览器并不会这么笨，它会把三次修改“保存”起来，一次完成！
 
 但是，有些时候你可能会（经常是不知不觉）强制刷新队列并要求计划任务立即执行。
+
 ```js
 var ele = document.getElementById('myDiv');
 ele.style.borderLeft = '1px';
@@ -122,9 +126,11 @@ var eleOffsetLeft = ele.offsetLeft;
 
 ele.style.padding = '5px';
 ```
+
 上面的代码，前两次的操作会缓存在渲染队列中待处理，但是一旦offsetHeight属性被请求了，队列就会立即执行，所以总共有两次重排与重绘。
 
 **获取布局信息的操作**会导致列队刷新，比如以下方法：
+
 - offsetTop, offsetLeft, offsetWidth, offsetHeight
 - scrollTop, scrollLeft, scrollWidth, scrollHeight
 - clientTop, clientLeft, clientWidth, clientHeight
@@ -135,6 +141,7 @@ ele.style.padding = '5px';
 > **因此在修改样式的过程中，最好避免使用上面列出的属性。** 它们都会刷新渲染列队，即使队列中改变的样式属性和想要获取的属性值并没有什么关系。
 
 一个更有效的方法是不要在布局信息改变时查询它。可以将查询代码放到尾末
+
 ```js
 var ele = document.getElementById('myDiv');
 ele.style.borderLeft = '1px';
@@ -170,11 +177,13 @@ ele.className = 'active';
 
 # 批量修改DOM
 当需要对DOM元素进行一系列操作时，可以通过以下步骤来减少重绘和重排的次数：
-1.使元素脱离文档流。
-2.对其应用多重改变。
-3.把元素带回文档中。
+
+1.使元素脱离文档流。  
+2.对其应用多重改变。  
+3.把元素带回文档中。  
 
 有三种基本方法可以使DOM脱离文档：
+
 - 隐藏元素，应用修改，重新显示。
 - 使用文档片段（document fragment）在当前DOM之外构建一个子树，再把它拷贝回文档。
 - 将原始元素拷贝到一个脱离文档的节点中，修改副本，完成后再替换原始元素。
