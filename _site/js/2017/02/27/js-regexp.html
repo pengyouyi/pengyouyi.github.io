@@ -422,9 +422,12 @@
 <span class="p">}</span>
 </code></pre></div>
 <p>result:</p>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell">Found abb. Next match starts at 3
-Found ab. Next match starts at 9
-</code></pre></div>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre>Found abb. Next match starts at 3
+Found ab. Next match starts at 9<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
 <p>小节：RegExp的两个方法，模式匹配中的全局修饰符g, 相当于，执行时每次 patten.lastIndex 的值是否改变。</p>
 
 <ul>
@@ -460,11 +463,12 @@ Found ab. Next match starts at 9
 
 <h2 id="match">match</h2>
 
-<p>match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。<br>
+<p>match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配。<br><br>
 该方法类似 indexOf() 和 lastIndexOf()，但是它返回指定的值，而不是字符串的位置。</p>
 
-<p><strong>返回值</strong><br>
-存放匹配结果的<code>数组</code>。该数组的内容依赖于 regexp 是否具有全局标志 g。</p>
+<p><strong>返回值</strong></p>
+
+<p>存放匹配结果的<code>数组</code>。该数组的内容依赖于 regexp 是否具有全局标志 g。</p>
 
 <p>如果 regexp <code>没有标志 g</code>，那么 match() 方法就只能在 stringObject 中<code>执行一次匹配</code>。如果<code>没有找到任何匹配的文本</code>， match() 将返回 <code>null</code>。否则，它将返回一个数组，其中存放了与它找到的匹配文本有关的信息。该数组的<code>第 0 个元素存放的是匹配文本</code>，而其余的元素存放的是与正则表达式的子表达式匹配的文本。除了这些常规的数组元素之外，返回的数组还含有两个对象属性。<code>index</code> 属性声明的是匹配文本的起始字符在 stringObject 中的位置，input 属性声明的是对 stringObject 的引用。</p>
 
@@ -509,18 +513,21 @@ Found ab. Next match starts at 9
 </code></pre></div>
 <h2 id="replace">replace</h2>
 
-<p><strong>定义和用法</strong><br>
-replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
+<p><strong>定义和用法</strong></p>
+
+<p>replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</p>
 
 <p><strong>语法</strong></p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">regexp</span><span class="o">|</span><span class="nx">substr</span><span class="p">,</span> <span class="nx">newSubstr</span><span class="o">|</span><span class="kd">function</span><span class="p">)</span>
 <span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">regexp</span><span class="o">|</span><span class="nx">substr</span><span class="p">,</span> <span class="nx">newSubStr</span><span class="o">|</span><span class="kd">function</span><span class="p">[,</span> <span class="nx">flags</span><span class="p">]);</span>
 </code></pre></div>
-<p><strong>参数介绍：</strong><br>
-<strong>1)参数一：</strong><br>
- a)regexp:一个 RegExp 对象.该正则所匹配的内容会被第二个参数的返回值替换掉. <br>
- b)substr：被替换掉的一个 String. <br>
-<strong>2)参数二：</strong></p>
+<p><strong>参数介绍：</strong></p>
+
+<p><strong>1)参数一：</strong><br><br>
+ a)regexp:一个 RegExp 对象.该正则所匹配的内容会被第二个参数的返回值替换掉.<br><br>
+ b)substr：被替换掉的一个 String. </p>
+
+<p><strong>2)参数二：</strong>  </p>
 
 <ul>
 <li><strong>a) newSubStr：</strong>替换掉第一个参数在原字符串中的匹配部分.该字符串中可以内插一些特殊的变量名. 比如</li>
@@ -558,15 +565,16 @@ replace() 方法用于在字符串中用一些字符替换另一些字符，或�
 <li><strong>b) function(str,$1[,$2,...,$99],offset,s):</strong>创建新的子串，参数解释如下</li>
 </ul>
 
-<p>str:匹配的子串<br>
- $1...99:第n个括号子匹配字符串,提供替换的第一个参数是一个正则表达式对象。(对应于$1、$2等。)<br>
- offset:匹配子串在字符串中的开始位置(从0开始)，例如&quot;abcd&quot;,正则/bc/,offset = 1.<br>
- s:当前操作的字符串<br>
-<strong>3)参数三(可选)：</strong><br>
-flags:指定正则表达式的匹配模式，可选值：<br>
-g:全局替换<br>
-i:忽略大小写<br>
-m:多行替换<br>
+<p>str:匹配的子串<br><br>
+ $1...99:第n个括号子匹配字符串,提供替换的第一个参数是一个正则表达式对象。(对应于$1、$2等。)<br><br>
+ offset:匹配子串在字符串中的开始位置(从0开始)，例如&quot;abcd&quot;,正则/bc/,offset = 1.<br><br>
+ s:当前操作的字符串</p>
+
+<p><strong>3)参数三(可选)：</strong><br><br>
+flags:指定正则表达式的匹配模式，可选值：<br><br>
+g:全局替换<br><br>
+i:忽略大小写<br><br>
+m:多行替换<br><br>
 y:?</p>
 
 <p>str.replace(regexp, newSubstr)</p>
