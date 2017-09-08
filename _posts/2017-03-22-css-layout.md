@@ -33,7 +33,8 @@ description: css等高布局
 	clear: both;
 }
 ```
-```html
+
+{% highlight html linenos %}
 <div id="demo1">
 	<div class="left">left</div>
 	<div class="right">
@@ -44,7 +45,7 @@ description: css等高布局
 	</div>
 	<div class="clear"></div>
 </div>
-```
+{% endhighlight %}
 
 **_result display_**
 <div class="rd">
@@ -53,8 +54,9 @@ description: css等高布局
 
 # padding补偿法两列等高布局
 
-浏览器兼容最好最简便的应该是padding补偿法。
-思路：首先把列的padding-bottom设为一个足够大的值，再把列的margin-bottom设一个与前面的padding-bottom的正值相抵消的负值，父容器设置超出隐藏，这样子父容器的高度就还是它里面的列没有设定padding-bottom时的高度，当它里面的任一列高度增加了，则父容器的高度被撑到它里面最高那列的高度，其他比这列矮的列则会用它们的padding-bottom来补偿这部分高度差。因为背景是可以用在padding占用的空间里的，而且边框也是跟随padding变化的，所以就成功的完成了一个障眼法。
+浏览器兼容最好最简便的应该是padding补偿法。  
+思路：
+首先把列的padding-bottom设为一个足够大的值，再把列的margin-bottom设一个与前面的padding-bottom的正值相抵消的负值，父容器设置超出隐藏，这样子父容器的高度就还是它里面的列没有设定padding-bottom时的高度，当它里面的任一列高度增加了，则父容器的高度被撑到它里面最高那列的高度，其他比这列矮的列则会用它们的padding-bottom来补偿这部分高度差。因为背景是可以用在padding占用的空间里的，而且边框也是跟随padding变化的，所以就成功的完成了一个障眼法。
 
 核心代码：
 ```css
@@ -94,7 +96,7 @@ main {
 }
 ```
 
-```html
+{% highlight html linenos %}
 <div id="demo1">
 	<div class="left">left</div>
 	<div class="right">
@@ -104,7 +106,7 @@ main {
 		<p>12</p>
 	</div>
 </div>
-```
+{% endhighlight %}
 
 **_result display_**
 <div class="rd">

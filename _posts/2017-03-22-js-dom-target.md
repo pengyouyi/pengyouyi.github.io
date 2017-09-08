@@ -21,14 +21,16 @@ currentTarget **某事件处理程序当前正在处理事件的那个元素**
 > 绑定事件的对象
 
 # js事件中target和currentTarget各指的是什么
-```html
+
+{% highlight html linenos %}
 <div id="demo">
 	父亲
 	<p id="son">儿子
 		<a id="sun">孙子</a>
 	</p>
 </div>
-```
+{% endhighlight %}
+
 ```js
 demo.onclick = function(e) {
 	console.log("e.target",e.target);

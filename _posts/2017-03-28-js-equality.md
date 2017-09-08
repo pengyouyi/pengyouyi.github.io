@@ -23,9 +23,9 @@ description: js相等的判断
 
 # summery==运算的规则：
 
-> undefined == null，结果是true。且它俩与所有其他值比较的结果都是false。
-> String == Boolean，需要两个操作数同时转为Number。
-> String/Boolean == Number，需要String/Boolean转为Number。
+> undefined == null，结果是true。且它俩与所有其他值比较的结果都是false。  
+> String == Boolean，需要两个操作数同时转为Number。  
+> String/Boolean == Number，需要String/Boolean转为Number。  
 > Object == Primitive，需要Object转为Primitive(具体通过valueOf和toString方法)。
 
 
