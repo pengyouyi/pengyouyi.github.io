@@ -4,7 +4,7 @@
  <title>彭友谊的博客</title>
  <link href="" rel="self"/>
  <link href=""/>
- <updated>2017-09-08T11:07:13+08:00</updated>
+ <updated>2017-09-08T11:12:50+08:00</updated>
  <id></id>
  <author>
    <name>pengyouyi</name>
@@ -19,8 +19,9 @@
    <id>/http/2017/05/09/js-http-methods</id>
    <content type="html">&lt;h1 id=&quot;http&quot;&gt;HTTP请求方法&lt;/h1&gt;
 
-&lt;p&gt;根据HTTP标准，HTTP请求可以使用多种请求方法。&lt;br&gt;
-HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。&lt;br&gt;
+&lt;p&gt;根据HTTP标准，HTTP请求可以使用多种请求方法。&lt;/p&gt;
+
+&lt;p&gt;HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。&lt;br&gt;&lt;br&gt;
 HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。&lt;/p&gt;
 
 &lt;table&gt;&lt;thead&gt;
@@ -94,7 +95,7 @@ HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方
 &lt;p&gt;名词解释&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;安全性：客户端可以发起请求，并知道它不会改变资源的状态。&lt;br&gt;
+&lt;p&gt;安全性：客户端可以发起请求，并知道它不会改变资源的状态。&lt;br&gt;&lt;br&gt;
 幂等性：保证客户端重复发起某个请求的效果与一次请求的效果一致。&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -112,13 +113,20 @@ HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方
 &lt;span class=&quot;nl&quot;&gt;Host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;localhost&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 200 OK
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 200 OK
 Content-Type: application/xml; charset=UTF-8
 Content-Length: 21
 
-&amp;lt;hello&amp;gt;tester&amp;lt;/hello&amp;gt;
-......
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;hello&amp;gt;&lt;/span&gt;tester&lt;span class=&quot;nt&quot;&gt;&amp;lt;/hello&amp;gt;&lt;/span&gt;
+......&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;h2 id=&quot;head&quot;&gt;HEAD&lt;/h2&gt;
 
 &lt;p&gt;HEAD方法与GET方法行为类似，但服务器在响应中只返回首部。不会返回实体的主体部分。&lt;/p&gt;
@@ -126,27 +134,34 @@ Content-Length: 21
 &lt;p&gt;用处：&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;在不获取资源的情况下了解资源的情况（比如：判断其类型）；&lt;br&gt;
-通过查看响应中的状态码，看看某个对象是否存在；&lt;br&gt;
+&lt;p&gt;在不获取资源的情况下了解资源的情况（比如：判断其类型）；&lt;br&gt;&lt;br&gt;
+通过查看响应中的状态码，看看某个对象是否存在；&lt;br&gt;&lt;br&gt;
 通过查看首部，测试资源是否被修改了。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;服务器必须确保返回的首部与GET请求所返回的首部完全相同。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;请求：只有header，没有body。&lt;/li&gt;
+&lt;li&gt;请求：只有header，没有body。&lt;br&gt;&lt;/li&gt;
 &lt;li&gt;响应：只有header，没有body。服务器不能添加body。&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;请求报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;GET /hello HTTP/1.1
-Host: localhost
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;GET /hello HTTP/1.1
+Host: localhost&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 200 OK
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 200 OK
 Content-Type: application/xml; charset=UTF-8
-Content-Length: 21
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Content-Length: 21&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;h2 id=&quot;put&quot;&gt;PUT&lt;/h2&gt;
 
 &lt;p&gt;PUT方法就是让服务器用请求的主体部分来创建一个由所请求的URL命名的新文档，或者，如果那个URL已经存在的话，就用这个主体来替代它。&lt;br&gt;
@@ -160,26 +175,38 @@ Content-Length: 21
 &lt;p&gt;&lt;strong&gt;创建资源的请求&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;请求报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;PUT /stu/alice HTTP/1.1
-Host: localhost
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;PUT /stu/alice HTTP/1.1
+Host: localhost&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 201 Created
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 201 Created
 Location: http://localhost/stu/alice
-Content-Length: 0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Content-Length: 0&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;&lt;strong&gt;更新资源的请求&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;请求报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;PUT /stu/bob HTTP/1.1
-Host: localhost
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;PUT /stu/bob HTTP/1.1
+Host: localhost&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 204 No Content
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 204 No Content&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;h2 id=&quot;post&quot;&gt;POST&lt;/h2&gt;
 
-&lt;p&gt;向服务器发送需要处理的数据,例如提交表单。&lt;br&gt;
+&lt;p&gt;向服务器发送需要处理的数据,例如提交表单。&lt;br&gt;&lt;br&gt;
 POST请求可能会导致服务器上新的资源的建立和/或已有资源的修改。&lt;/p&gt;
 
 &lt;ul&gt;
@@ -190,61 +217,104 @@ POST请求可能会导致服务器上新的资源的建立和/或已有资源的
 &lt;p&gt;&lt;strong&gt;执行动作&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;请求报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;POST /prompt/delete HTTP/1.1
-Host: localhost
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;POST /prompt/delete HTTP/1.1
+Host: localhost&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 204 No Content
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 204 No Content&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;&lt;strong&gt;创建资源&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;请求报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;POST /stu/bob HTTP/1.1
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;POST /stu/bob HTTP/1.1
 Host: localhost
 Content-Type: application/xml
 
-&amp;lt;student&amp;gt;
-    &amp;lt;name&amp;gt;Bob&amp;lt;/name&amp;gt;
-    &amp;lt;age&amp;gt;22&amp;lt;/age&amp;gt;
-&amp;lt;/student&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;student&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Bob&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;age&amp;gt;&lt;/span&gt;22&lt;span class=&quot;nt&quot;&gt;&amp;lt;/age&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/student&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 201 Created
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 201 Created
 Location: http://localhost/stu/bob
 Content-Location: http://localhost/stu/bob
 Content-Type: application/xml
 
-&amp;lt;student&amp;gt;
-    &amp;lt;name&amp;gt;Bob&amp;lt;/name&amp;gt;
-    &amp;lt;age&amp;gt;22&amp;lt;/age&amp;gt;
-&amp;lt;/student&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;student&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Bob&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;age&amp;gt;&lt;/span&gt;22&lt;span class=&quot;nt&quot;&gt;&amp;lt;/age&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/student&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;&lt;strong&gt;修改资源&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;请求报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;POST /stu/bob/modify HTTP/1.1
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;POST /stu/bob/modify HTTP/1.1
 Host: localhost
 Content-Type: application/json
 
 {
     &quot;Name&quot;: &quot;Bob&quot;,
     &quot;Age&quot;: 24
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+}&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 303 See Other
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 303 See Other
 Location: http://localhost/stu/bob
 Content-Type: application/xml
 
-&amp;lt;student&amp;gt;
-    &amp;lt;name&amp;gt;Bob&amp;lt;/name&amp;gt;
-    &amp;lt;age&amp;gt;24&amp;lt;/age&amp;gt;
-&amp;lt;/student&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;student&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;name&amp;gt;&lt;/span&gt;Bob&lt;span class=&quot;nt&quot;&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;age&amp;gt;&lt;/span&gt;24&lt;span class=&quot;nt&quot;&gt;&amp;lt;/age&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/student&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;h2 id=&quot;trace&quot;&gt;TRACE&lt;/h2&gt;
 
-&lt;p&gt;客户端发起一个请求时，这个请求可能要穿过防火墙、代理、网关或其他一些应用程序。每个中间节点都可能会修改原始的HTTP请求。TRACE方法允许客户端在最终将请求发给服务器时，看看它变成什么样子。&lt;br&gt;
-TRACE方法主要用于诊断；用于验证请求是否如愿穿过了请求/响应链。它也是一种很好的工具，可以用来查看代理和其他应用程序对用户请求所产生效果。&lt;/p&gt;
+&lt;p&gt;客户端发起一个请求时，这个请求可能要穿过防火墙、代理、网关或其他一些应用程序。每个中间节点都可能会修改原始的HTTP请求。TRACE方法允许客户端在最终将请求发给服务器时，看看它变成什么样子。&lt;/p&gt;
+
+&lt;p&gt;TRACE方法主要用于诊断；用于验证请求是否如愿穿过了请求/响应链。它也是一种很好的工具，可以用来查看代理和其他应用程序对用户请求所产生效果。&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;请求：header与body。&lt;br&gt;
@@ -252,18 +322,29 @@ TRACE方法主要用于诊断；用于验证请求是否如愿穿过了请求/�
 &lt;/blockquote&gt;
 
 &lt;p&gt;请求报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;TRACE /trace HTTP/1.1
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;TRACE /trace HTTP/1.1
 Host: localhost
-Accept: text/html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Accept: text/html&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 200 OK
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 200 OK
 Content-Type: message/http
 
 TRACE /trace HTTP/1.1
 Host: localhost
-Accept: text/html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Accept: text/html&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;h2 id=&quot;options&quot;&gt;OPTIONS&lt;/h2&gt;
 
 &lt;p&gt;OPTIONS 方法请求服务器告知其支持的各种功能。可以询问服务器通常支持哪些方法，或者对某些特殊资源支持哪些方法。&lt;br&gt;
@@ -275,13 +356,19 @@ Accept: text/html
 &lt;/blockquote&gt;
 
 &lt;p&gt;请求报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;OPTIONS /test-options HTTP/1.1
-Host: localhost
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;OPTIONS /test-options HTTP/1.1
+Host: localhost&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 204 No Content
-Allow: GET, POST, OPTIONS
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 204 No Content
+Allow: GET, POST, OPTIONS&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;h2 id=&quot;delete&quot;&gt;DELETE&lt;/h2&gt;
 
 &lt;p&gt;请求服务器删除请求URL所指定的资源。&lt;/p&gt;
@@ -292,12 +379,17 @@ Allow: GET, POST, OPTIONS
 &lt;/blockquote&gt;
 
 &lt;p&gt;请求报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;DELETE /doc/old.txt HTTP/1.1
-Host: localhost
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;DELETE /doc/old.txt HTTP/1.1
+Host: localhost&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;p&gt;响应报文&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;HTTP/1.1 204 No Content
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;HTTP/1.1 204 No Content&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
 &lt;h2 id=&quot;http&quot;&gt;HTTP请求扩展方法&lt;/h2&gt;
 
 &lt;table&gt;&lt;thead&gt;

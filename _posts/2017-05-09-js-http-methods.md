@@ -10,7 +10,8 @@ description: HTTP方法
 # HTTP请求方法
 
 根据HTTP标准，HTTP请求可以使用多种请求方法。
-HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。
+
+HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。  
 HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。
 
 |序号|方法|描述|是否包含主体|安全|幂等|
@@ -25,7 +26,7 @@ HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方
 
 名词解释
 
-> 安全性：客户端可以发起请求，并知道它不会改变资源的状态。
+> 安全性：客户端可以发起请求，并知道它不会改变资源的状态。  
 > 幂等性：保证客户端重复发起某个请求的效果与一次请求的效果一致。
 
 ## GET
@@ -43,43 +44,43 @@ Host: localhost
 
 响应报文
 
-```
+{% highlight html linenos %}
 HTTP/1.1 200 OK
 Content-Type: application/xml; charset=UTF-8
 Content-Length: 21
 
 <hello>tester</hello>
 ......
-```
+{% endhighlight %}
 
 ## HEAD 
 HEAD方法与GET方法行为类似，但服务器在响应中只返回首部。不会返回实体的主体部分。
 
 用处：
 
-> 在不获取资源的情况下了解资源的情况（比如：判断其类型）；
-> 通过查看响应中的状态码，看看某个对象是否存在；
+> 在不获取资源的情况下了解资源的情况（比如：判断其类型）；  
+> 通过查看响应中的状态码，看看某个对象是否存在；  
 > 通过查看首部，测试资源是否被修改了。
 
 服务器必须确保返回的首部与GET请求所返回的首部完全相同。
 
-+ 请求：只有header，没有body。
++ 请求：只有header，没有body。  
 + 响应：只有header，没有body。服务器不能添加body。
 
 
 请求报文
-```
+{% highlight html linenos %}
 GET /hello HTTP/1.1
 Host: localhost
-```
+{% endhighlight %}
 
 
 响应报文
-```
+{% highlight html linenos %}
 HTTP/1.1 200 OK
 Content-Type: application/xml; charset=UTF-8
 Content-Length: 21
-```
+{% endhighlight %}
 
 ## PUT
 PUT方法就是让服务器用请求的主体部分来创建一个由所请求的URL命名的新文档，或者，如果那个URL已经存在的话，就用这个主体来替代它。
@@ -91,34 +92,34 @@ PUT方法就是让服务器用请求的主体部分来创建一个由所请求�
 **创建资源的请求**
 
 请求报文
-```
+{% highlight html linenos %}
 PUT /stu/alice HTTP/1.1
 Host: localhost
-```
+{% endhighlight %}
 
 响应报文
-```
+{% highlight html linenos %}
 HTTP/1.1 201 Created
 Location: http://localhost/stu/alice
 Content-Length: 0
-```
+{% endhighlight %}
 
 
 **更新资源的请求**
 
 请求报文
-```
+{% highlight html linenos %}
 PUT /stu/bob HTTP/1.1
 Host: localhost
-```
+{% endhighlight %}
 
 响应报文
-```
+{% highlight html linenos %}
 HTTP/1.1 204 No Content
-```
+{% endhighlight %}
 
 ## POST
-向服务器发送需要处理的数据,例如提交表单。
+向服务器发送需要处理的数据,例如提交表单。  
 POST请求可能会导致服务器上新的资源的建立和/或已有资源的修改。
 
 + 请求：一个资源的表述。
@@ -129,22 +130,22 @@ POST请求可能会导致服务器上新的资源的建立和/或已有资源的
 
 请求报文
 
-```
+{% highlight html linenos %}
 POST /prompt/delete HTTP/1.1
 Host: localhost
-```
+{% endhighlight %}
 
 响应报文
 
-```
+{% highlight html linenos %}
 HTTP/1.1 204 No Content
-```
+{% endhighlight %}
 
 **创建资源**
 
 请求报文
 
-```
+{% highlight html linenos %}
 POST /stu/bob HTTP/1.1
 Host: localhost
 Content-Type: application/xml
@@ -153,11 +154,11 @@ Content-Type: application/xml
     <name>Bob</name>
     <age>22</age>
 </student>
-```
+{% endhighlight %}
 
 响应报文
 
-```
+{% highlight html linenos %}
 HTTP/1.1 201 Created
 Location: http://localhost/stu/bob
 Content-Location: http://localhost/stu/bob
@@ -167,12 +168,12 @@ Content-Type: application/xml
     <name>Bob</name>
     <age>22</age>
 </student>
-```
+{% endhighlight %}
 **修改资源**
 
 请求报文
 
-```
+{% highlight html linenos %}
 POST /stu/bob/modify HTTP/1.1
 Host: localhost
 Content-Type: application/json
@@ -181,11 +182,11 @@ Content-Type: application/json
     "Name": "Bob",
     "Age": 24
 }
-```
+{% endhighlight %}
 
 响应报文
 
-```
+{% highlight html linenos %}
 HTTP/1.1 303 See Other
 Location: http://localhost/stu/bob
 Content-Type: application/xml
@@ -194,31 +195,32 @@ Content-Type: application/xml
     <name>Bob</name>
     <age>24</age>
 </student>
-```
+{% endhighlight %}
 
 ## TRACE
 客户端发起一个请求时，这个请求可能要穿过防火墙、代理、网关或其他一些应用程序。每个中间节点都可能会修改原始的HTTP请求。TRACE方法允许客户端在最终将请求发给服务器时，看看它变成什么样子。
+
 TRACE方法主要用于诊断；用于验证请求是否如愿穿过了请求/响应链。它也是一种很好的工具，可以用来查看代理和其他应用程序对用户请求所产生效果。
 
 > 请求：header与body。
 > 响应：body中包含整个请求消息。
 
 请求报文
-```
+{% highlight html linenos %}
 TRACE /trace HTTP/1.1
 Host: localhost
 Accept: text/html
-```
+{% endhighlight %}
 
 响应报文
-```
+{% highlight html linenos %}
 HTTP/1.1 200 OK
 Content-Type: message/http
 
 TRACE /trace HTTP/1.1
 Host: localhost
 Accept: text/html
-```
+{% endhighlight %}
 
 ## OPTIONS
 OPTIONS 方法请求服务器告知其支持的各种功能。可以询问服务器通常支持哪些方法，或者对某些特殊资源支持哪些方法。
@@ -228,16 +230,16 @@ OPTIONS 方法请求服务器告知其支持的各种功能。可以询问服务
 > 响应：默认只有header，但是也可以在body中添加内容，比如描述性文字
 
 请求报文
-```
+{% highlight html linenos %}
 OPTIONS /test-options HTTP/1.1
 Host: localhost
-```
+{% endhighlight %}
 
 响应报文
-```
+{% highlight html linenos %}
 HTTP/1.1 204 No Content
 Allow: GET, POST, OPTIONS
-```
+{% endhighlight %}
 
 ## DELETE
 请求服务器删除请求URL所指定的资源。
@@ -246,15 +248,15 @@ Allow: GET, POST, OPTIONS
 > 响应：成功或失败。body中可以包含操作的状态。
 
 请求报文
-```
+{% highlight html linenos %}
 DELETE /doc/old.txt HTTP/1.1
 Host: localhost
-```
+{% endhighlight %}
 
 响应报文
-```
+{% highlight html linenos %}
 HTTP/1.1 204 No Content
-```
+{% endhighlight %}
 
 
 ## HTTP请求扩展方法
