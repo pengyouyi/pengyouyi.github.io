@@ -4,13 +4,70 @@
  <title>彭友谊的博客</title>
  <link href="" rel="self"/>
  <link href=""/>
- <updated>2017-10-24T15:45:39+08:00</updated>
+ <updated>2017-10-24T23:07:36+08:00</updated>
  <id></id>
  <author>
    <name>pengyouyi</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>CSS 盒子模型</title>
+   <link href="/css/2017/10/24/css-model"/>
+   <updated>2017-10-24T00:00:00+08:00</updated>
+   <id>/css/2017/10/24/css-model</id>
+   <content type="html">&lt;h1 id=&quot;css-box-model&quot;&gt;CSS 盒子模型(Box Model)&lt;/h1&gt;
+
+&lt;p&gt;CSS中盒子模型的组成由内容区（content）、内边距（padding）、边框（border）、外边距（margin）组成。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;盒子模型有两种&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;W3C标准盒模型&lt;/li&gt;
+&lt;li&gt;低版本IE浏览器（IE5/6）盒模型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;浏览器默认的盒模型是“W3C标准盒模型”&lt;/p&gt;
+
+&lt;h1 id=&quot;ie&quot;&gt;标准模型和IE模型的区别&lt;/h1&gt;
+
+&lt;p&gt;标准的CSS盒子模型与低版本IE的盒子模型有什么不同的？&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;标准的css盒子模型宽高 = 内容区宽高；&lt;/li&gt;
+&lt;li&gt;低端IE css盒子模型宽高 = 内容区宽高 + 内边距﹢边界；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-24-1.png&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-24-2.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;css&quot;&gt;css如何设置这两种模型&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;box-sizing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;content-box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;【标准模型，浏览器默认】&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;box-sizing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;border-box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;【&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;IE&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;模型】&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;js&quot;&gt;JS如何设置获取盒模型对应的宽和高&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;dom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;dom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;currentStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getComputedStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;dom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getBoundingClientRect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;&gt;浏览器的兼容性问题&lt;/h1&gt;
+
+&lt;p&gt;可以在HTML页面声明 &amp;lt;!DOCTYPE html&amp;gt;。&lt;/p&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.runoob.com/css/css-boxmodel.html&quot;&gt;http://www.runoob.com/css/css-boxmodel.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.w3school.com.cn/css/css_boxmodel.asp&quot;&gt;http://www.w3school.com.cn/css/css_boxmodel.asp&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/love-sea520/p/5903442.html&quot;&gt;http://www.cnblogs.com/love-sea520/p/5903442.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/thislbq/p/5883631.html&quot;&gt;http://www.cnblogs.com/thislbq/p/5883631.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>css多栏布局方案</title>
@@ -1097,6 +1154,14 @@
 &lt;li&gt;优点：可以优先加载内容主体。&lt;/li&gt;
 &lt;li&gt;缺点：HTML 代码结构稍微复杂点&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h1 id=&quot;summary&quot;&gt;summary&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;传统的布局方法基于盒状模型，依赖 display属性 + position属性 + float属性，实现复杂，但浏览器兼容好&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;圣杯和双飞翼布局处于过渡阶段，了解即可。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;拥抱flex布局,展望grid网格布局。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h1 id=&quot;layout&quot;&gt;页面布局的延伸-layout&lt;/h1&gt;
 
@@ -4703,36 +4768,6 @@ Javascript语言的特殊之处，就在于函数内部可以直接读取全局�
 &lt;li&gt;&lt;a href=&quot;https://www.sitepoint.com/demystifying-javascript-closures-callbacks-iifes/&quot;&gt;https://www.sitepoint.com/demystifying-javascript-closures-callbacks-iifes/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://medium.freecodecamp.com/lets-learn-javascript-closures-66feb44f6a44#.3k2l1ktm2&quot;&gt;https://medium.freecodecamp.com/lets-learn-javascript-closures-66feb44f6a44#.3k2l1ktm2&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>js中的函数定义</title>
-   <link href="/js/2016/12/08/js-function-definition"/>
-   <updated>2016-12-08T00:00:00+08:00</updated>
-   <id>/js/2016/12/08/js-function-definition</id>
-   <content type="html">&lt;h1 id=&quot;js&quot;&gt;js中的函数定义&lt;/h1&gt;
-
-&lt;h2 id=&quot;declaration&quot;&gt;函数声明-declaration&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;expression&quot;&gt;函数表达式-expression&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; 
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;functiona&quot;&gt;Functiona构造函数&lt;/h2&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;num1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;num2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;return num1 + num2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 不推荐使用&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&quot;declaretion-amp-expression&quot;&gt;declaretion &amp;amp; expression&lt;/h2&gt;
-
-&lt;p&gt;the differcence between a function declaretion and a function expression&lt;/p&gt;
-
-&lt;p&gt;函数声明作为一种声明，当然会在预编译阶级有所动作（声明提前），而函数表达式则不会。&lt;br&gt;&lt;br&gt;
-另一个区别是，函数声明不能直接加一对括号让它们执行。&lt;br&gt;&lt;br&gt;
-第三个区别，表达式还可以继续细分，表达式是由常量，变量，操作符，函数等组合而成，计算以后返回一个结果值，至少也会返回一个undefined。&lt;/p&gt;
 </content>
  </entry>
  
