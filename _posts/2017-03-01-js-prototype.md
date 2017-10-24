@@ -143,9 +143,7 @@ console.log([1, 56, 34, 12].min()); // 1
 
 # 更多-more
 - [http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html](http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html)
-- [http://blog.rainy.im/2015/07/20/prototype-chain-in-js/](http://blog.rainy.im/2015/07/20/prototype-chain-in-js/)
-
-
+- [http://www.imooc.com/article/3654](http://www.imooc.com/article/3654)
 
 
 
