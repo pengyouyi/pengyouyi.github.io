@@ -31,7 +31,7 @@ window.onload只会执行最后一个，之前的会被覆盖掉。
 
 ```js
 window.onload = function() {
-	console.log("onload go")
+	console.log("onload")
 }
 window.onload = function() {
 	console.log("onload go")

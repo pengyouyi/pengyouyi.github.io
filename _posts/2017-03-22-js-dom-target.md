@@ -66,6 +66,8 @@ demo.onclick = function(e) {
 `this === e.currentTarget`
 但是 this 不一定等于 e.target
 
+target只包含事件的实际目标
+
 
 
 

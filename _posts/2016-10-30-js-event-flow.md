@@ -1,13 +1,11 @@
 ---
 layout: post
-title: js事件机制
+title: DOM事件流
 tags:
 - js事件
 categories: JS
-description: js事件机制
+description: DOM事件流
 ---
-
-# js事件机制
 
 # DOM事件流
 DOM事件流
@@ -35,6 +33,7 @@ DOM2级事件规定事件包括三个阶段：
 
 # 事件捕获event capturing
 如果点击div元素，事件捕获的传播顺序  
+
 **  window对象  
 (1) document对象  
 (2) html  
@@ -42,7 +41,8 @@ DOM2级事件规定事件包括三个阶段：
 (4) div  
 
 尽管“DOM2级事件”规范要求事件应该从document对象开始传播和结束，但大部分兼容标准的浏览器会继续将事件的捕获和冒泡延伸到window对象。  
-由于老版本的浏览器（such as: IE8及以下版本）不支持，所以很少有人使用事件捕获。
+
+由于老版本的浏览器（such as: IE8及以下版本）不支持事件流，所以很少有人使用事件捕获。
 
 # 事件冒泡event bubbling
 如果点击div元素，事件冒泡的传播顺序  
@@ -51,6 +51,8 @@ DOM2级事件规定事件包括三个阶段：
 (3) html  
 (4) document  
 **  window对象  
+
+注：【IE9、Firefox、chrome、Safari 会将事件冒泡到window对象】
 
 所有现代浏览器都支持事件冒泡，可以放心用。
 
@@ -151,6 +153,60 @@ example-2
 <img src="/assets/images/2016/10-11-12/event-capturing.png" alt="">
 </div>
 
+# event capturing 完整例子
+
+{% highlight html linenos %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+</head>
+<body>
+	
+	<div id="myDiv">click me, 事件捕获完整阶段</div>	
+
+<script>
+	var myDiv = document.getElementById("myDiv");
+
+	myDiv.addEventListener("click", function() {
+    	console.log("div 事件捕获");
+    },true);
+    
+    myDiv.addEventListener("click", function() {
+    	console.log("div 事件捕获，once again");
+    },true);
+
+    myDiv.addEventListener("click", function() {
+    	console.log("div 事件冒泡");
+    },false);
+
+	window.addEventListener("click", function() {
+    	console.log("window 事件捕获");
+    },true);
+
+    document.addEventListener("click", function() {
+    	console.log("document 事件捕获");
+    },true);
+
+    document.documentElement.addEventListener("click", function() {
+    	console.log("html 事件捕获");
+    },true);
+
+    document.body.addEventListener("click", function() {
+    	console.log("body 事件捕获");
+    },true);
+</script>		
+</body>
+</html>
+{% endhighlight %}
+
+在div事件捕获阶段注册的两个事件按照注册顺序执行
+
+**_result display_**
+<div class="rd">
+    <img src="/assets/images/2016/10-11-12/10-30-1.png" alt="">
+</div>
 
 # 更多-more
 

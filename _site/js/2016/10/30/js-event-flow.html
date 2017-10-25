@@ -7,7 +7,7 @@
     
     
     
-    <title>js事件机制 | 彭友谊的博客</title>
+    <title>DOM事件流 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="js事件机制">
+    <meta property="og:title" content="DOM事件流">
     <meta property="og:url" content="/js/2016/10/30/js-event-flow">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="js事件机制">
+    <meta property="og:description" content="DOM事件流">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="js事件机制">
+    <meta name="twitter:title" content="DOM事件流">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -138,7 +138,7 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/10/30/js-event-flow" title="js事件机制" itemprop="url">js事件机制</a>
+      <a href="/js/2016/10/30/js-event-flow" title="DOM事件流" itemprop="url">DOM事件流</a>
   </h1>
   <p class="article-author">By
        
@@ -157,9 +157,7 @@
 		
 		</div>
 		
-		<h1 id="js">js事件机制</h1>
-
-<h1 id="dom">DOM事件流</h1>
+		<h1 id="dom">DOM事件流</h1>
 
 <p>DOM事件流</p>
 
@@ -194,15 +192,17 @@
 
 <h1 id="event-capturing">事件捕获event capturing</h1>
 
-<p>如果点击div元素，事件捕获的传播顺序<br><br>
-**  window对象<br><br>
+<p>如果点击div元素，事件捕获的传播顺序  </p>
+
+<p>**  window对象<br><br>
 (1) document对象<br><br>
 (2) html<br><br>
 (3) body<br><br>
 (4) div  </p>
 
-<p>尽管“DOM2级事件”规范要求事件应该从document对象开始传播和结束，但大部分兼容标准的浏览器会继续将事件的捕获和冒泡延伸到window对象。<br><br>
-由于老版本的浏览器（such as: IE8及以下版本）不支持，所以很少有人使用事件捕获。</p>
+<p>尽管“DOM2级事件”规范要求事件应该从document对象开始传播和结束，但大部分兼容标准的浏览器会继续将事件的捕获和冒泡延伸到window对象。  </p>
+
+<p>由于老版本的浏览器（such as: IE8及以下版本）不支持事件流，所以很少有人使用事件捕获。</p>
 
 <h1 id="event-bubbling">事件冒泡event bubbling</h1>
 
@@ -212,6 +212,8 @@
 (3) html<br><br>
 (4) document<br><br>
 **  window对象  </p>
+
+<p>注：【IE9、Firefox、chrome、Safari 会将事件冒泡到window对象】</p>
 
 <p>所有现代浏览器都支持事件冒泡，可以放心用。</p>
 
@@ -378,6 +380,103 @@
 <img src="/assets/images/2016/10-11-12/event-capturing.png" alt="">
 </div>
 
+<h1 id="event-capturing">event capturing 完整例子</h1>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;</span>click me, 事件捕获完整阶段<span class="nt">&lt;/div&gt;</span> 
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="kd">var</span> <span class="nx">myDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"myDiv"</span><span class="p">);</span>
+
+    <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件捕获"</span><span class="p">);</span>
+    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
+    
+    <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件捕获，once again"</span><span class="p">);</span>
+    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
+
+    <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件冒泡"</span><span class="p">);</span>
+    <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+
+    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"window 事件捕获"</span><span class="p">);</span>
+    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
+
+    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"document 事件捕获"</span><span class="p">);</span>
+    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
+
+    <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"html 事件捕获"</span><span class="p">);</span>
+    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
+
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"body 事件捕获"</span><span class="p">);</span>
+    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>     
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>在div事件捕获阶段注册的两个事件按照注册顺序执行</p>
+
+<p><strong><em>result display</em></strong></p>
+
+<div class="rd">
+    <img src="/assets/images/2016/10-11-12/10-30-1.png" alt="">
+</div>
+
 <h1 id="more">更多-more</h1>
   
 	</div>
@@ -419,7 +518,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/10/30/js-event-flow" data-title="js事件机制 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2016/10/30/js-event-flow" data-title="DOM事件流 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -486,7 +585,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>30</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>31</sup></a></li>
 		  
 		
 		  
@@ -591,7 +690,7 @@
 			
 		
 			
-				<li><a href="/tags/#js事件" title="js事件">js事件<sup>2</sup></a></li>
+				<li><a href="/tags/#js事件" title="js事件">js事件<sup>4</sup></a></li>
 			
 		
 			
