@@ -11,8 +11,8 @@ description: DOM事件
 
 DOM事件模型分为两类：
 
-一类是IE所使用的冒泡型事件（Bubbling）；
-另一类是DOM标准定义的冒泡型与捕获型（Capture）的事件。
+- 一类是IE所使用的冒泡型事件（Bubbling）；
+- 另一类是DOM标准定义的冒泡型与捕获型（Capture）的事件。
 
 除IE外的其他浏览器都支持标准的DOM事件处理模型。
 
@@ -20,7 +20,7 @@ DOM事件模型分为两类：
 
 事件就是用户或浏览器自身执行的某种动作。
 诸如click、load、mouseover ，都是事件的名字。
-而响应某个事件的函数就叫做事件处理程序（或事件侦听器）
+而响应某个事件的函数就叫做`事件处理程序`（或事件侦听器）
 
 ## HTML事件处理程序
 
@@ -215,7 +215,9 @@ var EventUtil = {
     }
 }
 ```
+
 使用EventUtil对象
+
 ```js
 var btn = document.getElementById('myBtn');
 var handler = function() {
