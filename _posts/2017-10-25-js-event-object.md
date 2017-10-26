@@ -1,6 +1,6 @@
 ---
 layout: post
-title: event事件对象的常用属性、方法
+title: event事件对象的通用属性、方法
 tags:
 - js事件
 categories: JS
@@ -117,10 +117,11 @@ event对象包含与创建它的特定事件有关的属性和方法。
 |detail|Integer|与事件相关的细节信息|
 |view|AbstractView|与事件关联的抽象视图。等同于发生事件的window对象|
 
+<br>
 
-this === currentTarget
-target是事件真正的目标
-当 eventPhase = 2 时，this = target = currentTarget
+- this === currentTarget  
+- target是事件真正的目标  
+- 当 eventPhase = 2 时，this = target = currentTarget
 
 在需要通过一个函数处理多个事件时，可以使用type属性
 
@@ -280,9 +281,10 @@ IE中的事件对象都会包含下表所列的属性和方法
 |returnValue|Boolean|默认值为true，将其设置为false就可以取消事件的默认行为【 preventDefault() 】|读/写|
 |cancelBubble|Boolean|默认值为false，将其设置为true就可以取消事件冒泡【 stopPropagation() 】|读/写|
 
+<br>
 
-IE中DOM0级事件处理程序，this 可能= srcElement 
-IE中DOM2级事件处理程序，this = window
+- IE中DOM0级事件处理程序，this 可能= srcElement   
+- IE中DOM2级事件处理程序，this = window
 
 {% highlight js linenos %}
 var btn = document.getElementById("myBtn");
