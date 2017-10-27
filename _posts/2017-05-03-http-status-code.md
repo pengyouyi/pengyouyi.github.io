@@ -66,7 +66,7 @@ HTTP客户端应用程序有一个实体的主体部分要发送给服务器，�
 
 PUT, DELETE, 和 OPTIONS 方法永远不会返回 200 状态码.
 
-## 201 (Created / 已创建)
+## 201（Created / 已创建)
 对于创建服务器对象的请求（比如，PUT）。响应的实体主体部分中（Location首部）应包含各种引用了已创建的资源的URL。服务器必须在发送这个状态码之前创建好对象。
 
 ## 202（Accepted / 已接受）
@@ -249,6 +249,12 @@ PUT, DELETE, 和 OPTIONS 方法永远不会返回 200 状态码.
 
 当post请求被转换为带有很长的查询信息的get请求时，就会发生这种情况。
 
+## 415（Unsupported Media Type / 不支持的媒体类型)
+
+## 416（Requested Range Not Satisfiable / 所请求的范围未得到满足)
+
+## 417（Expectation Failed / 无法满足期望)
+
 # 服务端错误status code
 
 |状态码|短语原因|含义|
@@ -261,8 +267,18 @@ PUT, DELETE, 和 OPTIONS 方法永远不会返回 200 状态码.
 |505|HTTP Version Not Supported<br/> 【不支持的HTTP版本】|服务器不支持客户端发送的HTTP请求中所使用的HTTP协议版本|
 
 
+## 500（Internal Server Error / 内部服务器错误)
+
+## 501（Not Implemented / 未实现)
+
+## 502（Bad Gateway / 网关故障)
+
 ## 503（Service Unavailable / 服务不可用）
 由于临时的服务器维护或者过载,服务器当前无法处理请求.这个状况是临时的,并且将在一段时间以后恢复.如果能够预计延迟时间,那么响应中可以包含一个Retry-After:头用以标明这个延迟时间.如果没有给出这个Retry-After:信息，那么客户端应当以处理500响应的方式处理它.同时,这种情况下,一个友好的用于解释服务器出现问题的页面应当被返回,并且,缓存相关的HTTP头信息也应该包含,因为通常这种错误提示网页不应当被客户端缓存.
+
+## 504（Gateway Timeout / 网关超时)
+
+## 505（HTTP Version Not Supported / 不支持的HTTP版本)
 
 
 # 更多-more

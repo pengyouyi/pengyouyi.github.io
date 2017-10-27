@@ -24,7 +24,7 @@ typeof b; // "undefined"
 # null，undefined
 在JavaScript中，有两个表示‘空’的值undefined和null。
 
-> undefined是Js语言类型，undefined 表示一个变量没有被声明，不存在这个值，或者被声明了但没有被赋值；
+> undefined是Js语言类型，undefined 表示一个变量没有被声明，不存在这个值，或者被声明了但没有被赋值；  
 > null 表示一个对象是“没有值”的值，也就是值为“空”；
 
 ```js
