@@ -4,7 +4,7 @@
  <title>彭友谊的博客</title>
  <link href="" rel="self"/>
  <link href=""/>
- <updated>2017-10-27T10:31:05+08:00</updated>
+ <updated>2017-10-27T15:42:54+08:00</updated>
  <id></id>
  <author>
    <name>pengyouyi</name>
@@ -889,23 +889,128 @@ IE8及更早版本不支持DOM事件流（事件捕获）；&lt;br&gt;
 
 &lt;h1 id=&quot;http&quot;&gt;HTTP报文流&lt;/h1&gt;
 
-&lt;p&gt;报文流入源端服务器&lt;/p&gt;
+&lt;p&gt;报文流入源端服务器并流回到客户端&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-25-3.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
 
 &lt;p&gt;所有报文都向下游流动&lt;/p&gt;
 
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-25-4.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
 &lt;h1 id=&quot;http&quot;&gt;HTTP报文的组成部分&lt;/h1&gt;
 
-&lt;p&gt;HTTP报文是简单的格式化数据块&lt;/p&gt;
+&lt;p&gt;HTTP报文是简单的格式化数据块。&lt;/p&gt;
 
 &lt;p&gt;每条报文都包含一条来自客户端的请求，或者一条来自服务器的响应。&lt;/p&gt;
 
 &lt;p&gt;报文由三个部分组成：&lt;/p&gt;
 
-&lt;p&gt;对报文进行描述的起始行&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对报文进行描述的&lt;code&gt;起始行&lt;/code&gt;(&lt;strong&gt;start line&lt;/strong&gt;)&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;包含属性的&lt;code&gt;首部&lt;/code&gt;(&lt;strong&gt;header&lt;/strong&gt;)块&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;以及可选的、包含数据的&lt;code&gt;主体&lt;/code&gt;(&lt;strong&gt;body&lt;/strong&gt;)部分&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;包含属性的首部块&lt;/p&gt;
+&lt;p&gt;&lt;div class=&quot;rd&quot;&gt;&lt;br&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-25-5.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+&lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;以及可选的、包含数据的主体部分&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;起始行和首部是由行分隔的ASCII文本。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;起始行和首部每行末尾都以CRLF结束&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;首部和主体之间用一个&lt;code&gt;空行&lt;/code&gt;(CR+LF)来分隔&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;主体中可以包含文本或二进制数据，也可以为空&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;行终止序列CRLF，是由两个字符组成的:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;CR(Carriage Return)回车符，ASCII码13&lt;/li&gt;
+&lt;li&gt;LF(Line Feed)换行符，ASCII码10&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;http&quot;&gt;HTTP报文的语法&lt;/h1&gt;
+
+&lt;p&gt;所有HTTP报文都可以分为两类：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;请求报文(request message)&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;响应报文(response message)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;请求报文会向web服务器请求一个动作，响应报文会将请求的结果返回给客户端&lt;/p&gt;
+
+&lt;h2 id=&quot;request-message&quot;&gt;request message格式&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;method&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;request-URL&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;headers&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entity-body&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-25-7.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;请求报文的4个组成部分:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;请求行。用来说明请求类型,要访问的资源以及所使用的HTTP版本。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;首部-请求头，可以为服务器提供一些额外信息&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;空行，是必须滴，即使没有后面的请求数据&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;主体-请求数据&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;response-message&quot;&gt;response message格式&lt;/h2&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;table style=&quot;border-spacing: 0&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;gutter gl&quot; style=&quot;text-align: right&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;status&amp;gt;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;&amp;lt;reason-phrase&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;headers&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;entity-body&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;strong&gt;响应报文的4个组成部分:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;响应行，由HTTP协议版本号，数字状态码，原因短语三部分组成&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;首部，可以为客户端提供信息&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;空行&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;主体-响应正文&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;中英对照&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;方法(method)&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;请求URL(request-URL)&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;版本(version)&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;状态码(status)&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;原因短语(reason-phrase)&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;首部(header)&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;实体的主体部分(entity-body)&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;entity-body&quot;&gt;实体的主体部分(entity-body)&lt;/h2&gt;
+
+&lt;p&gt;可选的实体主体部分是HTTP报文的负荷。就是&lt;code&gt;HTTP要传输的内容&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;HTTP报文可以承载很多类型的数字数据：图片、视频、HTML文档、软件应用程序、信用卡事物、电子邮件等。&lt;/p&gt;
+
+&lt;h1 id=&quot;charles-request-response&quot;&gt;使用Charles抓取的request、response&lt;/h1&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-25-6.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
 
 &lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 
@@ -1053,8 +1158,10 @@ Connection: Keep-Alive
 
 &lt;p&gt;&lt;strong&gt;补充知识：编码类型&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://imququ.com/post/four-ways-to-post-data-in-http.html&quot;&gt;四种常见的 POST 提交数据方式&lt;/a&gt;&lt;br&gt;
-&lt;a href=&quot;application/x-www-form-urlencoded%E5%92%8Cmultipart/form-data%E7%9A%84%E5%8C%BA%E5%88%AB&quot;&gt;application/x-www-form-urlencoded和multipart/form-data的区别&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://imququ.com/post/four-ways-to-post-data-in-http.html&quot;&gt;四种常见的 POST 提交数据方式&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;application/x-www-form-urlencoded%E5%92%8Cmultipart/form-data%E7%9A%84%E5%8C%BA%E5%88%AB&quot;&gt;application/x-www-form-urlencoded和multipart/form-data的区别&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;总结以上表格要表达的意思&lt;/p&gt;
 

@@ -72,8 +72,8 @@ name=Professional%20Ajax&publisher=Wiley
 
 **补充知识：编码类型**
 
-[四种常见的 POST 提交数据方式](https://imququ.com/post/four-ways-to-post-data-in-http.html)
-[application/x-www-form-urlencoded和multipart/form-data的区别](application/x-www-form-urlencoded和multipart/form-data的区别)
+- [四种常见的 POST 提交数据方式](https://imququ.com/post/four-ways-to-post-data-in-http.html)  
+- [application/x-www-form-urlencoded和multipart/form-data的区别](application/x-www-form-urlencoded和multipart/form-data的区别)
 
 
 
