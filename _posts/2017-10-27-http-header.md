@@ -36,13 +36,13 @@ HTTP首部字段想请求和响应报文中添加了一些附加信息。
  既可用于请求，也可用于响应。可以在客户端、服务器和其他应用程序之间提供通用功能。
 
  **2. 请求首部**  
- 是请求报文特有的，为服务器提供一些额外信息
+ 是请求报文特有的。补充了请求的附加内容、客户端信息、响应内容相关优先级等信息。
 
  **3. 响应首部**  
- 是响应报文特有的，为客户端提供信息
+ 是响应报文特有的。为客户端提供信息，补充响应的附加内容，也会要求客户端附加额外的内容信息。
 
  **4. 实体首部**  
- 描述实体的长度和内容，或者资源本身。可用于请求，也可用于响应。
+针对请求报文和响应报文的实体部分使用的首部。描述实体的长度和内容，或者更新时间。
 
  **5. 扩展首部**  
  非标准HTTP规范，由程序开发者创建
@@ -202,9 +202,11 @@ Accept首部使连接的两端受益：
 |Set-Cookie|不是真正的安全首部，但隐含有安全功能；可以在客户端设置一个令牌，以便服务器对客户端进行标识|Set-Cookie: UserID=JohnDoe;|
 |Set-Cookie2|是|Set-Cookie的扩展|Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1|
 |UA-(CPU,Disp,OS,Color,Pixels)|不推荐使用，客户端机器的CPU、显示器的尺寸和色彩深度、操作系统、显示器的颜色信息、显示器的像素信息|UA-OS: Windows 95|
+|Content-Disposition|？|？|
 
 # 更多-more
 
+- [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
 - [http://tools.jb51.net/table/http_header](http://tools.jb51.net/table/http_header)
 - [http://www.jianshu.com/c/47c604fe47af](http://www.jianshu.com/c/47c604fe47af)
 - [http://www.jianshu.com/p/d40facd78a88](http://www.jianshu.com/p/d40facd78a88)
