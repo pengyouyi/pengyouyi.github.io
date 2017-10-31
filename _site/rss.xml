@@ -5,8 +5,8 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Tue, 31 Oct 2017 13:22:37 +0800</lastBuildDate>
-        <pubDate>Tue, 31 Oct 2017 13:22:37 +0800</pubDate>
+        <lastBuildDate>Tue, 31 Oct 2017 16:05:44 +0800</lastBuildDate>
+        <pubDate>Tue, 31 Oct 2017 16:05:44 +0800</pubDate>
         <ttl>60</ttl>
 
 
@@ -95,8 +95,6 @@
 &lt;div class=&quot;rd&quot;&gt;
     &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-6.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 </description>
                 <link>/http/2017/10/31/http-agent-cache-gateway-tunnel</link>
                 <guid>/http/2017/10/31/http-agent-cache-gateway-tunnel</guid>
@@ -209,8 +207,6 @@
 &lt;div class=&quot;rd&quot;&gt;
     &lt;img src=&quot;/assets/images/2017/10-11-12/10-30-13.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 </description>
                 <link>/http/2017/10/30/http-about</link>
                 <guid>/http/2017/10/30/http-about</guid>
@@ -269,8 +265,6 @@
 &lt;li&gt;news，访问一些特定的文章或新闻组&lt;br&gt;&lt;/li&gt;
 &lt;li&gt;telnet，访问交互式业务&lt;br&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 </description>
                 <link>/http/2017/10/30/http-URI-URL</link>
                 <guid>/http/2017/10/30/http-URI-URL</guid>
@@ -437,8 +431,6 @@
 &lt;div class=&quot;rd&quot;&gt;
     &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-8.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 </description>
                 <link>/http/2017/10/28/http-tcp-ip</link>
                 <guid>/http/2017/10/28/http-tcp-ip</guid>
@@ -446,26 +438,120 @@
         </item>
 
         <item>
-                <title>HTTP持久连接</title>
-                <description>&lt;h1 id=&quot;http&quot;&gt;HTTP持久连接&lt;/h1&gt;
+                <title>HTTP持久连接、管线化</title>
+                <description>&lt;h1 id=&quot;http&quot;&gt;HTTP连接性能&lt;/h1&gt;
 
-&lt;h2 id=&quot;&gt;什么是持久连接&lt;/h2&gt;
+&lt;h2 id=&quot;http&quot;&gt;HTTP事务的时延&lt;/h2&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-9.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;tcp&quot;&gt;TCP连接的握手时延&lt;/h2&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-9.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;在发送数据之前，TCP要传送两个分组来建立连接&lt;/p&gt;
+
+&lt;h2 id=&quot;http&quot;&gt;HTTP串行事务处理时延&lt;/h2&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-11.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;提高HTTP的连接性能&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;并行连接。 通过多TCP连接发起并发的HTTP请求。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;持久连接。 重用TCP连接，以消除连接及关闭时延。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;管道化连接。通过共享的TCP连接发起并发的HTTP请求。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;复用的连接。 交替传送请求和响应（实验阶段）。&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;&gt;并行连接&lt;/h1&gt;
+
+&lt;p&gt;并行连接可能会提高页面的加载速度&lt;/p&gt;
+
+&lt;p&gt;但由于客户端的网络宽带不足，并行连接不一定总是更快。&lt;/p&gt;
+
+&lt;p&gt;浏览器使用了并行连接，并行连接的总数通常是4个。服务器可以随意关闭来自特定客户端的超量连接。&lt;/p&gt;
+
+&lt;h1 id=&quot;http-1-1&quot;&gt;HTTP/1.1持久连接&lt;/h1&gt;
+
+&lt;p&gt;在事务处理结束之后仍然保持在打开状态的TCP连接被称为&lt;code&gt;持久连接&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;非持久连接会在每个事务结束之后关闭。持久连接会在不同事务之间保持打开状态，直到客户端或服务器决定将其关闭为止。&lt;/p&gt;
 
 &lt;p&gt;HTTP协议采用“请求 - 应答”模式，当使用普通模式，即非Keep-Alive模式时，每个请求/应答客户和服务器都要新建一个连接，完成之后立即断开连接（HTTP协议为无连接的协议）&lt;/p&gt;
 
-&lt;p&gt;当使用Keep - Alive模式（又称为持久连接、连接重用）时，Keep - Alive功能使客户端到服务器端的连接持续有效，当出现对服务器的后记请求时，Keep - Alive功能避免了建立或者重新建立连接&lt;/p&gt;
+&lt;p&gt;当使用Keep - Alive模式（又称为持久连接、连接重用）时，Keep - Alive功能使客户端到服务器端的连接持续有效，当出现对服务器的后续请求时，Keep - Alive功能避免了建立或者重新建立连接&lt;/p&gt;
 
-&lt;p&gt;持久连接是HTTP/1.1才出现的&lt;/p&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Connection: Keep-Alive
+Keep-Alive: max &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 5, timeout &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 120&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h3 id=&quot;&gt;什么是管线化&lt;/h3&gt;
+&lt;p&gt;以上说明服务器最多还会为另外5个事务保持持久的打开状态，或者将打开状态保持到连接空闲了2分钟之后。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-12.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;connection&quot;&gt;Connection首部和哑代理&lt;/h2&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-13.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-14.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;现代的代理不能转发Connection首部和所有名字出现在Connection值中的首部。&lt;/p&gt;
+
+&lt;p&gt;使用Proxy-Connection能解决客户端和服务器之间只有一个代理时的哑代理问题。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-15.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;浏览器发送Proxy-Connection。如果遇到聪明的代理（理解持久连接），它会用Connection取代Proxy-Connection，再发送给服务器&lt;/p&gt;
+
+&lt;p&gt;如果有多层代理，Proxy-Connection仍然无法解决问题。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-16.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;http-1-0-http-1-1&quot;&gt;HTTP/1.0和HTTP/1.1持久协议区别&lt;/h2&gt;
+
+&lt;p&gt;HTTP/1.0中默认是关闭持久连接的,通过发送Connection: Keep-Alive请求首部来激活Keep-Alive连接。&lt;/p&gt;
+
+&lt;p&gt;早期HTTP/1.0使用Keep - Alive连接达到持久连接效果。Keep - Alive连接是可选或者不支持的。&lt;/p&gt;
+
+&lt;p&gt;持久连接(persistent connection)是HTTP/1.1才出现的，HTTP/1.1所有的连接默认都是持久连接。连接关闭必须添加Connection: close首部。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;启用Keep-Alive的优点&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;启用Keep-Alive模式肯定更高效，性能更高。因为避免了建立/释放连接的开销。&lt;/p&gt;
+
+&lt;p&gt;单用户客户端与任何服务器或代理之间的连接数不应该超过2个。一个代理与其它服务器或代码之间应该使用不超过2 * N的活跃并发连接。这是为了提高HTTP响应时间，避免拥塞（冗余的连接并不能代码执行性能的提升）。&lt;/p&gt;
+
+&lt;h1 id=&quot;http&quot;&gt;HTTP管线化连接&lt;/h1&gt;
 
 &lt;p&gt;在使用持久连接的情况下，某个连接上消息的传递类似于&lt;/p&gt;
 
 &lt;p&gt;请求1 -&amp;gt; 响应1 -&amp;gt; 请求12 -&amp;gt; 响应2 -&amp;gt; 请求3 -&amp;gt; 响应3&lt;/p&gt;
 
-&lt;p&gt;某个连接上的消息变成了类似这样&lt;/p&gt;
+&lt;p&gt;管线化连接，某个连接上的消息变成了类似这样&lt;/p&gt;
 
 &lt;p&gt;请求1 -&amp;gt; 请求2 -&amp;gt; 请求3 -&amp;gt; 响应1  -&amp;gt; 响应2 -&amp;gt; 响应3&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-17.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP管线化连接限制&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;管线化机制通过持久连接完成，仅HTTP/1.1支持此技术&lt;br&gt;&lt;/li&gt;
@@ -476,7 +562,22 @@
 &lt;li&gt;由于上面提到的服务器端问题，开启管线化很可能并不会带来大幅度的性能提升，而且很多服务器端和代理程序对管线化的支持并不好，因此现代浏览器chrome和Firefox默认并未开启管线化支持&lt;br&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h1 id=&quot;close&quot;&gt;关闭连接-close&lt;/h1&gt;
+
+&lt;p&gt;所有HTTP客户端、服务器或代理都可以在任意时刻关闭一TCP传输连接。通常在一条报文结束时关闭，也有出错的时候。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;如何确定传输的实体大小？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;当服务器知道消息的长度时，使用消息首部字段Conent-Length&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;当服务器不知道内容的大小时，使用消息首部字段Transfer-Encoding&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Transfer-Encoding 与 Conent-Length 不共存，Transfer-Encoding 优先级高于 Conent-Length&lt;/p&gt;
+
 &lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.kafan.cn/edu/5110681.html&quot;&gt;https://www.kafan.cn/edu/5110681.html&lt;/a&gt;&lt;/p&gt;
 </description>
                 <link>/http/2017/10/28/http-keep-alive</link>
                 <guid>/http/2017/10/28/http-keep-alive</guid>
@@ -574,12 +675,14 @@
 
 &lt;p&gt;MIME 类型是一种文本标记，表示一种主要的对象类型和一个特定的子类型，中间 由一条斜杠来分隔。&lt;/p&gt;
 
-&lt;p&gt;•   HTML 格式的文本文档由text/html 类型来标记。&lt;br&gt;
-•   普通的ASCII 文本文档由text/plain 类型来标记。&lt;br&gt;
-•   JPEG 版本的图片为image/jpeg 类型。&lt;br&gt;
-•   GIF 格式的图片为image/gif 类型。&lt;br&gt;
-•   Apple 的QuickTime 电影为video/quicktime 类型。&lt;br&gt;
-•   微软的PowerPoint 演示文件为application/vnd.ms-powerpoint 类型。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;HTML 格式的文本文档由text/html 类型来标记。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;普通的ASCII 文本文档由text/plain 类型来标记。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;JPEG 版本的图片为image/jpeg 类型。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;GIF 格式的图片为image/gif 类型。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Apple 的QuickTime 电影为video/quicktime 类型。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;微软的PowerPoint 演示文件为application/vnd.ms-powerpoint 类型。&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 
