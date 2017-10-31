@@ -7,8 +7,14 @@ categories: HTTP
 description: HTTPS
 ---
 
-# HTTPS
+# HTTP和HTTPS的区别
 
+1. HTTP 的 URL 以 http:// 开头，而 HTTPS 的 URL 以 https:// 开头  
+2. HTTP 是不安全的，而 HTTPS 是安全的。HTTPS使用安全套接字层（SSL）进行信息交换，是HTTP的安全版  
+3. HTTP 标准端口是 80 ，而 HTTPS 的标准端口是 443  
+4. 在 OSI 网络模型中，HTTP 工作于应用层，而 HTTPS 工作在传输层  
+5. HTTP 无需加密，而 HTTPS 对传输的数据进行加密  
+6. HTTP 无需证书，而 HTTPS 需要认证证书  
 
 # HTTP的缺点
 
@@ -62,12 +68,9 @@ HTTP协议通过和SSL(Secure Socket Layer,安全套接层)或TLS(Transport Laye
 
 使用MD5和SHA-1来确认文件的数字签名。
 
-
-# HTTPS定义
-
+# HTTPS
 
 HTTP + 加密 + 认证 + 完整性保护 = HTTPS
-
 
 ## HTTP + 加密 + 认证 + 完整性保护 = HTTPS
 
@@ -135,22 +138,52 @@ HTTPS采用对称加密和非对称加密所混合的加密机制。
 
 ## HTTPS安全通信机制
 
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/10-31-18.png" alt="">
+</div>
+
+[http://www.jianshu.com/p/e634784e7b00](http://www.jianshu.com/p/e634784e7b00)
+
+完整的HTTPS的通信过程
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/10-31-19.png" alt="">
+</div>
+
+## 为什么不一直使用HTTPS
+
+HTTPS的缺点
+
+1. 加密通信与纯文本通信相比,消耗更多的CPU和内存资源
+
+2. 购买证书是要钱的！
+
+3. 少许对客户端有要求的情况下,会要求客户端也必须有一个证书.
+
+- 这里客户端证书,其实就类似表示个人信息的时候,除了用户名/密码, 还有一个CA 认证过的身份. 应为个人证书一般来说上别人无法模拟的,所有这样能够更深的确认自己的身份
+
+- 目前少数个人银行的专业版是这种做法,具体证书可能是拿U盘作为一个备份的载体
+
+### SSL慢吗
+
+当使用SSL时，它的处理速度变慢
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/10-31-19.png" alt="">
+</div>
+
+使用SSL加速器硬件来改善计算速度。
+
 # HTTPS的工作原理
 
-# HTTP和HTTPS的区别
-
-1. HTTP 的 URL 以 http:// 开头，而 HTTPS 的 URL 以 https:// 开头  
-2. HTTP 是不安全的，而 HTTPS 是安全的。HTTPS使用安全套接字层（SSL）进行信息交换，是HTTP的安全版  
-3. HTTP 标准端口是 80 ，而 HTTPS 的标准端口是 443  
-4. 在 OSI 网络模型中，HTTP 工作于应用层，而 HTTPS 工作在传输层  
-5. HTTP 无需加密，而 HTTPS 对传输的数据进行加密  
-6. HTTP 无需证书，而 HTTPS 需要认证证书  
-
-# HTTPS的优点
-
-
-# HTTPS的缺点
-
+1、客户端发起HTTPS请求
+2、服务端的配置数字证书
+3、传送证书
+4、客户端解析证书
+5、传送加密信息
+6、服务段解密信息
+7、传输加密后的信息
+8、客户端解密信息
 
 # 什么时候该使用 HTTPS
 
@@ -161,10 +194,7 @@ HTTPS采用对称加密和非对称加密所混合的加密机制。
 - 电子邮件  
 - 一些企业部门的网站  
 
-
-
-
-
+# 更多-more
 
 [https://juejin.im/entry/58d7635e5c497d0057fae036](https://juejin.im/entry/58d7635e5c497d0057fae036)
 [http://www.jianshu.com/p/37654eb66b58](http://www.jianshu.com/p/37654eb66b58)
