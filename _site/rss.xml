@@ -5,10 +5,174 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Tue, 31 Oct 2017 16:05:44 +0800</lastBuildDate>
-        <pubDate>Tue, 31 Oct 2017 16:05:44 +0800</pubDate>
+        <lastBuildDate>Tue, 31 Oct 2017 23:05:10 +0800</lastBuildDate>
+        <pubDate>Tue, 31 Oct 2017 23:05:10 +0800</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>HTTPS</title>
+                <description>&lt;h1 id=&quot;https&quot;&gt;HTTPS&lt;/h1&gt;
+
+&lt;h1 id=&quot;http&quot;&gt;HTTP的缺点&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通信使用明文(不加密), 内容可能会被窃听&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;不验证通信方的身份, 因此有可能遭遇伪装&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;无法证明报文的完整性, 所以有可能已遭篡改&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;a&quot;&gt;通信使用明文可能会被窃听-a&lt;/h2&gt;
+
+&lt;h3 id=&quot;tcp-ip&quot;&gt;TCP/IP是可能被窃听的网络&lt;/h3&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-7.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;即使已经经过加密处理的通信，也会被窥视到通信内容。但无法破解报文信息的含义。&lt;/p&gt;
+
+&lt;h3 id=&quot;encryption&quot;&gt;加密处理防止被窃听-encryption&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;通信的加密&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;HTTP协议通过和SSL(Secure Socket Layer,安全套接层)或TLS(Transport Layer Security,安全层传输协议)组合使用，加密HTTP的通信内容。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;内容的加密&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;把HTTP报文里所含的内容进行加密处理后再发送。&lt;/p&gt;
+
+&lt;h2 id=&quot;b&quot;&gt;不验证通信方的身份就可能遭遇伪装-b&lt;/h2&gt;
+
+&lt;h3 id=&quot;anyone&quot;&gt;任何人都可发起请求-anyone&lt;/h3&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-8.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;certificate&quot;&gt;查明对手的证书-certificate&lt;/h3&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-9.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;c&quot;&gt;无法证明报文的完整性, 可能已遭篡改-c&lt;/h2&gt;
+
+&lt;h3 id=&quot;error&quot;&gt;接收到的内容可能有误-Error&lt;/h3&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-10.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;&gt;如何防止篡改&lt;/h3&gt;
+
+&lt;p&gt;使用MD5和SHA-1来确认文件的数字签名。&lt;/p&gt;
+
+&lt;h1 id=&quot;https&quot;&gt;HTTPS定义&lt;/h1&gt;
+
+&lt;p&gt;HTTP + 加密 + 认证 + 完整性保护 = HTTPS&lt;/p&gt;
+
+&lt;h2 id=&quot;http-https&quot;&gt;HTTP + 加密 + 认证 + 完整性保护 = HTTPS&lt;/h2&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-11.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;https-ssl-http&quot;&gt;HTTPS是身披SSL外壳的HTTP&lt;/h2&gt;
+
+&lt;p&gt;通常情况下HTTP是直接和TCP层进行通信的。当使用SSL(安全套阶字)时,则演变成HTTP先和SSL通信,SSL再和TCP通信的了。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-12.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;encryption&quot;&gt;加密技术-encryption&lt;/h2&gt;
+
+&lt;p&gt;SSL采用的是一种叫做公开密钥加密的加密处理方式&lt;/p&gt;
+
+&lt;h3 id=&quot;symmetric-encryption&quot;&gt;对称加密-Symmetric encryption&lt;/h3&gt;
+
+&lt;p&gt;加密和解密用的一个密钥的方式称为对称加密,也叫做共享密钥加密&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-12.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;对称加密在发送加密信息时也需要将密钥发送给对方,但这样可以被攻击者截取,就不安全啦&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-14.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;asymmetric-encryption&quot;&gt;非对称加密-Asymmetric encryption&lt;/h3&gt;
+
+&lt;p&gt;非对称加密又称作公开密钥加密,它很好的解决了对称加密密钥被截取的问题。&lt;/p&gt;
+
+&lt;p&gt;非对称加密采用一对非对称的密钥,一把叫做私有密钥,一把叫做共有密钥。&lt;/p&gt;
+
+&lt;p&gt;使用非对称加密,发送密文一方使用对方的共有密钥进行加密处理,对方收到加密信息后,再使用自己的私有密钥进行解密。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-15.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;https&quot;&gt;HTTPS采用混合加密机制&lt;/h3&gt;
+
+&lt;p&gt;HTTPS采用对称加密和非对称加密所混合的加密机制。&lt;/p&gt;
+
+&lt;p&gt;若密钥能安全交换,那么有可能仅考虑非对称加密。&lt;/p&gt;
+
+&lt;p&gt;但是非对称加密与对称加密相比,处理速度相对较慢。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-16.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;certificate&quot;&gt;证明公开密钥正确性的证书-certificate&lt;/h3&gt;
+
+&lt;p&gt;使用数字证书认证机构和其颁布的公开密钥证书进行认证。即让第三方独立机构进行验证。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-17.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;https&quot;&gt;HTTPS安全通信机制&lt;/h2&gt;
+
+&lt;h1 id=&quot;https&quot;&gt;HTTPS的工作原理&lt;/h1&gt;
+
+&lt;h1 id=&quot;http-https&quot;&gt;HTTP和HTTPS的区别&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;HTTP 的 URL 以 http:// 开头，而 HTTPS 的 URL 以 https:// 开头&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;HTTP 是不安全的，而 HTTPS 是安全的。HTTPS使用安全套接字层（SSL）进行信息交换，是HTTP的安全版&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;HTTP 标准端口是 80 ，而 HTTPS 的标准端口是 443&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;在 OSI 网络模型中，HTTP 工作于应用层，而 HTTPS 工作在传输层&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;HTTP 无需加密，而 HTTPS 对传输的数据进行加密&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;HTTP 无需证书，而 HTTPS 需要认证证书&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;https&quot;&gt;HTTPS的优点&lt;/h1&gt;
+
+&lt;h1 id=&quot;https&quot;&gt;HTTPS的缺点&lt;/h1&gt;
+
+&lt;h1 id=&quot;https&quot;&gt;什么时候该使用 HTTPS&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;银行网站&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;支付网关&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;购物网站&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;登录页&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;电子邮件&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;一些企业部门的网站&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://juejin.im/entry/58d7635e5c497d0057fae036&quot;&gt;https://juejin.im/entry/58d7635e5c497d0057fae036&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;http://www.jianshu.com/p/37654eb66b58&quot;&gt;http://www.jianshu.com/p/37654eb66b58&lt;/a&gt;&lt;/p&gt;
+</description>
+                <link>/http/2017/10/31/http-https</link>
+                <guid>/http/2017/10/31/http-https</guid>
+                <pubDate>Tue, 31 Oct 2017 00:00:00 +0800</pubDate>
+        </item>
 
         <item>
                 <title>代理、缓存、网关、隧道</title>
@@ -1201,6 +1365,37 @@ Keep-Alive: max &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 5, timeout &lt;sp
 &lt;td&gt;？&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h1 id=&quot;hop-by-hop-headers&quot;&gt;Hop-by-hop headers&lt;/h1&gt;
+
+&lt;p&gt;HTTP首部字段根据代理怎么处理它们分为两类&lt;/p&gt;
+
+&lt;h2 id=&quot;end-to-end-headers&quot;&gt;End-to-end headers&lt;/h2&gt;
+
+&lt;p&gt;端到端首部&lt;/p&gt;
+
+&lt;p&gt;分在此类别中的首部会转发给请求/响应的最终接收目标，且必须保存在由缓存生成的响应中，另外规定它必须被转发。&lt;/p&gt;
+
+&lt;h2 id=&quot;hop-by-hop-headers&quot;&gt;Hop-by-hop headers&lt;/h2&gt;
+
+&lt;p&gt;逐跳首部&lt;/p&gt;
+
+&lt;p&gt;只对单次转发有效，会通过缓存或代理而不再转发。HTTP/1.1规定，使用Hop-by-hop 首部，需提供 Connection 首部字段。&lt;/p&gt;
+
+&lt;p&gt;逐跳首部&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Connection&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Keep-Alive&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Proxy-Authenticate&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Proxy-Authorization&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;TE&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Trailer&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Transfer-Encoding&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Upgrade&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;除了这8个首部字段之外，其他所有字段都属于端到端首部。&lt;/p&gt;
 
 &lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 
@@ -4931,75 +5126,6 @@ while(..) 和 do..while(..)循环语句中的条件判断表达式&lt;br&gt;&lt;
 </description>
                 <link>/js/2017/03/28/js-operator</link>
                 <guid>/js/2017/03/28/js-operator</guid>
-                <pubDate>Tue, 28 Mar 2017 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>js相等的判断</title>
-                <description>&lt;h1 id=&quot;js&quot;&gt;js全等的判断&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;result display&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/1-2-3/03-28-1.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;js&quot;&gt;js相等的判断&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;result display&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/1-2-3/03-28-2.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;summery&quot;&gt;summery==运算的规则：&lt;/h1&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;undefined == null，结果是true。且它俩与所有其他值比较的结果都是false。&lt;br&gt;&lt;br&gt;
-String == Boolean，需要两个操作数同时转为Number。&lt;br&gt;&lt;br&gt;
-String/Boolean == Number，需要String/Boolean转为Number。&lt;br&gt;&lt;br&gt;
-Object == Primitive，需要Object转为Primitive(具体通过valueOf和toString方法)。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;compare&quot;&gt;==compare&lt;/h1&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;  &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;  &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;  &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//true&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;  &lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//true&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;0&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;  &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;//true&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//true&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//true&lt;/span&gt;
-&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//true&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;undefined&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NaN&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//true&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;观察上面可以知，从 &lt;code&gt;false&lt;/code&gt;、&lt;code&gt;0&lt;/code&gt;、&lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt;、&lt;code&gt;[ ]&lt;/code&gt; 4个值中任选两个都是相等的。&lt;br&gt;
-等号比较时，false和true分别可以转化为0、1&lt;/p&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://dorey.github.io/JavaScript-Equality-Table/&quot;&gt;https://dorey.github.io/JavaScript-Equality-Table/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/21650547&quot;&gt;https://zhuanlan.zhihu.com/p/21650547&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <link>/js/2017/03/28/js-equality</link>
-                <guid>/js/2017/03/28/js-equality</guid>
                 <pubDate>Tue, 28 Mar 2017 00:00:00 +0800</pubDate>
         </item>
 

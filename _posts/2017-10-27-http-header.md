@@ -204,6 +204,33 @@ Accept首部使连接的两端受益：
 |UA-(CPU,Disp,OS,Color,Pixels)|不推荐使用，客户端机器的CPU、显示器的尺寸和色彩深度、操作系统、显示器的颜色信息、显示器的像素信息|UA-OS: Windows 95|
 |Content-Disposition|？|？|
 
+# Hop-by-hop headers
+
+HTTP首部字段根据代理怎么处理它们分为两类
+
+## End-to-end headers
+端到端首部
+
+分在此类别中的首部会转发给请求/响应的最终接收目标，且必须保存在由缓存生成的响应中，另外规定它必须被转发。
+
+## Hop-by-hop headers
+逐跳首部
+
+只对单次转发有效，会通过缓存或代理而不再转发。HTTP/1.1规定，使用Hop-by-hop 首部，需提供 Connection 首部字段。
+
+逐跳首部
+
+ - Connection  
+ - Keep-Alive  
+ - Proxy-Authenticate  
+ - Proxy-Authorization  
+ - TE  
+ - Trailer  
+ - Transfer-Encoding  
+ - Upgrade  
+
+除了这8个首部字段之外，其他所有字段都属于端到端首部。
+
 # 更多-more
 
 - [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
