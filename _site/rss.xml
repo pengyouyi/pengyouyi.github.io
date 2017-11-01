@@ -5,10 +5,220 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Tue, 31 Oct 2017 23:38:29 +0800</lastBuildDate>
-        <pubDate>Tue, 31 Oct 2017 23:38:29 +0800</pubDate>
+        <lastBuildDate>Wed, 01 Nov 2017 13:26:32 +0800</lastBuildDate>
+        <pubDate>Wed, 01 Nov 2017 13:26:32 +0800</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>HTTP/2.0、HTTP/1.1和HTTP/1.0的区别</title>
+                <description>&lt;h1 id=&quot;http-2-0-http-1-1&quot;&gt;HTTP/2.0与HTTP/1.1区别&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;采用二进制格式（Binary Format）解析&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;多路复用（MultiPlexing）&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;header压缩&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;服务端推送（server push）&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://http2.github.io/&quot;&gt;https://http2.github.io/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;binary-format&quot;&gt;新的二进制格式（Binary Format）&lt;/h2&gt;
+
+&lt;p&gt;HTTP1.x的解析是基于文本，HTTP2.0的协议解析采用二进制格式。&lt;/p&gt;
+
+&lt;p&gt;二进制协议解析起来更高效、“线上”更紧凑，更重要的是错误更少。&lt;/p&gt;
+
+&lt;h2 id=&quot;multiplexing&quot;&gt;多路复用（MultiPlexing）&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP2.0的多路复用和HTTP1.X中的长连接复用有什么区别&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;HTTP/1.* 一次请求-响应，建立一个连接，用完关闭；每一个请求都要建立一个连接。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;HTTP/1.1 试过用流水线(pipelining)来解决这个问题, 若干个请求排队串行化单线程处理，后面的请求等待前面请求的返回才能获得执行机会，一旦有某请求超时等，后续请求只能被&lt;code&gt;阻塞&lt;/code&gt;。此外, 由于网络媒介(intermediary )和服务器不能很好的支持流水线, 导致部署起来困难重重。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTTP/2多个消息的请求和响应可同时在一个连接上&lt;code&gt;并行执行&lt;/code&gt;。某个请求任务耗时严重，不会影响到其它连接的正常执行。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-9.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;header&quot;&gt;header压缩&lt;/h2&gt;
+
+&lt;p&gt;HTTP/2 对消息头采用 HPACK 进行压缩传输，通讯双方各自cache一份header fields表，既避免了重复header的传输，又减小了需要传输的大小。&lt;/p&gt;
+
+&lt;h2 id=&quot;server-push&quot;&gt;服务端推送（server push）&lt;/h2&gt;
+
+&lt;p&gt;当浏览器请求一个网页时，服务器将会发回HTML，在服务器开始发送JavaScript、图片和CSS前，服务器需要等待浏览器解析HTML和发送所有内嵌资源的请求。服务器推送服务通过“推送”那些它认为客户端将会需要的内容到客户端的缓存中，以此来避免往返的延迟。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-7.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-8.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;http&quot;&gt;HTTP历史&lt;/h1&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-6.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;http&quot;&gt;HTTP瓶颈&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;一条连接上只可发送一个请求。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;请求只能从客户端开始。客户端不可以接收除响应以外的指令。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;请求/响应首部未经压缩就发送。首部信息越多延迟越大。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;发送冗长的首部。每次互相发送相同的首部造成的浪费较多。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;可任意选择数据压缩格式。非强制压缩发送。&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;影响一个HTTP网络请求的因素主要有两个：带宽和延迟。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ajax的解决方法&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;从已加载完毕的页面发起请求，只更新局部页面。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Comet的解决方法&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一旦服务器有内容更新了，不等待请求，直接给客户端返回响应。模拟服务器向客户端推送的功能。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SPDY的目标&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Google在2010发布了SPDY，其开发目标旨在解决HTTP的性能瓶颈，缩短Web页面的加载时间（50%）。&lt;/p&gt;
+
+&lt;h1 id=&quot;spdy-http1-x&quot;&gt;SPDY：HTTP1.x的优化&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.chromium.org/spdy/&quot;&gt;http://www.chromium.org/spdy/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;SPDY没有完全改写HTTP协议，而是在TCP/IP的应用层与传输层之间通过新加会话的形式运作。同时，考虑到安全性问题，SPDY规定通信中使用SSL。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-1.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;spdy&quot;&gt;SPDY特点&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;1.多路复用流&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;通过单一的TCP连接，可以无限制处理多个HTTP请求。所有请求的处理都在一条TCP连接上完成，因此TCP的处理效率得到提高。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.赋予请求优先级&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;SPDY不仅可以无限制地并发处理请求，还可以给请求逐个分配优先级顺序。这样主要是为了在发送多个请求时，解决因带宽低而导致响应变慢的问题。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.压缩HTTP首部&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;压缩HTTP请求和响应的首部，通信产生的数据包数量和发送的字节数就变少了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4.推送功能&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;支持服务器主动向客户端推送数据的功能。这样，服务器可直接发送数据，而不必等待客户端的请求。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5.服务器提示功能&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;服务器可以主动提示客户端请求所需的资源。由于在客户端发现资源之前就可以获知资源的存在，因此在资源已缓存等情况下，可以避免发送不必要的请求。&lt;/p&gt;
+
+&lt;h2 id=&quot;spdy-web&quot;&gt;SPDY消除web瓶颈了吗&lt;/h2&gt;
+
+&lt;p&gt;SPDY只是将单个域名（IP地址）的通信多路复用，当一个网站上使用多个域名下的资源，改善效果受限。&lt;/p&gt;
+
+&lt;p&gt;SPDY的确是一种可有效消除HTTP瓶颈的技术。&lt;/p&gt;
+
+&lt;p&gt;还有非HTTP瓶颈导致的速度提升问题，比如改善web内容的编写方式等。&lt;/p&gt;
+
+&lt;h1 id=&quot;websccket&quot;&gt;使用浏览器进行全双工通信的WebSccket&lt;/h1&gt;
+
+&lt;p&gt;WebSocket通信协议在2011年被定为标准。&lt;/p&gt;
+
+&lt;p&gt;web浏览器与web服务器之间全双工通信标准。主要为了解决Ajax和Comet里XMLHttpRequest附带的缺陷所引起的问题。&lt;/p&gt;
+
+&lt;h2 id=&quot;websccket&quot;&gt;WebSccket协议&lt;/h2&gt;
+
+&lt;p&gt;一旦web服务器与客户端之间建立起webSocket协议的通信连接，之后所有的通信都依靠这个专用协议进行。通信过程中可互相发送JSON、XML、HTML或图片等任意格式的数据。&lt;/p&gt;
+
+&lt;h2 id=&quot;websccket&quot;&gt;WebSccket特点&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;1. 推送功能&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. 减少通信量&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;只要建立起WebSocket连接，就希望一直保持连接状态。和HTTP相比，不但每次连接时的总开销减少，而且由于WebSocket的首部信息很小，通信量也相应减少了。&lt;/p&gt;
+
+&lt;p&gt;实现WebSocket通信，在HTTP连接建立后，需要完成一次“握手”的步骤。&lt;/p&gt;
+
+&lt;p&gt;握手-请求&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-2.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;握手-相应&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-3.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;成功握手确立WebSocket连接之后，通信时不再使用HTTP的数据帧，而采用WebSocket独立的数据帧。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-4.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.w3.org/TR/websockets/&quot;&gt;W3C The WebSocket API&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;http-2-0-spdy&quot;&gt;HTTP/2.0：SPDY的升级版&lt;/h1&gt;
+
+&lt;p&gt;HTTP/2.0的目标是改善用户在使用Web时的速度体验。&lt;/p&gt;
+
+&lt;h2 id=&quot;http2-0-spdy&quot;&gt;HTTP2.0和SPDY的区别&lt;/h2&gt;
+
+&lt;p&gt;HTTP2.0 支持明文 HTTP 传输，而 SPDY 强制使用 HTTPS&lt;/p&gt;
+
+&lt;p&gt;HTTP2.0 消息头的压缩算法采用 HPACK，而非 SPDY 采用的 DEFLATE&lt;/p&gt;
+
+&lt;h2 id=&quot;http-2-0&quot;&gt;HTTP/2.0的特点&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SPDY&lt;/strong&gt;&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP Speed + Mobility&lt;/strong&gt;&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Network-Friendly HTTP Upgrade&lt;/strong&gt;&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;HTTP Speed + Mobility 是用于改善并提高移动端通信时速度和性能的标准。基于SPDY和WebSocket。&lt;/p&gt;
+
+&lt;p&gt;Network-Friendly HTTP Upgrade 主要是在移动端通信时改善HTTP性能的标准。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-5.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;http1-1-http1-0&quot;&gt;HTTP1.1和HTTP1.0的区别&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;HTTP1.1增加host字段。HTTP1.1请求消息中如果没有Host头域会报告一个错误（400 Bad Request）。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;HTTP1.1新增状态码。比如100、409(Conflict)、410(Gone)等。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;HTTP1.1支持长连接。HTTP1.1中默认开启Connection： keep-alive&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;HTTP1.1支持分块传输&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;带宽优化及网络连接的使用。HTTP1.1则在请求头引入了range头域，它允许只请求资源的某个部分，即返回码是206（Partial Content）&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;缓存处理。在HTTP1.0中主要使用header里的If-Modified-Since,Expires来做为缓存判断的标准，HTTP1.1则引入了更多的缓存控制策略例如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等更多可供选择的缓存头来控制缓存策略。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/frankyou/p/6145485.html&quot;&gt;http://www.cnblogs.com/frankyou/p/6145485.html&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.sohu.com/a/161201715_714863&quot;&gt;http://www.sohu.com/a/161201715_714863&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000002765886&quot;&gt;https://segmentfault.com/a/1190000002765886&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+                <link>/http/2017/11/01/http-http2</link>
+                <guid>/http/2017/11/01/http-http2</guid>
+                <pubDate>Wed, 01 Nov 2017 00:00:00 +0800</pubDate>
+        </item>
 
         <item>
                 <title>HTTPS</title>
@@ -179,21 +389,21 @@
 &lt;p&gt;当使用SSL时，它的处理速度变慢&lt;/p&gt;
 
 &lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-19.png&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/10-31-20.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
 
 &lt;p&gt;使用SSL加速器硬件来改善计算速度。&lt;/p&gt;
 
 &lt;h1 id=&quot;https&quot;&gt;HTTPS的工作原理&lt;/h1&gt;
 
-&lt;p&gt;1、客户端发起HTTPS请求&lt;br&gt;
-2、服务端的配置数字证书&lt;br&gt;
-3、传送证书&lt;br&gt;
-4、客户端解析证书&lt;br&gt;
-5、传送加密信息&lt;br&gt;
-6、服务段解密信息&lt;br&gt;
-7、传输加密后的信息&lt;br&gt;
-8、客户端解密信息&lt;/p&gt;
+&lt;p&gt;1、客户端发起HTTPS请求&lt;br&gt;&lt;br&gt;
+2、服务端的配置数字证书&lt;br&gt;&lt;br&gt;
+3、传送证书&lt;br&gt;&lt;br&gt;
+4、客户端解析证书&lt;br&gt;&lt;br&gt;
+5、传送加密信息&lt;br&gt;&lt;br&gt;
+6、服务段解密信息&lt;br&gt;&lt;br&gt;
+7、传输加密后的信息&lt;br&gt;&lt;br&gt;
+8、客户端解密信息  &lt;/p&gt;
 
 &lt;h1 id=&quot;https&quot;&gt;什么时候该使用 HTTPS&lt;/h1&gt;
 
@@ -208,8 +418,10 @@
 
 &lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://juejin.im/entry/58d7635e5c497d0057fae036&quot;&gt;https://juejin.im/entry/58d7635e5c497d0057fae036&lt;/a&gt;&lt;br&gt;
-&lt;a href=&quot;http://www.jianshu.com/p/37654eb66b58&quot;&gt;http://www.jianshu.com/p/37654eb66b58&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://juejin.im/entry/58d7635e5c497d0057fae036&quot;&gt;https://juejin.im/entry/58d7635e5c497d0057fae036&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/37654eb66b58&quot;&gt;http://www.jianshu.com/p/37654eb66b58&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
                 <link>/http/2017/10/31/http-https</link>
                 <guid>/http/2017/10/31/http-https</guid>
@@ -4880,295 +5092,6 @@ while(..) 和 do..while(..)循环语句中的条件判断表达式&lt;br&gt;&lt;
                 <link>/js/2017/03/30/js-toBoolean</link>
                 <guid>/js/2017/03/30/js-toBoolean</guid>
                 <pubDate>Thu, 30 Mar 2017 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>js运算符优先级</title>
-                <description>&lt;h1 id=&quot;js&quot;&gt;js运算符优先级&lt;/h1&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;优先级&lt;/th&gt;
-&lt;th&gt;运算符&lt;/th&gt;
-&lt;th&gt;运算类型&lt;/th&gt;
-&lt;th&gt;关联性&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;20&lt;/td&gt;
-&lt;td&gt;( … )&lt;/td&gt;
-&lt;td&gt;圆括号&lt;/td&gt;
-&lt;td&gt;n/a&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;19&lt;/td&gt;
-&lt;td&gt;.&lt;/td&gt;
-&lt;td&gt;成员访问&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;… [ … ]&lt;/td&gt;
-&lt;td&gt;需计算的成员访问&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;new … ( … )&lt;/td&gt;
-&lt;td&gt;new (带参数列表)&lt;/td&gt;
-&lt;td&gt;n/a&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;18&lt;/td&gt;
-&lt;td&gt;… ( … )函数调用&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;new …&lt;/td&gt;
-&lt;td&gt;new (无参数列表)&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;td&gt;##########&lt;/td&gt;
-&lt;td&gt;############&lt;/td&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;17&lt;/td&gt;
-&lt;td&gt;… &lt;code&gt;++&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;后置递增(运算符在后)&lt;/td&gt;
-&lt;td&gt;n/a&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;… --&lt;/td&gt;
-&lt;td&gt;后置递减(运算符在后)&lt;/td&gt;
-&lt;td&gt;n/a&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;16&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;!&lt;/code&gt; …&lt;/td&gt;
-&lt;td&gt;逻辑非&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;~ …&lt;/td&gt;
-&lt;td&gt;按位非&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;+&lt;/code&gt; …&lt;/td&gt;
-&lt;td&gt;一元加法&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;- …&lt;/td&gt;
-&lt;td&gt;一元减法&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;++&lt;/code&gt; …&lt;/td&gt;
-&lt;td&gt;前置递增&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;-- …&lt;/td&gt;
-&lt;td&gt;前置递减&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;typeof&lt;/code&gt; …&lt;/td&gt;
-&lt;td&gt;返回数据类型&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;td&gt;##########&lt;/td&gt;
-&lt;td&gt;############&lt;/td&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;14&lt;/td&gt;
-&lt;td&gt;*&lt;/td&gt;
-&lt;td&gt;乘法&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;/&lt;/td&gt;
-&lt;td&gt;除法&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;%&lt;/td&gt;
-&lt;td&gt;取模&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;13&lt;/td&gt;
-&lt;td&gt;+&lt;/td&gt;
-&lt;td&gt;加法&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;-&lt;/td&gt;
-&lt;td&gt;减法&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;td&gt;##########&lt;/td&gt;
-&lt;td&gt;############&lt;/td&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;11&lt;/td&gt;
-&lt;td&gt;&amp;lt;&lt;/td&gt;
-&lt;td&gt;小于&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&amp;lt;=&lt;/td&gt;
-&lt;td&gt;小于等于&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&amp;gt;&lt;/td&gt;
-&lt;td&gt;大于&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&amp;gt;=&lt;/td&gt;
-&lt;td&gt;大于等于&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;… in …&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;… instanceof …&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;td&gt;##########&lt;/td&gt;
-&lt;td&gt;############&lt;/td&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;10&lt;/td&gt;
-&lt;td&gt;==&lt;/td&gt;
-&lt;td&gt;相等&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;！=&lt;/td&gt;
-&lt;td&gt;不相等&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;===&lt;/td&gt;
-&lt;td&gt;全等&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;！===&lt;/td&gt;
-&lt;td&gt;不全等&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;td&gt;##########&lt;/td&gt;
-&lt;td&gt;############&lt;/td&gt;
-&lt;td&gt;######&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;6&lt;/td&gt;
-&lt;td&gt;&amp;amp;&amp;amp;&lt;/td&gt;
-&lt;td&gt;逻辑与&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;5&lt;/td&gt;
-&lt;td&gt;逻辑或&lt;/td&gt;
-&lt;td&gt;逻辑或&lt;/td&gt;
-&lt;td&gt;L&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;td&gt;… ? … : …&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;条件运算符&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;… = …&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;赋值&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;+=&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;-=&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;*=&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;/=&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;%=&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;R&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence&quot;&gt;https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_Precedence&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <link>/js/2017/03/28/js-operator</link>
-                <guid>/js/2017/03/28/js-operator</guid>
-                <pubDate>Tue, 28 Mar 2017 00:00:00 +0800</pubDate>
         </item>
 
 

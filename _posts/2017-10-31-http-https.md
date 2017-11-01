@@ -169,21 +169,21 @@ HTTPS的缺点
 当使用SSL时，它的处理速度变慢
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-31-19.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-31-20.png" alt="">
 </div>
 
 使用SSL加速器硬件来改善计算速度。
 
 # HTTPS的工作原理
 
-1、客户端发起HTTPS请求
-2、服务端的配置数字证书
-3、传送证书
-4、客户端解析证书
-5、传送加密信息
-6、服务段解密信息
-7、传输加密后的信息
-8、客户端解密信息
+1、客户端发起HTTPS请求  
+2、服务端的配置数字证书  
+3、传送证书  
+4、客户端解析证书  
+5、传送加密信息  
+6、服务段解密信息  
+7、传输加密后的信息  
+8、客户端解密信息  
 
 # 什么时候该使用 HTTPS
 
@@ -196,5 +196,5 @@ HTTPS的缺点
 
 # 更多-more
 
-[https://juejin.im/entry/58d7635e5c497d0057fae036](https://juejin.im/entry/58d7635e5c497d0057fae036)
-[http://www.jianshu.com/p/37654eb66b58](http://www.jianshu.com/p/37654eb66b58)
+- [https://juejin.im/entry/58d7635e5c497d0057fae036](https://juejin.im/entry/58d7635e5c497d0057fae036)  
+- [http://www.jianshu.com/p/37654eb66b58](http://www.jianshu.com/p/37654eb66b58)
