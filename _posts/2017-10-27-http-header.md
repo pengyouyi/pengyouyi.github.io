@@ -97,7 +97,7 @@ Accept首部使连接的两端受益：
 |---|---|---|
 |Accept|告诉服务器能够发送哪些媒体类型|Accept: text/plain, text/html|
 |Accept-Charset|客户端可以接受哪些字符集|Accept-Charset: utf-8, gb2312|
-|Accept-Encoding|客户端可以接受哪些编码方式|Accept-Encoding: compress, gzip, deflate|
+|Accept-Encoding|客户端可以接受哪些编码方式|Accept-Encoding: compress, gzip, deflate, identity(默认不压缩)|
 |Accept-Language|浏览器可以接受或优选哪种语言|Accept-Language: en,zh|
 
 
@@ -233,7 +233,8 @@ HTTP首部字段根据代理怎么处理它们分为两类
 
 # 更多-more
 
-- [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
-- [http://tools.jb51.net/table/http_header](http://tools.jb51.net/table/http_header)
-- [http://www.jianshu.com/c/47c604fe47af](http://www.jianshu.com/c/47c604fe47af)
-- [http://www.jianshu.com/p/d40facd78a88](http://www.jianshu.com/p/d40facd78a88)
+- [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)  
+- [http://tools.jb51.net/table/http_header](http://tools.jb51.net/table/http_header)  
+- [http://www.jianshu.com/c/47c604fe47af](http://www.jianshu.com/c/47c604fe47af)  
+- [http://www.jianshu.com/p/d40facd78a88](http://www.jianshu.com/p/d40facd78a88)  
+- [图解HTTP-完整彩色版.pdf](http://pengyouyi.site/assets/images/2017/pdf/HTTP.pdf)  
