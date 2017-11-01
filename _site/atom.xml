@@ -4,7 +4,7 @@
  <title>彭友谊的博客</title>
  <link href="" rel="self"/>
  <link href=""/>
- <updated>2017-11-01T21:31:23+08:00</updated>
+ <updated>2017-11-01T23:03:40+08:00</updated>
  <id></id>
  <author>
    <name>pengyouyi</name>
@@ -504,14 +504,135 @@ Last-Modified与ETag是可以一起使用的，&lt;code&gt;服务器会优先验
     &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-15.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
 
-&lt;h3 id=&quot;&gt;表示是否能缓存的指令&lt;/h3&gt;
+&lt;h2 id=&quot;a&quot;&gt;表示是否能缓存的指令-a&lt;/h2&gt;
 
-&lt;p&gt;public 指令&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;public 指令&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: public
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;当指定使用public指令时，则明确表明其他用户也可以利用缓存。&lt;/p&gt;
 
-&lt;p&gt;private 指令&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;private 指令&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-16.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: private
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;当指定private指令后，响应只以特定的用户作为对象，与public相反。&lt;/p&gt;
+
+&lt;p&gt;缓存服务器会对该特定用户提供资源缓存的服务，对于其他用户发送过来的请求，代理服务器则不会返回缓存。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;no-cache 指令&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-17.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: no-cache
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;使用no-cache指令的目的是为了防止从缓存中返回过期的资源。&lt;/p&gt;
+
+&lt;p&gt;客户端发送的请求中如果包含no-cache指令，则表示客户端将不会接收缓存过的响应。于是，缓存服务器必须把客户端请求转发给源服务器。&lt;/p&gt;
+
+&lt;p&gt;如果服务器返回的响应中包含no-cache指令,缓存服务器&lt;code&gt;可以缓存&lt;/code&gt;，但是只有在跟WEB服务器验证了其有效后，才能返回给客户端&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: no-cache = Location
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;如果服务器返回的响应中，若报文首部字段Cache-Control中对no-cache字段名具体指定参数值，那么缓存服务器不能对资源进行缓存。源服务器以后也将不再对缓存服务器请求提出的资源有效性进行确认，且禁止其对响应资源进行缓存操作。&lt;/p&gt;
+
+&lt;h2 id=&quot;b&quot;&gt;控制可执行缓存对象的指令-b&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;no-store 指令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: no-store
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;当使用no-store指令时，暗示请求或响应中包含机密信息。&lt;/p&gt;
+
+&lt;p&gt;no-store是&lt;code&gt;真正地不进行缓存&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;因此，该指令规定缓存不能在本地存储请求或响应的任何一部分。&lt;/p&gt;
+
+&lt;h2 id=&quot;c&quot;&gt;指定缓存期限和认证的指令-c&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;s-maxage 指令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: s-maxage = 3600（单位：秒）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;s-maxage指令的功能和max-age指令的相同。&lt;/p&gt;
+
+&lt;p&gt;它们的不同点是s-maxage指令只适用于供多位用户使用的公共缓存服务器（一般指代理）。也就是说，对于向同一用户重复返回响应的服务器来说，这个指令没有任何作用。&lt;/p&gt;
+
+&lt;p&gt;另外，当使用s-maxage指令后，则直接忽略对Expires首部字段及max-age指令的处理。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;max-age 指令&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-18.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: max-age = 3600（单位：秒）
+Cache-Control: max-age = 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;当客户端发送的请求中包含max-age指令时，如果判定缓存资源的缓存时间数值比指定时间的数值更小，那么客户端就接收缓存的资源。&lt;/p&gt;
+
+&lt;p&gt;当指定max-age = 0，时，那么缓存服务器通常需要将请求转发给源服务器。&lt;/p&gt;
+
+&lt;p&gt;当源服务器返回的响应中包含max-age指令时，缓存服务器将不对资源的有效性再作确认，而max-age数值代表保存为缓存的最长时间。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;min-fresh 指令&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-19.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: min-fresh = 60（单位：秒）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;min-fresh指令要求缓存服务器返回至少还未过指定时间的缓存资源。&lt;/p&gt;
+
+&lt;p&gt;比如，当指定min-fresh = 60后，过了60秒的资源都无法作为响应返回了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;max-stale 指令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: max-stale = 60（单位：秒）
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;使用max-stale可指示缓存资源，即使过期也照常接收。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;only-if-cached 指令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: only-if-cached
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;使用only-if-cached指令表示客户端仅在缓存服务器本地缓存目标资源的情况下才会要求其返回。&lt;/p&gt;
+
+&lt;p&gt;换言之，该指令要求缓存服务器不重新加载响应，也不会再次确认资源有效性。若发生请求缓存服务器的本地缓存无响应，则返回504 Gateway Timeout。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;must-revalidate 指令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: must-revalidate 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;使用must-revalidate 指令，代理会向源服务器再次验证即将返回的响应缓存目前是否任然有效。&lt;/p&gt;
+
+&lt;p&gt;若代理无法连通源服务器再次获取有效资源的话，缓存必须给客户端一条504状态码。&lt;/p&gt;
+
+&lt;p&gt;另外，使用must-revalidate 指令会忽略请求的max-stale 指令。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;proxy-revalidate 指令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: proxy-revalidate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;proxy-revalidate指令要求所有的缓存服务器在接收到客户端带有该指令的请求返回响应之前，必须再次验证缓存的有效性。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;no-transform 指令&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Cache-Control: no-transform
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;使用no-transform指令规定无论是在请求还是响应中，缓存都不能改变实体主体的媒体类型。&lt;/p&gt;
+
+&lt;p&gt;这样做可防止缓存或代理压缩图片等类似操作。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/chen_zw/article/details/18924875&quot;&gt;http://blog.csdn.net/chen_zw/article/details/18924875&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cache-control&quot;&gt;cache-control应该怎么设置更好？&lt;/h2&gt;
+
+&lt;p&gt;对于图片，css,等长期不变化的内容应该设置较长的过期时间（如180天）&lt;/p&gt;
+
+&lt;p&gt;建议：&lt;/p&gt;
+
+&lt;p&gt;1.对于js和css可以独立到一个二级域名中，启用GZIP，且设置较长的过期时间&lt;/p&gt;
+
+&lt;p&gt;2.对于图片独立到另一个二级域名中，且设置较长的过期时间&lt;/p&gt;
+
+&lt;p&gt;3.对于静态文件(html)如果长期不更新也可以设置稍长的过期时间（如30天），需要根据当前网站的实际而定。&lt;/p&gt;
+
+&lt;p&gt;4.对于动态文件(php)可以设置较短的过期时间（如120秒）&lt;/p&gt;
 
 &lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 

@@ -227,16 +227,174 @@ Cache-control: private, max-age=0, no-cache
     <img src="/assets/images/2017/10-11-12/11-01-15.png" alt="">
 </div>
 
-### 表示是否能缓存的指令
+## 表示是否能缓存的指令-a
 
-public 指令
+**public 指令**
 
 ```html
 Cache-Control: public
 ```
 当指定使用public指令时，则明确表明其他用户也可以利用缓存。
 
-private 指令
+**private 指令**
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-01-16.png" alt="">
+</div>
+
+```html
+Cache-Control: private
+```
+
+当指定private指令后，响应只以特定的用户作为对象，与public相反。
+
+缓存服务器会对该特定用户提供资源缓存的服务，对于其他用户发送过来的请求，代理服务器则不会返回缓存。
+
+**no-cache 指令**
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-01-17.png" alt="">
+</div>
+
+```html
+Cache-Control: no-cache
+```
+
+使用no-cache指令的目的是为了防止从缓存中返回过期的资源。
+
+客户端发送的请求中如果包含no-cache指令，则表示客户端将不会接收缓存过的响应。于是，缓存服务器必须把客户端请求转发给源服务器。
+
+如果服务器返回的响应中包含no-cache指令,缓存服务器`可以缓存`，但是只有在跟WEB服务器验证了其有效后，才能返回给客户端
+
+```html
+Cache-Control: no-cache = Location
+```
+
+如果服务器返回的响应中，若报文首部字段Cache-Control中对no-cache字段名具体指定参数值，那么缓存服务器不能对资源进行缓存。源服务器以后也将不再对缓存服务器请求提出的资源有效性进行确认，且禁止其对响应资源进行缓存操作。
+
+
+## 控制可执行缓存对象的指令-b
+
+**no-store 指令**
+
+```html
+Cache-Control: no-store
+```
+
+当使用no-store指令时，暗示请求或响应中包含机密信息。
+
+no-store是`真正地不进行缓存`。
+
+因此，该指令规定缓存不能在本地存储请求或响应的任何一部分。
+
+## 指定缓存期限和认证的指令-c
+
+**s-maxage 指令**
+
+```html
+Cache-Control: s-maxage = 3600（单位：秒）
+```
+
+s-maxage指令的功能和max-age指令的相同。
+
+它们的不同点是s-maxage指令只适用于供多位用户使用的公共缓存服务器（一般指代理）。也就是说，对于向同一用户重复返回响应的服务器来说，这个指令没有任何作用。
+
+另外，当使用s-maxage指令后，则直接忽略对Expires首部字段及max-age指令的处理。
+
+**max-age 指令**
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-01-18.png" alt="">
+</div>
+
+```html
+Cache-Control: max-age = 3600（单位：秒）
+Cache-Control: max-age = 0
+```
+
+当客户端发送的请求中包含max-age指令时，如果判定缓存资源的缓存时间数值比指定时间的数值更小，那么客户端就接收缓存的资源。
+
+当指定max-age = 0，时，那么缓存服务器通常需要将请求转发给源服务器。
+
+当源服务器返回的响应中包含max-age指令时，缓存服务器将不对资源的有效性再作确认，而max-age数值代表保存为缓存的最长时间。
+
+**min-fresh 指令**
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-01-19.png" alt="">
+</div>
+
+```html
+Cache-Control: min-fresh = 60（单位：秒）
+```
+
+min-fresh指令要求缓存服务器返回至少还未过指定时间的缓存资源。
+
+比如，当指定min-fresh = 60后，过了60秒的资源都无法作为响应返回了。
+
+**max-stale 指令**
+
+```html
+Cache-Control: max-stale = 60（单位：秒）
+```
+
+使用max-stale可指示缓存资源，即使过期也照常接收。
+
+**only-if-cached 指令**
+
+```html
+Cache-Control: only-if-cached
+```
+
+使用only-if-cached指令表示客户端仅在缓存服务器本地缓存目标资源的情况下才会要求其返回。
+
+换言之，该指令要求缓存服务器不重新加载响应，也不会再次确认资源有效性。若发生请求缓存服务器的本地缓存无响应，则返回504 Gateway Timeout。
+
+**must-revalidate 指令**
+
+```html
+Cache-Control: must-revalidate 
+```
+
+使用must-revalidate 指令，代理会向源服务器再次验证即将返回的响应缓存目前是否任然有效。
+
+若代理无法连通源服务器再次获取有效资源的话，缓存必须给客户端一条504状态码。
+
+另外，使用must-revalidate 指令会忽略请求的max-stale 指令。
+
+**proxy-revalidate 指令**
+
+```html
+Cache-Control: proxy-revalidate
+```
+
+proxy-revalidate指令要求所有的缓存服务器在接收到客户端带有该指令的请求返回响应之前，必须再次验证缓存的有效性。
+
+**no-transform 指令**
+
+```html
+Cache-Control: no-transform
+```
+
+使用no-transform指令规定无论是在请求还是响应中，缓存都不能改变实体主体的媒体类型。
+
+这样做可防止缓存或代理压缩图片等类似操作。
+
+[http://blog.csdn.net/chen_zw/article/details/18924875](http://blog.csdn.net/chen_zw/article/details/18924875)
+
+## cache-control应该怎么设置更好？
+
+对于图片，css,等长期不变化的内容应该设置较长的过期时间（如180天）
+
+建议：
+
+1.对于js和css可以独立到一个二级域名中，启用GZIP，且设置较长的过期时间
+
+2.对于图片独立到另一个二级域名中，且设置较长的过期时间
+
+3.对于静态文件(html)如果长期不更新也可以设置稍长的过期时间（如30天），需要根据当前网站的实际而定。
+
+4.对于动态文件(php)可以设置较短的过期时间（如120秒）
 
 # 更多-more
 
