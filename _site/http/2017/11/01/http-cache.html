@@ -287,6 +287,8 @@
 
 <h1 id="document-expiration">文档过期-document expiration</h1>
 
+<p>也叫做<code>强缓存</code>。</p>
+
 <p>HTTP采用<code>文档过期</code>和<code>服务器再验证</code>机制来检测副本的新鲜。</p>
 
 <h2 id="expires">Expires策略</h2>
@@ -328,6 +330,8 @@
 <p>HTTP/1.0会以 Expires 为准，忽略Cache-Control。</p>
 
 <h1 id="server-revalidation">服务器再验证-server revalidation</h1>
+
+<p>也叫做<code>协商缓存</code>。</p>
 
 <p>有两种方式，检查缓存的新鲜度</p>
 
@@ -401,10 +405,34 @@ Last-Modified与ETag是可以一起使用的，<code>服务器会优先验证ETa
 
 <p>而当用户使用Ctrl+F5进行强制刷新的时候，只是所有的缓存机制都将失效，重新从服务器拉去资源。</p>
 
-<h1 id="unable">不能缓存的请求-Unable</h1>
+<h1 id="cache">cache实际应用</h1>
+
+<h2 id="can">can被缓存的内容</h2>
+
+<ul>
+<li>css样式表<br></li>
+<li>js文件<br></li>
+<li>logo、图标<br></li>
+<li>html文件<br></li>
+<li>可以下载的内容<br></li>
+</ul>
+
+<h3 id=">经常改变的文件</h3>
+
+<p>Cache-Control:no-cache，Cache-Control:max-age=0</p>
+
+<p>比如入口index.html文件，文件内容改变但名称不变的资源。</p>
+
+<h3 id=">不经常改变的文件</h3>
+
+<p>给max-age设置一个较大的值，一般设置max-age=31536000(一年，最大值)。</p>
+
+<p>比如引入的第三方文件、打包出来的带有hash后缀css、js文件。一般来说文件内容改变了，会更新版本号、hash值，相当于请求另一个文件</p>
+
+<h2 id="unable">不能缓存的请求-Unable</h2>
 
 <ol>
-<li>HTTP信息头中包含Cache-Control:no-cache，pragma:no-cache（HTTP1.0），或Cache-Control:max-age=0等告诉浏览器不用缓存的请求<br></li>
+<li>HTTP信息头中包含Cache-Control:no-cache，Cache-Control:max-age=0，pragma:no-cache（HTTP1.0）等告诉浏览器不用缓存的请求<br></li>
 <li>需要根据Cookie，认证信息等决定输入内容的动态请求是不能被缓存的<br></li>
 <li>经过HTTPS安全加密的请求（有人也经过测试发现，ie其实在头部加入Cache-Control：max-age信息，firefox在头部加入Cache-Control:Public之后，能够对HTTPS的资源进行缓存，<a href="http://www.ruanyifeng.com/blog/2011/02/seven_myths_about_https.html">参考《HTTPS的七个误解》</a>）<br></li>
 <li>POST请求无法被缓存<br></li>

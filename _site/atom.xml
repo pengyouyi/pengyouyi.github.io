@@ -4,7 +4,7 @@
  <title>彭友谊的博客</title>
  <link href="" rel="self"/>
  <link href=""/>
- <updated>2017-11-01T23:48:53+08:00</updated>
+ <updated>2017-11-02T11:23:56+08:00</updated>
  <id></id>
  <author>
    <name>pengyouyi</name>
@@ -357,6 +357,8 @@
 
 &lt;h1 id=&quot;document-expiration&quot;&gt;文档过期-document expiration&lt;/h1&gt;
 
+&lt;p&gt;也叫做&lt;code&gt;强缓存&lt;/code&gt;。&lt;/p&gt;
+
 &lt;p&gt;HTTP采用&lt;code&gt;文档过期&lt;/code&gt;和&lt;code&gt;服务器再验证&lt;/code&gt;机制来检测副本的新鲜。&lt;/p&gt;
 
 &lt;h2 id=&quot;expires&quot;&gt;Expires策略&lt;/h2&gt;
@@ -398,6 +400,8 @@
 &lt;p&gt;HTTP/1.0会以 Expires 为准，忽略Cache-Control。&lt;/p&gt;
 
 &lt;h1 id=&quot;server-revalidation&quot;&gt;服务器再验证-server revalidation&lt;/h1&gt;
+
+&lt;p&gt;也叫做&lt;code&gt;协商缓存&lt;/code&gt;。&lt;/p&gt;
 
 &lt;p&gt;有两种方式，检查缓存的新鲜度&lt;/p&gt;
 
@@ -471,10 +475,34 @@ Last-Modified与ETag是可以一起使用的，&lt;code&gt;服务器会优先验
 
 &lt;p&gt;而当用户使用Ctrl+F5进行强制刷新的时候，只是所有的缓存机制都将失效，重新从服务器拉去资源。&lt;/p&gt;
 
-&lt;h1 id=&quot;unable&quot;&gt;不能缓存的请求-Unable&lt;/h1&gt;
+&lt;h1 id=&quot;cache&quot;&gt;cache实际应用&lt;/h1&gt;
+
+&lt;h2 id=&quot;can&quot;&gt;can被缓存的内容&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;css样式表&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;js文件&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;logo、图标&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;html文件&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;可以下载的内容&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;&gt;经常改变的文件&lt;/h3&gt;
+
+&lt;p&gt;Cache-Control:no-cache，Cache-Control:max-age=0&lt;/p&gt;
+
+&lt;p&gt;比如入口index.html文件，文件内容改变但名称不变的资源。&lt;/p&gt;
+
+&lt;h3 id=&quot;&gt;不经常改变的文件&lt;/h3&gt;
+
+&lt;p&gt;给max-age设置一个较大的值，一般设置max-age=31536000(一年，最大值)。&lt;/p&gt;
+
+&lt;p&gt;比如引入的第三方文件、打包出来的带有hash后缀css、js文件。一般来说文件内容改变了，会更新版本号、hash值，相当于请求另一个文件&lt;/p&gt;
+
+&lt;h2 id=&quot;unable&quot;&gt;不能缓存的请求-Unable&lt;/h2&gt;
 
 &lt;ol&gt;
-&lt;li&gt;HTTP信息头中包含Cache-Control:no-cache，pragma:no-cache（HTTP1.0），或Cache-Control:max-age=0等告诉浏览器不用缓存的请求&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;HTTP信息头中包含Cache-Control:no-cache，Cache-Control:max-age=0，pragma:no-cache（HTTP1.0）等告诉浏览器不用缓存的请求&lt;br&gt;&lt;/li&gt;
 &lt;li&gt;需要根据Cookie，认证信息等决定输入内容的动态请求是不能被缓存的&lt;br&gt;&lt;/li&gt;
 &lt;li&gt;经过HTTPS安全加密的请求（有人也经过测试发现，ie其实在头部加入Cache-Control：max-age信息，firefox在头部加入Cache-Control:Public之后，能够对HTTPS的资源进行缓存，&lt;a href=&quot;http://www.ruanyifeng.com/blog/2011/02/seven_myths_about_https.html&quot;&gt;参考《HTTPS的七个误解》&lt;/a&gt;）&lt;br&gt;&lt;/li&gt;
 &lt;li&gt;POST请求无法被缓存&lt;br&gt;&lt;/li&gt;
@@ -2084,7 +2112,27 @@ application/zip，application/application/vnd.ms-powerpoint...&lt;/p&gt;&lt;/li&
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Content-Disposition&lt;/td&gt;
+&lt;td&gt;告诉浏览器以下载的方式打开数据。&lt;/td&gt;
 &lt;td&gt;？&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X-Frame-Options&lt;/td&gt;
+&lt;td&gt;HTTP响应首部，防止点击劫持攻击。&lt;/td&gt;
+&lt;td&gt;X-Frame-Options: DENY、SAMEORIGIN（仅同源域名下的页面匹配许可）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X-XSS-Protection&lt;/td&gt;
+&lt;td&gt;HTTP响应首部，防止XSS攻击&lt;/td&gt;
+&lt;td&gt;X-XSS-Protection: 0（过滤无效）、1（过滤有效）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DNT&lt;/td&gt;
+&lt;td&gt;HTTP请求首部，拒绝个人信息被收集&lt;/td&gt;
+&lt;td&gt;DNT: 0(同意被追踪)、1(拒绝被追踪)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;P3P&lt;/td&gt;
+&lt;td&gt;HTTP响应首部，保护用户隐私&lt;/td&gt;
 &lt;td&gt;？&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;&lt;/table&gt;

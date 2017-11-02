@@ -73,6 +73,8 @@ description: HTTP缓存机制
 
 # 文档过期-document expiration
 
+也叫做`强缓存`。
+
 HTTP采用`文档过期`和`服务器再验证`机制来检测副本的新鲜。
 
 ## Expires策略
@@ -122,6 +124,8 @@ Cache-Control: max-age=3600
 HTTP/1.0会以 Expires 为准，忽略Cache-Control。
 
 # 服务器再验证-server revalidation
+
+也叫做`协商缓存`。
 
 有两种方式，检查缓存的新鲜度
 
@@ -193,9 +197,31 @@ Last-Modified与ETag是可以一起使用的，`服务器会优先验证ETag`，
 
 而当用户使用Ctrl+F5进行强制刷新的时候，只是所有的缓存机制都将失效，重新从服务器拉去资源。
 
-# 不能缓存的请求-Unable 
+# cache实际应用
 
-1. HTTP信息头中包含Cache-Control:no-cache，pragma:no-cache（HTTP1.0），或Cache-Control:max-age=0等告诉浏览器不用缓存的请求  
+## can被缓存的内容
+
+- css样式表  
+- js文件  
+- logo、图标  
+- html文件  
+- 可以下载的内容  
+
+### 经常改变的文件
+
+Cache-Control:no-cache，Cache-Control:max-age=0
+
+比如入口index.html文件，文件内容改变但名称不变的资源。
+
+### 不经常改变的文件
+
+给max-age设置一个较大的值，一般设置max-age=31536000(一年，最大值)。
+
+比如引入的第三方文件、打包出来的带有hash后缀css、js文件。一般来说文件内容改变了，会更新版本号、hash值，相当于请求另一个文件
+
+## 不能缓存的请求-Unable 
+
+1. HTTP信息头中包含Cache-Control:no-cache，Cache-Control:max-age=0，pragma:no-cache（HTTP1.0）等告诉浏览器不用缓存的请求  
 2. 需要根据Cookie，认证信息等决定输入内容的动态请求是不能被缓存的  
 3. 经过HTTPS安全加密的请求（有人也经过测试发现，ie其实在头部加入Cache-Control：max-age信息，firefox在头部加入Cache-Control:Public之后，能够对HTTPS的资源进行缓存，[参考《HTTPS的七个误解》](http://www.ruanyifeng.com/blog/2011/02/seven_myths_about_https.html)）  
 4. POST请求无法被缓存  

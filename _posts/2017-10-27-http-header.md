@@ -202,7 +202,11 @@ Accept首部使连接的两端受益：
 |Set-Cookie|不是真正的安全首部，但隐含有安全功能；可以在客户端设置一个令牌，以便服务器对客户端进行标识|Set-Cookie: UserID=JohnDoe;|
 |Set-Cookie2|是|Set-Cookie的扩展|Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1|
 |UA-(CPU,Disp,OS,Color,Pixels)|不推荐使用，客户端机器的CPU、显示器的尺寸和色彩深度、操作系统、显示器的颜色信息、显示器的像素信息|UA-OS: Windows 95|
-|Content-Disposition|？|？|
+|Content-Disposition|告诉浏览器以下载的方式打开数据。|？|
+|X-Frame-Options|HTTP响应首部，防止点击劫持攻击。|X-Frame-Options: DENY、SAMEORIGIN（仅同源域名下的页面匹配许可）|
+|X-XSS-Protection|HTTP响应首部，防止XSS攻击|X-XSS-Protection: 0（过滤无效）、1（过滤有效）|
+|DNT|HTTP请求首部，拒绝个人信息被收集|DNT: 0(同意被追踪)、1(拒绝被追踪)|
+|P3P|HTTP响应首部，保护用户隐私|？|
 
 # Hop-by-hop headers
 
