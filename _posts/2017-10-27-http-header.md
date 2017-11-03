@@ -60,6 +60,7 @@ HTTP首部字段想请求和响应报文中添加了一些附加信息。
 |Upgrade|发送端想”升级“，向服务器指定某种传输协议以便服务器进行转换（如果支持），服务端回应101响应时，必须包含这个首部|Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11|
 |Via|显示报文经过的中间节点(代理、网关)|Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)|
 |MIME-Version|发送端使用的MIME版本|MIME-Version: 1.0|
+|Transfer-Encoding|告知接收方对其采用了何种传输编码方式|Transfer-Encoding:chunked|
 
 
 ## 通用缓存首部-Universal cache
@@ -99,6 +100,7 @@ Accept首部使连接的两端受益：
 |Accept-Charset|客户端可以接受哪些字符集|Accept-Charset: utf-8, gb2312|
 |Accept-Encoding|客户端可以接受哪些编码方式|Accept-Encoding: compress, gzip, deflate, identity(默认不压缩)|
 |Accept-Language|浏览器可以接受或优选哪种语言|Accept-Language: en,zh|
+|TE|客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息|TE: trailers,deflate;q=0.5|
 
 
 ## 条件请求首部-Conditional

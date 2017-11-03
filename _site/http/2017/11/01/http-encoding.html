@@ -7,7 +7,7 @@
     
     
     
-    <title>GET请求和POST请求的区别 | 彭友谊的博客</title>
+    <title>HTTP内容编码、传输编码、分块传输 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="GET请求和POST请求的区别">
-    <meta property="og:url" content="/http/2017/10/25/http-get-post">
+    <meta property="og:title" content="HTTP内容编码、传输编码、分块传输">
+    <meta property="og:url" content="/http/2017/11/01/http-encoding">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="GET请求和POST请求的区别">
+    <meta property="og:description" content="HTTP内容编码、分块传输">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="GET请求和POST请求的区别">
+    <meta name="twitter:title" content="HTTP内容编码、传输编码、分块传输">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,14 +144,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/http/2017/10/25/http-get-post" title="GET请求和POST请求的区别" itemprop="url">GET请求和POST请求的区别</a>
+      <a href="/http/2017/11/01/http-encoding" title="HTTP内容编码、传输编码、分块传输" itemprop="url">HTTP内容编码、传输编码、分块传输</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2017-10-25 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-10-25</time>
+    <time datetime="2017-11-01 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-11-01</time>
     
   </p>
 </header>
@@ -163,165 +163,76 @@
 		
 		</div>
 		
-		<h1 id="get-post">GET请求和POST请求的区别</h1>
+		<h1 id="http">HTTP内容编码</h1>
 
-<p>两种 HTTP 请求方法：GET 和 POST</p>
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-01-20.png" alt="">
+</div>
 
-<p>在客户机和服务器之间进行请求-响应时，两种最常被用到的方法是：GET 和 POST。</p>
+<p>内容编码指明应用在实体内容上的编码格式，保持实体信息原样压缩。内容编码后的实体由客户端接收并负责解码。</p>
 
-<ul>
-<li>GET: 从服务器获取资源</li>
-<li>POST: 向服务器发送需要处理的数据</li>
-</ul>
-
-<p><strong>GET 方法</strong></p>
-
-<p>查询字符串（名称/值对）是在 GET 请求的 URL 中发送的,<br><br>
-（就是把数据放置在HTTP协议头中），以?分割URL和传输数据，参数之间以&amp;相连;<br><br>
-GET提交的数据会在地址栏中显示出来</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6</pre></td><td class="code"><pre>GET /books/?sex<span class="o">=</span>man&amp;name<span class="o">=</span>Professional HTTP/1.1
-Host: www.wrox.com
-User-Agent: Mozilla/5.0 <span class="o">(</span>Windows; U; Windows NT 5.1; en-US; rv:1.7.6<span class="o">)</span>
-Gecko/20050225 Firefox/1.0.1
-Connection: Keep-Alive
-  <span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>最后一行是空行</p>
-
-<p><strong>POST 方法</strong></p>
-
-<p>查询字符串（名称/值对）是在 POST 请求的 HTTP 消息主体中发送的;<br><br>
-POST提交，地址栏不会改变</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9</pre></td><td class="code"><pre>POST / HTTP/1.1
-Host: www.wrox.com
-User-Agent: Mozilla/5.0 <span class="o">(</span>Windows; U; Windows NT 5.1; en-US; rv:1.7.6<span class="o">)</span>
-Gecko/20050225 Firefox/1.0.1
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 40
-Connection: Keep-Alive
-
-<span class="nv">name</span><span class="o">=</span>Professional%20Ajax&amp;publisher<span class="o">=</span>Wiley<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p><br /></p>
-
-<table><thead>
-<tr>
-<th>比较</th>
-<th>GET请求</th>
-<th>POST请求</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>提交数据方式</td>
-<td>GET请求的数据会附在URL之后</td>
-<td>POST提交的数据放置在Request body中</td>
-</tr>
-<tr>
-<td>可见性</td>
-<td>数据在 URL 中对所有人都是可见的</td>
-<td>数据不会显示在 URL 中</td>
-</tr>
-<tr>
-<td>传输数据的大小</td>
-<td>传输数据受到URL长度的限制</td>
-<td>理论上数据不受限,但实际各个WEB服务器会规定对post提交数据大小进行限制</td>
-</tr>
-<tr>
-<td>传输数据的类型</td>
-<td>只允许 ASCII 字符</td>
-<td>没有限制。也允许二进制数据</td>
-</tr>
-<tr>
-<td>传输数据的编码方式</td>
-<td>application/x-www-form-urlencoded, <br>只能进行url编码</td>
-<td>application/x-www-form-urlencoded 或 multipart/form-data, 支持多种编码方式</td>
-</tr>
-<tr>
-<td>安全性</td>
-<td>不安全，因为参数直接暴露在URL上，所以不能用来传递密码或敏感信息,<br>使用GET提交数据还可能会造成Cross-site request forgery攻击</td>
-<td>POST比GET更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中</td>
-</tr>
-<tr>
-<td>收藏</td>
-<td>可收藏为书签</td>
-<td>不可收藏为书签</td>
-</tr>
-<tr>
-<td>缓存</td>
-<td>被浏览器主动缓存</td>
-<td>不能缓存,除非手动设置</td>
-</tr>
-<tr>
-<td>历史记录</td>
-<td>参数被完整保留在浏览器历史中</td>
-<td>参数不会被保留</td>
-</tr>
-<tr>
-<td>后退/刷新</td>
-<td>无害</td>
-<td>数据会被重新提交<br>（浏览器应该告知用户数据会被重新提交）</td>
-</tr>
-<tr>
-<td>安全</td>
-<td>GET请求安全，不会改变资源的状态</td>
-<td>不安全</td>
-</tr>
-<tr>
-<td>幂等</td>
-<td>GET请求幂等，对同一URL的多个请求返回同样的结果</td>
-<td>不幂等</td>
-</tr>
-</tbody></table>
-
-<p><br/><br>
-<a href="http://www.runoob.com/nodejs/node-js-get-post.html">Node.js GET/POST请求</a></p>
-
-<p><strong>补充知识：编码类型</strong></p>
+<h2 id="http">HTTP内容编码类型</h2>
 
 <ul>
-<li><a href="https://imququ.com/post/four-ways-to-post-data-in-http.html">四种常见的 POST 提交数据方式</a><br></li>
-<li><a href="application/x-www-form-urlencoded%E5%92%8Cmultipart/form-data%E7%9A%84%E5%8C%BA%E5%88%AB">application/x-www-form-urlencoded和multipart/form-data的区别</a></li>
+<li>gzip (GNU zip)</li>
+<li>compress (UNIX系统的标准压缩)</li>
+<li>deflate (zlib)</li>
+<li>identity (不进行编码，默认)</li>
 </ul>
 
-<p>总结以上表格要表达的意思</p>
-
-<ol>
-<li>GET请求安全、幂等；</li>
-<li>GET通过URL提交数据，不安全；</li>
-<li>GET传输的数据量小、数据类型单一、数据编码方式单一；</li>
-<li>GET请求可以被收藏、被缓存、被历史记录，刷新无害</li>
-</ol>
-
-<p><strong>GET和POST区别补充点</strong></p>
+<h2 id="accept-encoding-content-encoding">Accept-Encoding、Content-Encoding</h2>
 
 <ul>
-<li>GET和POST本质上没有区别，都是是TCP链接。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。<br></li>
-<li>GET产生一个TCP数据包；POST产生两个TCP数据包。</li>
+<li>Accept-Encoding，HTTP请求头，指定浏览器可以支持的web服务器返回内容压缩编码类型。<br></li>
+<li>Content-Encoding，HTTP响应头，web服务器支持的返回内容压缩编码类型。</li>
 </ul>
+<div class="highlight"><pre><code class="language-html" data-lang="html">Accept-Encoding: compress, gzip
+Accept-Encoding: *
+Accept-Encoding: gzip;q=1.0, identity;q=0.5, *;q=0
+</code></pre></div><div class="highlight"><pre><code class="language-html" data-lang="html">Content-Encoding: gzip
+</code></pre></div>
+<h1 id="http">HTTP传输编码</h1>
+
+<p>使用传输编码是为了改变报文中的数据在网络上传输方式。</p>
+
+<h2 id="transfer-encoding-te">Transfer-Encoding、TE</h2>
+
+<ul>
+<li>Transfer-Encoding，(多用作HTTP响应头) 告知接收方对其采用了何种传输编码方式<br></li>
+<li>TE，HTTP请求头，客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息<br></li>
+</ul>
+<div class="highlight"><pre><code class="language-html" data-lang="html">Transfer-Encoding:chunked
+</code></pre></div><div class="highlight"><pre><code class="language-html" data-lang="html">TE: trailers,deflate;q=0.5
+</code></pre></div>
+<h1 id="http">HTTP分块编码</h1>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-01-21.png" alt="">
+</div>
+
+<p>分块编码是一种传输编码，是报文的属性，不是主体的属性。</p>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-01-22.png" alt="">
+</div>
+
+<h1 id="accept-charset">Accept-Charset</h1>
+
+<ul>
+<li>Accept-Charset：HTTP请求头,浏览器可以接受的字符编码集。</li>
+</ul>
+
+<p>常见字符集名称：ASCII字符集、GB2312字符集、BIG5字符集、GB18030字符集、Unicode字符集(UTF-8)等。</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">Accept-Charset: iso-8859-5
+</code></pre></div><div class="highlight"><pre><code class="language-html" data-lang="html">Content-Type: text/html; Charset = utf-8
+</code></pre></div>
+<p><a href="http://www.w3school.com.cn/tags/html_ref_charactersets.asp">HTML 字符集</a></p>
 
 <h1 id="more">更多-more</h1>
 
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol</a></li>
-<li><a href="http://www.w3school.com.cn/tags/html_ref_httpmethods.asp">http://www.w3school.com.cn/tags/html_ref_httpmethods.asp</a></li>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd">99%的人都理解错了HTTP中GET与POST的区别</a></li>
+<li><a href="http://www.cnblogs.com/skynet/archive/2011/05/03/2035105.html">http://www.cnblogs.com/skynet/archive/2011/05/03/2035105.html</a></li>
+<li><a href="http://www.cnblogs.com/defias/p/3436517.html">http://www.cnblogs.com/defias/p/3436517.html</a></li>
 </ul>
   
 	</div>
@@ -363,7 +274,7 @@ Connection: Keep-Alive
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/http/2017/10/25/http-get-post" data-title="GET请求和POST请求的区别 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/http/2017/11/01/http-encoding" data-title="HTTP内容编码、传输编码、分块传输 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -375,18 +286,18 @@ Connection: Keep-Alive
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/http/2017/10/25/http-Characteristic" title="HTTP特点">
+ <a href="/http/2017/11/01/http-cache" title="HTTP缓存">
   <strong>上一篇：</strong><br/>
   <span>
-  HTTP特点</span>
+  HTTP缓存</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/http/2017/10/25/http-message"  title="HTTP报文的组成部分">
+<a href="/http/2017/11/01/http-http2"  title="HTTP/2.0、HTTP/1.1和HTTP/1.0的区别">
  <strong>下一篇：</strong><br/> 
- <span>HTTP报文的组成部分
+ <span>HTTP/2.0、HTTP/1.1和HTTP/1.0的区别
 </span>
 </a>
 </div>

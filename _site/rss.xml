@@ -5,8 +5,8 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Thu, 02 Nov 2017 14:20:58 +0800</lastBuildDate>
-        <pubDate>Thu, 02 Nov 2017 14:20:58 +0800</pubDate>
+        <lastBuildDate>Fri, 03 Nov 2017 11:01:38 +0800</lastBuildDate>
+        <pubDate>Fri, 03 Nov 2017 11:01:38 +0800</pubDate>
         <ttl>60</ttl>
 
 
@@ -217,6 +217,85 @@
 </description>
                 <link>/http/2017/11/01/http-http2</link>
                 <guid>/http/2017/11/01/http-http2</guid>
+                <pubDate>Wed, 01 Nov 2017 00:00:00 +0800</pubDate>
+        </item>
+
+        <item>
+                <title>HTTP内容编码、传输编码、分块传输</title>
+                <description>&lt;h1 id=&quot;http&quot;&gt;HTTP内容编码&lt;/h1&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-20.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;内容编码指明应用在实体内容上的编码格式，保持实体信息原样压缩。内容编码后的实体由客户端接收并负责解码。&lt;/p&gt;
+
+&lt;h2 id=&quot;http&quot;&gt;HTTP内容编码类型&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;gzip (GNU zip)&lt;/li&gt;
+&lt;li&gt;compress (UNIX系统的标准压缩)&lt;/li&gt;
+&lt;li&gt;deflate (zlib)&lt;/li&gt;
+&lt;li&gt;identity (不进行编码，默认)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;accept-encoding-content-encoding&quot;&gt;Accept-Encoding、Content-Encoding&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Accept-Encoding，HTTP请求头，指定浏览器可以支持的web服务器返回内容压缩编码类型。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;Content-Encoding，HTTP响应头，web服务器支持的返回内容压缩编码类型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Accept-Encoding: compress, gzip
+Accept-Encoding: *
+Accept-Encoding: gzip;q=1.0, identity;q=0.5, *;q=0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Content-Encoding: gzip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;http&quot;&gt;HTTP传输编码&lt;/h1&gt;
+
+&lt;p&gt;使用传输编码是为了改变报文中的数据在网络上传输方式。&lt;/p&gt;
+
+&lt;h2 id=&quot;transfer-encoding-te&quot;&gt;Transfer-Encoding、TE&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Transfer-Encoding，(多用作HTTP响应头) 告知接收方对其采用了何种传输编码方式&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;TE，HTTP请求头，客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Transfer-Encoding:chunked
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;TE: trailers,deflate;q=0.5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;http&quot;&gt;HTTP分块编码&lt;/h1&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-21.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;分块编码是一种传输编码，是报文的属性，不是主体的属性。&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-01-22.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;accept-charset&quot;&gt;Accept-Charset&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Accept-Charset：HTTP请求头,浏览器可以接受的字符编码集。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;常见字符集名称：ASCII字符集、GB2312字符集、BIG5字符集、GB18030字符集、Unicode字符集(UTF-8)等。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Accept-Charset: iso-8859-5
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;Content-Type: text/html; Charset = utf-8
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.w3school.com.cn/tags/html_ref_charactersets.asp&quot;&gt;HTML 字符集&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/skynet/archive/2011/05/03/2035105.html&quot;&gt;http://www.cnblogs.com/skynet/archive/2011/05/03/2035105.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/defias/p/3436517.html&quot;&gt;http://www.cnblogs.com/defias/p/3436517.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+                <link>/http/2017/11/01/http-encoding</link>
+                <guid>/http/2017/11/01/http-encoding</guid>
                 <pubDate>Wed, 01 Nov 2017 00:00:00 +0800</pubDate>
         </item>
 
@@ -1690,6 +1769,11 @@ application/zip，application/application/vnd.ms-powerpoint...&lt;/p&gt;&lt;/li&
 &lt;td&gt;发送端使用的MIME版本&lt;/td&gt;
 &lt;td&gt;MIME-Version: 1.0&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Transfer-Encoding&lt;/td&gt;
+&lt;td&gt;告知接收方对其采用了何种传输编码方式&lt;/td&gt;
+&lt;td&gt;Transfer-Encoding:chunked&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;&lt;/table&gt;
 
 &lt;h2 id=&quot;universal-cache&quot;&gt;通用缓存首部-Universal cache&lt;/h2&gt;
@@ -1789,6 +1873,11 @@ application/zip，application/application/vnd.ms-powerpoint...&lt;/p&gt;&lt;/li&
 &lt;td&gt;Accept-Language&lt;/td&gt;
 &lt;td&gt;浏览器可以接受或优选哪种语言&lt;/td&gt;
 &lt;td&gt;Accept-Language: en,zh&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;TE&lt;/td&gt;
+&lt;td&gt;客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息&lt;/td&gt;
+&lt;td&gt;TE: trailers,deflate;q=0.5&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;&lt;/table&gt;
 
@@ -5016,552 +5105,6 @@ Host: localhost&lt;span class=&quot;w&quot;&gt;
                 <link>/http/2017/05/09/http-methods</link>
                 <guid>/http/2017/05/09/http-methods</guid>
                 <pubDate>Tue, 09 May 2017 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>HTTP状态码</title>
-                <description>&lt;h1 id=&quot;http&quot;&gt;HTTP状态码分类&lt;/h1&gt;
-
-&lt;p&gt;HTTP状态码分类分为&lt;strong&gt;5&lt;/strong&gt;类&lt;/p&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;总体范围&lt;/th&gt;
-&lt;th&gt;已定义范围&lt;/th&gt;
-&lt;th&gt;类别&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;100~199&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;100~101&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;信息&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;200~299&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;200~206&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;成功&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;300~399&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;300~305&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;重定向&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;400~499&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;400~417&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;客户端错误&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;500~599&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;500~505&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;服务器错误&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h1 id=&quot;status-code&quot;&gt;信息性status code&lt;/h1&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;状态码&lt;/th&gt;
-&lt;th&gt;短语原因&lt;/th&gt;
-&lt;th&gt;含义&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;100&lt;/td&gt;
-&lt;td&gt;Continue&lt;br/&gt; 【继续】&lt;/td&gt;
-&lt;td&gt;说明收到了请求的初始部分，请客户端继续&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;101&lt;/td&gt;
-&lt;td&gt;Switching Protocols &lt;br/&gt;【切换协议】&lt;/td&gt;
-&lt;td&gt;说明服务器正在根据客户端的指定，&lt;br/&gt;将协议切换成Update首部所列的协议&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;100-continue&quot;&gt;100 (Continue / 继续)&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;目的：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-HTTP客户端应用程序有一个实体的主体部分要发送给服务器，但希望在发送之前查看一下服务器是否会接受这个实体。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;作用：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-100 Continue 是一种优化。客户端应用程序只有在避免向服务器发送一个服务器无法处理或使用的大实体时，才应该使用100 Continue。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;过程：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-1）如果客户端在向服务器发送一个实体，并且愿意在发送实体之前等待100 Continue响应，那么，客户端就要发送一个携带了值为100 Continue 的 Expect 请求首部；&lt;br&gt;&lt;br&gt;
-2）如果服务器收到了一条带有值为100-continue 的 Expect 首部的请求，这是指客户端询问是否可以在后续的请求中发送附件。在这种情况下，服务器用100-Continue允许客户端继续或用417 (Expectation Failed)告诉客户端不同意接受附件。 &lt;/p&gt;
-
-&lt;h2 id=&quot;101-switching-protocol&quot;&gt;101 (Switching Protocol / 切换协议)&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;作用：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-只有在切换新的协议更有好处的时候才应该采取类似措施。例如，切换到新的HTTP版本比旧版本更有优势，或者切换到一个实时且同步的协议以传送利用此类特性的资源。&lt;/p&gt;
-
-&lt;h1 id=&quot;status-code&quot;&gt;成功status code&lt;/h1&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;状态码&lt;/th&gt;
-&lt;th&gt;短语原因&lt;/th&gt;
-&lt;th&gt;含义&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;200&lt;/td&gt;
-&lt;td&gt;OK&lt;/td&gt;
-&lt;td&gt;服务器已成功处理请求&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;201&lt;/td&gt;
-&lt;td&gt;Created&lt;br/&gt; 【已创建】&lt;/td&gt;
-&lt;td&gt;对那些要服务器创建对象的请求来说，资源已创建完毕。&lt;br/&gt;通常这是 PUT 方法得到的响应码。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;202&lt;/td&gt;
-&lt;td&gt;Accepted&lt;br/&gt; 【已接受】&lt;/td&gt;
-&lt;td&gt;请求已接受，但服务器尚未处理&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;203&lt;/td&gt;
-&lt;td&gt;Non-Authoritative Information&lt;br/&gt; 【非权威信息】&lt;/td&gt;
-&lt;td&gt;实体首部包含的信息不是来自源端服务器，而是来自资源的一份副本&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;204&lt;/td&gt;
-&lt;td&gt;No Content&lt;br/&gt; 【没有内容】&lt;/td&gt;
-&lt;td&gt;响应报文包含一些首部和一个状态行，但不包含实体的主体内容&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;205&lt;/td&gt;
-&lt;td&gt;Reset Content&lt;br/&gt; 【重置内容】&lt;/td&gt;
-&lt;td&gt;浏览器应该重置当前页面上所有的HTML表单&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;206&lt;/td&gt;
-&lt;td&gt;Partial Content&lt;br/&gt; 【部分内容】&lt;/td&gt;
-&lt;td&gt;成功执行了一个部分或Range（范围）请求&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;200-ok&quot;&gt;200 (OK / 成功)&lt;/h2&gt;
-
-&lt;p&gt;请求成功.成功的意义根据请求所使用的方法不同而不同.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;GET: 资源已被提取,并作为响应体传回客户端.&lt;/li&gt;
-&lt;li&gt;HEAD: 实体头已作为响应头传回客户端&lt;/li&gt;
-&lt;li&gt;POST: 经过服务器处理客户端传来的数据,适合的资源作为响应体传回客户端.&lt;/li&gt;
-&lt;li&gt;TRACE: 服务器收到请求消息作为响应体传回客户端.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;PUT, DELETE, 和 OPTIONS 方法永远不会返回 200 状态码.&lt;/p&gt;
-
-&lt;h2 id=&quot;201-created&quot;&gt;201（Created / 已创建)&lt;/h2&gt;
-
-&lt;p&gt;对于创建服务器对象的请求（比如，PUT）。响应的实体主体部分中（Location首部）应包含各种引用了已创建的资源的URL。服务器必须在发送这个状态码之前创建好对象。&lt;/p&gt;
-
-&lt;h2 id=&quot;202-accepted&quot;&gt;202（Accepted / 已接受）&lt;/h2&gt;
-
-&lt;p&gt;请求已被接受，但服务器还未对其执行任何动作。正如它可能被拒绝一样，最终该请求可能会也可能不会被执行。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;目的：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-在异步操作的场合下，没有比发送这个状态码更方便的做法了。允许服务器接受其他过程的请求（例如某个每天只执行一次的基于批处理的操作），而不必让客户端一直保持与服务器的连接直到批处理操作全部完成。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-服务器应当在返回的实体中包含一些指示处理当前状态的信息，以及指向处理状态监视器或状态预测的指针，以便用户能够估计操作是否已经完成。&lt;/p&gt;
-
-&lt;h2 id=&quot;203-non-authoritative-information&quot;&gt;203（Non-Authoritative Information / 非权威信息)&lt;/h2&gt;
-
-&lt;p&gt;服务器已成功处理了请求,但返回的实体头部元信息不是在原始服务器上有效的确定集合，而是来自本地或者第三方的拷贝。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;原因：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-中间节点上有一份资源副本，但无法或者没有对它所发送的与资源有关的元信息（首部）进行验证，就会出现这种情况。&lt;br&gt;
-如果不是上述情况,使用200状态码才是最合适的.&lt;/p&gt;
-
-&lt;h2 id=&quot;204-no-content&quot;&gt;204（No Content / 没有内容)&lt;/h2&gt;
-
-&lt;p&gt;代表服务器接收的请求已成功处理，但在返回的响应报文中不含实体的主体部分。也不允许返回任何主体。&lt;/p&gt;
-
-&lt;p&gt;没有新文档。浏览器应该继续显示原来的文档。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;用处：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-1）确定先前的页面是否已经更新。&lt;br&gt;&lt;br&gt;
-2）用户代理可以根据新的响应头来更新对应资源的缓存信息。&lt;br&gt;&lt;br&gt;
-3）主要用于浏览器不转为显示新文档的情况下，对其进行更新（比如刷新一个表单页面）。&lt;br&gt;&lt;br&gt;
-4）这各状态码对于用户周期性的重载某一页非常有用。如果用户定期地刷新页面，而Servlet可以确定用户文档足够新。&lt;/p&gt;
-
-&lt;h2 id=&quot;205-reset-content&quot;&gt;205（Reset Content / 重置内容)&lt;/h2&gt;
-
-&lt;p&gt;没有新文档。但浏览器应该重置它所显示的内容。用来强制浏览器清除表单输入内容。&lt;/p&gt;
-
-&lt;h2 id=&quot;206-partial-content&quot;&gt;206（Partial Content / 部分内容)&lt;/h2&gt;
-
-&lt;p&gt;客户端发送了一个带Range头的请求（GET）来获取部分或者某个范围内的文档，服务器完成了它。&lt;br&gt;
-206响应中必须包含Content-Range、Date 以及 ETag 或 Content-Location 首部。&lt;/p&gt;
-
-&lt;h1 id=&quot;status-code&quot;&gt;重定向status code&lt;/h1&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;状态码&lt;/th&gt;
-&lt;th&gt;短语原因&lt;/th&gt;
-&lt;th&gt;含义&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;300&lt;/td&gt;
-&lt;td&gt;Multiple Choices&lt;br/&gt; 【多项选择】&lt;/td&gt;
-&lt;td&gt;客户端请求了实际指向多个资源的URL&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;301&lt;/td&gt;
-&lt;td&gt;Moved Permanently&lt;br/&gt; 【永久搬离】&lt;/td&gt;
-&lt;td&gt;所请求的页面已经转移至新的url&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;302&lt;/td&gt;
-&lt;td&gt;Found&lt;br/&gt; 【已找到】&lt;/td&gt;
-&lt;td&gt;所请求的页面已经临时转移至新的url&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;303&lt;/td&gt;
-&lt;td&gt;See Other&lt;br/&gt; 【参见其他】&lt;/td&gt;
-&lt;td&gt;告知客户端应该用另一个URL来获取资源&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;304&lt;/td&gt;
-&lt;td&gt;Not Modified&lt;br/&gt; 【未修改】&lt;/td&gt;
-&lt;td&gt;告诉客户端,所请求的内容距离上次访问并没有变化。&lt;br/&gt;客户端可以直接从浏览器缓存里获取该资源.&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;305&lt;/td&gt;
-&lt;td&gt;Use Proxy&lt;br/&gt; 【使用代理】&lt;/td&gt;
-&lt;td&gt;请求的文档要通过定位头信息中的代理服务器获得&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;306&lt;/td&gt;
-&lt;td&gt;Unused&lt;br/&gt; 【未使用】&lt;/td&gt;
-&lt;td&gt;当前未使用&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;307&lt;/td&gt;
-&lt;td&gt;Temporary Redirect&lt;br/&gt; 【临时重定向】&lt;/td&gt;
-&lt;td&gt;与302状态码有相同的语义,且前后两次访问必须使用相同的方法(GET POST)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;300-multiple-choices&quot;&gt;300（Multiple Choices / 多项选择）&lt;/h2&gt;
-
-&lt;p&gt;表示被请求的文档可以在多个地方找到，比如服务器上有某个HTML文档的英语和法语版本。&lt;br&gt;
-返回这个代码时会带有一个&lt;strong&gt;选项列表&lt;/strong&gt;，这样用户就可以选择他希望使用的那一项了。&lt;/p&gt;
-
-&lt;h2 id=&quot;301-moved-permanently&quot;&gt;301（Moved Permanently / 永久搬离）&lt;/h2&gt;
-
-&lt;p&gt;请求的URL已&lt;strong&gt;永久移走&lt;/strong&gt;。响应的 Location 首部中应该包含资源现在所处的 URL。&lt;/p&gt;
-
-&lt;h2 id=&quot;302-found&quot;&gt;302（Found / 已找到）&lt;/h2&gt;
-
-&lt;p&gt;与301有些类似。但这里的搬离是临时的,并且还可能继续改变。&lt;br&gt;
-客户端应该使用 Location 首部给出 URL 对资源进行临时定位。&lt;br&gt;
-将来的请求仍应使用&lt;strong&gt;老的URL&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;303-see-other&quot;&gt;303（See Other / 参见其他）&lt;/h2&gt;
-
-&lt;p&gt;新的URL位于响应报文的Location首部。&lt;/p&gt;
-
-&lt;p&gt;明确表明客户端应该使用GET方法定向获取请求的资源。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;目的：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-允许POST请求的响应将客户端定向到某个资源上去。&lt;br&gt;
-如果最初的请求是 POST ，服务器发送该响应用来引导客户端使用GET方法访问另外一个URL。&lt;/p&gt;
-
-&lt;h2 id=&quot;304-not-modified&quot;&gt;304（Not Modified / 未修改）&lt;/h2&gt;
-
-&lt;p&gt;当客户端有一个缓存的文档，通过提供一个 If-Modified-Since 头信息可指出客户端只希望文档在指定日期之后有所修改时才会重载此文档，用这种方式可以进行有条件的请求。服务器告诉客户，原来缓冲的文档还可以继续使用。&lt;br&gt;
-带有304状态码的响应不应该包含实体的主体部分。&lt;/p&gt;
-
-&lt;h2 id=&quot;305-use-proxy&quot;&gt;305（Use Proxy / 使用代理）&lt;/h2&gt;
-
-&lt;p&gt;必须通过一个代理来访问资源，代理的位置由Location首部给出。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-如果客户端错误地让代理介入了某条请求，可能会引发破坏性的行为，而且会造成安全漏洞。so该状态码并未受到广泛支持。&lt;/p&gt;
-
-&lt;h2 id=&quot;306-unused&quot;&gt;306（Unused / 未使用）&lt;/h2&gt;
-
-&lt;p&gt;当初它被用在HTTP 1.1规范的旧版本中。目前已不再使用，但是代码依然被保留。&lt;/p&gt;
-
-&lt;h2 id=&quot;307-temporary-redirect&quot;&gt;307（Temporary Redirect / 临时重定向）&lt;/h2&gt;
-
-&lt;p&gt;需要跟用户询问是否应该在新URI上发起POST方法，也就是说，307是不会把POST转为GET的&lt;/p&gt;
-
-&lt;h2 id=&quot;302-303-307&quot;&gt;302、303、307之间的区别&lt;/h2&gt;
-
-&lt;p&gt;他们都是重定向,并且有细微的区别，他们的区别主要来源于HTTP/1.0 和HTTP/1.1 应用程序对这些状态码处理方式不同而不同。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;http1.0：只有302码，没有303和307状态码；&lt;/p&gt;
-
-&lt;p&gt;http1.1：有302（理论上是可以放弃的，为了兼容1.0被保留，而且因为目前程序都没那么讲究所以302大量出现在一些项目上），303，307&lt;/p&gt;
-
-&lt;p&gt;302：HTTP/1.0和HTTP/1.1中的表现都是一样的,浏览器对它的处理也是一样的&lt;/p&gt;
-
-&lt;p&gt;303：POST重定向为GET。&lt;/p&gt;
-
-&lt;p&gt;307：需要跟用户询问是否应该在新URI上发起POST方法，也就是说，307是不会把POST转为GET的&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://my.oschina.net/u/1040928/blog/514117&quot;&gt;https://my.oschina.net/u/1040928/blog/514117&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/cswuyg/p/3871976.html&quot;&gt;https://www.cnblogs.com/cswuyg/p/3871976.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;status-code&quot;&gt;客户端错误status code&lt;/h1&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;状态码&lt;/th&gt;
-&lt;th&gt;短语原因&lt;/th&gt;
-&lt;th&gt;含义&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;400&lt;/td&gt;
-&lt;td&gt;Bad Request&lt;br/&gt; 【错误请求】&lt;/td&gt;
-&lt;td&gt;告知客户端发送了一条错误的请求&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;401&lt;/td&gt;
-&lt;td&gt;Unauthorized&lt;br/&gt; 【未授权】&lt;/td&gt;
-&lt;td&gt;需要身份验证后才能获取所请求的内容&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;402&lt;/td&gt;
-&lt;td&gt;Payment Required&lt;br/&gt; 【要求付款】&lt;/td&gt;
-&lt;td&gt;当前该状态码尚未使用&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;403&lt;/td&gt;
-&lt;td&gt;Forbidden&lt;br/&gt; 【禁止访问】&lt;/td&gt;
-&lt;td&gt;服务器拒绝了请求&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;404&lt;/td&gt;
-&lt;td&gt;Not Found&lt;br/&gt; 【未找到】&lt;/td&gt;
-&lt;td&gt;服务器无法找到所请求的URL&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;405&lt;/td&gt;
-&lt;td&gt;Method Not Allowed&lt;br/&gt; 【不允许使用的方法】&lt;/td&gt;
-&lt;td&gt;请求方法对某些特定的资源不允许使用&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;406&lt;/td&gt;
-&lt;td&gt;Not Acceptable&lt;br/&gt; 【无法接受】&lt;/td&gt;
-&lt;td&gt;服务器生成的响应无法被客户端所接受&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;407&lt;/td&gt;
-&lt;td&gt;Proxy Authentication Required&lt;br/&gt; 【要求进行代理认证】&lt;/td&gt;
-&lt;td&gt;与401类似，用户必须首先使用代理服务器进行验证&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;408&lt;/td&gt;
-&lt;td&gt;Request Timeout&lt;br/&gt; 【请求超时】&lt;/td&gt;
-&lt;td&gt;服务端等待客户端发送请求的时间过长&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;409&lt;/td&gt;
-&lt;td&gt;Conflict&lt;br/&gt; 【冲突】&lt;/td&gt;
-&lt;td&gt;发出的请求在资源上造成一些冲突&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;410&lt;/td&gt;
-&lt;td&gt;Gone&lt;br/&gt; 【消失了】&lt;/td&gt;
-&lt;td&gt;除了服务器曾经拥有过此资源外，与404类似&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;411&lt;/td&gt;
-&lt;td&gt;Length Required&lt;br/&gt; 【要求长度指示】&lt;/td&gt;
-&lt;td&gt;服务器在本次请求中需要 Content-Length 首部&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;412&lt;/td&gt;
-&lt;td&gt;PreCondition Failed&lt;br/&gt; 【先决条件失败】&lt;/td&gt;
-&lt;td&gt;服务器没能满足客户端在获取资源时在请求头字段中设置的先决条件&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;413&lt;/td&gt;
-&lt;td&gt;Request Entity Too Large&lt;br/&gt; 【请求实体太大】&lt;/td&gt;
-&lt;td&gt;客户端发送的实体主体部分比服务器能够或者希望处理的要大&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;414&lt;/td&gt;
-&lt;td&gt;Request URI Too Long&lt;br/&gt; 【请求URI太长】&lt;/td&gt;
-&lt;td&gt;客户端请求所包含的URI地址太长&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;415&lt;/td&gt;
-&lt;td&gt;Unsupported Media Type&lt;br/&gt; 【不支持的媒体类型】&lt;/td&gt;
-&lt;td&gt;服务器不支持客户端所发送的实体的内容类型&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;416&lt;/td&gt;
-&lt;td&gt;Requested Range Not Satisfiable&lt;br/&gt; 【所请求的范围未得到满足】&lt;/td&gt;
-&lt;td&gt;请求报文所请求的是指定资源的某个范围，&lt;br/&gt; 而此范围无效或者无法满足。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;417&lt;/td&gt;
-&lt;td&gt;Expectation Failed&lt;br/&gt; 【无法满足期望】&lt;/td&gt;
-&lt;td&gt;请求的Expect首部包含了一个预期内容，但服务器无法满足&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;400-bad-request&quot;&gt;400（Bad Request / 错误请求）&lt;/h2&gt;
-
-&lt;p&gt;客户端发送的请求语法错误，服务器无法正常读取。&lt;/p&gt;
-
-&lt;h2 id=&quot;401-unauthorized&quot;&gt;401（Unauthorized / 未授权）&lt;/h2&gt;
-
-&lt;p&gt;被请求的页面需要用户名和密码。&lt;br&gt;
-类似于403错误.不同点是.401错误后,只要正确输入帐号密码,验证即可通过.&lt;/p&gt;
-
-&lt;h2 id=&quot;402-payment-required&quot;&gt;402（Payment Required / 要求付款）&lt;/h2&gt;
-
-&lt;p&gt;该状态码被保留以供将来使用.创建此代码最初的目的是为数字支付系统而用,然而,到现在也没投入使用.&lt;/p&gt;
-
-&lt;h2 id=&quot;403-forbidden&quot;&gt;403（Forbidden / 禁止访问）&lt;/h2&gt;
-
-&lt;p&gt;客户端没有权利访问所请求内容,服务器拒绝本次请求.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;禁止原因：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-如果服务器想说明为什么拒绝请求，可以包含实体的主体部分来对原因进行描述。但这个状态码通常是在服务器不想说明拒绝原因的时候使用。&lt;/p&gt;
-
-&lt;p&gt;这个状态经常会由于服务器上的损坏文件或目录许可而引起。 &lt;/p&gt;
-
-&lt;h2 id=&quot;404-not-found&quot;&gt;404（Not Found / 未找到）&lt;/h2&gt;
-
-&lt;p&gt;通常会包含一个实体，以便客户端应用程序显示给用户看。&lt;br&gt;&lt;br&gt;
-由于经常发生此种情况,所以该状态码在上网时是非常常见的.&lt;/p&gt;
-
-&lt;h2 id=&quot;405-method-not-allowed&quot;&gt;405（Method Not Allowed / 不允许使用的方法）&lt;/h2&gt;
-
-&lt;p&gt;该请求使用的方法被服务器端禁止使用,[GET 和 HEAD 方法不能被禁止]。&lt;br&gt;
-响应中应该包含一个Allow首部，以告知客户端所请求的资源支持使用哪些方法。&lt;/p&gt;
-
-&lt;h2 id=&quot;406-not-acceptable&quot;&gt;406（Not Acceptable / 无法接受）&lt;/h2&gt;
-
-&lt;p&gt;请求资源的MIME类型与客户端中Accept头信息中指定的类型不一致.客户端可以指定参数来说明它们愿意接收什么类型的实体。服务器没有与客户端可接受的URL相匹配的资源时，使用此代码。通常，服务器会包含一些首部，以便客户端弄清为什么请求无法满足。&lt;/p&gt;
-
-&lt;h2 id=&quot;407-proxy-authentication-required&quot;&gt;407（Proxy Authentication Required / 要求进行代理认证）&lt;/h2&gt;
-
-&lt;p&gt;与401状态有些相似，只是这个状态用于代理服务器。该状态指出客户端必须通过代理服务器的认证。&lt;/p&gt;
-
-&lt;h2 id=&quot;408-request-timeout&quot;&gt;408（Request Timeout / 请求超时）&lt;/h2&gt;
-
-&lt;p&gt;如果客户端完成其请求时花费的时间太长，服务器可以送回这个状态码并关闭连接。&lt;/p&gt;
-
-&lt;h2 id=&quot;409-conflict&quot;&gt;409（Conflict / 冲突）&lt;/h2&gt;
-
-&lt;p&gt;该状态通常与PUT请求一同使用，常被用于试图上传版本不正确的文件时。&lt;/p&gt;
-
-&lt;h2 id=&quot;410-gone&quot;&gt;410（Gone / 消失了）&lt;/h2&gt;
-
-&lt;p&gt;告诉客户端所请求的文档已经不存在并且没有更新的地址。410状态不同于404，410是在指导文档已被移走的情况下使用，而404则用于未知原因的无法访问。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;用处：&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-主要用于Web站点的维护，这样服务器的管理者就可以在资源被移除的情况下通知客户端。&lt;/p&gt;
-
-&lt;h2 id=&quot;411-length-required&quot;&gt;411（Length Required / 要求长度指示）&lt;/h2&gt;
-
-&lt;p&gt;如果发起的请求中没有Content-Length 首部，服务器是不会接受此资源请求的。&lt;/p&gt;
-
-&lt;h2 id=&quot;412-precondition-failed&quot;&gt;412（PreCondition Failed / 先决条件失败）&lt;/h2&gt;
-
-&lt;p&gt;如果客户端发起了一个条件请求，如果服务器无法满足其中的某个条件，就返回这个状态码。&lt;/p&gt;
-
-&lt;h2 id=&quot;413-request-entity-too-large&quot;&gt;413（Request Entity Too Large / 请求实体太大）&lt;/h2&gt;
-
-&lt;p&gt;告诉客户端现在所请求的文档比服务器现在想要处理的要大。如果服务器认为能够过一段时间处理，则会包含一个Retry-After的响应头信息。&lt;/p&gt;
-
-&lt;h2 id=&quot;414-request-uri-too-long-uri&quot;&gt;414（Request URI Too Long / 请求URI太长）&lt;/h2&gt;
-
-&lt;p&gt;由于url太长，服务器不会接受请求。&lt;/p&gt;
-
-&lt;p&gt;这里所指的“URI”是指URL中主机、域名及端口号之后的内容。例如：在URL--&lt;a href=&quot;http://www.y2k-disaster.com:8080/we/look/silly/now/%E4%B8%ADURI%E6%98%AF%E6%8C%87/we/look/silly/now/%E3%80%82&quot;&gt;http://www.y2k-disaster.com:8080/we/look/silly/now/中URI是指/we/look/silly/now/。&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;当post请求被转换为带有很长的查询信息的get请求时，就会发生这种情况。&lt;/p&gt;
-
-&lt;h2 id=&quot;415-unsupported-media-type&quot;&gt;415（Unsupported Media Type / 不支持的媒体类型)&lt;/h2&gt;
-
-&lt;h2 id=&quot;416-requested-range-not-satisfiable&quot;&gt;416（Requested Range Not Satisfiable / 所请求的范围未得到满足)&lt;/h2&gt;
-
-&lt;h2 id=&quot;417-expectation-failed&quot;&gt;417（Expectation Failed / 无法满足期望)&lt;/h2&gt;
-
-&lt;h1 id=&quot;status-code&quot;&gt;服务端错误status code&lt;/h1&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;状态码&lt;/th&gt;
-&lt;th&gt;短语原因&lt;/th&gt;
-&lt;th&gt;含义&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;500&lt;/td&gt;
-&lt;td&gt;Internal Server Error&lt;br/&gt; 【内部服务器错误】&lt;/td&gt;
-&lt;td&gt;服务器遇到未知的无法解决的问题，&lt;br /&gt;使其无法为请求提供服务&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;501&lt;/td&gt;
-&lt;td&gt;Not Implemented&lt;br/&gt; 【未实现】&lt;/td&gt;
-&lt;td&gt;服务器不支持该请求中使用的方法&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;502&lt;/td&gt;
-&lt;td&gt;Bad Gateway&lt;br/&gt; 【网关故障】&lt;/td&gt;
-&lt;td&gt;服务器作为网关且从上游服务器获取到了一个无效的HTTP响应&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;503&lt;/td&gt;
-&lt;td&gt;Service Unavailable&lt;br/&gt; 【服务不可用】&lt;/td&gt;
-&lt;td&gt;服务器目前无法为请求提供服务，&lt;br/&gt;但过一段时间就可以恢复服务&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;504&lt;/td&gt;
-&lt;td&gt;Gateway Timeout&lt;br/&gt; 【网关超时】&lt;/td&gt;
-&lt;td&gt;服务器作为网关且不能从上游服务器及时的得到响应返回给客户端&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;505&lt;/td&gt;
-&lt;td&gt;HTTP Version Not Supported&lt;br/&gt; 【不支持的HTTP版本】&lt;/td&gt;
-&lt;td&gt;服务器不支持客户端发送的HTTP请求中所使用的HTTP协议版本&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;500-internal-server-error&quot;&gt;500（Internal Server Error / 内部服务器错误)&lt;/h2&gt;
-
-&lt;h2 id=&quot;501-not-implemented&quot;&gt;501（Not Implemented / 未实现)&lt;/h2&gt;
-
-&lt;h2 id=&quot;502-bad-gateway&quot;&gt;502（Bad Gateway / 网关故障)&lt;/h2&gt;
-
-&lt;h2 id=&quot;503-service-unavailable&quot;&gt;503（Service Unavailable / 服务不可用）&lt;/h2&gt;
-
-&lt;p&gt;由于临时的服务器维护或者过载,服务器当前无法处理请求.这个状况是临时的,并且将在一段时间以后恢复.如果能够预计延迟时间,那么响应中可以包含一个Retry-After:头用以标明这个延迟时间.如果没有给出这个Retry-After:信息，那么客户端应当以处理500响应的方式处理它.同时,这种情况下,一个友好的用于解释服务器出现问题的页面应当被返回,并且,缓存相关的HTTP头信息也应该包含,因为通常这种错误提示网页不应当被客户端缓存.&lt;/p&gt;
-
-&lt;h2 id=&quot;504-gateway-timeout&quot;&gt;504（Gateway Timeout / 网关超时)&lt;/h2&gt;
-
-&lt;h2 id=&quot;505-http-version-not-supported-http&quot;&gt;505（HTTP Version Not Supported / 不支持的HTTP版本)&lt;/h2&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.w3school.com.cn/tags/html_ref_httpmessages.asp&quot;&gt;http://www.w3school.com.cn/tags/html_ref_httpmessages.asp&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://tool.lu/httpcode/&quot;&gt;http://tool.lu/httpcode/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <link>/http/2017/05/03/http-status-code</link>
-                <guid>/http/2017/05/03/http-status-code</guid>
-                <pubDate>Wed, 03 May 2017 00:00:00 +0800</pubDate>
         </item>
 
 
