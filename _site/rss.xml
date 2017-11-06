@@ -5,10 +5,165 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Mon, 06 Nov 2017 17:51:21 +0800</lastBuildDate>
-        <pubDate>Mon, 06 Nov 2017 17:51:21 +0800</pubDate>
+        <lastBuildDate>Mon, 06 Nov 2017 20:42:28 +0800</lastBuildDate>
+        <pubDate>Mon, 06 Nov 2017 20:42:28 +0800</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>js运行机制、同步、异步</title>
+                <description>&lt;h1 id=&quot;js&quot;&gt;js运行机制是单线程&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;结果：&lt;br&gt;&lt;br&gt;
+100&lt;br&gt;&lt;br&gt;
+300&lt;br&gt;&lt;br&gt;
+200  &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;以上程序执行过程分析：&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;执行第一行，打印100&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;执行setTimeout后，传入setTimeout的函数会被暂存起来，不会立即执行（单线程的特点，不能同时干两件事）&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;执行最后一行，打印300&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;待所有程序执行完，处于空闲状态时，会立马看有没有暂存起来的要执行。&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;发现暂存起来的setTimeout中的函数无需等待时间，就立即过来执行&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;task-queue&quot;&gt;任务队列-Task queue&lt;/h1&gt;
+
+&lt;p&gt;所有任务可以分成两种，一种是同步任务（synchronous），另一种是异步任务（asynchronous）。&lt;br&gt;&lt;br&gt;
+同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；&lt;br&gt;&lt;br&gt;
+异步任务指的是，不进入主线程、而进入&amp;quot;任务队列&amp;quot;（task queue）的任务，只有&amp;quot;任务队列&amp;quot;通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。  &lt;/p&gt;
+
+&lt;p&gt;异步执行的运行机制如下。（同步执行也是如此，因为它可以被视为没有异步任务的异步执行。）&lt;/p&gt;
+
+&lt;p&gt;（1）所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。&lt;br&gt;&lt;br&gt;
+（2）主线程之外，还存在一个&amp;quot;任务队列&amp;quot;（task queue）。只要异步任务有了运行结果，就在&amp;quot;任务队列&amp;quot;之中放置一个事件。&lt;br&gt;&lt;br&gt;
+（3）一旦&amp;quot;执行栈&amp;quot;中的所有同步任务执行完毕，系统就会读取&amp;quot;任务队列&amp;quot;，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。&lt;br&gt;&lt;br&gt;
+（4）主线程不断重复上面的第三步。  &lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-06-1.jpg&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;只要主线程空了，就会去读取&amp;quot;任务队列&amp;quot;，这就是JavaScript的运行机制。这个过程会不断重复。&lt;/p&gt;
+
+&lt;h1 id=&quot;synchronization-task&quot;&gt;同步任务-Synchronization task&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;console.log()&lt;br&gt;&lt;br&gt;
+alert()&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'peng'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'you'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'yi'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;asynchronous-task&quot;&gt;异步任务-Asynchronous task&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;前端使用异步的场景&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;定时任务：setTimeout、setInterval&lt;br&gt;&lt;br&gt;
+网络请求：ajax请求，动态&lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt;加载&lt;br&gt;&lt;br&gt;
+DOM事件绑定&lt;br&gt;&lt;br&gt;
+ES6中Promise  &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;settimeout&quot;&gt;setTimeout&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;结果：&lt;br&gt;&lt;br&gt;
+100&lt;br&gt;&lt;br&gt;
+300&lt;br&gt;&lt;br&gt;
+200  &lt;/p&gt;
+
+&lt;h2 id=&quot;ajax&quot;&gt;ajax请求代码示例&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'start'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./data1.json'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'end'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;img&quot;&gt;img加载&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'start'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'img'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'loaded'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/xxx.png'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'end'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;dom&quot;&gt;DOM事件绑定&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'start'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'btn1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'click'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'clicked'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'end'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;何时需要异步&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;在可能发生等待的情况&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;等待过程中不能像alert一样阻塞程序运行&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;difference&quot;&gt;同步和异步的区别-Difference&lt;/h1&gt;
+
+&lt;p&gt;同步会阻塞代码执行，而异步不会&lt;/p&gt;
+
+&lt;h1 id=&quot;event-loop&quot;&gt;Event Loop&lt;/h1&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-06-2.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;order&quot;&gt;同步和异步执行顺序-order&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;执行栈中的代码（同步任务），总是在读取&amp;quot;任务队列&amp;quot;（异步任务）之前执行。&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;结果只执行A&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'B'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;结果还是只执行A&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;1s后打出4个4&lt;/p&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2014/10/event-loop.html&quot;&gt;http://www.ruanyifeng.com/blog/2014/10/event-loop.html&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://web.jobbole.com/82631/&quot;&gt;http://web.jobbole.com/82631/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+                <link>/js/2017/11/06/js-operating</link>
+                <guid>/js/2017/11/06/js-operating</guid>
+                <pubDate>Mon, 06 Nov 2017 00:00:00 +0800</pubDate>
+        </item>
 
         <item>
                 <title>前端错误监控</title>
@@ -66,9 +221,9 @@
 &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/hustskyking/p/fe-monitor.html&quot;&gt;http://www.cnblogs.com/hustskyking/p/fe-monitor.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>/other/2017/11/06/interview-front-end-error</link>
-                <guid>/other/2017/11/06/interview-front-end-error</guid>
-                <pubDate>Mon, 06 Nov 2017 00:00:00 +0800</pubDate>
+                <link>/other/2017/11/05/interview-front-end-error</link>
+                <guid>/other/2017/11/05/interview-front-end-error</guid>
+                <pubDate>Sun, 05 Nov 2017 00:00:00 +0800</pubDate>
         </item>
 
         <item>
@@ -88,7 +243,7 @@
 &lt;/ol&gt;
 
 &lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/11-07-1.png&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-04-1.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
 
 &lt;p&gt;渲染引擎(layout engineer或Rendering Engine)&lt;/p&gt;
@@ -115,13 +270,13 @@ Firefox 使用的是 &lt;code&gt;Gecko&lt;/code&gt;，这是 Mozilla 公司“�
 &lt;p&gt;解析html以构建dom树 -&amp;gt; 构建render树 -&amp;gt; 布局render树 -&amp;gt; 绘制render树&lt;/p&gt;
 
 &lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/11-07-2.png&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-04-2.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&quot;dom-render&quot;&gt;dom树和render树&lt;/h2&gt;
 
 &lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/11-07-5.png&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-04-5.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
 
 &lt;p&gt;Rendering Tree 渲染树并不等同于 DOM 树，因为一些像&amp;quot;head&amp;quot;元素或display:none的东西就没必要放在渲染树中了。&lt;/p&gt;
@@ -131,13 +286,13 @@ Firefox 使用的是 &lt;code&gt;Gecko&lt;/code&gt;，这是 Mozilla 公司“�
 &lt;h1 id=&quot;webkit&quot;&gt;WebKit 主流程&lt;/h1&gt;
 
 &lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/11-07-3.png&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-04-3.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
 
 &lt;p&gt;Mozilla 的 Gecko 呈现引擎主流程&lt;/p&gt;
 
 &lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/11-07-4.jpg&quot; alt=&quot;&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-04-4.jpg&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
 
 &lt;p&gt;WebKit 和 Gecko 使用的术语略有不同，但整体流程是基本相同的。&lt;/p&gt;
@@ -169,18 +324,99 @@ Firefox 使用的是 &lt;code&gt;Gecko&lt;/code&gt;，这是 Mozilla 公司“�
 该DTD包含所有HTML元素和属性，包括展示性的和弃用的元素（比如font）&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h1 id=&quot;load&quot;&gt;加载-Load&lt;/h1&gt;
+
+&lt;p&gt;了解浏览器如何进行加载，我们可以在引用外部样式文件，外部js时，将他们放到合适的位置，使浏览器以最快的速度将文件加载完毕。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;加载css和js文件的区别&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;加载过程中遇到外部css文件，浏览器另外发出一个请求，来获取css文件。遇到图片资源，浏览器也会另外发出一个请求，来获取图片资源。这是异步请求，并不会影响html文档进行加载，&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;但是当文档加载过程中遇到js文件，html文档会挂起渲染（加载解析渲染同步）的线程，不仅要等待文档中js文件加载完毕，还要等待解析执行完毕，才可以恢复html文档的渲染线程。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;原因：JS有可能会修改DOM，最为经典的document.write，这意味着，在JS执行完成前，后续所有资源的下载可能是没有必要的，这是js阻塞后续资源下载的根本原因。&lt;/p&gt;
+
+&lt;p&gt;办法：可以将外部引用的js文件放在&lt;/body&gt;前。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;css文件影响js文件的执行&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;虽然css文件的加载不影响js文件的加载，但是却影响js文件的执行，即使js文件内只有一行代码，也会造成阻塞。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;原因：可能会有 var width = $(&amp;#39;#id&amp;#39;).width()，这意味着，js代码执行前，浏览器必须保证css文件已下载和解析完成。这也是css阻塞后续js的根本原因。&lt;/p&gt;
+
+&lt;p&gt;办法：当js文件不需要依赖css文件时，可以将js文件放在头部css的前面。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;asynchronous-loading&quot;&gt;异步加载-Asynchronous loading&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;1. 异步加载方式&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;动态脚本加载&lt;/li&gt;
+&lt;li&gt;defer&lt;/li&gt;
+&lt;li&gt;async&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;2. 异步加载的区别&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;defer是在HTML解析完之后才会执行，如果是多个，按照加载的顺序依次执行&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;async是在加载完之后立即执行，如果是多个，执行顺序和加载顺序无关&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;test&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;script src=&quot;js/defer1.js&quot; defer&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script src=&quot;js/defer2.js&quot; defer&amp;gt;&amp;lt;/script&amp;gt; --&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://cdnjs.cloudflare.com/ajax/libs/seajs/3.0.2/sea.js&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;async&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;js/defer2.js&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;async&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dome&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        test
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;  
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'write'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&amp;lt;span&amp;gt;write&amp;lt;/span&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;  
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;===&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;defer1.js&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'defer1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;defer2.js&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'defer2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/&quot;&gt;浏览器的工作原理：新式网络浏览器幕后揭秘&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000004292479#articleHeader6&quot;&gt;https://segmentfault.com/a/1190000004292479#articleHeader6&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/slly/p/6640761.html&quot;&gt;http://www.cnblogs.com/slly/p/6640761.html&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/e141d1543143&quot;&gt;http://www.jianshu.com/p/e141d1543143&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://segmentfault.com/a/1190000004292479#articleHeader6&quot;&gt;JS 一定要放在 Body 的最底部么&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/slly/p/6640761.html&quot;&gt;浏览器渲染原理及流程&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/e141d1543143&quot;&gt;浏览器~加载，解析，渲染&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-                <link>/other/2017/11/06/interview-browser-working</link>
-                <guid>/other/2017/11/06/interview-browser-working</guid>
-                <pubDate>Mon, 06 Nov 2017 00:00:00 +0800</pubDate>
+                <link>/other/2017/11/04/interview-browser-working</link>
+                <guid>/other/2017/11/04/interview-browser-working</guid>
+                <pubDate>Sat, 04 Nov 2017 00:00:00 +0800</pubDate>
         </item>
 
         <item>
@@ -3642,63 +3878,6 @@ HTTP允许传输&lt;code&gt;任意类型的数据对象&lt;/code&gt;。正在传
                 <link>/http/2017/10/25/http-Characteristic</link>
                 <guid>/http/2017/10/25/http-Characteristic</guid>
                 <pubDate>Wed, 25 Oct 2017 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>CSS 盒子模型</title>
-                <description>&lt;h1 id=&quot;css-box-model&quot;&gt;CSS 盒子模型(Box Model)&lt;/h1&gt;
-
-&lt;p&gt;CSS中盒子模型的组成由内容区（content）、内边距（padding）、边框（border）、外边距（margin）组成。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;盒子模型有两种&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;W3C标准盒模型&lt;/li&gt;
-&lt;li&gt;低版本IE浏览器（IE5/6）盒模型&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;浏览器默认的盒模型是“W3C标准盒模型”&lt;/p&gt;
-
-&lt;h1 id=&quot;ie&quot;&gt;标准模型和IE模型的区别&lt;/h1&gt;
-
-&lt;p&gt;标准的CSS盒子模型与低版本IE的盒子模型有什么不同的？&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;标准的css盒子模型宽高 = 内容区宽高；&lt;/li&gt;
-&lt;li&gt;低端IE css盒子模型宽高 = 内容区宽高 + 内边距﹢边界；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-24-1.png&quot; alt=&quot;&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-24-2.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;css&quot;&gt;css如何设置这两种模型&lt;/h1&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nt&quot;&gt;box-sizing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;content-box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;【标准模型，浏览器默认】&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;box-sizing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;border-box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;【&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;IE&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;模型】&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;js&quot;&gt;JS如何设置获取盒模型对应的宽和高&lt;/h1&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;dom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;dom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;currentStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getComputedStyle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;dom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getBoundingClientRect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;height&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h1 id=&quot;&gt;浏览器的兼容性问题&lt;/h1&gt;
-
-&lt;p&gt;可以在HTML页面声明 &amp;lt;!DOCTYPE html&amp;gt;。&lt;/p&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.runoob.com/css/css-boxmodel.html&quot;&gt;http://www.runoob.com/css/css-boxmodel.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.w3school.com.cn/css/css_boxmodel.asp&quot;&gt;http://www.w3school.com.cn/css/css_boxmodel.asp&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/love-sea520/p/5903442.html&quot;&gt;http://www.cnblogs.com/love-sea520/p/5903442.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/thislbq/p/5883631.html&quot;&gt;http://www.cnblogs.com/thislbq/p/5883631.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <link>/css/2017/10/24/css-model</link>
-                <guid>/css/2017/10/24/css-model</guid>
-                <pubDate>Tue, 24 Oct 2017 00:00:00 +0800</pubDate>
         </item>
 
 

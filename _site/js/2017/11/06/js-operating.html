@@ -7,7 +7,7 @@
     
     
     
-    <title>浏览器渲染机制 | 彭友谊的博客</title>
+    <title>js运行机制、同步、异步 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="浏览器渲染机制">
-    <meta property="og:url" content="/other/2017/11/06/interview-browser-working">
+    <meta property="og:title" content="js运行机制、同步、异步">
+    <meta property="og:url" content="/js/2017/11/06/js-operating">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="浏览器工作原理">
+    <meta property="og:description" content="js运行机制">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="浏览器渲染机制">
+    <meta name="twitter:title" content="js运行机制、同步、异步">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,7 +144,7 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/other/2017/11/06/interview-browser-working" title="浏览器渲染机制" itemprop="url">浏览器渲染机制</a>
+      <a href="/js/2017/11/06/js-operating" title="js运行机制、同步、异步" itemprop="url">js运行机制、同步、异步</a>
   </h1>
   <p class="article-author">By
        
@@ -163,109 +163,152 @@
 		
 		</div>
 		
-		<h1 id="high-rise-structure">浏览器的High-rise structure</h1>
+		<h1 id="js">js运行机制是单线程</h1>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+</code></pre></div>
+<p>结果：<br><br>
+100<br><br>
+300<br><br>
+200  </p>
 
-<p>浏览器的高层结构:</p>
-
-<ol>
-<li><strong>用户界面</strong> - 包括地址栏、前进/后退按钮、书签菜单等。除了浏览器主窗口显示的您请求的页面外，其他显示的各个部分都属于用户界面。<br></li>
-<li><strong>浏览器引擎</strong> - 在用户界面和呈现引擎之间传送指令。<br></li>
-<li><strong>呈现引擎</strong> - 负责显示请求的内容。如果请求的内容是 HTML，它就负责解析 HTML 和 CSS 内容，并将解析后的内容显示在屏幕上。<br></li>
-<li><strong>网络</strong> - 用于网络调用，比如 HTTP 请求。其接口与平台无关，并为所有平台提供底层实现。<br></li>
-<li><strong>用户界面后端</strong> - 用于绘制基本的窗口小部件，比如组合框和窗口。其公开了与平台无关的通用接口，而在底层使用操作系统的用户界面方法。<br></li>
-<li><strong>JavaScript 解释器</strong>。用于解析和执行 JavaScript 代码。<br></li>
-<li><strong>数据存储</strong>。这是持久层。浏览器需要在硬盘上保存各种数据，例如 Cookie。新的 HTML 规范 (HTML5) 定义了“网络数据库”，这是一个完整（但是轻便）的浏览器内数据库。<br></li>
-</ol>
-
-<div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-07-1.png" alt="">
-</div>
-
-<p>渲染引擎(layout engineer或Rendering Engine)</p>
-
-<h1 id="rendering-engine">呈现引擎-Rendering Engine</h1>
-
-<h2 id="role">呈现引擎的作用-role</h2>
-
-<p>默认情况下，呈现引擎可显示 HTML 和 XML 文档与图片。通过插件（或浏览器扩展程序），还可以显示其他类型的内容；例如，使用 PDF 查看器插件就能显示 PDF 文档。但是在本章中，我们将集中介绍其主要用途：显示使用 CSS 格式化的 HTML 内容和图片。</p>
-
-<h2 id="classification">呈现引擎分类-classification</h2>
-
-<p>本文所讨论的浏览器（Firefox、Chrome 浏览器和 Safari）是基于两种呈现引擎构建的。<br><br>
-Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的呈现引擎。<br><br>
-而 Safari 和 Chrome 浏览器使用的都是 <code>WebKit</code>。  </p>
-
-<p>其他浏览器内核：</p>
-
-<p><code>Presto</code>内核：Opera7及以上。 [Opera内核原为：Presto，现为：Blink;]<br><br>
-<code>Trident</code>内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]  </p>
-
-<h1 id="main-process">呈现引擎的主流程-main process</h1>
-
-<p>解析html以构建dom树 -&gt; 构建render树 -&gt; 布局render树 -&gt; 绘制render树</p>
-
-<div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-07-2.png" alt="">
-</div>
-
-<h2 id="dom-render">dom树和render树</h2>
-
-<div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-07-5.png" alt="">
-</div>
-
-<p>Rendering Tree 渲染树并不等同于 DOM 树，因为一些像&quot;head&quot;元素或display:none的东西就没必要放在渲染树中了。</p>
-
-<p>display:none 的节点不会被加入 Render Tree，而 visibility: hidden 则会，所以，如果某个节点最开始是不显示的，设为 display:none 是更优的。</p>
-
-<h1 id="webkit">WebKit 主流程</h1>
-
-<div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-07-3.png" alt="">
-</div>
-
-<p>Mozilla 的 Gecko 呈现引擎主流程</p>
-
-<div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-07-4.jpg" alt="">
-</div>
-
-<p>WebKit 和 Gecko 使用的术语略有不同，但整体流程是基本相同的。</p>
-
-<ol>
-<li><p><strong>Create/Update DOM And request css/image/js</strong>：浏览器请求到HTML代码后，在生成DOM的最开始阶段，并行发起css、图片、js的请求，无论他们是否在HEAD里。</p></li>
-<li><p><strong>Create/Update Render CSSOM</strong>：CSS文件下载完成，开始构建CSSOM</p></li>
-<li><p><strong>Create/Update Render Tree</strong>：所有CSS文件下载完成，CSSOM构建结束后，和 DOM 一起生成 Render Tree。</p></li>
-<li><p><strong>Layout</strong>：有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系。下一步操作称之为Layout，顾名思义就是计算出每个节点在屏幕中的位置。</p></li>
-<li><p><strong>Painting</strong>：Layout后，浏览器已经知道了哪些节点要显示（which nodes are visible）、每个节点的CSS属性是什么（their computed styles）、每个节点在屏幕中的位置是哪里（geometry）。就进入了最后一步：Painting，按照算出来的规则，通过显卡，把内容画到屏幕上。</p></li>
-</ol>
-
-<p>需要着重指出的是，这是一个渐进的过程。为达到更好的用户体验，呈现引擎会力求尽快将内容显示在屏幕上。它不必等到整个 HTML 文档解析完毕之后，就会开始构建呈现树和设置布局。在不断接收和处理来自网络的其余内容的同时，呈现引擎会将部分内容解析并显示出来。</p>
-
-<h1 id="doctype">什么是DOCTYPE及作用</h1>
-
-<p>DTD（document type definition,文档类型定义）是一系列的语法规则，用来定义XML或 (X)HTML的文件类型。浏览器会使用它来判断文档类型，决定使用何种协议来解析，以及切换浏览器模式。</p>
-
-<p>DOCTYPE是用来声明文档类型和DTD规范的，一个主要的用途便是文件的合法性验证。如果文件代码不合法，那么浏览器解析时便会出一些差错。</p>
+<p><em>以上程序执行过程分析：</em></p>
 
 <ul>
-<li>HTML5
-<code>html
-&lt;!DOCTYPE html&gt;
-</code></li>
-<li><p>HTML 4.01 Strict<br>
-该DTD包含所有HTML元素和属性，但不包括展示性的和弃用的元素（比如font）</p></li>
-<li><p>HTML 4.01 Transitional<br>
-该DTD包含所有HTML元素和属性，包括展示性的和弃用的元素（比如font）</p></li>
+<li>执行第一行，打印100<br></li>
+<li>执行setTimeout后，传入setTimeout的函数会被暂存起来，不会立即执行（单线程的特点，不能同时干两件事）<br></li>
+<li>执行最后一行，打印300<br></li>
+<li>待所有程序执行完，处于空闲状态时，会立马看有没有暂存起来的要执行。<br></li>
+<li>发现暂存起来的setTimeout中的函数无需等待时间，就立即过来执行<br></li>
 </ul>
+
+<h1 id="task-queue">任务队列-Task queue</h1>
+
+<p>所有任务可以分成两种，一种是同步任务（synchronous），另一种是异步任务（asynchronous）。<br><br>
+同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；<br><br>
+异步任务指的是，不进入主线程、而进入&quot;任务队列&quot;（task queue）的任务，只有&quot;任务队列&quot;通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。  </p>
+
+<p>异步执行的运行机制如下。（同步执行也是如此，因为它可以被视为没有异步任务的异步执行。）</p>
+
+<p>（1）所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。<br><br>
+（2）主线程之外，还存在一个&quot;任务队列&quot;（task queue）。只要异步任务有了运行结果，就在&quot;任务队列&quot;之中放置一个事件。<br><br>
+（3）一旦&quot;执行栈&quot;中的所有同步任务执行完毕，系统就会读取&quot;任务队列&quot;，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。<br><br>
+（4）主线程不断重复上面的第三步。  </p>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-06-1.jpg" alt="">
+</div>
+
+<p>只要主线程空了，就会去读取&quot;任务队列&quot;，这就是JavaScript的运行机制。这个过程会不断重复。</p>
+
+<h1 id="synchronization-task">同步任务-Synchronization task</h1>
+
+<blockquote>
+<p>console.log()<br><br>
+alert()</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'peng'</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s1">'you'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'yi'</span><span class="p">);</span>
+</code></pre></div>
+<h1 id="asynchronous-task">异步任务-Asynchronous task</h1>
+
+<p><strong>前端使用异步的场景</strong></p>
+
+<blockquote>
+<p>定时任务：setTimeout、setInterval<br><br>
+网络请求：ajax请求，动态<code>&lt;img&gt;</code>加载<br><br>
+DOM事件绑定<br><br>
+ES6中Promise  </p>
+</blockquote>
+
+<h2 id="settimeout">setTimeout</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+</code></pre></div>
+<p>结果：<br><br>
+100<br><br>
+300<br><br>
+200  </p>
+
+<h2 id="ajax">ajax请求代码示例</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'./data1.json'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data1</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="img">img加载</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'img'</span><span class="p">);</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'loaded'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'/xxx.png'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="dom">DOM事件绑定</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn1'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'clicked'</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>何时需要异步</strong></p>
+
+<ul>
+<li>在可能发生等待的情况<br></li>
+<li>等待过程中不能像alert一样阻塞程序运行<br></li>
+</ul>
+
+<h1 id="difference">同步和异步的区别-Difference</h1>
+
+<p>同步会阻塞代码执行，而异步不会</p>
+
+<h1 id="event-loop">Event Loop</h1>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-06-2.png" alt="">
+</div>
+
+<h1 id="order">同步和异步执行顺序-order</h1>
+
+<p><code>执行栈中的代码（同步任务），总是在读取&quot;任务队列&quot;（异步任务）之前执行。</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A"</span><span class="p">);</span>
+<span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"B"</span><span class="p">);</span>
+</code></pre></div>
+<p>结果只执行A</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A"</span><span class="p">);</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'B'</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>结果还是只执行A</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>1s后打出4个4</p>
 
 <h1 id="more">更多-more</h1>
 
 <ul>
-<li><a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/">浏览器的工作原理：新式网络浏览器幕后揭秘</a><br></li>
-<li><a href="https://segmentfault.com/a/1190000004292479#articleHeader6">https://segmentfault.com/a/1190000004292479#articleHeader6</a><br></li>
-<li><a href="http://www.cnblogs.com/slly/p/6640761.html">http://www.cnblogs.com/slly/p/6640761.html</a><br></li>
-<li><a href="http://www.jianshu.com/p/e141d1543143">http://www.jianshu.com/p/e141d1543143</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html">http://www.ruanyifeng.com/blog/2014/10/event-loop.html</a><br></li>
+<li><a href="http://web.jobbole.com/82631/">http://web.jobbole.com/82631/</a></li>
 </ul>
   
 	</div>
@@ -283,7 +326,7 @@ Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的�
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#other">other</a>
+  <a class="article-category-link" href="/categories/#JS">JS</a>
   
 </div>
 
@@ -307,7 +350,7 @@ Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的�
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/other/2017/11/06/interview-browser-working" data-title="浏览器渲染机制 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2017/11/06/js-operating" data-title="js运行机制、同步、异步 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -319,21 +362,13 @@ Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的�
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/http/2017/11/01/http-http2" title="HTTP/2.0、HTTP/1.1和HTTP/1.0的区别">
+ <a href="/other/2017/11/05/interview-front-end-error" title="前端错误监控">
   <strong>上一篇：</strong><br/>
   <span>
-  HTTP/2.0、HTTP/1.1和HTTP/1.0的区别</span>
+  前端错误监控</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/other/2017/11/06/interview-front-end-error"  title="前端错误监控">
- <strong>下一篇：</strong><br/> 
- <span>前端错误监控
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -374,7 +409,7 @@ Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的�
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>32</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>33</sup></a></li>
 		  
 		
 		  
@@ -467,7 +502,7 @@ Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的�
 			
 		
 			
-				<li><a href="/tags/#面试题" title="面试题">面试题<sup>5</sup></a></li>
+				<li><a href="/tags/#面试题" title="面试题">面试题<sup>6</sup></a></li>
 			
 		
 			

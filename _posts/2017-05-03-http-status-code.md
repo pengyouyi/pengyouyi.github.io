@@ -286,5 +286,6 @@ PUT, DELETE, 和 OPTIONS 方法永远不会返回 200 状态码.
 
 
 # 更多-more
-- [http://www.w3school.com.cn/tags/html_ref_httpmessages.asp](http://www.w3school.com.cn/tags/html_ref_httpmessages.asp)
-- [http://tool.lu/httpcode/](http://tool.lu/httpcode/)
+- [http://www.w3school.com.cn/tags/html_ref_httpmessages.asp](http://www.w3school.com.cn/tags/html_ref_httpmessages.asp)  
+- [http://tool.lu/httpcode/](http://tool.lu/httpcode/)  
+- [图解HTTP-完整彩色版.pdf](http://pengyouyi.site/assets/pdf/HTTP.pdf)
