@@ -1,0 +1,835 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+    
+    
+    
+    
+    <title>浏览器渲染机制 | 彭友谊的博客</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="pengyouyi">
+    
+
+    
+    <!--<%- open_graph({twitter_id: theme.author.twitter, google_plus: theme.author.google_plus}) %>-->
+
+    <meta name="description" content="page.description">
+    
+    <meta property="og:type" content="article">
+    
+    <meta property="og:title" content="浏览器渲染机制">
+    <meta property="og:url" content="/other/2017/11/06/interview-browser-working">
+    <meta property="og:site_name" content="彭友谊的博客">
+    <meta property="og:description" content="浏览器工作原理">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="浏览器渲染机制">
+    <meta name="twitter:description" content="page.description">
+    <meta name="twitter:creator" content="@">
+
+  <!-- <meta name="baidu-site-verification" content="omJRdVnwTK" /> -->
+  <meta name="baidu-site-verification" content="BCTXxB6hux" />
+
+    <link rel="publisher" href="">
+
+    
+    <link rel="alternative" href="/atom.xml" title="彭友谊的博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/assets/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/assets/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/assets/img/jacman.jpg">
+    
+
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/highlight.css" type="text/css">
+</head>
+
+<!--  flagcounter   -->
+
+<!--<a href="http://info.flagcounter.com/Q6yu"><img src="http://s10.flagcounter.com/count2/Q6yu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>-->
+
+
+
+<!--百度站内搜索开始
+<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=6765244687647673409' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+
+
+<div id="bdcs-frame-box"></div>
+<script type="text/javascript">
+  var bdcsFrameSid="6765244687647673409";
+  var bdcsFrameWidth = 552;
+  var bdcsFrameWt = 1;
+  var bdcsFrameHt = 1;
+  var bdcsFrameResultNum = 10;
+  var bdcsFrameBgColor = "#ffffff";
+</script>
+<script type="text/javascript" src="http://zhannei.baidu.com/static/js/iframe.js"></script>
+
+百度站内搜索结束-->
+
+<!--百度站内搜索开始  彭友谊好好 - 18233560490  -->
+<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=9872709389462059831' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+<!--百度站内搜索结束  http://zn.baidu.com/cse/searchbox/index?sid=9872709389462059831  -->
+
+
+<!-- target=blank  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    //为超链接加上target='_blank'属性
+    $('a[href^="http"]').each(function() {
+      $(this).attr('target', '_blank');
+    });
+  });
+</script>
+
+  <body>
+    <header>
+        <div>
+		    
+			<div id="imglogo">
+				<a href="/"><img src="/assets/img/logo.png" alt="彭友谊的博客" title="彭友谊的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="彭友谊的博客">彭友谊的博客</a></h1>
+				<h2 class="blog-motto">努力做好一名前端攻城狮</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="menu">
+			</a></div>
+	<!-----  flagcounter   ----->
+	<!--<a href="http://info.flagcounter.com/Q6yu" target="_blank" style="position: absolute;right: 0;"><img src="http://s10.flagcounter.com/count2/Q6yu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>-->
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search">
+						<label>Search</label>
+						<input type="search"  name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>	
+</div>
+
+
+
+
+
+    </header>
+    <div id="container">
+      
+
+
+<div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+	<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/other/2017/11/06/interview-browser-working" title="浏览器渲染机制" itemprop="url">浏览器渲染机制</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-11-06 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-11-06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article toc-content">
+		
+			<!--<%- toc(item.content) %>-->
+		
+		</div>
+		
+		<h1 id="high-rise-structure">浏览器的High-rise structure</h1>
+
+<p>浏览器的高层结构:</p>
+
+<ol>
+<li><strong>用户界面</strong> - 包括地址栏、前进/后退按钮、书签菜单等。除了浏览器主窗口显示的您请求的页面外，其他显示的各个部分都属于用户界面。<br></li>
+<li><strong>浏览器引擎</strong> - 在用户界面和呈现引擎之间传送指令。<br></li>
+<li><strong>呈现引擎</strong> - 负责显示请求的内容。如果请求的内容是 HTML，它就负责解析 HTML 和 CSS 内容，并将解析后的内容显示在屏幕上。<br></li>
+<li><strong>网络</strong> - 用于网络调用，比如 HTTP 请求。其接口与平台无关，并为所有平台提供底层实现。<br></li>
+<li><strong>用户界面后端</strong> - 用于绘制基本的窗口小部件，比如组合框和窗口。其公开了与平台无关的通用接口，而在底层使用操作系统的用户界面方法。<br></li>
+<li><strong>JavaScript 解释器</strong>。用于解析和执行 JavaScript 代码。<br></li>
+<li><strong>数据存储</strong>。这是持久层。浏览器需要在硬盘上保存各种数据，例如 Cookie。新的 HTML 规范 (HTML5) 定义了“网络数据库”，这是一个完整（但是轻便）的浏览器内数据库。<br></li>
+</ol>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-07-1.png" alt="">
+</div>
+
+<p>渲染引擎(layout engineer或Rendering Engine)</p>
+
+<h1 id="rendering-engine">呈现引擎-Rendering Engine</h1>
+
+<h2 id="role">呈现引擎的作用-role</h2>
+
+<p>默认情况下，呈现引擎可显示 HTML 和 XML 文档与图片。通过插件（或浏览器扩展程序），还可以显示其他类型的内容；例如，使用 PDF 查看器插件就能显示 PDF 文档。但是在本章中，我们将集中介绍其主要用途：显示使用 CSS 格式化的 HTML 内容和图片。</p>
+
+<h2 id="classification">呈现引擎分类-classification</h2>
+
+<p>本文所讨论的浏览器（Firefox、Chrome 浏览器和 Safari）是基于两种呈现引擎构建的。<br><br>
+Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的呈现引擎。<br><br>
+而 Safari 和 Chrome 浏览器使用的都是 <code>WebKit</code>。  </p>
+
+<p>其他浏览器内核：</p>
+
+<p><code>Presto</code>内核：Opera7及以上。 [Opera内核原为：Presto，现为：Blink;]<br><br>
+<code>Trident</code>内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]  </p>
+
+<h1 id="main-process">呈现引擎的主流程-main process</h1>
+
+<p>解析html以构建dom树 -&gt; 构建render树 -&gt; 布局render树 -&gt; 绘制render树</p>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-07-2.png" alt="">
+</div>
+
+<h2 id="dom-render">dom树和render树</h2>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-07-5.png" alt="">
+</div>
+
+<p>Rendering Tree 渲染树并不等同于 DOM 树，因为一些像&quot;head&quot;元素或display:none的东西就没必要放在渲染树中了。</p>
+
+<p>display:none 的节点不会被加入 Render Tree，而 visibility: hidden 则会，所以，如果某个节点最开始是不显示的，设为 display:none 是更优的。</p>
+
+<h1 id="webkit">WebKit 主流程</h1>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-07-3.png" alt="">
+</div>
+
+<p>Mozilla 的 Gecko 呈现引擎主流程</p>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-07-4.jpg" alt="">
+</div>
+
+<p>WebKit 和 Gecko 使用的术语略有不同，但整体流程是基本相同的。</p>
+
+<ol>
+<li><p><strong>Create/Update DOM And request css/image/js</strong>：浏览器请求到HTML代码后，在生成DOM的最开始阶段，并行发起css、图片、js的请求，无论他们是否在HEAD里。</p></li>
+<li><p><strong>Create/Update Render CSSOM</strong>：CSS文件下载完成，开始构建CSSOM</p></li>
+<li><p><strong>Create/Update Render Tree</strong>：所有CSS文件下载完成，CSSOM构建结束后，和 DOM 一起生成 Render Tree。</p></li>
+<li><p><strong>Layout</strong>：有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系。下一步操作称之为Layout，顾名思义就是计算出每个节点在屏幕中的位置。</p></li>
+<li><p><strong>Painting</strong>：Layout后，浏览器已经知道了哪些节点要显示（which nodes are visible）、每个节点的CSS属性是什么（their computed styles）、每个节点在屏幕中的位置是哪里（geometry）。就进入了最后一步：Painting，按照算出来的规则，通过显卡，把内容画到屏幕上。</p></li>
+</ol>
+
+<p>需要着重指出的是，这是一个渐进的过程。为达到更好的用户体验，呈现引擎会力求尽快将内容显示在屏幕上。它不必等到整个 HTML 文档解析完毕之后，就会开始构建呈现树和设置布局。在不断接收和处理来自网络的其余内容的同时，呈现引擎会将部分内容解析并显示出来。</p>
+
+<h1 id="doctype">什么是DOCTYPE及作用</h1>
+
+<p>DTD（document type definition,文档类型定义）是一系列的语法规则，用来定义XML或 (X)HTML的文件类型。浏览器会使用它来判断文档类型，决定使用何种协议来解析，以及切换浏览器模式。</p>
+
+<p>DOCTYPE是用来声明文档类型和DTD规范的，一个主要的用途便是文件的合法性验证。如果文件代码不合法，那么浏览器解析时便会出一些差错。</p>
+
+<ul>
+<li>HTML5
+<code>html
+&lt;!DOCTYPE html&gt;
+</code></li>
+<li><p>HTML 4.01 Strict<br>
+该DTD包含所有HTML元素和属性，但不包括展示性的和弃用的元素（比如font）</p></li>
+<li><p>HTML 4.01 Transitional<br>
+该DTD包含所有HTML元素和属性，包括展示性的和弃用的元素（比如font）</p></li>
+</ul>
+
+<h1 id="more">更多-more</h1>
+
+<ul>
+<li><a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/">浏览器的工作原理：新式网络浏览器幕后揭秘</a><br></li>
+<li><a href="https://segmentfault.com/a/1190000004292479#articleHeader6">https://segmentfault.com/a/1190000004292479#articleHeader6</a><br></li>
+<li><a href="http://www.cnblogs.com/slly/p/6640761.html">http://www.cnblogs.com/slly/p/6640761.html</a><br></li>
+<li><a href="http://www.jianshu.com/p/e141d1543143">http://www.jianshu.com/p/e141d1543143</a></li>
+</ul>
+  
+	</div>
+	<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <!--
+  <%- list_categories(item.categories, {
+      show_count: false,
+      class: 'article-category',
+      style: 'none',
+      separator: '►'
+  }) %>
+  -->
+  
+  <a class="article-category-link" href="/categories/#other">other</a>
+  
+</div>
+
+
+  <div class="article-tags">
+  <!--
+  <% var tags = [];
+    item.tags.forEach(function(tag){
+      tags.push('<a href="' + config.root + tag.path + '">' + tag.name + '</a>');
+    }); %>-->
+  <span></span> <!--<%- tags.join('') %>-->
+  
+  
+  <a href="/tags/#面试题">面试题</a>
+  
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="/other/2017/11/06/interview-browser-working" data-title="浏览器渲染机制 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>   
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/http/2017/11/01/http-http2" title="HTTP/2.0、HTTP/1.1和HTTP/1.0的区别">
+  <strong>上一篇：</strong><br/>
+  <span>
+  HTTP/2.0、HTTP/1.1和HTTP/1.0的区别</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/other/2017/11/06/interview-front-end-error"  title="前端错误监控">
+ <strong>下一篇：</strong><br/> 
+ <span>前端错误监控
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<!--  -->
+</div>  
+
+
+
+
+
+      
+      
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside toc-content">
+ 
+ <!--<%- toc(item.content) %>-->
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/#编辑器" title="编辑器">编辑器<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#MAC" title="MAC">MAC<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#JS" title="JS">JS<sup>32</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#CSS" title="CSS">CSS<sup>18</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#HTML" title="HTML">HTML<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>17</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#other" title="other">other<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/#markdown" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#mac" title="mac">mac<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Apache" title="Apache">Apache<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#端口使用" title="端口使用">端口使用<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Vue" title="Vue">Vue<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#handlebars" title="handlebars">handlebars<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Webpack" title="Webpack">Webpack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#构建工具" title="构建工具">构建工具<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#MVC" title="MVC">MVC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#MVVM" title="MVVM">MVVM<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#react" title="react">react<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#requirejs" title="requirejs">requirejs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#seajs" title="seajs">seajs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#shell" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#babel" title="babel">babel<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#ES6" title="ES6">ES6<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#面试题" title="面试题">面试题<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#布局" title="布局">布局<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#CSS" title="CSS">CSS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#HTML" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#js事件" title="js事件">js事件<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#性能" title="性能">性能<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#BFC" title="BFC">BFC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#float" title="float">float<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#this" title="this">this<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#js函数" title="js函数">js函数<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#工具" title="工具">工具<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#正则" title="正则">正则<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#jQuery" title="jQuery">jQuery<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#HTTP" title="HTTP">HTTP<sup>17</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            <a href="" target="_blank" title="码农圈">码农圈</a>
+          </li>
+        
+          <li>
+            <a href="" target="_blank" title="Peng's Blog">Peng's Blog</a>
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Make a little progress every day. <br/>
+			stronger and powerful.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/pengyouyi" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+	<!--
+			<%  Array.prototype.S=String.fromCharCode(2);
+			  Array.prototype.in_array=function(e){
+    			var r=new RegExp(this.S+e+this.S);
+    			return (r.test(this.S+this.join(this.S)+this.S));
+				};
+				var cc = new Array('by','by-nc','by-nc-nd','by-nc-sa','by-nd','by-sa','zero'); %>
+		<% if (cc.in_array(theme.creative_commons) ) { %>
+				<div class="cc-license">
+          <a href="http://creativecommons.org/licenses/<%= theme.creative_commons %>/4.0" class="cc-opacity" target="_blank">
+            <img src="<%- config.root %>img/cc-<%= theme.creative_commons %>.svg" alt="Creative Commons" />
+          </a>
+        </div>
+    <% } %>
+				-->
+
+		<p class="copyright">
+		Powered by <a href="http://jekyllrb.com" target="_blank" title="jekyll">jekyll</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="about" target="_blank" title="pengyouyi">pengyouyi</a>
+		
+		
+		</p>
+</div>
+
+
+</footer>
+    <script src="/assets/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/js/jquery.imagesloaded.min.js"></script>
+<script src="/assets/js/gallery.js"></script>
+<script src="/assets/js/jquery.qrcode-0.12.0.min.js"></script>
+<script src="/assets/js/toc.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+      
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.toc-content').toc();
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+/*
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      //$('.hoverqrcode').hide();
+  });
+  */
+});   
+</script>
+
+
+
+
+
+<!--
+
+-->
+
+
+
+
+<link rel="stylesheet" href="/assets/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/assets/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      if ($(this).hasClass('emoji')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+<!-- Analytics Begin -->
+
+
+
+<!--<script type="text/javascript">-->
+<!--var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
+<!--document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F130eaab551382bf609b702558cf803a0' type='text/javascript'%3E%3C/script%3E"));-->
+<!--</script>-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?130eaab551382bf609b702558cf803a0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/assets/img/scrollup.png"/></a>
+	</div>
+	<script src="/assets/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+  </body>
+</html>
+

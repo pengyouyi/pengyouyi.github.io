@@ -243,4 +243,4 @@ HTTP首部字段根据代理怎么处理它们分为两类
 - [http://tools.jb51.net/table/http_header](http://tools.jb51.net/table/http_header)  
 - [http://www.jianshu.com/c/47c604fe47af](http://www.jianshu.com/c/47c604fe47af)  
 - [http://www.jianshu.com/p/d40facd78a88](http://www.jianshu.com/p/d40facd78a88)  
-- [图解HTTP-完整彩色版.pdf](http://pengyouyi.site/assets/images/2017/pdf/HTTP.pdf)  
+- [图解HTTP-完整彩色版.pdf](http://pengyouyi.site/assets/pdf/HTTP.pdf)  

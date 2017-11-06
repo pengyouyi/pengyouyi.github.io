@@ -73,9 +73,9 @@ description: HTTP缓存机制
 
 # 文档过期-document expiration
 
-也叫做`强缓存`。
-
 HTTP采用`文档过期`和`服务器再验证`机制来检测副本的新鲜。
+
+文档过期也叫做`强缓存`。
 
 ## Expires策略
 
@@ -125,7 +125,7 @@ HTTP/1.0会以 Expires 为准，忽略Cache-Control。
 
 # 服务器再验证-server revalidation
 
-也叫做`协商缓存`。
+服务器再验证也叫做`协商缓存`。
 
 有两种方式，检查缓存的新鲜度
 
