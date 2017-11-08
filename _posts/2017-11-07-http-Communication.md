@@ -37,9 +37,9 @@ description: 同源策略及限制
 
 如果非同源，共有三种行为受到限制。
 
-（1） Cookie、LocalStorage 和 IndexDB 无法读取。
-（2） DOM 无法获得。
-（3） AJAX 请求不能发送。
+（1） Cookie、LocalStorage 和 IndexDB 无法读取。  
+（2） DOM 无法获得。  
+（3） AJAX 请求不能发送。  
 
 # 跨域的标签-Cross domain Tags
 
@@ -60,11 +60,11 @@ description: 同源策略及限制
 
 # 规避同源策略-Avoid
 
-㊀ document.domain
-㊁ window.name
-㊂ localtion.hash 
+㊀ document.domain  
+㊁ window.name  
+㊂ localtion.hash  
 ㊃ window.postMessage (HTML5)   
-㊄ JSONP 
+㊄ JSONP  
 ㊅ Websocket协议  
 ㊆ CORS跨域资源共享（W3C标准，支持跨域通信的AJAX）  
 
