@@ -7,7 +7,7 @@
     
     
     
-    <title>js中的prototype | 彭友谊的博客</title>
+    <title>js中的prototype和__proto__ | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="js中的prototype">
+    <meta property="og:title" content="js中的prototype和__proto__">
     <meta property="og:url" content="/js/2017/03/01/js-prototype">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="js中的prototype">
+    <meta property="og:description" content="js中的prototype和__proto__">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="js中的prototype">
+    <meta name="twitter:title" content="js中的prototype和__proto__">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,7 +144,7 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2017/03/01/js-prototype" title="js中的prototype" itemprop="url">js中的prototype</a>
+      <a href="/js/2017/03/01/js-prototype" title="js中的prototype和__proto__" itemprop="url">js中的prototype和__proto__</a>
   </h1>
   <p class="article-author">By
        
@@ -163,9 +163,7 @@
 		
 		</div>
 		
-		<h1 id="js-prototype">js中的prototype</h1>
-
-<h1 id="definition">definition和用法</h1>
+		<h1 id="prototype">prototype的定义和用法</h1>
 
 <p>prototype 属性使您有能力向对象添加属性和方法。</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span><span class="o">=</span><span class="nx">value</span>
@@ -197,12 +195,18 @@
 <blockquote>
 <p>我们创建的每个函数都有一个 prototype（原型）属性，这个属性是一个指针，指向一个<code>对象</code>，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。</p>
 
-<p>无论什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象。在默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，这个属性包含一个指向 prototype 属性所在函数的指针。</p>
+<p>无论什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象。</p>
+
+<p>在默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，这个属性包含一个指向 prototype 属性所在函数的指针。</p>
 </blockquote>
 
-<p>prototype属性是函数所特有,准确来说是构造函数所特有。</p>
+<div class="rd">
+    <img src="/assets/images/2017/1-2-3/03-01-4.png" alt="">
+</div>
 
-<h1 id="function-prototype">function.prototype</h1>
+<p><strong><code>prototype属性是函数所特有</code></strong>,准确来说是构造函数所特有。</p>
+
+<h2 id="function-prototype">function.prototype</h2>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="nx">c</span><span class="p">;</span>
 <span class="p">}</span>
@@ -213,28 +217,39 @@
     <img src="/assets/images/2017/1-2-3/03-01-1.png" alt="">
 </div>
 
-<p><strong><code>a.prototype.constructor</code></strong></p>
+<p><strong><code>a.prototype.constructor</code> === a</strong></p>
 
 <div class="rd">
     <img src="/assets/images/2017/1-2-3/03-01-2.png" alt="">
 </div>
 
-<p><strong><code>a.prototype.__proto__</code></strong></p>
+<p><strong><code>a.prototype.__proto__</code> === Object.prototype</strong></p>
 
 <div class="rd">
     <img src="/assets/images/2017/1-2-3/03-01-3.png" alt="">
 </div>
 
-<h2 id="__proto__">__proto__</h2>
+<h1 id="__proto__">__proto__</h1>
 
-<h3 id="1-__proto__-function-prototype-empty-function">1.所有构造器/函数的__proto__都指向Function.prototype，它是一个空函数（Empty function）</h3>
+<blockquote>
+<p>1.所有构造器/函数的__proto__都指向Function.prototype，它是一个空函数（Empty function）</p>
 
-<h3 id="2-__proto__-prototype">2.所有对象的__proto__都指向其构造器的prototype</h3>
+<p>2.所有对象的__proto__都指向其构造器的prototype</p>
+</blockquote>
 
 <p>每个对象都会在其内部初始化一个属性，就是__proto__，当我们访问一个对象的属性 时，如果这个对象内部不存在这个属性，那么他就会去__proto__里找这个属性，这个__proto__又会有自己的__proto__，于是就这样 一直找下去。</p>
 
-<p><strong>proto</strong>:每个对象都有一个名为<strong>proto</strong>的内部隐藏属性，指向于它所对应的原型对象(chrome、firefox中名称为<strong>proto</strong>，并且可以被访问到)。原型链正是基于<strong>proto</strong>才得以形成(note：不是基于函数对象的属性prototype)。</p>
+<div class="rd">
+    <img src="/assets/images/2017/1-2-3/03-01-5.png" alt="">
+</div>
 
+<p><strong>proto</strong>:<code>每个对象都有一个名为__proto__的内部隐藏属性</code>，指向于它所对应的原型对象(chrome、firefox中名称为<strong>proto</strong>，并且可以被访问到)。原型链正是基于<strong>proto</strong>才得以形成(note：不是基于函数对象的属性prototype)。</p>
+
+<p><strong>Object.create(obj).__proto__ === obj</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">a2</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+<span class="nx">a2</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">a</span><span class="p">;</span>  <span class="c1">// true</span>
+</code></pre></div>
 <p>prototype本质上还是一个JavaScript对象。</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">// String {length: 0, [[PrimitiveValue]]: ""}</span>
@@ -269,6 +284,15 @@
 <span class="c1">// 但是，我们更倾向于如下的语法定义：</span>
 <span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">];</span>
 </code></pre></div>
+<p>var a = {} 其实是 var a = new Object() 的语法糖<br>
+var a = [] 其实是 var a = new Array() 的语法糖<br>
+function Foo() {...} 其实是 var Foo = new Function(...)</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">String</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nb">Number</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nb">Array</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
+<span class="nb">Date</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
+</code></pre></div>
 <p>实际上，JavaScript所有的固有数据类型都具有只读的prototype属性 （这是可以理解的：因为如果修改了这些类型的prototype属性，则哪些预定义的方法就消失了）， 但是我们可以向其中添加自己的扩展方法。</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 向JavaScript固有类型Array扩展一个获取最小值的方法</span>
 <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">min</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -284,6 +308,22 @@
 <span class="c1">// 在任意Array的实例上调用min方法</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">].</span><span class="nx">min</span><span class="p">());</span> <span class="c1">// 1</span>
 </code></pre></div>
+<h1 id="rule">原型和原型链-rule</h1>
+
+<p><strong>原型和原型链的5个规则</strong></p>
+
+<ol>
+<li>所有的<em>引用类型</em>（数组、对象、函数），都具有<strong>对象特性</strong>，即可自由扩展属性（除了 &#39;null&#39; 意外）。<br></li>
+<li>所有的<code>引用类型</code>（数组、对象、函数），都有一个 <code>__proto__</code> 属性【隐式原型】，属性值是一个普通的对象。<br></li>
+<li>所有<code>函数</code>，都有一个<code>prototype</code> 属性【显式原型】，属性值也是一个普通的对象。<br></li>
+<li>所有的<code>引用类型（数组、对象、函数）， __proto__ 属性值指向它的构造函数的 “prototype” 属性值</code><br></li>
+<li>当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的 <strong>proto</strong> （即它的构造函数的prototype）中寻找。<br></li>
+</ol>
+
+<p><div class="rd"><br>
+    <img src="/assets/images/2017/1-2-3/03-01-6.jpg" alt=""><br>
+</div></p>
+
 <h1 id="more">更多-more</h1>
 
 <ul>
@@ -320,7 +360,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#js函数">js函数</a>
+  <a href="/tags/#原型链">原型链</a>
   
   </div>
 
@@ -330,7 +370,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2017/03/01/js-prototype" data-title="js中的prototype | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2017/03/01/js-prototype" data-title="js中的prototype和__proto__ | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -397,7 +437,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>33</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>35</sup></a></li>
 		  
 		
 		  
@@ -409,7 +449,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>18</sup></a></li>
+			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>19</sup></a></li>
 		  
 		
 		  
@@ -526,7 +566,7 @@
 			
 		
 			
-				<li><a href="/tags/#js函数" title="js函数">js函数<sup>9</sup></a></li>
+				<li><a href="/tags/#js函数" title="js函数">js函数<sup>7</sup></a></li>
 			
 		
 			
@@ -538,6 +578,10 @@
 			
 		
 			
+				<li><a href="/tags/#原型链" title="原型链">原型链<sup>4</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/#jQuery" title="jQuery">jQuery<sup>1</sup></a></li>
 			
 		
@@ -546,7 +590,7 @@
 			
 		
 			
-				<li><a href="/tags/#通信类" title="通信类">通信类<sup>1</sup></a></li>
+				<li><a href="/tags/#通信类" title="通信类">通信类<sup>2</sup></a></li>
 			
 		
 		</ul>
