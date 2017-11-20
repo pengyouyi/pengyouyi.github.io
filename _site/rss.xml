@@ -5,10 +5,202 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Mon, 20 Nov 2017 12:17:03 +0800</lastBuildDate>
-        <pubDate>Mon, 20 Nov 2017 12:17:03 +0800</pubDate>
+        <lastBuildDate>Mon, 20 Nov 2017 16:57:23 +0800</lastBuildDate>
+        <pubDate>Mon, 20 Nov 2017 16:57:23 +0800</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>Cookie，sessionStorage, localStorage 的区别</title>
+                <description>&lt;h1 id=&quot;cookie&quot;&gt;cookie&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;cookie本身用于客户端和服务器端通信&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;但它有本地存储的功能，于是就被“借用”，它是兼容性最好的本地存储&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;使用 document.cookie = ... 获取和修改即可&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;cookie:存储在用户本地终端上的数据。有时也用cookies，指某些网站为了辨别用户身份，进行session跟踪而存储在本地终端上的数据，通常经过加密。一般应用最典型的案列就是判断注册用户是否已经登过该网站。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cookie用于存储的优缺点&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;兼容性最好，几乎所有的浏览器都支持。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;存储量太小，只有4KB&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;所有http请求都带着，会影响获取资源的效率&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;API简单，需要封装才能用 document.cookie = ...&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;cookie&quot;&gt;设置、读取、删除cookie&lt;/h2&gt;
+
+&lt;p&gt;cookie是以键值对的形式保存的字符串，即key=value的格式。各个cookie之间一般是以“;”分隔。  &lt;/p&gt;
+
+&lt;p&gt;cookie中存储的内容为格式：name=jack;password=123&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//设置cookie  &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//name是cookie中的名，value是对应的值，iTime是多久过期（单位为天）  &lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setCookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;  
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;oDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;  
+    &lt;span class=&quot;c1&quot;&gt;//设置cookie过期时间  &lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;oDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;oDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iTime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  
+    &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'='&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;';expires='&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;oDate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toGMTString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;  
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
+
+&lt;span class=&quot;c1&quot;&gt;//获取cookie  &lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getCookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;  
+    &lt;span class=&quot;c1&quot;&gt;//cookie中的数据都是以分号加空格区分开  &lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;; &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;  
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;  
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;  
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
+    &lt;span class=&quot;c1&quot;&gt;//未找到对应的cookie则返回空字符串  &lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;  
+
+&lt;span class=&quot;c1&quot;&gt;//删除cookie  &lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;removeCookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;  
+    &lt;span class=&quot;c1&quot;&gt;//调用setCookie方法，把时间设置为-1  &lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;setCookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.jb51.net/article/64330.htm&quot;&gt;JS设置cookie、读取cookie、删除cookie&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;sessionstorage&quot;&gt;sessionStorage&lt;/h1&gt;
+
+&lt;p&gt;sessionStorage 和 localStorage 是HTML5 Web Storage API 提供的，可以方便的在web请求之间保存数据。有了本地数据，就可以避免数据在浏览器和服务器间不必要地来回传递。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sessionStorage是临时存储神器&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;sessionStorage优缺点&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt; 临时存储神器，关闭页面标签自动回收，不可以跨页面交互。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt; 不能做持久化的东西&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;页面强制刷新时，sessionStorage依旧还在&lt;br&gt;&lt;br&gt;
+当前页面不关闭，重新打开新的一样的页面，新页面里不存在之前的sessionStorage&lt;br&gt;&lt;br&gt;
+在当前页面做提交表单动作时，前进到别的页面，回退之后依旧能取到sessionStorage  &lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;sessionstorage-localstorage-api&quot;&gt;sessionStorage、localStorage常用API&lt;/h2&gt;
+
+&lt;p&gt;不管是 localStorage，还是 sessionStorage，可使用的API都相同，常用的有如下几个（以localStorage为例）：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;保存数据：localStorage.setItem(key,value);&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;读取数据：localStorage.getItem(key);&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;删除单个数据：localStorage.removeItem(key);&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;删除所有数据：localStorage.clear();&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;得到某个索引的key：localStorage.key(index);&lt;br&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;localstorage&quot;&gt;localStorage&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;localStorage用于持久化的本地存储&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;localstorage优缺点&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt; 兼容性中等，操作简单，就是key-value形式，几乎现代的浏览器都支持。&lt;br&gt;
+&lt;strong&gt;缺点：&lt;/strong&gt; IE8及以下不支持。跨浏览器是读不到缓存的，不能跨域取&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;localStorage 的一个坑&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;IOS safari 隐藏模式下，localStorage.getItem 会报错，建议统一使用try-catch 封装&lt;/p&gt;
+
+&lt;h1 id=&quot;cookie-sessionstorage-localstorage&quot;&gt;Cookie，sessionStorage, localStorage 的相同点&lt;/h1&gt;
+
+&lt;p&gt;都是保存在浏览器端，且同源的。&lt;/p&gt;
+
+&lt;h1 id=&quot;cookie-sessionstorage-localstorage&quot;&gt;Cookie，sessionStorage, localStorage 的区别&lt;/h1&gt;
+
+&lt;h2 id=&quot;http&quot;&gt;http请求中是否携带&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;cookie：&lt;/strong&gt;数据始终在同源的http请求中携带（即使不需要），即cookie在浏览器和服务器间来回传递；&lt;br&gt;&lt;br&gt;
+cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;sessionStorage和localStorage：&lt;/strong&gt;不会自动把数据发给服务器，仅在本地保存。&lt;/p&gt;
+
+&lt;h2 id=&quot;storage-size&quot;&gt;存储大小-Storage size&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;cookie：&lt;/strong&gt;数据不能超过4k，同时因为每次http请求都会携带cookie，所以cookie只适合保存很小的数据，如会话标识。&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;sessionStorage和localStorage：&lt;/strong&gt;大小一般为5MB&lt;/p&gt;
+
+&lt;h2 id=&quot;data-validity-period&quot;&gt;数据有效期-Data validity period&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;cookie：&lt;/strong&gt;只在设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭；&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;sessionStorage：&lt;/strong&gt;仅在当前浏览器窗口关闭前有效，自然也就不可能持久保持；&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;localStorage：&lt;/strong&gt;始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据。&lt;/p&gt;
+
+&lt;h2 id=&quot;different-scopes&quot;&gt;作用域不同-Different scopes&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;sessionStorage：&lt;/strong&gt;不在不同的浏览器窗口中共享，即使是同一个页面；&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;localStorage：&lt;/strong&gt;在所有同源窗口中都是共享的；&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;cookie：&lt;/strong&gt;也是在所有同源窗口中都是共享的。  &lt;/p&gt;
+
+&lt;h2 id=&quot;ease-of-use&quot;&gt;易用性-Ease of use&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Cookie：&lt;/strong&gt;需要程序员自己封装，源生的Cookie接口不友好&lt;br&gt;&lt;br&gt;
+&lt;strong&gt;sessionStorage和localStorage：&lt;/strong&gt;源生接口可以接受，亦可再次封装来对Object和Array有更好的支持&lt;/p&gt;
+
+&lt;p&gt;Web Storage 支持事件通知机制，可以将数据更新的通知发送给监听者。&lt;br&gt;&lt;br&gt;
+Web Storage 的 api 接口使用更方便。&lt;/p&gt;
+
+&lt;h1 id=&quot;cookie-sessionstorage-localstorage&quot;&gt;Cookie、sessionStorage、localStorage    应用场景&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;⑴ Cookie：&lt;/strong&gt;判断用户是否登录。针对登录过的用户，服务器端会在他登录时往 Cookie 中插入一段加密过的唯一辨识单一用户的辨识码，下次只要读取这个值就可以判断当前用户是否登录啦。&lt;/p&gt;
+
+&lt;p&gt;曾经还使用 Cookie 来保存用户在电商网站的购物车信息，如今有了 localStorage，似乎在这个方面也可以给 Cookie 放个假了~&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;⑵ localStorage：&lt;/strong&gt;接替了 Cookie 管理购物车的工作，同时也能胜任其他一些工作。比如HTML5游戏通常会产生一些本地数据，localStorage 也是非常适用的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;⑶ sessionStorage：&lt;/strong&gt;如果遇到一些内容特别多的表单，为了优化用户体验，我们可能要把表单页面拆分成多个子页面，然后按步骤引导用户填写。这时候 sessionStorage 的作用就发挥出来了。&lt;/p&gt;
+
+&lt;h1 id=&quot;security&quot;&gt;安全性的考虑-Security&lt;/h1&gt;
+
+&lt;p&gt;不是什么数据都适合放在 Cookie、localStorage 和 sessionStorage 中的。使用它们的时候，需要时刻注意是否有代码存在 XSS 注入的风险。因为只要打开控制台，你就随意修改它们的值，也就是说如果你的网站中有 XSS 的风险，它们就能对你的 localStorage 肆意妄为。所以千万不要用它们存储你系统中的敏感数据。&lt;/p&gt;
+
+&lt;h1 id=&quot;server-storage&quot;&gt;浏览器本地存储与服务器端存储的区别-Server storage&lt;/h1&gt;
+
+&lt;p&gt;其实数据既可以在浏览器本地存储，也可以在服务器端存储 &lt;/p&gt;
+
+&lt;p&gt;浏览器可以保存一些数据，需要的时候直接从本地存取，sessionStorage、localStorage和cookie都是由浏览器存储在本地的数据 &lt;/p&gt;
+
+&lt;p&gt;服务器端也可以保存所有用户的所有数据，但需要的时候浏览器要向服务器请求数据。 &lt;/p&gt;
+
+&lt;p&gt;1、服务器端可以保存用户的持久数据，如数据库和云存储将用户的大量数据保存在服务器端&lt;br&gt;&lt;br&gt;
+2、服务器端也可以保存用户的临时会话数据，服务器端的session机制，如jsp的session对象，数据保存在服务器上，&lt;/p&gt;
+
+&lt;p&gt;实际上，服务器和浏览器之间仅需传递session id即可，服务器根据session id找到对应用户的session对象，会话数据仅在一段时间内有效，这个时间就是server端设置的session有效期&lt;/p&gt;
+
+&lt;p&gt;服务器端保存所有的用户的数据，所以服务器端的开销较大，而浏览器端保存则把不同用户需要的数据分别保存在用户各自的浏览器中，浏览器端一般只用来存储小数据，而非服务可以存储大数据或小数据服务器存储数据安全一些，浏览器只适合存储一般数据&lt;/p&gt;
+
+&lt;h1 id=&quot;cookie-session&quot;&gt;cookie和session的区别：&lt;/h1&gt;
+
+&lt;p&gt;1、cookie数据存放在客户的浏览器上，session数据放在服务器上&lt;br&gt;&lt;br&gt;
+2、cookie不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗，考虑&lt;em&gt;到安全应当使用session&lt;br&gt;&lt;br&gt;
+3、session会在一定时间内保存在服务器上，当访问增多，会比较占用你服务器的性能，考虑到减轻服务器性能方面，应当使用cookie&lt;br&gt;&lt;br&gt;
+4、单个cookie保存的数&lt;/em&gt;据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie&lt;br&gt;&lt;br&gt;
+5、建议将登录信息等重要信息存放为session，其他信息如果需要保留，可以放在cookie中&lt;br&gt;&lt;br&gt;
+6、session保存在服务器，客户端不知道其中的信心；cookie保存在客户端，服务器能够知道其中的信息&lt;br&gt;&lt;br&gt;
+7、session中保存的是对象，cookie中保存的是字符串&lt;br&gt;&lt;br&gt;
+8、session不能区分路径，同一个用户在访问一个网站期间，所有的session在任何一个地方都可以访问到，而cookie中如果设置了路径参数，那么同一个网站中不同路径下的cookie互相是访问不到的  &lt;/p&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://blog.csdn.net/ruby_xc/article/details/65939988&quot;&gt;Cookie、session和localStorage、以及sessionStorage之间的区别&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+&lt;a href=&quot;https://segmentfault.com/a/1190000002723469&quot;&gt;详说 Cookie, LocalStorage 与 SessionStorage&lt;/a&gt;&lt;/p&gt;
+</description>
+                <link>/js/2017/11/20/js-storage</link>
+                <guid>/js/2017/11/20/js-storage</guid>
+                <pubDate>Mon, 20 Nov 2017 00:00:00 +0800</pubDate>
+        </item>
 
         <item>
                 <title>性能优化</title>
@@ -57,6 +249,12 @@
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equie=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;x-dns-prefetch-control&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;on&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dns-prefetch&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;//host_name_to_prefetch.com&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;复用和加载方式优化&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-20-2.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
 &lt;h1 id=&quot;rendering&quot;&gt;渲染优化 - Rendering&lt;/h1&gt;
 
 &lt;ol&gt;
@@ -105,11 +303,9 @@
 &lt;p&gt;白屏时间和连通率都会对跳出率造成影响&lt;br&gt;&lt;br&gt;
 可操时间影响day、MAU活跃量&lt;br&gt;&lt;br&gt;
 可操时间影响比较大的有游戏充值、赌博付费  &lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://pengyouyi.site/assets/images/2017/xmind/high-performance.xmind&quot;&gt;复用、加载优化&lt;/a&gt;&lt;/p&gt;
 </description>
-                <link>/js/2017/11/20/js-speed-2</link>
-                <guid>/js/2017/11/20/js-speed-2</guid>
+                <link>/js/2017/11/20/js-speed-2.1</link>
+                <guid>/js/2017/11/20/js-speed-2.1</guid>
                 <pubDate>Mon, 20 Nov 2017 00:00:00 +0800</pubDate>
         </item>
 
@@ -3661,57 +3857,6 @@ Keep-Alive: max &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 5, timeout &lt;sp
 </description>
                 <link>/http/2017/10/28/http-header-Request-Response</link>
                 <guid>/http/2017/10/28/http-header-Request-Response</guid>
-                <pubDate>Sat, 28 Oct 2017 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>HTTP媒体类型</title>
-                <description>&lt;h1 id=&quot;http&quot;&gt;HTTP媒体类型&lt;/h1&gt;
-
-&lt;p&gt;因特网上有数千种不同的数据类型，HTTP仔细地给每种要通过Web传输的对象都打上名为MIME类型（MIME type） 的数据格式标签。 最初设计MIM（Multipurpose Internet Mail Extension，多用途因特网邮件扩展）是为了解决在不同的电子邮件系统之间搬移报文时存在的问题。MIME 在电子邮件系统中工作得非常好，因此HTTP 也采纳了它，用它来描述并标记多媒体内容。&lt;/p&gt;
-
-&lt;p&gt;Web服务器会为所有HTTP对象数据附加一个MIME类型。 当Web浏览器从服务器中取回一个对象时，会去查看相关的MIME 类型，看看它是否知道应该如何处理这个对象。&lt;/p&gt;
-
-&lt;p&gt;大多数浏览器都可以处理数百种常见的对象类型：显示图片文件、解析并格式化HTML 文件、通过计算机声卡播放音频文件，或者运行外部 插件软件来处理特殊格式的数据。&lt;/p&gt;
-
-&lt;p&gt;MIME 类型是一种文本标记，表示一种主要的对象类型和一个特定的子类型，中间由一条斜杠来分隔。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;文本文件&lt;br&gt;&lt;br&gt;
-text/html，text/plain，text/css...&lt;br&gt;
-application/xhtml+xml，application/xml...&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;图片文件&lt;br&gt;&lt;br&gt;
-image/jpeg，image/gif，image/png...&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;视频文件&lt;br&gt;&lt;br&gt;
-video/mpeg，video/quicktime&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;应用程序使用的二进制文件&lt;br&gt;&lt;br&gt;
-application/zip，application/application/vnd.ms-powerpoint...&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;accept&quot;&gt;Accept&lt;/h1&gt;
-
-&lt;p&gt;Accept首部字段可通知服务器，用户代理&lt;code&gt;能够处理的媒体类型&lt;/code&gt;及&lt;code&gt;媒体类型的相对优先级&lt;/code&gt;。&lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-18.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;p&gt;可使用type/subtype这种形式，一次指定多种媒体类型。&lt;/p&gt;
-
-&lt;p&gt;若想要给显示的媒体类型增加优先级，则使用q=来额外表示权重值，用分号（；）进行分隔。权重值q的范围是0~1。默认权重为q=1.0。&lt;/p&gt;
-
-&lt;p&gt;当服务器提供多种内容时，将会首先返回权重值最高的媒体类型。&lt;/p&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.iana.org/assignments/media-types/media-types.xhtml&quot;&gt;http://www.iana.org/assignments/media-types/media-types.xhtml&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://tool.oschina.net/commons&quot;&gt;http://tool.oschina.net/commons&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.w3school.com.cn/media/media_mimeref.asp&quot;&gt;http://www.w3school.com.cn/media/media_mimeref.asp&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <link>/http/2017/10/28/http-MIME</link>
-                <guid>/http/2017/10/28/http-MIME</guid>
                 <pubDate>Sat, 28 Oct 2017 00:00:00 +0800</pubDate>
         </item>
 
