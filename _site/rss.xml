@@ -5,10 +5,113 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Mon, 20 Nov 2017 10:53:11 +0800</lastBuildDate>
-        <pubDate>Mon, 20 Nov 2017 10:53:11 +0800</pubDate>
+        <lastBuildDate>Mon, 20 Nov 2017 12:17:03 +0800</lastBuildDate>
+        <pubDate>Mon, 20 Nov 2017 12:17:03 +0800</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>性能优化</title>
+                <description>&lt;h1 id=&quot;optimization-policy&quot;&gt;性能优化 - optimization policy&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;原则&lt;/strong&gt; &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;多使用内存、缓存或者其他方法&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;减少CPU计算、减少网络&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;从哪里入手&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;加载页面和静态资源&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;页面渲染&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;load-resource&quot;&gt;加载资源优化 - Load resource&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;静态资源的压缩合并&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;静态资源缓存&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;非核心代码异步加载-&amp;gt; 异步加载的方式-&amp;gt; 异步加载的区别&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;使用CDN让资源加载更快&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;使用&lt;a href=&quot;http://www.jianshu.com/p/1e63f434051d&quot;&gt;SSR&lt;/a&gt;（server side render）后端渲染，数据直接输出到HTML中&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;预解析DNS&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;静态资源缓存&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通过连接名称控制缓存，&lt;script src=&quot;abc_1.js&quot;&gt;&lt;/script&gt;&lt;/li&gt;
+&lt;li&gt;只有内容改变的时候，链接名称才会改变，&lt;script src=&quot;abc_2.js&quot;&gt;&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;使用SSR（server side render）后端渲染&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;现在 Vue 、React 提出了这样的概念&lt;/li&gt;
+&lt;li&gt;其实 jsp 、php 、 asp 都属于后端渲染&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;预解析DNS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equie=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;x-dns-prefetch-control&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;on&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;dns-prefetch&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;//host_name_to_prefetch.com&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;rendering&quot;&gt;渲染优化 - Rendering&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;css放前面，js放后面&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;懒加载（图片懒加载、下拉加载更多）&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;减少DOM查询，对DOM查询做缓存&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;减少DOM操作，多个操作尽量合并在一起执行&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;事件节流&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;尽早执行操作（如DOMContentLoaded） &lt;/li&gt;
+&lt;li&gt;写高性能的DOM，&lt;a href=&quot;http://pengyouyi.site/css/2016/12/19/js-repaint-reflow&quot;&gt;避免回流和重绘&lt;/a&gt; &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;图片懒加载&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;img1&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;preview.png&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;realsrc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;abc.png&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;img1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'img1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;img1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;img1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getAttribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'data-realsrc'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/script&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;事件节流&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;textarea&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'text'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;timeoutId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;textarea&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'keyup'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;timeoutId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;clearTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;timeoutId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;timeoutId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 触发change事件&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;尽早执行操作&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'load'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 页面的全部资源加载完才会执行，包括图片、视频等&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'DOMContentLoaded'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// DOM渲染完即可执行，此时图片、视频还可能没有加载完&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;term&quot;&gt;性能优化的术语-term&lt;/h1&gt;
+
+&lt;div class=&quot;rd&quot;&gt;
+    &lt;img src=&quot;/assets/images/2017/10-11-12/11-20-1.png&quot; alt=&quot;&quot;&gt;
+&lt;/div&gt;
+
+&lt;p&gt;白屏时间和连通率都会对跳出率造成影响&lt;br&gt;&lt;br&gt;
+可操时间影响day、MAU活跃量&lt;br&gt;&lt;br&gt;
+可操时间影响比较大的有游戏充值、赌博付费  &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://pengyouyi.site/assets/images/2017/xmind/high-performance.xmind&quot;&gt;复用、加载优化&lt;/a&gt;&lt;/p&gt;
+</description>
+                <link>/js/2017/11/20/js-speed-2</link>
+                <guid>/js/2017/11/20/js-speed-2</guid>
+                <pubDate>Mon, 20 Nov 2017 00:00:00 +0800</pubDate>
+        </item>
 
         <item>
                 <title>雅虎军规</title>
@@ -1803,6 +1906,13 @@ Firefox 使用的是 &lt;code&gt;Gecko&lt;/code&gt;，这是 Mozilla 公司“�
 
 &lt;p&gt;了解浏览器如何进行加载，我们可以在引用外部样式文件，外部js时，将他们放到合适的位置，使浏览器以最快的速度将文件加载完毕。&lt;/p&gt;
 
+&lt;h2 id=&quot;form&quot;&gt;加载资源的形式-form&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;输入URL（或跳转页面）加载HTML&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;加载HTML中的静态资源,比如 &lt;code&gt;&amp;lt;script src=&amp;#39;/static/&amp;#39;&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
 &lt;p&gt;&lt;strong&gt;加载css和js文件的区别&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ul&gt;
@@ -1813,7 +1923,7 @@ Firefox 使用的是 &lt;code&gt;Gecko&lt;/code&gt;，这是 Mozilla 公司“�
 &lt;blockquote&gt;
 &lt;p&gt;原因：JS有可能会修改DOM，最为经典的document.write，这意味着，在JS执行完成前，后续所有资源的下载可能是没有必要的，这是js阻塞后续资源下载的根本原因。&lt;/p&gt;
 
-&lt;p&gt;办法：可以将外部引用的js文件放在&lt;/body&gt;前。&lt;/p&gt;
+&lt;p&gt;办法：可以将外部引用的js文件放在&amp;lt;/body&amp;gt;前。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;strong&gt;css文件影响js文件的执行&lt;/strong&gt;&lt;/p&gt;
@@ -1880,6 +1990,27 @@ Firefox 使用的是 &lt;code&gt;Gecko&lt;/code&gt;，这是 Mozilla 公司“�
 &lt;p&gt;defer2.js&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'defer2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;url-html&quot;&gt;输入URL（或跳转页面）加载HTML&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;加载一个资源的过程&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;浏览器根据DNS服务器得到域名的IP地址&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;向这个IP的机器发送HTTP请求&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;服务器收到、处理并返回HTTP请求&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;浏览器得到返回内容&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;浏览器渲染页面的过程&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;根据HTML结构生成 DOM树&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;根据CSS生成cssOM&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;将DOM和CSSOM整合成render树&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;根据render树开始渲染和展示&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;遇到 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 时，会执行并阻塞渲染&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
 &lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
 
 &lt;ul&gt;
@@ -3582,587 +3713,6 @@ application/zip，application/application/vnd.ms-powerpoint...&lt;/p&gt;&lt;/li&
                 <link>/http/2017/10/28/http-MIME</link>
                 <guid>/http/2017/10/28/http-MIME</guid>
                 <pubDate>Sat, 28 Oct 2017 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>HTTP报文-首部分类</title>
-                <description>&lt;h1 id=&quot;http&quot;&gt;HTTP报文-首部&lt;/h1&gt;
-
-&lt;p&gt;HTTP首部字段想请求和响应报文中添加了一些附加信息。&lt;br&gt;&lt;br&gt;
-本质上来说，他们只是一些名/值对的列表。&lt;/p&gt;
-
-&lt;p&gt;请求报文和响应报文的结构&lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-27-1.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;p&gt;请求报文和响应报文的实例&lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-27-2.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-27-3.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;http&quot;&gt;HTTP报文-首部分类&lt;/h1&gt;
-
-&lt;p&gt;HTTP首部可以分为以下5类&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1. 通用首部&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
- 既可用于请求，也可用于响应。可以在客户端、服务器和其他应用程序之间提供通用功能。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2. 请求首部&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
- 是请求报文特有的。补充了请求的附加内容、客户端信息、响应内容相关优先级等信息。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;3. 响应首部&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
- 是响应报文特有的。为客户端提供信息，补充响应的附加内容，也会要求客户端附加额外的内容信息。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;4. 实体首部&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
-针对请求报文和响应报文的实体部分使用的首部。描述实体的长度和内容，或者更新时间。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;5. 扩展首部&lt;/strong&gt;&lt;br&gt;&lt;br&gt;
- 非标准HTTP规范，由程序开发者创建&lt;/p&gt;
-
-&lt;h1 id=&quot;general-header&quot;&gt;通用首部(General-Header)&lt;/h1&gt;
-
-&lt;h2 id=&quot;general&quot;&gt;通用性息信首部-General&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Connection&lt;/td&gt;
-&lt;td&gt;表示是否需要持久连接。（HTTP 1.1默认进行持久连接）&lt;/td&gt;
-&lt;td&gt;Connection: close&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Date&lt;/td&gt;
-&lt;td&gt;报文创建的日期和时间，响应必须给出，缓存评估新鲜度&lt;/td&gt;
-&lt;td&gt;Date: Tue, 15 Nov 2010 08:12:31 GMT&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Trailer&lt;/td&gt;
-&lt;td&gt;如果报文采用了分块传输编码方式，就可以使用这个首部列出位于报文拖挂(Trailer)部分的首部集合&lt;/td&gt;
-&lt;td&gt;Trailer: Content-Length&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Upgrade&lt;/td&gt;
-&lt;td&gt;发送端想”升级“，向服务器指定某种传输协议以便服务器进行转换（如果支持），服务端回应101响应时，必须包含这个首部&lt;/td&gt;
-&lt;td&gt;Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Via&lt;/td&gt;
-&lt;td&gt;显示报文经过的中间节点(代理、网关)&lt;/td&gt;
-&lt;td&gt;Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;MIME-Version&lt;/td&gt;
-&lt;td&gt;发送端使用的MIME版本&lt;/td&gt;
-&lt;td&gt;MIME-Version: 1.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Transfer-Encoding&lt;/td&gt;
-&lt;td&gt;告知接收方对其采用了何种传输编码方式&lt;/td&gt;
-&lt;td&gt;Transfer-Encoding:chunked&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;universal-cache&quot;&gt;通用缓存首部-Universal cache&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Cache-Control&lt;/td&gt;
-&lt;td&gt;【HTTP/1.1】指定请求和响应遵循的缓存机制&lt;/td&gt;
-&lt;td&gt;Cache-Control: no-cache&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Pragma&lt;/td&gt;
-&lt;td&gt;随报文传送一些指令。通常来控制缓存。迫使浏览器重新加载或刷新时，即使缓存新鲜也要请求服务器&lt;/td&gt;
-&lt;td&gt;Pragma: no-cache&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h1 id=&quot;request-header&quot;&gt;请求首部(request header)&lt;/h1&gt;
-
-&lt;p&gt;请求首部说明是谁或什么在发送请求、请求源自何处，或者客户端的喜好及能力。&lt;/p&gt;
-
-&lt;p&gt;服务器可以根据请求首部给出的客户端信息，试着为客户端提供更好的响应。&lt;/p&gt;
-
-&lt;h2 id=&quot;informational&quot;&gt;请求的信息性首部-Informational&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;From&lt;/td&gt;
-&lt;td&gt;发出请求的用户的Email&lt;/td&gt;
-&lt;td&gt;From: &lt;a href=&quot;mailto:user@email.com&quot;&gt;user@email.com&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Host&lt;/td&gt;
-&lt;td&gt;指定请求的服务器的域名和端口号，HTTP1.1规定客户端请求必须包含Host,否则它返回400 bad request&lt;/td&gt;
-&lt;td&gt;Host: &lt;a href=&quot;http://www.zcmhi.com&quot;&gt;www.zcmhi.com&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Referer&lt;/td&gt;
-&lt;td&gt;使服务器知道客户端从哪里获得其请求的URL；先前网页的地址，当前请求网页紧随其后,即来路&lt;/td&gt;
-&lt;td&gt;Referer: &lt;a href=&quot;http://www.zcmhi.com/archives/71.html&quot;&gt;http://www.zcmhi.com/archives/71.html&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;User-Agent&lt;/td&gt;
-&lt;td&gt;告诉服务器发出请求的客户端信息&lt;/td&gt;
-&lt;td&gt;User-Agent: Mozilla/5.0 (Linux; X11)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;UA-(CPU,Disp,OS,Color,Pixels)&lt;/td&gt;
-&lt;td&gt;不推荐使用，客户端机器的CPU、显示器的尺寸和色彩深度、操作系统、显示器的颜色信息、显示器的像素信息&lt;/td&gt;
-&lt;td&gt;UA-OS: Windows 95&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;accept&quot;&gt;Accept首部&lt;/h2&gt;
-
-&lt;p&gt;Accept首部为客户端提供了一种将其喜好和能力告知服务器的方式，包括它们想要什么，可以使用什么，不想要什么。&lt;/p&gt;
-
-&lt;p&gt;Accept首部使连接的两端受益：&lt;/p&gt;
-
-&lt;p&gt;客户端会得到它们想要的内容，服务器则不会浪费其时间和带宽来发送客户端无法使用的东西。&lt;/p&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Accept&lt;/td&gt;
-&lt;td&gt;告诉服务器能够发送哪些媒体类型&lt;/td&gt;
-&lt;td&gt;Accept: text/plain, text/html&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Accept-Charset&lt;/td&gt;
-&lt;td&gt;客户端可以接受哪些字符集&lt;/td&gt;
-&lt;td&gt;Accept-Charset: utf-8, gb2312&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Accept-Encoding&lt;/td&gt;
-&lt;td&gt;客户端可以接受哪些编码方式&lt;/td&gt;
-&lt;td&gt;Accept-Encoding: compress, gzip, deflate, identity(默认不压缩)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Accept-Language&lt;/td&gt;
-&lt;td&gt;浏览器可以接受或优选哪种语言&lt;/td&gt;
-&lt;td&gt;Accept-Language: en,zh&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;TE&lt;/td&gt;
-&lt;td&gt;客户端愿意接受的传输编码，并通知服务器接受接受尾加头信息&lt;/td&gt;
-&lt;td&gt;TE: trailers,deflate;q=0.5&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;conditional&quot;&gt;条件请求首部-Conditional&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Expect&lt;/td&gt;
-&lt;td&gt;客户端告诉服务器他们需要某种行为，服务器给出反馈【成功：100 Continue ；失败：417 Expectation Failed】&lt;/td&gt;
-&lt;td&gt;Expect: 100-continue&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If-Match&lt;/td&gt;
-&lt;td&gt;只有请求内容与实体相匹配才有效，服务器对比If-Match首部的实体标记与当前的实体标记，匹配才返回对象&lt;/td&gt;
-&lt;td&gt;If-Match: “737060cd8c284d8af7ad3082f209582d”&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If-None-Match&lt;/td&gt;
-&lt;td&gt;如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变&lt;/td&gt;
-&lt;td&gt;If-None-Match: “737060cd8c284d8af7ad3082f209582d”&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Range&lt;/td&gt;
-&lt;td&gt;只请求实体的一部分，指定范围&lt;/td&gt;
-&lt;td&gt;Range: bytes=500-999&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If-Range&lt;/td&gt;
-&lt;td&gt;客户端拥有某范围内资源的副本，它要对范围进行再验证。如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag或Date&lt;/td&gt;
-&lt;td&gt;If-Range: “737060cd8c284d8af7ad3082f209582d”&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If-Modified-Since&lt;/td&gt;
-&lt;td&gt;如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码&lt;/td&gt;
-&lt;td&gt;If-Modified-Since: Sat, 29 Oct 2010 19:43:31 GMT&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;If-Unmodified-Since&lt;/td&gt;
-&lt;td&gt;只有实体在指定时间之后未被修改才请求成功&lt;/td&gt;
-&lt;td&gt;If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;security&quot;&gt;安全请求首部-Security&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Authorization&lt;/td&gt;
-&lt;td&gt;向服务器(401)回应自己的身份验证信息，HTTP授权的授权证书&lt;/td&gt;
-&lt;td&gt;Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Cookie&lt;/td&gt;
-&lt;td&gt;客户端识别和跟踪的扩展首部&lt;/td&gt;
-&lt;td&gt;Cookie: Skin=new;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Cookie2&lt;/td&gt;
-&lt;td&gt;识别请求发起者能够理解哪种类型的Cookie&lt;/td&gt;
-&lt;td&gt;Cookie: $Version=1; Skin=new;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;proxy&quot;&gt;代理请求首部-Proxy&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Max-Forwards&lt;/td&gt;
-&lt;td&gt;指定请求所经过的代理或其他中间节点的最大数目。只能和TRACE方法一同使用&lt;/td&gt;
-&lt;td&gt;Max-Forwards: 10&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Proxy-Authorization&lt;/td&gt;
-&lt;td&gt;与代理进行认证时使用，响应Proxy-Authenticate质询&lt;/td&gt;
-&lt;td&gt;Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Proxy-Connection&lt;/td&gt;
-&lt;td&gt;客户端与代理之间建立连接使用。解决Connection被哑代理盲转发的问题&lt;/td&gt;
-&lt;td&gt;Proxy-Connection: close&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h1 id=&quot;response-header&quot;&gt;响应首部(Response header)&lt;/h1&gt;
-
-&lt;h2 id=&quot;informative&quot;&gt;响应的信息性首部-Informative&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Age&lt;/td&gt;
-&lt;td&gt;(从原始服务器创建开始)响应持续时间，响应是通过中间节点，很可能从代理的缓存传过来的&lt;/td&gt;
-&lt;td&gt;Age: 12&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Retry-After&lt;/td&gt;
-&lt;td&gt;如果资源不可用的话，告诉客户端什么时候(或多久之后)重新发送请求&lt;/td&gt;
-&lt;td&gt;Retry-After: 120&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Server&lt;/td&gt;
-&lt;td&gt;服务器标识自己，同User-Agent标识客户端一样&lt;/td&gt;
-&lt;td&gt;Server: Apache/1.3.27 (Unix) (Red-Hat/Linux)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Warning&lt;/td&gt;
-&lt;td&gt;警告实体可能存在的问题&lt;/td&gt;
-&lt;td&gt;Warning: 199 Miscellaneous warning&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;negotiation&quot;&gt;协商首部-Negotiation&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Accept-Ranges&lt;/td&gt;
-&lt;td&gt;表明服务器是否接受请求资源的某个范围&lt;/td&gt;
-&lt;td&gt;Accept-Ranges: bytes&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Allow&lt;/td&gt;
-&lt;td&gt;告诉客户端可以对特定资源使用哪些HTTP方法，发送405Method Not Allowed响应的HTTP/1.1服务器必须包含Allow首部&lt;/td&gt;
-&lt;td&gt;Allow: GET, HEAD&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Location&lt;/td&gt;
-&lt;td&gt;用来重定向接收方到非请求URL的位置来完成请求或标识新的资源&lt;/td&gt;
-&lt;td&gt;Location: &lt;a href=&quot;http://www.zcmhi.com/archives/94.html&quot;&gt;http://www.zcmhi.com/archives/94.html&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Vary&lt;/td&gt;
-&lt;td&gt;是一个首部列表，服务器查看其它首部的列表，根据首部的内容挑出最适合的版本发送给客户端&lt;/td&gt;
-&lt;td&gt;Vary: User-Agent&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;security&quot;&gt;安全响应首部-Security&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Proxy-Authenticate&lt;/td&gt;
-&lt;td&gt;代理用这个首部来质询发送请求的应用程序，要求其对自身进行认证，HTTP/1.1代理服务器发送407Proxy Authentication Required响应，必须包含这个首部&lt;/td&gt;
-&lt;td&gt;Proxy-Authenticate: Basic&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;WWW-Authenticate&lt;/td&gt;
-&lt;td&gt;用于401Unauthorized 响应，向客户端发布一个质询认证方案，表明客户端请求实体应该使用的授权方案&lt;/td&gt;
-&lt;td&gt;WWW-Authenticate: Basic&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set-Cookie&lt;/td&gt;
-&lt;td&gt;不是真正的安全首部，但隐含有安全功能；可以在客户端设置一个令牌，以便服务器对客户端进行标识&lt;/td&gt;
-&lt;td&gt;Set-Cookie: UserID=JohnDoe;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set-Cookie2&lt;/td&gt;
-&lt;td&gt;是&lt;/td&gt;
-&lt;td&gt;Set-Cookie的扩展&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h1 id=&quot;entity-header&quot;&gt;实体首部(Entity header)&lt;/h1&gt;
-
-&lt;h2 id=&quot;content&quot;&gt;内容首部-Content&lt;/h2&gt;
-
-&lt;p&gt;内容首部说明了实体内容的类型、尺寸以及处理它所需的其他有用信息&lt;/p&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Content-Type&lt;/td&gt;
-&lt;td&gt;请求或返回主体的媒体类型&lt;/td&gt;
-&lt;td&gt;Content-Type: text/html; charset=utf-8&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Content-Length&lt;/td&gt;
-&lt;td&gt;请求或响应主体的长度或尺寸，比如HEAD方法得到服务器给的header就有这个首部&lt;/td&gt;
-&lt;td&gt;Content-Length: 348&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Content-Range&lt;/td&gt;
-&lt;td&gt;在整个返回体中本部分的字节位置【206】&lt;/td&gt;
-&lt;td&gt;Content-Range: bytes 21010-47021/47022&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Content-Encoding&lt;/td&gt;
-&lt;td&gt;是否对某对象进行过编码。比如，服务器告诉客户端它对对象执行过哪种编码，客户端就可以对报文解码&lt;/td&gt;
-&lt;td&gt;Content-Encoding: compress, gzip&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Content-Language&lt;/td&gt;
-&lt;td&gt;告诉客户端，理解哪种自然语言&lt;/td&gt;
-&lt;td&gt;Content-Language: en,zh&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Content-Base&lt;/td&gt;
-&lt;td&gt;服务器为响应主体部分中要解析的URL指定一个基础URL&lt;/td&gt;
-&lt;td&gt;Content-Base: &lt;a href=&quot;http://www.joes-hardware.com&quot;&gt;http://www.joes-hardware.com&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Content-Location&lt;/td&gt;
-&lt;td&gt;服务器用它将客户端重定向到一个新URL&lt;/td&gt;
-&lt;td&gt;Content-Location: &lt;a href=&quot;http://www.joes-hardware.com/index.htm&quot;&gt;http://www.joes-hardware.com/index.htm&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Content-MD5&lt;/td&gt;
-&lt;td&gt;对报文主体进行校验&lt;/td&gt;
-&lt;td&gt;Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h2 id=&quot;entity-cache&quot;&gt;实体缓存首部-Entity cache&lt;/h2&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;ETag&lt;/td&gt;
-&lt;td&gt;实体标记，某个特定资源版本的标识符&lt;/td&gt;
-&lt;td&gt;ETag: “737060cd8c284d8af7ad3082f209582d”&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Expires&lt;/td&gt;
-&lt;td&gt;给出响应失效的日期和时间，客户端缓存副本，在有效期之前，不去访问服务器资源是否有效&lt;/td&gt;
-&lt;td&gt;Expires: Thu, 01 Dec 2010 16:00:00 GMT&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Last-Modified&lt;/td&gt;
-&lt;td&gt;服务器上的资源的最后修改时间或创建时间&lt;/td&gt;
-&lt;td&gt;Last-Modified: Tue, 15 Nov 2010 12:45:26 GMT&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h1 id=&quot;extension-header&quot;&gt;扩展首部(extension header)&lt;/h1&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;首部&lt;/th&gt;
-&lt;th&gt;描述&lt;/th&gt;
-&lt;th&gt;示例&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Cookie&lt;/td&gt;
-&lt;td&gt;客户端识别和跟踪的扩展首部&lt;/td&gt;
-&lt;td&gt;Cookie: Skin=new;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Cookie2&lt;/td&gt;
-&lt;td&gt;识别请求发起者能够理解哪种类型的Cookie&lt;/td&gt;
-&lt;td&gt;Cookie: $Version=1; Skin=new;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;MIME-Version&lt;/td&gt;
-&lt;td&gt;发送端使用的MIME版本&lt;/td&gt;
-&lt;td&gt;MIME-Version: 1.0&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set-Cookie&lt;/td&gt;
-&lt;td&gt;不是真正的安全首部，但隐含有安全功能；可以在客户端设置一个令牌，以便服务器对客户端进行标识&lt;/td&gt;
-&lt;td&gt;Set-Cookie: UserID=JohnDoe;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Set-Cookie2&lt;/td&gt;
-&lt;td&gt;是&lt;/td&gt;
-&lt;td&gt;Set-Cookie的扩展&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;UA-(CPU,Disp,OS,Color,Pixels)&lt;/td&gt;
-&lt;td&gt;不推荐使用，客户端机器的CPU、显示器的尺寸和色彩深度、操作系统、显示器的颜色信息、显示器的像素信息&lt;/td&gt;
-&lt;td&gt;UA-OS: Windows 95&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Content-Disposition&lt;/td&gt;
-&lt;td&gt;告诉浏览器以下载的方式打开数据。&lt;/td&gt;
-&lt;td&gt;？&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;X-Frame-Options&lt;/td&gt;
-&lt;td&gt;HTTP响应首部，防止点击劫持攻击。&lt;/td&gt;
-&lt;td&gt;X-Frame-Options: DENY、SAMEORIGIN（仅同源域名下的页面匹配许可）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;X-XSS-Protection&lt;/td&gt;
-&lt;td&gt;HTTP响应首部，防止XSS攻击&lt;/td&gt;
-&lt;td&gt;X-XSS-Protection: 0（过滤无效）、1（过滤有效）&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;DNT&lt;/td&gt;
-&lt;td&gt;HTTP请求首部，拒绝个人信息被收集&lt;/td&gt;
-&lt;td&gt;DNT: 0(同意被追踪)、1(拒绝被追踪)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;P3P&lt;/td&gt;
-&lt;td&gt;HTTP响应首部，保护用户隐私&lt;/td&gt;
-&lt;td&gt;？&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;h1 id=&quot;hop-by-hop-headers&quot;&gt;Hop-by-hop headers&lt;/h1&gt;
-
-&lt;p&gt;HTTP首部字段根据代理怎么处理它们分为两类&lt;/p&gt;
-
-&lt;h2 id=&quot;end-to-end-headers&quot;&gt;End-to-end headers&lt;/h2&gt;
-
-&lt;p&gt;端到端首部&lt;/p&gt;
-
-&lt;p&gt;分在此类别中的首部会转发给请求/响应的最终接收目标，且必须保存在由缓存生成的响应中，另外规定它必须被转发。&lt;/p&gt;
-
-&lt;h2 id=&quot;hop-by-hop-headers&quot;&gt;Hop-by-hop headers&lt;/h2&gt;
-
-&lt;p&gt;逐跳首部&lt;/p&gt;
-
-&lt;p&gt;只对单次转发有效，会通过缓存或代理而不再转发。HTTP/1.1规定，使用Hop-by-hop 首部，需提供 Connection 首部字段。&lt;/p&gt;
-
-&lt;p&gt;逐跳首部&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Connection&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Keep-Alive&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Proxy-Authenticate&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Proxy-Authorization&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;TE&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Trailer&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Transfer-Encoding&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;Upgrade&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;除了这8个首部字段之外，其他所有字段都属于端到端首部。&lt;/p&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers&quot;&gt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://tools.jb51.net/table/http_header&quot;&gt;http://tools.jb51.net/table/http_header&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/c/47c604fe47af&quot;&gt;http://www.jianshu.com/c/47c604fe47af&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/d40facd78a88&quot;&gt;http://www.jianshu.com/p/d40facd78a88&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://pengyouyi.site/assets/pdf/HTTP.pdf&quot;&gt;图解HTTP-完整彩色版.pdf&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <link>/http/2017/10/27/http-header</link>
-                <guid>/http/2017/10/27/http-header</guid>
-                <pubDate>Fri, 27 Oct 2017 00:00:00 +0800</pubDate>
         </item>
 
 

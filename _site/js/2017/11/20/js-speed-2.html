@@ -7,7 +7,7 @@
     
     
     
-    <title>编写高效的CSS选择器 | 彭友谊的博客</title>
+    <title>性能优化 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="编写高效的CSS选择器">
-    <meta property="og:url" content="/css/2016/12/01/css-selector-effective">
+    <meta property="og:title" content="性能优化">
+    <meta property="og:url" content="/js/2017/11/20/js-speed-2">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="编写高效的CSS选择器">
+    <meta property="og:description" content="性能优化">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="编写高效的CSS选择器">
+    <meta name="twitter:title" content="性能优化">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,14 +144,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/css/2016/12/01/css-selector-effective" title="编写高效的CSS选择器" itemprop="url">编写高效的CSS选择器</a>
+      <a href="/js/2017/11/20/js-speed-2" title="性能优化" itemprop="url">性能优化</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-12-01 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-12-01</time>
+    <time datetime="2017-11-20 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-11-20</time>
     
   </p>
 </header>
@@ -163,154 +163,101 @@
 		
 		</div>
 		
-		<h1 id="css-css">CSS渲染规则、CSS选择器的效率</h1>
+		<h1 id="optimization-policy">性能优化 - optimization policy</h1>
 
-<h1 id="css"><a href="https://css-tricks.com/efficiently-rendering-css/">浏览器对css选择器的渲染规则</a></h1>
-
-<p><a href="http://stackoverflow.com/questions/5797014/why-do-browsers-match-CSS-selectors-from-right-to-left">样式系统从最右边的选择符开始向左进行匹配规则（右-&gt;左）</a>。</p>
-
-<p>只要当前选择符的左边还有其他选择符，样式系统就会继续向左移动，直到找到和规则匹配的元素，或者因为不匹配而退出。</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>div.nav &gt; ul li a[title]<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>上述例子，浏览器首先会尝试在你的HTML标签中寻找“a[title]”元素，接着在匹配“li和ul”，最后在去匹配“div.nav”。</p>
-
-<p>选择器的最后一部分，也就是选择器的最右边（在这个例子中就是a[title]部分）部分被称为“关键选择器”，它将决定你的选择器的效率如何？是高还是低。</p>
-
-<h1 id="css">决定css选择器性能的关键点</h1>
+<p><strong>原则</strong> </p>
 
 <ul>
-<li><p>1.首先选择器对性能的影响源于<strong>浏览器匹配选择器和文档元素时所消耗的时间</strong>，所以优化选择器的原则是应尽量避免使用消耗更多匹配时间的选择器。</p></li>
-<li><p>2.最右侧的选择器对于性能就起着<strong>关键性的作用</strong>，它是最先开始查找的，如果最右侧是#id选择器那么性能就很高，如果是标签选择器那么性能就会大打折扣。</p></li>
+<li>多使用内存、缓存或者其他方法<br></li>
+<li>减少CPU计算、减少网络</li>
 </ul>
 
-<h1 id="css"><a href="http://csswizardry.com/2011/09/writing-efficient-css-selectors/">CSS选择器的效率（从高到低）</a></h1>
+<p><strong>从哪里入手</strong></p>
 
-<p>Google 资深web开发工程师 Steve Souders 对 CSS 选择器的执行效率从高到低做了一个排序：</p>
+<ol>
+<li>加载页面和静态资源<br></li>
+<li>页面渲染<br></li>
+</ol>
 
-<p>1.id选择器（#myid）<br><br>
-2.类选择器（.myclassname）<br><br>
-3.标签选择器（div,h1,p）<br><br>
-4.相邻选择器（h1+p）<br><br>
-5.子选择器（ul &gt; li）<br><br>
-6.后代选择器（li a）<br><br>
-7.通配符选择器（*）<br><br>
-8.属性选择器（a[rel=&quot;external&quot;]）<br><br>
-9.伪类选择器（a:hover, li:nth-child）  </p>
+<h1 id="load-resource">加载资源优化 - Load resource</h1>
 
-<p>id选择器的性能是最高的，但是id具有唯一性</p>
+<ol>
+<li>静态资源的压缩合并<br></li>
+<li>静态资源缓存<br></li>
+<li>非核心代码异步加载-&gt; 异步加载的方式-&gt; 异步加载的区别<br></li>
+<li>使用CDN让资源加载更快<br></li>
+<li>使用<a href="http://www.jianshu.com/p/1e63f434051d">SSR</a>（server side render）后端渲染，数据直接输出到HTML中<br></li>
+<li>预解析DNS</li>
+</ol>
 
-<p>class选择器次之，具有共性，常使用之</p>
-
-<p>如果你非常在意页面的性能那千万别使用CSS3选择器。实际上，在所有浏览器中，用 class 和 id 来渲染，比那些使用同胞，后代选择器，子选择器（sibling, descendant and child selectors）对页面性能的改善更值得关注。</p>
-
-<h1 id="guidelines-for-efficient-css">Guidelines for efficient CSS</h1>
-
-<h2 id="avoid-universal-rules">Avoid universal rules</h2>
-
-<p>Make sure a rule doesn’t end up in the universal category!</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>#content * {..}<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<h2 id="don-t-qualify-id-rules-with-tag-names-or-classes">Don’t qualify ID rules with tag names or classes</h2>
-
-<div class="show">
-  <div class="incorrect">BAD</div>
-    button#backButton {…}
-  <div class="incorrect">BAD</div>
-    .menu-left#newMenuIcon {…}
-  <div class="correct">GOOD</div>
-    #backButton {…}
-  <div class="correct">GOOD</div>
-    #newMenuIcon {…}
-</div>
-
-<p>id在HTML中是唯一的，也就是说一个HTML页面只限定有一个id为“XX”的元素，而不限制拥有这个ID元素的标签名，所以,在button#backButton {…}中,button标签完全是无意义的，可以，而且应该去掉，button#backButton {…}与#backButton {…}是等价的。在#backButton前多写了button,只会引起样式系统向左移动，继续查找页面元素，损耗页面性能，延长页面渲染时间。</p>
-
-<h2 id="don-t-qualify-class-rules-with-tag-names">Don’t qualify class rules with tag names</h2>
-
-<div class="show">
-  <div class="incorrect">BAD</div>
-    treecell.indented {…}
-  <div class="correct">GOOD</div>
-    .treecell-indented {…}
-  <div class="correct">BEST</div>
-    .hierarchy-deep {…}
-</div>
-
-<h2 id="use-the-most-specific-category-possible">Use the most specific category possible</h2>
-
-<div class="show">
-  <div class="incorrect">BAD</div>
-  treeitem[mailfolder="true"] > treerow > treecell {…}
-  <div class="correct">GOOD</div>
-  .treecell-mailfolder {…}
-</div>
-
-<p>尽量选择最具体的方式,避免使用多层标签选择器。使用 class 选择器替换，减少css查找</p>
-
-<h2 id="avoid-the-descendant-selector">Avoid the descendant selector</h2>
-
-<p>后代选择器在CSS中是最昂贵的选择器。贵得要命——尤其是把它和标签或通配符放在一起！</p>
-
-<div class="show">
-  <div class="incorrect">BAD</div>
-  treeitem[mailfolder="true"] > treerow > treecell {…}
-  <div class="correct">GOOD</div>
-  .treecell-mailfolder {…}
-</div>
-
-<h2 id="tag-category-rules-should-never-contain-a-child-selector">Tag category rules should never contain a child selector</h2>
-
-<div class="show">
-  <div class="incorrect">BAD</div>
-  treehead > treerow > treecell {…}
-  <div class="correct">GOOD</div>
-  .treecell-header {…}
-</div>
-
-<h2 id="question-all-usages-of-the-child-selector">Question all usages of the child selector</h2>
-
-<div class="show">
-  <div class="incorrect">BAD</div>
-  treeitem[IsImapServer=”true”] > treerow > .tree-folderpane-icon {…}
-  <div class="correct">GOOD</div>
-  .tree-folderpane-icon[IsImapServer=”true”] {…}
-</div>
-
-<h2 id="rely-on-inheritance">Rely on inheritance</h2>
-
-<div class="show">
-  <div class="incorrect">BAD</div>
-  #bookmarkMenuItem > .menu-left { list-style-image: url(blah) }
-  <div class="correct">GOOD</div>
-  #bookmarkMenuItem { list-style-image: url(blah) }
-</div>
-
-<h2 id="use-moz-image-region">Use -moz-image-region!</h2>
-
-<h2 id="use-scoped-stylesheets">Use scoped stylesheets</h2>
-
-<h2 id="avoid-vendor-specific-features-unless-necessary">Avoid vendor-specific features unless necessary</h2>
-
-<p><strong>summary：</strong></p>
-
-<p>1.避免使用通配符<br><br>
-2.不使用标签名或类名修饰ID规则：如果规则使用ID选择器作为关键选择器，不要给规则添加标签名。因为ID本身就是唯一的，添加标签名会不必要地降低匹配效率。<br><br>
-3.不使用标签名修饰类：相较于标签，类更具独特性。<br><br>
-4.尽量选择最具体的方式：造成低效的最简单粗暴的原因就是在标签上使用太多规则。给元素添加类可以更快细分到类方式，可以减少规则去匹配标签的时间。<br><br>
-5.关于后代选择器和子选择器：避免使用后代选择器，非要用的话建议用子选择器代替，但子选择器也要慎用，标签规则永远不要包含子选择器。<br><br>
-6.利用可继承性：没必要在一般内容上声明样式。</p>
-
-<h1 id="more">更多-more</h1>
+<p><strong>静态资源缓存</strong></p>
 
 <ul>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS">https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Writing_efficient_CSS</a></li>
-<li><a href="https://css-tricks.com/efficiently-rendering-css/">https://css-tricks.com/efficiently-rendering-css/</a></li>
-<li><a href="http://csswizardry.com/2011/09/writing-efficient-css-selectors/">http://csswizardry.com/2011/09/writing-efficient-css-selectors/</a></li>
+<li>通过连接名称控制缓存，<script src="abc_1.js"></script></li>
+<li>只有内容改变的时候，链接名称才会改变，<script src="abc_2.js"></script></li>
 </ul>
+
+<p><strong>使用SSR（server side render）后端渲染</strong></p>
+
+<ul>
+<li>现在 Vue 、React 提出了这样的概念</li>
+<li>其实 jsp 、php 、 asp 都属于后端渲染</li>
+</ul>
+
+<p><strong>预解析DNS</strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;meta</span> <span class="na">http-equie=</span><span class="s">"x-dns-prefetch-control"</span> <span class="na">content=</span><span class="s">"on"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"dns-prefetch"</span> <span class="na">href=</span><span class="s">"//host_name_to_prefetch.com"</span><span class="nt">&gt;</span>
+</code></pre></div>
+<h1 id="rendering">渲染优化 - Rendering</h1>
+
+<ol>
+<li>css放前面，js放后面<br></li>
+<li>懒加载（图片懒加载、下拉加载更多）<br></li>
+<li>减少DOM查询，对DOM查询做缓存<br></li>
+<li>减少DOM操作，多个操作尽量合并在一起执行<br></li>
+<li>事件节流<br></li>
+<li>尽早执行操作（如DOMContentLoaded） </li>
+<li>写高性能的DOM，<a href="http://pengyouyi.site/css/2016/12/19/js-repaint-reflow">避免回流和重绘</a> </li>
+</ol>
+
+<p><strong>图片懒加载</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"img1"</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"preview.png"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">realsrc</span><span class="o">=</span><span class="s2">"abc.png"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">img1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'img1'</span><span class="p">);</span>
+  <span class="nx">img1</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">img1</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'data-realsrc'</span><span class="p">);</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div>
+<p><strong>事件节流</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">textarea</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'text'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">timeoutId</span><span class="p">;</span>
+<span class="nx">textarea</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'keyup'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">timeoutId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timeoutId</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">timeoutId</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 触发change事件</span>
+    <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p><strong>尽早执行操作</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="c1">// 页面的全部资源加载完才会执行，包括图片、视频等</span>
+<span class="p">});</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'DOMContentLoaded'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// DOM渲染完即可执行，此时图片、视频还可能没有加载完</span>
+<span class="p">})</span>
+</code></pre></div>
+<h1 id="term">性能优化的术语-term</h1>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-20-1.png" alt="">
+</div>
+
+<p>白屏时间和连通率都会对跳出率造成影响<br><br>
+可操时间影响day、MAU活跃量<br><br>
+可操时间影响比较大的有游戏充值、赌博付费  </p>
+
+<p><a href="http://pengyouyi.site/assets/images/2017/xmind/high-performance.xmind">复用、加载优化</a></p>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -327,7 +274,7 @@
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#CSS">CSS</a>
+  <a class="article-category-link" href="/categories/#JS">JS</a>
   
 </div>
 
@@ -351,7 +298,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/css/2016/12/01/css-selector-effective" data-title="编写高效的CSS选择器 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2017/11/20/js-speed-2" data-title="性能优化 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -363,21 +310,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2016/11/30/js-this" title="js中的this">
+ <a href="/js/2017/11/13/js-speed" title="雅虎军规">
   <strong>上一篇：</strong><br/>
   <span>
-  js中的this</span>
+  雅虎军规</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/js/2016/12/08/js-anonymous-function"  title="js中的匿名函数">
- <strong>下一篇：</strong><br/> 
- <span>js中的匿名函数
-</span>
-</a>
-</div>
 
 </nav>
 
