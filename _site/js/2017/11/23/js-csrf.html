@@ -7,7 +7,7 @@
     
     
     
-    <title>requirejs初学 | 彭友谊的博客</title>
+    <title>CSRF攻击原理及预防 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="requirejs初学">
-    <meta property="og:url" content="/js/2016/09/29/requirejs">
+    <meta property="og:title" content="CSRF攻击原理及预防">
+    <meta property="og:url" content="/js/2017/11/23/js-csrf">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="requirejs初学">
+    <meta property="og:description" content="CSRF攻击原理及预防">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="requirejs初学">
+    <meta name="twitter:title" content="CSRF攻击原理及预防">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,14 +144,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/09/29/requirejs" title="requirejs初学" itemprop="url">requirejs初学</a>
+      <a href="/js/2017/11/23/js-csrf" title="CSRF攻击原理及预防" itemprop="url">CSRF攻击原理及预防</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-09-29 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-09-29</time>
+    <time datetime="2017-11-23 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-11-23</time>
     
   </p>
 </header>
@@ -163,238 +163,187 @@
 		
 		</div>
 		
-		<h1 id="requirejs">requirejs初学</h1>
+		<h1 id="csrf">CSRF 简介</h1>
 
-<p><strong>a.为什么要使用requireJS</strong></p>
+<p>Cross Site Request Forgy</p>
 
-<p>很久之前，我们所有的JS文件写到一个js文件里面去进行加载，但是当业务越来越复杂的时候，需要分成多个JS文件进行加载，比如在页面中head内分别引入a.js，b.js，c.js等，如下所示：</p>
+<p>跨站请求伪造</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app/a.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app/b.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/app/c.js"</span><span class="nt">&gt;&lt;/script&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<p>CSRF是一种夹持用户在已经登陆的web应用程序上执行非本意的操作的攻击方式。</p>
 
-<p>这段代码依次加载多个js文件。这样的写法有很大的缺点。</p>
+<p>相比于XSS，CSRF是利用了系统对页面浏览器的信任，XSS则利用了系统对用户的信任。</p>
+
+<h1 id="csrf">CSRF 攻击原理</h1>
+
+<p>CSRF攻击者在用户已经登录目标网站之后，诱使用户访问一个攻击页面，利用目标网站对用户的信任，以用户身份在攻击页面对目标网站发起伪造用户操作的请求，达到攻击目的。</p>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-23-1.jpg" alt="">
+</div>
+
+<p>构成CSRF攻击是有条件的：</p>
 
 <ol>
-<li>页面在加载的时候，是从页面自上往下加载及渲染的，当页面上有多个分散的js文件时候，页面会先加载及解析头部的JS文件(同步加载)，页面被堵塞了，其次分散的js请求数多了，网页失去响应的时间就会变长。</li>
-<li>由于JS文件存在依赖关系，比如上面的b.js要依赖于a.js,所以务必保证a.js优先引入到页面上来且先加载，要严格保证加载顺序，依赖性最大的文件一定要放到最后加载。但是当依赖关系很复杂的时候，代码的编写和维护就会变得困难了。</li>
+<li>客户端必须一个网站并生成cookie凭证存储在浏览器中<br></li>
+<li>该cookie没有清除，客户端又tab一个页面进行访问别的网站</li>
 </ol>
 
-<p><strong>b.使用requireJS的优点有哪些？</strong></p>
+<h1 id="csrf">CSRF 危害</h1>
 
-<blockquote>
-<p>（1）实现js文件的异步加载，避免网页失去响应；<br><br>
-（2）管理模块之间的依赖性，便于代码的编写和维护；<br><br>
-（3）遵循AMD（异步模块定义）规范。  </p>
-</blockquote>
+<p>✸ 冒充用户发送邮件，发消息，发帖<br><br>
+✸ 盗取用户的账号，消费(购买商品，虚拟货币)、转账<br><br>
+✸ 损坏网站名誉  </p>
 
-<p><strong>c.引用-reference</strong></p>
+<p>CSRF造成的问题包括：个人隐私泄露以及财产安全。</p>
 
-<p>去requirejs官网下载<a href="http://www.requirejs.cn/docs/download.html">http://www.requirejs.cn/docs/download.html</a>,在页面头部head标签内引入requireJS，如下：</p>
+<h1 id="csrf">CSRF 防御措施</h1>
 
-<p><code>&lt;script src=&quot;js/require.js&quot;&gt;&lt;/script&gt;</code>，但是加载这个文件也会造成网页失去响应，我们可以加上 defer 和 async这个属性。如下：<code>&lt;script src=&quot;js/require.js&quot; defer async=&quot;true&quot; &gt;&lt;/script&gt;</code></p>
+<p>① 使用验证码<br><br>
+② 添加token<br><br>
+③ 验证Referer<br><br>
+④ 禁止第三方网站带Cookies<br><br>
+⑤ 在http头中自定义属性并验证<br><br>
+⑥ 尽量使用POST，限制GET  </p>
 
-<h1 id="data-main">data-main入口点</h1>
+<h2 id="http-referer">验证 HTTP Referer 字段</h2>
 
-<p>接下来，看看requireJS启动加载脚本的初始化方式，requireJS支持属性 data-main 这个属性来加载初始化的JS文件，<br>
-如下：</p>
+<p>禁止来自第三方网站的请求</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/require.js"</span> <span class="na">defer</span> <span class="na">async=</span><span class="s">"true"</span> <span class="na">data-main=</span><span class="s">"js/app.js"</span><span class="nt">&gt;&lt;/script&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<p>http头中有一个referer，记录http请求的来源地址，访问一个安全受限的页面的请求必须来自同一个网站。当用户要提交一个请求时，请求的referer值需是提交按钮（触发请求）所在的页面的URL。</p>
 
-<p>上面的意思是：先异步加载requireJS文件，完成后继续异步加载app.js文件</p>
+<h2 id="cookies">禁止第三方网站带Cookies</h2>
 
-<p>上面的app.js后的.js可以去掉，因为requireJS源码已经默认都是以后缀JS文件结尾的。</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie</a></p>
 
-<h1 id="define">如何定义模块文件-define</h1>
+<p>user.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 登录成功，设置cookie</span>
+<span class="nx">ctx</span><span class="p">.</span><span class="nx">cookies</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'userId'</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,{</span>
+    <span class="na">httpOnly</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
+    <span class="na">sameSite</span><span class="p">:</span> <span class="s1">'strict'</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>但是问题是sameSite这个属性只有chrome和Opera支持</p>
 
-<p>RequireJS编写模块不同于其他脚本文件，它良好的使用define来定义一个作用域避免全局空间污染，它可以显示出其依赖关系，并以函数(定义此模块的那个函数)参数的形式将这些依赖进行注入。</p>
+<h2 id="verification-code">使用验证码-Verification Code</h2>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16</pre></td><td class="code"><pre>-demo
-   index.html
-   -js
-        require.js
-        app.js
-        -app
-            a.js
-            b.js
-            c.js
-            d1.js
-            ....
-            d6.js
-        -lib
-            jquery.js
-            backbone.js
-            underscore.js<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<p>每次用户提交都在表单上填写一个图片上的随机字符串作为验证码。</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12</pre></td><td class="code"><pre>//index.html
-<span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<h2 id="token">在请求地址中添加token并验证</h2>
+
+<p>CSRF攻击之所以能够成功，是因为攻击者可以伪造用户的请求，该请求中所有的用户验证信息都存在于Cookie中，因此攻击者可以在不知道这些验证信息的情况下直接利用用户自己的Cookie来通过安全验证。由此可知，抵御CSRF攻击的关键在于：在请求中放入攻击者所不能伪造的信息，并且该信息不存在于Cookie之中。</p>
+
+<p>在请求中放入攻击者不能伪造的信息，并且该信息不在cookie中，开发者可以在http请求中以参数的形式加入一个随机产生的token，并且在服务器建立一个拦截器来验证这个token。如果请求中没有token或者token中内容不正确的话，表示可能是攻击者发动的攻击。</p>
+
+<p>例子：</p>
+
+<ol>
+<li><p>用户访问某个表单页面。</p></li>
+<li><p>服务端生成一个Token，放在用户的Session中，或者浏览器的Cookie中。</p></li>
+<li><p>在页面表单附带上Token参数。</p></li>
+<li><p>用户提交请求后， 服务端验证表单中的Token是否与用户Session（或Cookies）中的Token一致，一致为合法请求，不是则非法请求。</p></li>
+</ol>
+
+<p>这个Token的值必须是随机的，不可预测的。由于Token的存在，攻击者无法再构造一个带有合法Token的请求实施CSRF攻击。另外使用Token时应注意Token的保密性，尽量把敏感操作由GET改为POST，以form或AJAX形式提交，避免Token泄露。</p>
+
+<h2 id="http">在http头中自定义属性并验证</h2>
+
+<p>通过XHR这个类，一次性给所有该类请求加上csrftoken这个http头属性，并且把token值放入其中。</p>
+
+<h2 id="post-get">尽量使用POST，限制GET</h2>
+
+<p>GET接口太容易被拿来做CSRF攻击，看第一个示例就知道，只要构造一个img标签，而img标签又是不能过滤的数据。接口最好限制为POST使用，GET则无效，降低攻击风险。</p>
+
+<p>当然POST并不是万无一失，攻击者只要构造一个form就可以，但需要在第三方页面做，这样就增加暴露的可能性。</p>
+
+<h3 id="get">用GET方式攻击更简单</h3>
+
+<p><strong>如果不用用户点击</strong></p>
+
+<p>csrf.html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>require<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">data-main=</span><span class="s">"js/app.js"</span> <span class="na">src=</span><span class="s">"js/require.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>csrf demo<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    hello，这里什么也没有。
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"localhost：1521/ajax/addComment?postid=13&amp;content=我是来自get的评论"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+<p><strong>这里用户需要点击</strong></p>
+
+<p>csrf.html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>csrf demo<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+    hello，这里什么也没有。
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"localhost：1521/ajax/addComment?postid=13&amp;content=我是来自get的评论"</span><span class="nt">&gt;</span>点击这里有钱啦<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+<h3 id="post">用POST方式攻击</h3>
+
+<p>创建iframe, 在iframe中提交和跳转，由于iframe隐藏，所以看不到跳转页。</p>
+
+<p>用的是POST，需要第三方构建表单提交才可以</p>
+
+<p>csrf.html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;title&gt;</span>csrf demo<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    hello，这里什么也没有。
+    <span class="nt">&lt;script&gt;</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span>
+            <span class="err">`</span>
+<span class="err">                </span><span class="o">&lt;</span><span class="nx">form</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"commentForm"</span> <span class="nx">target</span><span class="o">=</span><span class="s2">"csrf"</span> <span class="nx">method</span><span class="o">=</span><span class="s2">"post"</span> <span class="nx">action</span><span class="o">=</span><span class="s2">"http://localhost:1521/post/addComment"</span><span class="o">&gt;</span>
+<span class="err">                    </span><span class="o">&lt;</span><span class="nx">input</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"postId"</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"hidden"</span> <span class="nx">value</span><span class="o">=</span><span class="s2">"1"</span><span class="o">&gt;</span>
+<span class="err">                    </span><span class="o">&lt;</span><span class="nx">textarea</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"content"</span><span class="o">&gt;</span><span class="err">来自</span><span class="nx">CSRF</span><span class="err">！</span><span class="o">&lt;</span><span class="sr">/textarea</span><span class="err">&gt;
+                </span><span class="o">&lt;</span><span class="sr">/form&gt;</span><span class="err">`
+</span>        <span class="p">);</span>
+
+        <span class="kd">var</span> <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'iframe'</span><span class="p">);</span>
+        <span class="nx">iframe</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'csrf'</span><span class="p">;</span>
+        <span class="nx">iframe</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s1">'none'</span><span class="p">;</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">iframe</span><span class="p">);</span>
+
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'[name=commentForm]'</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>
+        <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>在app.js初始化代码如下：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">require</span><span class="p">([</span><span class="s1">'app/d1'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">d1</span><span class="p">){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">d1</span><span class="p">);</span>
-<span class="p">})</span>
+<span class="nt">&lt;/html&gt;</span>
 </code></pre></div>
-<p><strong>a.简单的值对,直接一个对象</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d1.js</span>
-<span class="nx">define</span><span class="p">({</span>
-    <span class="na">color</span><span class="p">:</span> <span class="s2">"black"</span><span class="p">,</span>
-    <span class="na">size</span><span class="p">:</span> <span class="s2">"24px"</span>
-<span class="p">});</span>
-</code></pre></div>
-<p><strong>b.函数式定义</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d2.js</span>
-<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="na">color</span><span class="p">:</span> <span class="s2">"red"</span><span class="p">,</span>
-        <span class="na">size</span><span class="p">:</span> <span class="s2">"30px"</span>
-    <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
-<p><strong>c.存在依赖的函数式定义</strong></p>
+<h2 id="php-csrf">PHP-CSRF</h2>
 
-<p>例如d3.js 依赖a.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d3.js</span>
-<span class="nx">define</span><span class="p">([</span><span class="s1">'./a'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="na">color</span><span class="p">:</span> <span class="s2">"blue"</span><span class="p">,</span>
-        <span class="na">add</span><span class="p">:</span> <span class="nx">a</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">})</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//a.js</span>
-<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-    <span class="k">return</span><span class="p">{</span>
-        <span class="na">add</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
-            <span class="k">return</span> <span class="nx">a</span><span class="o">+</span><span class="nx">b</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">})</span>
-</code></pre></div>
-<p><strong>d.将模块定义为一个函数</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d4.js</span>
-<span class="nx">define</span><span class="p">([</span><span class="s1">'./a'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">){</span>
-    <span class="k">return</span> <span class="kd">function</span><span class="p">(){</span>
-        <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">})</span>
-</code></pre></div>
-<p><strong>e.定义一个命名模块</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d5.js</span>
- <span class="nx">define</span><span class="p">(</span><span class="s2">"myname"</span><span class="p">,[</span><span class="s1">'./a'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">))</span> <span class="p">{</span>
-            <span class="c1">//todo</span>
-       <span class="p">}</span>
-    <span class="p">);</span>
-</code></pre></div>
-<p><em>以上命名函数写法,移植需要重命名,不推荐使用</em></p>
-
-<p><strong>f.简单包装CommonJS来定义模块</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//d6.js</span>
-<span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">,</span><span class="nx">module</span><span class="p">){</span>
-
-    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./a'</span><span class="p">);</span>
-
-    <span class="nx">exports</span><span class="p">.</span><span class="nx">show</span> <span class="o">=</span>  <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
-<h1 id="requirejs">requireJS配置项</h1>
-
-<h2 id="baseurl">baseUrl ：</h2>
-
-<p>所有模块的查找根路径。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//app.js</span>
-<span class="nx">requirejs</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
-    <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'js/app'</span>
-<span class="p">});</span>
-
-<span class="nx">requirejs</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">,</span><span class="s1">'c'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">,</span><span class="nx">c</span><span class="p">){</span>
-
-<span class="p">});</span>
-</code></pre></div>
-<h2 id="paths">paths:</h2>
-
-<p>是映射那些不直接放在baseUrl指定的目录下的文件。设置paths的起始位置是相对于baseUrl的，除非该path设置是以”/”开头或含有URL协议(&#39;http://&#39;或者&#39;https://&#39;).</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">app</span><span class="p">.</span><span class="nx">js</span>
-<span class="nx">requirejs</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
-    <span class="na">baseUrl</span><span class="p">:</span> <span class="s1">'js/lib'</span><span class="p">,</span>
-    <span class="na">paths</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">myapp</span><span class="p">:</span> <span class="s1">'../app'</span>
-    <span class="p">}</span>
-<span class="p">});</span>
-
-<span class="nx">require</span><span class="p">([</span><span class="s1">'jquery'</span><span class="p">,</span><span class="s1">'myapp/b'</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s2">"#demo"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre></div>
-<h2 id="shim">shim:</h2>
-
-<p>为那些没有使用define()来声明依赖关系、设置模块的&quot;浏览器全局变量注入&quot;型脚本做依赖和导出配置。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
-<span class="err">　　　　</span><span class="na">shim</span><span class="p">:</span> <span class="p">{</span>
-
-<span class="err">　　　　　　</span><span class="s1">'underscore'</span><span class="p">:{</span>
-<span class="err">　　　　　　　　</span><span class="na">exports</span><span class="p">:</span> <span class="s1">'_'</span>
-<span class="err">　　　　　　</span><span class="p">},</span>
-<span class="err">　　　　　　</span><span class="s1">'backbone'</span><span class="p">:</span> <span class="p">{</span>
-<span class="err">　　　　　　　　</span><span class="na">deps</span><span class="p">:</span> <span class="p">[</span><span class="s1">'underscore'</span><span class="p">,</span> <span class="s1">'jquery'</span><span class="p">],</span>
-<span class="err">　　　　　　　　</span><span class="na">exports</span><span class="p">:</span> <span class="s1">'Backbone'</span>
-<span class="err">　　　　　　</span><span class="p">}</span>
-<span class="err">　　　　</span><span class="p">}</span>
-<span class="err">　　</span><span class="p">});</span>
-</code></pre></div>
-<h2 id="map">Map参数：</h2>
-
-<p>Map参数是用来解决同一个模块不同版本的问题<br><br>
-building...</p>
+<p>cookie samesite<br><br>
+HTTP referer头<br><br>
+token  </p>
 
 <h1 id="more">更多-more</h1>
 
 <ul>
-<li><a href="http://www.requirejs.cn/docs/api.html">http://www.requirejs.cn/docs/api.html</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2012/11/require_js.html">http://www.ruanyifeng.com/blog/2012/11/require_js.html</a></li>
-<li><a href="http://www.cnblogs.com/tugenhua0707/p/4067220.html">http://www.cnblogs.com/tugenhua0707/p/4067220.html</a></li>
+<li><a href="http://www.cnblogs.com/cxying93/p/6035031.html">cnblogs Web安全之CSRF攻击的防御措施</a></li>
+<li><a href="https://www.cnblogs.com/phpstudy2015-6/p/6771239.html">cnblogs CSRF攻击与防御</a></li>
 </ul>
   
 	</div>
@@ -426,7 +375,9 @@ building...</p>
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#requirejs">requirejs</a>
+  <a href="/tags/#面试题">面试题</a>
+  
+  <a href="/tags/#安全">安全</a>
   
   </div>
 
@@ -436,7 +387,7 @@ building...</p>
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/09/29/requirejs" data-title="requirejs初学 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2017/11/23/js-csrf" data-title="CSRF攻击原理及预防 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -448,21 +399,13 @@ building...</p>
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2016/09/22/react" title="react初学">
+ <a href="/js/2017/11/22/js-xss" title="XSS攻击原理及预防">
   <strong>上一篇：</strong><br/>
   <span>
-  react初学</span>
+  XSS攻击原理及预防</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/js/2016/09/30/seajs"  title="seajs初学">
- <strong>下一篇：</strong><br/> 
- <span>seajs初学
-</span>
-</a>
-</div>
 
 </nav>
 
