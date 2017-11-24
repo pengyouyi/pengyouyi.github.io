@@ -5,10 +5,542 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Thu, 23 Nov 2017 21:53:31 +0800</lastBuildDate>
-        <pubDate>Thu, 23 Nov 2017 21:53:31 +0800</pubDate>
+        <lastBuildDate>Fri, 24 Nov 2017 10:53:00 +0800</lastBuildDate>
+        <pubDate>Fri, 24 Nov 2017 10:53:00 +0800</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>前端Cookies问题、前端点击劫持问题、传输安全、密码安全、SQL注入</title>
+                <description>&lt;h1 id=&quot;cookies&quot;&gt;前端Cookies问题&lt;/h1&gt;
+
+&lt;h2 id=&quot;cookies&quot;&gt;Cookies特性&lt;/h2&gt;
+
+&lt;p&gt;前端数据存储&lt;br&gt;
+后端可以通过HTTP头设置&lt;br&gt;
+请求时通过HTTP头传给后端&lt;br&gt;
+前端可读写&lt;br&gt;
+遵守同源策略&lt;/p&gt;
+
+&lt;p&gt;前端读&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;doucment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;前端写&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;doucment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;userId = 2&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;cookies特性&lt;/strong&gt;&lt;br&gt;
+域名&lt;br&gt;&lt;br&gt;
+有效期&lt;br&gt;&lt;br&gt;
+路径&lt;br&gt;&lt;br&gt;
+http-only&lt;br&gt;&lt;br&gt;
+sucure  &lt;/p&gt;
+
+&lt;p&gt;cookie没有提供删除方法，删除是通过设置有效期为过去的时间。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toGMTString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// &quot;Mon, 28 Aug 2017 08:31:06 GMT&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'aaa = 1; expires=&quot;Mon, 28 Aug 2018 08:31:06 GMT&quot;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;expires 值应该使用 GMT 格式的时间&lt;/p&gt;
+
+&lt;h2 id=&quot;cookies&quot;&gt;Cookies作用&lt;/h2&gt;
+
+&lt;p&gt;存储个性化设置（用户选的皮肤、上次打开的菜单、上次停留在某个页面）&lt;br&gt;&lt;br&gt;
+存储未登录时用户唯一标识&lt;br&gt;&lt;br&gt;
+存储已登录用户的凭证&lt;br&gt;&lt;br&gt;
+存储其他业务数据  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cookies-登录用户凭证&lt;/strong&gt;&lt;br&gt;
+前端提交用户名和密码&lt;br&gt;&lt;br&gt;
+后端验证用户名和密码&lt;br&gt;&lt;br&gt;
+后端通过HTTP头设置用户凭证&lt;br&gt;&lt;br&gt;
+后续访问时后端先验证用户凭证  &lt;/p&gt;
+
+&lt;p&gt;用户ID&lt;br&gt;&lt;br&gt;
+用户ID + 签名（使用nodejs的crypto）&lt;br&gt;&lt;br&gt;
+SessionId(像一把钥匙，去开仓库再取到用户ID)&lt;br&gt;&lt;br&gt;
+token  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;crypt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{};&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'#dsfda'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;crypt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cryptUserId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;crypto&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'crypto'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sign&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;crypto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createHmac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sha256'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;sign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;digest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'hex'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;crypto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;后端验证前端传入的sign是否正确，如果篡改了用户ID，但是没法拿到算法，签名不变，与后端重新算出来的sign不匹配，验证不通过。&lt;/p&gt;
+
+&lt;h2 id=&quot;cookies-xss-csrf&quot;&gt;Cookies和XSS CSRF的关系与案例&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Cookies和XSS的关系&lt;/strong&gt;&lt;br&gt;
+XSS可能偷取Cookies&lt;br&gt;&lt;br&gt;
+http-only的Cookie不会被偷  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cookies和 CSRF的关系&lt;/strong&gt;&lt;br&gt;
+CSRF利用了用户Cookies&lt;br&gt;&lt;br&gt;
+攻击站点无法读写Cookies&lt;br&gt;&lt;br&gt;
+最好能阻止第三方使用Cookies  &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;cookies安全案例&lt;/em&gt;&lt;br&gt;
+某学校教务系统使用了开源CMS&lt;br&gt;&lt;br&gt;
+该CMS使用username作为唯一用户标识&lt;br&gt;&lt;br&gt;
+该CMS文章作者暴露了username&lt;br&gt;&lt;br&gt;
+可使用任意username登录后台  &lt;/p&gt;
+
+&lt;p&gt;某论坛使用了某开源ASP BBS程序&lt;br&gt;&lt;br&gt;
+该ASP程序使用用户ID作为用户标识&lt;br&gt;&lt;br&gt;
+可伪造任意用户登录  &lt;/p&gt;
+
+&lt;h2 id=&quot;cookies&quot;&gt;Cookies安全策略&lt;/h2&gt;
+
+&lt;p&gt;签名防篡改&lt;br&gt;&lt;br&gt;
+私有变换（加密）&lt;br&gt;&lt;br&gt;
+http-only(防止XSS)&lt;br&gt;&lt;br&gt;
+secure&lt;br&gt;&lt;br&gt;
+same-site  &lt;/p&gt;
+
+&lt;p&gt;加密&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;crypto&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'crypto'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'78&amp;amp;*fdsaf^*sfd'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cipher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;crypto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createCipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'des'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'hello world'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'utf8'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hex'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;final&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'hex'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decipher&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;crypto&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createDecipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'des'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;originalText&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hex'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'utf8'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;originalText&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decipher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kr&quot;&gt;final&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'utf8'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;originalText&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;click-hijacking&quot;&gt;前端点击劫持问题-Click hijacking&lt;/h1&gt;
+
+&lt;h2 id=&quot;demo&quot;&gt;点击劫持演示-demo&lt;/h2&gt;
+
+&lt;p&gt;在攻击网页上，通过iframe引入被攻击网页,并设置被攻击的iframe透明度为0，用户以为操作的是攻击网页，实际上是操作（点击）了被攻击网页iframe，这样攻击就产生了。&lt;/p&gt;
+
+&lt;p&gt;一句话，被攻击的网页被内嵌了。&lt;/p&gt;
+
+&lt;p&gt;用户亲手操作&lt;br&gt;&lt;br&gt;
+用户不知情&lt;br&gt;&lt;br&gt;
+盗取用户资金（转账、消费）&lt;br&gt;&lt;br&gt;
+获取用户敏感信息  &lt;/p&gt;
+
+&lt;p&gt;clickhijack.html&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;csrf demo&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;background:url(clickhijack.png) no-repeat&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;iframe&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;opacity:.1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://localhost:1521/post/1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;width=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;800&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;height=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;600&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;click-hijacking-defense&quot;&gt;点击劫持防御-Click hijacking defense&lt;/h2&gt;
+
+&lt;p&gt;javascript 禁止内嵌&lt;br&gt;&lt;br&gt;
+X-FRAME-OPTIONS 禁止内嵌&lt;br&gt;&lt;br&gt;
+其他辅助手段  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;javascript 禁止内嵌&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;if (top.location !== window.location) {
+  top.location = window.location;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;js不能100%防御成功&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;&amp;lt;body style=&quot;background:url(clickhijack.png) no-repeat&quot;&amp;gt;  &amp;lt;iframe style=&quot;opacity:.1&quot; src=&quot;http://localhost:1521/post/1&quot; width=&quot;800&quot; height=&quot;600&quot; sandbox=&quot;allow-forms&quot;&amp;gt;&amp;lt;/iframe&amp;gt; &amp;lt;/body&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;X-FRAME-OPTIONS 禁止内嵌&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;ctx.set('X-Frame-Options', 'DENY');
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;推荐使用的手段&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;其他辅助手段&lt;/strong&gt;&lt;br&gt;
+验证码&lt;/p&gt;
+
+&lt;h1 id=&quot;transmission-security&quot;&gt;传输安全-Transmission security&lt;/h1&gt;
+
+&lt;h2 id=&quot;http&quot;&gt;HTTP窃听&lt;/h2&gt;
+
+&lt;p&gt;HTTP传输窃听&lt;/p&gt;
+
+&lt;p&gt;浏览器 &amp;lt; - &amp;gt; 代理服务器 &amp;lt; - &amp;gt; 链路 &amp;lt; - &amp;gt; 服务器&lt;/p&gt;
+
+&lt;p&gt;查看访问服务器中间经过哪些？&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;traceroute&lt;/span&gt;  &lt;span class=&quot;nx&quot;&gt;pengyouyi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;site&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;traceroute&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;localhost&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;anyproxy安装&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;npm install -g anyproxy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;启动anyproxy&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;anyproxy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;chrome浏览器插件&lt;br&gt;&lt;br&gt;
+Proxy SwitchyOmega&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;配置&lt;/em&gt;&lt;br&gt;
+代理协议：HTTP&lt;br&gt;&lt;br&gt;
+代理服务器：localhost&lt;br&gt;&lt;br&gt;
+代理端口：8001&lt;br&gt;&lt;br&gt;
+不代理的地址列表：空&lt;br&gt;&lt;br&gt;
+然后应用选项  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP窃听危害&lt;/strong&gt;&lt;br&gt;
+窃听用户密码&lt;br&gt;&lt;br&gt;
+窃听传输敏感信息&lt;br&gt;&lt;br&gt;
+非法获取个人资料  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTP篡改危害&lt;/strong&gt;&lt;br&gt;
+插入广告&lt;br&gt;&lt;br&gt;
+重定向网站&lt;br&gt;&lt;br&gt;
+无法防御的XSS和CSRF攻击  &lt;/p&gt;
+
+&lt;h2 id=&quot;https&quot;&gt;HTTPS原理&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;  | -----------------------------  |
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;浏览器 |&amp;lt; - &amp;gt; 代理服务器 &amp;lt; - &amp;gt; 链路 &amp;lt; - &amp;gt; | 服务器&lt;br&gt;
+      | ------------------------------ |&lt;/p&gt;
+
+&lt;p&gt;TLS(SSL)加密&lt;br&gt;
+Transport Layer Security，传输层安全协议&lt;br&gt;
+Secure Socket Layer，安全套接字层&lt;/p&gt;
+
+&lt;h2 id=&quot;https&quot;&gt;HTTPS部署&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.sslforfree.com/&quot;&gt;https://www.sslforfree.com/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;password-security&quot;&gt;密码安全-Password security&lt;/h1&gt;
+
+&lt;p&gt;密码的作用&lt;br&gt;&lt;br&gt;
+密码的存储&lt;br&gt;&lt;br&gt;
+密码的传输&lt;br&gt;&lt;br&gt;
+密码的替代方案&lt;br&gt;&lt;br&gt;
+生物特征密码的问题  &lt;/p&gt;
+
+&lt;h2 id=&quot;&gt;密码的作用&lt;/h2&gt;
+
+&lt;p&gt;证明你是你&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;密码 - 比对&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;存储的密码 &amp;lt;-对比-&amp;gt; 输入的密码&lt;/p&gt;
+
+&lt;h2 id=&quot;&gt;密码的存储&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;密码 - 泄露渠道&lt;/strong&gt;&lt;br&gt;
+数据库被偷&lt;br&gt;&lt;br&gt;
+服务器被入侵&lt;br&gt;&lt;br&gt;
+通讯被窃听&lt;br&gt;&lt;br&gt;
+内部人员泄露数据&lt;br&gt;&lt;br&gt;
+其他网站（撞库）  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;密码 - 存储&lt;/strong&gt;&lt;br&gt;
+严禁明文存储（防泄露）&lt;br&gt;&lt;br&gt;
+单向变换（防泄露）&lt;br&gt;&lt;br&gt;
+变换复杂度要求（防猜解）&lt;br&gt;&lt;br&gt;
+密码复杂度要求（防猜解）&lt;br&gt;&lt;br&gt;
+加盐（防猜解）  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;密码 - 哈希算法&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;明文 - 密文  一一对应&lt;br&gt;&lt;br&gt;
+雪崩效应&lt;br&gt;&lt;br&gt;
+密文 - 明文  无法反推&lt;br&gt;&lt;br&gt;
+密文固定长度&lt;br&gt;&lt;br&gt;
+常见哈希算法： md5、sha1、sha256  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;密码 - 单向变换彩虹表&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;md5(明文) = 密文&lt;br&gt;&lt;br&gt;
+md5(md5(明文)) = 密文&lt;br&gt;&lt;br&gt;
+md5(sha1(明文)) = 密文&lt;br&gt;&lt;br&gt;
+md5(sha256(sha1(明文))) = 密文  &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;密码 - 帮助用户加强复杂度&lt;/em&gt;&lt;/p&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;ID&lt;/th&gt;
+&lt;th&gt;原始密码&lt;/th&gt;
+&lt;th&gt;盐&lt;/th&gt;
+&lt;th&gt;变换后密码&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;123456&lt;/td&gt;
+&lt;td&gt;A7D3E9...&lt;/td&gt;
+&lt;td&gt;d8ds3d...&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;p&gt;md5(sha1(md5(ID + adf + 原始密码 + f8s + 盐 + fd93)))&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;密码 - 变换次数越多越安全&lt;/em&gt;&lt;br&gt;
+加密成本几乎不变（生成密码时速度慢一些）&lt;br&gt;&lt;br&gt;
+彩虹表失效（数量太大，无法建立通用性）&lt;br&gt;&lt;br&gt;
+解密成本增大N倍  &lt;/p&gt;
+
+&lt;h2 id=&quot;&gt;密码加固&lt;/h2&gt;
+
+&lt;p&gt;如果用户密码没有加盐，我们自动加盐（时间戳）然后存储更新老密码，临时存储用户原始密码和盐，只需要比对用户传来的盐和原始密码计算出新密码与数据库里存储的更新密码比较。&lt;/p&gt;
+
+&lt;p&gt;不用比对明文密码，即使数据库泄露，攻击者也不知道原密码。&lt;/p&gt;
+
+&lt;h2 id=&quot;&gt;密码传输安全&lt;/h2&gt;
+
+&lt;p&gt;HTTPS传输&lt;br&gt;&lt;br&gt;
+频率限制&lt;br&gt;&lt;br&gt;
+前端加密意义有限  &lt;/p&gt;
+
+&lt;p&gt;前端加密后传输，后端也需要用同样的算法加密比对。&lt;/p&gt;
+
+&lt;h2 id=&quot;&gt;生物密码&lt;/h2&gt;
+
+&lt;p&gt;指纹（唇纹）&lt;br&gt;&lt;br&gt;
+声纹&lt;br&gt;&lt;br&gt;
+虹膜&lt;br&gt;&lt;br&gt;
+人脸  &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;密码 - 生物特征密码&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;私密性 - 容易泄露&lt;br&gt;&lt;br&gt;
+安全性 - 碰触&lt;br&gt;&lt;br&gt;
+唯一性 - 终身唯一 无法修改  &lt;/p&gt;
+
+&lt;h1 id=&quot;injection-problem&quot;&gt;接入层注入问题- injection problem&lt;/h1&gt;
+
+&lt;h2 id=&quot;sql&quot;&gt;关系型数据库和SQL介绍&lt;/h2&gt;
+
+&lt;p&gt;存放结构化数据&lt;br&gt;&lt;br&gt;
+可高效操作大量数据&lt;br&gt;&lt;br&gt;
+方便处理数据之间的关联关系  &lt;/p&gt;
+
+&lt;p&gt;常见：access、sqlite、MySQL、MySQL server&lt;/p&gt;
+
+&lt;p&gt;SQL语言&lt;br&gt;&lt;br&gt;
+select * from table where id = 1&lt;br&gt;&lt;br&gt;
+标准化类似自然语言的描述性语言&lt;br&gt;&lt;br&gt;
+用于关系型数据库  &lt;/p&gt;
+
+&lt;h2 id=&quot;sql&quot;&gt;SQL注入前置知识&lt;/h2&gt;
+
+&lt;p&gt;1&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;用户传入 &lt;code&gt;1 or 1 = 1&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;table&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;2&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'${data.username}'&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'${data.password}'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;用户传入 &lt;code&gt;1&amp;#39; or &amp;#39;1&amp;#39; = &amp;#39;1&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'${data.username}'&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1'&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'1'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;sql&quot;&gt;SQL注入演示和危害&lt;/h2&gt;
+
+&lt;p&gt;猜解密码&lt;br&gt;&lt;br&gt;
+获取数据&lt;br&gt;&lt;br&gt;
+删库删表&lt;br&gt;&lt;br&gt;
+拖库  &lt;/p&gt;
+
+&lt;h2 id=&quot;sql&quot;&gt;SQL注入防御&lt;/h2&gt;
+
+&lt;p&gt;关闭错误输出&lt;br&gt;&lt;br&gt;
+检查数据类型&lt;br&gt;&lt;br&gt;
+对数据进行转义&lt;br&gt;&lt;br&gt;
+使用参数化查询（MySQL2最根本、直有效、简单的方法）&lt;br&gt;&lt;br&gt;
+使用ORM（对象关系映射）  &lt;/p&gt;
+
+&lt;h2 id=&quot;nosql&quot;&gt;NoSQL注入和防御&lt;/h2&gt;
+
+&lt;p&gt;检查数据类型&lt;br&gt;&lt;br&gt;
+类型转换&lt;br&gt;&lt;br&gt;
+写完整条件  &lt;/p&gt;
+
+&lt;h1 id=&quot;&gt;接入层上传问题&lt;/h1&gt;
+
+&lt;h2 id=&quot;upload&quot;&gt;上传漏洞简介-upload&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;上传问题&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;上传文件&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;再次访问上传的文件&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;上传的文件被当成程序解析&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;&gt;上传问题防御&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;限制上传后缀&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;文件类型检查&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;文件内容检查&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;程序输出（不让用户输出的能直接访问）&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;权限控制 - 可写可执行互斥&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h1 id=&quot;&gt;社会工程学和信息泄露&lt;/h1&gt;
+
+&lt;h2 id=&quot;&gt;信息泄露和社会工程学&lt;/h2&gt;
+
+&lt;p&gt;泄露系统敏感信息&lt;br&gt;&lt;br&gt;
+泄露用户敏感信息&lt;br&gt;&lt;br&gt;
+泄露用户密码  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;信息泄露的途径&lt;/strong&gt;&lt;br&gt;
+错误信息失控&lt;br&gt;&lt;br&gt;
+SQL注入&lt;br&gt;&lt;br&gt;
+水平权限控制不当  &lt;/p&gt;
+
+&lt;h1 id=&quot;&gt;其他安全问题&lt;/h1&gt;
+
+&lt;h2 id=&quot;dos&quot;&gt; DOS攻击&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;其他安全问题&lt;/strong&gt;&lt;br&gt;
+拒绝服务DOS&lt;br&gt;&lt;br&gt;
+重放攻击  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;拒绝服务攻击DOS&lt;/strong&gt;&lt;br&gt;
+模拟正常用户&lt;br&gt;&lt;br&gt;
+大量占用服务器&lt;br&gt;&lt;br&gt;
+无法服务正常用户  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;DOS类型&lt;/strong&gt;&lt;br&gt;
+TCP半连接&lt;br&gt;&lt;br&gt;
+HTTP连接&lt;br&gt;&lt;br&gt;
+DNS  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;大规模分布式拒绝服务攻击DDOS&lt;/strong&gt;&lt;br&gt;
+流量可达几十到上百G&lt;br&gt;&lt;br&gt;
+分布式（肉鸡、代理）&lt;br&gt;&lt;br&gt;
+极难防御  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;DOS攻击案例&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;游戏私服互相DDOS&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;换目标，攻击DNS服务器&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;DNS服务器机器下线&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;数十万网站DNS解析瘫痪&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;暴风影音后台疯狂请求解析&lt;br&gt;&lt;/li&gt;
+&lt;li&gt;各地local DNS瘫痪 无法上网&lt;br&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;DOS攻击防御&lt;/strong&gt;&lt;br&gt;
+防火墙&lt;br&gt;&lt;br&gt;
+交换机、路由器&lt;br&gt;&lt;br&gt;
+流量清洗&lt;br&gt;&lt;br&gt;
+高防IP  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;DOS攻击预防&lt;/strong&gt;&lt;br&gt;
+避免重逻辑业务&lt;br&gt;&lt;br&gt;
+快速失败快速返回&lt;br&gt;&lt;br&gt;
+防雪崩机制&lt;br&gt;&lt;br&gt;
+有损服务&lt;br&gt;&lt;br&gt;
+CDN  &lt;/p&gt;
+
+&lt;h2 id=&quot;replay-attack&quot;&gt;重放攻击-Replay attack&lt;/h2&gt;
+
+&lt;p&gt;请求被窃听或记录&lt;br&gt;&lt;br&gt;
+再次发起相同的请求&lt;br&gt;&lt;br&gt;
+产生意外的结果  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;重放攻击后果&lt;/strong&gt;&lt;br&gt;
+用户被多次消费&lt;br&gt;&lt;br&gt;
+用户登录态被盗取&lt;br&gt;&lt;br&gt;
+多次抽奖  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;重放攻击防御&lt;/strong&gt;&lt;br&gt;
+加密（HTTPS）&lt;br&gt;&lt;br&gt;
+时间戳&lt;br&gt;&lt;br&gt;
+token（session）&lt;br&gt;&lt;br&gt;
+nonce&lt;br&gt;&lt;br&gt;
+签名  &lt;/p&gt;
+
+&lt;h1 id=&quot;course-summary&quot;&gt;课程总结-Course summary&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;请简述XSS的原理&lt;/strong&gt;&lt;br&gt;
+用户的数据（文章、评论、浏览器访问的参数）被当成脚本在页面中执行了&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;请简述XSS的防御方法&lt;/strong&gt;&lt;br&gt;
+浏览器自动拦截&lt;br&gt;&lt;br&gt;
+转义&lt;br&gt;&lt;br&gt;
+白名单过滤&lt;br&gt;&lt;br&gt;
+csp  &lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;XSS防御需要注意的点&lt;/strong&gt;&lt;br&gt;
+场景和对应的防御方法&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CSRF原理是什么&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CSRF的危害是什么&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CSRF如何防御&lt;/strong&gt;&lt;br&gt;
+验证码&lt;br&gt;&lt;br&gt;
+token&lt;br&gt;&lt;br&gt;
+refer&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cookie的作用&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cookie和session的关系&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cookie的特性&lt;/strong&gt;&lt;br&gt;
+容量小&lt;br&gt;&lt;br&gt;
+不能跨域&lt;br&gt;&lt;br&gt;
+path不同，Cookie不同&lt;br&gt;&lt;br&gt;
+有限期&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;如何删除一个Cookie值&lt;/strong&gt;&lt;br&gt;
+设置Cookie过期时间为一个过去是时间&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTPS是如何保证数据不被窃听的&lt;/strong&gt;&lt;br&gt;
+数据加密&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;HTTPS是如何保证不被中间人攻击&lt;/strong&gt;&lt;br&gt;
+证书CA&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;部署HTTPS的步骤&lt;/strong&gt;&lt;br&gt;
+保证所有资源都可以通过HTTPS访问&lt;br&gt;&lt;br&gt;
+找CA生成证书&lt;br&gt;&lt;br&gt;
+部署到服务器上&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SQL注入的原理是什么&lt;/strong&gt;&lt;br&gt;
+用户查询条件本应该为数据，数据变成查询语句本身的一部分，查询语句语义被改变，从而产生意外结果。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;SQL注入有哪些危害&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Node.js中如何防止SQL注入&lt;/strong&gt;&lt;br&gt;
+转义&lt;br&gt;&lt;br&gt;
+数据关系模型&lt;br&gt;&lt;br&gt;
+参数化查询，两步骤执行&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PHP中如何防止SQL注入&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;文件上传漏洞的原理&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;如何防范文件上传漏洞&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;如何设计用户密码存储&lt;/strong&gt;&lt;br&gt;
+不用明文存储&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;如何设计登录过程&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;如何保证用户密码不被窃听&lt;/strong&gt;&lt;/p&gt;
+</description>
+                <link>/js/2017/11/24/js-cookie</link>
+                <guid>/js/2017/11/24/js-cookie</guid>
+                <pubDate>Fri, 24 Nov 2017 00:00:00 +0800</pubDate>
+        </item>
 
         <item>
                 <title>CSRF攻击原理及预防</title>
@@ -4100,172 +4632,6 @@ HTTP协议采用了请求/响应模型。客户端向服务器发送一个请求
                 <link>/http/2017/10/30/http-URI-URL</link>
                 <guid>/http/2017/10/30/http-URI-URL</guid>
                 <pubDate>Mon, 30 Oct 2017 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>网络基础TCP/IP</title>
-                <description>&lt;h1 id=&quot;tcp-ip&quot;&gt;网络基础TCP/IP&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;HTTP和TCP/IP协议族的关系:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;通常使用的网络(包括互联网)是在TCP/IP协议族的基础上运作的。HTTP属于它内部的一个子集&lt;/p&gt;
-
-&lt;h2 id=&quot;tcp-ip&quot;&gt;TCP/IP协议族&lt;/h2&gt;
-
-&lt;p&gt;计算机与网络设备要相互通信，双方就必须基于相同的方法。&lt;br&gt;&lt;br&gt;
-比如，如何探测到通信目标、由哪一边先发起通信、使用哪种语言进行通信、怎样结束通信等规则都需要事先确定。&lt;br&gt;&lt;br&gt;
-不同的硬件、操作系统之间的通信，所有一切都需要一种规则。&lt;br&gt;&lt;br&gt;
-而我们把这种规则称为&lt;code&gt;协议&lt;/code&gt;(protocol)。  &lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-1.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;p&gt;协议中存在各式各样的内容。从电缆的规格到IP地址的选定方法、寻找异地用户的方法、双方建立通信的顺序，以及Web页面显示需要处理的步骤等等。&lt;/p&gt;
-
-&lt;p&gt;像这样把与互联网相关的协议集合起来总称为&lt;code&gt;TCP/IP&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;tcp-ip&quot;&gt;TCP/IP分层&lt;/h2&gt;
-
-&lt;p&gt;TCP/IP协议层分为4层：应用层、传输层、网络层、数据链路层。&lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-2.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;1-application-layer&quot;&gt;1. 应用层-application layer&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;应用层决定了向用户提供应用服务时通信的活动。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;TCP/IP协议族内预存了各类通用的应用服务,包括：&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;FTP (File Transfer Protocol) 文件传输协议&lt;/li&gt;
-&lt;li&gt;DNS (Domain Name System) 域名系统服务&lt;/li&gt;
-&lt;li&gt;HTTP 协议&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;hr&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;2-transport-layer&quot;&gt;2. 传输层-transport layer&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;传输层提供处于网络连接中的两台计算机之间的数据传输。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;传输层上两个性质不同的协议&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;TCP (Transmission Control Protocol)，传输控制协议&lt;/li&gt;
-&lt;li&gt;UDP (User Data Protocol)，用户数据报协议&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;hr&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3-network-layer&quot;&gt;3. 网络层（又名网络互联层）- Network layer&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;网络层用来处理网络上流动的数据包。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;数据包是网络传输的最小数据单位。&lt;br&gt;&lt;br&gt;
-该层规定了通过怎样的路径（传输路径）到达对方计算机，并把数据包送给对方。&lt;/p&gt;
-
-&lt;p&gt;&lt;hr&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;4-link-layer&quot;&gt;4. 链路层（数据链路层，网络接口层）- link layer&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;链路层用来处理连接网络的硬件部分。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;包括控制操作系统、硬件的设备驱动、NIC（Network Interface Card，网卡）、光纤，以及连接器等一切传输媒介。&lt;/p&gt;
-
-&lt;p&gt;&lt;hr&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;TCP/IP层次化的好处：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;改变只需把变动的层替换掉，不用整个替换；设计也变简单了。&lt;/p&gt;
-
-&lt;h2 id=&quot;tcp-ip&quot;&gt;TCP/IP通信传输流&lt;/h2&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-3.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;http-ip-tcp-dns&quot;&gt;与HTTP关系密切的协议：IP、TCP、DNS&lt;/h1&gt;
-
-&lt;h2 id=&quot;ip&quot;&gt;负责传输的IP协议&lt;/h2&gt;
-
-&lt;p&gt;IP（Internet Protocol）国际协议位于网络层。&lt;/p&gt;
-
-&lt;p&gt;区别“IP”和“IP地址”：“IP”其实是一种协议的名称。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;IP协议的作用就是把各种数据包传送给对方。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;IP地址指明了节点被分配到的地址，IP地址可变换&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;MAC地址(Media Access Control Address)是指网卡所属的固定地址，MAC地址基本不会更改&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;使用ARP协议凭借MAC地址通信&lt;/p&gt;
-
-&lt;p&gt;ARP（Address Resolution Protocol）是一种用来解析地址的协议，根据通信方的IP地址就可以反查出对应的MAC地址。&lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-4.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;tcp&quot;&gt;确保可靠性的TCP协议&lt;/h2&gt;
-
-&lt;p&gt;TCP位于传输层，提供可靠的字节流服务。&lt;/p&gt;
-
-&lt;p&gt;字节流服务（Byte Stream Service）是指，为了方便传输，将大块数据分隔成以报文段(segment)为单位的数据包进行管理。&lt;br&gt;
-可靠的传输服务是指，能够把数据准确可靠地传给对方。&lt;/p&gt;
-
-&lt;p&gt;TCP协议为了更容易传送大数据才把数据分隔，而TCP协议能够确认数据最终是否送达到对方。&lt;/p&gt;
-
-&lt;h3 id=&quot;tcp&quot;&gt;TCP三次握手&lt;/h3&gt;
-
-&lt;p&gt;为了准确无误的将数据送达目标处，TCP协议采用了&lt;code&gt;三次握手策略&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;用TCP协议把数据包送出去后，TCP不会对传送后的情况置之不理，它会向对方确认是否成功送达。&lt;/p&gt;
-
-&lt;p&gt;握手过程中使用了TCP的标志(flag) - SYN(synchronize) 和 ACK(acknowledgement)。&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;发送端首先发送一个带SYN标志的数据包给对方。&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;接收端收到后，回传一个带SYN/ACK 标志的数据包以表示传达确认信息。&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;最后，发送端再回传一个带ACK标志的数据包，代表“握手”结束。&lt;br&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-5.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;p&gt;TCP为HTTP提供了一条&lt;code&gt;可靠的比特传输管道&lt;/code&gt;,TCP会按顺序、无差错的传递数据&lt;/p&gt;
-
-&lt;h2 id=&quot;dns&quot;&gt;负责域名解析的DNS服务&lt;/h2&gt;
-
-&lt;p&gt;DNS(Domain Name System)服务是和HTTP协议一样位于应用层的协议。&lt;/p&gt;
-
-&lt;p&gt;DNS协议提供通过域名查找IP地址，或逆向从IP地址反查域名的服务&lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-6.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;h1 id=&quot;ip&quot;&gt;连接、IP地址及端口号&lt;/h1&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-7.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Web浏览器通过TCP连接与Web服务器进行交互的步骤&lt;/p&gt;
-
-&lt;h1 id=&quot;http&quot;&gt;各种协议与HTTP协议的关系&lt;/h1&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/10-28-8.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-</description>
-                <link>/http/2017/10/28/http-tcp-ip</link>
-                <guid>/http/2017/10/28/http-tcp-ip</guid>
-                <pubDate>Sat, 28 Oct 2017 00:00:00 +0800</pubDate>
         </item>
 
 

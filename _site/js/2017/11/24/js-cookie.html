@@ -1,0 +1,1253 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+    
+    
+    
+    
+    <title>前端Cookies问题、前端点击劫持问题、传输安全、密码安全、SQL注入 | 彭友谊的博客</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="pengyouyi">
+    
+
+    
+    <!--<%- open_graph({twitter_id: theme.author.twitter, google_plus: theme.author.google_plus}) %>-->
+
+    <meta name="description" content="page.description">
+    
+    <meta property="og:type" content="article">
+    
+    <meta property="og:title" content="前端Cookies问题、前端点击劫持问题、传输安全、密码安全、SQL注入">
+    <meta property="og:url" content="/js/2017/11/24/js-cookie">
+    <meta property="og:site_name" content="彭友谊的博客">
+    <meta property="og:description" content="前端Cookies问题、前端点击劫持问题、传输安全、密码安全、SQL注入">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="前端Cookies问题、前端点击劫持问题、传输安全、密码安全、SQL注入">
+    <meta name="twitter:description" content="page.description">
+    <meta name="twitter:creator" content="@">
+
+  <!-- <meta name="baidu-site-verification" content="omJRdVnwTK" /> -->
+  <meta name="baidu-site-verification" content="BCTXxB6hux" />
+
+    <link rel="publisher" href="">
+
+    
+    <link rel="alternative" href="/atom.xml" title="彭友谊的博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/assets/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/assets/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/assets/img/jacman.jpg">
+    
+
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/highlight.css" type="text/css">
+</head>
+
+<!--  flagcounter   -->
+
+<!--<a href="http://info.flagcounter.com/Q6yu"><img src="http://s10.flagcounter.com/count2/Q6yu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>-->
+
+
+
+<!--百度站内搜索开始
+<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=6765244687647673409' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+
+
+<div id="bdcs-frame-box"></div>
+<script type="text/javascript">
+  var bdcsFrameSid="6765244687647673409";
+  var bdcsFrameWidth = 552;
+  var bdcsFrameWt = 1;
+  var bdcsFrameHt = 1;
+  var bdcsFrameResultNum = 10;
+  var bdcsFrameBgColor = "#ffffff";
+</script>
+<script type="text/javascript" src="http://zhannei.baidu.com/static/js/iframe.js"></script>
+
+百度站内搜索结束-->
+
+<!--百度站内搜索开始  彭友谊好好 - 18233560490  -->
+<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=9872709389462059831' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+<!--百度站内搜索结束  http://zn.baidu.com/cse/searchbox/index?sid=9872709389462059831  -->
+
+
+<!-- target=blank  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    //为超链接加上target='_blank'属性
+    $('a[href^="http"]').each(function() {
+      $(this).attr('target', '_blank');
+    });
+  });
+</script>
+
+  <body>
+    <header>
+        <div>
+		    
+			<div id="imglogo">
+				<a href="/"><img src="/assets/img/logo.png" alt="彭友谊的博客" title="彭友谊的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="彭友谊的博客">彭友谊的博客</a></h1>
+				<h2 class="blog-motto">努力做好一名前端攻城狮</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="menu">
+			</a></div>
+	<!-----  flagcounter   ----->
+	<!--<a href="http://info.flagcounter.com/Q6yu" target="_blank" style="position: absolute;right: 0;"><img src="http://s10.flagcounter.com/count2/Q6yu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>-->
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<!-- <form class="search" action="http://pengyouyi.site" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 9872709389462059831 >
+							<input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form> -->
+					
+					</li>
+				</ul>
+			</nav>	
+</div>
+
+
+
+
+
+    </header>
+    <div id="container">
+      
+
+
+<div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+	<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/js/2017/11/24/js-cookie" title="前端Cookies问题、前端点击劫持问题、传输安全、密码安全、SQL注入" itemprop="url">前端Cookies问题、前端点击劫持问题、传输安全、密码安全、SQL注入</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-11-24 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-11-24</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article toc-content">
+		
+			<!--<%- toc(item.content) %>-->
+		
+		</div>
+		
+		<h1 id="cookies">前端Cookies问题</h1>
+
+<h2 id="cookies">Cookies特性</h2>
+
+<p>前端数据存储<br>
+后端可以通过HTTP头设置<br>
+请求时通过HTTP头传给后端<br>
+前端可读写<br>
+遵守同源策略</p>
+
+<p>前端读</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">doucment</span><span class="p">.</span><span class="nx">cookie</span>
+</code></pre></div>
+<p>前端写</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">doucment</span><span class="p">.</span><span class="nx">cookie</span><span class="o">=</span><span class="s2">"userId = 2"</span>
+</code></pre></div>
+<p><strong>cookies特性</strong><br>
+域名<br><br>
+有效期<br><br>
+路径<br><br>
+http-only<br><br>
+sucure  </p>
+
+<p>cookie没有提供删除方法，删除是通过设置有效期为过去的时间。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="nx">now</span><span class="p">.</span><span class="nx">toGMTString</span><span class="p">();</span>
+<span class="c1">// "Mon, 28 Aug 2017 08:31:06 GMT"</span>
+
+<span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="s1">'aaa = 1; expires="Mon, 28 Aug 2018 08:31:06 GMT"'</span>
+</code></pre></div>
+<p>expires 值应该使用 GMT 格式的时间</p>
+
+<h2 id="cookies">Cookies作用</h2>
+
+<p>存储个性化设置（用户选的皮肤、上次打开的菜单、上次停留在某个页面）<br><br>
+存储未登录时用户唯一标识<br><br>
+存储已登录用户的凭证<br><br>
+存储其他业务数据  </p>
+
+<p><strong>Cookies-登录用户凭证</strong><br>
+前端提交用户名和密码<br><br>
+后端验证用户名和密码<br><br>
+后端通过HTTP头设置用户凭证<br><br>
+后续访问时后端先验证用户凭证  </p>
+
+<p>用户ID<br><br>
+用户ID + 签名（使用nodejs的crypto）<br><br>
+SessionId(像一把钥匙，去开仓库再取到用户ID)<br><br>
+token  </p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">crypt</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kr">const</span> <span class="nx">KEY</span> <span class="o">=</span> <span class="s1">'#dsfda'</span><span class="p">;</span>
+
+<span class="nx">crypt</span><span class="p">.</span><span class="nx">cryptUserId</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">sign</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createHmac</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">,</span> <span class="nx">KEY</span><span class="p">);</span>
+  <span class="nx">sign</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">userId</span> <span class="o">+</span> <span class="s1">''</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">sign</span><span class="p">.</span><span class="nx">digest</span><span class="p">(</span><span class="s1">'hex'</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">;</span>
+</code></pre></div>
+<p>后端验证前端传入的sign是否正确，如果篡改了用户ID，但是没法拿到算法，签名不变，与后端重新算出来的sign不匹配，验证不通过。</p>
+
+<h2 id="cookies-xss-csrf">Cookies和XSS CSRF的关系与案例</h2>
+
+<p><strong>Cookies和XSS的关系</strong><br>
+XSS可能偷取Cookies<br><br>
+http-only的Cookie不会被偷  </p>
+
+<p><strong>Cookies和 CSRF的关系</strong><br>
+CSRF利用了用户Cookies<br><br>
+攻击站点无法读写Cookies<br><br>
+最好能阻止第三方使用Cookies  </p>
+
+<p><em>cookies安全案例</em><br>
+某学校教务系统使用了开源CMS<br><br>
+该CMS使用username作为唯一用户标识<br><br>
+该CMS文章作者暴露了username<br><br>
+可使用任意username登录后台  </p>
+
+<p>某论坛使用了某开源ASP BBS程序<br><br>
+该ASP程序使用用户ID作为用户标识<br><br>
+可伪造任意用户登录  </p>
+
+<h2 id="cookies">Cookies安全策略</h2>
+
+<p>签名防篡改<br><br>
+私有变换（加密）<br><br>
+http-only(防止XSS)<br><br>
+secure<br><br>
+same-site  </p>
+
+<p>加密</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">KEY</span> <span class="o">=</span> <span class="s1">'78&amp;*fdsaf^*sfd'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">cipher</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createCipher</span><span class="p">(</span><span class="s1">'des'</span><span class="p">,</span> <span class="nx">KEY</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">cipher</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="s1">'hello world'</span><span class="p">,</span> <span class="s1">'utf8'</span><span class="p">,</span> <span class="s1">'hex'</span><span class="p">);</span>
+<span class="nx">text</span> <span class="o">+=</span> <span class="nx">cipher</span><span class="p">.</span><span class="kr">final</span><span class="p">(</span><span class="s1">'hex'</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">decipher</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">createDecipher</span><span class="p">(</span><span class="s1">'des'</span><span class="p">,</span> <span class="nx">KEY</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">originalText</span> <span class="o">=</span> <span class="nx">decipher</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="s1">'hex'</span><span class="p">,</span> <span class="s1">'utf8'</span><span class="p">);</span>
+<span class="nx">originalText</span> <span class="o">=</span> <span class="nx">decipher</span><span class="p">.</span><span class="kr">final</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">originalText</span><span class="p">);</span>
+</code></pre></div>
+<h1 id="click-hijacking">前端点击劫持问题-Click hijacking</h1>
+
+<h2 id="demo">点击劫持演示-demo</h2>
+
+<p>在攻击网页上，通过iframe引入被攻击网页,并设置被攻击的iframe透明度为0，用户以为操作的是攻击网页，实际上是操作（点击）了被攻击网页iframe，这样攻击就产生了。</p>
+
+<p>一句话，被攻击的网页被内嵌了。</p>
+
+<p>用户亲手操作<br><br>
+用户不知情<br><br>
+盗取用户资金（转账、消费）<br><br>
+获取用户敏感信息  </p>
+
+<p>clickhijack.html</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;title&gt;</span>csrf demo<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body</span> <span class="na">style=</span><span class="s">"background:url(clickhijack.png) no-repeat"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;iframe</span> <span class="na">style=</span><span class="s">"opacity:.1"</span> <span class="na">src=</span><span class="s">"http://localhost:1521/post/1"</span> <span class="na">width=</span><span class="s">"800"</span> <span class="na">height=</span><span class="s">"600"</span><span class="nt">&gt;&lt;/iframe&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+<h2 id="click-hijacking-defense">点击劫持防御-Click hijacking defense</h2>
+
+<p>javascript 禁止内嵌<br><br>
+X-FRAME-OPTIONS 禁止内嵌<br><br>
+其他辅助手段  </p>
+
+<p><strong>javascript 禁止内嵌</strong></p>
+<div class="highlight"><pre><code class="language-" data-lang="">if (top.location !== window.location) {
+  top.location = window.location;
+}
+</code></pre></div>
+<p>js不能100%防御成功</p>
+<div class="highlight"><pre><code class="language-" data-lang="">&lt;body style="background:url(clickhijack.png) no-repeat"&gt;  &lt;iframe style="opacity:.1" src="http://localhost:1521/post/1" width="800" height="600" sandbox="allow-forms"&gt;&lt;/iframe&gt; &lt;/body&gt;
+
+</code></pre></div>
+<p><strong>X-FRAME-OPTIONS 禁止内嵌</strong></p>
+<div class="highlight"><pre><code class="language-" data-lang="">ctx.set('X-Frame-Options', 'DENY');
+</code></pre></div>
+<p>推荐使用的手段</p>
+
+<p><strong>其他辅助手段</strong><br>
+验证码</p>
+
+<h1 id="transmission-security">传输安全-Transmission security</h1>
+
+<h2 id="http">HTTP窃听</h2>
+
+<p>HTTP传输窃听</p>
+
+<p>浏览器 &lt; - &gt; 代理服务器 &lt; - &gt; 链路 &lt; - &gt; 服务器</p>
+
+<p>查看访问服务器中间经过哪些？</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">traceroute</span>  <span class="nx">pengyouyi</span><span class="p">.</span><span class="nx">site</span>
+<span class="nx">traceroute</span> <span class="nx">localhost</span>
+</code></pre></div>
+<p>anyproxy安装</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">npm install -g anyproxy
+</code></pre></div>
+<p>启动anyproxy</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">anyproxy
+</code></pre></div>
+<p>chrome浏览器插件<br><br>
+Proxy SwitchyOmega</p>
+
+<p><em>配置</em><br>
+代理协议：HTTP<br><br>
+代理服务器：localhost<br><br>
+代理端口：8001<br><br>
+不代理的地址列表：空<br><br>
+然后应用选项  </p>
+
+<p><strong>HTTP窃听危害</strong><br>
+窃听用户密码<br><br>
+窃听传输敏感信息<br><br>
+非法获取个人资料  </p>
+
+<p><strong>HTTP篡改危害</strong><br>
+插入广告<br><br>
+重定向网站<br><br>
+无法防御的XSS和CSRF攻击  </p>
+
+<h2 id="https">HTTPS原理</h2>
+<div class="highlight"><pre><code class="language-" data-lang="">  | -----------------------------  |
+</code></pre></div>
+<p>浏览器 |&lt; - &gt; 代理服务器 &lt; - &gt; 链路 &lt; - &gt; | 服务器<br>
+      | ------------------------------ |</p>
+
+<p>TLS(SSL)加密<br>
+Transport Layer Security，传输层安全协议<br>
+Secure Socket Layer，安全套接字层</p>
+
+<h2 id="https">HTTPS部署</h2>
+
+<p><a href="https://www.sslforfree.com/">https://www.sslforfree.com/</a></p>
+
+<h1 id="password-security">密码安全-Password security</h1>
+
+<p>密码的作用<br><br>
+密码的存储<br><br>
+密码的传输<br><br>
+密码的替代方案<br><br>
+生物特征密码的问题  </p>
+
+<h2 id=">密码的作用</h2>
+
+<p>证明你是你</p>
+
+<p><strong>密码 - 比对</strong></p>
+
+<p>存储的密码 &lt;-对比-&gt; 输入的密码</p>
+
+<h2 id=">密码的存储</h2>
+
+<p><strong>密码 - 泄露渠道</strong><br>
+数据库被偷<br><br>
+服务器被入侵<br><br>
+通讯被窃听<br><br>
+内部人员泄露数据<br><br>
+其他网站（撞库）  </p>
+
+<p><strong>密码 - 存储</strong><br>
+严禁明文存储（防泄露）<br><br>
+单向变换（防泄露）<br><br>
+变换复杂度要求（防猜解）<br><br>
+密码复杂度要求（防猜解）<br><br>
+加盐（防猜解）  </p>
+
+<p><strong>密码 - 哈希算法</strong></p>
+
+<p>明文 - 密文  一一对应<br><br>
+雪崩效应<br><br>
+密文 - 明文  无法反推<br><br>
+密文固定长度<br><br>
+常见哈希算法： md5、sha1、sha256  </p>
+
+<p><strong>密码 - 单向变换彩虹表</strong></p>
+
+<p>md5(明文) = 密文<br><br>
+md5(md5(明文)) = 密文<br><br>
+md5(sha1(明文)) = 密文<br><br>
+md5(sha256(sha1(明文))) = 密文  </p>
+
+<p><em>密码 - 帮助用户加强复杂度</em></p>
+
+<table><thead>
+<tr>
+<th>ID</th>
+<th>原始密码</th>
+<th>盐</th>
+<th>变换后密码</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>123456</td>
+<td>A7D3E9...</td>
+<td>d8ds3d...</td>
+</tr>
+</tbody></table>
+
+<p>md5(sha1(md5(ID + adf + 原始密码 + f8s + 盐 + fd93)))</p>
+
+<p><em>密码 - 变换次数越多越安全</em><br>
+加密成本几乎不变（生成密码时速度慢一些）<br><br>
+彩虹表失效（数量太大，无法建立通用性）<br><br>
+解密成本增大N倍  </p>
+
+<h2 id=">密码加固</h2>
+
+<p>如果用户密码没有加盐，我们自动加盐（时间戳）然后存储更新老密码，临时存储用户原始密码和盐，只需要比对用户传来的盐和原始密码计算出新密码与数据库里存储的更新密码比较。</p>
+
+<p>不用比对明文密码，即使数据库泄露，攻击者也不知道原密码。</p>
+
+<h2 id=">密码传输安全</h2>
+
+<p>HTTPS传输<br><br>
+频率限制<br><br>
+前端加密意义有限  </p>
+
+<p>前端加密后传输，后端也需要用同样的算法加密比对。</p>
+
+<h2 id=">生物密码</h2>
+
+<p>指纹（唇纹）<br><br>
+声纹<br><br>
+虹膜<br><br>
+人脸  </p>
+
+<p><em>密码 - 生物特征密码</em></p>
+
+<p>私密性 - 容易泄露<br><br>
+安全性 - 碰触<br><br>
+唯一性 - 终身唯一 无法修改  </p>
+
+<h1 id="injection-problem">接入层注入问题- injection problem</h1>
+
+<h2 id="sql">关系型数据库和SQL介绍</h2>
+
+<p>存放结构化数据<br><br>
+可高效操作大量数据<br><br>
+方便处理数据之间的关联关系  </p>
+
+<p>常见：access、sqlite、MySQL、MySQL server</p>
+
+<p>SQL语言<br><br>
+select * from table where id = 1<br><br>
+标准化类似自然语言的描述性语言<br><br>
+用于关系型数据库  </p>
+
+<h2 id="sql">SQL注入前置知识</h2>
+
+<p>1</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">select</span> <span class="o">*</span> <span class="nx">from</span> <span class="nx">table</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">$</span><span class="p">{</span><span class="nx">id</span><span class="p">};</span>
+</code></pre></div>
+<p>用户传入 <code>1 or 1 = 1</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">select</span> <span class="o">*</span> <span class="nx">from</span> <span class="nx">table</span> <span class="nx">where</span> <span class="nx">id</span> <span class="o">=</span> <span class="mi">1</span> <span class="nx">or</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
+<p>2</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">select</span> <span class="o">*</span> <span class="nx">from</span> <span class="nx">user</span> <span class="nx">where</span> <span class="nx">username</span> <span class="o">=</span> <span class="s1">'${data.username}'</span> <span class="nx">and</span> <span class="nx">password</span> <span class="o">=</span> <span class="s1">'${data.password}'</span>
+</code></pre></div>
+<p>用户传入 <code>1&#39; or &#39;1&#39; = &#39;1</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">select</span> <span class="o">*</span> <span class="nx">from</span> <span class="nx">user</span> <span class="nx">where</span> <span class="nx">username</span> <span class="o">=</span> <span class="s1">'${data.username}'</span> <span class="nx">and</span> <span class="nx">password</span> <span class="o">=</span> <span class="s1">'1'</span> <span class="nx">or</span> <span class="s1">'1'</span> <span class="o">=</span> <span class="s1">'1'</span>
+</code></pre></div>
+<h2 id="sql">SQL注入演示和危害</h2>
+
+<p>猜解密码<br><br>
+获取数据<br><br>
+删库删表<br><br>
+拖库  </p>
+
+<h2 id="sql">SQL注入防御</h2>
+
+<p>关闭错误输出<br><br>
+检查数据类型<br><br>
+对数据进行转义<br><br>
+使用参数化查询（MySQL2最根本、直有效、简单的方法）<br><br>
+使用ORM（对象关系映射）  </p>
+
+<h2 id="nosql">NoSQL注入和防御</h2>
+
+<p>检查数据类型<br><br>
+类型转换<br><br>
+写完整条件  </p>
+
+<h1 id=">接入层上传问题</h1>
+
+<h2 id="upload">上传漏洞简介-upload</h2>
+
+<p><strong>上传问题</strong></p>
+
+<ol>
+<li>上传文件<br></li>
+<li>再次访问上传的文件<br></li>
+<li>上传的文件被当成程序解析</li>
+</ol>
+
+<h2 id=">上传问题防御</h2>
+
+<ol>
+<li>限制上传后缀<br></li>
+<li>文件类型检查<br></li>
+<li>文件内容检查<br></li>
+<li>程序输出（不让用户输出的能直接访问）<br></li>
+<li>权限控制 - 可写可执行互斥<br></li>
+</ol>
+
+<h1 id=">社会工程学和信息泄露</h1>
+
+<h2 id=">信息泄露和社会工程学</h2>
+
+<p>泄露系统敏感信息<br><br>
+泄露用户敏感信息<br><br>
+泄露用户密码  </p>
+
+<p><strong>信息泄露的途径</strong><br>
+错误信息失控<br><br>
+SQL注入<br><br>
+水平权限控制不当  </p>
+
+<h1 id=">其他安全问题</h1>
+
+<h2 id="dos"> DOS攻击</h2>
+
+<p><strong>其他安全问题</strong><br>
+拒绝服务DOS<br><br>
+重放攻击  </p>
+
+<p><strong>拒绝服务攻击DOS</strong><br>
+模拟正常用户<br><br>
+大量占用服务器<br><br>
+无法服务正常用户  </p>
+
+<p><strong>DOS类型</strong><br>
+TCP半连接<br><br>
+HTTP连接<br><br>
+DNS  </p>
+
+<p><strong>大规模分布式拒绝服务攻击DDOS</strong><br>
+流量可达几十到上百G<br><br>
+分布式（肉鸡、代理）<br><br>
+极难防御  </p>
+
+<p><strong>DOS攻击案例</strong></p>
+
+<ol>
+<li>游戏私服互相DDOS<br></li>
+<li>换目标，攻击DNS服务器<br></li>
+<li>DNS服务器机器下线<br></li>
+<li>数十万网站DNS解析瘫痪<br></li>
+<li>暴风影音后台疯狂请求解析<br></li>
+<li>各地local DNS瘫痪 无法上网<br></li>
+</ol>
+
+<p><strong>DOS攻击防御</strong><br>
+防火墙<br><br>
+交换机、路由器<br><br>
+流量清洗<br><br>
+高防IP  </p>
+
+<p><strong>DOS攻击预防</strong><br>
+避免重逻辑业务<br><br>
+快速失败快速返回<br><br>
+防雪崩机制<br><br>
+有损服务<br><br>
+CDN  </p>
+
+<h2 id="replay-attack">重放攻击-Replay attack</h2>
+
+<p>请求被窃听或记录<br><br>
+再次发起相同的请求<br><br>
+产生意外的结果  </p>
+
+<p><strong>重放攻击后果</strong><br>
+用户被多次消费<br><br>
+用户登录态被盗取<br><br>
+多次抽奖  </p>
+
+<p><strong>重放攻击防御</strong><br>
+加密（HTTPS）<br><br>
+时间戳<br><br>
+token（session）<br><br>
+nonce<br><br>
+签名  </p>
+
+<h1 id="course-summary">课程总结-Course summary</h1>
+
+<p><strong>请简述XSS的原理</strong><br>
+用户的数据（文章、评论、浏览器访问的参数）被当成脚本在页面中执行了</p>
+
+<p><strong>请简述XSS的防御方法</strong><br>
+浏览器自动拦截<br><br>
+转义<br><br>
+白名单过滤<br><br>
+csp  </p>
+
+<p><strong>XSS防御需要注意的点</strong><br>
+场景和对应的防御方法</p>
+
+<p><strong>CSRF原理是什么</strong></p>
+
+<p><strong>CSRF的危害是什么</strong></p>
+
+<p><strong>CSRF如何防御</strong><br>
+验证码<br><br>
+token<br><br>
+refer</p>
+
+<p><strong>Cookie的作用</strong></p>
+
+<p><strong>Cookie和session的关系</strong></p>
+
+<p><strong>Cookie的特性</strong><br>
+容量小<br><br>
+不能跨域<br><br>
+path不同，Cookie不同<br><br>
+有限期</p>
+
+<p><strong>如何删除一个Cookie值</strong><br>
+设置Cookie过期时间为一个过去是时间</p>
+
+<p><strong>HTTPS是如何保证数据不被窃听的</strong><br>
+数据加密</p>
+
+<p><strong>HTTPS是如何保证不被中间人攻击</strong><br>
+证书CA</p>
+
+<p><strong>部署HTTPS的步骤</strong><br>
+保证所有资源都可以通过HTTPS访问<br><br>
+找CA生成证书<br><br>
+部署到服务器上</p>
+
+<p><strong>SQL注入的原理是什么</strong><br>
+用户查询条件本应该为数据，数据变成查询语句本身的一部分，查询语句语义被改变，从而产生意外结果。</p>
+
+<p><strong>SQL注入有哪些危害</strong></p>
+
+<p><strong>Node.js中如何防止SQL注入</strong><br>
+转义<br><br>
+数据关系模型<br><br>
+参数化查询，两步骤执行</p>
+
+<p><strong>PHP中如何防止SQL注入</strong></p>
+
+<p><strong>文件上传漏洞的原理</strong></p>
+
+<p><strong>如何防范文件上传漏洞</strong></p>
+
+<p><strong>如何设计用户密码存储</strong><br>
+不用明文存储</p>
+
+<p><strong>如何设计登录过程</strong></p>
+
+<p><strong>如何保证用户密码不被窃听</strong></p>
+  
+	</div>
+	<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <!--
+  <%- list_categories(item.categories, {
+      show_count: false,
+      class: 'article-category',
+      style: 'none',
+      separator: '►'
+  }) %>
+  -->
+  
+  <a class="article-category-link" href="/categories/#JS">JS</a>
+  
+</div>
+
+
+  <div class="article-tags">
+  <!--
+  <% var tags = [];
+    item.tags.forEach(function(tag){
+      tags.push('<a href="' + config.root + tag.path + '">' + tag.name + '</a>');
+    }); %>-->
+  <span></span> <!--<%- tags.join('') %>-->
+  
+  
+  <a href="/tags/#面试题">面试题</a>
+  
+  <a href="/tags/#安全">安全</a>
+  
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="/js/2017/11/24/js-cookie" data-title="前端Cookies问题、前端点击劫持问题、传输安全、密码安全、SQL注入 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>   
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/js/2017/11/23/js-csrf" title="CSRF攻击原理及预防">
+  <strong>上一篇：</strong><br/>
+  <span>
+  CSRF攻击原理及预防</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+<!--  -->
+</div>  
+
+
+
+
+
+      
+      
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside toc-content">
+ 
+ <!--<%- toc(item.content) %>-->
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/#编辑器" title="编辑器">编辑器<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#MAC" title="MAC">MAC<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#JS" title="JS">JS<sup>41</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#CSS" title="CSS">CSS<sup>18</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#HTML" title="HTML">HTML<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>19</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#other" title="other">other<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/#markdown" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#mac" title="mac">mac<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Apache" title="Apache">Apache<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#端口使用" title="端口使用">端口使用<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Vue" title="Vue">Vue<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#handlebars" title="handlebars">handlebars<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Webpack" title="Webpack">Webpack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#构建工具" title="构建工具">构建工具<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#MVC" title="MVC">MVC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#MVVM" title="MVVM">MVVM<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#react" title="react">react<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#requirejs" title="requirejs">requirejs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#seajs" title="seajs">seajs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#shell" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#ES6" title="ES6">ES6<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#面试题" title="面试题">面试题<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#布局" title="布局">布局<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#CSS" title="CSS">CSS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#HTML" title="HTML">HTML<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#js事件" title="js事件">js事件<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#性能" title="性能">性能<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#BFC" title="BFC">BFC<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#this" title="this">this<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#js函数" title="js函数">js函数<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#工具" title="工具">工具<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#正则" title="正则">正则<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#原型链" title="原型链">原型链<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#jQuery" title="jQuery">jQuery<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#HTTP" title="HTTP">HTTP<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#通信类" title="通信类">通信类<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#安全" title="安全">安全<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            <a href="" target="_blank" title="码农圈">码农圈</a>
+          </li>
+        
+          <li>
+            <a href="" target="_blank" title="Peng's Blog">Peng's Blog</a>
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Make a little progress every day. <br/>
+			stronger and powerful.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/pengyouyi" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+	<!--
+			<%  Array.prototype.S=String.fromCharCode(2);
+			  Array.prototype.in_array=function(e){
+    			var r=new RegExp(this.S+e+this.S);
+    			return (r.test(this.S+this.join(this.S)+this.S));
+				};
+				var cc = new Array('by','by-nc','by-nc-nd','by-nc-sa','by-nd','by-sa','zero'); %>
+		<% if (cc.in_array(theme.creative_commons) ) { %>
+				<div class="cc-license">
+          <a href="http://creativecommons.org/licenses/<%= theme.creative_commons %>/4.0" class="cc-opacity" target="_blank">
+            <img src="<%- config.root %>img/cc-<%= theme.creative_commons %>.svg" alt="Creative Commons" />
+          </a>
+        </div>
+    <% } %>
+				-->
+
+		<p class="copyright">
+		Powered by <a href="http://jekyllrb.com" target="_blank" title="jekyll">jekyll</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="about" target="_blank" title="pengyouyi">pengyouyi</a>
+		
+		
+		</p>
+</div>
+
+
+</footer>
+    <script src="/assets/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/js/jquery.imagesloaded.min.js"></script>
+<script src="/assets/js/gallery.js"></script>
+<script src="/assets/js/jquery.qrcode-0.12.0.min.js"></script>
+<script src="/assets/js/toc.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+      
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.toc-content').toc();
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+/*
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      //$('.hoverqrcode').hide();
+  });
+  */
+});   
+</script>
+
+
+
+
+
+<!--
+
+-->
+
+
+
+
+<link rel="stylesheet" href="/assets/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/assets/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      if ($(this).hasClass('emoji')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+<!-- Analytics Begin -->
+
+
+
+<!--<script type="text/javascript">-->
+<!--var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
+<!--document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F130eaab551382bf609b702558cf803a0' type='text/javascript'%3E%3C/script%3E"));-->
+<!--</script>-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?130eaab551382bf609b702558cf803a0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/assets/img/scrollup.png"/></a>
+	</div>
+	<script src="/assets/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+  </body>
+</html>
+
