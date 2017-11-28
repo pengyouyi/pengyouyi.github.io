@@ -7,7 +7,7 @@
     
     
     
-    <title>js中的函数定义 | 彭友谊的博客</title>
+    <title>排序算法-快速排序 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="js中的函数定义">
-    <meta property="og:url" content="/js/2016/12/08/js-function-definition">
+    <meta property="og:title" content="排序算法-快速排序">
+    <meta property="og:url" content="/js/2017/11/27/js-algorithms-quick">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="js中的函数定义">
+    <meta property="og:description" content="排序算法-快速排序">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="js中的函数定义">
+    <meta name="twitter:title" content="排序算法-快速排序">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,14 +144,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/12/08/js-function-definition" title="js中的函数定义" itemprop="url">js中的函数定义</a>
+      <a href="/js/2017/11/27/js-algorithms-quick" title="排序算法-快速排序" itemprop="url">排序算法-快速排序</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-12-08 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-12-08</time>
+    <time datetime="2017-11-27 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-11-27</time>
     
   </p>
 </header>
@@ -163,28 +163,71 @@
 		
 		</div>
 		
-		<h1 id="js">js中的函数定义</h1>
+		<h1 id="algorithm">算法-algorithm</h1>
 
-<h2 id="declaration">函数声明-declaration</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="kr">double</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
-    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>   
+<h1 id="quick-sort">快速排序-quick sort</h1>
+
+<p><strong>算法描述</strong></p>
+
+<p>快速排序由于排序效率在同为O(N*logN)的几种排序方法中效率较高，因此经常被采用，再加上快速排序思想----分治法也确实实用。快速排序是一种既不浪费空间又可以快一点的排序算法。</p>
+
+<p><strong>算法步骤</strong></p>
+
+<p>（1）先从数列中取出一个数作为“基准”</p>
+
+<p>（2）建立两个数组，分别存储左边(小于或等于“基准”的数)和右边的数组(比这个“基准”大的数)</p>
+
+<p>（3）利用递归,再对左右区间重复第二步，直到各区间只有一个数。</p>
+
+<p><strong>算法实现</strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>  
+
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>  <span class="c1">//如果数组只有一个数，就直接返回；</span>
+  <span class="p">}</span>
+  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">mid</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 基准位置（理论上可任意选取）,这里找到中间数的索引值，如果是浮点数，则向下取整</span>
+  <span class="kd">var</span> <span class="nx">midValue</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">mid</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>  <span class="c1">// 基准数</span>
+  <span class="c1">// arr.splice(mid,1);用于找到中间数的值，返回的是一个数组，如果使用arr[mid]则返回的是一个数值</span>
+
+  <span class="kd">var</span> <span class="nx">leftArr</span> <span class="o">=</span> <span class="p">[</span> <span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">rightArr</span> <span class="o">=</span> <span class="p">[</span> <span class="p">];</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">midValue</span> <span class="o">&gt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="p">{</span>
+      <span class="nx">leftArr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>  <span class="c1">// 基准点的左边的数传到左边数组</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">rightArr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span> <span class="c1">//基准点的右边的数传到右边数组</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">quickSort</span><span class="p">(</span><span class="nx">leftArr</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">midValue</span><span class="p">,</span><span class="nx">quickSort</span><span class="p">(</span><span class="nx">rightArr</span><span class="p">));</span>
 <span class="p">}</span>
-</code></pre></div>
-<h2 id="expression">函数表达式-expression</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="kr">double</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span> <span class="nx">x</span><span class="p">;</span> 
-<span class="p">}</span>
-</code></pre></div>
-<h2 id="functiona">Functiona构造函数</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s2">"num1"</span><span class="p">,</span><span class="s2">"num2"</span><span class="p">,</span><span class="s2">"return num1 + num2"</span><span class="p">);</span> <span class="c1">// 不推荐使用</span>
-</code></pre></div>
-<h2 id="declaretion-amp-expression">declaretion &amp; expression</h2>
 
-<p>the differcence between a function declaretion and a function expression</p>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">);</span>
 
-<p>函数声明作为一种声明，当然会在预编译阶级有所动作（声明提前），而函数表达式则不会。<br><br>
-另一个区别是，函数声明不能直接加一对括号让它们执行。<br><br>
-第三个区别，表达式还可以继续细分，表达式是由常量，变量，操作符，函数等组合而成，计算以后返回一个结果值，至少也会返回一个undefined。</p>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
+<h1 id="more">更多-more</h1>
+
+<ul>
+<li><p><a href="https://segmentfault.com/a/1190000009426421">https://segmentfault.com/a/1190000009426421</a></p></li>
+<li><p><a href="https://segmentfault.com/a/1190000000669157">https://segmentfault.com/a/1190000000669157</a></p></li>
+</ul>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -215,7 +258,9 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#js函数">js函数</a>
+  <a href="/tags/#面试题">面试题</a>
+  
+  <a href="/tags/#算法">算法</a>
   
   </div>
 
@@ -225,7 +270,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/12/08/js-function-definition" data-title="js中的函数定义 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2017/11/27/js-algorithms-quick" data-title="排序算法-快速排序 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -237,21 +282,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2016/12/08/js-anonymous-function" title="js中的匿名函数">
+ <a href="/js/2017/11/27/js-algorithms-merge" title="排序算法-归并排序">
   <strong>上一篇：</strong><br/>
   <span>
-  js中的匿名函数</span>
+  排序算法-归并排序</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/js/2016/12/09/js-closure"  title="js中的闭包">
- <strong>下一篇：</strong><br/> 
- <span>js中的闭包
-</span>
-</a>
-</div>
 
 </nav>
 
