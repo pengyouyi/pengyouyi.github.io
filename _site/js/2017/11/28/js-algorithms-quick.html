@@ -23,9 +23,9 @@
     <meta property="og:type" content="article">
     
     <meta property="og:title" content="排序算法-快速排序">
-    <meta property="og:url" content="/js/2017/11/27/js-algorithms-quick">
+    <meta property="og:url" content="/js/2017/11/28/js-algorithms-quick">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="排序算法-快速排序">
+    <meta property="og:description" content="排序算法algorithm-快速排序">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="排序算法-快速排序">
     <meta name="twitter:description" content="page.description">
@@ -144,14 +144,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2017/11/27/js-algorithms-quick" title="排序算法-快速排序" itemprop="url">排序算法-快速排序</a>
+      <a href="/js/2017/11/28/js-algorithms-quick" title="排序算法-快速排序" itemprop="url">排序算法-快速排序</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2017-11-27 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-11-27</time>
+    <time datetime="2017-11-28 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-11-28</time>
     
   </p>
 </header>
@@ -163,9 +163,7 @@
 		
 		</div>
 		
-		<h1 id="algorithm">算法-algorithm</h1>
-
-<h1 id="quick-sort">快速排序-quick sort</h1>
+		<h1 id="quick-sort">快速排序-quick sort</h1>
 
 <p><strong>算法描述</strong></p>
 
@@ -222,6 +220,58 @@
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div>
+<p><strong><a href="https://www.cnblogs.com/dushao/p/6004883.html">快速排序-法二：</a></strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>  
+
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+        <span class="nx">partitionIndex</span><span class="p">,</span>
+        <span class="nx">left</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">left</span> <span class="o">!=</span> <span class="s1">'number'</span> <span class="p">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="nx">left</span><span class="p">,</span>
+        <span class="nx">right</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">right</span> <span class="o">!=</span> <span class="s1">'number'</span> <span class="p">?</span> <span class="nx">len</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:</span> <span class="nx">right</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">left</span> <span class="o">&lt;</span> <span class="nx">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">partitionIndex</span> <span class="o">=</span> <span class="nx">partition</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">right</span><span class="p">);</span>
+        <span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">partitionIndex</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">partitionIndex</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nx">right</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">partition</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">left</span> <span class="p">,</span><span class="nx">right</span><span class="p">)</span> <span class="p">{</span>     <span class="c1">//分区操作</span>
+    <span class="kd">var</span> <span class="nx">pivot</span> <span class="o">=</span> <span class="nx">left</span><span class="p">,</span>                      <span class="c1">//设定基准值（pivot）</span>
+        <span class="nx">index</span> <span class="o">=</span> <span class="nx">pivot</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">index</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">right</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">pivot</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nx">swap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+            <span class="nx">index</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>        
+    <span class="p">}</span>
+    <span class="nx">swap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">pivot</span><span class="p">,</span> <span class="nx">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">index</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">swap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+    <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">);</span>
+
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
 <h1 id="more">更多-more</h1>
 
 <ul>
@@ -270,7 +320,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2017/11/27/js-algorithms-quick" data-title="排序算法-快速排序 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2017/11/28/js-algorithms-quick" data-title="排序算法-快速排序 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -289,6 +339,14 @@
 </a>
 </div>
 
+
+<div class="next">
+<a href="/js/2017/11/28/js-algorithms-shell"  title="排序算法-希尔排序">
+ <strong>下一篇：</strong><br/> 
+ <span>排序算法-希尔排序
+</span>
+</a>
+</div>
 
 </nav>
 
@@ -329,7 +387,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>43</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>44</sup></a></li>
 		  
 		
 		  
@@ -418,7 +476,7 @@
 			
 		
 			
-				<li><a href="/tags/#面试题" title="面试题">面试题<sup>12</sup></a></li>
+				<li><a href="/tags/#面试题" title="面试题">面试题<sup>13</sup></a></li>
 			
 		
 			
@@ -482,7 +540,7 @@
 			
 		
 			
-				<li><a href="/tags/#算法" title="算法">算法<sup>2</sup></a></li>
+				<li><a href="/tags/#算法" title="算法">算法<sup>3</sup></a></li>
 			
 		
 		</ul>

@@ -5,10 +5,8 @@ tags:
 - 面试题
 - 算法
 categories: JS
-description: 排序算法-归并排序
+description: 排序算法algorithm-归并排序
 ---
-
-# 算法-algorithm
 
 # 归并排序（Merge Sort）
 

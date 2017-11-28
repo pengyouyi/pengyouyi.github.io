@@ -5,10 +5,8 @@ tags:
 - 面试题
 - 算法
 categories: JS
-description: 排序算法-快速排序
+description: 排序算法algorithm-快速排序
 ---
-
-# 算法-algorithm
 
 # 快速排序-quick sort
 **算法描述**
@@ -60,6 +58,61 @@ function quickSort(arr) {
   }
 
   return quickSort(leftArr).concat(midValue,quickSort(rightArr));
+}
+
+console.log(quickSort(arr) );
+
+</script>
+</body>
+</html>
+```
+
+**[快速排序-法二：](https://www.cnblogs.com/dushao/p/6004883.html)**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+</head>
+<body>
+
+<script>  
+
+var arr = [8, 6, 2, 3, 1, 5, 7, 4];
+
+function quickSort(arr, left, right) {
+    var len = arr.length,
+        partitionIndex,
+        left = typeof left != 'number' ? 0 : left,
+        right = typeof right != 'number' ? len - 1 : right;
+
+    if (left < right) {
+        partitionIndex = partition(arr, left, right);
+        quickSort(arr, left, partitionIndex-1);
+        quickSort(arr, partitionIndex+1, right);
+    }
+    return arr;
+}
+
+function partition(arr, left ,right) {     //分区操作
+    var pivot = left,                      //设定基准值（pivot）
+        index = pivot + 1;
+    for (var i = index; i <= right; i++) {
+        if (arr[i] < arr[pivot]) {
+            swap(arr, i, index);
+            index++;
+        }        
+    }
+    swap(arr, pivot, index - 1);
+    return index-1;
+}
+
+function swap(arr, i, j) {
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
 }
 
 console.log(quickSort(arr) );

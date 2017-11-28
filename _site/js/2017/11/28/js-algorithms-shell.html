@@ -7,7 +7,7 @@
     
     
     
-    <title>DOM事件流 | 彭友谊的博客</title>
+    <title>排序算法-希尔排序 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="DOM事件流">
-    <meta property="og:url" content="/js/2016/10/30/js-event-flow">
+    <meta property="og:title" content="排序算法-希尔排序">
+    <meta property="og:url" content="/js/2017/11/28/js-algorithms-shell">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="DOM事件流">
+    <meta property="og:description" content="排序算法algorithm-希尔排序">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="DOM事件流">
+    <meta name="twitter:title" content="排序算法-希尔排序">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,14 +144,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2016/10/30/js-event-flow" title="DOM事件流" itemprop="url">DOM事件流</a>
+      <a href="/js/2017/11/28/js-algorithms-shell" title="排序算法-希尔排序" itemprop="url">排序算法-希尔排序</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-30 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-30</time>
+    <time datetime="2017-11-28 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-11-28</time>
     
   </p>
 </header>
@@ -163,327 +163,80 @@
 		
 		</div>
 		
-		<h1 id="dom">DOM事件流</h1>
+		<h1 id="shell-sort">希尔排序-shell sort</h1>
 
-<p>DOM事件流</p>
+<p><strong>算法描述</strong></p>
 
-<p>DOM2级事件规定事件包括三个阶段：</p>
+<p>希尔排序，也称递减增量排序算法，是插入排序的一种更高效的改进版本。但希尔排序是非稳定排序算法。</p>
 
-<p>① 事件捕获阶段</p>
+<p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
 
-<p>② 处于目标阶段</p>
+<ul>
+<li><p>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率；</p></li>
+<li><p>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位；</p></li>
+</ul>
 
-<p>③ 事件冒泡阶段</p>
+<p><strong>希尔排序的基本思想是：</strong></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<p>先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录基本有序时，再对全体记录进行依次直接插入排序。</p>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/11-28-1.jpeg" alt="">
+</div>
+
+<p><strong>算法步骤</strong></p>
+
+<ul>
+<li><p>选择一个增量序列 t1，t2，……，tk，其中 ti &gt; tj, tk = 1；</p></li>
+<li><p>按增量序列个数 k，对序列进行 k 趟排序；</p></li>
+<li><p>每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</p></li>
+</ul>
+
+<p><strong>算法实现</strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;&lt;/div&gt;</span>       
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="event-capturing">事件捕获event capturing</h1>
+<span class="nt">&lt;script&gt;</span>  
 
-<p>如果点击div元素，事件捕获的传播顺序  </p>
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
 
-<p>**  window对象<br><br>
-(1) document对象<br><br>
-(2) html<br><br>
-(3) body<br><br>
-(4) div  </p>
+<span class="kd">function</span> <span class="nx">shellSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+        <span class="nx">temp</span><span class="p">,</span>
+        <span class="nx">gap</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 
-<p>尽管“DOM2级事件”规范要求事件应该从document对象开始传播和结束，但大部分兼容标准的浏览器会继续将事件的捕获和冒泡延伸到window对象。  </p>
+    <span class="k">while</span><span class="p">(</span><span class="nx">gap</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>          <span class="c1">//动态定义间隔序列</span>
+        <span class="nx">gap</span> <span class="o">=</span> <span class="nx">gap</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<p>由于老版本的浏览器（such as: IE8及以下版本）不支持事件流，所以很少有人使用事件捕获。</p>
-
-<h1 id="event-bubbling">事件冒泡event bubbling</h1>
-
-<p>如果点击div元素，事件冒泡的传播顺序<br><br>
-(1) div<br><br>
-(2) body<br><br>
-(3) html<br><br>
-(4) document<br><br>
-**  window对象  </p>
-
-<p>注：【IE9、Firefox、chrome、Safari 会将事件冒泡到window对象】</p>
-
-<p>所有现代浏览器都支持事件冒泡，可以放心用。</p>
-
-<p>我们在注册事件的时候，通常使用的是 捕获 或者 冒泡 的 一种：</p>
-
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2</pre></td><td class="code"><pre><span class="nx">obj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="nx">func</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">// 捕获方式</span>
-<span class="nx">obj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="nx">func</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span> <span class="c1">// 冒泡方式</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>事件只会因为捕获或者冒泡触发一次。</p>
-
-<p>example-1</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
-   <span class="nf">#p</span> <span class="p">{</span> <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span> <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span> <span class="p">}</span>
-   <span class="nf">#c</span> <span class="p">{</span> <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span> <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">red</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">&lt;/style&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"p"</span><span class="nt">&gt;</span>
-        parent
-        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"c"</span><span class="nt">&gt;</span>
-            child
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>    
-    <span class="nt">&lt;script&gt;</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"p"</span><span class="p">),</span>
-                <span class="nx">c</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"c"</span><span class="p">);</span>
-            <span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点捕获'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-            <span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点冒泡'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">gap</span><span class="p">;</span> <span class="nx">gap</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">gap</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">gap</span><span class="o">/</span><span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">gap</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">temp</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span><span class="o">-</span><span class="nx">gap</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">temp</span><span class="p">;</span> <span class="nx">j</span> <span class="o">-=</span> <span class="nx">gap</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="o">+</span><span class="nx">gap</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="o">+</span><span class="nx">gap</span><span class="p">]</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
         <span class="p">}</span>
-    <span class="nt">&lt;/script&gt;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">shellSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
+
+<span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p><strong><em>result display</em></strong></p>
-
-<div class="rd">
-<img src="/assets/images/2016/10-11-12/event-bubbling.png" alt="">
-</div>
-
-<p>example-2</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
-   <span class="nf">#p</span> <span class="p">{</span> <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span> <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span> <span class="p">}</span>
-   <span class="nf">#c</span> <span class="p">{</span> <span class="nl">width</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span> <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">red</span><span class="p">;</span> <span class="p">}</span>
-<span class="nt">&lt;/style&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"p"</span><span class="nt">&gt;</span>
-        parent
-        <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"c"</span><span class="nt">&gt;</span>
-            child
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>    
-    <span class="nt">&lt;script&gt;</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"p"</span><span class="p">),</span>
-                <span class="nx">c</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"c"</span><span class="p">);</span>
-            <span class="nx">p</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'父节点捕获'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-            <span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点捕获'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-            <span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点冒泡'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-            <span class="nx">p</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'父节点冒泡'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p><strong><em>result display</em></strong></p>
-
-<div class="rd">
-<img src="/assets/images/2016/10-11-12/event-capturing.png" alt="">
-</div>
-
-<h1 id="event-capturing">event capturing 完整例子</h1>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;</span>click me, 事件捕获完整阶段<span class="nt">&lt;/div&gt;</span> 
-
-<span class="nt">&lt;script&gt;</span>
-    <span class="kd">var</span> <span class="nx">myDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"myDiv"</span><span class="p">);</span>
-
-    <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件捕获"</span><span class="p">);</span>
-    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-    
-    <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件捕获，once again"</span><span class="p">);</span>
-    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-
-    <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件冒泡"</span><span class="p">);</span>
-    <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-
-    <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"window 事件捕获"</span><span class="p">);</span>
-    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-
-    <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"document 事件捕获"</span><span class="p">);</span>
-    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-
-    <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"html 事件捕获"</span><span class="p">);</span>
-    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-
-    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"body 事件捕获"</span><span class="p">);</span>
-    <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-<span class="nt">&lt;/script&gt;</span>     
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>在div事件捕获阶段注册的两个事件按照注册顺序执行</p>
-
-<p><strong><em>result display</em></strong></p>
-
-<div class="rd">
-    <img src="/assets/images/2016/10-11-12/10-30-1.png" alt="">
-</div>
-
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>
 <h1 id="more">更多-more</h1>
+
+<ul>
+<li><p><a href="https://segmentfault.com/a/1190000009461832">https://segmentfault.com/a/1190000009461832</a></p></li>
+<li><p><a href="http://blog.csdn.net/liusaint1992/article/details/51345887">http://blog.csdn.net/liusaint1992/article/details/51345887</a></p></li>
+</ul>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -514,7 +267,9 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#js事件">js事件</a>
+  <a href="/tags/#面试题">面试题</a>
+  
+  <a href="/tags/#算法">算法</a>
   
   </div>
 
@@ -524,7 +279,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2016/10/30/js-event-flow" data-title="DOM事件流 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2017/11/28/js-algorithms-shell" data-title="排序算法-希尔排序 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -536,21 +291,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/css/2016/10/28/block-inline" title="block & inline 元素区别">
+ <a href="/js/2017/11/28/js-algorithms-quick" title="排序算法-快速排序">
   <strong>上一篇：</strong><br/>
   <span>
-  block & inline 元素区别</span>
+  排序算法-快速排序</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/js/2016/10/31/js-event-delegate"  title="js事件委托">
- <strong>下一篇：</strong><br/> 
- <span>js事件委托
-</span>
-</a>
-</div>
 
 </nav>
 
