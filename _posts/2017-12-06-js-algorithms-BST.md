@@ -2,7 +2,6 @@
 layout: post
 title: 二叉搜索树（BST）
 tags:
-- 面试题
 - 算法
 categories: JS
 description: 二叉搜索树（BST）

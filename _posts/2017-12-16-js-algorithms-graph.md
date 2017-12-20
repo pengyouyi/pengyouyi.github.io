@@ -2,7 +2,6 @@
 layout: post
 title: 图的基础
 tags:
-- 面试题
 - 算法
 categories: JS
 description: 图的基础
@@ -281,7 +280,7 @@ flood fill
 
 扫雷
 
-走迷宫，迷宫生成，
+走迷宫，[迷宫生成](http://blog.csdn.net/scargtt/article/details/71078275)，
 迷宫的本质是一颗树 
 迷宫生成，是一个生成树的过程
 

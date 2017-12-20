@@ -2,7 +2,6 @@
 layout: post
 title: 堆和排序
 tags:
-- 面试题
 - 算法
 categories: JS
 description: 堆和排序

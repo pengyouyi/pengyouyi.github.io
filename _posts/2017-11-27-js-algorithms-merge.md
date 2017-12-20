@@ -2,7 +2,6 @@
 layout: post
 title: 排序算法-归并排序
 tags:
-- 面试题
 - 算法
 categories: JS
 description: 排序算法algorithm-归并排序
