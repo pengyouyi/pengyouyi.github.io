@@ -77,3 +77,5 @@ console.log(selectSort(arr));
 # 更多-more
 
 [bubkoo 选择排序](http://bubkoo.com/2014/01/13/sort-algorithm/selection-sort/)
+
+[segmentfault javascript 排序算法之选择排序、插入排序](https://segmentfault.com/a/1190000011597883)

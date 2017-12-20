@@ -7,7 +7,7 @@
     
     
     
-    <title>插入排序 | 彭友谊的博客</title>
+    <title>排序算法总结 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="插入排序">
-    <meta property="og:url" content="/js/2017/12/20/js-algorithms-insertSort">
+    <meta property="og:title" content="排序算法总结">
+    <meta property="og:url" content="/js/2017/12/20/js-algorithms-Summary">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="插入排序">
+    <meta property="og:description" content="排序算法总结">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="插入排序">
+    <meta name="twitter:title" content="排序算法总结">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,7 +144,7 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2017/12/20/js-algorithms-insertSort" title="插入排序" itemprop="url">插入排序</a>
+      <a href="/js/2017/12/20/js-algorithms-Summary" title="排序算法总结" itemprop="url">排序算法总结</a>
   </h1>
   <p class="article-author">By
        
@@ -163,126 +163,109 @@
 		
 		</div>
 		
-		<h1 id="insertion-sort">插入排序法 - Insertion Sort</h1>
+		<h1 id="summary">排序算法总结-Summary</h1>
 
-<p><strong>o(n^2)排序算法</strong></p>
+<ul>
+<li><p>基本排序算法：冒泡排序、选择排序、插入排序</p></li>
+<li><p>高级排序算法：希尔排序、归并排序、快速排序</p></li>
+<li><p>其他排序算法：堆排序、基数排序等。</p></li>
+</ul>
 
-<p><strong>思路</strong></p>
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/12-20-2.png" alt="">
+</div>
+
+<h1 id="bubble-sort"><a href="http://pengyouyi.site/js/2017/12/20/js-algorithms-bubbleSort">冒泡排序 - bubble Sort</a></h1>
+
+<h2 id="bubble-sort">bubble Sort 思路</h2>
+
+<p>对相邻的元素进行两两比较，顺序相反则进行交换，这样，每一趟会将最小或最大的元素“浮”到顶端，最终达到完全有序</p>
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/12-20-1.png" alt="">
+</div>
+
+<h2 id="bubble-sort">bubble Sort 实现</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js">
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">bubbleSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+
+       <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+         <span class="nx">swap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">j</span><span class="p">,</span> <span class="nx">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+       <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">swap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+  <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+  <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bubbleSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
+</code></pre></div>
+<h1 id="selection-sort"><a href="http://pengyouyi.site/js/2017/12/19/js-algorithms-selectSort">选择排序 - Selection Sort</a></h1>
+
+<h2 id="selection-sort">Selection Sort 思路</h2>
+
+<p>在要排序的一组数中，选出最小（或者最大）的一个数与<font color="#e0e">第1个位置</font>的数交换；</p>
+
+<p>然后在剩下的数当中再找最小（或者最大）的与<font color="#e0e">第2个位置</font>的数交换，</p>
+
+<p>依次类推，直到第n-1个元素（倒数第二个数）和第n个元素（最后一个数）比较为止。</p>
+
+<h2 id="selection-sort">Selection Sort 实现</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">selectSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 初始化[i,len) 区间最小值的索引为i</span>
+    <span class="kd">var</span> <span class="nx">minIndex</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+    <span class="c1">//寻找 [i,len) 之间的最小值，记录其索引</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">minIndex</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]){</span>
+        <span class="nx">minIndex</span> <span class="o">=</span> <span class="nx">j</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">swap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">minIndex</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// 交换元素arr[i] 与 arr[j]</span>
+<span class="kd">function</span> <span class="nx">swap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+  <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+  <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">selectSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
+</code></pre></div>
+<h1 id="insertion-sort"><a href="http://pengyouyi.site/js/2017/12/20/js-algorithms-insertSort">插入排序 - Insertion Sort</a></h1>
+
+<h2 id="insertion-sort">Insertion Sort 思路</h2>
 
 <p>将元素分成已排序、未排序两部份</p>
 
 <p>1〉从第一个元素开始，该元素可以认为已经被排序</p>
 
-<p>2〉取出第一个未排序元素存放在临时变量temp中，在已经排序的元素序列中从后往前扫描，逐一比较【插入时<font color="#e0e">由右而左</font>比较】</p>
+<p>2〉取出第一个未排序元素存放在临时变量temp中，在已经排序的元素序列中<font color="#e0e">从后往前</font>扫描，逐一比较</p>
 
 <p>3〉如果temp小于已排序元素，将该元素移到下个位置</p>
 
 <p>4〉重复步骤3〉，直到找到已排序的元素小于或者等于</p>
 
-<table><thead>
-<tr>
-<th>初始值</th>
-<th><strong>8</strong></th>
-<th><font color="#e0e">6</font></th>
-<th>2</th>
-<th>3</th>
-<th>1</th>
-<th>5</th>
-<th>7</th>
-<th>4</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>第一遍</td>
-<td><strong>6</strong></td>
-<td><strong>8</strong></td>
-<td><font color="#e0e">2</font></td>
-<td>3</td>
-<td>1</td>
-<td>5</td>
-<td>7</td>
-<td>4</td>
-</tr>
-<tr>
-<td>第二遍</td>
-<td><strong>2</strong></td>
-<td><strong>6</strong></td>
-<td><strong>8</strong></td>
-<td><font color="#e0e">3</font></td>
-<td>1</td>
-<td>5</td>
-<td>7</td>
-<td>4</td>
-</tr>
-<tr>
-<td>第三遍</td>
-<td><strong>2</strong></td>
-<td><strong>3</strong></td>
-<td><strong>6</strong></td>
-<td><strong>8</strong></td>
-<td><font color="#e0e">1</font></td>
-<td>5</td>
-<td>7</td>
-<td>4</td>
-</tr>
-<tr>
-<td>第四遍</td>
-<td><strong>1</strong></td>
-<td><strong>2</strong></td>
-<td><strong>3</strong></td>
-<td><strong>6</strong></td>
-<td><strong>8</strong></td>
-<td><font color="#e0e">5</font></td>
-<td>7</td>
-<td>4</td>
-</tr>
-<tr>
-<td>第五遍</td>
-<td><strong>1</strong></td>
-<td><strong>2</strong></td>
-<td><strong>3</strong></td>
-<td><strong>5</strong></td>
-<td><strong>6</strong></td>
-<td><strong>8</strong></td>
-<td><font color="#e0e">7</font></td>
-<td>4</td>
-</tr>
-<tr>
-<td>第六遍</td>
-<td><strong>1</strong></td>
-<td><strong>2</strong></td>
-<td><strong>3</strong></td>
-<td><strong>5</strong></td>
-<td><strong>6</strong></td>
-<td><strong>7</strong></td>
-<td><strong>8</strong></td>
-<td><font color="#e0e">4</font></td>
-</tr>
-<tr>
-<td>第七遍</td>
-<td><strong>1</strong></td>
-<td><strong>2</strong></td>
-<td><strong>3</strong></td>
-<td><strong>4</strong></td>
-<td><strong>5</strong></td>
-<td><strong>6</strong></td>
-<td><strong>7</strong></td>
-<td><strong>8</strong></td>
-</tr>
-</tbody></table>
-
-<h2 id="insertion-sort">Insertion Sort实现</h2>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-
-<span class="nt">&lt;script&gt;</span>  
-
-<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
+<h2 id="insertion-sort">Insertion Sort 实现</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
 
 <span class="kd">function</span> <span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
 
@@ -306,149 +289,59 @@
   <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
-
-<span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
 </code></pre></div>
-<h2 id="insertion-sort">Insertion Sort改进</h2>
+<h1 id="quick-sort"><a href="http://pengyouyi.site/js/2017/11/28/js-algorithms-quick">快速排序 - quick sort</a></h1>
 
-<p>交换两个数组的位置比比较两个位置上的值大小要耗时，</p>
+<h2 id="quick-sort">quick sort 思路</h2>
 
-<p>所以arr[j]比arr[j-1]大的时候，将arr[j]赋值为arr[j-1],直到找到arr[j]应该待的位置k，将arr[k]赋值为arr[j]</p>
+<p>（1）先从数列中取出一个数作为“基准”，通常取中间数</p>
+
+<p>（2）建立两个数组，分别存储左边(小于或等于“基准”的数)和右边的数组(比这个“基准”大的数)</p>
+
+<p>（3）利用递归,再对左右区间重复第二步，直到各区间只有一个数。</p>
+
+<h2 id="quick-sort">quick sort 实现</h2>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
 
-<span class="kd">function</span> <span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
 
-  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-
-  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="kd">var</span> <span class="nx">curValue</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">curValue</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span> <span class="nx">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-
-      <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
-
-    <span class="p">}</span>
-    <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nx">curValue</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>  <span class="c1">//如果数组只有一个数，就直接返回；</span>
   <span class="p">}</span>
-  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
-</code></pre></div>
-<p>法二：用while语句</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
-
-<span class="kd">function</span> <span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
-
   <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">mid</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 基准位置（理论上可任意选取）,这里找到中间数的索引值，如果是浮点数，则向下取整</span>
+  <span class="kd">var</span> <span class="nx">midValue</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">mid</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>  <span class="c1">// 基准数</span>
+  <span class="c1">// arr.splice(mid,1);用于找到中间数的值，返回的是一个数组，如果使用arr[mid]则返回的是一个数值</span>
 
-  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="nx">i</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">curValue</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-
-    <span class="k">while</span> <span class="p">(</span><span class="nx">curValue</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span> <span class="p">{</span>
-       <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
-       <span class="nx">j</span><span class="o">--</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">curValue</span><span class="p">;</span>
-
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
-</code></pre></div>
-<h2 id="insertion-sort">Insertion Sort从左到右比较</h2>
-
-<p>插入排序法-<font color="#e0e">从左到右</font>依次比较</p>
-
-<p>法一</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-
-<span class="nt">&lt;script&gt;</span>  
-
-<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
-
-<span class="kd">function</span> <span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
-
-  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">leftArr</span> <span class="o">=</span> <span class="p">[</span> <span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">rightArr</span> <span class="o">=</span> <span class="p">[</span> <span class="p">];</span>
 
   <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">i</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-      <span class="k">if</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span> <span class="p">{</span>
-        <span class="nx">swap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">)</span>
-      <span class="p">}</span>
-
+    <span class="k">if</span> <span class="p">(</span><span class="nx">midValue</span> <span class="o">&gt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="p">{</span>
+      <span class="nx">leftArr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>  <span class="c1">// 基准点的左边的数传到左边数组</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">rightArr</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span> <span class="c1">//基准点的右边的数传到右边数组</span>
     <span class="p">}</span>
   <span class="p">}</span>
-  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="kd">function</span> <span class="nx">swap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">j</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-  <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
-  <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nx">temp</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
 
-<span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
+  <span class="k">return</span> <span class="nx">quickSort</span><span class="p">(</span><span class="nx">leftArr</span><span class="p">).</span><span class="nx">concat</span><span class="p">(</span><span class="nx">midValue</span><span class="p">,</span><span class="nx">quickSort</span><span class="p">(</span><span class="nx">rightArr</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">quickSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">);</span>
 </code></pre></div>
-<p>插入排序法-<font color="#e0e">从左到右</font>依次比较</p>
+<h1 id="shell-sort"><a href="http://pengyouyi.site/js/2017/11/28/js-algorithms-shell">希尔排序 - shell sort</a></h1>
 
-<p>法二</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
+<h1 id="merge-sort"><a href="http://pengyouyi.site/js/2017/11/27/js-algorithms-merge">归并排序 - Merge Sort</a></h1>
 
-<span class="nt">&lt;script&gt;</span>  
-
-<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">];</span>
-<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
-<span class="kd">function</span> <span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
-
-  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-
-  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="c1">// 寻找元素arr[i]合适的插入位置</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">i</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-
-       <span class="k">if</span> <span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span> <span class="p">{</span>
-         <span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
-       <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="nx">arr</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="nx">arr</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">insertSort</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
-
-<span class="nt">&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<p>插入排序有可能会提前终止，因此理论上插入排序效率比选择排序高。</p>
+<h1 id="heap-sort"><a href="http://pengyouyi.site/js/2017/11/30/js-algorithms-stack">堆排序-heap sort</a></h1>
 
 <h1 id="more">更多-more</h1>
 
-<p><a href="http://notepad.yehyeh.net/Content/Algorithm/Sort/Insertion/1.php">http://notepad.yehyeh.net/Content/Algorithm/Sort/Insertion/1.php</a></p>
+<ul>
+<li><p><a href="https://segmentfault.com/a/1190000009426421">https://segmentfault.com/a/1190000009426421</a></p></li>
+<li><p><a href="https://www.cnblogs.com/dushao/p/6004883.html">十大经典算法排序总结对比</a></p></li>
+<li><p><a href="http://www.cnblogs.com/chengxiao/category/880910.html">http://www.cnblogs.com/chengxiao/category/880910.html</a></p></li>
+</ul>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -489,7 +382,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2017/12/20/js-algorithms-insertSort" data-title="插入排序 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2017/12/20/js-algorithms-Summary" data-title="排序算法总结 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -501,13 +394,21 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2017/12/20/js-algorithms-bubbleSort" title="冒泡排序">
+ <a href="/js/2017/12/19/js-algorithms-selectSort" title="选择排序">
   <strong>上一篇：</strong><br/>
   <span>
-  冒泡排序</span>
+  选择排序</span>
 </a>
 </div>
 
+
+<div class="next">
+<a href="/js/2017/12/20/js-algorithms-bubbleSort"  title="冒泡排序">
+ <strong>下一篇：</strong><br/> 
+ <span>冒泡排序
+</span>
+</a>
+</div>
 
 </nav>
 
