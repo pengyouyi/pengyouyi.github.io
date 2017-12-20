@@ -190,6 +190,8 @@ console.log(quickSort(arr) );
 
 # [堆排序-heap sort](http://pengyouyi.site/js/2017/11/30/js-algorithms-stack)
 
+# [堆栈、队列、链表 data structure](https://juejin.im/entry/58759e79128fe1006b48cdfd)
+
 
 # 更多-more
 
