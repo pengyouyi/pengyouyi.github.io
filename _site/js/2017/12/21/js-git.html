@@ -7,7 +7,7 @@
     
     
     
-    <title>js中的prototype和__proto__ | 彭友谊的博客</title>
+    <title>常用 Git 命令 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="js中的prototype和__proto__">
-    <meta property="og:url" content="/js/2017/03/01/js-prototype">
+    <meta property="og:title" content="常用 Git 命令">
+    <meta property="og:url" content="/js/2017/12/21/js-git">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="js中的prototype和__proto__">
+    <meta property="og:description" content="常用 Git 命令">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="js中的prototype和__proto__">
+    <meta name="twitter:title" content="常用 Git 命令">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,14 +144,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2017/03/01/js-prototype" title="js中的prototype和__proto__" itemprop="url">js中的prototype和__proto__</a>
+      <a href="/js/2017/12/21/js-git" title="常用 Git 命令" itemprop="url">常用 Git 命令</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2017-03-01 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-03-01</time>
+    <time datetime="2017-12-21 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-12-21</time>
     
   </p>
 </header>
@@ -163,173 +163,150 @@
 		
 		</div>
 		
-		<h1 id="prototype">prototype的定义和用法</h1>
+		<h1 id="git">常用 Git 命令</h1>
 
-<p>prototype 属性使您有能力向对象添加属性和方法。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span><span class="o">=</span><span class="nx">value</span>
+<p>Git 和 svn 都是版本控制工具，区别是SVN是集成式的，git是分布式，总的来说，git在多人合作上的优势大于SVN，</p>
+
+<p>克隆项目：</p>
+
+<p>进入到要克隆的文件夹下：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone url  <span class="o">(</span>github 上要克隆项目的URL<span class="o">)</span>
 </code></pre></div>
-<p>不是所有的对象都拥有prototype这一属性：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="s2">"hello"</span><span class="p">;</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str1</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// undefined</span>
+<p>设置提交代码的用户和邮箱： 最好和github 上的一致</p>
 
-<span class="kd">var</span> <span class="nx">str2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="s2">"test"</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str2</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// undefined</span>
-
-<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// undefined</span>
+<p>先进入项目中，</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProjectName <span class="o">[</span>master] &gt; git config user.name “pengyouyi”
+ProjectName <span class="o">[</span>master] &gt; git config user.email “2390803922@qq.com”
 </code></pre></div>
-<p>我们在定义函数的时候，函数定义的时候函数本身就会默认有一个prototype的属性(还有一个length属性)，<br>
-而我们如果用new 运算符来生成一个对象的时候就没有prototype属性。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="nx">c</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span><span class="c1">// Object {} 或  Object { constructor: () , __proto__: Object }</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">a</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span><span class="c1">// object</span>
-
-<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">a</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span><span class="c1">// undefined</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span><span class="c1">// undefined</span>
+<p>查看项目的作者：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProjectName <span class="o">[</span>master] &gt; git config user.name 
 </code></pre></div>
-<blockquote>
-<p>我们创建的每个函数都有一个 prototype（原型）属性，这个属性是一个指针，指向一个<code>对象</code>，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。</p>
-
-<p>无论什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象。</p>
-
-<p>在默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，这个属性包含一个指向 prototype 属性所在函数的指针。</p>
-</blockquote>
-
-<div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-4.png" alt="">
-</div>
-
-<p><strong><code>prototype属性是函数所特有</code></strong>,准确来说是构造函数所特有。</p>
-
-<h2 id="function-prototype">function.prototype</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="nx">c</span><span class="p">;</span>
-<span class="p">}</span>
+<p>查看所有的：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProjectName <span class="o">[</span>master] &gt; git config –list
 </code></pre></div>
-<p><strong><code>a.prototype 包含了2个属性，一个是constructor ，另外一个是__proto__</code></strong></p>
+<p>Git 的三个区：</p>
 
-<div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-1.png" alt="">
-</div>
+<p>工作区：<br>
+暂存区：<br>
+    --作为过渡层<br>
+    --避免误操作<br>
+    --保护工作区和版本区<br>
+    --分支处理<br><br>
+版本区:</p>
 
-<p><strong><code>a.prototype.constructor</code> === a</strong></p>
-
-<div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-2.png" alt="">
-</div>
-
-<p><strong><code>a.prototype.__proto__</code> === Object.prototype</strong></p>
-
-<div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-3.png" alt="">
-</div>
-
-<h1 id="__proto__">__proto__</h1>
-
-<blockquote>
-<p>1.所有构造器/函数的__proto__都指向Function.prototype，它是一个空函数（Empty function）</p>
-
-<p>2.所有对象的__proto__都指向其构造器的prototype</p>
-</blockquote>
-
-<p>每个对象都会在其内部初始化一个属性，就是__proto__，当我们访问一个对象的属性 时，如果这个对象内部不存在这个属性，那么他就会去__proto__里找这个属性，这个__proto__又会有自己的__proto__，于是就这样 一直找下去。</p>
-
-<div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-5.png" alt="">
-</div>
-
-<p><strong>proto</strong>:<code>每个对象都有一个名为__proto__的内部隐藏属性</code>，指向于它所对应的原型对象(chrome、firefox中名称为<strong>proto</strong>，并且可以被访问到)。原型链正是基于<strong>proto</strong>才得以形成(note：不是基于函数对象的属性prototype)。</p>
-
-<p><strong>Object.create(obj).__proto__ === obj</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{};</span>
-<span class="kd">var</span> <span class="nx">a2</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-<span class="nx">a2</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">a</span><span class="p">;</span>  <span class="c1">// true</span>
+<p>查看工作区的所有文件：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git status
 </code></pre></div>
-<p>prototype本质上还是一个JavaScript对象。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">// String {length: 0, [[PrimitiveValue]]: ""}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">// Object {}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Number</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// Number {[[PrimitiveValue]]: 0}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
+<p>把工作区的内容添加到暂存区：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="se">\p</span>rotectName <span class="o">[</span>master] &gt;git add demo.html
 </code></pre></div>
-<p>上述对数组操作的很多方法（比如concat、join、push），对字符串等的操作方法都是在prototype属性中定义的。 </p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 构造函数</span>
-<span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="c1">// 定义Person的原型，原型中的属性可以被自定义对象引用</span>
-<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">getName</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kd">var</span> <span class="nx">hao</span><span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">"haorooms"</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">hao</span><span class="p">.</span><span class="nx">getName</span><span class="p">());</span>  <span class="c1">// "haorooms"</span>
+<p>提示内容</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="se">\p</span>rotectName <span class="o">[</span> master  +1  ~0  -0 ： +1  ~0  -0  ! <span class="o">]</span>   
 </code></pre></div>
-<p>作为类比，我们考虑下JavaScript中的数据类型 - 字符串（String）、数字（Number）、数组（Array）、对象（Object）、日期（Date）等。</p>
+<p>意思：红色代表工作区，+1 有1个文件可以被移动，~0代表被修改的文件数目，-0代表被删除的文件数目</p>
 
-<p>在JavaScript内部这些类型都是作为构造函数来实现的，比如：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 定义数组的构造函数，作为JavaScript的一种预定义类型</span>
-<span class="kd">function</span> <span class="nb">Array</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
+<p>绿色代表暂存区，参数同工作区</p>
 
-<span class="c1">// 初始化数组的实例</span>
-<span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
-<span class="c1">// 但是，我们更倾向于如下的语法定义：</span>
-<span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">];</span>
+<p>Git add .  把所有修改后的文件重新添加到暂存区</p>
+
+<p>把暂存区的内容添加到版本库中：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="se">\p</span>rotectName <span class="o">[</span> master  +2  ~0  -0 <span class="o">]</span>  &gt; git commit
 </code></pre></div>
-<p>var a = {} 其实是 var a = new Object() 的语法糖<br>
-var a = [] 其实是 var a = new Array() 的语法糖<br>
-function Foo() {...} 其实是 var Foo = new Function(...)</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">String</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
-<span class="nb">Number</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
-<span class="nb">Array</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
-<span class="nb">Object</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
-<span class="nb">Date</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
+<p>会弹出一个记事本要求填写注释，让它不谈注释，直接写注释</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="se">\p</span>rotectName <span class="o">[</span> master  +2  ~0  -0 <span class="o">]</span>  &gt; git commit –m “change demo1”
 </code></pre></div>
-<p>实际上，JavaScript所有的固有数据类型都具有只读的prototype属性 （这是可以理解的：因为如果修改了这些类型的prototype属性，则哪些预定义的方法就消失了）， 但是我们可以向其中添加自己的扩展方法。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 向JavaScript固有类型Array扩展一个获取最小值的方法</span>
-<span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">min</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">min</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">min</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">min</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-    <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="nx">min</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="c1">// 在任意Array的实例上调用min方法</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">].</span><span class="nx">min</span><span class="p">());</span> <span class="c1">// 1</span>
+<p>工作区不能跳过暂存区直接提交到版本库，但是有一种简写方式</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git commit –a –m “add js”
 </code></pre></div>
-<h1 id="rule">原型和原型链-rule</h1>
+<p>Git 命令</p>
 
-<p><strong>原型和原型链的5个规则</strong></p>
+<p>对比：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">    Git diff 工作区和暂存区对比
+    Git diff –cached <span class="o">(</span>--staged<span class="o">)</span>  暂存区和版本库对比
+    Git diff master  工作区和版本库对比
+</code></pre></div>
+<p>撤销:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">    Git reset Head drag.js  从缓存区撤销到工作区
+    Git checkout - -  filename  从工作区撤回到版本库
+    Git commit – amend  从暂存区撤销到版本库， 合并一次新的提交方案
+例如：git commit –m “change3 drag.js and demo.js” –amend 撤销上一次的提交，重新再提交一次
+</code></pre></div>
+<p>删除：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">    Git rm filename  删除缓存区的文件，但是删除的时候要先在工作区中删除
+    Git rm –f test.txt  删除缓存区的文件,也强行删除了工作区中的文件
+  Git rm – cached  test.txt  删除缓存区的文件,不删除 工作区中的文件
+</code></pre></div>
+<p>恢复：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git checkout  id filename  恢复工作区中指定的某个文件（删除的某个文件）
+Git reset –hard id  恢复某个指定的版本，可以是对多个文件同时的操作
+Git reset –hard HEAD^  指针往回走一步，
+Git reset –hard HEAD~2  往回走两个版本，扩展到N 
+Git reflog 打印对版本的操作记录，其中的ID可用于回到现在的某个版本
+</code></pre></div>
+<p>推送到远程：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git remote   查看远程仓库的名称 ，默认 origin
+Git remote  查看远程地址
+Git push origin master   推送 
+</code></pre></div>
+<p>多人协作解决冲突：</p>
 
-<ol>
-<li>所有的<em>引用类型</em>（数组、对象、函数），都具有<strong>对象特性</strong>，即可自由扩展属性（除了 &#39;null&#39; 意外）。<br></li>
-<li>所有的<code>引用类型</code>（数组、对象、函数），都有一个 <code>__proto__</code> 属性【隐式原型】，属性值是一个普通的对象。<br></li>
-<li>所有<code>函数</code>，都有一个<code>prototype</code> 属性【显式原型】，属性值也是一个普通的对象。<br></li>
-<li>所有的<code>引用类型（数组、对象、函数）， __proto__ 属性值指向它的构造函数的 “prototype” 属性值</code><br></li>
-<li>当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的 <strong>proto</strong> （即它的构造函数的prototype）中寻找。<br></li>
-</ol>
+<p>拉取 </p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git fetch  拉取下来的与自己的不合并
+Git pull  拉取下来的与自己的自动合并
+</code></pre></div>
+<p><strong>方式Git fetch：</strong></p>
 
-<p><div class="rd"><br>
-    <img src="/assets/images/2017/1-2-3/03-01-6.jpg" alt=""><br>
-</div></p>
+<p>先用git fetch 拉取下来，</p>
 
-<h1 id="more">更多-more</h1>
+<p>然后对比 git diff master origin/master   有冲突的部分就会被显示出来   红色表示本地，绿色表示远程</p>
 
-<ul>
-<li><a href="http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html">http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html</a></li>
-<li><a href="http://www.imooc.com/article/3654">http://www.imooc.com/article/3654</a></li>
-</ul>
+<p>Git merge origin/master   有冲突的地方，两个不同的都会显示在本地文件夹下，然后手动选择处理，取舍自己的还是别人的。</p>
+
+<p>处理好冲突后，git commit –a –m “add style by pengyouyi to demo1”</p>
+
+<p>最后Git  push origin master 远端</p>
+
+<p><strong>方式Git pull：</strong></p>
+
+<p>Git pull origin master  从远端拉下，发现冲突</p>
+
+<p>直接git pull 会同步，本地会被拉取下来的文件覆盖 </p>
+
+<p>当想要参与到别人的项目而没有权限的时候，该如何做：</p>
+
+<p>Folk：</p>
+
+<p>先搜索到作者，然后找到要想参与的项目，，点击右上角fork ，就把项目克隆到自己的与户名下了。 </p>
+
+<p>Pull request: </p>
+
+<p>修改者改好之后可以pull request ,交给有权限的人处理，是否可以通过merge，‘</p>
+
+<p>也可以不拉到本地，在github上直接进行修改</p>
+
+<p>删除从别的地方folk过来的项目，</p>
+
+<p>进入要删除的项目中，右下角设置，最下面按钮Delete this repository ，在弹窗中输入要删除的镜像    仓库的名字，点击删除</p>
+
+<p><strong>分支：</strong></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProfileName &gt; git branch  查看分支
+ProfileName &gt; git branch   branchName    创建分支
+ProfileName &gt; git checkout branchName   切换到某个分支
+ProfileName &gt; git checkout –b  branchName   创建某个分支并切换到它上面去<span class="o">(</span>-b branch简写 <span class="o">)</span>
+ProfileName &gt; git merge branchName 在主分支上合并其他分支，会将其他分支上的修改直接反应到主分支上
+ProfileName &gt; git branch  --merged  查看被合并的分支
+ProfileName &gt; git branch  --no –merged   查看未被合并的分支
+ProfileName &gt; git branch –d branchName  若与主分支合并了，则可将其删除
+ProfileName &gt; git branch –D  branchName  若未与主分支合并，也可将其强行 删除
+</code></pre></div>
+<p><strong>打标签：</strong></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProfileName &gt; git tag   查看打的标签
+ProfileName &gt; git tag  tagName    打一个标签
+ProfileName &gt; git push origin   v1.0
+</code></pre></div>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a></p>
+
+<p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000">git多人协作</a></p>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -360,7 +337,7 @@ function Foo() {...} 其实是 var Foo = new Function(...)</p>
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#原型链">原型链</a>
+  <a href="/tags/#工具">工具</a>
   
   </div>
 
@@ -370,7 +347,7 @@ function Foo() {...} 其实是 var Foo = new Function(...)</p>
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2017/03/01/js-prototype" data-title="js中的prototype和__proto__ | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2017/12/21/js-git" data-title="常用 Git 命令 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -382,21 +359,13 @@ function Foo() {...} 其实是 var Foo = new Function(...)</p>
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2017/03/01/js-constructor" title="constructor属性">
+ <a href="/js/2017/12/20/js-algorithms-insertSort" title="插入排序">
   <strong>上一篇：</strong><br/>
   <span>
-  constructor属性</span>
+  插入排序</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/js/2017/03/02/js-null-undefined"  title="js的null，undefined或undeclared的区别">
- <strong>下一篇：</strong><br/> 
- <span>js的null，undefined或undeclared的区别
-</span>
-</a>
-</div>
 
 </nav>
 

@@ -2,7 +2,7 @@
 layout: post
 title: Cookie，sessionStorage, localStorage 的区别
 tags:
-- 面试题
+- Interview
 categories: JS
 description: Cookie，sessionStorage, localStorage 的区别
 ---
@@ -100,6 +100,7 @@ sessionStorage 和 localStorage 是HTML5 Web Storage API 提供的，可以方�
 **localstorage优缺点**
 
 **优点：** 兼容性中等，操作简单，就是key-value形式，几乎现代的浏览器都支持。
+
 **缺点：** IE8及以下不支持。跨浏览器是读不到缓存的，不能跨域取
 
 **localStorage 的一个坑**

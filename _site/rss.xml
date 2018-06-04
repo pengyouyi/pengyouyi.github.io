@@ -5,10 +5,162 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Wed, 20 Dec 2017 20:20:25 +0800</lastBuildDate>
-        <pubDate>Wed, 20 Dec 2017 20:20:25 +0800</pubDate>
+        <lastBuildDate>Mon, 04 Jun 2018 15:42:07 +0800</lastBuildDate>
+        <pubDate>Mon, 04 Jun 2018 15:42:07 +0800</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>常用 Git 命令</title>
+                <description>&lt;h1 id=&quot;git&quot;&gt;常用 Git 命令&lt;/h1&gt;
+
+&lt;p&gt;Git 和 svn 都是版本控制工具，区别是SVN是集成式的，git是分布式，总的来说，git在多人合作上的优势大于SVN，&lt;/p&gt;
+
+&lt;p&gt;克隆项目：&lt;/p&gt;
+
+&lt;p&gt;进入到要克隆的文件夹下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone url  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;github 上要克隆项目的URL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;设置提交代码的用户和邮箱： 最好和github 上的一致&lt;/p&gt;
+
+&lt;p&gt;先进入项目中，&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ProjectName &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;master] &amp;gt; git config user.name “pengyouyi”
+ProjectName &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;master] &amp;gt; git config user.email “2390803922@qq.com”
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;查看项目的作者：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ProjectName &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;master] &amp;gt; git config user.name 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;查看所有的：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ProjectName &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;master] &amp;gt; git config –list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Git 的三个区：&lt;/p&gt;
+
+&lt;p&gt;工作区：&lt;br&gt;
+暂存区：&lt;br&gt;
+    --作为过渡层&lt;br&gt;
+    --避免误操作&lt;br&gt;
+    --保护工作区和版本区&lt;br&gt;
+    --分支处理&lt;br&gt;&lt;br&gt;
+版本区:&lt;/p&gt;
+
+&lt;p&gt;查看工作区的所有文件：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Git status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;把工作区的内容添加到暂存区：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;rotectName &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;master] &amp;gt;git add demo.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;提示内容&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;rotectName &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; master  +1  ~0  -0 ： +1  ~0  -0  ! &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;意思：红色代表工作区，+1 有1个文件可以被移动，~0代表被修改的文件数目，-0代表被删除的文件数目&lt;/p&gt;
+
+&lt;p&gt;绿色代表暂存区，参数同工作区&lt;/p&gt;
+
+&lt;p&gt;Git add .  把所有修改后的文件重新添加到暂存区&lt;/p&gt;
+
+&lt;p&gt;把暂存区的内容添加到版本库中：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;rotectName &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; master  +2  ~0  -0 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;  &amp;gt; git commit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;会弹出一个记事本要求填写注释，让它不谈注释，直接写注释&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;se&quot;&gt;\p&lt;/span&gt;rotectName &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; master  +2  ~0  -0 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;  &amp;gt; git commit –m “change demo1”
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;工作区不能跳过暂存区直接提交到版本库，但是有一种简写方式&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Git commit –a –m “add js”
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Git 命令&lt;/p&gt;
+
+&lt;p&gt;对比：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;    Git diff 工作区和暂存区对比
+    Git diff –cached &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;--staged&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;  暂存区和版本库对比
+    Git diff master  工作区和版本库对比
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;撤销:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;    Git reset Head drag.js  从缓存区撤销到工作区
+    Git checkout - -  filename  从工作区撤回到版本库
+    Git commit – amend  从暂存区撤销到版本库， 合并一次新的提交方案
+例如：git commit –m “change3 drag.js and demo.js” –amend 撤销上一次的提交，重新再提交一次
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;删除：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;    Git rm filename  删除缓存区的文件，但是删除的时候要先在工作区中删除
+    Git rm –f test.txt  删除缓存区的文件,也强行删除了工作区中的文件
+  Git rm – cached  test.txt  删除缓存区的文件,不删除 工作区中的文件
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;恢复：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Git checkout  id filename  恢复工作区中指定的某个文件（删除的某个文件）
+Git reset –hard id  恢复某个指定的版本，可以是对多个文件同时的操作
+Git reset –hard HEAD^  指针往回走一步，
+Git reset –hard HEAD~2  往回走两个版本，扩展到N 
+Git reflog 打印对版本的操作记录，其中的ID可用于回到现在的某个版本
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;推送到远程：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Git remote   查看远程仓库的名称 ，默认 origin
+Git remote  查看远程地址
+Git push origin master   推送 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;多人协作解决冲突：&lt;/p&gt;
+
+&lt;p&gt;拉取 &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;Git fetch  拉取下来的与自己的不合并
+Git pull  拉取下来的与自己的自动合并
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;方式Git fetch：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;先用git fetch 拉取下来，&lt;/p&gt;
+
+&lt;p&gt;然后对比 git diff master origin/master   有冲突的部分就会被显示出来   红色表示本地，绿色表示远程&lt;/p&gt;
+
+&lt;p&gt;Git merge origin/master   有冲突的地方，两个不同的都会显示在本地文件夹下，然后手动选择处理，取舍自己的还是别人的。&lt;/p&gt;
+
+&lt;p&gt;处理好冲突后，git commit –a –m “add style by pengyouyi to demo1”&lt;/p&gt;
+
+&lt;p&gt;最后Git  push origin master 远端&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;方式Git pull：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Git pull origin master  从远端拉下，发现冲突&lt;/p&gt;
+
+&lt;p&gt;直接git pull 会同步，本地会被拉取下来的文件覆盖 &lt;/p&gt;
+
+&lt;p&gt;当想要参与到别人的项目而没有权限的时候，该如何做：&lt;/p&gt;
+
+&lt;p&gt;Folk：&lt;/p&gt;
+
+&lt;p&gt;先搜索到作者，然后找到要想参与的项目，，点击右上角fork ，就把项目克隆到自己的与户名下了。 &lt;/p&gt;
+
+&lt;p&gt;Pull request: &lt;/p&gt;
+
+&lt;p&gt;修改者改好之后可以pull request ,交给有权限的人处理，是否可以通过merge，‘&lt;/p&gt;
+
+&lt;p&gt;也可以不拉到本地，在github上直接进行修改&lt;/p&gt;
+
+&lt;p&gt;删除从别的地方folk过来的项目，&lt;/p&gt;
+
+&lt;p&gt;进入要删除的项目中，右下角设置，最下面按钮Delete this repository ，在弹窗中输入要删除的镜像    仓库的名字，点击删除&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;分支：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ProfileName &amp;gt; git branch  查看分支
+ProfileName &amp;gt; git branch   branchName    创建分支
+ProfileName &amp;gt; git checkout branchName   切换到某个分支
+ProfileName &amp;gt; git checkout –b  branchName   创建某个分支并切换到它上面去&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-b branch简写 &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+ProfileName &amp;gt; git merge branchName 在主分支上合并其他分支，会将其他分支上的修改直接反应到主分支上
+ProfileName &amp;gt; git branch  --merged  查看被合并的分支
+ProfileName &amp;gt; git branch  --no –merged   查看未被合并的分支
+ProfileName &amp;gt; git branch –d branchName  若与主分支合并了，则可将其删除
+ProfileName &amp;gt; git branch –D  branchName  若未与主分支合并，也可将其强行 删除
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;打标签：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ProfileName &amp;gt; git tag   查看打的标签
+ProfileName &amp;gt; git tag  tagName    打一个标签
+ProfileName &amp;gt; git push origin   v1.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html&quot;&gt;http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000&quot;&gt;git多人协作&lt;/a&gt;&lt;/p&gt;
+</description>
+                <link>/js/2017/12/21/js-git</link>
+                <guid>/js/2017/12/21/js-git</guid>
+                <pubDate>Thu, 21 Dec 2017 00:00:00 +0800</pubDate>
+        </item>
 
         <item>
                 <title>插入排序</title>
@@ -371,15 +523,19 @@
                 <title>排序算法总结</title>
                 <description>&lt;h1 id=&quot;summary&quot;&gt;排序算法总结-Summary&lt;/h1&gt;
 
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;基本排序算法：冒泡排序、选择排序、插入排序&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;高级排序算法：希尔排序、归并排序、快速排序&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;其他排序算法：堆排序、基数排序等。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;✍ 基本排序算法：冒泡排序、选择排序、插入排序&lt;/p&gt;
+
+&lt;p&gt;✍ 高级排序算法：希尔排序、归并排序、快速排序&lt;/p&gt;
+
+&lt;p&gt;✍ 其他排序算法：堆排序、基数排序等。&lt;/p&gt;
 
 &lt;div class=&quot;rd&quot;&gt;
     &lt;img src=&quot;/assets/images/2017/10-11-12/12-20-2.png&quot; alt=&quot;&quot;&gt;
 &lt;/div&gt;
+
+&lt;p&gt;☞ In-place: 占用常数内存，不占用额外内存&lt;br&gt;&lt;br&gt;
+☞ Out-place: 占用额外内存&lt;br&gt;&lt;br&gt;
+☞ 稳定性：排序后2个相等键值的顺序和排序之前它们的顺序相同  &lt;/p&gt;
 
 &lt;h1 id=&quot;bubble-sort&quot;&gt;&lt;a href=&quot;http://pengyouyi.site/js/2017/12/20/js-algorithms-bubbleSort&quot;&gt;冒泡排序 - bubble Sort&lt;/a&gt;&lt;/h1&gt;
 
@@ -3482,8 +3638,9 @@ HTML有XSS攻击风险&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;localstorage优缺点&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt; 兼容性中等，操作简单，就是key-value形式，几乎现代的浏览器都支持。&lt;br&gt;
-&lt;strong&gt;缺点：&lt;/strong&gt; IE8及以下不支持。跨浏览器是读不到缓存的，不能跨域取&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt; 兼容性中等，操作简单，就是key-value形式，几乎现代的浏览器都支持。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;缺点：&lt;/strong&gt; IE8及以下不支持。跨浏览器是读不到缓存的，不能跨域取&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;localStorage 的一个坑&lt;/strong&gt;&lt;/p&gt;
 
@@ -4575,588 +4732,6 @@ object 的 __proto__ 一层一层往上，能否对应到constructor.prototype&l
                 <link>/http/2017/11/08/Communication-front-end</link>
                 <guid>/http/2017/11/08/Communication-front-end</guid>
                 <pubDate>Wed, 08 Nov 2017 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>同源策略及限制</title>
-                <description>&lt;h1 id=&quot;same-origin-policy&quot;&gt;同源策略-Same-origin policy&lt;/h1&gt;
-
-&lt;h2 id=&quot;meaning&quot;&gt;含义 - Meaning&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;协议相同 window.location.protocol&lt;br&gt;&lt;br&gt;
-域名相同 window.location.hostname&lt;br&gt;&lt;br&gt;
-端口相同 window.location.port  &lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.w3school.com.cn/jsref/dom_obj_location.asp&quot;&gt;location对象&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;域名、端口、协议，其中任何一个不同都算跨域。&lt;/p&gt;
-
-&lt;table&gt;&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;URL&lt;/th&gt;
-&lt;th&gt;说明&lt;/th&gt;
-&lt;th&gt;是否允许通信&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&quot;http://www.a.com/a.js&quot;&gt;http://www.a.com/a.js&lt;/a&gt; &lt;br/&gt; &lt;a href=&quot;http://70.32.92.74/b.js&quot;&gt;http://70.32.92.74/b.js&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;域名和域名对应IP&lt;/td&gt;
-&lt;td&gt;不允许&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&quot;http://www.a.com/a.js&quot;&gt;http://www.a.com/a.js&lt;/a&gt; &lt;br/&gt; &lt;a href=&quot;http://script.a.com/b.js&quot;&gt;http://script.a.com/b.js&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&quot;http://blog.csdn.net/qq_26744901/article/details/52701116&quot;&gt;主域相同，子域不同&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;不允许&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;a href=&quot;http://www.a.com/a.js&quot;&gt;http://www.a.com/a.js&lt;/a&gt; &lt;br/&gt; &lt;a href=&quot;http://a.com/b.js&quot;&gt;http://a.com/b.js&lt;/a&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&quot;http://blog.csdn.net/yummy_go/article/details/50675421&quot;&gt;同一域名，不同二级域名&lt;/a&gt;（同上）&lt;/td&gt;
-&lt;td&gt;不允许&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;
-
-&lt;p&gt;在跨域问题上，域仅仅是通过“URL的首部”来识别，而不会去尝试判断相同的ip地址对应着两个域，或是两个域是否在同一个IP上。&lt;/p&gt;
-
-&lt;h2 id=&quot;purpose&quot;&gt;目的 - purpose&lt;/h2&gt;
-
-&lt;p&gt;同源政策的目的，是为了保证用户信息的安全，防止恶意的网站窃取数据。&lt;/p&gt;
-
-&lt;p&gt;&amp;quot;同源政策&amp;quot;是必需的，否则 Cookie 可以共享，互联网就毫无安全可言了。&lt;/p&gt;
-
-&lt;h2 id=&quot;limit-range&quot;&gt;限制范围 - Limit range&lt;/h2&gt;
-
-&lt;p&gt;如果非同源，共有三种行为受到限制。&lt;/p&gt;
-
-&lt;p&gt;（1） Cookie、LocalStorage 和 IndexDB 无法读取。&lt;br&gt;&lt;br&gt;
-（2） DOM 无法获得。&lt;br&gt;&lt;br&gt;
-（3） AJAX 请求不能发送。  &lt;/p&gt;
-
-&lt;h1 id=&quot;cross-domain-tags&quot;&gt;跨域的标签-Cross domain Tags&lt;/h1&gt;
-
-&lt;h2 id=&quot;tags&quot;&gt;可以跨域的标签-Tags&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;img src=xxx&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;link href=xxx&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;script src=xxx&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;这些标签可以跨域加载资源，而不受同源策略的限制。这些带&amp;quot;src&amp;quot;属性的标签每次加载时，实际上是由浏览器发起了一次GET请求。不同于 XMLHttpRequest 的是，通过src属性加载的资源，浏览器限制了JavaScript的权限，使其不能读、写返回的内容。&lt;/p&gt;
-
-&lt;h2 id=&quot;use-scenarios&quot;&gt;跨域的标签的使用场景-Use scenarios&lt;/h2&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; 用于打点统计，统计网站可能是其他域&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;link&amp;gt; &amp;lt;script&amp;gt;&lt;/code&gt; 可以使用CDN，CDN的也是其他域&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 可以用于JSONP&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h1 id=&quot;avoid&quot;&gt;规避同源策略-Avoid&lt;/h1&gt;
-
-&lt;p&gt;㊀ document.domain&lt;br&gt;&lt;br&gt;
-㊁ window.name&lt;br&gt;&lt;br&gt;
-㊂ localtion.hash&lt;br&gt;&lt;br&gt;
-㊃ window.postMessage (HTML5)&lt;br&gt;&lt;br&gt;
-㊄ JSONP&lt;br&gt;&lt;br&gt;
-㊅ Websocket协议&lt;br&gt;&lt;br&gt;
-㊆ CORS跨域资源共享（W3C标准，支持跨域通信的AJAX）  &lt;/p&gt;
-
-&lt;h1 id=&quot;document-domain&quot;&gt;通过修改document.domain来跨子域&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;document.domain跨域原理&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;如果两个window或者frames包含的脚本可以把domain设置成一样的值，那么就可以规避同源策略，每个window之间可以互相沟通。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;这种方式也不是一直都有用，因为端口号是在内部保存的，有可能被保存成null。换句话说，example.com的端口号80，在我们更新document.domain属性的时候可能会变成null。为null的端口可能不被认为是80，这主要依赖浏览器实现。  &lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;document.domain的设置是有限制的，我们只能把&lt;code&gt;document.domain设置成自身或更高一级的父域&lt;/code&gt;，且&lt;code&gt;主域必须相同&lt;/code&gt;。例如：a.b.example.com 中某个文档的document.domain 可以设成a.b.example.com、b.example.com 、example.com中的任意一个，但是不可以设成 c.a.b.example.com,因为这是当前域的子域，也不可以设成baidu.com,因为主域已经不相同了。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;cookie&quot;&gt;Cookie&lt;/h2&gt;
-
-&lt;p&gt;Cookie 是服务器写入浏览器的一小段信息，只有同源的网页才能共享。但是，两个网页一级域名相同，只是二级域名不同，浏览器允许通过设置document.domain共享 Cookie。&lt;/p&gt;
-
-&lt;h2 id=&quot;document-domain-cookie&quot;&gt;document.domain获取Cookie例子&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;场景：A网页是 &lt;a href=&quot;http://w1.example.com/a.html&quot;&gt;http://w1.example.com/a.html&lt;/a&gt; ，B网页是 &lt;a href=&quot;http://w2.example.com/b.html&quot;&gt;http://w2.example.com/b.html&lt;/a&gt; ，那么只要设置相同的document.domain，两个网页就可以共享Cookie。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;domain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'example.com'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A网页通过脚本设置一个 Cookie。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;test1=hello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;B网页就可以读到这个 Cookie。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;allCookie&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cookie&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-&lt;p&gt;document.domain这种方法只适用于 Cookie 和 iframe 窗口，LocalStorage 和 IndexDB 无法通过这种方法.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;document-domain-iframe&quot;&gt;document.domain + iframe例子&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;场景：&lt;a href=&quot;http://a.study.cn/a.html&quot;&gt;http://a.study.cn/a.html&lt;/a&gt; 请求 &lt;a href=&quot;http://b.study.cn/b.html&quot;&gt;http://b.study.cn/b.html&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;a.html&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Insert title here&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;domain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'study.cn'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-            &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;iframe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-                &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;win&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;iframe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;contentWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-                &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;doc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;win&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-                &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;win&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-                &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;win&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;iframe&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://b.study.cn/b.html'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;onload=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'test()'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;b.html&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Insert title here&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;domain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'study.cn'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-    我是b.study.cn的body
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;运行效果截图:&lt;/p&gt;
-
-&lt;div class=&quot;rd&quot;&gt;
-    &lt;img src=&quot;/assets/images/2017/10-11-12/11-07-1.png&quot; alt=&quot;&quot;&gt;
-&lt;/div&gt;
-
-&lt;p&gt;可以通过js访问到iframe中的各种属性和对象.&lt;/p&gt;
-
-&lt;p&gt;如果你想在 &lt;a href=&quot;http://a.study.cn/a.html&quot;&gt;http://a.study.cn/a.html&lt;/a&gt; 页面中通过ajax直接请求页面 &lt;a href=&quot;http://b.study.cn/b.html&quot;&gt;http://b.study.cn/b.html&lt;/a&gt; ，即使你设置了相同的document.domain也还是不行的.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;解决：如果你想通过ajax的方法去与不同子域的页面交互，除了使用jsonp的方法外，还可以用一个隐藏的iframe来做一个代理。原理就是让这个iframe载入一个与你想要通过ajax获取数据的目标页面处在相同的域的页面，所以这个iframe中的页面是可以正常使用ajax去获取你要的数据的，然后就是通过我们刚刚讲得修改document.domain的方法，让我们能通过js完全控制这个iframe，这样我们就可以让iframe去发送ajax请求，然后收到的数据我们也可以获得了。?????&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;document.domain跨域缺点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;1、安全性，当一个站点（b.a.com）被攻击后，另一个站点（c.a.com）会引起安全漏洞。&lt;br&gt;&lt;br&gt;
-2、如果一个页面中引入多个iframe，要想能够操作所有iframe，必须都得设置相同domain。&lt;/p&gt;
-
-&lt;h1 id=&quot;location-hash-iframe&quot;&gt;location.hash + iframe&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;location.hash跨域原理：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;hash改变不刷新页面，search改变刷新页面&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;location.hash跨域场景：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;当前页面A通过iframe或iframe嵌入了跨域的页面B&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;父窗口A可以把信息，写入子窗口的片段标识符。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementsByTagName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'iframe'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'#'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;子窗口B通过监听&lt;code&gt;hashchange事件&lt;/code&gt;得到通知&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onhashchange&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;同样的，子窗口也可以改变父窗口的片段标识符。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;parent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;location&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;href&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;#&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hash&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;location.hash跨域缺点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;数据直接暴露在了url中，数据容量和类型都有限等&lt;/p&gt;
-
-&lt;h1 id=&quot;window-name-iframe&quot;&gt;window.name + iframe&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;window.name跨域原理：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;浏览器窗口有window.name属性。这个属性的最大特点是，&lt;/p&gt;
-
-&lt;p&gt;在一个窗口(window)的生命周期内,窗口载入的所有的页面（无论是否同源）都是&lt;code&gt;共享一个window.name&lt;/code&gt;的，每个页面对window.name都有读写的权限，&lt;/p&gt;
-
-&lt;p&gt;window.name是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;window.name跨域场景：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;比如有一个 &lt;a href=&quot;http://www.example.com/a.html&quot;&gt;www.example.com/a.html&lt;/a&gt; 页面,需要通过a.html页面里的js来获取另一个位于不同域上的页面 &lt;a href=&quot;http://www.cnblogs.com/data.html&quot;&gt;www.cnblogs.com/data.html&lt;/a&gt; 里的数据。&lt;/p&gt;
-
-&lt;p&gt;（1）data.html页面里的代码很简单，就是给当前的window.name设置一个a.html页面想要得到的数据值。&lt;/p&gt;
-
-&lt;p&gt;data.html里的代码：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'要传送的内容,所有可以转化成字符串来传递的数据都可以在这里使用，比如可以传递一个JSON数据'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/script&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;那么在a.html页面中，我们怎么把data.html页面载入进来呢？显然我们不能直接在a.html页面中通过改变window.location来载入data.html页面，因为我们想要即使a.html页面不跳转也能得到data.html里的数据。答案就是在a.html页面中使用一个隐藏的iframe来充当一个中间人角色，由iframe去获取data.html的数据，然后a.html再去得到iframe获取到的数据。&lt;/p&gt;
-
-&lt;p&gt;充当中间人的iframe想要获取到data.html的通过window.name设置的数据，只需要把这个iframe的src设为 &lt;a href=&quot;http://www.cnblogs.com/data.html&quot;&gt;www.cnblogs.com/data.html&lt;/a&gt; 就行了。然后a.html想要得到iframe所获取到的数据，也就是想要得到iframe的window.name的值，还必须把这个iframe的src设成跟a.html页面同一个域才行，不然根据前面讲的同源策略，a.html是不能访问到iframe里的window.name属性的。&lt;/p&gt;
-
-&lt;p&gt;（2）a.html页面的代码：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Insert title here&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;iframe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;proxy&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;iframe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;iframe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;contentWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-      &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;iframe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;b.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//b.html是随便的一个页面，只要与a.html同源就行，目的是让a.html能访问到iframe里面的东西。&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;nt&quot;&gt;&amp;lt;iframe&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id =&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;proxy&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;www.cnblogs.com/data.html&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;style=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;display:none&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;onload=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;getData()&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;window.name 方法的优缺点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;优点: window.name容量很大，可以放置非常长的字符串（2MB）；&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;缺点: 必须监听子窗口window.name属性的变化，影响网页性能。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;html5-window-postmessage&quot;&gt;HTML5的window.postMessage&lt;/h1&gt;
-
-&lt;p&gt;HTML5引入了一个全新的API：跨文档通信 API（Cross-document messaging）。&lt;/p&gt;
-
-&lt;p&gt;这个API为window对象新增了一个&lt;code&gt;otherWindow.postMessage(message, targetOrigin)&lt;/code&gt;方法，允许跨窗口通信，不论这两个窗口是否同源。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;调用postMessage方法的window对象是指要接收消息的那一个window对象，即otherWindow: 可以是页面中iframe的contentWindow属性；window.open的返回值；通过name或下标从window.frames取到的值。&lt;/p&gt;
-
-&lt;p&gt;该方法的第一个参数message为要发送的消息，类型只能为字符串；&lt;/p&gt;
-
-&lt;p&gt;第二个参数targetOrigin用来限定接收消息的那个window对象所在的域，如果不想限定域，可以使用通配符 *  。&lt;/p&gt;
-
-&lt;p&gt;需要接收消息的window对象，可是通过监听自身的&lt;code&gt;message事件&lt;/code&gt;来获取传过来的消息，消息内容储存在该事件对象的data属性中。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;window.postMessage跨域场景：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;场景一：&lt;/strong&gt;A窗口 &lt;a href=&quot;http://aaa.com&quot;&gt;http://aaa.com&lt;/a&gt; 向B窗口 &lt;a href=&quot;http://bbb.com&quot;&gt;http://bbb.com&lt;/a&gt; 发消息。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;A页面通过postMessage方法发送消息：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;popup&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://bbb.com'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;popup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;postMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Hello World!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://bbb.com'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// Bwindow.postMessage('data', 'http://bbb.com');&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;B页面通过message事件监听并接受消息:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'message'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// data&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// Bwindow&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;origin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// http://aaa.com&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;同理，也可以B页面发送消息，然后A页面监听并接受消息。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;场景二：&lt;/strong&gt;a.com/index.html页面 向 b.com/index.html页面 发消息。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;a.com/index.html中的代码：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iframe&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ifr&quot;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b.com/index.html&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/iframe&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ifr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ifr'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;win&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ifr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;contentWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 获取window对象&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;targetOrigin&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://b.com'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 若写成'http://b.com/c/proxy.html'效果一样&lt;/span&gt;
-                                        &lt;span class=&quot;c1&quot;&gt;// 若写成'http://c.com'就不会执行postMessage了&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;win&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;postMessage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'我是来自a页面的消息'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;targetOrigin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/script&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;b.com/index.html中的代码：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onmessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;运行a页面，就能看到b页面收到了消息&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;postMessage优缺点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;优点：postMessage的使用十分简单，在处理一些和多页面通信、页面与iframe等消息通信的跨域问题时，有着很好的适用性。&lt;/li&gt;
-&lt;li&gt;缺点：&lt;a href=&quot;https://caniuse.com/#feat=x-doc-messaging&quot;&gt;IE11才完全支持&lt;/a&gt;、IE10对postMessage的支持有限制&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;通过window.postMessage，读写其他窗口的 LocalStorage 也成为了可能。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage&quot;&gt;https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;jsonp&quot;&gt;JSONP&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;JSONP跨域原理：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;在js中，我们直接用XMLHttpRequest请求不同域上的数据时，是不可以的。但是，在页面上引入不同域上的js脚本文件却是可以的，jsonp正是利用这个特性来实现的。&lt;/p&gt;
-
-&lt;p&gt;JSONP包含两部分：回调函数和数据。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;回调函数是当响应到来时要放在当前页面被调用的函数。&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;数据就是传入回调函数中的json数据，也就是回调函数的参数了。&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;JSONP跨域步骤&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;（1）网页通过添加一个script元素，向服务器请求JSON数据，这种做法不受同源政策限制；&lt;br&gt;&lt;br&gt;
-（2）服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。&lt;br&gt;&lt;br&gt;
-（3）回调函数在当前页面被立即调用，前提是浏览器定义了这个回调函数  &lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;JSONP跨域场景：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;有个a.html页面，它里面的代码需要利用ajax获取一个不同域上的json数据，假设这个json数据地址是 &lt;a href=&quot;http://example.com/data.php&quot;&gt;http://example.com/data.php&lt;/a&gt;,&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;a.html&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dosomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;jsondata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/script&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://example.com/data.php?callback=dosomething&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/script&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;script标签向服务器example.com发出请求。注意，该请求的查询字符串有一个callback参数，用来指定回调函数的名字，这对于JSONP是必需的。&lt;/p&gt;
-
-&lt;p&gt;因为是当做一个js文件来引入的，所以 &lt;a href=&quot;http://example.com/data.php&quot;&gt;http://example.com/data.php&lt;/a&gt; 返回的必须是一个能执行的js文件，所以这个页面的php代码可能是这样的:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-php&quot; data-lang=&quot;php&quot;&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$callback&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$_GET&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'callback'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 得到回调函数名
-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 要返回的数据
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$callback&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'('&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;json_encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;')'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 输出
-&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;最终那个页面输出的结果是:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;dosomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;所以通过 &lt;a href=&quot;http://example.com/data.php?callback=dosomething&quot;&gt;http://example.com/data.php?callback=dosomething&lt;/a&gt; 得到的js文件，就是我们之前定义的dosomething函数,并且它的参数就是我们需要的json数据，这样我们就跨域获得了我们需要的数据。&lt;/p&gt;
-
-&lt;p&gt;a.html&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dosomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;jsondata&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;script src=&quot;http://example.com/data.php?callback=dosomething&quot;&amp;gt;&amp;lt;/script&amp;gt; --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;dosomething&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;由于script元素请求的脚本，直接作为代码运行。这时，只要浏览器定义了dosomething函数，该函数就会立即调用。作为参数的JSON数据被视为JavaScript对象，而不是字符串，因此避免了使用JSON.parse的步骤。&lt;/p&gt;
-
-&lt;h2 id=&quot;jquery-jsonp&quot;&gt;jQuery实现JSONP&lt;/h2&gt;
-
-&lt;p&gt;1) $.getJSON方法来请求跨域数据：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//callback后面的?会由jQuery自动生成方法名&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'http://www.b.com/getdata?callback=?'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 处理获得的json数据&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;2) $.ajax方法，指定dataType为jsonp：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ajax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'http://www.b.com/getdata?callback=?'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//不指定回调名，可省略callback参数，会由jQuery自动生成&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;dataType&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'jsonp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;jsonpCallback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'demo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//可省略&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;success&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;JSONP跨域优缺点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;优点：JSONP是服务器与客户端跨源通信的常用方法。最大特点就是简单适用，老式浏览器全部支持。&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;缺点：&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;1、JSONP只支持GET请求;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;2、JSONP只支持跨域HTTP请求这种情况,不能解决不同域的两个页面之间如何进行JavaScript调用的问题;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;3、要确定jsonp请求是否失败并不容易,回调函数调用失败，浏览器会以静默失败的方式处理&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;4、安全问题(请求代码中可能存在安全隐患)&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;websocket&quot;&gt;WebSocket通信协议&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;webSocket跨域原理：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;WebSocket是一种通信协议，使用ws://（非加密）和wss://（加密）作为协议前缀。该协议&lt;code&gt;不实行同源政策&lt;/code&gt;，只要服务器支持，就可以通过它进行跨源通信。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;webSocket跨域实现步骤：&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;在JS创建了webSocket之后，会有一个HTTP请求发送到浏览器以发起连接。取得服务器响应后，建立的连接会使用HTTP升级从HTTP协议交换为webSockt协议。&lt;/p&gt;
-
-&lt;p&gt;浏览器发出的WebSocket请求的头信息&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;GET /chat HTTP/1.1
-Host: server.example.com
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
-Sec-WebSocket-Protocol: chat, superchat
-Sec-WebSocket-Version: 13
-Origin: http://example.com
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;上面代码中，有一个字段是Origin，表示该请求的&lt;code&gt;请求源（origin）&lt;/code&gt;，即发自哪个域名。&lt;/p&gt;
-
-&lt;p&gt;正是因为有了Origin这个字段，所以WebSocket才没有实行同源政策。因为服务器可以根据这个字段，判断是否许可本次通信。如果该域名在&lt;code&gt;白名单&lt;/code&gt;内，服务器就会做出如下回应。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;HTTP/1.1 101 Switching Protocols
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
-Sec-WebSocket-Protocol: chat
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;WebSocket客户端示例&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ws&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;WebSocket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;wss://echo.websocket.org&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;ws&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onopen&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;evt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; 
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Connection open ...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
-  &lt;span class=&quot;nx&quot;&gt;ws&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Hello WebSockets!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;ws&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onmessage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;evt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Received Message: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;evt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;ws&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;ws&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;onclose&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;evt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Connection closed.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2017/05/websocket.html&quot;&gt;http://www.ruanyifeng.com/blog/2017/05/websocket.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;w3c-cors&quot;&gt;W3C的CORS跨域资源共享&lt;/h1&gt;
-
-&lt;p&gt;&lt;strong&gt;CORS原理&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&amp;quot;跨域资源共享&amp;quot;（Cross-origin resource sharing）。它是W3C标准，是跨源AJAX请求的根本解决方法。&lt;/p&gt;
-
-&lt;p&gt;CORS使用了一个新的&lt;code&gt;Origin请求头&lt;/code&gt;和一个新的&lt;code&gt;Access-Control-Allow-Origin响应头&lt;/code&gt;扩展了HTTP。&lt;/p&gt;
-
-&lt;p&gt;整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。&lt;/p&gt;
-
-&lt;p&gt;因此，实现CORS通信的关键是服务器。只要&lt;code&gt;服务器实现了CORS接口&lt;/code&gt;，就可以跨源通信。&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;CORS简单请求的基本流程&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;浏览器发现这次跨源AJAX请求是简单请求，就自动在头信息之中，添加一个Origin字段。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;GET&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cors&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HTTP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;Origin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//api.bob.com&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;Host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;com&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;Accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Language&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;en&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;US&lt;/span&gt;
-&lt;span class=&quot;nl&quot;&gt;Connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;keep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;alive&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Agent&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Mozilla&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;5.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。&lt;/p&gt;
-
-&lt;p&gt;服务器端对于CORS的支持，通过设置Access-Control-Allow-Origin头标识哪些站点可以请求文件。如果浏览器检测到相应的设置，就可以允许Ajax进行跨域的访问。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;Access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Control&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Allow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Origin&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//api.bob.com&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;Access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Control&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Allow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Credentials&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;Access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Control&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Expose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Headers&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;FooBar&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;Content&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;charset&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;utf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;CORS具体例子&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;平时的ajax请求:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;xhr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;XMLHttpRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;xhr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;POST&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/damonare&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;xhr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;使用CORS的Ajax代码：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text/javascript&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;xhr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;XMLHttpRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;xhr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;￼GET&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http://segmentfault.com/u/trigkit4/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;xhr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;代码与之前的区别就在于相对路径换成了其他域的绝对路径，也就是你要跨域访问的接口地址。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;CORS跨域优缺点&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;优点：CORS支持所有类型的HTTP请求,CORS与JSONP相比，无疑更为先进、方便和可靠。&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;缺点：CORS需要浏览器和服务器同时支持。IE浏览器不能低于IE10。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2016/04/cors.html&quot;&gt;http://www.ruanyifeng.com/blog/2016/04/cors.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;all&quot;&gt;总结-all&lt;/h1&gt;
-
-&lt;p&gt;在不同域的文档之间传输数据,前端的方式:&lt;/p&gt;
-
-&lt;p&gt;对于主域相同，子域不同的父子窗口通信&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;document.domain + iframe, ①获取document.cookie; ②获取子iframe.contentWindow&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;对于完全不同源的网站，有三种方法可以解决跨域窗口的通信问题。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;location.hash + iframe，子窗口监听hashchange事件得到消息&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;window.name + iframe, 同窗口的页面共享window.name，父窗口监听子窗口window.name属性的变化得到消息&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;otherWindow.postMessage(message, targetOrigin) + iframe，子iframe监听message事件来获取父页面传过来的消息&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;hr&gt;&lt;/p&gt;
-
-&lt;p&gt;规避AJAX同源限制:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;JSONP - 前后端结合：script.src发请求，callbackFn(data)&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;WebSocket - 协议不实行同源政策，Origin请求头，服务器白名单&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;CORS跨域资源共享  - 纯后端方式: 浏览器自动添加Origin，服务器设置Access-Control-Allow-Origin白名单&lt;br&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Same-origin_policy&quot;&gt;https://en.wikipedia.org/wiki/Same-origin_policy&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html&quot;&gt;浏览器同源政策及其规避方法-阮一峰&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy&quot;&gt;https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.jianshu.com/p/beb059c43a8b&quot;&gt;https://en.wikipedia.org/wiki/Same-origin_policy 翻译&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://m.blog.csdn.net/joyhen/article/details/21631833&quot;&gt;前端解决跨域问题的8种方案（最新最全）&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/2050/p/3191744.html&quot;&gt;前端的跨域请求方法使用场景及各自的局限性&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/NOmsbKZsryTUONQj2gBFIA&quot;&gt;前端跨域知识总结-前端大全-秦至&lt;/a&gt;&lt;br&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/Ulh3dq-9eHwbS2ggOcu7jA&quot;&gt;JavaScript 跨域总结与解决办法-前端大全-rainman&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/G37_ZBIj_WkSpCyTuTpg3g&quot;&gt;那些年，那些跨域问题-前端早读课-金蝶&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-                <link>/http/2017/11/07/http-Communication</link>
-                <guid>/http/2017/11/07/http-Communication</guid>
-                <pubDate>Tue, 07 Nov 2017 00:00:00 +0800</pubDate>
         </item>
 
 
