@@ -2,7 +2,7 @@
 layout: post
 title: HTML面试题
 tags:
-- 面试题
+- Interview
 categories: HTML
 description: HTML面试题
 ---
@@ -23,6 +23,10 @@ description: HTML面试题
 
  而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。
 
+> [SGML](https://blog.csdn.net/github_39030531/article/details/72854443) - 标准通用标记语言（Standard Generalized Markup Language）
+
+> DTD - 文档类型定义（Document Type Definition）
+
 # block & inline
 - 行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
 
@@ -36,6 +40,9 @@ description: HTML面试题
     鲜为人知的是：
     <area> <base> <col> <command> <embed> <keygen> <param> <source> <track> <wbr>
 {% endhighlight %}
+
+不同浏览器（版本）、HTML4（5）、CSS2等实际略有差异
+[参考:](http://stackoverflow.com/questions/6867254/browsers-default-css-for-html-elements)
 
 # link和@import
 - 页面导入样式时，使用link和@import有什么区别？
@@ -66,10 +73,12 @@ Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等
 Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]  
 Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]  
 
+详细文章：[浏览器内核的解析和对比](http://www.cnblogs.com/fullhouse/archive/2011/12/19/2293455.html)
+
 # html5 new features
 - html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
 
-1. HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
+**HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。**
 
 绘画 canvas;  
 用于媒介回放的 video 和 audio 元素;  
@@ -79,11 +88,13 @@ sessionStorage 的数据在浏览器关闭后自动删除;
 表单控件，calendar、date、time、email、url、search;  
 新的技术webworker, websocket, Geolocation;  
 
-移除的元素：  
+**移除的元素：**
+
 纯表现的元素：basefont，big，center，font, s，strike，tt，u;  
 对可用性产生负面影响的元素：frame，frameset，noframes；
 
-2. 支持HTML5新标签：
+**支持HTML5新标签：**
+
  IE8/IE7/IE6支持通过document.createElement方法产生的标签，
  可以利用这一特性让这些浏览器支持HTML5新标签，
  浏览器支持新标签后，还需要添加标签默认的样式。
@@ -96,7 +107,9 @@ sessionStorage 的数据在浏览器关闭后自动删除;
  <![endif]-->
  {% endhighlight %}
 
-3. 如何区分HTML5： DOCTYPE声明\新增的结构元素\功能元素
+**如何区分HTML5：** 
+
+DOCTYPE声明、新增的结构元素、功能元素
 
 # 语义化-Semantic
 - 简述一下你对HTML语义化的理解？
@@ -115,8 +128,11 @@ html语义化让页面的内容结构化，结构更清晰，便于对浏览器�
 原理：HTML5的离线存储是基于一个新建的.appcache文件的缓存机制(不是存储技术)，通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储了下来。之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。
 
 如何使用：
+
 1、页面头部像下面一样加入一个manifest的属性；
+
 2、在cache.manifest文件的编写离线存储的资源；
+
 {% highlight html linenos %}
     CACHE MANIFEST
     #v0.11
@@ -128,13 +144,24 @@ html语义化让页面的内容结构化，结构更清晰，便于对浏览器�
     FALLBACK:
     / /offline.html
 {% endhighlight %}
+
 3、在离线状态时，操作window.applicationCache进行需求实现。
+
+详细的使用请参考：
+
+[HTML5 离线缓存-manifest简介](http://yanhaijing.com/html/2014/12/28/html5-manifest/)
+
+[有趣的HTML5：离线存储](http://segmentfault.com/a/1190000000732617)
 
 # application cache
 - 浏览器是怎么对HTML5的离线储存资源进行管理和加载的呢？
 
-在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
+在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行
+离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
+
 离线的情况下，浏览器就直接使用离线存储的资源。
+
+[有趣的HTML5：离线存储](https://segmentfault.com/a/1190000000732617)
 
 # cookies
 - 请描述一下 cookies，sessionStorage 和 localStorage 的区别？
@@ -143,11 +170,13 @@ cookie是网站为了标示用户身份而储存在用户本地终端（Client S
 cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。  
 sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。  
 
-存储大小：
+**存储大小：**
+    
     cookie数据大小不能超过4k。  
     sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。 
 
-有期时间：
+**有期时间：**
+    
     localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；  
     sessionStorage  数据在当前浏览器窗口关闭后自动删除。  
     cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
@@ -155,13 +184,13 @@ sessionStorage和localStorage不会自动把数据发给服务器，仅在本地
 # iframe
 - iframe有那些缺点？
 
-*iframe会阻塞主页面的Onload事件；
-*搜索引擎的检索程序无法解读这种页面，不利于SEO;
+iframe会阻塞主页面的Onload事件；
 
-*iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
+搜索引擎的检索程序无法解读这种页面，不利于SEO;
 
-使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript
-动态给iframe添加src属性值，这样可以绕开以上两个问题。
+iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
+
+使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript动态给iframe添加src属性值，这样可以绕开以上两个问题。
 
 # Label
 - Label的作用是什么？是怎么用的？
@@ -208,7 +237,9 @@ ActiveX HTMLFile (IE) 、
 - 如何在页面上实现一个圆形的可点击区域？
 
 1、map+area或者svg
+
 2、border-radius
+
 3、纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等
 
 # 1px
@@ -229,13 +260,16 @@ ActiveX HTMLFile (IE) 、
 
 title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响；
 
-strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：<strong>会重读，而<B>是展示强调内容。
+strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：\<strong>会重读，而\<B>是展示强调内容。
 
 i内容展示为斜体，em表示强调的文本；
 
-Physical Style Elements -- 自然样式标签  
-b, i, u, s, pre  
-Semantic Style Elements -- 语义样式标签  
-strong, em, ins, del, code  
+Physical Style Elements -- 自然样式标签 : b, i, u, s, pre  
+
+Semantic Style Elements -- 语义样式标签 : strong, em, ins, del, code  
+
 应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。
 
+# Reprint
+
+[转载-markYun](https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers)

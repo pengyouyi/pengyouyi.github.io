@@ -5,10 +5,471 @@
         <description>彭友谊的博客 - pengyouyi</description>
         <link></link>
         <atom:link href="" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Mon, 04 Jun 2018 15:42:07 +0800</lastBuildDate>
-        <pubDate>Mon, 04 Jun 2018 15:42:07 +0800</pubDate>
+        <lastBuildDate>Mon, 11 Jun 2018 20:06:17 +0800</lastBuildDate>
+        <pubDate>Mon, 11 Jun 2018 20:06:17 +0800</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>JavaScript原生对象常用方法总结</title>
+                <description>&lt;h1 id=&quot;array&quot;&gt;Array&lt;/h1&gt;
+
+&lt;p&gt;Array属性：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Array.length&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Array方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Array.isArray()  检测数组&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;转换方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Array.join()  数组转换成字符串&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;栈方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Array.pop()  移除数组末尾的元素&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.push()  数组末尾添加元素&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;队列方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Array.shift()  数组前端移除项&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.unshift()  数组前端添加项&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;栈方法、队列方法操作的是原数组对象，不会创建副本&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;重排序方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Array.reverse()  反转数组项的顺序&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.sort()  字符串按英文字母的ASC码升序排列；&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.sort(fn); -1，数字从小到大排列 ，1，数字降序排列&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;操作方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Array.concat()  连接，创建新数组，原数组不变&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.slice(start,end)  复制从start到end位置的新数组，原数组不变&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.splice(start,deleteCount,newItem1)    最强大的数组方法，可以删除、插入、替换，当然会修改原数组&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;位置方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Array.indexOf(searchElement,fromIndex&lt;br&gt;
+)  查找项在数组中的位置   。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.lastIndexOf()&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;迭代方法：&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Array.some()  该函数对任一项返回true，则返回true&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.every()  该函数对每一项都返回true，才返回true&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.map()  返回新数组&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.forEach()  对数组中的每一项运行给定函数，没有返回值&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.filter()  返回true的项组成的数组&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;迭代方法都不能改变原数组的值&lt;/p&gt;
+
+&lt;p&gt;归并方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Array.reduce()&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Array.reduceRight()&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cur&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;prev&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cur&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 15&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;总结：直接操作原数组的方法有：pop、push、shift、unshift、splice&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array&quot;&gt;Array-API&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;string&quot;&gt;String&lt;/h1&gt;
+
+&lt;p&gt;字符方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;String.charAt(index)  返回指定位置的字符&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.charCodeAt(index)  返回指定字符的ASCII码&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;字符串操作方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;String.concat(str1,str2,str3) 拼接两个或多个字符串,返回拼接得到的新字符串&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.slice(beginIndex,endIndex&lt;br&gt;
+)  返回被操作字符串的一个子字符串&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.substring(indexStart, indexEnd)  同上&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.substr(start,length)  同上&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;字符串的操作方法都是返回一个基本类型的字符串值，对原始字符串没有任何影响&lt;/p&gt;
+
+&lt;p&gt;字符串位置方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;String.indexOf(searchValue[, fromIndex]&lt;br&gt;
+)  返回指定字符在字符串中第一次出现的索引&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.lastIndexOf()  返回指定字符在字符串中第一次出现的索引，不过是从最后面一个字符开始查找。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;trim()方法:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;String.trim()  返回删除前置、后缀所有空格的字符串副本，原字符串不变，空格还在。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.trimLeft()&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.trimRight()&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;字符串大小写转换方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;String.toUpperCase()  把字符串转换成大写,原字符串不变&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.toLowerCase()  把字符串转换成小写&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;字符串的模式匹配方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;String.match(regexp)  用于检索与指定正则匹配的子串，如果开启了全局检索模式，且有多个符合条件的子串，那么&lt;br&gt;
+返回的是一个数组。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.search(pattern)  用于返回指定子串或符合指定正则表达式的子串在原字符串中第一次出现的索引,&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String.replace(regexp|substr, newSubstr|function)  用于字符串替换操作，接收两个参数。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;第一个参数：表示待替换的字符串，或者是替换的正则表达式&lt;/p&gt;
+
+&lt;p&gt;第二个参数：替换文本，也可以是一个function的返回值&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;replace方法不会改变原字符串对象，而是返回新字符串对象&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+&lt;li&gt;String.split(separator)  以指定的分割字符或正则表达式的匹配字符来分割原字符串，返回结果以数组形式表示。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://pengyouyi.site/js/2017/02/27/js-regexp#%E6%94%AF%E6%8C%81%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84string%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E6%B3%954%E4%B8%AA&quot;&gt;支持正则表达式的String对象的方法（4个）&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String&quot;&gt;String-API&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;转换为字符串：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;anyone.toString()  null和undefined值没有这个方法&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;String()  将任意类型的值转换为字符串&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;字符串的特点: 字符串是不可变的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;总结出：字符串执行用以上方法，都不会改变原字符串对象，都是返回新的字符串对象&lt;/p&gt;
+
+&lt;p&gt;改变某个变量保存的字符串:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;lang&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Java'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;lang&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;lang&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;' Script'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&quot;number&quot;&gt;Number&lt;/h1&gt;
+
+&lt;p&gt;Number属性:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Number.MAX_VALUE&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Number.MIN_VALUE&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Number.MAX_SAFE_INTEGER = 2^53 - 1&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Number.MIN_SAFE_INTEGER = -(2^53 - 1)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Number.MAX_SAFE_INTEGER 是 js 里整数的安全的最大值&lt;/p&gt;
+
+&lt;p&gt;Number.MAX_VALUE 则表示 js 里最大的数值约1.79E+308，比这更大的表示 Infinity&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.zhihu.com/question/36680964?from=profile_question_card&quot;&gt;javascript中Number的MAX_SAFE_INTEGER 和 MAX_VALUE？&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;数值转换方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Number.parseInt(string,[ radix ])  转为radix进制的整数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nb&quot;&gt;Number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;parseInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;  Number.parseFloat(string)  转为浮点数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;待补充：Number()、parseInt()、parseFloat() 转化规则&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;数值范围判断：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Number.isNaN()  判断是否为数字&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Number.isFinite()  判定是否是有限数字&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Number.isInteger()  判断是否为整数&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Number.isSafeInteger()&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;保留Number位数:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Number.toFixed(digits)  将数字四舍五入为指定小数位数的数字&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;参数值范围为[0,20],表示四舍五入后保留的小数位数，如果没有传入参数，默认参数值等于0&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Number.toPrecision()  将数字精确到指定长度.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;方法接收参数一个参数，参数的范围为[0,21] , 参数表示数字的位数，如果数字总位数大于参数值且数字是小数，那么会进行四舍五入，如果数字总位数小于参数值且数字是小数，那么多出的小数位会自动补零。如果数字总位数小于参数值且数字为整数，那么会改用科学计数法表示。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Number.toExponential(i)  科学计数形式&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Number.toString([radix])  radix取值必须为2~36&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;toFixed()、toPrecision()、toExponential(i)、toString() 这4个方法返回的是字符串类型的值，原来的数字类型还是数字&lt;/p&gt;
+
+&lt;p&gt;Number中的NaN、Infinity 为全局属性&lt;/p&gt;
+
+&lt;p&gt;Number中的parseInt()、parseFloat()、isNaN()、isFinite()也为全局方法&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/susufufu/p/5853342.html&quot;&gt;全局属性、全局方法&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;番外篇：《js高级程序设计》5.7节单体内置对象：Global对象、Math对象&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number&quot;&gt;Number-API&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;object&quot;&gt;Object&lt;/h1&gt;
+
+&lt;p&gt;Object属性：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;obj.constructor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Object方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;object.valueOf()&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;obj.toString()&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;obj.toLocaleString()&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Object原型相关：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;obj.hasOwnProperty(propName)  检测给定的属性在当前对象实例中（而不是在实例的原型中）&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;prototypeObj.isPrototypeOf(object)  用于检测传入的对象是否是传入对象的原型&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Object.getPrototypeOf(obj)  获取obj的原型&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Object.assign(target, ...sources&lt;br&gt;
+)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Object.create(proto[, propertiesObject]&lt;br&gt;
+)  使用指定的原型对象和其属性创建了一个新的对象。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/snandy/p/5278474.html&quot;&gt;Object属性相关：&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Object.defineProperty(obj, prop, descriptor)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Object.seal(obj)  密封对象&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Object.freeze(obj)  冻结对象&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Object.preventExtensions(obj)  扩展对象&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Object 其他方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Object.is(value1, value2);  跟&amp;quot;==&amp;quot;和&amp;quot;===&amp;quot; 都不同&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object&quot;&gt;Object-API&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;date&quot;&gt;Date&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// 距1970-01-01的毫秒数&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dateString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;dateString格式如下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;nx&quot;&gt;yyyy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;yyyy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;MM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;yyyy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HH&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mm&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ss&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;yyyy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;MM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HH&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mm&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ss&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;yyyy&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;MM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;yyyy&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;yyyy&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HH&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mm&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ss&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;MM&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;yyyy&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HH&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mm&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ss&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;获取毫秒数：&lt;/p&gt;
+
+&lt;p&gt;返回距离1970年1月1日午夜（零时）之间的毫秒数的3个方法&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Date.parse(dateString)  将符合规定的日期字符串转换成日期，并返回该日期至1970-01-01的毫秒数&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Date.UTC(year, month[, day[, hour[, minute[, second[, millisecond]]]]])&lt;br&gt;
+两个参数（年和月）是必须的&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Date.parse() 和 Date.UTC() 方法返回的毫秒数可以传递给Date()构造函数&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;someDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;May 25, 2004&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;otherDate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;UTC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2018, 5&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Date.now()  调用这个方法时的日期和时间的毫秒数，Date对象的时间戳&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;获取和设置dateObj的时间/日期：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;dateObj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;dateObj.getTime()  返回表示日期的毫秒数，同valueOf()&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.getFullYear()  年&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.getMonth()  月，0~11&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.getDate()  日&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.getHours()  时&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.getMinutes()  分&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.getSeconds()  秒&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.getDay()  星期几（0表示星期日，6表示星期六）&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;set方法对应以上get方法&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;dateObj.setTime(毫秒)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.setFullYear(年)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;theBigDay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;theBigDay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setFullYear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1997&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;继承的方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;dateObj.valueOf()&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.toString()&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.toLocaleString()&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;日期格式化方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;dateObj.toUTCString()&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.toDateString()&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;dateObj.toTimeString()&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date&quot;&gt;Date-API&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;math&quot;&gt;Math&lt;/h1&gt;
+
+&lt;p&gt;Math对象的属性：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Math.PI  ∏&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Math.E  自然对数的底数e&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;数值最大最小方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Math.max(val1,val2,val3...)  返回一组数值中的最大值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-js&quot; data-lang=&quot;js&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;max&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;54&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// 54&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;maxVal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Math.min()  返回一组数值中的最小值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;舍入方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Math.floor(x)  向下取整&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Math.ceil(x)  向上取整&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Math.round(x)  四舍五入&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;随机方法:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Math.random()  [0,1)之间的随机数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;值 = Math.floor(Math.random() * 可能值的总数 + 第一个可能的值)&lt;/p&gt;
+
+&lt;p&gt;其他方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Math.abs(num)  取绝对值&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Math.pow(num, power)  num的power次幂&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Math.sqrt(num)  num的平方根&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Math.sin(x)  x的正弦值&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math&quot;&gt;Math-API&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;regexp&quot;&gt;RegExp&lt;/h1&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-&quot; data-lang=&quot;&quot;&gt;/pattern/flags
+
+new RegExp(patternStr[, flags])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;RegExp对象属性：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;global  RegExp对象是否具有标志 g 全局模式。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;ignoreCase  RegExp对象是否具有标志 i 不区分大小写。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;multiline  RegExp 对象是否具有标志 m 多行模式&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;lastIndex  一个整数，标示开始下一次匹配的字符位置。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;RegExp实例方法：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;RegExp.test  检索字符串中指定的值。返回 true 或 false。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;RegExp.exec  检索字符串中指定的值。返回找到的值，并确定其位置。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://pengyouyi.site/js/2017/02/27/js-regexp#regexp%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7&quot;&gt;RegExp对象属性、方法（3个）&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp&quot;&gt;RegExp-API&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/panruifang/article/details/42290303&quot;&gt;JavaScript原生对象常用方法总结&lt;/a&gt;&lt;/p&gt;
+</description>
+                <link>/js/2018/06/11/js-obj-arr-str</link>
+                <guid>/js/2018/06/11/js-obj-arr-str</guid>
+                <pubDate>Mon, 11 Jun 2018 00:00:00 +0800</pubDate>
+        </item>
 
         <item>
                 <title>常用 Git 命令</title>
@@ -4715,23 +5176,6 @@ object 的 __proto__ 一层一层往上，能否对应到constructor.prototype&l
                 <link>/js/2017/11/09/js-object</link>
                 <guid>/js/2017/11/09/js-object</guid>
                 <pubDate>Thu, 09 Nov 2017 00:00:00 +0800</pubDate>
-        </item>
-
-        <item>
-                <title>前后端如何通信</title>
-                <description>&lt;h1 id=&quot;method&quot;&gt;前后端通讯的方式-method&lt;/h1&gt;
-
-&lt;p&gt;1、AJAX(同源下的通讯)&lt;br&gt;
-2、WebSocket（不受同源策略限制）&lt;br&gt;
-3、CORS（支持跨域通讯也支持同源通讯）&lt;/p&gt;
-
-&lt;h1 id=&quot;more&quot;&gt;更多-more&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_c112a2980102xm9b.html&quot;&gt;http://blog.sina.com.cn/s/blog_c112a2980102xm9b.html&lt;/a&gt;&lt;/p&gt;
-</description>
-                <link>/http/2017/11/08/Communication-front-end</link>
-                <guid>/http/2017/11/08/Communication-front-end</guid>
-                <pubDate>Wed, 08 Nov 2017 00:00:00 +0800</pubDate>
         </item>
 
 
