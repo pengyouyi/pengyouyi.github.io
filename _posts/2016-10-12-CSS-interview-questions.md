@@ -492,7 +492,8 @@ select:-webkit-autofill {
 ```
 
 # font-style:oblique;
-- ## font-style属性可以让它赋值为“oblique” oblique是什么意思？
+
+- font-style属性可以让它赋值为“oblique” oblique是什么意思？
 
 [倾斜的字体样式](http://www.runoob.com/cssref/pr-font-font-style.html)
 
@@ -874,13 +875,55 @@ webp<JGP<PNG
 [gif、jpg、png、webp图片格式比较](http://www.sohu.com/a/111891781_165433)
 
 # FOUC
+
+- 什么是FOUC？你如何来避免FOUC？
+
+由于css引入使用了@import 或者存在多个style标签以及css文件在页面底部引入使得css文件加载在html之后导致页面闪烁、花屏
+
 - style标签写在body后与body前有什么区别？
 
 写在head标签中利于浏览器逐步渲染（resources downloading->CSSOM+DOM->RenderTree(composite)->Layout->paint）。
 
 写在body标签后由于浏览器以逐行方式对html文档进行解析，当解析到写在尾部的样式表（外联或写在style标签）会导致浏览器停止之前的渲染，等待加载且解析样式表完成之后重新渲染，在windows的IE下可能会出现FOUC现象（即样式失效导致的页面闪烁问题）
 
-建议：一般样式都放在 head 之间
+建议：用link加载css文件，一般样式放在head标签里面
+
+# 解释em
+
+```js
+document.getElementById("ElementID").style.fontSize="1.5em" 
+```
+
+em是个相对单位。
+
+# readonly & disable
+
+- form中的input可以设置为readonly和disable，请问二者有什么区别？
+
+readonly不可编辑，但可以选择和复制；值可以传递到后台  
+
+disabled不能编辑，不能复制，不能选择；值不可以传递到后台
+
+# 优雅降级 graceful degradation
+
+- 什么叫优雅降级和渐进增强？
+
+**渐进增强 progressive enhancement：**  
+
+针对低版本浏览器进行构建页面，保证最基本的功能，然后再针对高级浏览器进行效果、交互等改进和追加功能达到更好的用户体验。 
+
+**优雅降级 graceful degradation：** 
+
+一开始就构建完整的功能，然后再针对低版本浏览器进行兼容。   
+
+**区别：** 
+
+a. 优雅降级是从复杂的现状开始，并试图减少用户体验的供给 
+
+b. 渐进增强则是从一个非常基础的，能够起作用的版本开始，并不断扩充，以适应未来环境的需要 
+
+c. 降级（功能衰减）意味着往回看；而渐进增强则意味着朝前看，同时保证其根基处于安全地带
+
 
 
 # 更多-more
