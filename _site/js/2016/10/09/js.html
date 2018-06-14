@@ -405,7 +405,9 @@ proName是必选项。一个属性名称的字符串值。</p>
 
 <h2 id="closure">闭包（closure）</h2>
 
-<p>-什么是闭包（closure），为什么要用它？</p>
+<ul>
+<li>什么是闭包（closure），为什么要用它？</li>
+</ul>
 
 <p>闭包是指有权访问另一个函数作用域中变量的函数，创建闭包的最常见的方式就是在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量,利用闭包可以突破作用链域，将函数内部的变量和方法传递到外部。</p>
 
@@ -416,6 +418,8 @@ proName是必选项。一个属性名称的字符串值。</p>
 <p>2.内部函数可以引用外层的参数和变量</p>
 
 <p>3.参数和变量不会被垃圾回收机制回收</p>
+
+<p>法一：</p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
@@ -450,7 +454,7 @@ proName是必选项。一个属性名称的字符串值。</p>
     <span class="kd">var</span> <span class="nx">ulEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">liEle</span> <span class="o">=</span> <span class="nx">ulEle</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">liEle</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span> <span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
         <span class="nx">liEle</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">){</span>
             <span class="k">return</span> <span class="kd">function</span><span class="p">(){</span>
                 <span class="nx">alert</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span>
@@ -461,6 +465,98 @@ proName是必选项。一个属性名称的字符串值。</p>
     
 <span class="nt">&lt;/script&gt;</span><span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>法二：</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></td><td class="code"><pre><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 1<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 2<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 3<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 4<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span> index = 5<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">ulEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">liEle</span> <span class="o">=</span> <span class="nx">ulEle</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">liEle</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">liEle</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">index</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span> <span class="c1">//给每个li定义一个属性索引值</span>
+    <span class="nx">liEle</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">index</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>法三：</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></td><td class="code"><pre><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li&gt;</span> index = 1<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span> index = 2<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span> index = 3<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span> index = 4<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span> index = 5<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">ulEle</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">liEle</span> <span class="o">=</span> <span class="nx">ulEle</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">liEle</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span> <span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">liEle</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">})(</span><span class="nx">i</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><a href="https://blog.csdn.net/clh386/article/details/78560002?locationNum=3&amp;fps=1">JS中for循环出现的问题：如何给li元素绑定事件，点击每个li元素弹出对应的索引？</a></p>
 
 <h2 id="this">this</h2>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">User</span> <span class="o">=</span> <span class="p">{</span>
@@ -1195,7 +1291,7 @@ proName是必选项。一个属性名称的字符串值。</p>
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>55</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>62</sup></a></li>
 		  
 		
 		  
@@ -1284,7 +1380,7 @@ proName是必选项。一个属性名称的字符串值。</p>
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>7</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>14</sup></a></li>
 			
 		
 			
@@ -1353,6 +1449,10 @@ proName是必选项。一个属性名称的字符串值。</p>
 		
 			
 				<li><a href="/tags/#算法" title="算法">算法<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#imooc" title="imooc">imooc<sup>7</sup></a></li>
 			
 		
 		</ul>

@@ -259,6 +259,16 @@
 <span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getMost</span><span class="p">(</span><span class="nx">str</span><span class="p">).</span><span class="nx">index</span><span class="p">);</span>
 </code></pre></div>
+<h2 id="string">获取随机String</h2>
+
+<ul>
+<li>获取随机数，要求是长度一致的字符串格式</li>
+</ul>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">random</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+<span class="nx">random</span> <span class="o">=</span> <span class="nx">random</span> <span class="o">+</span> <span class="s1">'00000000'</span><span class="p">;</span>
+<span class="nx">random</span> <span class="o">=</span> <span class="nx">random</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">random</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="showtime">按照格式showTime</h2>
 
 <ul>
@@ -666,7 +676,40 @@
 <p><a href="http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance.html">构造函数的继承</a></p>
 
 <p><a href="http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance_continued.html">非构造函数的继承</a></p>
-  
+
+<h2 id="foreach">重写forEach</h2>
+
+<ul>
+<li>写一个能遍历对象和数组的通用forEach函数</li>
+</ul>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">forEach</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">key</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 准确判断是不是数组</span>
+    <span class="nx">obj</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">fn</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// 不是数组就是对象</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">fn</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="nx">forEach</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">x</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="na">y</span><span class="p">:</span> <span class="mi">200</span>
+<span class="p">}</span>
+<span class="nx">forEach</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>  
 	</div>
 	<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -773,7 +816,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>55</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>62</sup></a></li>
 		  
 		
 		  
@@ -862,7 +905,7 @@
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>7</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>14</sup></a></li>
 			
 		
 			
@@ -931,6 +974,10 @@
 		
 			
 				<li><a href="/tags/#算法" title="算法">算法<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#imooc" title="imooc">imooc<sup>7</sup></a></li>
 			
 		
 		</ul>

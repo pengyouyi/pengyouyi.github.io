@@ -111,6 +111,17 @@ function getMost(str){
 console.log(getMost(str).index);
 ```
 
+## 获取随机String
+
+- 获取随机数，要求是长度一致的字符串格式
+
+```js
+var random = Math.random();
+random = random + '00000000';
+random = random.slice(0,10);
+console.log(random);
+```
+
 ## 按照格式showTime 
 
 - xxxx年xx月xx日xx时xx分xx秒动态显示时间 要求不足10的补0 
@@ -574,3 +585,41 @@ sub2.sayAge();
 [构造函数的继承](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance.html)
 
 [非构造函数的继承](http://www.ruanyifeng.com/blog/2010/05/object-oriented_javascript_inheritance_continued.html)
+
+
+## 重写forEach
+
+- 写一个能遍历对象和数组的通用forEach函数
+
+```js
+function forEach(obj, fn) {
+  var key;
+  if (obj instanceof Array) {
+  	// 准确判断是不是数组
+  	obj.forEach(function(item, index) {
+  		fn(index, item);
+  	});
+  } else {
+  	// 不是数组就是对象
+  	for (key in obj) {
+  		fn(key, obj[key])
+  	}
+  }
+}
+
+var arr = [1, 2, 3];
+forEach(arr, function(index, item) {
+	console.log(index, item);
+});
+
+var obj = {
+	x: 100,
+	y: 200
+}
+forEach(obj, function(key, value) {
+	console.log(key, value);
+});
+```
+
+
+
