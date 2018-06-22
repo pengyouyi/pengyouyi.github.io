@@ -373,65 +373,99 @@ module.exports = {
 
 ## 上线回滚 - linux基础命令
 
+**目录操作：**
+
 ```js
-mkdir a
+mkdir a  创建目录
 
-ls
+ls  列出目录的内容及其内容属性信息
 
-ll
+ls -l = ll 【 ll不是命令，是ls -l的别名 】列出文件的详细信息，有时间，是否可读写等信息 
 
-cd
+ls ‐a  显示目录下的所有文件，包括隐藏文件 
 
-pwd
+cd  从当前工作目录切换到指定的工作目录。
 
-cd ..
+pwd  显示当前工作目录的绝对路径。
 
-rm -rf a
+cd ..  进入上一层目录
 
-vi a.js
+cp a.js a1.js  复制文件或目录
 
-cp a.js a1.js
+mv a1.js src/a1.js  移动或重命名文件
 
-ll
+rm  删除一个或多个文件或目录
 
-mkdir src
+rm -rf a  删除所有内容，包含目录和文件，r表示递归，f表示强制 
 
-ll
-
-mv a1.js src/a1.js
-
-ll
-
-rm a.js
+rmdir  删除空目录
 ```
+
+**文件操作：**
+
+```js
+vi/vim a.js  命令行文本编辑器
+
+touch  创建新的空文件，改变已有文件的时间戳属性。
+
+cat a.js  连接文件并打印到标准输出设备上，cat经常用来显示文件的内容
+
+head a.js  显示文件的开头的内容。默认显示文件的头10行内容。
+
+tail a.js  显示文件内容的尾部，默认10行
+
+head -n 5 a.js  显示前5行
+
+tail -n 8 a.js  显示后8行
+
+grep '2' a.js  是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。
+```
+
+- 文件和目录操作命令
+
+- 查看文件及内容处理命令
+
+- 文件压缩及解压缩命令
+
+- 信息显示命令
+
+- 搜索文件命令
+
+- 用户管理命令
+
+- 基础网络操作命令
+
+- 有关磁盘与文件系统的命令
+
+- 系统权限及用户授权相关命令
+
+- 系统管理与性能监视命令
+
+- 关机 / 重启 / 注销和查看系统信息的命令
+
+- 进程管理相关命令
+
+[Linux命令大全](http://man.linuxde.net/)
+
+[Linux基础命令](https://blog.csdn.net/rufin89/article/details/79379908)
+
+> 从命令模式切换到编辑模式使用“A”、“a”、“O”、“o”、“I”、“i”键。
+
+> 从编辑模式切换到命令模式使用“esc”键，
 
 **vim**
+
 ```js
-vim a.js
+vim a.js  编辑文件
 
-i
+i  在当前字符前插入文本
 
-esc
+esc  从编辑模式切换到命令模式
 
-:wq
-
-cat a.js
-
-head a.js
-
-tail a.js
-
-head -n 1 a.js
-
-tail -n 2 a.js
-
-grep '2' a.js  
-
-vi a.js
+:wq  在命令模式下，执行存盘退出操作
 ```
 
-
-
+[vi命令](http://man.linuxde.net/vi)
 
 
 

@@ -1,10 +1,11 @@
 ---
 layout: post
-title: css多栏布局方案
+title: css三栏布局的8种方案
 tags:
-- 布局
+- Interview
+- layout
 categories: CSS
-description: css多栏布局常见的几种方法
+description: css三栏布局的8种方案
 ---
 
 # css多栏布局
@@ -665,6 +666,10 @@ BFC 区域，不会与浮动元素重叠
 
 3. 拥抱flex布局,展望grid网格布局。
 
+**去掉高度已知，哪种方案还可以用**
+
+flex 和 表格布局 还能表现完美
+
 # 页面布局的延伸-layout
 
 - 常用居中方法
@@ -696,3 +701,4 @@ BFC 区域，不会与浮动元素重叠
 - [http://www.debugrun.com/a/O57CQWk.html](http://www.debugrun.com/a/O57CQWk.html)
 - [http://www.imooc.com/article/2235](http://www.imooc.com/article/2235)
 - [http://www.imooc.com/article/17719](http://www.imooc.com/article/17719)
+- [详解CSS实现三栏布局的七种方法](http://kmknkk.xin/2018/03/02/CSS%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/)

@@ -7,7 +7,7 @@
     
     
     
-    <title>慕课网-前端JavaScript面试技巧(双越)- | 彭友谊的博客</title>
+    <title>慕课网-前端JavaScript面试技巧(双越)-异步和单线程 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="慕课网-前端JavaScript面试技巧(双越)-">
-    <meta property="og:url" content="/js/2018/06/14/muke-js-interview-shuangyue-demo">
+    <meta property="og:title" content="慕课网-前端JavaScript面试技巧(双越)-异步和单线程">
+    <meta property="og:url" content="/js/2018/06/14/muke-primary-interview-shuangyue-yibu">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="慕课网-前端JavaScript面试技巧(双越)-">
+    <meta property="og:description" content="慕课网-前端JavaScript面试技巧(双越)-异步和单线程">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="慕课网-前端JavaScript面试技巧(双越)-">
+    <meta name="twitter:title" content="慕课网-前端JavaScript面试技巧(双越)-异步和单线程">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,7 +144,7 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2018/06/14/muke-js-interview-shuangyue-demo" title="慕课网-前端JavaScript面试技巧(双越)-" itemprop="url">慕课网-前端JavaScript面试技巧(双越)-</a>
+      <a href="/js/2018/06/14/muke-primary-interview-shuangyue-yibu" title="慕课网-前端JavaScript面试技巧(双越)-异步和单线程" itemprop="url">慕课网-前端JavaScript面试技巧(双越)-异步和单线程</a>
   </h1>
   <p class="article-author">By
        
@@ -163,17 +163,172 @@
 		
 		</div>
 		
-		<p>慕课网学习笔记-前端JavaScript面试技巧(双越)- </p>
+		<p>慕课网学习笔记-前端JavaScript面试技巧(双越)- 第4章 JS基础知识（下）- 异步和单线程</p>
 
 <h1 id="question">question</h1>
 
 <p><strong>题目：</strong></p>
 
+<p>1、同步和异步的区别是什么？分别举一个同步和异步的例子</p>
+
+<p>2、一个关于setTimeout的笔试题</p>
+
+<p>3、前端使用异步的场景有哪些</p>
+
 <h1 id="knowledge-point">Knowledge-point</h1>
 
 <p><strong>知识点：</strong></p>
 
+<ul>
+<li><p>什么是异步（对比同步）</p></li>
+<li><p>前端使用异步的场景</p></li>
+<li><p>异步和单线程</p></li>
+</ul>
+
+<h2 id="what">什么(what)是异步</h2>
+
+<p><strong>异步</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+</code></pre></div>
+<p>结果：</p>
+
+<p>100<br>
+300<br>
+200【1s后打印】</p>
+
+<p><strong>同步</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'peng'</span><span class="p">);</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s1">'you'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'yi'</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="when">何时(when)需要异步</h3>
+
+<ul>
+<li><p>在可能发生等待的情况</p></li>
+<li><p>等待过程中不能像alert一样阻塞程序运行</p></li>
+<li><p>因此，所有的“等待的情况”都不要异步</p></li>
+</ul>
+
+<h2 id="front-end">front-end使用异步的场景</h2>
+
+<p><strong>前端使用异步的场景</strong></p>
+
+<ul>
+<li><p>定时任务：setTimeout、setInterval</p></li>
+<li><p>网络请求：ajax请求，动态<code>&lt;img&gt;</code>加载</p></li>
+<li><p>事件绑定</p></li>
+</ul>
+
+<p><em>ajax请求代码示例</em></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'./data1.json'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data1</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
+</code></pre></div>
+<p><em>img加载</em></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'img'</span><span class="p">);</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'loaded'</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'/xxx.png'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
+</code></pre></div>
+<p><em>事件绑定</em></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn1'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'clicked'</span><span class="p">);</span>
+<span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="single-thread">单线程-Single-thread</h2>
+
+<p>单线程</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+</code></pre></div>
+<p>结果：<br>
+100<br>
+300<br>
+200</p>
+
+<p><em>以上程序执行过程分析：</em></p>
+
+<ul>
+<li><p>执行第一行，打印100</p></li>
+<li><p>执行setTimeout后，传入setTimeout的函数会被暂存起来，不会立即执行（单线程的特点，不能同时干两件事）</p></li>
+<li><p>执行最后一行，打印300</p></li>
+<li><p>待所有程序执行完，处于空闲状态时，会立马看有没有暂存起来的要执行。</p></li>
+<li><p>发现暂存起来的setTimeout中的函数无需等待时间，就立即过来执行</p></li>
+</ul>
+
 <h1 id="answer">Answer</h1>
+
+<h2 id="and">同步and异步</h2>
+
+<p><strong>同步和异步的区别是什么？分别举一个同步和异步的例子</strong></p>
+
+<ul>
+<li><p>同步会阻塞代码执行，而异步不会</p></li>
+<li><p>alert是同步，setTimeout 是异步</p></li>
+</ul>
+
+<h2 id="settimeout">setTimeout</h2>
+
+<ul>
+<li>一个关于setTimeout的笔试题</li>
+</ul>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+  <span class="p">},</span><span class="nx">i</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>以上执行结果是：每过1s都输出5，</p>
+
+<p>修改让其每隔1s弹出0，1，2，3，4</p>
+
+<p>法一：</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="p">},</span><span class="nx">i</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+  <span class="p">})(</span><span class="nx">i</span><span class="p">);</span> 
+<span class="p">}</span>
+</code></pre></div>
+<p>法二：</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">((</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">})(</span><span class="nx">i</span><span class="p">),</span><span class="nx">i</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>法三：</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+  <span class="p">},</span><span class="nx">i</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>法四：<br>
+ES6的Promise、ES7的 async/await</p>
+
+<blockquote>
+<p>setTimeout 不支持传带参数的函数</p>
+</blockquote>
+
+<p><a href="https://www.cnblogs.com/destinyruru/p/5823760.html">setTimeout(function(){}，0)</a></p>
 
 <h1 id="more">更多-more</h1>
 
@@ -220,7 +375,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2018/06/14/muke-js-interview-shuangyue-demo" data-title="慕课网-前端JavaScript面试技巧(双越)- | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2018/06/14/muke-primary-interview-shuangyue-yibu" data-title="慕课网-前端JavaScript面试技巧(双越)-异步和单线程 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -232,18 +387,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2018/06/14/muke-js-interview-shuangyue-bibao" title="慕课网-前端JavaScript面试技巧(双越)-作用域、闭包">
+ <a href="/js/2018/06/14/muke-primary-interview-shuangyue-proto" title="慕课网-前端JavaScript面试技巧(双越)-原型和原型链">
   <strong>上一篇：</strong><br/>
   <span>
-  慕课网-前端JavaScript面试技巧(双越)-作用域、闭包</span>
+  慕课网-前端JavaScript面试技巧(双越)-原型和原型链</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/js/2018/06/14/muke-js-interview-shuangyue-dev-environment"  title="慕课网-前端JavaScript面试技巧(双越)-开发环境">
+<a href="/js/2018/06/21/js-type-conversion"  title="js显示类型转换&隐式类型转换">
  <strong>下一篇：</strong><br/> 
- <span>慕课网-前端JavaScript面试技巧(双越)-开发环境
+ <span>js显示类型转换&隐式类型转换
 </span>
 </a>
 </div>
@@ -287,7 +442,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>64</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>65</sup></a></li>
 		  
 		
 		  
@@ -376,11 +531,11 @@
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>16</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>20</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#布局" title="布局">布局<sup>10</sup></a></li>
+				<li><a href="/tags/#布局" title="布局">布局<sup>8</sup></a></li>
 			
 		
 			
@@ -392,11 +547,15 @@
 			
 		
 			
-				<li><a href="/tags/#js事件" title="js事件">js事件<sup>5</sup></a></li>
+				<li><a href="/tags/#DOM" title="DOM">DOM<sup>5</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/#性能" title="性能">性能<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#js事件" title="js事件">js事件<sup>1</sup></a></li>
 			
 		
 			
@@ -432,6 +591,10 @@
 			
 		
 			
+				<li><a href="/tags/#layout" title="layout">layout<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/#面试题" title="面试题">面试题<sup>3</sup></a></li>
 			
 		
@@ -449,6 +612,10 @@
 		
 			
 				<li><a href="/tags/#imooc" title="imooc">imooc<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -2,7 +2,7 @@
 layout: post
 title: DOM事件流
 tags:
-- js事件
+- DOM
 categories: JS
 description: DOM事件流
 ---

@@ -7,7 +7,7 @@
     
     
     
-    <title>慕课网-前端JavaScript面试技巧(双越)-异步和单线程 | 彭友谊的博客</title>
+    <title>js显示类型转换&隐式类型转换 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="慕课网-前端JavaScript面试技巧(双越)-异步和单线程">
-    <meta property="og:url" content="/js/2018/06/14/muke-js-interview-shuangyue-yibu">
+    <meta property="og:title" content="js显示类型转换&隐式类型转换">
+    <meta property="og:url" content="/js/2018/06/21/js-type-conversion">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="慕课网-前端JavaScript面试技巧(双越)-异步和单线程">
+    <meta property="og:description" content="js显示类型转换&隐式类型转换">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="慕课网-前端JavaScript面试技巧(双越)-异步和单线程">
+    <meta name="twitter:title" content="js显示类型转换&隐式类型转换">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -144,14 +144,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2018/06/14/muke-js-interview-shuangyue-yibu" title="慕课网-前端JavaScript面试技巧(双越)-异步和单线程" itemprop="url">慕课网-前端JavaScript面试技巧(双越)-异步和单线程</a>
+      <a href="/js/2018/06/21/js-type-conversion" title="js显示类型转换&隐式类型转换" itemprop="url">js显示类型转换&隐式类型转换</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2018-06-14 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-06-14</time>
+    <time datetime="2018-06-21 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-06-21</time>
     
   </p>
 </header>
@@ -163,176 +163,176 @@
 		
 		</div>
 		
-		<p>慕课网学习笔记-前端JavaScript面试技巧(双越)- 第4章 JS基础知识（下）- 异步和单线程</p>
+		<h1 id="data-type">数据类型data-type</h1>
 
-<h1 id="question">question</h1>
+<p>7种数据类型</p>
 
-<p><strong>题目：</strong></p>
+<p><strong>原始类型：</strong></p>
 
-<p>1、同步和异步的区别是什么？分别举一个同步和异步的例子</p>
+<p>Undefined、Null、Boolean、String、Number、Symbol、</p>
 
-<p>2、一个关于setTimeout的笔试题</p>
+<p><strong>对象：</strong></p>
 
-<p>3、前端使用异步的场景有哪些</p>
+<p>Object</p>
 
-<h1 id="knowledge-point">Knowledge-point</h1>
+<h1 id="explicit">显式类型转换-Explicit</h1>
 
-<p><strong>知识点：</strong></p>
+<p>js高程p26~p34</p>
 
-<ul>
-<li><p>什么是异步（对比同步）</p></li>
-<li><p>前端使用异步的场景</p></li>
-<li><p>异步和单线程</p></li>
-</ul>
-
-<h2 id="what">什么(what)是异步</h2>
-
-<p><strong>异步</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
-<span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
-</code></pre></div>
-<p>结果：</p>
-
-<p>100<br>
-300<br>
-200【1s后打印】</p>
-
-<p><strong>同步</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'peng'</span><span class="p">);</span>
-<span class="nx">alert</span><span class="p">(</span><span class="s1">'you'</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'yi'</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="when">何时(when)需要异步</h3>
-
-<ul>
-<li><p>在可能发生等待的情况</p></li>
-<li><p>等待过程中不能像alert一样阻塞程序运行</p></li>
-<li><p>因此，所有的“等待的情况”都不要异步</p></li>
-</ul>
-
-<h2 id="front-end">front-end使用异步的场景</h2>
-
-<p><strong>前端使用异步的场景</strong></p>
-
-<ul>
-<li><p>定时任务：setTimeout、setInterval</p></li>
-<li><p>网络请求：ajax请求，动态<code>&lt;img&gt;</code>加载</p></li>
-<li><p>事件绑定</p></li>
-</ul>
-
-<p><em>ajax请求代码示例</em></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'./data1.json'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data1</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
-</code></pre></div>
-<p><em>img加载</em></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'img'</span><span class="p">);</span>
-<span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'loaded'</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'/xxx.png'</span><span class="p">;</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
-</code></pre></div>
-<p><em>事件绑定</em></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn1'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s1">'clicked'</span><span class="p">);</span>
-<span class="p">})</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
-</code></pre></div>
-<h2 id="single-thread">单线程-Single-thread</h2>
-
-<p>单线程</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
-<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
-<span class="p">});</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
-</code></pre></div>
-<p>结果：<br>
-100<br>
-300<br>
-200</p>
-
-<p><em>以上程序执行过程分析：</em></p>
-
-<ul>
-<li><p>执行第一行，打印100</p></li>
-<li><p>执行setTimeout后，传入setTimeout的函数会被暂存起来，不会立即执行（单线程的特点，不能同时干两件事）</p></li>
-<li><p>执行最后一行，打印300</p></li>
-<li><p>待所有程序执行完，处于空闲状态时，会立马看有没有暂存起来的要执行。</p></li>
-<li><p>发现暂存起来的setTimeout中的函数无需等待时间，就立即过来执行</p></li>
-</ul>
-
-<h1 id="answer">Answer</h1>
-
-<h2 id="and">同步and异步</h2>
-
-<p><strong>同步和异步的区别是什么？分别举一个同步和异步的例子</strong></p>
-
-<ul>
-<li><p>同步会阻塞代码执行，而异步不会</p></li>
-<li><p>alert是同步，setTimeout 是异步</p></li>
-</ul>
-
-<h2 id="settimeout">setTimeout</h2>
-
-<ul>
-<li>一个关于setTimeout的笔试题</li>
-</ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-  <span class="p">},</span><span class="nx">i</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>以上执行结果是：每过1s都输出5，</p>
-
-<p>修改让其每隔1s弹出0，1，2，3，4</p>
-
-<p>法一：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-    <span class="p">},</span><span class="nx">i</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-  <span class="p">})(</span><span class="nx">i</span><span class="p">);</span> 
-<span class="p">}</span>
-</code></pre></div>
-<p>法二：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">setTimeout</span><span class="p">((</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">})(</span><span class="nx">i</span><span class="p">),</span><span class="nx">i</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>法三：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-  <span class="p">},</span><span class="nx">i</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
-<p>法四：<br>
-ES6的Promise、ES7的 async/await</p>
+<h2 id="boolean">Boolean函数</h2>
 
 <blockquote>
-<p>setTimeout 不支持传带参数的函数</p>
+<p>Boolean()</p>
+
+<p>!!</p>
 </blockquote>
 
-<p><a href="https://www.cnblogs.com/destinyruru/p/5823760.html">setTimeout(function(){}，0)</a></p>
+<p>天生为假值的有：<code>undefined</code>、<code>null</code>、<code>0</code>、<code>NaN</code>、<code>&quot;&quot;</code></p>
+
+<p><a href="http://pengyouyi.site/js/2017/03/30/js-toBoolean">js显示、隐式转为布尔值</a></p>
+
+<h2 id="number">Number函数</h2>
+
+<p>有3个函数可以把非数值转换为数值：Number()、parseInt()、parseFloat()</p>
+
+<blockquote>
+<p>Number()可以用于任何数据类型</p>
+
+<p>parseInt()、parseFloat() 专门用于把字符串转换成数值</p>
+</blockquote>
+
+<h3 id="number"><strong>Number()转换规则</strong></h3>
+
+<p><strong>❀ 原始类型转换</strong></p>
+
+<ul>
+<li>数值：转换后还是原来的值</li>
+<li>布尔值：true转成1, false转成0</li>
+<li>null: 转成0</li>
+<li>undefined: 转成 NaN</li>
+<li>字符串：如果可以被解析为数值，则转换为相应的数值，否则得到NaN。空字符串转为0。</li>
+</ul>
+
+<p><strong>❀ 对象类型转换</strong></p>
+
+<p>❶ 先调用对象的valueOf()方法，如果该方法返回原始类型的值（数值、字符串、布尔），则直接对该值使用Number()方法，不再进行后续步骤。</p>
+
+<p>❷ 如果valueOf()方法返回复合类型的值，再调用对象自身的toString()方法，如果toString()方法返回原始类型的值，则对该值使用Number()方法，不再进行后续步骤。</p>
+
+<p>❸ 如果toString()方法返回的是复合类型的值，则报错。</p>
+
+<h3 id="parseint"><strong>parseInt()转换规则</strong></h3>
+
+<p>Number()函数在转换字符串时比较复杂而且不够合理，因此在处理整数的时候更常用的是parseInt()函数。</p>
+
+<p>❶ parseInt()在转换字符串时，更多的是看其是否符合数值模式。它会忽略字符串前面的空格，直到找到第一个非空格字符。</p>
+
+<p>❷ 如果第一个字符不是数字字符或者负号，parseInt()就会返回NaN。比如：parseInt(&#39;&#39;)返回NaN</p>
+
+<p>❸ 如果第一个字符是数字字符，parseInt()会继续解析第二个字符，直到解析完所有的后续字符或者遇到了一个非数字字符。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">Number</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> <span class="c1">// 0</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>  <span class="c1">// NaN</span>
+
+<span class="nb">parseInt</span><span class="p">(</span><span class="mf">22.5</span><span class="p">)</span>  <span class="c1">// 22</span>
+</code></pre></div>
+<p><strong>Number()和parseInt()的区别</strong></p>
+
+<blockquote>
+<p>Number函数比parseInt函数转换更为严格，只有纯数字形式的字符串才能被转换成数字，否则为NaN</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">Number</span><span class="p">(</span><span class="s2">"1234blue"</span><span class="p">);</span>  <span class="c1">// NaN</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s2">"1234blue"</span><span class="p">)</span>  <span class="c1">// 1234</span>
+</code></pre></div>
+<p>parseInt()在解析八进制字面量的字符串【字符串以“0”开头且后跟数字字符】时，ECMAScript 3 和 5存在分歧。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">parseInt</span><span class="p">(</span><span class="s1">'070'</span><span class="p">)</span>  <span class="c1">// ECMAScript 3 认为是 56【八进制】</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">'070'</span><span class="p">)</span>  <span class="c1">// ECMAScript 5 认为是 70 十进制】</span>
+</code></pre></div>
+<p>因此推荐parseInt()无论在什么情况下都应明确指定基数</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">parseInt</span><span class="p">(</span><span class="s1">'0xA'</span><span class="p">)</span>  <span class="c1">// 10</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">'10'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1">// 2</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">'10'</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>  <span class="c1">// 8</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">'10'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// 10</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s1">'10'</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="c1">// 16</span>
+</code></pre></div>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt">parseInt(string, radix)</a></p>
+
+<p>ES6推荐小写的<code>0b</code>二进制、<code>0o</code>八进制、<code>0x</code>十六进制</p>
+
+<h3 id="parsefloat"><strong>parseFloat()转换规则</strong></h3>
+
+<p>❶ parseFloat() 也会忽略字符串前面的空格。</p>
+
+<p>❷ 一直解析到字符串末尾，或者解析到遇见一个无效的浮点数字字符为止。i.e.字符串的第一个小数点是有效的，而第二个小数点就是无效的了。</p>
+
+<p><strong>parseInt() 和parseFloat()的区别</strong></p>
+
+<ul>
+<li><p>parseFloat()只解析十进制值，因此它没有第二个参数指定基数</p></li>
+<li><p>parseFloat()始终都会忽略前导的零，而不会像Number()可能转换成八进制数。但十六进制格式的字符串则始终被转换成0.</p></li>
+</ul>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'1234blue'</span><span class="p">)</span>  <span class="c1">// 1234</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'0xA'</span><span class="p">)</span>  <span class="c1">// 0</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'22.5'</span><span class="p">)</span>  <span class="c1">// 22.5</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'22.34.5'</span><span class="p">)</span>  <span class="c1">// 22.34</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'070'</span><span class="p">)</span>  <span class="c1">// 70</span>
+</code></pre></div>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat">parseFloat(value)</a></p>
+
+<h2 id="string">String函数</h2>
+
+<blockquote>
+<p>String() 能将任何类型的值转换为字符串</p>
+
+<p>toString() 数值、布尔值、对象和字符串值都有toString() 方法。但是null和undefined值没有这个方法。</p>
+</blockquote>
+
+<h3 id="string"><strong>String()转换规则</strong></h3>
+
+<p><strong>❀ 原始类型转换</strong></p>
+
+<ul>
+<li>数值：转为相应的字符串</li>
+<li>字符串：返回字符串的一个副本，还是原来的值</li>
+<li>布尔：true转为&quot;true&quot;,false转为&quot;false&quot;</li>
+<li>undefined: 转为&quot;undefined&quot;</li>
+<li>null: 转为&quot;null&quot;</li>
+</ul>
+
+<p><strong>❀ 对象类型转换</strong></p>
+
+<p>❶ 先调用toString()方法，如果toString方法返回的是原始类型的值，则对该值使用String()方法，不再进行以下步骤。</p>
+
+<p>❷ 如果toString()方法返回的是复合类型的值，再调用valueOf()方法，如果valueOf()方法返回的是原始类型的值，则对该值使用String()方法，不再进行以下步骤。</p>
+
+<p>❸ 如果valueOf()方法返回的是复合类型的值，则报错。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">String</span><span class="p">([]);</span>  <span class="c1">// ""</span>
+<span class="nb">String</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]);</span>  <span class="c1">// "1,2"</span>
+<span class="nb">String</span><span class="p">({</span><span class="na">a</span><span class="p">:</span><span class="mi">2</span><span class="p">});</span>  <span class="c1">// "[object Object]"</span>
+</code></pre></div>
+<h1 id="implicit">隐式类型转换-Implicit</h1>
+
+<p>✯ 四则运算</p>
+
+<p>✯ 判断语句</p>
+
+<p>✯ Native调用（console.log、alert自动转换成字符串类型）</p>
+
+<p><strong>常见题目</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span>  <span class="c1">// ""</span>
+
+<span class="p">[]</span> <span class="o">+</span> <span class="p">{}</span>  <span class="c1">// "[object Object]"</span>
+
+<span class="p">{}</span> <span class="o">+</span> <span class="p">[]</span> <span class="o">==</span> <span class="o">+</span> <span class="p">[]</span>  <span class="c1">// 0,{}被当做代码块，不执行</span>
+
+<span class="p">{}</span> <span class="o">+</span> <span class="p">{}</span>  <span class="c1">// chrome:"[object Object][object Object]"  ; firefox: NaN</span>
+
+<span class="kc">true</span> <span class="o">+</span> <span class="kc">true</span>  <span class="c1">// 2</span>
+
+<span class="mi">1</span> <span class="o">+</span> <span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span> <span class="c1">// "1[object Object]"</span>
+</code></pre></div>
+<p>(<a href="https://segmentfault.com/a/1190000008038678">https://segmentfault.com/a/1190000008038678</a>)</p>
 
 <h1 id="more">更多-more</h1>
-
-<p><a href="https://coding.imooc.com/learn/list/115.html">前端JavaScript面试技巧</a></p>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -363,9 +363,7 @@ ES6的Promise、ES7的 async/await</p>
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#Interview">Interview</a>
-  
-  <a href="/tags/#imooc">imooc</a>
+  <a href="/tags/#JS-Basic">JS-Basic</a>
   
   </div>
 
@@ -375,7 +373,7 @@ ES6的Promise、ES7的 async/await</p>
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2018/06/14/muke-js-interview-shuangyue-yibu" data-title="慕课网-前端JavaScript面试技巧(双越)-异步和单线程 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2018/06/21/js-type-conversion" data-title="js显示类型转换&隐式类型转换 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -387,13 +385,21 @@ ES6的Promise、ES7的 async/await</p>
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2018/06/14/muke-js-interview-shuangyue-proto" title="慕课网-前端JavaScript面试技巧(双越)-原型和原型链">
+ <a href="/js/2018/06/14/muke-primary-interview-shuangyue-yibu" title="慕课网-前端JavaScript面试技巧(双越)-异步和单线程">
   <strong>上一篇：</strong><br/>
   <span>
-  慕课网-前端JavaScript面试技巧(双越)-原型和原型链</span>
+  慕课网-前端JavaScript面试技巧(双越)-异步和单线程</span>
 </a>
 </div>
 
+
+<div class="next">
+<a href="/js/2018/06/22/muke-middle-interview-happy-guidance"  title="慕课网-前端跳槽面试必备技巧（快乐动起来呀）- 第1章 课程简介">
+ <strong>下一篇：</strong><br/> 
+ <span>慕课网-前端跳槽面试必备技巧（快乐动起来呀）- 第1章 课程简介
+</span>
+</a>
+</div>
 
 </nav>
 
@@ -434,7 +440,7 @@ ES6的Promise、ES7的 async/await</p>
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>64</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>65</sup></a></li>
 		  
 		
 		  
@@ -523,11 +529,11 @@ ES6的Promise、ES7的 async/await</p>
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>16</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>20</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#布局" title="布局">布局<sup>10</sup></a></li>
+				<li><a href="/tags/#布局" title="布局">布局<sup>8</sup></a></li>
 			
 		
 			
@@ -539,11 +545,15 @@ ES6的Promise、ES7的 async/await</p>
 			
 		
 			
-				<li><a href="/tags/#js事件" title="js事件">js事件<sup>5</sup></a></li>
+				<li><a href="/tags/#DOM" title="DOM">DOM<sup>5</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/#性能" title="性能">性能<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#js事件" title="js事件">js事件<sup>1</sup></a></li>
 			
 		
 			
@@ -579,6 +589,10 @@ ES6的Promise、ES7的 async/await</p>
 			
 		
 			
+				<li><a href="/tags/#layout" title="layout">layout<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/#面试题" title="面试题">面试题<sup>3</sup></a></li>
 			
 		
@@ -596,6 +610,10 @@ ES6的Promise、ES7的 async/await</p>
 		
 			
 				<li><a href="/tags/#imooc" title="imooc">imooc<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>1</sup></a></li>
 			
 		
 		</ul>

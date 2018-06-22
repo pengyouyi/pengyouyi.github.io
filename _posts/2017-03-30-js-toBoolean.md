@@ -12,6 +12,7 @@ description: js显示、隐式转为布尔值
 # js显示转为布尔值
 
 > Boolean()
+
 > !!
 
 天生为假值的有：`undefined`、`null`、`0`、`NaN`、`""`

@@ -2,7 +2,8 @@
 layout: post
 title: event事件对象的通用属性、方法
 tags:
-- js事件
+- Interview
+- DOM
 categories: JS
 description: event事件对象
 ---

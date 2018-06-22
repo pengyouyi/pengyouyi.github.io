@@ -381,12 +381,41 @@ proName是必选项。一个属性名称的字符串值。</p>
 
 <p>所以的变量声明都会提升到函数的开头（如果这个变量在这个函数里面）或者全局作用域的开头（如果这个变量是一个全局变量）。</p>
 
+<p><code>所有声明变量或声明函数都会被提升到当前函数的顶部。</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span><span class="c1">//输出：function x(){}</span>
+<span class="kd">var</span> <span class="nx">x</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">x</span><span class="p">(){}</span>
+</code></pre></div>
+<p>以上代码，实际执行的代码为:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">x</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">x</span><span class="p">(){}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="nx">x</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div>
 <p><strong>函数声明会覆盖变量声明</strong></p>
 
-<p>如果存在函数声明和变量声明（注意：仅仅是声明，还没有被赋值），而且变量名跟函数名是相同的，那么，它们都会被提示到外部作用域的开头，但是，函数的优先级更高，所以变量的值会被函数覆盖掉。</p>
+<p>如果存在函数声明和变量声明（注意：仅仅是声明，还没有被赋值），而且变量名跟函数名是相同的，那么，它们都会被提示到外部作用域的开头，但是，<code>函数的优先级更高</code>，所以变量的值会被函数覆盖掉。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">a</span><span class="p">(){...}</span> 
 
+<span class="c1">// a = function a(){...}</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">a</span><span class="p">(){...}</span> 
+<span class="kd">var</span> <span class="nx">a</span><span class="p">;</span>
+
+<span class="c1">// a = function a(){...}</span>
+</code></pre></div>
 <p>但是，如果这个变量或者函数其中是赋值了的，那么另外一个将无法覆盖它</p>
 
+<p><strong>变量赋值会覆盖函数声明</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">a</span><span class="p">(){}</span> 
+
+<span class="c1">// a = 1</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">a</span><span class="p">(){}</span> 
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">// a = 1</span>
+</code></pre></div>
 <p><a href="https://www.cnblogs.com/MockingBirdHome/p/3385152.html">javascript中的变量作用域以及变量提升</a></p>
 
 <p><a href="https://www.cnblogs.com/silentjesse/p/4024536.html">javascript变量声明 及作用域</a></p>
@@ -1291,7 +1320,7 @@ proName是必选项。一个属性名称的字符串值。</p>
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>64</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>65</sup></a></li>
 		  
 		
 		  
@@ -1380,11 +1409,11 @@ proName是必选项。一个属性名称的字符串值。</p>
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>16</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>20</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#布局" title="布局">布局<sup>10</sup></a></li>
+				<li><a href="/tags/#布局" title="布局">布局<sup>8</sup></a></li>
 			
 		
 			
@@ -1396,11 +1425,15 @@ proName是必选项。一个属性名称的字符串值。</p>
 			
 		
 			
-				<li><a href="/tags/#js事件" title="js事件">js事件<sup>5</sup></a></li>
+				<li><a href="/tags/#DOM" title="DOM">DOM<sup>5</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/#性能" title="性能">性能<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#js事件" title="js事件">js事件<sup>1</sup></a></li>
 			
 		
 			
@@ -1436,6 +1469,10 @@ proName是必选项。一个属性名称的字符串值。</p>
 			
 		
 			
+				<li><a href="/tags/#layout" title="layout">layout<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/#面试题" title="面试题">面试题<sup>3</sup></a></li>
 			
 		
@@ -1453,6 +1490,10 @@ proName是必选项。一个属性名称的字符串值。</p>
 		
 			
 				<li><a href="/tags/#imooc" title="imooc">imooc<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>1</sup></a></li>
 			
 		
 		</ul>

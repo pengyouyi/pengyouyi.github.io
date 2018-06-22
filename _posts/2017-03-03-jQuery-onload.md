@@ -3,6 +3,7 @@ layout: post
 title: $(function{}) 与window.onload区别
 tags:
 - jQuery
+- DOM
 categories: JS
 description: $(function{}) 与window.onload区别
 ---

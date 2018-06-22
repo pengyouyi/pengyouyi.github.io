@@ -2,7 +2,7 @@
 layout: post
 title: js事件中target和currentTarget的区别
 tags:
-- js事件
+- DOM
 categories: JS
 description: js事件中target和currentTarget的区别
 ---

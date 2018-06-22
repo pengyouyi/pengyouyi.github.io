@@ -2,7 +2,8 @@
 layout: post
 title: DOM事件级别
 tags:
-- js事件
+- Interview
+- DOM
 categories: JS
 description: DOM事件
 ---
@@ -231,3 +232,30 @@ EventUtil.removeHandler(btn, "click", handler);
 
 - DOM1中没有规定事件相关的内容  
 - DOM3级事件模块在DOM2级事件模块的基础上重新定义了某些事件，也添加了一些新事件。
+
+# customeEvent自定义事件
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+</head>
+<body>
+	
+	<div id="myDiv">click me, 事件捕获完整阶段</div>	
+<script>
+	var myDiv = document.getElementById("myDiv");
+    
+    var eve = new Event('test');
+
+    myDiv.addEventListener('test', function() {
+        console.log('test dispatch');
+    }, false);
+
+    myDiv.dispatchEvent(eve);
+    
+</script>		
+</body>
+</html>
+```
