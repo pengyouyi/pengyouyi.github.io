@@ -183,9 +183,8 @@ true + true  // 2
 1 + {a: 1} // "1[object Object]"
 ```
 
-(https://segmentfault.com/a/1190000008038678)
+[https://segmentfault.com/a/1190000008038678](https://segmentfault.com/a/1190000008038678)
 
  
-
 # 更多-more
 
