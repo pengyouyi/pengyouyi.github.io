@@ -838,6 +838,31 @@ document对象是window对象的一个属性。window.document
 alert("hello \n world")
 ``` 
 
+## iframe的优缺点
+
+iframe也称作嵌入式框架，嵌入式框架和框架网页类似，它可以把一个网页的框架和内容嵌入在现有的网页中。
+
+**优点：**
+
+- 解决加载缓慢的第三方内容如图标和广告等的加载问题
+
+- Security sandbox
+
+- 并行加载脚本
+
+- 方便制作导航栏
+
+
+**缺点：**
+
+- iframe会阻塞主页面的Onload事件
+
+- 即时内容为空，加载也需要时间
+
+- 没有语意
+
+
+
 # about跨域、AJAX
 
 ## AJAX
