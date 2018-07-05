@@ -3,14 +3,18 @@ layout: post
 title: handlebars.js初学
 tags:
 - handlebars
-categories: JS
+categories: Framework
 description: handlebars.js初学
 ---
+
 # handlebars.js初学
 
 **a.简介-introduction**
 
-Handlebars 是 JavaScript 一个语义模板库，通过对view和data的分离来快速构建web模板。它采用"Logic-less template"（无逻辑模版）的思路，在加载时被预编译，而不是到了客户端执行到代码时再去编译，这样可以保证模板加载和运行的速度。
+Handlebars 是 JavaScript 一个语义模板库，通过对view和data的分离来快速构建web模板。
+
+它采用"Logic-less template"（无逻辑模版）的思路，在加载时被预编译，而不是到了客户端执行到代码时再去编译，这样可以保证模板加载和运行的速度。
+
 利用Handlebars处理HTML模板时，一般步骤如下：
 
 1. 获取模板内容
@@ -22,9 +26,13 @@ Handlebars兼容Mustache，你可以在Handlebars中导入Mustache模板。
 
 **b.安装-install**
 
-去handlebarsjs官方网站http://handlebarsjs.com/ 直接下载handlebars.js,用\<script\>标签引入, 也可通过NPM和Bower安装,详见[http://handlebarsjs.com/installation.html](http://handlebarsjs.com/installation.html)
+去handlebarsjs官方网站http://handlebarsjs.com/ 直接下载handlebars.js,用\<script\>标签引入, 
+
+也可通过NPM和Bower安装,详见[http://handlebarsjs.com/installation.html](http://handlebarsjs.com/installation.html)
+
 # Getting Started
 Handlebars expressions 是handlebars模板中最基本的单元，使用方法是加两个花括号{% raw %}{{value}}{% endraw %}, handlebars模板会自动匹配相应的数值，对象甚至是函数
+
 例如:
 
 {% highlight html linenos %}
@@ -495,6 +503,7 @@ $("#tableList").html(html);
 {% endhighlight %}
 
 \{\{#with favorite\}\}表示进入到favorite属性的上下文中，而favorite属性中又是一个list，因此可以用\{\{#each this\}\}进行遍历，表示遍历当前上下文环境，对于每次遍历，都是map结构，取name属性，最终拿到所有兴趣爱好。
+
 with可以结合handlebars的路径访问一起使用。Handlebars提供了.来访问属性也可以使用../来访问父级属性。
 
 {% highlight html linenos %}
@@ -598,6 +607,7 @@ $("#demo").html(html);
 {% endhighlight %}
 
 对于if指令，如果返回的为undefined、null、""、[ ]、{ }、false任意一个，都会导致最终结果为假。
+
 unless则是和if指令相反，当判断的值为false时他会渲染DOM
 
 # 自定义函数辅助函数（function helper）

@@ -169,7 +169,7 @@ example-2
 <script>
     var myDiv = document.getElementById("myDiv");
 
-	myDiv.addEventListener("click", function() {
+    myDiv.addEventListener("click", function() {
     	console.log("div 事件捕获");
     },true);
     
@@ -181,7 +181,7 @@ example-2
     	console.log("div 事件冒泡");
     },false);
 	
-	window.addEventListener("click", function() {
+    window.addEventListener("click", function() {
     	console.log("window 事件捕获");
     },true);
 
@@ -212,7 +212,9 @@ example-2
 
 - 我们给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。会执行几次事件，会先执行冒泡还是捕获？
 
-> 如果点击的为目标元素，目标元素的事情按`事件定义的顺序`从上到下顺序执行，而其他元素根据W3C的标准执行，即先捕获后冒泡。
+> 如果点击的为目标元素，`目标元素`的事情按`事件定义的顺序`从上到下顺序执行，
+
+> 而`其他元素`根据W3C的标准执行，即`先捕获后冒泡`。
 
 ```html
 <!DOCTYPE html>
@@ -254,9 +256,9 @@ window.onload = function(){
 </html>
 ```
 
-如果点击parent:父节点冒泡,父节点捕获;
+如果点击parent: 父节点冒泡, 父节点捕获;
 
-如果点击child:父节点捕获,子节点捕获,子节点冒泡父节点冒泡
+如果点击child: 父节点捕获, 子节点捕获, 子节点冒泡, 父节点冒泡
 
 [W3C下的冒泡和捕获机制。到底是冒泡呢。还是捕获呢。一个DOM元素绑定多个事件时如何执行。](https://blog.csdn.net/u011719449/article/details/23787627)
 

@@ -2,7 +2,7 @@
 layout: post
 title: HTML5编码规范
 tags:
-- HTML
+- standard
 categories: HTML
 description: HTML编码规范
 ---

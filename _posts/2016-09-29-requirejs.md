@@ -3,7 +3,7 @@ layout: post
 title: requirejs初学
 tags:
 - requirejs
-categories: JS
+categories: Framework
 description: requirejs初学
 ---
 # requirejs初学

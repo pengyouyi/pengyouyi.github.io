@@ -3,6 +3,7 @@ layout: post
 title: js基础面试题及答案
 tags:
 - Interview
+- JS-Basic
 categories: JS
 description: js基础面试题及答案
 ---

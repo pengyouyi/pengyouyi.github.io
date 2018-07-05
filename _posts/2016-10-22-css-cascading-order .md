@@ -2,7 +2,7 @@
 layout: post
 title: CSS选择器层叠顺序优先级
 tags:
-- CSS
+- standard
 categories: CSS
 description: CSS选择器层叠顺序优先级
 ---
@@ -25,8 +25,8 @@ h2 {color:silver;}
 1）[::after](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::after)  
 2）[::before](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::before)  
 3）[::first-letter](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::first-letter)  
-4）::first-line
-[::selection](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::selection)
+4）::first-line  
+[::selection](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::selection)  
 ::backdrop
 
 更详细的伪元素介绍  
@@ -51,7 +51,7 @@ span.demo
 [attr*=value]  
 [attr operator value i]  
 
-(例如： 
+(例如：  
 h1[title]  
 input[type="radio"]  
 a[href^="#"] {background-color:gold}  

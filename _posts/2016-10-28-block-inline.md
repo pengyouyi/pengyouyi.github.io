@@ -2,8 +2,8 @@
 layout: post
 title: block & inline 元素区别
 tags:
-- 布局
-categories: CSS
+- Css-Basic
+categories: HTML
 description: block & inline 元素区别
 ---
 
@@ -21,8 +21,8 @@ block & inline 元素区别
 
 和相邻的内联元素在同一行;  
 宽度(width)、高度(height)、
-内边距的top/bottom(padding-top/padding-bottom)和
-外边距的top/bottom(margin-top/margin-bottom)都不可改变，
+内边距的(padding-top/padding-bottom)和
+外边距的(margin-top/margin-bottom)都不可改变，
 就是里面文字或图片的大小;
 
 内联元素的margin-left / margin-right及padding-left / padding-rigtht是可以控制的，所以可以通过这4个属性来控制内联元素的宽度。
@@ -125,7 +125,8 @@ demo-2
 ## 替换元素-Replacement element
 几乎所有替换元素都是行内元素。   
 替换元素就是浏览器根据元素的标签和属性，来决定元素的具体显示内容。  
-例如浏览器会根据\<img\>标签的src属性的值来读取图片信息并显示出来，而如果查看(X)HTML代码，则看不到图片的实际内容；又例如根据\<input\>标签的type属性来决定是显示输入框，还是单选按钮等。  
+例如浏览器会根据\<img\>标签的src属性的值来读取图片信息并显示出来，而如果查看(X)HTML代码，则看不到图片的实际内容；  
+又例如根据\<input\>标签的type属性来决定是显示输入框，还是单选按钮等。  
 (X)HTML中的\<img\>、\<input\>、\<textarea\>、\<select\>、\<object\>都是替换元素。这些元素往往没有实际的内容，即是一个空元素
 
 替换元素元素表现特殊。display:inline; 但是可是设置margin、paddding

@@ -165,23 +165,17 @@
 
 <p>CSS Lint是一个开源的校验CSS文件质量的工具，最初是由Nicholas C. Zakas和Nicole Sullivan编写的，最初版本在Velocity会议上于2011年6月发布。CSS Lint的检测规则包括错误的和警告，当选择器或属性书写不正确、漏掉了大括号、多写了分号等时，会提示解析错误，解析错误优先提示。为了让css代码拥有更好性能，更标准，CSS Lint的检测规则有：</p>
 
-<ol>
-<li>盒模型(box-model)</li>
-</ol>
+<p><strong>❦ 1. 盒模型(box-model)</strong></p>
 
 <p>(1)当设定width的同时，还设置了border,border-left,border-right,padding,padding-left,padding-right中的任意一个，那么必须显示设置box-sizing</p>
 
 <p>(2)当设定height的同时，还设置了border,border-top,border-bottom,padding,padding-top,padding-bottom中的任意一个，那么必须显示设置box-sizing</p>
 
-<ol>
-<li>box-sizing(box-sizing) </li>
-</ol>
+<p><strong>❦ 2. box-sizing(box-sizing)</strong></p>
 
 <p>即使设置了box-sizing，仍然会warn，因为ie67不支持此属性</p>
 
-<ol>
-<li>display(display-property-grouping)</li>
-</ol>
+<p><strong>❦ 3. display(display-property-grouping)</strong></p>
 
 <p>(1)当设为inline时，不允许设置width, height, margin, margin-top, margin-bottom, float.</p>
 
@@ -191,35 +185,29 @@
 
 <p>(4)当设为table-*时，不允许设置margin, float.</p>
 
-<ol>
-<li>样式冗余(display-property-grouping)</li>
-</ol>
+<p><strong>❦ 4. 样式冗余(display-property-grouping)</strong></p>
 
 <p>(1)同样属性名以及属性值,在同一个容器中不允许声明两遍</p>
 
 <p>(2)相同的属性名(但不同值)，必须放在一起，不允许被其他属性隔开</p>
 
-<ol>
-<li>空的样式规则(empty-rules)</li>
-</ol>
+<p><strong>❦ 5. 空的样式规则(empty-rules)</strong></p>
 
 <p>不允许出现空的样式规则</p>
 
-<p>6.使用已知样式，方式拼写错误(known-properties)</p>
+<p><strong>❦ 6. 使用已知样式，方式拼写错误(known-properties)</strong></p>
 
 <p>(1)csslint不会检测以横线(-)开头的属性名</p>
 
 <p>(2)属性名和属性值的拼写都会检查</p>
 
-<p>7.链式class(known-properties)</p>
+<p><strong>❦ 7. 链式class(known-properties)</strong></p>
 
 <p>(1)不允许对相连的class(即链式class,类似于.foo.bar这样的)设置样式</p>
 
 <p>(2)可以新增一个class来代替链式class</p>
 
-<ol>
-<li>vendor前缀(compatible-vendor-prefixes)</li>
-</ol>
+<p><strong>❦ 8. vendor前缀(compatible-vendor-prefixes)</strong></p>
 
 <p>当出现以下样式时，应该拥有vender前缀，此时csslint会逐个检查Firefox(-moz),Safari/Chrome(-webkit),Opera(-o),以及Internet Explorer(-ms)前缀是否齐全，若少一种前缀，则会warn。</p>
 
@@ -281,7 +269,7 @@ user-select<br><br>
 word-break<br><br>
 writing-mode  </p>
 
-<p>9.渐变样式(gradients)</p>
+<p><strong>❦ 9. 渐变样式(gradients)</strong></p>
 
 <p>对于渐变样式，不同浏览器有不同的属性名称，不仅仅是前缀不同,区别如下</p>
 
@@ -293,107 +281,85 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
 
 <p>csslint会检查与渐变(gradient)相关的样式，若以上样式只写了一个或几个，且没有写全，则会warn</p>
 
-<p>10.不带vendor前缀的标准属性(vendor-prefix)</p>
+<p><strong>❦ 10. 不带vendor前缀的标准属性(vendor-prefix)</strong></p>
 
 <p>要将不带vendor前缀的标准属性样式，放在带vendor前缀的属性的后面</p>
 
-<p>11.向后兼容的的颜色样式(fallback-colors)</p>
+<p><strong>❦ 11. 向后兼容的的颜色样式(fallback-colors)</strong></p>
 
-<ol>
-<li>文本反向缩进</li>
-</ol>
+<p><strong>❦ 12. 文本反向缩进</strong></p>
 
 <p>(1)当为text-indent的值设置为-99，或者更小的值(比如-100,-999)的时候,必须加上direction: ltr</p>
 
 <p>(2)csslint只检测text-indent的值，而不检测其的单位(em, px)。</p>
 
-<ol>
-<li>字体过多(font-faces)</li>
-</ol>
+<p><strong>❦ 13. 字体过多(font-faces)</strong></p>
 
 <p>当使用超过5个字体时，会warn</p>
 
-<ol>
-<li>@import(import)</li>
-</ol>
+<p><strong>❦ 14. @import(import)</strong></p>
 
 <p>(1)可以将多个css合并为一个</p>
 
 <p>(2)使用多个<link>标签引入多个css文件</p>
 
-<ol>
-<li>正则式的选择符(regex-selectors)</li>
-</ol>
+<p><strong>❦ 15. 正则式的选择符(regex-selectors)</strong></p>
 
 <p>(1)不允许使用类似于正则语法(*=, |=, ^=, $=, ~=)的css选择符</p>
 
-<p>16.通配符选择符(universal-selector)</p>
+<p><strong>❦ 16. 通配符选择符(universal-selector)</strong></p>
 
 <p>不能将通配符(*)作为选择符的关键部分(key part)</p>
 
-<p>17.属性选择符(unqualified-attributes)</p>
+<p><strong>❦ 17. 属性选择符(unqualified-attributes)</strong></p>
 
 <p>同上面的通配符一样，属性选择符不能作为选择符的关键部分(key part)</p>
 
-<p>18.零的单位(zero-units)</p>
+<p><strong>❦ 18. 零的单位(zero-units)</strong></p>
 
-<p>19.高级选择符(overqualified-elements)</p>
+<p><strong>❦ 19. 高级选择符(overqualified-elements)</strong></p>
 
 <p>(1)若某个class紧跟(无空白符)在多个不同的元素后面, 则合法</p>
 
 <p>(2)上面这条规则中，若不是多个，而只是一个的时候，则会warn</p>
 
-<p>20.属性简写(shorthand)</p>
+<p><strong>❦ 20. 属性简写(shorthand)</strong></p>
 
 <p>(1)当在一个样式规则中，同时设置了margin-left, margin-right, margin-top, margin-bottom, 则会warn。</p>
 
 <p>(2)当在一个样式规则中，同时设置了padding-left, padding-right, padding-top, padding-bottom , 则会warn。</p>
 
-<ol>
-<li>背景图片冗余(duplicate-background-images)</li>
-</ol>
+<p><strong>❦ 21. 背景图片冗余(duplicate-background-images)</strong></p>
 
 <p>(1)当多个样式需要使用同一张图片作为背景图片的时候，如果在这些样式规则中重复设定background-image, 则会warn</p>
 
 <p>(2)当多个样式需要使用同一张图片作为背景图片的时候，应该新建一个class样式用于指定background-image，其他样式则用于设定background-position</p>
 
-<ol>
-<li>浮动(floats)</li>
-</ol>
+<p><strong>❦ 22. 浮动(floats)</strong></p>
 
 <p>(1)当使用float超过10次时，csslint会warn</p>
 
 <p>(2)在某些情况下，可以使用grid systems代替频繁的float</p>
 
-<ol>
-<li>字体大小(font-sizes)</li>
-</ol>
+<p><strong>❦ 23. 字体大小(font-sizes)</strong></p>
 
 <p>尽可能少用font-size，而应该设定几个样式规则用于对于不同的字体大小，然后在需要设定字体大小的地方添加需要的样式规则</p>
 
-<ol>
-<li>id选择符(ids)</li>
-</ol>
+<p><strong>❦ 24. id选择符(ids)</strong></p>
 
 <p>使用class选择符代替id选择符</p>
 
-<ol>
-<li>!important(important)</li>
-</ol>
+<p><strong>❦ 25. !important(important)</strong></p>
 
 <p>不允许使用!important</p>
 
-<ol>
-<li>outline(outline-none)</li>
-</ol>
+<p><strong>❦ 26. outline(outline-none)</strong></p>
 
 <p>(1)只有在包含伪类:focus的样式规则中，才能移除(设为none或者0)outline样式</p>
 
 <p>(2)在包含伪类:focus的样式规则中，移除outline样式的同时，必须要使用其他样式</p>
 
-<ol>
-<li>heading样式(qualified-headings, unique-headings)</li>
-</ol>
+<p><strong>❦ 27. heading样式(qualified-headings, unique-headings)</strong></p>
 
 <p>(1)heading样式(h1-h6)应该全局化。也就是说在整个网站中，heading样式应该以常量形式出现。</p>
 
@@ -436,7 +402,7 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#CSS">CSS</a>
+  <a href="/tags/#standard">standard</a>
   
   </div>
 
@@ -505,27 +471,39 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
 		<ul>
 		
 		  
-			<li><a href="/categories/#编辑器" title="编辑器">编辑器<sup>1</sup></a></li>
+			<li><a href="/categories/#Editor" title="Editor">Editor<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#MAC" title="MAC">MAC<sup>4</sup></a></li>
+			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>21</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>81</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>7</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#CSS" title="CSS">CSS<sup>19</sup></a></li>
+			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#HTML" title="HTML">HTML<sup>4</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>19</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>72</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#CSS" title="CSS">CSS<sup>18</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#HTML" title="HTML">HTML<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#MAC" title="MAC">MAC<sup>1</sup></a></li>
 		  
 		
 		  
@@ -554,11 +532,7 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
 			
 		
 			
-				<li><a href="/tags/#端口使用" title="端口使用">端口使用<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/#Vue" title="Vue">Vue<sup>1</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>4</sup></a></li>
 			
 		
 			
@@ -567,14 +541,6 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
 		
 			
 				<li><a href="/tags/#Webpack" title="Webpack">Webpack<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/#构建工具" title="构建工具">构建工具<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/#MVC" title="MVC">MVC<sup>1</sup></a></li>
 			
 		
 			
@@ -606,27 +572,27 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
 			
 		
 			
-				<li><a href="/tags/#布局" title="布局">布局<sup>8</sup></a></li>
+				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#CSS" title="CSS">CSS<sup>4</sup></a></li>
+				<li><a href="/tags/#layout" title="layout">layout<sup>3</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#HTML" title="HTML">HTML<sup>3</sup></a></li>
+				<li><a href="/tags/#standard" title="standard">standard<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#DOM" title="DOM">DOM<sup>5</sup></a></li>
+				<li><a href="/tags/#Css-Basic" title="Css-Basic">Css-Basic<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#性能" title="性能">性能<sup>5</sup></a></li>
+				<li><a href="/tags/#DOM" title="DOM">DOM<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#js事件" title="js事件">js事件<sup>1</sup></a></li>
+				<li><a href="/tags/#布局" title="布局">布局<sup>6</sup></a></li>
 			
 		
 			
@@ -635,6 +601,10 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
 		
 			
 				<li><a href="/tags/#this" title="this">this<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#性能" title="性能">性能<sup>4</sup></a></li>
 			
 		
 			
@@ -662,10 +632,6 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
 			
 		
 			
-				<li><a href="/tags/#layout" title="layout">layout<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/#面试题" title="面试题">面试题<sup>3</sup></a></li>
 			
 		
@@ -686,15 +652,11 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
 			
 		
 			
-				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/#Module" title="Module">Module<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>3</sup></a></li>
+				<li><a href="/tags/#HTML" title="HTML">HTML<sup>1</sup></a></li>
 			
 		
 			
@@ -715,6 +677,14 @@ Safari 4+ and Chrome(“Old WebKit”) : -webkit-gradient  </p>
         
           <li>
             <a href="https://leohxj.gitbooks.io/front-end-database/content/" target="_blank" title="前端工程师手册">前端工程师手册</a>
+          </li>
+        
+          <li>
+            <a href="http://www.bootcdn.cn/" target="_blank" title="BootCDN">BootCDN</a>
+          </li>
+        
+          <li>
+            <a href="https://cdnjs.com/" target="_blank" title="cdnjs">cdnjs</a>
           </li>
         
     </ul>

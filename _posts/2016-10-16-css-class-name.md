@@ -2,7 +2,7 @@
 layout: post
 title: CSS 命名推荐
 tags:
-- CSS
+- standard
 categories: CSS
 description: CSS 命名推荐
 ---

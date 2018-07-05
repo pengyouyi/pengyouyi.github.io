@@ -2,7 +2,7 @@
 layout: post
 title: HTML元素嵌套规范
 tags:
-- HTML
+- standard
 categories: HTML
 description: HTML元素嵌套规范
 ---
@@ -119,7 +119,8 @@ a， audio（如果设置了controls属性）， button， details， embed， i
 base，command，link，meta，noscript，script，style，title
 
 **详细Elements** Categories	、Parents†、Children
-https://www.w3.org/TR/html5/index.html#elements-1
+
+[https://www.w3.org/TR/html5/index.html#elements-1](https://www.w3.org/TR/html5/index.html#elements-1)
 
 
 # 更多-more
