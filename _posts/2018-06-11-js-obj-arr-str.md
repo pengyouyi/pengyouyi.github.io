@@ -287,7 +287,7 @@ Object 其他方法：
 
 ```js
 new Date();
-new Date(value);  // 距1970-01-01的毫秒数
+new Date(value);  // value:距1970-01-01的毫秒数
 new Date(dateString);
 ```
 
@@ -307,9 +307,9 @@ MM/dd/yyyy HH:mm:ss
 
 返回距离1970年1月1日午夜（零时）之间的毫秒数的3个方法
 
-- Date.parse(dateString)  将符合规定的日期字符串转换成日期，并返回该日期至1970-01-01的毫秒数
+① Date.parse(dateString)  将符合规定的日期字符串转换成日期，并返回该日期至1970-01-01的毫秒数
 
-- Date.UTC(year, month[, day[, hour[, minute[, second[, millisecond]]]]])
+② Date.UTC(year, month[, day[, hour[, minute[, second[, millisecond]]]]])
   两个参数（年和月）是必须的
 
 Date.parse() 和 Date.UTC() 方法返回的毫秒数可以传递给Date()构造函数
@@ -320,7 +320,7 @@ var someDate = new Date(Date.parse("May 25, 2004"));
 var otherDate = new Date(Date.UTC("2018, 5"))
 ```
 
-- Date.now()  调用这个方法时的日期和时间的毫秒数，Date对象的时间戳
+③ Date.now()  调用这个方法时的日期和时间的毫秒数，Date对象的时间戳
 
 获取和设置dateObj的时间/日期：
 
@@ -380,7 +380,7 @@ theBigDay.setFullYear(1997);
 
 Math对象的属性：
 
-- Math.PI  ∏
+- Math.PI  π
 
 - Math.E  自然对数的底数e
 

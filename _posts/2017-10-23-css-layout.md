@@ -247,7 +247,7 @@ DOM文档的书写顺序，先写两侧栏，再写主面板，更换后则侧�
 **table + table-cell 布局的优缺点**
 
 - 优点：布局优先，加速table渲染
-- 缺点：1、无法设置栏间距；2、IE7-不支持display:table和display:table-cell；
+- 缺点：1、无法设置栏间距；2、IE7-不支持 display:table 和 display:table-cell；
 
 # flex 布局
 
@@ -358,7 +358,7 @@ DOM文档的书写顺序，先写两侧栏，再写主面板，更换后则侧�
 	<div id="content">
 		<div id="left">
 		    <h2>left</h2>
-	    </div>
+		</div>
 		<div id="main">
 			<h2>main: grid网格布局</h2>
 			<h3>父级#content</h3>

@@ -90,14 +90,18 @@ setTimeout的第一个参数可以是函数，也可以是字符串。当传入�
 
 polyfill 是“在旧版浏览器上复制标准 API 的 JavaScript 补充”,可以动态地加载 JavaScript 代码或库，在不支持这些标准 API 的浏览器中模拟它们。
 
-例如，geolocation（地理位置）polyfill 可以在 navigator 对象上添加全局的 geolocation 对象，还能添加 getCurrentPosition 函数以及“坐标”回调对象，
-
 所有这些都是 W3C 地理位置 API 定义的对象和函数。因为 polyfill 模拟标准 API，所以能够以一种面向所有浏览器未来的方式针对这些 API 进行开发，一旦对这些 API 的支持变成绝对大多数，则可以方便地去掉 polyfill，无需做任何额外工作。
 
 
 - 做的项目中，有没有用过或自己实现一些 polyfill 方案（兼容性处理方案）？
 
-html5shiv、Geolocation、Placeholder
+✮ html5shiv.js 让IE6、IE7、IE8支持html
+
+✮ Respond.js 让IE6-8支持CSS3 Media Query
+
+✮ HTML5 Geolocation（地理定位）用于定位用户的位置
+
+✮ Placeholder
 
 # Get-file-extension-name
 

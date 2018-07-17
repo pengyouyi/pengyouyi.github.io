@@ -4,6 +4,7 @@ title: $(function{}) 与window.onload区别
 tags:
 - jQuery
 - DOM
+- JS-Basic
 categories: JS
 description: $(function{}) 与window.onload区别
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: cancas和SVG
 tags:
-- HTML
+- animation
 categories: HTML
 description: cancas和SVG
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: block & inline 元素区别
 tags:
-- Css-Basic
+- CSS-Basic
 categories: HTML
 description: block & inline 元素区别
 ---

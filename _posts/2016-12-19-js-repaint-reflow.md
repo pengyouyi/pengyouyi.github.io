@@ -2,7 +2,8 @@
 layout: post
 title: 浏览器重排与重绘
 tags:
-- 性能
+- BOM
+- optimaze
 categories: CSS
 description: 浏览器重排与重绘
 ---
@@ -218,6 +219,9 @@ ele.className = 'active';
 (4)由于display属性为none的元素不在渲染树中，对隐藏的元素操作不会引发其他元素的重排。如果要对一个元素进行复杂的操作时，可以先隐藏它，操作完成后再显示。这样只在隐藏和显示时触发两次重排。
 
 (5)在内存中多次操作节点，完成后再添加到文档中去。例如要异步获取表格数据，渲染到页面。可以先取得数据后在内存中构建整个表格的html片段，再一次性添加到文档中去，而不是循环添加每一行。
+
+# 更多-more
+[优化CSS重排重绘与浏览器性能](http://caibaojian.com/css-reflow-repaint.html)
 
 
 

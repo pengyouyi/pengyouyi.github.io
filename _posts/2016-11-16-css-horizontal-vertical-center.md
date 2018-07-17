@@ -2,7 +2,7 @@
 layout: post
 title: css水平垂直居中的方法总结
 tags:
-- 布局
+- layout
 categories: CSS
 description: css水平垂直居中的方法总结
 ---
@@ -61,7 +61,7 @@ description: css水平垂直居中的方法总结
   border: 1px solid red;
 }
 .content {
-  overflow: auto;
+  /* overflow: auto; */
   position: absolute;
   top: 0;
   right: 0;

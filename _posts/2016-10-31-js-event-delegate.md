@@ -3,6 +3,7 @@ layout: post
 title: js事件委托
 tags:
 - DOM
+- optimize
 categories: JS
 description: js事件委托
 ---
@@ -142,7 +143,6 @@ oBtn.onclick = function(){
     var aLi = document.createElement("li");
     aLi.innerHTML = "item " + iNow;
     oUl.appendChild(aLi);
-    mHover();
 }
 
 oUl.addEventListener("mouseover",function(e){

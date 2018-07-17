@@ -2,7 +2,6 @@
 layout: post
 title: DOM事件级别
 tags:
-- Interview
 - DOM
 categories: JS
 description: DOM事件
@@ -243,9 +242,9 @@ EventUtil.removeHandler(btn, "click", handler);
 </head>
 <body>
 	
-	<div id="myDiv">click me, 事件捕获完整阶段</div>	
+    <div id="myDiv">click me, 事件捕获完整阶段</div>	
 <script>
-	var myDiv = document.getElementById("myDiv");
+    var myDiv = document.getElementById("myDiv");
     
     var eve = new Event('test');
 

@@ -2,7 +2,7 @@
 layout: post
 title: 清除浮动带来的影响
 tags:
-- 布局
+- CSS-Basic
 categories: CSS
 description: 清除浮动带来的影响，以及清除浮动应用的原理
 ---

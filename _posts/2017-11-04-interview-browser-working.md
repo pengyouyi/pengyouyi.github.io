@@ -2,8 +2,8 @@
 layout: post
 title: 浏览器渲染机制
 tags:
-- 面试题
-categories: other
+- BOM
+categories: CSS
 description: 浏览器工作原理
 ---
 
@@ -159,7 +159,7 @@ DOCTYPE是用来声明文档类型和DTD规范的，一个主要的用途便是�
 	<div id="dome">
 		test
 		<script>  
-			console.log('write');
+		    console.log('write');
 		    document.write('<span>write</span>');
 		</script>
 	</div>
@@ -199,7 +199,7 @@ console.log('defer2');
 **浏览器渲染页面的过程**
 
 1. 根据HTML结构生成 DOM树  
-2. 根据CSS生成cssOM  
+2. 根据CSS生成CSSOM  
 3. 将DOM和CSSOM整合成render树  
 4. 根据render树开始渲染和展示  
 5. 遇到 `<script>` 时，会执行并阻塞渲染  

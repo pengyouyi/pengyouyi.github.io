@@ -2,7 +2,8 @@
 layout: post
 title: js中的call 、apply 、bind
 tags:
-- js函数
+- JS-Function
+- JS-Basic
 categories: JS
 description: js中的call 、apply 、bind
 ---
@@ -76,7 +77,9 @@ apple.say.apply(banana);    //My color is yellow
 ```
 
 ## 使用call方法调用父构造函数
-在一个子构造函数中，你可以通过调用父构造函数的 call 方法来实现继承，。下例中，使用 Food 构造函数创建的对象实例都会拥有在 Product 构造函数中添加的 name 属性和 price 属性,但 category 属性是在Food构造函数中定义的。
+在一个子构造函数中，你可以通过调用父构造函数的 call 方法来实现继承。
+
+下例中，使用 Food 构造函数创建的对象实例都会拥有在 Product 构造函数中添加的 name 属性和 price 属性,但 category 属性是在Food构造函数中定义的。
 
 ```js
 function Product(name, price) {
@@ -173,7 +176,7 @@ fun.bind(thisArg[, arg1[, arg2[, ...]]])
 
 ## 创建绑定函数bind
 ```js
-his.x = 9; 
+this.x = 9; 
 var module = {
   x: 81,
   getX: function() { return this.x; }

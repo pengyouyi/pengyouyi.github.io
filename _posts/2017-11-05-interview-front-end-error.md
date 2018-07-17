@@ -2,7 +2,7 @@
 layout: post
 title: 前端错误监控
 tags:
-- 面试题
+- BOM
 categories: other
 description: 前端错误监控
 ---
@@ -48,8 +48,8 @@ window.addEventListener('error', function(e){
 
 错误能被捕获。
 
-1、在script标签增加 crossorigin 属性  
-2、设置js资源响应头 Access-Control-Allow-Origin:*  
+1、在script标签增加 CrossOrigin 属性  
+2、设置js资源响应头 Access-Control-Allow-Origin: *  
 
 # 上报error的基本原理
 

@@ -2,7 +2,7 @@
 layout: post
 title: 排序算法-希尔排序
 tags:
-- 算法
+- algorithm
 categories: JS
 description: 排序算法algorithm-希尔排序
 ---

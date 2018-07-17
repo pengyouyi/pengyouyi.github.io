@@ -2,7 +2,7 @@
 layout: post
 title: js相等的判断
 tags:
-- 
+- JS-Basic
 categories: JS
 description: js相等的判断
 ---

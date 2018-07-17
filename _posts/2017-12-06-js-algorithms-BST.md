@@ -2,7 +2,7 @@
 layout: post
 title: 二叉搜索树（BST）
 tags:
-- 算法
+- algorithm
 categories: JS
 description: 二叉搜索树（BST）
 ---

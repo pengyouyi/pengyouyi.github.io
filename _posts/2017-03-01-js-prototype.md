@@ -2,7 +2,7 @@
 layout: post
 title: js中的prototype和__proto__
 tags:
-- 原型链
+- JS-Basic
 categories: JS
 description: js中的prototype和__proto__
 ---
@@ -90,7 +90,7 @@ function a(c){
     <img src="/assets/images/2017/1-2-3/03-01-5.png" alt="">
 </div>
 
- __proto__:`每个对象都有一个名为__proto__的内部隐藏属性`，指向于它所对应的原型对象(chrome、firefox中名称为__proto__，并且可以被访问到)。原型链正是基于__proto__才得以形成(note：不是基于函数对象的属性prototype)。
+ \_\_proto\_\_:`每个对象都有一个名为__proto__的内部隐藏属性`，指向于它所对应的原型对象(chrome、firefox中名称为\_\_proto\_\_，并且可以被访问到)。原型链正是基于\_\_proto\_\_才得以形成(note：不是基于函数对象的属性prototype)。
 
  **Object.create(obj).\_\_proto\_\_ === obj**
 
@@ -175,8 +175,8 @@ console.log([1, 56, 34, 12].min()); // 1
 1. 所有的*引用类型*（数组、对象、函数），都具有**对象特性**，即可自由扩展属性（除了 'null' 意外）。    
 2. 所有的`引用类型`（数组、对象、函数），都有一个 `__proto__` 属性【隐式原型】，属性值是一个普通的对象。  
 3. 所有`函数`，都有一个`prototype` 属性【显式原型】，属性值也是一个普通的对象。  
-4. 所有的`引用类型（数组、对象、函数）， __proto__ 属性值指向它的构造函数的 “prototype” 属性值`  
-5. 当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的 __proto__ （即它的构造函数的prototype）中寻找。  
+4. 所有的`引用类型（数组、对象、函数） __proto__ 属性值指向它的构造函数的 “prototype” 属性值`  
+5. 当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的 \_\_proto\_\_ （即它的构造函数的prototype）中寻找。  
 
  <div class="rd">
     <img src="/assets/images/2017/1-2-3/03-01-6.jpg" alt="">

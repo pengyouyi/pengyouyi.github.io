@@ -2,7 +2,8 @@
 layout: post
 title: js中的闭包
 tags:
-- js函数
+- JS-Function
+- JS-Basic
 categories: JS
 description: js中的闭包
 ---
@@ -54,7 +55,7 @@ alert(n); // 999
 
 ```js
 function f1(){
-　　var n=999;
+　　var n = 999;
 　　function f2(){
 　　　　alert(n); // 999
 　　}
@@ -67,13 +68,13 @@ function f1(){
 
 ```js
 function f1(){
-　　var n=999;
+　　var n = 999;
 　　function f2(){
 　　　　alert(n); 
 　　}
 　　return f2;
 }
-var result=f1();
+var result = f1();
 result(); // 999
 ```
 
@@ -87,13 +88,13 @@ result(); // 999
 ```js
 function f1(){
 　　var n=999;
-　　nAdd=function(){n+=1}
+　　nAdd = function(){ n += 1 }
 　　function f2(){
 　　　　alert(n);
 　　}
 　　return f2;
 }
-var result=f1();
+var result = f1();
 result(); // 999
 nAdd();
 result(); // 1000

@@ -177,9 +177,9 @@ Web Storage 的 api 接口使用更方便。
 # cookie和session的区别： 
 
 1、cookie数据存放在客户的浏览器上，session数据放在服务器上   
-2、cookie不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗，考虑*到安全应当使用session   
+2、cookie不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗，考虑到安全应当使用session   
 3、session会在一定时间内保存在服务器上，当访问增多，会比较占用你服务器的性能，考虑到减轻服务器性能方面，应当使用cookie   
-4、单个cookie保存的数*据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie   
+4、单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie   
 5、建议将登录信息等重要信息存放为session，其他信息如果需要保留，可以放在cookie中   
 6、session保存在服务器，客户端不知道其中的信心；cookie保存在客户端，服务器能够知道其中的信息   
 7、session中保存的是对象，cookie中保存的是字符串   

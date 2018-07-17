@@ -2,7 +2,7 @@
 layout: post
 title: 图的基础
 tags:
-- 算法
+- algorithm
 categories: JS
 description: 图的基础
 ---

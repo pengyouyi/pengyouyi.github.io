@@ -2,7 +2,7 @@
 layout: post
 title: js的null，undefined或undeclared的区别
 tags:
-- js函数
+- JS-Basic
 categories: JS
 description: js中null，undefined或undeclared区别
 ---

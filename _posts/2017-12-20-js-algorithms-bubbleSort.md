@@ -2,7 +2,7 @@
 layout: post
 title: 冒泡排序
 tags:
-- 算法
+- algorithm
 categories: JS
 description: 冒泡排序
 ---

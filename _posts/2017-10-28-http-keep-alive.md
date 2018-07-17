@@ -18,7 +18,7 @@ description: HTTP持久连接
 ## TCP连接的握手时延
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-9.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-10.png" alt="">
 </div>
 
 在发送数据之前，TCP要传送两个分组来建立连接

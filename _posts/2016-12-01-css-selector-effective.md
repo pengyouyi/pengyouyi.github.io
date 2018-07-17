@@ -2,7 +2,8 @@
 layout: post
 title: 编写高效的CSS选择器
 tags:
-- 性能
+- standard
+- optimize
 categories: CSS
 description: 编写高效的CSS选择器
 ---

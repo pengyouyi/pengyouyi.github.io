@@ -2,7 +2,7 @@
 layout: post
 title: constructor属性
 tags:
-- 原型链
+- JS-Basic
 categories: JS
 description: constructor属性
 ---

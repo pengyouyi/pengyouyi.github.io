@@ -2,7 +2,7 @@
 layout: post
 title: 同源策略及限制
 tags:
-- 通信类
+- BOM
 categories: HTTP
 description: 同源策略及限制
 ---

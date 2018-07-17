@@ -2,12 +2,14 @@
 layout: post
 title: js继承
 tags:
-- 原型链
+- JS-Basic
 categories: JS
 description: js继承
 ---
 
 # 原型链继承-Prototype chain
+
+`Child.prototype = new Parent();`
 
 借助原型链实现继承, 引起`引用类型的原型属性会被所有实例共享`
 
@@ -74,10 +76,12 @@ var s4 = new Child3();
 
 s3.play.push(4);
 
-console.log(s3.play, s4.play)
+console.log(s3.play, s4.play) // [1, 2, 3, 4],  [1, 2, 3];
 ```
 
-## 组合继承优化-optimize
+# 共享原型-Shared-prototype
+
+组合继承优化-1
 
 `Child.prototype = Parent.prototype`
 
@@ -109,7 +113,9 @@ console.log(s5 instanceof Child4,s5 instanceof Parent4);  // true, true
 console.log(s5.constructor)  // Parent4
 ```
 
-##  组合继承优化2-optimize
+#  Object.create
+
+组合继承优化-2
 
 `Child.prototype = Object.create(Parent.prototype)`
 
@@ -132,6 +138,10 @@ var s7 = new Child5();
 console.log(s7 instanceof Child5, s7 instanceof Parent5); // true, true
 console.log(s7.constructor);  // Child5
 ```
+
+[你不知道的javascript之Object.create 和new区别](https://blog.csdn.net/blueblueskyhua/article/details/73135938)
+
+[Object.create方法及其在继承上的应用](https://blog.csdn.net/TuoHai_/article/details/72954100)
 
 # 使用 class 关键字
 

@@ -2,7 +2,7 @@
 layout: post
 title: 选择排序
 tags:
-- 算法
+- algorithm
 categories: JS
 description: 选择排序
 ---

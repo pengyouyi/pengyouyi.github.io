@@ -2,7 +2,7 @@
 layout: post
 title: 堆和排序
 tags:
-- 算法
+- algorithm
 categories: JS
 description: 堆和排序
 ---

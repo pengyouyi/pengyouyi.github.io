@@ -2,7 +2,7 @@
 layout: post
 title: 插入排序
 tags:
-- 算法
+- algorithm
 categories: JS
 description: 插入排序
 ---

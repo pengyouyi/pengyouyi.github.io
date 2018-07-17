@@ -2,7 +2,7 @@
 layout: post
 title: 前后端如何通信
 tags:
-- 通信类
+- HTTP
 categories: HTTP
 description: 前后端如何通信
 ---

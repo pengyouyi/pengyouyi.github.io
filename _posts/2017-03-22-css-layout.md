@@ -2,7 +2,7 @@
 layout: post
 title: css等高布局
 tags:
-- 布局
+- layout
 categories: CSS
 description: css等高布局
 ---

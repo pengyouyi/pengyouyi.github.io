@@ -2,7 +2,7 @@
 layout: post
 title: 排序算法-快速排序
 tags:
-- 算法
+- algorithm
 categories: JS
 description: 排序算法algorithm-快速排序
 ---
@@ -48,7 +48,7 @@ function quickSort(arr) {
   var leftArr = [ ];
   var rightArr = [ ];
 
-  for(var i = 1; i < len; i++) {
+  for(var i = 0; i < arr.length; i++) {
     if (midValue > arr[i]) {
       leftArr.push(arr[i]);  // 基准点的左边的数传到左边数组
     } else {

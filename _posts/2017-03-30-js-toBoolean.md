@@ -2,7 +2,7 @@
 layout: post
 title: js显示、隐式转为布尔值
 tags:
-- 
+- JS-Basic
 categories: JS
 description: js显示、隐式转为布尔值
 ---

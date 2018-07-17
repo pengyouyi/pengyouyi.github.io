@@ -3,7 +3,7 @@ layout: post
 title: mac配置Apache
 tags:
 - mac
-- Apache
+- apache
 categories: HTTP
 description: MAC下配置Apache
 ---

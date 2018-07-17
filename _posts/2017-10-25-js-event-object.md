@@ -2,7 +2,6 @@
 layout: post
 title: event事件对象的通用属性、方法
 tags:
-- Interview
 - DOM
 categories: JS
 description: event事件对象
@@ -33,9 +32,9 @@ description: event事件对象
 	<title>test</title>
 </head>
 <body>
-	<div id="myDiv">click me</div>	
+    <div id="myDiv">click me</div>	
 <script>
-	var btn = document.getElementById("myDiv");
+    var btn = document.getElementById("myDiv");
 
     btn.onclick = function(event) {
         console.log(event);

@@ -20,8 +20,8 @@ description: JavaScript面试题-小code
 function GetBytes(str){
   var len = str.length;
   var bytes = len;
-  for(var i = 0;i<len;i++){
-    if(str.charCodeAt(i)>255){
+  for(var i = 0;i < len;i++){
+    if(str.charCodeAt(i) > 255){
       bytes++;
     }
   }
@@ -40,9 +40,9 @@ function getLeng(str){
   }
   var len = str.length;
   var newlen = 0;
-  for(var i=0; i<len; i++){
-    if(str.charCodeAt(i)>255){
-      newlen+=2;
+  for(var i = 0; i < len; i++){
+    if(str.charCodeAt(i) > 255){
+      newlen += 2;
     }else{
       newlen++;
     }
@@ -86,7 +86,7 @@ str = "abcaba";
 	
 function getMost(str){
 	var obj = {};
-	for(var i=0; i<str.length; i++){
+	for(var i = 0; i < str.length; i++){
 
 		if(!obj[str.charAt(i)]){
 			obj[str.charAt(i)] = 1;
@@ -103,8 +103,8 @@ function getMost(str){
 		}
 	}
 	var newObj = {
-		maxvalue:index,
-		maxnum:max
+		maxvalue: index,
+		maxnum: max
 	}
 	return newObj;
 }
@@ -131,7 +131,7 @@ console.log(random);
 <script type="text/javascript">
 
 	function f(str){
-		return str>9? str :"0"+ str
+		return str > 9 ? str : "0" + str;
 	}
 
 	function getTime(){
@@ -163,19 +163,19 @@ console.log(random);
 法一：正则匹配
 
 ```js
-	function myNum(num) {
-      var xs = num.toString().split('.')[1]; // 判断是否有小数部分
-      if (xs) {
-      	return num && num
-	        .toString()
-	        .replace(/(\d)(?=(\d{3})+\.)/g, function($1, $2){
-	            return $2 + ',';
-	        });
-      }
-      return num.toString().replace(/(\d{1,3})(?=(\d{3})+$)/g,'$1,');
+function myNum(num) {
+	var xs = num.toString().split('.')[1]; // 判断是否有小数部分
+	if (xs) {
+	return num && num
+		.toString()
+		.replace(/(\d)(?=(\d{3})+\.)/g, function($1, $2){
+			return $2 + ',';
+		});
 	}
+	return num.toString().replace(/(\d{1,3})(?=(\d{3})+$)/g,'$1,');
+}
 
-	console.log(myNum(num));
+console.log(myNum(num));
 ```
 
 法二：借用数组
@@ -186,9 +186,10 @@ var num = 12345678.90;
 function turnQFW(num) { 
 	var str = parseInt(num).toString();
 	var zsLength = parseInt(num).toString().length;
+	// 小数
 	var xs = num.toString().split(".")[1];
 
-	var iNum = str.length%3; //余数 
+	var iNum = str.length % 3; //余数 
 	var prev = ''; 
 	var arr = []; 
 	var iNow = 0; 

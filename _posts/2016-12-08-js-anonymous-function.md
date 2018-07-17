@@ -2,7 +2,7 @@
 layout: post
 title: js中的匿名函数
 tags:
-- js函数
+- JS-Function
 categories: JS
 description: js中的匿名函数
 ---
@@ -76,18 +76,19 @@ alert('water');
 2.参数保护,函数是独立作用域,传递参数可以保护临时变量,闭包可以保存循环中需要保留的临时变量,还有组件开发时将命名空间传递到函数中用闭包保护起来,即使命名空间被后面的代码重置,原变量被闭包保护将仍然生存  
 3.降低风险,因为没有变量名,中间代码又被闭包保护,js注入无法访问,减少被攻击风险
 
-1.  
+1.
+
 ```js
 (function(){
-		var a = "a";
-		b = "b";
-		function c(){
-			return c;
-		}
-	})()
-	console.log(a);    // a is not defined(…)
-	console.log(b);
-	console.log(c());  // c is not defined(…)
+	var a = "a";
+	b = "b";
+	function c(){
+		return c;
+	}
+})()
+console.log(a);    // a is not defined(…)
+console.log(b);
+console.log(c());  // c is not defined(…)
 ```
 
 # anonymous function使用场景

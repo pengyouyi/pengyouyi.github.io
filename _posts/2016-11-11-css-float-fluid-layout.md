@@ -2,7 +2,7 @@
 layout: post
 title: css布局之float流体布局
 tags:
-- 布局
+- layout
 categories: CSS
 description: css布局之float流体布局
 ---

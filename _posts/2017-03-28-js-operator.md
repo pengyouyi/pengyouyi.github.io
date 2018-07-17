@@ -2,7 +2,7 @@
 layout: post
 title: js运算符优先级
 tags:
-- 
+- JS-Basic
 categories: JS
 description: js运算符优先级
 ---

@@ -85,7 +85,7 @@ HTTP/1.0给客户端设定缓存方式可通过两个字段——“Pragma”和
 
 1. “Pragma: no-cache”，会知会客户端不要对该资源读缓存，即每次都得向服务器发一次请求才行。
 
-2. Pragma属于通用首部字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签
+2. Pragma属于**通用首部**字段，在客户端上使用时，常规要求我们往html上加上这段meta元标签
 
 ```html
 <meta http-equiv="Pragma" content="no-cache">
@@ -101,7 +101,7 @@ HTTP/1.0给客户端设定缓存方式可通过两个字段——“Pragma”和
 Expires: Thu, 01 Dec 2010 16:00:00 GMT
 ```
 
-Expires是Web服务器响应消息头字段，在响应http请求时告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。
+Expires是Web服务器**响应消息头**字段，在响应http请求时告诉浏览器在过期时间前浏览器可以直接从浏览器缓存取数据，而无需再次请求。
 
 **使用Expires缺点**
 
@@ -119,7 +119,7 @@ Cache-Control: max-age=3600
 
 `Cache-Control优先级高于Expires`  
 
-若报文中同时出现了 Pragma、Expires 和 Cache-Control，HTTP/1.1会以 Cache-Control 为准。
+若报文中同时出现了 Pragma、Expires 和 Cache-Control，HTTP/1.1会以 Cache-Control 为准；
 
 HTTP/1.0会以 Expires 为准，忽略Cache-Control。
 
@@ -186,7 +186,9 @@ Last-Modified与ETag是可以一起使用的，`服务器会优先验证ETag`，
 # 用户行为与缓存-User behavior
 
 如果直接在地址栏按回车，响应HTTP200（from cache），因为有效期还没过直接读取的缓存；
+
 如果ctrl+r进行刷新，则会相应HTTP304（Not Modified），虽然还是读取的本地缓存，但是多了一次服务端的请求；
+
 而如果是ctrl+shift+r强刷，则会直接从服务器下载新的文件，响应HTTP200。
 
 <div class="rd">
