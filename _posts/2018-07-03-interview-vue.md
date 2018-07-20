@@ -297,7 +297,9 @@ npm安装，然后import样式和js，vue.use（mintUi）全局引入。
 
 - v-model：实现双向绑定
 
-指令（v-class、v-for、v-if、v-show、v-on）。
+- v-show
+
+- v-on
 
 
 ## v-model是什么？怎么使用？ vue中标签怎么绑定事件？
@@ -527,6 +529,10 @@ vuex可以理解为一种开发模式或框架。比如PHP有thinkphp，java有s
 
 - 异步逻辑应该封装在action中。
 
+![https://vuex.vuejs.org/vuex.png](https://vuex.vuejs.org/vuex.png)
+
+[https://vuex.vuejs.org/](https://vuex.vuejs.org/)
+
 ## vuex是什么？怎么使用？哪种功能场景使用它？
 
 vue框架中状态管理。
@@ -686,6 +692,8 @@ actions.js
 无内容
 
 [vuex更多](https://vuex.vuejs.org/zh-cn/structure.html)
+
+[vuex 使用详解](https://blog.csdn.net/mjzhang1993/article/details/78321903)
 
 # MVVM
 

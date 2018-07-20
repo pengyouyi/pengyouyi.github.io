@@ -268,7 +268,7 @@ class List {
 		this.el.forEach((item) => {
 			item.addEventListener('click', function(e) {
 				if (e.target.className.indexOf('del') > -1) {
-                    self.removeItem.call(self,e.target)
+				  self.removeItem.call(self,e.target)
 				}
 			})
 		})
@@ -321,9 +321,9 @@ function flat(arr) {
 	function digui(arr) {
 		for(var i = 0; i < arr.length; i++) {
 			if (arr[i] instanceof Array) {
-	         digui(arr[i]);
+			    digui(arr[i]);
 			} else {
-				temp.push(arr[i]);
+			    temp.push(arr[i]);
 			}
 		}
 	}

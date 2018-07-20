@@ -288,7 +288,7 @@ div1.on('click', alert('click')).html('youyi');
 
 - 返回this
 
-[new操作符具体干了什么呢?](http://pengyouyi.site/js/2016/10/09/js#new)
+[new操作符具体干了什么呢?](http://pengyouyi.site/js/2016/10/09/interview-js#new)
 
 ```js
 function Foo(name, age) {

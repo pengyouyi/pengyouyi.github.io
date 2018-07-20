@@ -44,7 +44,7 @@ jquery和框架的区别
 </head>
 <body>
     <input type="text" name="" id="txt-title">
-	<button id="btn-submit">submit</button>
+    <button id="btn-submit">submit</button>
     <ul id="ul-list"></ul>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

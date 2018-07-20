@@ -12,6 +12,22 @@ description: 慕课网-揭秘一线互联网企业 前端JavaScript高级面试�
 
 # begin
 
+```js
+hello
+    我是4个中文空格
+        我是8个中文空格
+    我是4个英文空格
+        我是8个英文空格
+  一个英文tab
+    2个英文tab
+  一个中文tab
+    2个中文tab
+  2英文空格
+  2中文空格
+        4个英文tab
+        4个中文tab   
+```
+
 1、 说一下对组件化的理解
 
 2、 jsx本质是什么
@@ -84,10 +100,10 @@ class Todo extends Component {
 			)
 	};
 	addTitle(title) {
-       const currentList = this.state.list;
-       this.setState({
-       	  list: currentList.concat(title)
-       })
+	    const currentList = this.state.list;
+	    this.setState({
+	        list: currentList.concat(title)
+	    })
 	}
 }
 
@@ -115,9 +131,9 @@ class Input extends Component {
 			)
 	};
 	changeHandle(e) {
-       this.setState({
-       	  title: e.target.value
-       })
+	    this.setState({
+     	    title: e.target.value
+	    })
 	};
 	clickHandle() {
 		const title = this.state.title;

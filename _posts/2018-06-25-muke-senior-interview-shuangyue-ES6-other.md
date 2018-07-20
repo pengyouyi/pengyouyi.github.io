@@ -129,11 +129,11 @@ function fn(){
   // js
   arr.map(function(item){
     console.log('js', this) // window
-	  return item + 1
-	})
+    return item + 1
+  })
 	
 	//es6
-	arr.map((item, index) => {
+  arr.map((item, index) => {
 	  console.log('es6', this); // {a: 100}
 	  return item + 1;
 	})

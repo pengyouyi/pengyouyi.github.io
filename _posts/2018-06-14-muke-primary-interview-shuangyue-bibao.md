@@ -184,11 +184,11 @@ for(var i = 0; i < 10; i++) {
 window.onload = function() {
 	var oA = document.getElementsByTagName('a');
 	for(var i = 0; i < oA.length; i++) {
-      oA[i].onclick = function(num) {
-      	return function() {
-      		alert(num);
-      	}
-      }(i);
+		oA[i].onclick = function(num) {
+			return function() {
+				alert(num);
+			}
+		}(i);
     }
 }
 ```

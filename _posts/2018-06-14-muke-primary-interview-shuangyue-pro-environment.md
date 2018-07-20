@@ -4,6 +4,8 @@ title: 慕课网-前端JavaScript面试技巧(双越)-运行环境
 tags:
 - Interview
 - imooc
+- BOM
+- optimize
 categories: JS
 description: 慕课网-前端JavaScript面试技巧(双越)-运行环境
 ---

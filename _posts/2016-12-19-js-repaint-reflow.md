@@ -3,7 +3,7 @@ layout: post
 title: 浏览器重排与重绘
 tags:
 - BOM
-- optimaze
+- optimize
 categories: CSS
 description: 浏览器重排与重绘
 ---
