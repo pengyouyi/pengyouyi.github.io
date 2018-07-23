@@ -12,22 +12,6 @@ description: 慕课网-揭秘一线互联网企业 前端JavaScript高级面试�
 
 # begin
 
-```js
-hello
-    我是4个中文空格
-        我是8个中文空格
-    我是4个英文空格
-        我是8个英文空格
-  一个英文tab
-    2个英文tab
-  一个中文tab
-    2个中文tab
-  2英文空格
-  2中文空格
-        4个英文tab
-        4个中文tab   
-```
-
 1、 说一下对组件化的理解
 
 2、 jsx本质是什么
@@ -165,7 +149,7 @@ class List extends Component {
                 <ul>
                   {
                   	list.map((item,index) => {
-                      return <li key={index}>{item}</li>
+                  	    return <li key={index}>{item}</li>
                   	})
                   }
                 </ul>
@@ -208,7 +192,7 @@ class Todo extends Component {
 	};
 	render() {
 		return (
-		         /*视图封装-start*/
+              /*视图封装-start*/
               <div>
                 <Input addTitle={this.addTitle.bind(this)}/>
                 <List data={this.state.list}/>
@@ -217,11 +201,11 @@ class Todo extends Component {
 			)
 	};
 	addTitle(title) {
-       const currentList = this.state.list;
+	    const currentList = this.state.list;
        // 变化逻辑封装-start
-       this.setState({  
-       	  list: currentList.concat(title)
-       })
+	    this.setState({  
+	        list: currentList.concat(title)
+	    })
        // 变化逻辑封装-end
 	}
 }

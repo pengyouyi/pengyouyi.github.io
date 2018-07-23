@@ -47,7 +47,11 @@ beforeDestroy（销毁前）, destroyed（销毁后）
 
 ### beforeMount（载入前）/ mounted（载入后）：
 
-+ beforeMount: vue实例的$el和data都初始化了，但还是挂载之前为虚拟的dom节点，eg： `<div>{{message}}</div>` 
++ beforeMount: vue实例的$el和data都初始化了，但还是挂载之前为虚拟的dom节点，eg：
+
+```
+<div>{{message}}</div>
+```
 
 + mounted: vue实例挂载完成(DOM 加载完成)，data.message成功渲染。
 

@@ -4,7 +4,7 @@ title: Vue面试题汇总
 tags:
 - Interview
 - vue
-categories: JS
+categories: Framework
 description: Vue面试题汇总
 ---
 
