@@ -72,6 +72,14 @@ import { stat, exists, readFile } from 'fs';
 
 ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"use strict";。
 
+## Module & CommonJS
+
+ES6 模块与 CommonJS 模块的差异
+
+- CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用
+
+- CommonJS 模块是运行时加载，ES6 模块是编译时输出接口
+
 # es6模块化语法
 
 export命令用于规定模块的对外接口，import命令用于输入其他模块提供的功能。
@@ -349,4 +357,6 @@ cnpm i rollup-plugin-node-resolve rollup-plugin-babel babel-plugin-external-help
 [揭秘一线互联网企业 前端JavaScript高级面试](https://coding.imooc.com/learn/list/190.html)
 
 [ECMAScript 6 入门-阮一峰](http://es6.ruanyifeng.com/)
+
+[ES6之Module 的加载实现](https://blog.csdn.net/tian361zyc/article/details/72834288)
 

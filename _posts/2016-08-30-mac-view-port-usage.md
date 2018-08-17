@@ -52,9 +52,16 @@ kill -9 PID
 * 如果是mac，可以在终端输入`dig pengyouyi.github.io`，同样回车后会看到一个对应的IP地址。
 
 
+## npm权限修复
 
+[npm权限修复](https://www.jianshu.com/p/eed1cfeee7ec)
 
+## 修改bash
 
+```bash
+cd ~
+vim .bash_profile
+```
 
 
 

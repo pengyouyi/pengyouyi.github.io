@@ -323,6 +323,47 @@ CSS3 有3种和动画相关的属性：transform, transition, animation。
 
 3. 如果要使用js灵活设定动画属性，用transition.
 
+变换元素transform和过渡元素transition混合使用:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.pic{
+			width: 400px;
+			margin:80px auto;
+			background: #d8effe;
+			padding: 10px;
+		}
+		.pic img{
+			margin:5px;
+			padding: 5px;
+			width: 135px;
+			border:1px solid black;
+			background: white;
+			transition: all 1s;
+		}
+		.pic img:hover{
+			transform: scale(2.2) rotate(20deg);
+		}
+ 
+	</style>
+</head>
+<body>
+	<div class="pic">
+		<img src="one.jpg">
+		<img src="two.jpg">
+		<img src="three.jpg">
+		<img src="four.jpg">
+		<img src="five.jpg">
+	</div>
+</body>
+
+```
+
 
 # 更多-more
 

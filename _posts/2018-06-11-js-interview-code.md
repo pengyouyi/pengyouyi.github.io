@@ -457,6 +457,8 @@ camry.sell();
 
 - 实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Number、String、Object、Array、Boolean）进行值复制
 
+法一：递归
+
 ```js
 function clone(obj){
 	var o;
@@ -497,6 +499,27 @@ function clone(obj){
 var s = {fd:"df",fde:{we:3}};
 console.log(clone(s));
 ```
+
+法二：JSON.parse(JSON.stringify(obj)) 用JSON实现深拷贝
+
+```js
+var test={
+    a:"ss",
+    b:"dd",
+    c:[
+        {dd:"css",ee:"cdd"},
+        {mm:"ff",nn:"ee"}
+    ]
+};
+var test1 = JSON.parse(JSON.stringify(test));//拷贝数组,注意这行的拷贝方法
+console.log(test);
+console.log(test1);
+test1.c[0].dd="change"; //改变test1的c属性对象的d属性
+console.log(test);  //不影响test
+console.log(test1);
+```
+
+[使用JSON.parse(),JSON.stringify()实现对对象的深拷贝](https://www.cnblogs.com/baiyangyuanzi/p/6519612.html)
 
 ## 继承的使用-inherit
 

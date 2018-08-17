@@ -560,6 +560,8 @@
 <ul>
 <li>实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Number、String、Object、Array、Boolean）进行值复制</li>
 </ul>
+
+<p>法一：递归</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">clone</span><span class="p">(</span><span class="nx">obj</span><span class="p">){</span>
     <span class="kd">var</span> <span class="nx">o</span><span class="p">;</span>
     <span class="k">switch</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
@@ -599,6 +601,24 @@
 <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="p">{</span><span class="na">fd</span><span class="p">:</span><span class="s2">"df"</span><span class="p">,</span><span class="na">fde</span><span class="p">:{</span><span class="na">we</span><span class="p">:</span><span class="mi">3</span><span class="p">}};</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">clone</span><span class="p">(</span><span class="nx">s</span><span class="p">));</span>
 </code></pre></div>
+<p>法二：JSON.parse(JSON.stringify(obj)) 用JSON实现深拷贝</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">test</span><span class="o">=</span><span class="p">{</span>
+    <span class="na">a</span><span class="p">:</span><span class="s2">"ss"</span><span class="p">,</span>
+    <span class="na">b</span><span class="p">:</span><span class="s2">"dd"</span><span class="p">,</span>
+    <span class="na">c</span><span class="p">:[</span>
+        <span class="p">{</span><span class="na">dd</span><span class="p">:</span><span class="s2">"css"</span><span class="p">,</span><span class="na">ee</span><span class="p">:</span><span class="s2">"cdd"</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">mm</span><span class="p">:</span><span class="s2">"ff"</span><span class="p">,</span><span class="na">nn</span><span class="p">:</span><span class="s2">"ee"</span><span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">test1</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">test</span><span class="p">));</span><span class="c1">//拷贝数组,注意这行的拷贝方法</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test1</span><span class="p">);</span>
+<span class="nx">test1</span><span class="p">.</span><span class="nx">c</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">dd</span><span class="o">=</span><span class="s2">"change"</span><span class="p">;</span> <span class="c1">//改变test1的c属性对象的d属性</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>  <span class="c1">//不影响test</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test1</span><span class="p">);</span>
+</code></pre></div>
+<p><a href="https://www.cnblogs.com/baiyangyuanzi/p/6519612.html">使用JSON.parse(),JSON.stringify()实现对对象的深拷贝</a></p>
+
 <h2 id="inherit">继承的使用-inherit</h2>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Animal</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
@@ -815,7 +835,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>11</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>12</sup></a></li>
 		  
 		
 		  
@@ -900,7 +920,7 @@
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>35</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>36</sup></a></li>
 			
 		
 			

@@ -377,6 +377,9 @@ ES6\WebAssembly\Node\MVVM\Web Components\React\React Native\Webpack 组件化
 
 6. hot-update.js 插入成功后，执行hotAPI 的 createRecord 和 reload方法，获取到 Vue 组件的 render方法，重新 render 组件， 继而实现 UI 无刷新更新。
 
+
+[Webpack热更新](https://zhuanlan.zhihu.com/p/30623057)
+
 # 产品Update
 
 - 产品进行版本升级时，可能发生不兼容性问题，如何提前预防和解决？
