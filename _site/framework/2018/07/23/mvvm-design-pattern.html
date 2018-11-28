@@ -161,32 +161,38 @@
 		
 		</div>
 		
-		<h1 id="mvvm">MVVM设计模式</h1>
+		<h1 id="mvvm设计模式">MVVM设计模式</h1>
 
 <p>MVVM框架采用的设计模式是“观察者模式”</p>
 
 <div class="rd">
-    <img src="/assets/images/2018/7-8-9/7-23-1.png" alt="">
+    <img src="/assets/images/2018/7-8-9/7-23-1.png" alt="" />
 </div>
 
-<h1 id="vue-mvvm">vue和MVVM</h1>
+<h1 id="vue和mvvm">vue和MVVM</h1>
 
 <p>Vue.js 关于双向绑定的一些实现细节：</p>
 
 <p>Vue.js 是采用 Object.defineProperty 的 getter 和 setter，并结合观察者模式来实现数据绑定的。当把一个普通 Javascript 对象传给 Vue 实例来作为它的 data 选项时，Vue 将遍历它的属性，用 Object.defineProperty 将它们转为 getter/setter。用户看不到 getter/setter，但是在内部它们让 Vue 追踪依赖，在属性被访问和修改时通知变化。</p>
 
 <div class="rd">
-    <img src="/assets/images/2018/7-8-9/7-23-2.png" alt="">
+    <img src="/assets/images/2018/7-8-9/7-23-2.png" alt="" />
 </div>
 
 <blockquote>
-<p>Observer 数据监听器，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者，内部采用Object.defineProperty的getter和setter来实现。</p>
+  <p>Observer 数据监听器，能够对数据对象的所有属性进行监听，如有变动可拿到最新值并通知订阅者，内部采用Object.defineProperty的getter和setter来实现。</p>
+</blockquote>
 
-<p>Dep 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），数据变动触发notify 函数，再调用订阅者的 update 方法。</p>
+<blockquote>
+  <p>Dep 消息订阅器，内部维护了一个数组，用来收集订阅者（Watcher），数据变动触发notify 函数，再调用订阅者的 update 方法。</p>
+</blockquote>
 
-<p>Watcher 订阅者， 作为连接 Observer 和 Compile 的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。</p>
+<blockquote>
+  <p>Watcher 订阅者， 作为连接 Observer 和 Compile 的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数。</p>
+</blockquote>
 
-<p>Compile 指令解析器，它的作用对每个元素节点的指令进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数。</p>
+<blockquote>
+  <p>Compile 指令解析器，它的作用对每个元素节点的指令进行扫描和解析，根据指令模板替换数据，以及绑定相应的更新函数。</p>
 </blockquote>
 
 <p>当执行 new Vue() 时，Vue 就进入了初始化阶段，一方面Vue 会遍历 data 选项中的属性，并用 Object.defineProperty 将它们转为 getter/setter，实现数据变化监听功能；</p>
@@ -195,24 +201,24 @@
 
 <p>当数据发生变化时，Observer 中的 setter 方法被触发，setter 会立即调用Dep.notify()，Dep 开始遍历所有的订阅者，并调用订阅者的 update 方法，订阅者收到通知后对视图进行相应的更新。</p>
 
-<h1 id="mvvm">mvvm 源码分析</h1>
+<h1 id="mvvm-源码分析">mvvm 源码分析</h1>
 
 <p>mvvm</p>
-
 <ul>
-<li>index.html</li>
-<li>js
-
-<ul>
-<li>index.js</li>
-<li>watcher.js</li>
-<li>observer.js</li>
-<li>compile.js</li>
-</ul></li>
+  <li>index.html</li>
+  <li>js
+    <ul>
+      <li>index.js</li>
+      <li>watcher.js</li>
+      <li>observer.js</li>
+      <li>compile.js</li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="mvvm-index-html">mvvm/index.html</h2>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<h2 id="mvvmindexhtml">mvvm/index.html</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -258,15 +264,17 @@
 
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2 id="mvvm-js-index-js">mvvm/js/index.js</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Vue</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="mvvmjsindexjs">mvvm/js/index.js</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Vue</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">methods</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">methods</span><span class="p">;</span>
 
     <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">self</span><span class="p">.</span><span class="nx">proxyKeys</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+        <span class="nb">self</span><span class="p">.</span><span class="nx">proxyKeys</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
     <span class="p">});</span>
 
     <span class="nx">observe</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
@@ -276,32 +284,34 @@
 
 <span class="nx">Vue</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">proxyKeys</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
         <span class="c1">// this指Vue实例vm, 即实现将data的属性代理到vm上</span>
         <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
             <span class="na">enumerable</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
             <span class="na">configurable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
             <span class="na">get</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+                <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
             <span class="p">},</span>
             <span class="na">set</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">self</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newVal</span><span class="p">;</span>
+                <span class="nb">self</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newVal</span><span class="p">;</span>
             <span class="p">},</span>
         <span class="p">});</span>
     <span class="p">},</span>
 <span class="p">};</span>
-</code></pre></div>
-<h2 id="mvvm-js-observe-js">mvvm/js/observe.js</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Observer</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<h2 id="mvvmjsobservejs">mvvm/js/observe.js</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Observer</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">walk</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nx">Observer</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">walk</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
         <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">data</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">defineReactive</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
+            <span class="nb">self</span><span class="p">.</span><span class="nx">defineReactive</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]);</span>
         <span class="p">});</span>
     <span class="p">},</span>
     <span class="na">defineReactive</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
@@ -348,22 +358,32 @@
     <span class="p">},</span>
 <span class="p">};</span>
 <span class="nx">Dep</span><span class="p">.</span><span class="nx">target</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>observe()在vue实例化的时候被调用。</p>
 
 <ul>
-<li><p>Observer 把所有的data遍历一遍，调用Object.defineProperty()；</p></li>
-<li><p>识别子对象是否嵌套，如果是就递归处理，如果不是就直接定义这个对象；</p></li>
-<li><p>get 数据读取的时候，它来判断是不是要给 Dep【观察者列表】 添加一个观察者 【Watcher】，</p></li>
-<li><p>set 数据改变，通知 Dep。执行dep.notify()，Dep里面每一个 Watcher 执行 update()回调函数。</p></li>
+  <li>
+    <p>Observer 把所有的data遍历一遍，调用Object.defineProperty()；</p>
+  </li>
+  <li>
+    <p>识别子对象是否嵌套，如果是就递归处理，如果不是就直接定义这个对象；</p>
+  </li>
+  <li>
+    <p>get 数据读取的时候，它来判断是不是要给 Dep【观察者列表】 添加一个观察者 【Watcher】，</p>
+  </li>
+  <li>
+    <p>set 数据改变，通知 Dep。执行dep.notify()，Dep里面每一个 Watcher 执行 update()回调函数。</p>
+  </li>
 </ul>
 
-<h2 id="mvvm-js-watcher-js">mvvm/js/watcher.js</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Watcher</span> <span class="p">(</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+<h2 id="mvvmjswatcherjs">mvvm/js/watcher.js</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Watcher</span> <span class="p">(</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">cb</span> <span class="o">=</span> <span class="nx">cb</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">vm</span> <span class="o">=</span> <span class="nx">vm</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">exp</span> <span class="o">=</span> <span class="nx">exp</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>  <span class="c1">// 将自己添加到订阅器的操作</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">();</span>  <span class="c1">// 将自己添加到订阅器的操作</span>
 <span class="p">}</span>
 
 <span class="nx">Watcher</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
@@ -385,9 +405,11 @@
         <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
     <span class="p">},</span>
 <span class="p">};</span>
-</code></pre></div>
-<h2 id="mvvm-js-compile-js">mvvm/js/compile.js</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Compile</span> <span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">vm</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<h2 id="mvvmjscompilejs">mvvm/js/compile.js</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Compile</span> <span class="p">(</span><span class="nx">el</span><span class="p">,</span> <span class="nx">vm</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">vm</span> <span class="o">=</span> <span class="nx">vm</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">el</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="nx">el</span><span class="p">);</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">fragment</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
@@ -416,45 +438,45 @@
     <span class="p">},</span>
     <span class="na">compileElement</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">el</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">childNodes</span> <span class="o">=</span> <span class="nx">el</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
         <span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">childNodes</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">reg</span> <span class="o">=</span> <span class="sr">/</span><span class="se">\{\{(</span><span class="sr">.*</span><span class="se">)\}\}</span><span class="sr">/</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">textContent</span><span class="p">;</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">isElementNode</span><span class="p">(</span><span class="nx">node</span><span class="p">))</span> <span class="p">{</span>
-                <span class="nx">self</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">isTextNode</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">reg</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
-                <span class="nx">self</span><span class="p">.</span><span class="nx">compileText</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">reg</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">text</span><span class="p">)[</span><span class="mi">1</span><span class="p">]);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nx">isElementNode</span><span class="p">(</span><span class="nx">node</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nb">self</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nx">isTextNode</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">reg</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nb">self</span><span class="p">.</span><span class="nx">compileText</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">reg</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">text</span><span class="p">)[</span><span class="mi">1</span><span class="p">]);</span>
             <span class="p">}</span>
 
             <span class="k">if</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">childNodes</span> <span class="o">&amp;&amp;</span> <span class="nx">node</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">self</span><span class="p">.</span><span class="nx">compileElement</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+                <span class="nb">self</span><span class="p">.</span><span class="nx">compileElement</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">});</span>
     <span class="p">},</span>
     <span class="na">compile</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">nodeAttrs</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">attributes</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
         <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">forEach</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">nodeAttrs</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">attr</span><span class="p">)</span> <span class="p">{</span>
             <span class="kd">var</span> <span class="nx">attrName</span> <span class="o">=</span> <span class="nx">attr</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">isDirective</span><span class="p">(</span><span class="nx">attrName</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nx">isDirective</span><span class="p">(</span><span class="nx">attrName</span><span class="p">))</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">exp</span> <span class="o">=</span> <span class="nx">attr</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
                 <span class="kd">var</span> <span class="nx">dir</span> <span class="o">=</span> <span class="nx">attrName</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">isEventDirective</span><span class="p">(</span><span class="nx">dir</span><span class="p">))</span> <span class="p">{</span>  <span class="c1">// 事件指令</span>
-                    <span class="nx">self</span><span class="p">.</span><span class="nx">compileEvent</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="nx">dir</span><span class="p">);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nx">isEventDirective</span><span class="p">(</span><span class="nx">dir</span><span class="p">))</span> <span class="p">{</span>  <span class="c1">// 事件指令</span>
+                    <span class="nb">self</span><span class="p">.</span><span class="nx">compileEvent</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nb">self</span><span class="p">.</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="nx">dir</span><span class="p">);</span>
                 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>  <span class="c1">// v-model 指令</span>
-                    <span class="nx">self</span><span class="p">.</span><span class="nx">compileModel</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">self</span><span class="p">.</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="nx">dir</span><span class="p">);</span>
+                    <span class="nb">self</span><span class="p">.</span><span class="nx">compileModel</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nb">self</span><span class="p">.</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="nx">dir</span><span class="p">);</span>
                 <span class="p">}</span>
                 <span class="nx">node</span><span class="p">.</span><span class="nx">removeAttribute</span><span class="p">(</span><span class="nx">attrName</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="p">});</span>
     <span class="p">},</span>
     <span class="na">compileText</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">exp</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
         <span class="kd">var</span> <span class="nx">initText</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">vm</span><span class="p">[</span><span class="nx">exp</span><span class="p">];</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">updateText</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">initText</span><span class="p">);</span>
         <span class="k">new</span> <span class="nx">Watcher</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">updateText</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+            <span class="nb">self</span><span class="p">.</span><span class="nx">updateText</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
         <span class="p">});</span>
     <span class="p">},</span>
     <span class="na">compileEvent</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="nx">dir</span><span class="p">)</span> <span class="p">{</span>
@@ -466,11 +488,11 @@
         <span class="p">}</span>
     <span class="p">},</span>
     <span class="na">compileModel</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="nx">dir</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
         <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">vm</span><span class="p">[</span><span class="nx">exp</span><span class="p">];</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">modelUpdater</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">val</span><span class="p">);</span>
         <span class="k">new</span> <span class="nx">Watcher</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">vm</span><span class="p">,</span> <span class="nx">exp</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">modelUpdater</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+            <span class="nb">self</span><span class="p">.</span><span class="nx">modelUpdater</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
         <span class="p">});</span>
 
         <span class="nx">node</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'input'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
@@ -478,7 +500,7 @@
             <span class="k">if</span> <span class="p">(</span><span class="nx">val</span> <span class="o">===</span> <span class="nx">newValue</span><span class="p">)</span> <span class="p">{</span>
                 <span class="k">return</span><span class="p">;</span>
             <span class="p">}</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">vm</span><span class="p">[</span><span class="nx">exp</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">;</span>
+            <span class="nb">self</span><span class="p">.</span><span class="nx">vm</span><span class="p">[</span><span class="nx">exp</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">;</span>
             <span class="nx">val</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">;</span>
         <span class="p">});</span>
     <span class="p">},</span>
@@ -501,12 +523,17 @@
         <span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">==</span> <span class="mi">3</span><span class="p">;</span>
     <span class="p">},</span>
 <span class="p">};</span>
-</code></pre></div>
-<h1 id="more">更多-more</h1>
+</code></pre></div></div>
+
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><p><a href="https://www.cnblogs.com/onepixel/p/6034307.html">Vue.js 和 MVVM 小细节</a></p></li>
-<li><p><a href="https://blog.csdn.net/github_36369819/article/details/79201314">从vue源码看观察者模式</a></p></li>
+  <li>
+    <p><a href="https://www.cnblogs.com/onepixel/p/6034307.html">Vue.js 和 MVVM 小细节</a></p>
+  </li>
+  <li>
+    <p><a href="https://blog.csdn.net/github_36369819/article/details/79201314">从vue源码看观察者模式</a></p>
+  </li>
 </ul>
   
 	</div>
@@ -625,7 +652,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -779,6 +806,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

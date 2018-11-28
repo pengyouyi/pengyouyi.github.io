@@ -161,53 +161,50 @@
 		
 		</div>
 		
-		<h1 id="repaints-amp-reflows">repaints &amp; reflows</h1>
+		<h1 id="repaints--reflows">repaints &amp; reflows</h1>
 
 <h1 id="what-is-repaint-and-reflows">what is repaint and reflows</h1>
-
-<p>什么是重排和重绘 ？<br><br>
+<p>什么是重排和重绘 ？<br />
 浏览器下载完页面中的所有组件——HTML标记、JavaScript、CSS、图片之后会解析生成两个内部数据结构:</p>
 
 <p><strong>DOM树</strong></p>
-
 <blockquote>
-<p>表示页面结构</p>
+  <p>表示页面结构</p>
 </blockquote>
 
 <p><strong>渲染树</strong></p>
-
 <blockquote>
-<p>表示DOM节点如何显示</p>
+  <p>表示DOM节点如何显示</p>
 </blockquote>
 
-<p>DOM树中的每一个需要显示的节点在渲染树种至少存在一个对应的节点（隐藏的DOM元素disply值为none 在渲染树中没有对应的节点）。渲染树中的节点被称为“帧(frames)”或“盒(boxes)&quot;,符合CSS模型的定义，理解页面元素为一个具有内边距(padding)，外边距(margins)，边框(borders)和位置(position)的盒子。一旦DOM和渲染树构建完成，浏览器就开始显示（绘制(paint)）页面元素。</p>
+<p>DOM树中的每一个需要显示的节点在渲染树种至少存在一个对应的节点（隐藏的DOM元素disply值为none 在渲染树中没有对应的节点）。渲染树中的节点被称为“帧(frames)”或“盒(boxes)”,符合CSS模型的定义，理解页面元素为一个具有内边距(padding)，外边距(margins)，边框(borders)和位置(position)的盒子。一旦DOM和渲染树构建完成，浏览器就开始显示（绘制(paint)）页面元素。</p>
 
-<p>当DOM的变化影响了元素的几何属性（宽或高），浏览器需要重新计算元素的几何属性，同样其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的部分失效，并重新构造渲染树。这个过程称为<strong><code>重排</code></strong>。完成重排后，浏览器会重新绘制受影响的部分到屏幕，该过程称为<strong><code>重绘</code></strong>。</p>
+<p>当DOM的变化影响了元素的几何属性（宽或高），浏览器需要重新计算元素的几何属性，同样其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的部分失效，并重新构造渲染树。这个过程称为<strong><code class="highlighter-rouge">重排</code></strong>。完成重排后，浏览器会重新绘制受影响的部分到屏幕，该过程称为<strong><code class="highlighter-rouge">重绘</code></strong>。</p>
 
 <p>由于浏览器的流布局，对渲染树的计算通常只需要遍历一次就可以完成。但table及其内部元素除外，它可能需要多次计算才能确定好其在渲染树中节点的属性值，比同等元素要多花两倍时间，这就是我们尽量避免使用table布局页面的原因之一。</p>
 
 <p><strong>通俗理解：</strong></p>
 
 <blockquote>
-<p><code>重排</code>是DOM元素的几何属性变化，或者页面布局发生变化，渲染树需要重新计算。</p>
+  <p><code class="highlighter-rouge">重排</code>是DOM元素的几何属性变化，或者页面布局发生变化，渲染树需要重新计算。</p>
+</blockquote>
 
-<p><code>重绘</code>是一个元素外观的改变所触发的浏览器行为，例如改变visibility、outline、背景色等属性。浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。重绘不会带来重新布局，并不一定伴随重排。</p>
+<blockquote>
+  <p><code class="highlighter-rouge">重绘</code>是一个元素外观的改变所触发的浏览器行为，例如改变visibility、outline、背景色等属性。浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。重绘不会带来重新布局，并不一定伴随重排。</p>
 </blockquote>
 
 <h1 id="the-relationship-between-repaint-and-reflow">The relationship between repaint and reflow</h1>
-
 <p>重绘不会引起重排，但重排一定会引起重绘，一个元素的重排通常会带来一系列的反应，甚至触发整个文档的重排和重绘，性能代价是高昂的。</p>
 
 <p>并不是所有的DOM变化都会影响几何属性，比如改变一个元素的背景色并不会影响元素的宽和高，这种情况下只会发生重绘。</p>
 
-<h1 id="dom">DOM访问与修改</h1>
-
+<h1 id="dom访问与修改">DOM访问与修改</h1>
 <p>重排和重绘的代价究竟多大</p>
 
 <p>ECMAScript每次访问DOM元素，需交纳“过桥费”。修改元素更昂贵，它会导致浏览器重新计算页面的几何变化（重排和重绘）。</p>
 
 <p>每次过桥+重排+重绘</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">innerHTMLLoop</span><span class="p">(){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">innerHTMLLoop</span><span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
     <span class="kd">var</span> <span class="nx">times</span> <span class="o">=</span> <span class="mi">15000</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">times</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
@@ -218,9 +215,9 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="nx">innerHTMLLoop</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>   <span class="c1">//  1: 1008.557ms</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>只过桥</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
 <span class="kd">function</span> <span class="nx">innerHTMLLoop2</span><span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">times</span> <span class="o">=</span> <span class="mi">15000</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">times</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
@@ -233,9 +230,9 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 <span class="nx">innerHTMLLoop2</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>   <span class="c1">//  2: 10.318ms</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>高效率，访问一次DOM</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
 <span class="kd">function</span> <span class="nx">innerHTMLLoop3</span><span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">times</span> <span class="o">=</span> <span class="mi">15000</span><span class="p">;</span>
     <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">times</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
@@ -247,36 +244,37 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
 <span class="nx">innerHTMLLoop3</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>  <span class="c1">//  3: 1.190ms</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>访问DOM的次数越多，代码的运行速度越慢。因此，能减少DOM访问的次数则尽量减少，尽量留在ECMAScript这端处理。</p>
 
 <h1 id="when-dose-a-reflow-happen">when dose a reflow happen</h1>
-
 <p>当页面布局和几何属性改变时就需要“重排”。下述情况中会发生重排。</p>
 
-<p>1、添加或者删除可见的DOM元素<br><br>
-2、元素位置改变<br><br>
-3、元素尺寸改变（包括：width height margin border padding 等属性改变）<br><br>
-4、元素内容改变（例如：一个文本被另一个不同尺寸的图片替代）<br><br>
-5、页面渲染初始化（这个无法避免）<br><br>
-6、浏览器窗口尺寸改变  </p>
+<p>1、添加或者删除可见的DOM元素<br />
+2、元素位置改变<br />
+3、元素尺寸改变（包括：width height margin border padding 等属性改变）<br />
+4、元素内容改变（例如：一个文本被另一个不同尺寸的图片替代）<br />
+5、页面渲染初始化（这个无法避免）<br />
+6、浏览器窗口尺寸改变</p>
 
 <p>根据改变的范围和程度，渲染树中或大或小的对应部分也需要重新计算。有些改变会触发整个页面的重排：例如，当滚动条出现时。</p>
 
 <h1 id="queuing-and-flushing-render-tree-changes">Queuing and Flushing Render Tree Changes</h1>
-
 <p>渲染树变化的排队与刷新</p>
 
 <p>由于每次重排都会产生计算消耗，大多数浏览器通过队列化修改并批量执行来优化重排过程。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderLeft</span> <span class="o">=</span> <span class="s1">'1px'</span><span class="p">;</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderRight</span> <span class="o">=</span> <span class="s1">'2px'</span><span class="p">;</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="s1">'5px'</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>乍一想，元素的样式改变了三次，每次改变都会引起重排和重绘，所以总共有三次重排重绘过程，但是浏览器并不会这么笨，它会把三次修改“保存”起来，一次完成！</p>
 
 <p>但是，有些时候你可能会（经常是不知不觉）强制刷新队列并要求计划任务立即执行。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderLeft</span> <span class="o">=</span> <span class="s1">'1px'</span><span class="p">;</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderRight</span> <span class="o">=</span> <span class="s1">'2px'</span><span class="p">;</span>
 
@@ -284,43 +282,46 @@
 <span class="kd">var</span> <span class="nx">eleOffsetLeft</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">offsetLeft</span><span class="p">;</span> 
 
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="s1">'5px'</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>上面的代码，前两次的操作会缓存在渲染队列中待处理，但是一旦offsetHeight属性被请求了，队列就会立即执行，所以总共有两次重排与重绘。</p>
 
 <p><strong>获取布局信息的操作</strong>会导致列队刷新，比如以下方法：</p>
 
 <ul>
-<li>offsetTop, offsetLeft, offsetWidth, offsetHeight</li>
-<li>scrollTop, scrollLeft, scrollWidth, scrollHeight</li>
-<li>clientTop, clientLeft, clientWidth, clientHeight</li>
-<li>getComputedStyle() (currentStyle in IE)</li>
+  <li>offsetTop, offsetLeft, offsetWidth, offsetHeight</li>
+  <li>scrollTop, scrollLeft, scrollWidth, scrollHeight</li>
+  <li>clientTop, clientLeft, clientWidth, clientHeight</li>
+  <li>getComputedStyle() (currentStyle in IE)</li>
 </ul>
 
 <p>以上属性和方法需要返回最新的布局信息，因此浏览器不得不执行渲染队列中的“待处理变化”并触发重排以返回正确的值。</p>
 
 <blockquote>
-<p><strong>因此在修改样式的过程中，最好避免使用上面列出的属性。</strong> 它们都会刷新渲染列队，即使队列中改变的样式属性和想要获取的属性值并没有什么关系。</p>
+  <p><strong>因此在修改样式的过程中，最好避免使用上面列出的属性。</strong> 它们都会刷新渲染列队，即使队列中改变的样式属性和想要获取的属性值并没有什么关系。</p>
 </blockquote>
 
 <p>一个更有效的方法是不要在布局信息改变时查询它。可以将查询代码放到尾末</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderLeft</span> <span class="o">=</span> <span class="s1">'1px'</span><span class="p">;</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderRight</span> <span class="o">=</span> <span class="s1">'2px'</span><span class="p">;</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="s1">'5px'</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">eleOffsetTop</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">offsetTop</span><span class="p">;</span> 
 <span class="kd">var</span> <span class="nx">eleOffsetLeft</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">offsetLeft</span><span class="p">;</span> 
-</code></pre></div>
+</code></pre></div></div>
+
 <h1 id="minimizing-repaints-and-reflows">Minimizing Repaints and Reflows</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderLeft</span> <span class="o">=</span> <span class="s1">'1px'</span><span class="p">;</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">borderRight</span> <span class="o">=</span> <span class="s1">'2px'</span><span class="p">;</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">padding</span> <span class="o">=</span> <span class="s1">'5px'</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>三个样式属性被改变，每一个都会影响元素的几何结构，虽然大部分现代浏览器都做了优化，只会引起一次重排，但是像上文一样，如果一个及时的属性被请求，那么就会强制刷新队列，而且这段代码四次访问DOM。</p>
 
 <p>一个很显然的优化策略就是把它们的操作合成一次，这样只会修改DOM一次。使用cssText属性可以实现：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">ele</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myDiv'</span><span class="p">);</span>
 
 <span class="c1">// 1. 重写style</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cssText</span> <span class="o">=</span> <span class="s1">'border-left: 1px; border-right: 2px; padding: 5px;'</span><span class="p">;</span>
@@ -330,29 +331,27 @@
 
 <span class="c1">// 3. use class</span>
 <span class="nx">ele</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">'active'</span><span class="p">;</span>
-</code></pre></div>
-<h1 id="dom">批量修改DOM</h1>
+</code></pre></div></div>
 
+<h1 id="批量修改dom">批量修改DOM</h1>
 <p>当需要对DOM元素进行一系列操作时，可以通过以下步骤来减少重绘和重排的次数：</p>
 
-<p>1.使元素脱离文档流。<br><br>
-2.对其应用多重改变。<br><br>
-3.把元素带回文档中。  </p>
+<p>1.使元素脱离文档流。<br />
+2.对其应用多重改变。<br />
+3.把元素带回文档中。</p>
 
 <p>有三种基本方法可以使DOM脱离文档：</p>
 
 <ul>
-<li>隐藏元素，应用修改，重新显示。</li>
-<li>使用文档片段（document fragment）在当前DOM之外构建一个子树，再把它拷贝回文档。</li>
-<li>将原始元素拷贝到一个脱离文档的节点中，修改副本，完成后再替换原始元素。</li>
+  <li>隐藏元素，应用修改，重新显示。</li>
+  <li>使用文档片段（document fragment）在当前DOM之外构建一个子树，再把它拷贝回文档。</li>
+  <li>将原始元素拷贝到一个脱离文档的节点中，修改副本，完成后再替换原始元素。</li>
 </ul>
 
 <h1 id="caching-layout-information">Caching Layout Information</h1>
-
 <p>缓存布局信息</p>
 
 <h1 id="take-elements-out-of-the-flow-for-animations">Take Elements Out of the Flow for Animations</h1>
-
 <p>让元素脱离动画流</p>
 
 <p>用展开/折叠的方式来显示和隐藏部分页面是一种常见的交互模式。它通常包括展开区域的几何动画，并将页面其他部分推向下方。</p>
@@ -368,7 +367,6 @@
 <p>3.当动画结束时恢复定位，从而只会下移一次文档的其他元素</p>
 
 <h1 id="summary">Summary</h1>
-
 <p>重排优化有如下五种方法</p>
 
 <p>(1)将多次改变样式属性的操作合并成一次操作，减少DOM访问。</p>
@@ -381,9 +379,9 @@
 
 <p>(5)在内存中多次操作节点，完成后再添加到文档中去。例如要异步获取表格数据，渲染到页面。可以先取得数据后在内存中构建整个表格的html片段，再一次性添加到文档中去，而不是循环添加每一行。</p>
 
-<h1 id="more">更多-more</h1>
-
+<h1 id="更多-more">更多-more</h1>
 <p><a href="http://caibaojian.com/css-reflow-repaint.html">优化CSS重排重绘与浏览器性能</a></p>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -501,7 +499,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -655,6 +653,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

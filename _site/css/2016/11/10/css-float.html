@@ -161,29 +161,27 @@
 		
 		</div>
 		
-		<h1 id="float-float">深入理解float的设计初衷以及float带来的影响</h1>
+		<h1 id="深入理解float的设计初衷以及float带来的影响">深入理解float的设计初衷以及float带来的影响</h1>
 
-<h1 id="float">float定义</h1>
+<h1 id="float定义">float定义</h1>
 
 <p>A floated box is shifted to the left or right until its outer edge touches the containing block edge or the outer edge of another float. If there is a line box, the outer top of the floated box is aligned with the top of the current line box.【出处<a href="https://www.w3.org/TR/CSS2/visuren.html#floats">https://www.w3.org/TR/CSS2/visuren.html#floats</a>】</p>
 
 <ul>
-<li><strong>1.浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。</strong></li>
+  <li><strong>1.浮动的框可以向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。</strong></li>
 </ul>
 
-<p>Since a float is not in the flow, non-positioned block boxes created before and after the float box flow vertically as if the float did not exist. </p>
-
+<p>Since a float is not in the flow, non-positioned block boxes created before and after the float box flow vertically as if the float did not exist.</p>
 <ul>
-<li><strong>2.由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样。</strong>【出处<a href="http://www.w3school.com.cn/css/css_positioning_floating.asp">http://www.w3school.com.cn/css/css_positioning_floating.asp</a>】</li>
+  <li><strong>2.由于浮动框不在文档的普通流中，所以文档的普通流中的块框表现得就像浮动框不存在一样。</strong>【出处<a href="http://www.w3school.com.cn/css/css_positioning_floating.asp">http://www.w3school.com.cn/css/css_positioning_floating.asp</a>】</li>
 </ul>
 
 <p>However, the current and subsequent line boxes created next to the float are shortened as necessary to make room for the margin box of the float.</p>
-
 <ul>
-<li><strong>3.CSS的float 属性可以使一个元素<code>脱离正常的文档流</code>，然后被安放到它所在容器的的左端或者右端，并且其他的文本和行内元素围绕它安放。</strong>【出处<a href="https://developer.mozilla.org/zh-CN/docs/CSS/float">https://developer.mozilla.org/zh-CN/docs/CSS/float</a>】</li>
+  <li><strong>3.CSS的float 属性可以使一个元素<code class="highlighter-rouge">脱离正常的文档流</code>，然后被安放到它所在容器的的左端或者右端，并且其他的文本和行内元素围绕它安放。</strong>【出处<a href="https://developer.mozilla.org/zh-CN/docs/CSS/float">https://developer.mozilla.org/zh-CN/docs/CSS/float</a>】</li>
 </ul>
 
-<p>补充介绍：<br>
+<p>补充介绍：
 <a href="https://www.w3.org/TR/CSS2/visuren.html#positioning-scheme">w3.org/css2/position schemes</a></p>
 
 <p><a href="http://www.w3school.com.cn/css/css_positioning.asp">CSS有三种基本的定位机制：普通流，浮动(float)和绝对定位(position)</a></p>
@@ -203,12 +201,12 @@
 <p>有3种方法让元素脱离文档流。</p>
 
 <ul>
-<li>1.position: absoulte；</li>
-<li>2.position: fixed；</li>
-<li>3.float: left 或者 float: right。</li>
+  <li>1.position: absoulte；</li>
+  <li>2.position: fixed；</li>
+  <li>3.float: left 或者 float: right。</li>
 </ul>
 
-<p>批注：<br>
+<p>批注：
 position: static、relative不会使元素脱离文档流。</p>
 
 <p>float和绝对定位的脱离文档流是有区别的。</p>
@@ -227,29 +225,29 @@ position: static、relative不会使元素脱离文档流。</p>
 
 <p>使用float脱离文档流时，其他盒子会无视这个元素，但其他盒子内的文本依然会为这个元素让出位置，环绕在周围。(可以说是部分无视)</p>
 
-<h1 id="float">float属性值</h1>
-
+<h1 id="float属性值">float属性值</h1>
 <p>/<em>常用3个属性值：</em>/</p>
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">float</span><span class="o">:</span> <span class="nt">left</span><span class="o">;</span>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">float</span><span class="o">:</span> <span class="nt">left</span><span class="o">;</span>
 <span class="nt">float</span><span class="o">:</span> <span class="nt">right</span><span class="o">;</span>
 <span class="nt">float</span><span class="o">:</span> <span class="nt">none</span><span class="o">;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>/* Global values */</p>
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">float</span><span class="o">:</span> <span class="nt">inherit</span><span class="o">;</span>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">float</span><span class="o">:</span> <span class="nt">inherit</span><span class="o">;</span>
 <span class="nt">float</span><span class="o">:</span> <span class="nt">initial</span><span class="o">;</span>
 <span class="nt">float</span><span class="o">:</span> <span class="nt">unset</span><span class="o">;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>移动到父元素最左和最右是指元素往左或往右移动直到碰到另一个浮动元素或父元素内容区的边界（不包括padding）,none是默认的意思是不浮动,inherit是继承父级元素的float值。</p>
 
-<h1 id="float">float最初的设计初衷</h1>
-
+<h1 id="float最初的设计初衷">float最初的设计初衷</h1>
 <p>浮动出现的意义，是为了实现图文混排效果，让文字环绕图片，仅此而已。</p>
 
 <p>如今的用法基本上都是为了实现横向排版，虽然是一种“误用”，却往往能达到我们想要的效果。</p>
 
 <p>demo- img &amp; words</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -281,64 +279,62 @@ position: static、relative不会使元素脱离文档流。</p>
 30
 31
 32
-33</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+33
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
-    <span class="nl">margin</span><span class="p">:</span> <span class="m">16px</span> <span class="nb">auto</span><span class="p">;</span> 
-    <span class="nl">line-height</span><span class="p">:</span> <span class="m">1.5</span><span class="p">;</span> 
-    <span class="nl">font-size</span><span class="p">:</span> <span class="m">14px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#eee</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+	<span class="nl">margin</span><span class="p">:</span> <span class="m">16px</span> <span class="nb">auto</span><span class="p">;</span> 
+	<span class="nl">line-height</span><span class="p">:</span> <span class="m">1.5</span><span class="p">;</span> 
+	<span class="nl">font-size</span><span class="p">:</span> <span class="m">14px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#eee</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">img</span><span class="p">{</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">150px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="m">10px</span> <span class="m">5px</span> <span class="m">0</span><span class="p">;</span> 
+	<span class="nl">width</span><span class="p">:</span> <span class="m">150px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="m">10px</span> <span class="m">5px</span> <span class="m">0</span><span class="p">;</span> 
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"zly.jpg"</span> <span class="na">alt=</span><span class="s">""</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;p&gt;</span>赵丽颖，1987年10月16日出生于河北省廊坊市，中国内地影视女演员。<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"zly.jpg"</span> <span class="na">alt=</span><span class="s">""</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;p&gt;</span>赵丽颖，1987年10月16日出生于河北省廊坊市，中国内地影视女演员。<span class="nt">&lt;/p&gt;</span>
 
-        <span class="nt">&lt;p&gt;</span>2006年，因获得雅虎搜星比赛冯小刚组冠军而进入演艺圈；同年，在冯小刚执导的广告片《跪族篇》中担任女主角。2007年，参演个人首部电影《镖行天下之牡丹阁》。2011年，因在古装剧《新还珠格格》中饰演晴儿一角而被观众所认识。2013年，凭借古装剧《陆贞传奇》获得更多的关注。2014年10月，在第10届金鹰电视艺术节举办的投票活动中被选为“金鹰女神”；12月，凭借都市爱情剧《杉杉来了》获得第5届国剧盛典内地最具人气女演员奖。<span class="nt">&lt;/p&gt;</span>
+		<span class="nt">&lt;p&gt;</span>2006年，因获得雅虎搜星比赛冯小刚组冠军而进入演艺圈；同年，在冯小刚执导的广告片《跪族篇》中担任女主角。2007年，参演个人首部电影《镖行天下之牡丹阁》。2011年，因在古装剧《新还珠格格》中饰演晴儿一角而被观众所认识。2013年，凭借古装剧《陆贞传奇》获得更多的关注。2014年10月，在第10届金鹰电视艺术节举办的投票活动中被选为“金鹰女神”；12月，凭借都市爱情剧《杉杉来了》获得第5届国剧盛典内地最具人气女演员奖。<span class="nt">&lt;/p&gt;</span>
 
-        <span class="nt">&lt;p&gt;</span>2015年，主演的仙侠剧《花千骨》成为中国首部网络播放总量突破200亿的电视剧，并打破中国内地周播剧收视纪录，而其个人则凭借该剧先后获得第6届澳门国际电视节金莲花最佳女主角奖、第6届国剧盛典最具收视号召力演员奖、第22届上海电视节白玉兰奖最佳女主角奖提名、第28届中国电视金鹰奖观众喜爱的女演员奖 。2016年，主演古装玄幻剧《青云志》；同年，担任河北省旅游形象大使。<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;p&gt;</span>2015年，主演的仙侠剧《花千骨》成为中国首部网络播放总量突破200亿的电视剧，并打破中国内地周播剧收视纪录，而其个人则凭借该剧先后获得第6届澳门国际电视节金莲花最佳女主角奖、第6届国剧盛典最具收视号召力演员奖、第22届上海电视节白玉兰奖最佳女主角奖提名、第28届中国电视金鹰奖观众喜爱的女演员奖 。2016年，主演古装玄幻剧《青云志》；同年，担任河北省旅游形象大使。<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/img-words.png" alt="">
+    <img src="/assets/images/2016/10-11-12/img-words.png" alt="" />
 </div>
 
-<h2 id="float">float实现图文混排效果原理</h2>
-
-<p>浮动的破坏性。<br><br>
-文字之所以会环绕含有float属性的图片时因为浮动破坏了正常的line boxes。<br><br>
+<h2 id="float实现图文混排效果原理">float实现图文混排效果原理</h2>
+<p>浮动的破坏性。<br />
+文字之所以会环绕含有float属性的图片时因为浮动破坏了正常的line boxes。<br />
 具体如何破坏，待添加。。。</p>
 
-<h1 id="float">float造成的影响</h1>
+<h1 id="float造成的影响">float造成的影响</h1>
 
-<h1 id="float">float对自身元素的影响</h1>
+<h1 id="float对自身元素的影响">float对自身元素的影响</h1>
 
-<h2 id="wrap">包裹性-wrap</h2>
+<h2 id="包裹性-wrap">包裹性-wrap</h2>
 
 <p>块级元素如果不设置float，它默认会撑满整个屏幕，而如果设置了float，则只会包裹住其内容。</p>
 
 <p>demo- float-wrap</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -353,37 +349,35 @@ position: static、relative不会使元素脱离文档流。</p>
 13
 14
 15
-16</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+16
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="nc">.box1</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f93</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f93</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>测试float对块级元素形成的包裹性<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>测试float对块级元素形成的包裹性<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/block-wrap.png" alt="">
+    <img src="/assets/images/2016/10-11-12/block-wrap.png" alt="" />
 </div>
 
-<h2 id="block">隐式block化</h2>
-
+<h2 id="隐式block化">隐式block化</h2>
 <p>float对象将被视作块对象(block-level)，即display属性等于block。</p>
 
 <p>demo- float-display:block</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -424,11 +418,12 @@ position: static、relative不会使元素脱离文档流。</p>
 39
 40
 41
-42</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+42
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 
@@ -441,43 +436,39 @@ position: static、relative不会使元素脱离文档流。</p>
 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"mybtn"</span> <span class="na">value=</span><span class="s">"获取上述按钮position"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"btn"</span> <span class="na">value=</span><span class="s">"我来设置btn1浮动"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;script&gt;</span>
-    <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-        <span class="kd">var</span> <span class="nx">btn1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn1"</span><span class="p">);</span>
-        <span class="kd">var</span> <span class="nx">btn2</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn2"</span><span class="p">);</span>
-        <span class="kd">var</span> <span class="nx">mybtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"mybtn"</span><span class="p">);</span>
-        <span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn"</span><span class="p">);</span>
+	<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+		<span class="kd">var</span> <span class="nx">btn1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn1"</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">btn2</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn2"</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">mybtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"mybtn"</span><span class="p">);</span>
+		<span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn"</span><span class="p">);</span>
 
-        <span class="kd">function</span> <span class="nx">getDisplay</span><span class="p">(</span><span class="nx">ele</span><span class="p">){</span>
-            <span class="kd">var</span> <span class="nx">display</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">currentStyle</span> <span class="p">?</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">currentStyle</span><span class="p">.</span><span class="nx">display</span> <span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">ele</span><span class="p">,</span><span class="kc">null</span><span class="p">).</span><span class="nx">display</span><span class="p">;</span>
-            <span class="k">return</span> <span class="nx">display</span><span class="p">;</span>
-        <span class="p">}</span>
+		<span class="kd">function</span> <span class="nx">getDisplay</span><span class="p">(</span><span class="nx">ele</span><span class="p">){</span>
+			<span class="kd">var</span> <span class="nx">display</span> <span class="o">=</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">currentStyle</span> <span class="p">?</span> <span class="nx">ele</span><span class="p">.</span><span class="nx">currentStyle</span><span class="p">.</span><span class="nx">display</span> <span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">ele</span><span class="p">,</span><span class="kc">null</span><span class="p">).</span><span class="nx">display</span><span class="p">;</span>
+			<span class="k">return</span> <span class="nx">display</span><span class="p">;</span>
+		<span class="p">}</span>
 
-        <span class="nx">btn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            
-            <span class="nx">btn1</span><span class="p">.</span><span class="nx">style</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">styleFloat</span> <span class="p">?</span> <span class="s2">"styleFloat"</span> <span class="p">:</span> <span class="s2">"cssFloat"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"left"</span><span class="p">;</span>
-            <span class="nx">btn1</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s2">"btn1被浮动了"</span><span class="p">;</span>
-        <span class="p">}</span>
+		<span class="nx">btn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+			
+			<span class="nx">btn1</span><span class="p">.</span><span class="nx">style</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">styleFloat</span> <span class="p">?</span> <span class="s2">"styleFloat"</span> <span class="p">:</span> <span class="s2">"cssFloat"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"left"</span><span class="p">;</span>
+			<span class="nx">btn1</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s2">"btn1被浮动了"</span><span class="p">;</span>
+		<span class="p">}</span>
 
-        <span class="nx">mybtn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"btn1的display:"</span> <span class="o">+</span> <span class="nx">getDisplay</span><span class="p">(</span><span class="nx">btn1</span><span class="p">));</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"btn2的display:"</span> <span class="o">+</span> <span class="nx">getDisplay</span><span class="p">(</span><span class="nx">btn2</span><span class="p">));</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+		<span class="nx">mybtn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"btn1的display:"</span> <span class="o">+</span> <span class="nx">getDisplay</span><span class="p">(</span><span class="nx">btn1</span><span class="p">));</span>
+			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"btn2的display:"</span> <span class="o">+</span> <span class="nx">getDisplay</span><span class="p">(</span><span class="nx">btn2</span><span class="p">));</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/float-block.png" alt="">
+    <img src="/assets/images/2016/10-11-12/float-block.png" alt="" />
 </div>
-
 <p>可以看出按钮btn1被float后position属性值由原来的inline-block变成block了。</p>
 
-<h1 id="float">float对父元素的影响</h1>
-
+<h1 id="float对父元素的影响">float对父元素的影响</h1>
 <p>也即是浮动的破坏性</p>
 
 <p>float的破坏性是指：设置了float的元素会脱离文档流，会导致其父元素出现“坍塌”的现象，不错，这就是它的破坏性。</p>
@@ -486,78 +477,7 @@ position: static、relative不会使元素脱离文档流。</p>
 
 <p>domo- float - noheight</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;style&gt;</span>
-<span class="o">*</span><span class="p">{</span>
-    <span class="nl">margin</span><span class="p">:</span><span class="m">0</span><span class="p">;</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">10px</span> <span class="nb">solid</span> <span class="m">#f93</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.test</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">&lt;/style&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"test"</span><span class="nt">&gt;</span>我来测试浮动带来的破坏性<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p><strong><em>result display</em></strong></p>
-
-<div class="rd">
-    <img src="/assets/images/2016/10-11-12/float-noheight.png" alt="">
-</div>
-
-<h1 id="float">float对其兄弟元素的影响</h1>
-
-<h2 id="float">float对其兄弟元素（非浮动）的影响</h2>
-
-<h3 id="block">如果兄弟元素为块级block元素</h3>
-
-<p>在现代浏览器和IE8+下，该元素会忽视浮动元素的而占据它的位置，并且元素会处在浮动元素的下层（并且无法通过z-index属性改变他们的层叠位置），但它的内部文字和其他行内元素都会环绕浮动元素。</p>
-
-<p>demo- float</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -584,51 +504,49 @@ position: static、relative不会使元素脱离文档流。</p>
 25
 26
 27
-28</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
+<span class="o">*</span><span class="p">{</span>
+	<span class="nl">margin</span><span class="p">:</span><span class="m">0</span><span class="p">;</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">10px</span> <span class="nb">solid</span> <span class="m">#f93</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.box1</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.box2</span><span class="p">{</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">150px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#39f</span><span class="p">;</span>
+<span class="nc">.test</span><span class="p">{</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">margin-left</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>AAAAAAA<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box2"</span><span class="nt">&gt;</span>BBBBBBB<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"test"</span><span class="nt">&gt;</span>我来测试浮动带来的破坏性<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-5.png" alt="">
+    <img src="/assets/images/2016/10-11-12/float-noheight.png" alt="" />
 </div>
 
-<p>需要注意的是，在IE 6、7下则分别都有不同的表现，IE 6、7中，该兄弟元素会紧跟在浮动元素的右侧，并且在IE6中两者之间留有3px的空隙。这就是著名的“IE 3px bug”</p>
+<h1 id="float对其兄弟元素的影响">float对其兄弟元素的影响</h1>
+<h2 id="float对其兄弟元素非浮动的影响">float对其兄弟元素（非浮动）的影响</h2>
 
-<h3 id="inline">如果兄弟元素为内联inline元素</h3>
+<h3 id="如果兄弟元素为块级block元素">如果兄弟元素为块级block元素</h3>
 
-<p>则元素会环绕浮动元素排列。</p>
+<p>在现代浏览器和IE8+下，该元素会忽视浮动元素的而占据它的位置，并且元素会处在浮动元素的下层（并且无法通过z-index属性改变他们的层叠位置），但它的内部文字和其他行内元素都会环绕浮动元素。</p>
 
-<p>demo</p>
+<p>demo- float</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -650,46 +568,114 @@ position: static、relative不会使元素脱离文档流。</p>
 20
 21
 22
-23</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+23
+24
+25
+26
+27
+28
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box1</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.box2</span><span class="p">{</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">150px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#39f</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>AAAAAAA<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"我的表现如何"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>AAAAAAA<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box2"</span><span class="nt">&gt;</span>BBBBBBB<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-6.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-5.png" alt="" />
 </div>
 
-<h2 id="float">float对其兄弟元素（浮动）的影响</h2>
+<p>需要注意的是，在IE 6、7下则分别都有不同的表现，IE 6、7中，该兄弟元素会紧跟在浮动元素的右侧，并且在IE6中两者之间留有3px的空隙。这就是著名的“IE 3px bug”</p>
 
+<h3 id="如果兄弟元素为内联inline元素">如果兄弟元素为内联inline元素</h3>
+
+<p>则元素会环绕浮动元素排列。</p>
+
+<p>demo</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+<span class="nc">.wrap</span><span class="p">{</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.box1</span><span class="p">{</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>AAAAAAA<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"我的表现如何"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong><em>result display</em></strong></p>
+<div class="rd">
+    <img src="/assets/images/2016/10-11-12/11-10-6.png" alt="" />
+</div>
+
+<h2 id="float对其兄弟元素浮动的影响">float对其兄弟元素（浮动）的影响</h2>
 <p>float还有一个很有用的特性，就是清除空格。</p>
 
 <p>破坏性造成的紧密排列性（去空格化）。</p>
 
 <p>demo</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -736,72 +722,70 @@ position: static、relative不会使元素脱离文档流。</p>
 45
 46
 47
-48</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+48
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="o">*</span><span class="p">{</span>
-    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+	<span class="nl">margin</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.wrap</span> <span class="nt">input</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 <span class="nt">&lt;p&gt;</span>inline元素之间换行产生的空格<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn1"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn2"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn3"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn4"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;span&gt;</span>hello<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;br&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn1"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn2"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn3"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn4"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;span&gt;</span>hello<span class="nt">&lt;/span&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;br&gt;</span>
 <span class="nt">&lt;p&gt;</span>inline元素float能去掉它们之间的空格，所有换行符移到最后一个btn后面<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn1"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn2"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn3"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn4"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;span&gt;</span>hello<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;br&gt;</span>
-    <span class="nt">&lt;p&gt;</span>nbsp产生的空格<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn1"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn2"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn3"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn4"</span><span class="nt">&gt;&lt;span&gt;</span>hello<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;br&gt;</span>
-    <span class="nt">&lt;p&gt;</span>float将所有nbsp产生的空格移到最后一个btn后面<span class="nt">&lt;/p&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn1"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn2"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn3"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn4"</span><span class="nt">&gt;&lt;span&gt;</span>hello<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn1"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn2"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn3"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn4"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;span&gt;</span>hello<span class="nt">&lt;/span&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;br&gt;</span>
+	<span class="nt">&lt;p&gt;</span>nbsp产生的空格<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn1"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn2"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn3"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn4"</span><span class="nt">&gt;&lt;span&gt;</span>hello<span class="nt">&lt;/span&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;br&gt;</span>
+	<span class="nt">&lt;p&gt;</span>float将所有nbsp产生的空格移到最后一个btn后面<span class="nt">&lt;/p&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn1"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn2"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn3"</span><span class="nt">&gt;</span><span class="ni">&amp;nbsp;</span><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"btn4"</span><span class="nt">&gt;&lt;span&gt;</span>hello<span class="nt">&lt;/span&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-12.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-12.png" alt="" />
 </div>
 
-<p>1.元素float后，会去掉inline元素之间enter键产生的空格，但由于enter键对网页表现不会产生任何影响，所以即使btn4后面有enter键产生的空格，也是无法影响后面span元素的表现；<br><br>
+<p>1.元素float后，会去掉inline元素之间enter键产生的空格，但由于enter键对网页表现不会产生任何影响，所以即使btn4后面有enter键产生的空格，也是无法影响后面span元素的表现；<br />
 2.元素float后，也会去掉nbsp产生的空格，由于nbsp本身也是文本，所以所有nbsp挪位到btn4后面，产生3个nbsp;挤压span元素到后面去了。</p>
 
-<h1 id="float">float对子元素的影响</h1>
-
+<h1 id="float对子元素的影响">float对子元素的影响</h1>
 <p>我们知道当一个元素浮动时，在没有清楚浮动的情况下，它无法撑开其父元素，但它设置float后，可以让自己的浮动子元素撑开它自身，并且在没有定义具体宽度情况下，使自身的宽度从100%变为自适应（浮动元素display:block）。其高度和宽度均为浮动元素高度和非浮动元素高度之间的最大值。</p>
 
 <p>demo- 1</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -828,47 +812,46 @@ position: static、relative不会使元素脱离文档流。</p>
 25
 26
 27
-28</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+28
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.main</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">5px</span> <span class="nb">solid</span> <span class="m">#9f3</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">5px</span> <span class="nb">solid</span> <span class="m">#9f3</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box3</span><span class="p">{</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span> <span class="na">id=</span><span class="s">"box1"</span><span class="nt">&gt;</span>11111<span class="nt">&lt;/div&gt;</span>
-            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"box2"</span> <span class="na">id=</span><span class="s">"box2"</span><span class="nt">&gt;</span>22222<span class="nt">&lt;/span&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box3"</span><span class="nt">&gt;</span>33<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span> <span class="na">id=</span><span class="s">"box1"</span><span class="nt">&gt;</span>11111<span class="nt">&lt;/div&gt;</span>
+			<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"box2"</span> <span class="na">id=</span><span class="s">"box2"</span><span class="nt">&gt;</span>22222<span class="nt">&lt;/span&gt;</span>
+			<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box3"</span><span class="nt">&gt;</span>33<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-7.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-7.png" alt="" />
 </div>
 
 <p>当子元素（block）不float时，子元素且没有设置float，可以把子元素由原来的块状（width占据100%）包裹起来，其高度和宽度均为浮动元素高度和非浮动元素高度之间的最大值。</p>
 
 <p>demo- 2</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -903,126 +886,59 @@ position: static、relative不会使元素脱离文档流。</p>
 33
 34
 35
-36</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+36
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f00</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.main</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">5px</span> <span class="nb">solid</span> <span class="m">#9f3</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">5px</span> <span class="nb">solid</span> <span class="m">#9f3</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box1</span><span class="o">,</span><span class="nc">.box2</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">blue</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#f60</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">blue</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#f60</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box3</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span> <span class="na">id=</span><span class="s">"box1"</span><span class="nt">&gt;</span>11111<span class="nt">&lt;/div&gt;</span>
-            <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"box2"</span> <span class="na">id=</span><span class="s">"box2"</span><span class="nt">&gt;</span>22222<span class="nt">&lt;/span&gt;</span>
-            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box3"</span><span class="nt">&gt;</span>33<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>
+			<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span> <span class="na">id=</span><span class="s">"box1"</span><span class="nt">&gt;</span>11111<span class="nt">&lt;/div&gt;</span>
+			<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"box2"</span> <span class="na">id=</span><span class="s">"box2"</span><span class="nt">&gt;</span>22222<span class="nt">&lt;/span&gt;</span>
+			<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box3"</span><span class="nt">&gt;</span>33<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-8.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-8.png" alt="" />
 </div>
-
 <p>当它的子元素都浮动时，它能浮动自身，撑起高度，避免塌陷。</p>
 
-<h1 id="float">float对父元素之外的元素的影响</h1>
+<h1 id="float对父元素之外的元素的影响">float对父元素之外的元素的影响</h1>
 
-<h2 id="float">父元素之外的非浮动元素-float</h2>
+<h2 id="父元素之外的非浮动元素-float">父元素之外的非浮动元素-float</h2>
 
 <p>从上面可知，当一个元素浮动时，在没有清除浮动的情况下，它无法撑开其父元素，也就是父元素的宽高都为0。并且其父元素之外的非浮动元素也会无视该浮动元素，浮动元素仿佛到了另外一个世界里。</p>
 
 <p>demo- 1</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;style&gt;</span>
-<span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.main</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">5px</span> <span class="nb">solid</span> <span class="m">#9f3</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.outer</span><span class="p">{</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">&lt;/style&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>aaaaaa<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outer"</span><span class="nt">&gt;</span>bbbbb<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p><strong><em>result display</em></strong></p>
-
-<div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-9.png" alt="">
-</div>
-
-<h2 id="float">float对父元素之外的浮动元素</h2>
-
-<p>当浮动元素的父元素之外的元素为浮动元素时，他们仿佛去到了同一个世界里。</p>
-
-<p>两个元素的浮动方向相同时：</p>
-
-<p>demo</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -1047,53 +963,46 @@ position: static、relative不会使元素脱离文档流。</p>
 23
 24
 25
-26
-27
-28
-29
-30</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.main</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">5px</span> <span class="nb">solid</span> <span class="m">#9f3</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.outer</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>aaaaaa<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outer"</span><span class="nt">&gt;</span>bbbbb<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>aaaaaa<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outer"</span><span class="nt">&gt;</span>bbbbb<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-10.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-9.png" alt="" />
 </div>
 
-<p>两个元素的浮动方向相反时：</p>
+<h2 id="float对父元素之外的浮动元素">float对父元素之外的浮动元素</h2>
+
+<p>当浮动元素的父元素之外的元素为浮动元素时，他们仿佛去到了同一个世界里。</p>
+
+<p>两个元素的浮动方向相同时：</p>
 
 <p>demo</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -1123,63 +1032,132 @@ position: static、relative不会使元素脱离文档流。</p>
 28
 29
 30
-31</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.main</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.outer</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>aaaaaa<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outer"</span><span class="nt">&gt;</span>bbbbb<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>aaaaaa<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outer"</span><span class="nt">&gt;</span>bbbbb<span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-11.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-10.png" alt="" />
 </div>
 
-<h1 id="float-javascript">float与JavaScript</h1>
+<p>两个元素的浮动方向相反时：</p>
 
-<p>原因是在JavaScript中&quot;float&quot;是一个保留字，不能使用<code>element.style.float=&quot;left&quot;</code>;这样的句子 来改变CSS的float属性。<br>
-因为同样的原因，&quot;class&quot;被改成了&quot;className&quot; 、&quot;for&quot;被改成了&quot;htmlFor&quot;.</p>
+<p>demo</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;style&gt;</span>
+<span class="nc">.wrap</span><span class="p">{</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">2px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.main</span><span class="p">{</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.outer</span><span class="p">{</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"main"</span><span class="nt">&gt;</span>aaaaaa<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"outer"</span><span class="nt">&gt;</span>bbbbb<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong><em>result display</em></strong></p>
+<div class="rd">
+    <img src="/assets/images/2016/10-11-12/11-10-11.png" alt="" />
+</div>
+
+<h1 id="float与javascript">float与JavaScript</h1>
+<p>原因是在JavaScript中”float”是一个保留字，不能使用<code class="highlighter-rouge">element.style.float="left"</code>;这样的句子 来改变CSS的float属性。
+因为同样的原因，”class”被改成了”className” 、”for”被改成了”htmlFor”.</p>
 
 <p>IE浏览器：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">styleFloat</span> <span class="o">=</span> <span class="s2">"left"</span><span class="p">;</span>
-</code></pre></div>
-<p>其他浏览器：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cssFloat</span> <span class="o">=</span> <span class="s2">"left"</span><span class="p">;</span>
-</code></pre></div>
-<h1 id="float">float 的一些规则</h1>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">styleFloat</span> <span class="o">=</span> <span class="s2">"left"</span><span class="p">;</span>
+</code></pre></div></div>
 
-<p>float规则一<br><br>
-1.浮动元素在浮动的时候，其margin不会超过包含块的padding。例子见上demo-img &amp; words<br><br>
+<p>其他浏览器：</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cssFloat</span> <span class="o">=</span> <span class="s2">"left"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h1 id="float-的一些规则">float 的一些规则</h1>
+<p>float规则一<br />
+1.浮动元素在浮动的时候，其margin不会超过包含块的padding。例子见上demo-img &amp; words<br />
 PS：如果想要元素超出，可以设置margin属性。</p>
 
-<p>float规则二<br><br>
+<p>float规则二<br />
 1.如果有多个浮动元素，浮动元素会按顺序排下来而不会发生重叠的现象。</p>
 
 <p>2.包含块的宽度小于两个浮动元素的宽度总和，后面的浮动元素将会向下浮动，其顶端是前面浮动元素的底端。</p>
@@ -1188,7 +1166,7 @@ PS：如果想要元素超出，可以设置margin属性。</p>
 
 <p>demo-1</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -1246,71 +1224,70 @@ PS：如果想要元素超出，可以设置margin属性。</p>
 56
 57
 58
-59</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+59
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="o">*</span><span class="p">{</span>
-    <span class="nl">margin</span><span class="p">:</span><span class="m">0</span><span class="p">;</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+	<span class="nl">margin</span><span class="p">:</span><span class="m">0</span><span class="p">;</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
-    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f93</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
+	<span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f93</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box1</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">150px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">150px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box2</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">200px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box3</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">80px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#f39</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">80px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#f39</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box4</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">150px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#f93</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">150px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#f93</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box5</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#3f9</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#3f9</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>1.float:left<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box2"</span><span class="nt">&gt;</span>2.float:left<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box3"</span><span class="nt">&gt;</span>3.float:left<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box4"</span><span class="nt">&gt;</span>4.float:left<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box5"</span><span class="nt">&gt;</span>5.float:right<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>    
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>1.float:left<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box2"</span><span class="nt">&gt;</span>2.float:left<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box3"</span><span class="nt">&gt;</span>3.float:left<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box4"</span><span class="nt">&gt;</span>4.float:left<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box5"</span><span class="nt">&gt;</span>5.float:right<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>	
 
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-13.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-13.png" alt="" />
 </div>
 
 <p>4的移动过程发生卡主现象。</p>
@@ -1329,7 +1306,7 @@ PS：如果想要元素超出，可以设置margin属性。</p>
 
 <p>demo-2</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -1380,75 +1357,74 @@ PS：如果想要元素超出，可以设置margin属性。</p>
 49
 50
 51
-52</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+52
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="o">*</span><span class="p">{</span>
-    <span class="nl">margin</span><span class="p">:</span><span class="m">0</span><span class="p">;</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+	<span class="nl">margin</span><span class="p">:</span><span class="m">0</span><span class="p">;</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.wrap</span><span class="p">{</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
-    <span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f93</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">600px</span><span class="p">;</span>
+	<span class="nl">margin</span><span class="p">:</span> <span class="m">0</span> <span class="nb">auto</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#f93</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box1</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#9f3</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box2</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#93f</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box3</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">250px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#f39</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">250px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#f39</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.box4</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="m">#f93</span><span class="p">;</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">right</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+	<span class="nl">height</span><span class="p">:</span> <span class="m">120px</span><span class="p">;</span>
+	<span class="nl">background</span><span class="p">:</span> <span class="m">#f93</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>1.float:left<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box2"</span><span class="nt">&gt;</span>2.float:left<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box3"</span><span class="nt">&gt;</span>3.float:left<span class="nt">&lt;/div&gt;</span>
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box4"</span><span class="nt">&gt;</span>4.float:right<span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>    
+	<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"wrap"</span><span class="nt">&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box1"</span><span class="nt">&gt;</span>1.float:left<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box2"</span><span class="nt">&gt;</span>2.float:left<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box3"</span><span class="nt">&gt;</span>3.float:left<span class="nt">&lt;/div&gt;</span>
+		<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"box4"</span><span class="nt">&gt;</span>4.float:right<span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>	
 
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-14.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-14.png" alt="" />
 </div>
 
-<h1 id="float">float特殊情况</h1>
+<h1 id="float特殊情况">float特殊情况</h1>
 
-<h2 id="float">float浮动元素的延伸性</h2>
+<h2 id="float浮动元素的延伸性">float浮动元素的延伸性</h2>
 
 <p>我们将span元素放在p元素内，并将其高度设置成高于p元素并且左浮动，这个例子的关键在浮动元素高度高于父元素。</p>
 
-<p>demo </p>
+<p>demo</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -1478,93 +1454,91 @@ PS：如果想要元素超出，可以设置margin属性。</p>
 28
 29
 30
-31</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+31
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 <span class="o">*</span><span class="p">{</span>
-    <span class="nl">margin</span><span class="p">:</span><span class="m">0</span><span class="p">;</span>
-    <span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+	<span class="nl">margin</span><span class="p">:</span><span class="m">0</span><span class="p">;</span>
+	<span class="nl">padding</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">p</span> <span class="p">{</span> 
-    <span class="nl">width</span><span class="p">:</span> <span class="m">500px</span><span class="p">;</span> 
-    <span class="nl">margin-top</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span> 
-    <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span> 
-    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#00ff21</span><span class="p">;</span> 
+	<span class="nl">width</span><span class="p">:</span> <span class="m">500px</span><span class="p">;</span> 
+	<span class="nl">margin-top</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span> 
+	<span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span> 
+	<span class="nl">background-color</span><span class="p">:</span> <span class="m">#00ff21</span><span class="p">;</span> 
 <span class="p">}</span>
  <span class="nc">.high-float</span> <span class="p">{</span> 
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span> 
-    <span class="nl">height</span><span class="p">:</span> <span class="m">80px</span><span class="p">;</span> 
-    <span class="nl">line-height</span><span class="p">:</span> <span class="m">80px</span><span class="p">;</span> 
-    <span class="nl">background-color</span><span class="p">:</span> <span class="no">orangered</span><span class="p">;</span> 
+ 	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span> 
+ 	<span class="nl">height</span><span class="p">:</span> <span class="m">80px</span><span class="p">;</span> 
+ 	<span class="nl">line-height</span><span class="p">:</span> <span class="m">80px</span><span class="p">;</span> 
+ 	<span class="nl">background-color</span><span class="p">:</span> <span class="no">orangered</span><span class="p">;</span> 
  <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;p&gt;</span>在浮动元素之前在浮动元素之前，在浮动元素之前，在浮动元素之前，在浮动元素之前，在浮动元素之前，在浮动元素之前，在浮动元素之前，
-        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"high-float"</span><span class="nt">&gt;</span>浮动元素比父级元素高<span class="nt">&lt;/span&gt;</span>
+	<span class="nt">&lt;p&gt;</span>在浮动元素之前在浮动元素之前，在浮动元素之前，在浮动元素之前，在浮动元素之前，在浮动元素之前，在浮动元素之前，在浮动元素之前，
+    	<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"high-float"</span><span class="nt">&gt;</span>浮动元素比父级元素高<span class="nt">&lt;/span&gt;</span>
     <span class="nt">&lt;/p&gt;</span>
      <span class="nt">&lt;p&gt;</span>在浮动元素之后在浮动元素之后在浮动元素之后在浮动元素之后在浮动元素之后在浮动元素之后在浮动元素之后在浮动元素之后在浮动元素之后在浮动元素之后在浮动元素之后<span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-15.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-15.png" alt="" />
 </div>
 
-<p>1.浮动元素浮动到的位置是由当前它处于行数决定，浮到它当前行（或者它的下一行）的左右两端，而不是最顶端。<br><br>
-2.浮动元素高度高于父元素，可以看到浮动元素超出了父元素的底端。<br><br>
+<p>1.浮动元素浮动到的位置是由当前它处于行数决定，浮到它当前行（或者它的下一行）的左右两端，而不是最顶端。<br />
+2.浮动元素高度高于父元素，可以看到浮动元素超出了父元素的底端。<br />
 2的这种情况要怎么解决呢，只要将父元素也设置成浮动即可，我们将第一个p元素设置成左浮动，效果如下</p>
 
 <p>以上代码添加样式</p>
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">p</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">1</span><span class="o">)</span><span class="p">{</span>
-    <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">p</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">1</span><span class="o">)</span><span class="p">{</span>
+	<span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">p</span><span class="nd">:nth-child</span><span class="o">(</span><span class="nt">2</span><span class="o">)</span><span class="p">{</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#f39</span><span class="p">;</span> 
+	<span class="nl">background-color</span><span class="p">:</span> <span class="m">#f39</span><span class="p">;</span> 
 <span class="p">}</span>
-</code></pre></div>
-<p><strong><em>result display</em></strong></p>
+</code></pre></div></div>
 
+<p><strong><em>result display</em></strong></p>
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/11-10-16.png" alt="">
+    <img src="/assets/images/2016/10-11-12/11-10-16.png" alt="" />
 </div>
 
-<p>浮动元素延伸性<br><br>
-将父元素p设置成float:left后，浮动元素就会被包含到父元素里面，我们将这个特性成为浮动元素的延伸性。<br><br>
+<p>浮动元素延伸性<br />
+将父元素p设置成float:left后，浮动元素就会被包含到父元素里面，我们将这个特性成为浮动元素的延伸性。<br />
 浮动元素的延伸性是什么呢，我们可以将其理解为元素被设置成浮动后，该元素会进行延伸进而包含其所有浮动的子元素</p>
 
-<h2 id="padding">浮动元素超出父级元素的padding</h2>
-
-<p>（1）负maring的浮动元素<br><br>
+<h2 id="浮动元素超出父级元素的padding">浮动元素超出父级元素的padding</h2>
+<p>（1）负maring的浮动元素<br />
 将margin-left设置成负数之后，浮动的子元素明显超出了父元素的内边界。</p>
 
-<p>（2）浮动元素宽度大于父级元素宽度<br><br>
+<p>（2）浮动元素宽度大于父级元素宽度<br />
 如果我们将浮动元素的宽度设置大于父级元素，效果会如何呢？</p>
 
-<p>将浮动元素左浮动，并且宽度超出父级元素时，由于浮动元素宽度较大，它会超过父级元素的右内边界；<br>
+<p>将浮动元素左浮动，并且宽度超出父级元素时，由于浮动元素宽度较大，它会超过父级元素的右内边界；
 设置成右浮动后，会超出父级元素的左内边界。</p>
 
-<h2 id="float">float重叠问题</h2>
-
+<h2 id="float重叠问题">float重叠问题</h2>
 <p>重叠问题是指两个元素再同一个位置，会出现上下重叠的问题。浮动元素如果和普通文档流发生重叠会怎么样呢？</p>
 
-<p>1、行内元素与浮动元素发生重叠，其边框，背景和内容都会显示在浮动元素之上<br><br>
+<p>1、行内元素与浮动元素发生重叠，其边框，背景和内容都会显示在浮动元素之上<br />
 2、块级元素与浮动元素发生重叠时，边框和背景会显示在浮动元素之下，内容会显示在浮动元素之上</p>
 
-<h1 id="more">更多-more</h1>
-
+<h1 id="更多-more">更多-more</h1>
 <ul>
-<li><a href="https://www.w3.org/TR/CSS2/visuren.html#floats">https://www.w3.org/TR/CSS2/visuren.html#floats</a></li>
-<li><a href="https://www.w3.org/TR/CSS2/visuren.html#propdef-float">https://www.w3.org/TR/CSS2/visuren.html#propdef-float</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/CSS/float">https://developer.mozilla.org/zh-CN/docs/CSS/float</a></li>
-<li><a href="http://www.w3school.com.cn/css/css_positioning_floating.asp">http://www.w3school.com.cn/css/css_positioning_floating.asp</a></li>
+  <li><a href="https://www.w3.org/TR/CSS2/visuren.html#floats">https://www.w3.org/TR/CSS2/visuren.html#floats</a></li>
+  <li><a href="https://www.w3.org/TR/CSS2/visuren.html#propdef-float">https://www.w3.org/TR/CSS2/visuren.html#propdef-float</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/CSS/float">https://developer.mozilla.org/zh-CN/docs/CSS/float</a></li>
+  <li><a href="http://www.w3school.com.cn/css/css_positioning_floating.asp">http://www.w3school.com.cn/css/css_positioning_floating.asp</a></li>
 </ul>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -1680,7 +1654,7 @@ PS：如果想要元素超出，可以设置margin属性。</p>
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -1834,6 +1808,10 @@ PS：如果想要元素超出，可以设置margin属性。</p>
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

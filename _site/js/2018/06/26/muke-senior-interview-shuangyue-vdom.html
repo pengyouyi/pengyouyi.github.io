@@ -163,90 +163,125 @@
 		
 		<p>慕课网学习笔记-揭秘一线互联网企业 前端JavaScript高级面试（双越）- 第5章 虚拟 DOM</p>
 
-<h1 id="5-dom">第5章 虚拟 DOM</h1>
+<h1 id="第5章-虚拟-dom">第5章 虚拟 DOM</h1>
 
 <ul>
-<li><p>vdom 是 vue 和 react 的核心</p></li>
-<li><p>vdom 比较独立，使用也比较简单</p></li>
+  <li>
+    <p>vdom 是 vue 和 react 的核心</p>
+  </li>
+  <li>
+    <p>vdom 比较独立，使用也比较简单</p>
+  </li>
 </ul>
 
-<h1 id="virtual-dom">开始-virtual-dom</h1>
+<h1 id="开始-virtual-dom">开始-virtual-dom</h1>
 
 <ul>
-<li><p>vdom是什么？为何会存在vdom</p></li>
-<li><p>vdom的如何应用，核心API是什么</p></li>
-<li><p>介绍一下diff算法</p></li>
+  <li>
+    <p>vdom是什么？为何会存在vdom</p>
+  </li>
+  <li>
+    <p>vdom的如何应用，核心API是什么</p>
+  </li>
+  <li>
+    <p>介绍一下diff算法</p>
+  </li>
 </ul>
 
-<h2 id="vdom">什么是vdom-开始</h2>
+<h2 id="什么是vdom-开始">什么是vdom-开始</h2>
 
 <ul>
-<li><p>什么是 vdom</p></li>
-<li><p>设计一个需求场景</p></li>
-<li><p>用jQuery实现</p></li>
-<li><p>遇到的问题</p></li>
+  <li>
+    <p>什么是 vdom</p>
+  </li>
+  <li>
+    <p>设计一个需求场景</p>
+  </li>
+  <li>
+    <p>用jQuery实现</p>
+  </li>
+  <li>
+    <p>遇到的问题</p>
+  </li>
 </ul>
 
 <p><strong>什么是 vdom</strong></p>
 
 <ul>
-<li><p>用JS模拟DOM结构</p></li>
-<li><p>DOM变化的对比，放在JS层来做（图灵完备语言）</p></li>
-<li><p>提高重绘性能</p></li>
+  <li>
+    <p>用JS模拟DOM结构</p>
+  </li>
+  <li>
+    <p>DOM变化的对比，放在JS层来做（图灵完备语言）</p>
+  </li>
+  <li>
+    <p>提高重绘性能</p>
+  </li>
 </ul>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"list"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>item1<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>item2<span class="nt">&lt;/li&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"list"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>item1<span class="nt">&lt;/li&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"item"</span><span class="nt">&gt;</span>item2<span class="nt">&lt;/li&gt;</span>
 <span class="nt">&lt;/ul&gt;</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">{</span>
-    <span class="nl">tag</span><span class="p">:</span> <span class="s1">'ul'</span><span class="p">,</span>
-    <span class="nx">attrs</span><span class="err">:</span> <span class="p">{</span>
-        <span class="nl">id</span><span class="p">:</span> <span class="s1">'list'</span>
-    <span class="p">},</span>
-    <span class="nx">children</span><span class="err">:</span> <span class="p">[</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+	<span class="nl">tag</span><span class="p">:</span> <span class="s1">'ul'</span><span class="p">,</span>
+	<span class="nx">attrs</span><span class="p">:</span> <span class="p">{</span>
+		<span class="nl">id</span><span class="p">:</span> <span class="s1">'list'</span>
+	<span class="p">},</span>
+	<span class="nx">children</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="na">tag</span><span class="p">:</span> <span class="s1">'li'</span><span class="p">,</span>
-        <span class="na">attrs</span><span class="p">:</span> <span class="p">{</span><span class="na">className</span><span class="p">:</span> <span class="s1">'item'</span><span class="p">},</span>
-        <span class="na">children</span><span class="p">:</span> <span class="p">[</span><span class="s1">'item1'</span><span class="p">]</span>
+      	<span class="na">tag</span><span class="p">:</span> <span class="s1">'li'</span><span class="p">,</span>
+      	<span class="na">attrs</span><span class="p">:</span> <span class="p">{</span><span class="na">className</span><span class="p">:</span> <span class="s1">'item'</span><span class="p">},</span>
+      	<span class="na">children</span><span class="p">:</span> <span class="p">[</span><span class="s1">'item1'</span><span class="p">]</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="na">tag</span><span class="p">:</span> <span class="s1">'li'</span><span class="p">,</span>
-        <span class="na">attrs</span><span class="p">:</span> <span class="p">{</span><span class="na">className</span><span class="p">:</span> <span class="s1">'item'</span><span class="p">},</span>
-        <span class="na">children</span><span class="p">:</span> <span class="p">[</span><span class="s1">'item2'</span><span class="p">]</span>
+      	<span class="na">tag</span><span class="p">:</span> <span class="s1">'li'</span><span class="p">,</span>
+      	<span class="na">attrs</span><span class="p">:</span> <span class="p">{</span><span class="na">className</span><span class="p">:</span> <span class="s1">'item'</span><span class="p">},</span>
+      	<span class="na">children</span><span class="p">:</span> <span class="p">[</span><span class="s1">'item2'</span><span class="p">]</span>
       <span class="p">}</span>
-    <span class="p">]</span>
+	<span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div>
-<h2 id="vdom-jquery">什么是vdom-jquery</h2>
+</code></pre></div></div>
+
+<h2 id="什么是vdom-jquery">什么是vdom-jquery</h2>
 
 <p>设计一个需求场景</p>
 
 <ol>
-<li><p>将该数据展示成表格</p></li>
-<li><p>随便修改一个信息，表格也跟着修改</p></li>
+  <li>
+    <p>将该数据展示成表格</p>
+  </li>
+  <li>
+    <p>随便修改一个信息，表格也跟着修改</p>
+  </li>
 </ol>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">[</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span>
   <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s1">'张三'</span><span class="p">,</span>
-    <span class="na">age</span><span class="p">:</span> <span class="s1">'20'</span><span class="p">,</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s1">'北京'</span>
+  	<span class="na">name</span><span class="p">:</span> <span class="s1">'张三'</span><span class="p">,</span>
+  	<span class="na">age</span><span class="p">:</span> <span class="s1">'20'</span><span class="p">,</span>
+  	<span class="na">address</span><span class="p">:</span> <span class="s1">'北京'</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s1">'李四'</span><span class="p">,</span>
-    <span class="na">age</span><span class="p">:</span> <span class="s1">'21'</span><span class="p">,</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s1">'上海'</span>
+  	<span class="na">name</span><span class="p">:</span> <span class="s1">'李四'</span><span class="p">,</span>
+  	<span class="na">age</span><span class="p">:</span> <span class="s1">'21'</span><span class="p">,</span>
+  	<span class="na">address</span><span class="p">:</span> <span class="s1">'上海'</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s1">'王五'</span><span class="p">,</span>
-    <span class="na">age</span><span class="p">:</span> <span class="s1">'22'</span><span class="p">,</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s1">'广州'</span>
+  	<span class="na">name</span><span class="p">:</span> <span class="s1">'王五'</span><span class="p">,</span>
+  	<span class="na">age</span><span class="p">:</span> <span class="s1">'22'</span><span class="p">,</span>
+  	<span class="na">address</span><span class="p">:</span> <span class="s1">'广州'</span>
   <span class="p">}</span>
 <span class="p">]</span>
-</code></pre></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</code></pre></div></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 
@@ -258,19 +293,19 @@
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> 
 <span class="p">[</span>
   <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s1">'张三'</span><span class="p">,</span>
-    <span class="na">age</span><span class="p">:</span> <span class="s1">'20'</span><span class="p">,</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s1">'北京'</span>
+  	<span class="na">name</span><span class="p">:</span> <span class="s1">'张三'</span><span class="p">,</span>
+  	<span class="na">age</span><span class="p">:</span> <span class="s1">'20'</span><span class="p">,</span>
+  	<span class="na">address</span><span class="p">:</span> <span class="s1">'北京'</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s1">'李四'</span><span class="p">,</span>
-    <span class="na">age</span><span class="p">:</span> <span class="s1">'21'</span><span class="p">,</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s1">'上海'</span>
+  	<span class="na">name</span><span class="p">:</span> <span class="s1">'李四'</span><span class="p">,</span>
+  	<span class="na">age</span><span class="p">:</span> <span class="s1">'21'</span><span class="p">,</span>
+  	<span class="na">address</span><span class="p">:</span> <span class="s1">'上海'</span>
   <span class="p">},</span>
   <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s1">'王五'</span><span class="p">,</span>
-    <span class="na">age</span><span class="p">:</span> <span class="s1">'22'</span><span class="p">,</span>
-    <span class="na">address</span><span class="p">:</span> <span class="s1">'广州'</span>
+  	<span class="na">name</span><span class="p">:</span> <span class="s1">'王五'</span><span class="p">,</span>
+  	<span class="na">age</span><span class="p">:</span> <span class="s1">'22'</span><span class="p">,</span>
+  	<span class="na">address</span><span class="p">:</span> <span class="s1">'广州'</span>
   <span class="p">}</span>
 <span class="p">]</span>
 
@@ -294,35 +329,47 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2 id="vdom">什么是vdom-总结</h2>
+</code></pre></div></div>
+
+<h2 id="什么是vdom-总结">什么是vdom-总结</h2>
 
 <p>遇到的问题</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'div'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">div</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'div'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">result</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
 <span class="k">for</span> <span class="p">(</span><span class="nx">item</span> <span class="k">in</span> <span class="nx">div</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">result</span> <span class="o">+=</span> <span class="s1">' | '</span> <span class="o">+</span> <span class="nx">item</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <ul>
-<li><p>Dom 操作是昂贵的，js运行效率高</p></li>
-<li><p>尽量减少DOM操作，而不是“推到重来”</p></li>
-<li><p>项目越复杂，影响就越严重</p></li>
-<li><p>将DOM对比操作放在JS层，提高效率</p></li>
+  <li>
+    <p>Dom 操作是昂贵的，js运行效率高</p>
+  </li>
+  <li>
+    <p>尽量减少DOM操作，而不是“推到重来”</p>
+  </li>
+  <li>
+    <p>项目越复杂，影响就越严重</p>
+  </li>
+  <li>
+    <p>将DOM对比操作放在JS层，提高效率</p>
+  </li>
 </ul>
 
-<h1 id="vdom-snabbdom">使用vdom-snabbdom</h1>
+<h1 id="使用vdom-snabbdom">使用vdom-snabbdom</h1>
 
 <p>vdom的如何使用，核心API是什么</p>
 
 <p><a href="https://github.com/snabbdom/snabbdom">介绍snabbdom</a></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'container'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'container'</span><span class="p">);</span>
 
 <span class="kd">var</span> <span class="nx">vnode</span> <span class="o">=</span> <span class="nx">h</span><span class="p">(</span><span class="s1">'div#container.two.classes'</span><span class="p">,</span> <span class="p">{</span><span class="na">on</span><span class="p">:</span> <span class="p">{</span><span class="na">click</span><span class="p">:</span> <span class="nx">someFn</span><span class="p">}},</span> <span class="p">[</span>
   <span class="nx">h</span><span class="p">(</span><span class="s1">'span'</span><span class="p">,</span> <span class="p">{</span><span class="na">style</span><span class="p">:</span> <span class="p">{</span><span class="na">fontWeight</span><span class="p">:</span> <span class="s1">'bold'</span><span class="p">}},</span> <span class="s1">'This is bold'</span><span class="p">),</span>
   <span class="s1">' and this is just normal text'</span><span class="p">,</span>
-  <span class="nx">h</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="p">{</span><span class="na">props</span><span class="p">:</span> <span class="p">{</span><span class="na">href</span><span class="p">:</span> <span class="s1">'/foo'</span><span class="p">}},</span> <span class="s1">'I\'ll take you places!'</span><span class="p">)</span>
+  <span class="nx">h</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="p">{</span><span class="na">props</span><span class="p">:</span> <span class="p">{</span><span class="na">href</span><span class="p">:</span> <span class="s1">'/foo'</span><span class="p">}},</span> <span class="s1">'I</span><span class="se">\'</span><span class="s1">ll take you places!'</span><span class="p">)</span>
 <span class="p">]);</span>
 <span class="c1">// Patch into empty DOM element – this modifies the DOM as a side effect</span>
 <span class="nx">patch</span><span class="p">(</span><span class="nx">container</span><span class="p">,</span> <span class="nx">vnode</span><span class="p">);</span>
@@ -330,31 +377,35 @@
 <span class="kd">var</span> <span class="nx">newVnode</span> <span class="o">=</span> <span class="nx">h</span><span class="p">(</span><span class="s1">'div#container.two.classes'</span><span class="p">,</span> <span class="p">{</span><span class="na">on</span><span class="p">:</span> <span class="p">{</span><span class="na">click</span><span class="p">:</span> <span class="nx">anotherEventHandler</span><span class="p">}},</span> <span class="p">[</span>
   <span class="nx">h</span><span class="p">(</span><span class="s1">'span'</span><span class="p">,</span> <span class="p">{</span><span class="na">style</span><span class="p">:</span> <span class="p">{</span><span class="na">fontWeight</span><span class="p">:</span> <span class="s1">'normal'</span><span class="p">,</span> <span class="na">fontStyle</span><span class="p">:</span> <span class="s1">'italic'</span><span class="p">}},</span> <span class="s1">'This is now italic type'</span><span class="p">),</span>
   <span class="s1">' and this is still just normal text'</span><span class="p">,</span>
-  <span class="nx">h</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="p">{</span><span class="na">props</span><span class="p">:</span> <span class="p">{</span><span class="na">href</span><span class="p">:</span> <span class="s1">'/bar'</span><span class="p">}},</span> <span class="s1">'I\'ll take you places!'</span><span class="p">)</span>
+  <span class="nx">h</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="p">{</span><span class="na">props</span><span class="p">:</span> <span class="p">{</span><span class="na">href</span><span class="p">:</span> <span class="s1">'/bar'</span><span class="p">}},</span> <span class="s1">'I</span><span class="se">\'</span><span class="s1">ll take you places!'</span><span class="p">)</span>
 <span class="p">]);</span>
 <span class="c1">// Second `patch` invocation</span>
 <span class="nx">patch</span><span class="p">(</span><span class="nx">vnode</span><span class="p">,</span> <span class="nx">newVnode</span><span class="p">);</span> <span class="c1">// Snabbdom efficiently updates the old view to the new state</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>snabbdom 的核心函数是 h()、patch()</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">ul</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"list"</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">li</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"item"</span><span class="o">&gt;</span><span class="nx">item1</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">li</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"item"</span><span class="o">&gt;</span><span class="nx">item2</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">ul</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"list"</span><span class="o">&gt;</span>
+	<span class="o">&lt;</span><span class="nx">li</span> <span class="kd">class</span><span class="o">=</span><span class="s2">"item"</span><span class="o">&gt;</span><span class="nx">item1</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>	<span class="o">&lt;</span><span class="nx">li</span> <span class="kd">class</span><span class="o">=</span><span class="s2">"item"</span><span class="o">&gt;</span><span class="nx">item2</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
-</span></code></pre></div>
+</span></code></pre></div></div>
 <p>以上的dom结构可以用h函数这么表示</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">vnode</span> <span class="o">=</span> <span class="nx">h</span><span class="p">(</span><span class="s1">'ul#list'</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">vnode</span> <span class="o">=</span> <span class="nx">h</span><span class="p">(</span><span class="s1">'ul#list'</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span>
   <span class="nx">h</span><span class="p">(</span><span class="s1">'li.item'</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">'Item1'</span><span class="p">),</span>
   <span class="nx">h</span><span class="p">(</span><span class="s1">'li.item'</span><span class="p">,</span> <span class="p">{},</span> <span class="s1">'Item1'</span><span class="p">)</span>
 <span class="p">])</span>
-</code></pre></div>
-<h2 id="snabbdom">snabbdom实例</h2>
+</code></pre></div></div>
+
+<h2 id="snabbdom实例">snabbdom实例</h2>
 
 <p>snabbdom实例1</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/snabbdom/0.7.1/snabbdom.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -397,13 +448,15 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>snabbdom实例2</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/snabbdom/0.7.1/snabbdom.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
@@ -483,25 +536,35 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h2 id="vdom">使用vdom-总结</h2>
+</code></pre></div></div>
+
+<h2 id="使用vdom-总结">使用vdom-总结</h2>
 
 <p>核心API</p>
 
 <ul>
-<li><p>h(&#39;&lt;标签名&gt;&#39;,{...属性...}, [...子元素...])</p></li>
-<li><p>h(&#39;&lt;标签名&gt;&#39;,{...属性...}, &#39;...&#39;)</p></li>
-<li><p>patch(container, vnode)</p></li>
-<li><p>patch(vnode, newVnode)</p></li>
+  <li>
+    <p>h(‘<标签名>',{...属性...}, [...子元素...])</标签名></p>
+  </li>
+  <li>
+    <p>h(‘<标签名>',{...属性...}, '...')</标签名></p>
+  </li>
+  <li>
+    <p>patch(container, vnode)</p>
+  </li>
+  <li>
+    <p>patch(vnode, newVnode)</p>
+  </li>
 </ul>
 
-<h1 id="diff">Diff算法 </h1>
+<h1 id="diff算法">Diff算法 </h1>
 
 <p>To be built</p>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <p><a href="https://coding.imooc.com/learn/list/190.html">揭秘一线互联网企业 前端JavaScript高级面试</a></p>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -619,7 +682,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -773,6 +836,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

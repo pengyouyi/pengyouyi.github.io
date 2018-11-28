@@ -161,7 +161,7 @@
 		
 		</div>
 		
-		<h1 id="shell-sort">希尔排序-shell sort</h1>
+		<h1 id="希尔排序-shell-sort">希尔排序-shell sort</h1>
 
 <p><strong>算法描述</strong></p>
 
@@ -170,8 +170,12 @@
 <p>希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
 
 <ul>
-<li><p>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率；</p></li>
-<li><p>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位；</p></li>
+  <li>
+    <p>插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率；</p>
+  </li>
+  <li>
+    <p>但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位；</p>
+  </li>
 </ul>
 
 <p><strong>希尔排序的基本思想是：</strong></p>
@@ -179,23 +183,30 @@
 <p>先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录基本有序时，再对全体记录进行依次直接插入排序。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-28-1.jpeg" alt="">
+    <img src="/assets/images/2017/10-11-12/11-28-1.jpeg" alt="" />
 </div>
 
 <p><strong>算法步骤</strong></p>
 
 <ul>
-<li><p>选择一个增量序列 t1，t2，……，tk，其中 ti &gt; tj, tk = 1；</p></li>
-<li><p>按增量序列个数 k，对序列进行 k 趟排序；</p></li>
-<li><p>每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</p></li>
+  <li>
+    <p>选择一个增量序列 t1，t2，……，tk，其中 ti &gt; tj, tk = 1；</p>
+  </li>
+  <li>
+    <p>按增量序列个数 k，对序列进行 k 趟排序；</p>
+  </li>
+  <li>
+    <p>每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</p>
+  </li>
 </ul>
 
 <p><strong>算法实现</strong></p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 
@@ -211,7 +222,7 @@
     <span class="k">while</span><span class="p">(</span><span class="nx">gap</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>          <span class="c1">//动态定义间隔序列</span>
         <span class="nx">gap</span> <span class="o">=</span> <span class="nx">gap</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
-
+    
     <span class="k">for</span> <span class="p">(</span><span class="nx">gap</span><span class="p">;</span> <span class="nx">gap</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">gap</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">gap</span><span class="o">/</span><span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">gap</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
             <span class="nx">temp</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
@@ -228,12 +239,17 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1 id="more">更多-more</h1>
+</code></pre></div></div>
+
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><p><a href="https://segmentfault.com/a/1190000009461832">https://segmentfault.com/a/1190000009461832</a></p></li>
-<li><p><a href="http://blog.csdn.net/liusaint1992/article/details/51345887">http://blog.csdn.net/liusaint1992/article/details/51345887</a></p></li>
+  <li>
+    <p><a href="https://segmentfault.com/a/1190000009461832">https://segmentfault.com/a/1190000009461832</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.csdn.net/liusaint1992/article/details/51345887">http://blog.csdn.net/liusaint1992/article/details/51345887</a></p>
+  </li>
 </ul>
   
 	</div>
@@ -350,7 +366,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -504,6 +520,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

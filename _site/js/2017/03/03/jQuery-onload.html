@@ -161,56 +161,56 @@
 		
 		</div>
 		
-		<h1 id="function-window-onload">$(function{}) 与window.onload区别</h1>
+		<h1 id="function-与windowonload区别">$(function{}) 与window.onload区别</h1>
 
 <p>window.onload是js原生的事件</p>
 
 <p>$(function(){})是jQuery的方法</p>
 
-<p>$(function(){...}) 是 $(document).ready(function(){...}) 的缩写</p>
+<p>$(function(){…}) 是 $(document).ready(function(){…}) 的缩写</p>
 
 <p>$(function(){}) 类似于原生js中的 DOMContentLoaded事件</p>
 
-<h2 id="one">one：执行时机不一样</h2>
+<h2 id="one执行时机不一样">one：执行时机不一样</h2>
+<p>$(function() { …}) 是在<code class="highlighter-rouge">dom结构加载完毕</code>后就触发, dom里的内容不一定都已经加载完成。比如说一个页面有好多图片，而加载这些图片需要一定的时间。</p>
 
-<p>$(function() { ...}) 是在<code>dom结构加载完毕</code>后就触发, dom里的内容不一定都已经加载完成。比如说一个页面有好多图片，而加载这些图片需要一定的时间。</p>
+<p>window.onload 是在<code class="highlighter-rouge">整个页面加载完成</code>之后（包括页面上的资源，比如图片）才执行。</p>
 
-<p>window.onload 是在<code>整个页面加载完成</code>之后（包括页面上的资源，比如图片）才执行。</p>
+<p>所以：<code class="highlighter-rouge">$(function(){...}) 会比 window.onload 先执行</code></p>
 
-<p>所以：<code>$(function(){...}) 会比 window.onload 先执行</code></p>
-
-<h2 id="two">two：执行次数不一样：</h2>
-
-<p>$(function() { } )不管你jsp引入的js里定义了几个，会按照顺序依次执行;<br>
+<h2 id="two执行次数不一样">two：执行次数不一样：</h2>
+<p>$(function() { } )不管你jsp引入的js里定义了几个，会按照顺序依次执行;
 window.onload只会执行最后一个，之前的会被覆盖掉。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onload"</span><span class="p">)</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onload"</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onload go"</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"onload go"</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ready"</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ready"</span><span class="p">)</span>
 <span class="p">})</span>
 <span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ready go"</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ready go"</span><span class="p">)</span>
 <span class="p">})</span>
-</code></pre></div>
-<p>执行结果：</p>
+</code></pre></div></div>
 
+<p>执行结果：</p>
 <div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-03-1.png" alt="">
+    <img src="/assets/images/2017/1-2-3/03-03-1.png" alt="" />
 </div>
 
-<h1 id="dom">DOM文档加载步骤：</h1>
+<h1 id="dom文档加载步骤">DOM文档加载步骤：</h1>
 
-<p>(1) 解析HTML结构<br><br>
-(2) 加载外部脚本和样式表文件<br><br>
-(3) 解析并执行脚本代码<br><br>
-(4) 构造HTML  DOM模型  //ready<br><br>
-(5) 加载图片等外部文件<br><br>
+<p>(1) 解析HTML结构<br />
+(2) 加载外部脚本和样式表文件<br />
+(3) 解析并执行脚本代码<br />
+(4) 构造HTML  DOM模型  //ready<br />
+(5) 加载图片等外部文件<br />
 (6) 页面加载完毕  //load</p>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -330,7 +330,7 @@ window.onload只会执行最后一个，之前的会被覆盖掉。</p>
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -484,6 +484,10 @@ window.onload只会执行最后一个，之前的会被覆盖掉。</p>
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

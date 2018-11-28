@@ -161,73 +161,77 @@
 		
 		</div>
 		
-		<h1 id="call-apply-bind">call/apply/bind方法的来源</h1>
-
+		<h1 id="callapplybind方法的来源">call/apply/bind方法的来源</h1>
 <p>call，apply，bind这三个方法其实都是继承自Function.prototype中的，属于实例方法。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'call'</span><span class="p">))</span> <span class="c1">//true</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'call'</span><span class="p">))</span> <span class="c1">//true</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'apply'</span><span class="p">))</span> <span class="c1">//true</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'bind'</span><span class="p">))</span> <span class="c1">//true</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>上面代码中，都返回了true，表明三种方法都是继承自Function.prototype的。当然，普通的对象，函数，数组都继承了Function.prototype对象中的三个方法，所以这三个方法都可以在对象，数组，函数中使用。</p>
 
-<h1 id="apply-call">apply、call</h1>
-
+<h1 id="applycall">apply、call</h1>
 <p>在 javascript 中，call 和 apply 都是为了改变某个函数运行时的上下文（context）而存在的，换句话说，就是为了改变函数体内部 this 的指向。</p>
 
 <ul>
-<li>call() 方法在使用一个指定的this值和若干个指定的参数值的前提下调用某个函数或方法.</li>
+  <li>call() 方法在使用一个指定的this值和若干个指定的参数值的前提下调用某个函数或方法.</li>
 </ul>
 
 <p>语法：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">fun</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">thisArg</span><span class="p">[,</span> <span class="nx">arg1</span><span class="p">[,</span> <span class="nx">arg2</span><span class="p">[,</span> <span class="p">...]]])</span>
-</code></pre></div>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fun</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">thisArg</span><span class="p">[,</span> <span class="nx">arg1</span><span class="p">[,</span> <span class="nx">arg2</span><span class="p">[,</span> <span class="p">...]]])</span>
+</code></pre></div></div>
+
 <ul>
-<li>apply() 方法在指定 this 值和参数（参数以数组或类数组对象的形式存在）的情况下调用某个函数。</li>
+  <li>apply() 方法在指定 this 值和参数（参数以数组或类数组对象的形式存在）的情况下调用某个函数。</li>
 </ul>
 
 <p>语法：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">fun</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">thisArg</span><span class="p">[,</span> <span class="nx">argsArray</span><span class="p">])</span>
-</code></pre></div>
-<h1 id="apply-call">apply、call 的区别</h1>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fun</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">thisArg</span><span class="p">[,</span> <span class="nx">argsArray</span><span class="p">])</span>
+</code></pre></div></div>
 
-<p>对于 apply、call 二者而言，作用完全一样，只是接受参数的方式不太一样。<br><br>
+<h1 id="applycall-的区别">apply、call 的区别</h1>
+<p>对于 apply、call 二者而言，作用完全一样，只是接受参数的方式不太一样。<br />
 call()方法接受的是若干个参数的列表，而apply()方法接受的是一个包含多个参数的数组。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">)</span> <span class="p">{</span>
 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">)</span> <span class="p">{</span>
+     
 <span class="p">};</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>通过如下方式来调用：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">func</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">func</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">);</span>
 <span class="nx">func</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">])</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>当你的参数是明确知道数量时用 call ，而不确定的时候用 apply，然后把参数 push 进数组传递进去。当参数数量不确定时，函数内部也可以通过 arguments 这个伪数组来遍历所有的参数。</p>
 
-<h2 id="call-39-this-39">使用call方法调用函数并且指定上下文的&#39;this&#39;</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">fruits</span><span class="p">()</span> <span class="p">{}</span>
+<h2 id="使用call方法调用函数并且指定上下文的this">使用call方法调用函数并且指定上下文的’this’</h2>
 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">fruits</span><span class="p">()</span> <span class="p">{}</span>
+  
 <span class="nx">fruits</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">color</span><span class="p">:</span> <span class="s2">"red"</span><span class="p">,</span>
     <span class="na">say</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"My color is "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">color</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-
+  
 <span class="kd">var</span> <span class="nx">apple</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">fruits</span><span class="p">;</span>
 <span class="nx">apple</span><span class="p">.</span><span class="nx">say</span><span class="p">();</span>    <span class="c1">//My color is red</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>使用call 和 apply 改变 this 指向</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">banana</span> <span class="o">=</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">banana</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">color</span><span class="p">:</span> <span class="s2">"yellow"</span>
 <span class="p">}</span>
 <span class="nx">apple</span><span class="p">.</span><span class="nx">say</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">banana</span><span class="p">);</span>     <span class="c1">//My color is yellow</span>
 <span class="nx">apple</span><span class="p">.</span><span class="nx">say</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">banana</span><span class="p">);</span>    <span class="c1">//My color is yellow</span>
-</code></pre></div>
-<h2 id="call">使用call方法调用父构造函数</h2>
+</code></pre></div></div>
 
+<h2 id="使用call方法调用父构造函数">使用call方法调用父构造函数</h2>
 <p>在一个子构造函数中，你可以通过调用父构造函数的 call 方法来实现继承。</p>
 
 <p>下例中，使用 Food 构造函数创建的对象实例都会拥有在 Product 构造函数中添加的 name 属性和 price 属性,但 category 属性是在Food构造函数中定义的。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Product</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Product</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
 
@@ -254,9 +258,11 @@ call()方法接受的是若干个参数的列表，而apply()方法接受的是�
     <span class="k">this</span><span class="p">.</span><span class="nx">category</span> <span class="o">=</span> <span class="s1">'food'</span><span class="p">;</span> 
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">cheese</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Food</span><span class="p">(</span><span class="s1">'feta'</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
-</code></pre></div>
-<h2 id="call">使用call方法调用匿名函数</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">animals</span> <span class="o">=</span> <span class="p">[</span>
+</code></pre></div></div>
+
+<h2 id="使用call方法调用匿名函数">使用call方法调用匿名函数</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">animals</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span><span class="na">species</span><span class="p">:</span> <span class="s1">'Lion'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'King'</span><span class="p">},</span>
   <span class="p">{</span><span class="na">species</span><span class="p">:</span> <span class="s1">'Whale'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'Fail'</span><span class="p">}</span>
 <span class="p">];</span>
@@ -271,47 +277,50 @@ call()方法接受的是若干个参数的列表，而apply()方法接受的是�
 <span class="p">}</span>
 
 <span class="nl">result</span><span class="p">:</span>
-<span class="err">#</span><span class="mi">0</span> <span class="nx">Lion</span><span class="err">:</span> <span class="nx">King</span>
-<span class="nl">VM695</span><span class="p">:</span><span class="mi">9</span> <span class="err">#</span><span class="mi">1</span> <span class="nx">Whale</span><span class="err">:</span> <span class="nx">Fail</span>
-</code></pre></div>
-<h1 id="apply-call">apply、call 的常见使用</h1>
+<span class="err">#</span><span class="mi">0</span> <span class="nx">Lion</span><span class="p">:</span> <span class="nx">King</span>
+<span class="nx">VM695</span><span class="p">:</span><span class="mi">9</span> <span class="err">#</span><span class="mi">1</span> <span class="nx">Whale</span><span class="p">:</span> <span class="nx">Fail</span>
+</code></pre></div></div>
 
-<h2 id="array">Array之间追加</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">array1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span> <span class="p">,</span> <span class="s2">"foo"</span> <span class="p">,</span> <span class="p">{</span><span class="nx">name</span> <span class="s2">"Joe"</span><span class="p">}</span> <span class="p">,</span> <span class="o">-</span><span class="mi">2458</span><span class="p">];</span> 
+<h1 id="applycall-的常见使用">apply、call 的常见使用</h1>
+
+<h2 id="array之间追加">Array之间追加</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">array1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span> <span class="p">,</span> <span class="s2">"foo"</span> <span class="p">,</span> <span class="p">{</span><span class="nx">name</span> <span class="s2">"Joe"</span><span class="p">}</span> <span class="p">,</span> <span class="o">-</span><span class="mi">2458</span><span class="p">];</span> 
 <span class="kd">var</span> <span class="nx">array2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Doe"</span> <span class="p">,</span> <span class="mi">555</span> <span class="p">,</span> <span class="mi">100</span><span class="p">];</span> 
 <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">push</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">array1</span><span class="p">,</span> <span class="nx">array2</span><span class="p">);</span> 
 <span class="cm">/* array1 值为  [12 , "foo" , {name "Joe"} , -2458 , "Doe" , 555 , 100] */</span>
-</code></pre></div>
-<h2 id="array">获取Array中的最大值和最小值</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span>  <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">458</span> <span class="p">,</span> <span class="mi">120</span> <span class="p">,</span> <span class="o">-</span><span class="mi">215</span> <span class="p">];</span> 
+</code></pre></div></div>
+
+<h2 id="获取array中的最大值和最小值">获取Array中的最大值和最小值</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span>  <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">458</span> <span class="p">,</span> <span class="mi">120</span> <span class="p">,</span> <span class="o">-</span><span class="mi">215</span> <span class="p">];</span> 
 <span class="kd">var</span> <span class="nx">maxInNumbers</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nb">Math</span><span class="p">,</span> <span class="nx">numbers</span><span class="p">),</span>   <span class="c1">//458</span>
     <span class="nx">maxInNumbers</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">Math</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mi">458</span> <span class="p">,</span> <span class="mi">120</span> <span class="p">,</span> <span class="o">-</span><span class="mi">215</span><span class="p">);</span> <span class="c1">//458</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>number 本身没有 max 方法，但是 Math 有，我们就可以借助 call 或者 apply 使用其方法。</p>
 
-<h2 id="tostring">验证是否是数组（前提是toString()方法没有被重写过）</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">functionisArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">){</span> 
+<h2 id="验证是否是数组前提是tostring方法没有被重写过">验证是否是数组（前提是toString()方法没有被重写过）</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">functionisArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">){</span> 
     <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="s1">'[object Array]'</span> <span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<h2 id="array">类（伪）数组使用Array方法</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">domNodes</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"*"</span><span class="p">));</span>
-</code></pre></div>
-<h1 id="notice">notice</h1>
+</code></pre></div></div>
 
+<h2 id="类伪数组使用array方法">类（伪）数组使用Array方法</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">domNodes</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"*"</span><span class="p">));</span>
+</code></pre></div></div>
+<h1 id="notice">notice</h1>
 <p>如果call和apply的第一个参数写的是null，那么this指向的是window对象</p>
 
 <h1 id="bind">bind()</h1>
 
 <ul>
-<li>bind()方法会创建一个新函数。当这个新函数被调用时，bind()的第一个参数将作为它运行时的 this, 之后的一序列参数将会在传递的实参前传入作为它的参数。</li>
+  <li>bind()方法会创建一个新函数。当这个新函数被调用时，bind()的第一个参数将作为它运行时的 this, 之后的一序列参数将会在传递的实参前传入作为它的参数。</li>
 </ul>
 
 <p>语法：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">fun</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">thisArg</span><span class="p">[,</span> <span class="nx">arg1</span><span class="p">[,</span> <span class="nx">arg2</span><span class="p">[,</span> <span class="p">...]]])</span>
-</code></pre></div>
-<h2 id="bind">创建绑定函数bind</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span> 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fun</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">thisArg</span><span class="p">[,</span> <span class="nx">arg1</span><span class="p">[,</span> <span class="nx">arg2</span><span class="p">[,</span> <span class="p">...]]])</span>
+</code></pre></div></div>
+
+<h2 id="创建绑定函数bind">创建绑定函数bind</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span> 
 <span class="kd">var</span> <span class="nx">module</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">x</span><span class="p">:</span> <span class="mi">81</span><span class="p">,</span>
   <span class="na">getX</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span> <span class="p">}</span>
@@ -326,11 +335,11 @@ call()方法接受的是若干个参数的列表，而apply()方法接受的是�
 <span class="c1">// 新手可能会被全局的x变量和module里的属性x所迷惑</span>
 <span class="kd">var</span> <span class="nx">boundGetX</span> <span class="o">=</span> <span class="nx">retrieveX</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">module</span><span class="p">);</span>
 <span class="nx">boundGetX</span><span class="p">();</span> <span class="c1">// 返回 81</span>
-</code></pre></div>
-<h2 id="bind">bind()的优雅使用</h2>
+</code></pre></div></div>
 
+<h2 id="bind的优雅使用">bind()的优雅使用</h2>
 <p>在常见的单体模式中，通常我们会使用 _this , that , self 等保存 this</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">bar</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="na">eventBind</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
         <span class="kd">var</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
@@ -340,9 +349,11 @@ call()方法接受的是若干个参数的列表，而apply()方法接受的是�
         <span class="p">});</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>使用 bind() 可以更加优雅的解决这个问题：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">bar</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="na">eventBind</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
         <span class="nx">$</span><span class="p">(</span><span class="s1">'.someClass'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
@@ -351,9 +362,10 @@ call()方法接受的是若干个参数的列表，而apply()方法接受的是�
         <span class="p">}.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<h2 id="bind">多次调用bind()</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</code></pre></div></div>
+<h2 id="多次调用bind">多次调用bind()</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">bar</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
@@ -364,19 +376,21 @@ call()方法接受的是若干个参数的列表，而apply()方法接受的是�
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="nx">bar</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="nx">sed</span><span class="p">);</span>
 <span class="nx">func</span><span class="p">();</span> <span class="c1">//?</span>
-
+ 
 <span class="kd">var</span> <span class="nx">fiv</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">x</span><span class="p">:</span><span class="mi">5</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="nx">bar</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="nx">sed</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="nx">fiv</span><span class="p">);</span>
 <span class="nx">func</span><span class="p">();</span> <span class="c1">//?</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>答案是，两次都仍将输出 3 ，而非期待中的 4 和 5 。原因是，在Javascript中，多次 bind() 是无效的。更深层次的原因， bind() 的实现，相当于使用函数在内部包了一个 call / apply ，第二次 bind() 相当于再包住第一次 bind() ,故第二次以后的 bind 是无法生效的。</p>
 
-<h2 id="polyfill">Polyfill（兼容旧浏览器）</h2>
+<h2 id="polyfill兼容旧浏览器">Polyfill（兼容旧浏览器）</h2>
 
 <p>bind 函数在 ECMA-262 第五版才被加入；它可能无法在所有浏览器上运行。你可以部份地在脚本开头加入以下代码，就能使它运作，让不支持的浏览器也能使用 bind() 功能。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bind</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bind</span><span class="p">)</span> <span class="p">{</span>
   <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bind</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">oThis</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="k">this</span> <span class="o">!==</span> <span class="s2">"function"</span><span class="p">)</span> <span class="p">{</span>
       <span class="c1">// closest thing possible to the ECMAScript 5</span>
@@ -384,14 +398,14 @@ call()方法接受的是若干个参数的列表，而apply()方法接受的是�
       <span class="k">throw</span> <span class="k">new</span> <span class="nx">TypeError</span><span class="p">(</span><span class="s2">"Function.prototype.bind - what is trying to be bound is not callable"</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="kd">var</span> <span class="nx">aArgs</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> 
+    <span class="kd">var</span> <span class="nx">aArgs</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kr">arguments</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> 
         <span class="nx">fToBind</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span> 
         <span class="nx">fNOP</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
         <span class="nx">fBound</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
           <span class="k">return</span> <span class="nx">fToBind</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span> <span class="k">instanceof</span> <span class="nx">fNOP</span>
                                  <span class="p">?</span> <span class="k">this</span>
                                  <span class="p">:</span> <span class="nx">oThis</span> <span class="o">||</span> <span class="k">this</span><span class="p">,</span>
-                               <span class="nx">aArgs</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)));</span>
+                               <span class="nx">aArgs</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kr">arguments</span><span class="p">)));</span>
         <span class="p">};</span>
 
     <span class="nx">fNOP</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
@@ -400,37 +414,39 @@ call()方法接受的是若干个参数的列表，而apply()方法接受的是�
     <span class="k">return</span> <span class="nx">fBound</span><span class="p">;</span>
   <span class="p">};</span>
 <span class="p">}</span>
-</code></pre></div>
-<h1 id="apply-call-bind">apply、call、bind比较</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<h1 id="applycallbind比较">apply、call、bind比较</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">x</span><span class="p">:</span> <span class="mi">81</span><span class="p">,</span>
 <span class="p">};</span>
-
+  
 <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">getX</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
-
+  
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">getX</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">obj</span><span class="p">)());</span>  <span class="c1">//81</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">getX</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span>    <span class="c1">//81</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">getX</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span>   <span class="c1">//81</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>当你希望改变上下文环境之后并非立即执行，而是回调执行的时候，使用 bind() 方法。而 apply/call 则会立即执行函数。</p>
 
 <h1 id="summary">Summary</h1>
-
-<p>apply 、 call 、bind 三者都是用来改变函数的this对象的指向的；<br><br>
-apply 、 call 、bind 三者第一个参数都是this要指向的对象，也就是想指定的上下文；<br><br>
-apply 、 call 、bind 三者都可以利用后续参数传参；<br><br>
+<p>apply 、 call 、bind 三者都是用来改变函数的this对象的指向的；<br />
+apply 、 call 、bind 三者第一个参数都是this要指向的对象，也就是想指定的上下文；<br />
+apply 、 call 、bind 三者都可以利用后续参数传参；<br />
 bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调用 。</p>
 
-<h1 id="more">更多-more</h1>
-
+<h1 id="更多-more">更多-more</h1>
 <ul>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call</a></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind</a></li>
 </ul>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -548,7 +564,7 @@ bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调�
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -702,6 +718,10 @@ bind 是返回对应函数，便于稍后调用；apply 、call 则是立即调�
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -161,7 +161,7 @@
 		
 		</div>
 		
-		<h1 id="data-type">数据类型data-type</h1>
+		<h1 id="数据类型data-type">数据类型data-type</h1>
 
 <p>7种数据类型</p>
 
@@ -173,42 +173,46 @@
 
 <p>Object</p>
 
-<h1 id="explicit">显式类型转换-Explicit</h1>
+<h1 id="显式类型转换-explicit">显式类型转换-Explicit</h1>
 
 <p>js高程p26~p34</p>
 
-<h2 id="boolean">Boolean函数</h2>
+<h2 id="boolean函数">Boolean函数</h2>
 
 <blockquote>
-<p>Boolean()</p>
-
-<p>!!</p>
+  <p>Boolean()</p>
 </blockquote>
 
-<p>天生为假值的有：<code>undefined</code>、<code>null</code>、<code>0</code>、<code>NaN</code>、<code>&quot;&quot;</code></p>
+<blockquote>
+  <p>!!</p>
+</blockquote>
+
+<p>天生为假值的有：<code class="highlighter-rouge">undefined</code>、<code class="highlighter-rouge">null</code>、<code class="highlighter-rouge">0</code>、<code class="highlighter-rouge">NaN</code>、<code class="highlighter-rouge">""</code></p>
 
 <p><a href="http://pengyouyi.site/js/2017/03/30/js-toBoolean">js显示、隐式转为布尔值</a></p>
 
-<h2 id="number">Number函数</h2>
+<h2 id="number函数">Number函数</h2>
 
 <p>有3个函数可以把非数值转换为数值：Number()、parseInt()、parseFloat()</p>
 
 <blockquote>
-<p>Number()可以用于任何数据类型</p>
-
-<p>parseInt()、parseFloat() 专门用于把字符串转换成数值</p>
+  <p>Number()可以用于任何数据类型</p>
 </blockquote>
 
-<h3 id="number"><strong>Number()转换规则</strong></h3>
+<blockquote>
+  <p>parseInt()、parseFloat() 专门用于把字符串转换成数值</p>
+</blockquote>
+
+<h3 id="number转换规则"><strong>Number()转换规则</strong></h3>
 
 <p><strong>❀ 原始类型转换</strong></p>
 
 <ul>
-<li>数值：转换后还是原来的值</li>
-<li>布尔值：true转成1, false转成0</li>
-<li>null: 转成0</li>
-<li>undefined: 转成 NaN</li>
-<li>字符串：如果可以被解析为数值，则转换为相应的数值，否则得到NaN。空字符串转为0。</li>
+  <li>数值：转换后还是原来的值</li>
+  <li>布尔值：true转成1, false转成0</li>
+  <li>null: 转成0</li>
+  <li>undefined: 转成 NaN</li>
+  <li>字符串：如果可以被解析为数值，则转换为相应的数值，否则得到NaN。空字符串转为0。</li>
 </ul>
 
 <p><strong>❀ 对象类型转换</strong></p>
@@ -219,44 +223,52 @@
 
 <p>❸ 如果toString()方法返回的是复合类型的值，则报错。</p>
 
-<h3 id="parseint"><strong>parseInt()转换规则</strong></h3>
+<h3 id="parseint转换规则"><strong>parseInt()转换规则</strong></h3>
 
 <p>Number()函数在转换字符串时比较复杂而且不够合理，因此在处理整数的时候更常用的是parseInt()函数。</p>
 
 <p>❶ parseInt()在转换字符串时，更多的是看其是否符合数值模式。它会忽略字符串前面的空格，直到找到第一个非空格字符。</p>
 
-<p>❷ 如果第一个字符不是数字字符或者负号，parseInt()就会返回NaN。比如：parseInt(&#39;&#39;)返回NaN</p>
+<p>❷ 如果第一个字符不是数字字符或者负号，parseInt()就会返回NaN。比如：parseInt(‘‘)返回NaN</p>
 
 <p>❸ 如果第一个字符是数字字符，parseInt()会继续解析第二个字符，直到解析完所有的后续字符或者遇到了一个非数字字符。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">Number</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> <span class="c1">// 0</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Number</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span> <span class="c1">// 0</span>
 <span class="nb">parseInt</span><span class="p">(</span><span class="s1">''</span><span class="p">)</span>  <span class="c1">// NaN</span>
 
 <span class="nb">parseInt</span><span class="p">(</span><span class="mf">22.5</span><span class="p">)</span>  <span class="c1">// 22</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>Number()和parseInt()的区别</strong></p>
 
 <blockquote>
-<p>Number函数比parseInt函数转换更为严格，只有纯数字形式的字符串才能被转换成数字，否则为NaN</p>
+  <p>Number函数比parseInt函数转换更为严格，只有纯数字形式的字符串才能被转换成数字，否则为NaN</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">Number</span><span class="p">(</span><span class="s2">"1234blue"</span><span class="p">);</span>  <span class="c1">// NaN</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Number</span><span class="p">(</span><span class="s2">"1234blue"</span><span class="p">);</span>  <span class="c1">// NaN</span>
 <span class="nb">parseInt</span><span class="p">(</span><span class="s2">"1234blue"</span><span class="p">)</span>  <span class="c1">// 1234</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>parseInt()在解析八进制字面量的字符串【字符串以“0”开头且后跟数字字符】时，ECMAScript 3 和 5存在分歧。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">parseInt</span><span class="p">(</span><span class="s1">'070'</span><span class="p">)</span>  <span class="c1">// ECMAScript 3 认为是 56【八进制】</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">parseInt</span><span class="p">(</span><span class="s1">'070'</span><span class="p">)</span>  <span class="c1">// ECMAScript 3 认为是 56【八进制】</span>
 <span class="nb">parseInt</span><span class="p">(</span><span class="s1">'070'</span><span class="p">)</span>  <span class="c1">// ECMAScript 5 认为是 70 十进制】</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>因此推荐parseInt()无论在什么情况下都应明确指定基数</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">parseInt</span><span class="p">(</span><span class="s1">'0xA'</span><span class="p">)</span>  <span class="c1">// 10</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">parseInt</span><span class="p">(</span><span class="s1">'0xA'</span><span class="p">)</span>  <span class="c1">// 10</span>
 <span class="nb">parseInt</span><span class="p">(</span><span class="s1">'10'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1">// 2</span>
 <span class="nb">parseInt</span><span class="p">(</span><span class="s1">'10'</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>  <span class="c1">// 8</span>
 <span class="nb">parseInt</span><span class="p">(</span><span class="s1">'10'</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1">// 10</span>
 <span class="nb">parseInt</span><span class="p">(</span><span class="s1">'10'</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span> <span class="c1">// 16</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt">parseInt(string, radix)</a></p>
 
-<p>ES6推荐小写的<code>0b</code>二进制、<code>0o</code>八进制、<code>0x</code>十六进制</p>
+<p>ES6推荐小写的<code class="highlighter-rouge">0b</code>二进制、<code class="highlighter-rouge">0o</code>八进制、<code class="highlighter-rouge">0x</code>十六进制</p>
 
-<h3 id="parsefloat"><strong>parseFloat()转换规则</strong></h3>
+<h3 id="parsefloat转换规则"><strong>parseFloat()转换规则</strong></h3>
 
 <p>❶ parseFloat() 也会忽略字符串前面的空格。</p>
 
@@ -265,35 +277,43 @@
 <p><strong>parseInt() 和parseFloat()的区别</strong></p>
 
 <ul>
-<li><p>parseFloat()只解析十进制值，因此它没有第二个参数指定基数</p></li>
-<li><p>parseFloat()始终都会忽略前导的零，而不会像Number()可能转换成八进制数。但十六进制格式的字符串则始终被转换成0.</p></li>
+  <li>
+    <p>parseFloat()只解析十进制值，因此它没有第二个参数指定基数</p>
+  </li>
+  <li>
+    <p>parseFloat()始终都会忽略前导的零，而不会像Number()可能转换成八进制数。但十六进制格式的字符串则始终被转换成0.</p>
+  </li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'1234blue'</span><span class="p">)</span>  <span class="c1">// 1234</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'1234blue'</span><span class="p">)</span>  <span class="c1">// 1234</span>
 <span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'0xA'</span><span class="p">)</span>  <span class="c1">// 0</span>
 <span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'22.5'</span><span class="p">)</span>  <span class="c1">// 22.5</span>
 <span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'22.34.5'</span><span class="p">)</span>  <span class="c1">// 22.34</span>
 <span class="nb">parseFloat</span><span class="p">(</span><span class="s1">'070'</span><span class="p">)</span>  <span class="c1">// 70</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat">parseFloat(value)</a></p>
 
-<h2 id="string">String函数</h2>
+<h2 id="string函数">String函数</h2>
 
 <blockquote>
-<p>String() 能将任何类型的值转换为字符串</p>
-
-<p>toString() 数值、布尔值、对象和字符串值都有toString() 方法。但是null和undefined值没有这个方法。</p>
+  <p>String() 能将任何类型的值转换为字符串</p>
 </blockquote>
 
-<h3 id="string"><strong>String()转换规则</strong></h3>
+<blockquote>
+  <p>toString() 数值、布尔值、对象和字符串值都有toString() 方法。但是null和undefined值没有这个方法。</p>
+</blockquote>
+
+<h3 id="string转换规则"><strong>String()转换规则</strong></h3>
 
 <p><strong>❀ 原始类型转换</strong></p>
 
 <ul>
-<li>数值：转为相应的字符串</li>
-<li>字符串：返回字符串的一个副本，还是原来的值</li>
-<li>布尔：true转为&quot;true&quot;,false转为&quot;false&quot;</li>
-<li>undefined: 转为&quot;undefined&quot;</li>
-<li>null: 转为&quot;null&quot;</li>
+  <li>数值：转为相应的字符串</li>
+  <li>字符串：返回字符串的一个副本，还是原来的值</li>
+  <li>布尔：true转为”true”,false转为”false”</li>
+  <li>undefined: 转为”undefined”</li>
+  <li>null: 转为”null”</li>
 </ul>
 
 <p><strong>❀ 对象类型转换</strong></p>
@@ -303,11 +323,13 @@
 <p>❷ 如果toString()方法返回的是复合类型的值，再调用valueOf()方法，如果valueOf()方法返回的是原始类型的值，则对该值使用String()方法，不再进行以下步骤。</p>
 
 <p>❸ 如果valueOf()方法返回的是复合类型的值，则报错。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">String</span><span class="p">([]);</span>  <span class="c1">// ""</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">String</span><span class="p">([]);</span>  <span class="c1">// ""</span>
 <span class="nb">String</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]);</span>  <span class="c1">// "1,2"</span>
 <span class="nb">String</span><span class="p">({</span><span class="na">a</span><span class="p">:</span><span class="mi">2</span><span class="p">});</span>  <span class="c1">// "[object Object]"</span>
-</code></pre></div>
-<h1 id="implicit">隐式类型转换-Implicit</h1>
+</code></pre></div></div>
+
+<h1 id="隐式类型转换-implicit">隐式类型转换-Implicit</h1>
 
 <p>✯ 四则运算</p>
 
@@ -316,7 +338,8 @@
 <p>✯ Native调用（console.log、alert自动转换成字符串类型）</p>
 
 <p><strong>常见题目</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span>  <span class="c1">// ""</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[]</span> <span class="o">+</span> <span class="p">[]</span>  <span class="c1">// ""</span>
 
 <span class="p">[]</span> <span class="o">+</span> <span class="p">{}</span>  <span class="c1">// "[object Object]"</span>
 
@@ -327,10 +350,12 @@
 <span class="kc">true</span> <span class="o">+</span> <span class="kc">true</span>  <span class="c1">// 2</span>
 
 <span class="mi">1</span> <span class="o">+</span> <span class="p">{</span><span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span> <span class="c1">// "1[object Object]"</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><a href="https://segmentfault.com/a/1190000008038678">https://segmentfault.com/a/1190000008038678</a></p>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -446,7 +471,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -600,6 +625,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

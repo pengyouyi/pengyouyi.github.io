@@ -180,38 +180,50 @@
 <p><strong>知识点：</strong></p>
 
 <ul>
-<li><p>构造函数</p></li>
-<li><p>构造函数 - 扩展</p></li>
-<li><p>原型规则和示例</p></li>
-<li><p>原型链</p></li>
-<li><p>instanceof</p></li>
+  <li>
+    <p>构造函数</p>
+  </li>
+  <li>
+    <p>构造函数 - 扩展</p>
+  </li>
+  <li>
+    <p>原型规则和示例</p>
+  </li>
+  <li>
+    <p>原型链</p>
+  </li>
+  <li>
+    <p>instanceof</p>
+  </li>
 </ul>
 
-<h2 id="constructor">构造函数-Constructor</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+<h2 id="构造函数-constructor">构造函数-Constructor</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
-  <span class="k">this</span><span class="p">.</span><span class="kr">class</span> <span class="o">=</span> <span class="s1">'class-1'</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="kd">class</span> <span class="o">=</span> <span class="s1">'class-1'</span><span class="p">;</span>
   <span class="c1">// return this;  // 默认有这一行</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="s1">'zhangsan'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">foo1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="s1">'lisi'</span><span class="p">,</span> <span class="mi">22</span><span class="p">);</span>  <span class="c1">//创造多个对象</span>
-</code></pre></div>
-<h2 id="extend">构造函数extend</h2>
+</code></pre></div></div>
+
+<h2 id="构造函数extend">构造函数extend</h2>
 
 <p>var a = {} 其实是 var a = new Object() 的语法糖</p>
 
 <p>var a = [] 其实是 var a = new Array() 的语法糖</p>
 
-<p>function Foo() {...} 其实是 var Foo = new Function(...)</p>
+<p>function Foo() {…} 其实是 var Foo = new Function(…)</p>
 
 <p>使用 instanceof 判断一个函数是否是一个变量的构造函数</p>
 
-<h2 id="5-rules">5个原型rules</h2>
+<h2 id="5个原型rules">5个原型rules</h2>
 
 <p><strong>原型和原型链-5个原型规则:</strong></p>
 
-<p>1、所有的<em>引用类型</em>（数组、对象、函数），都具有<strong>对象特性</strong>，即可自由扩展属性（除了 &#39;null&#39; 意外）。</p>
+<p>1、所有的<em>引用类型</em>（数组、对象、函数），都具有<strong>对象特性</strong>，即可自由扩展属性（除了 ‘null’ 意外）。</p>
 
 <p>2、所有的<em>引用类型</em>（数组、对象、函数），都有一个 <strong>proto</strong> 属性【隐式原型】，属性值是一个普通的对象。</p>
 
@@ -221,8 +233,9 @@
 
 <p>5、当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的 <strong>proto</strong> （即它的构造函数的prototype）中寻找。</p>
 
-<h3 id="1-39-null-39">1、所有的<em>引用类型</em>（数组、对象、函数），都具有<strong>对象特性</strong>，即可自由扩展属性（除了 &#39;null&#39; 意外）。</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 原型和原型链</span>
+<h3 id="1所有的引用类型数组对象函数都具有对象特性即可自由扩展属性除了-null-意外">1、所有的<em>引用类型</em>（数组、对象、函数），都具有<strong>对象特性</strong>，即可自由扩展属性（除了 ‘null’ 意外）。</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 原型和原型链</span>
 <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="nx">obj</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
 
@@ -231,81 +244,94 @@
 
 <span class="kd">function</span> <span class="nx">fn</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
 <span class="nx">fn</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-</code></pre></div>
-<h3 id="2-__proto__">2、所有的<em>引用类型</em>（数组、对象、函数），都有一个 __proto__ 属性【隐式原型】，属性值是一个普通的对象。</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span>  
+</code></pre></div></div>
+
+<h3 id="2所有的引用类型数组对象函数都有一个-__proto__-属性隐式原型属性值是一个普通的对象">2、所有的<em>引用类型</em>（数组、对象、函数），都有一个 __proto__ 属性【隐式原型】，属性值是一个普通的对象。</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span>  
 <span class="c1">// Object</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span>
 <span class="c1">// [constructor: ƒ, toString: ƒ, toLocaleString: ƒ, join: ƒ, pop: ƒ, …]</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span>
 <span class="c1">// ƒ () { [native code] }</span>
-</code></pre></div>
-<h3 id="3-prototype">3、所有<em>函数</em>，都有一个<strong>prototype</strong> 属性【显式原型】，属性值也是一个普通的对象。</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="3所有函数都有一个prototype-属性显式原型属性值也是一个普通的对象">3、所有<em>函数</em>，都有一个<strong>prototype</strong> 属性【显式原型】，属性值也是一个普通的对象。</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
 <span class="c1">// {constructor: f fn(); __proto__: Object}</span>
-</code></pre></div>
-<h3 id="4-__proto__-prototype">4、所有的引用类型（数组、对象、函数）， __proto__ 属性值指向它的构造函数的 “prototype” 属性值</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="4所有的引用类型数组对象函数-__proto__-属性值指向它的构造函数的-prototype-属性值">4、所有的引用类型（数组、对象、函数）， __proto__ 属性值指向它的构造函数的 “prototype” 属性值</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
 <span class="c1">// true</span>
-</code></pre></div>
-<h3 id="5-proto-prototype">5、当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的 <strong>proto</strong> （即它的构造函数的prototype）中寻找。</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 构造函数</span>
+</code></pre></div></div>
+
+<h3 id="5当试图得到一个对象的某个属性时如果这个对象本身没有这个属性那么会去它的-proto-即它的构造函数的prototype中寻找">5、当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的 <strong>proto</strong> （即它的构造函数的prototype）中寻找。</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 构造函数</span>
 <span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
 <span class="p">}</span>
 <span class="nx">Foo</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">alertName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+	<span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="c1">// 创建示例</span>
 <span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="s1">'zhangsan'</span><span class="p">);</span>
 <span class="nx">f</span><span class="p">.</span><span class="nx">printName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="c1">// 测试</span>
 <span class="nx">f</span><span class="p">.</span><span class="nx">printName</span><span class="p">()</span>
 <span class="nx">f</span><span class="p">.</span><span class="nx">alertName</span><span class="p">()</span>
-</code></pre></div>
-<h2 id="add-2-points">原型规则-Add-2-points</h2>
+</code></pre></div></div>
+
+<h2 id="原型规则-add-2-points">原型规则-Add-2-points</h2>
 
 <p><strong>原型和原型链-5个原型规则-补充2点</strong></p>
 
 <p>this、循环对象自身的属性</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">item</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">item</span>
 <span class="k">for</span> <span class="p">(</span><span class="nx">item</span> <span class="k">in</span> <span class="nx">f</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// 高级浏览器已经在 for in 中屏蔽了来自原型的属性</span>
-    <span class="c1">// 但是这里建议大家还是加上这个判断，保证程序的健壮性</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">f</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">item</span><span class="p">))</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span>
-    <span class="p">}</span>
+	<span class="c1">// 高级浏览器已经在 for in 中屏蔽了来自原型的属性</span>
+	<span class="c1">// 但是这里建议大家还是加上这个判断，保证程序的健壮性</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">f</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">item</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 结果只有2个属性：name 、printName</span>
-</code></pre></div>
-<h2 id="prototype-chain">原型链-Prototype-Chain</h2>
+</code></pre></div></div>
+
+<h2 id="原型链-prototype-chain">原型链-Prototype-Chain</h2>
 
 <ul>
-<li>原型和原型链-原型链</li>
+  <li>原型和原型链-原型链</li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 原型和原型链-原型链</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 原型和原型链-原型链</span>
 
 <span class="c1">// 构造函数</span>
 <span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
 <span class="p">}</span>
 <span class="nx">Foo</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">alertName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+	<span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="c1">// 创建示例</span>
 <span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="s1">'zhangsan'</span><span class="p">);</span>
 <span class="nx">f</span><span class="p">.</span><span class="nx">printName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="c1">// 测试</span>
 <span class="nx">f</span><span class="p">.</span><span class="nx">printName</span><span class="p">()</span>
 <span class="nx">f</span><span class="p">.</span><span class="nx">alertName</span><span class="p">()</span>
 <span class="nx">f</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="c1">// 要去 f.__proto__.__proto__ 中去寻找</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">f</span><span class="p">.</span><span class="nx">toString</span><span class="p">())</span> <span class="c1">// [object Object]</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><a href="http://www.imooc.com/article/3654">http://www.imooc.com/article/3654</a></p>
 
 <p><a href="http://www.jb51.net/article/30750.htm">http://www.jb51.net/article/30750.htm</a></p>
@@ -313,7 +339,7 @@
 <h2 id="instanceof">instanceof</h2>
 
 <ul>
-<li>原型和原型链-原型链 - instanceof</li>
+  <li>原型和原型链-原型链 - instanceof</li>
 </ul>
 
 <p>instanceof：用于判断 <em>引用类型</em> 属于哪个 <em>构造函数</em> 的方法</p>
@@ -321,7 +347,8 @@
 <p><strong>f instanceof Foo 的判断逻辑是：</strong></p>
 
 <p>f 的 __proto__ 一层一层往上，能否对应到Foo.prototype</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span>
 <span class="p">}</span>
 
@@ -329,107 +356,127 @@
 <span class="kd">var</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="s1">'zhangsan'</span><span class="p">);</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">f</span> <span class="k">instanceof</span> <span class="nx">Foo</span><span class="p">);</span>  <span class="c1">// true</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>再试着判断 f instanceof Object</p>
 
 <h1 id="answer">Answer</h1>
 
-<h2 id="one">one-如何准确判断一个变量是数组类型</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
+<h2 id="one-如何准确判断一个变量是数组类型">one-如何准确判断一个变量是数组类型</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[];</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span> <span class="k">instanceof</span> <span class="nb">Array</span><span class="p">);</span> <span class="c1">// true</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr</span><span class="p">);</span> <span class="c1">// object, typeof 是无法判断是否是数组的</span>
 
 <span class="kd">function</span> <span class="nx">isArray</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="s1">'[object Array]'</span><span class="p">;</span>
+	<span class="k">return</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="o">===</span> <span class="s1">'[object Array]'</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span> <span class="c1">// true</span>
-</code></pre></div>
-<h2 id="two">two-写一个原型链继承的例子</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 动物</span>
+</code></pre></div></div>
+
+<h2 id="two-写一个原型链继承的例子">two-写一个原型链继承的例子</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 动物</span>
 <span class="kd">function</span> <span class="nx">Animal</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">eat</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'animal eat'</span><span class="p">);</span>
-    <span class="p">}</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">eat</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'animal eat'</span><span class="p">);</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 狗</span>
 <span class="kd">function</span> <span class="nx">Dog</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">bark</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'dog bark'</span><span class="p">);</span>
-    <span class="p">}</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">bark</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'dog bark'</span><span class="p">);</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="nx">Dog</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">();</span>
 
 <span class="c1">// 哈士奇</span>
 <span class="kd">var</span> <span class="nx">hashiqi</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">();</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>写一个贴近实际开发原型链继承的例子</p>
 
-<h2 id="dom">写一个封装DOM查询的例子</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Elem</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<h2 id="写一个封装dom查询的例子">写一个封装DOM查询的例子</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Elem</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">Elem</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">html</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">elem</span><span class="p">;</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// 链式操作</span>
+  	<span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
+  	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+  	<span class="k">return</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// 链式操作</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
+  	<span class="k">return</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 <span class="nx">Elem</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">on</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">elem</span><span class="p">;</span>
-    <span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">elem</span><span class="p">[</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">;</span>
-    <span class="p">}</span>
+	<span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">elem</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">);</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nx">elem</span><span class="p">[</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">;</span>
+	<span class="p">}</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">div1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Elem</span><span class="p">(</span><span class="s1">'div1'</span><span class="p">);</span>
 <span class="nx">div1</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s1">'有'</span><span class="p">);</span>
 <span class="nx">div1</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)).</span><span class="nx">html</span><span class="p">(</span><span class="s1">'youyi'</span><span class="p">);</span>
-</code></pre></div>
-<h2 id="new">描述 new 一个对象的过程</h2>
+</code></pre></div></div>
+
+<h2 id="描述-new-一个对象的过程">描述 new 一个对象的过程</h2>
 
 <ul>
-<li><p>创建一个新对象</p></li>
-<li><p>this 指向这个新对象</p></li>
-<li><p>执行代码，即对this赋值</p></li>
-<li><p>返回this</p></li>
+  <li>
+    <p>创建一个新对象</p>
+  </li>
+  <li>
+    <p>this 指向这个新对象</p>
+  </li>
+  <li>
+    <p>执行代码，即对this赋值</p>
+  </li>
+  <li>
+    <p>返回this</p>
+  </li>
 </ul>
 
 <p><a href="http://pengyouyi.site/js/2016/10/09/interview-js#new">new操作符具体干了什么呢?</a></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span> <span class="o">=</span> <span class="p">{};</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
-  <span class="k">this</span><span class="p">.</span><span class="kr">class</span> <span class="o">=</span> <span class="s1">'class-1'</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="kd">class</span> <span class="o">=</span> <span class="s1">'class-1'</span><span class="p">;</span>
   <span class="c1">// return this;  // 默认有这一行</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="s1">'zhangsan'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">foo1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="s1">'lisi'</span><span class="p">,</span> <span class="mi">22</span><span class="p">);</span>  <span class="c1">//创造多个对象</span>
-</code></pre></div>
-<h2 id="zepto">zepto(或其他框架) 源码如何使用原型链</h2>
+</code></pre></div></div>
 
-<h3 id="overall-structure">整体结构-Overall structure</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">Zepto</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<h2 id="zepto或其他框架-源码如何使用原型链">zepto(或其他框架) 源码如何使用原型链</h2>
+
+<h3 id="整体结构-overall-structure">整体结构-Overall structure</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Zepto</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="p">...</span>
 <span class="p">})()</span>
 
 <span class="nb">window</span><span class="p">.</span><span class="nx">Zepto</span> <span class="o">=</span> <span class="nx">Zepto</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nx">Zepto</span><span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>zepto 的核心是一个闭包，加载完毕后立即执行。然后暴露给全局变量 zepto ，如果 $ 没有定义，也将 $ 赋值为 zepto 。</p>
 
-<h3 id="core-structure">核心结构-Core structure</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">zepto</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">$</span>
+<h3 id="核心结构-core-structure">核心结构-Core structure</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">zepto</span> <span class="o">=</span> <span class="p">{},</span> <span class="nx">$</span>
 
 <span class="kd">function</span> <span class="nx">Z</span><span class="p">(</span><span class="nx">doms</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">doms</span><span class="p">.</span><span class="nx">length</span> 
@@ -462,7 +509,8 @@
 <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Z</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span>
 
 <span class="k">return</span> <span class="nx">$</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>在源码中，可以看出， $ 其实是一个函数，同时在 $ 身上又挂了很多属性和方法（这里体现在 $.fn 身上，其他的会在后续的文章中谈到）。</p>
 
 <p>我们在使用 zepto 的时候，会用 $ 去获取 dom ，并且在这些 dom 对象身上都有 zepto 定义的各种各样的操作方法。</p>
@@ -471,7 +519,7 @@
 
 <p>函数 Z 会将 doms 展开，变成实例的属性，key 为对应 domObj 的索引， 并且设置实例的 length 属性。</p>
 
-<h3 id="zepto-z-prototype-z-prototype-fn">zepto.Z.prototype = Z.prototype = $.fn</h3>
+<h3 id="zeptozprototype--zprototype--fn">zepto.Z.prototype = Z.prototype = $.fn</h3>
 
 <p>读到这里，你可能会有点疑惑，$ 最终返回的是 Z 函数的实例，但是 Z 函数明明没有 dom 的操作方法啊，这些操作方法都定义在 $.fn 身上，为什么 $ 可以调用这些方法呢？</p>
 
@@ -480,17 +528,17 @@
 <p>既然这样就已经让 Z 的实例继承了 $.fn 的方法，那 zepto.Z.prototype = $.fn 又是为什么呢？</p>
 
 <p>如果我们再看源码，会发现有这样的一个方法：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">zepto</span><span class="p">.</span><span class="nx">isZ</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">zepto</span><span class="p">.</span><span class="nx">isZ</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">object</span> <span class="k">instanceof</span> <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>这个方法是用来判读一个对象是否为 zepto 对象，这是通过判断这个对象是否为 zepto.Z 的实例来完成的，因此需要将 zepto.Z 和 Z 的 prototype 指向同一个对象。 isZ 方法会在 init 中用到，后面也会介绍。</p>
 
 <p><a href="https://www.cnblogs.com/libin-1/p/6888574.html">读 Zepto 源码系列</a></p>
 
 <p><a href="https://segmentfault.com/a/1190000008950420">读Zepto源码之代码结构</a></p>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <p><a href="https://coding.imooc.com/learn/list/115.html">前端JavaScript面试技巧</a></p>
   
@@ -610,7 +658,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -764,6 +812,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

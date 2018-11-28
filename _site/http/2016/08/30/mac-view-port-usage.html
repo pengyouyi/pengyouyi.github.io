@@ -161,43 +161,53 @@
 		
 		</div>
 		
-		<h2 id="mac">MAC下查看某个端口被哪个程序占用及杀进程方法</h2>
+		<h2 id="mac下查看某个端口被哪个程序占用及杀进程方法">MAC下查看某个端口被哪个程序占用及杀进程方法</h2>
 
-<h2 id="lsof">lsof命令查看端口使用情况</h2>
-
+<h2 id="lsof命令查看端口使用情况">lsof命令查看端口使用情况</h2>
 <p>通过list open file命令可以查看到当前打开文。</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">lsof -i:port</code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">lsof <span class="nt">-i</span>:port</code></pre></figure>
 
 <p>port替换成端口号，比如查看63342端口,使用如下</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell">lsof -i:63342</code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">lsof <span class="nt">-i</span>:63342</code></pre></figure>
 
 <p>参数说明: -i表示网络链接,该命令会同时列出PID，方便kill</p>
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="n">pengyouyideMacBook</span><span class="o">-</span><span class="n">Pro</span><span class="o">:~</span> <span class="n">pengyouyi</span><span class="err">$</span> <span class="n">lsof</span> <span class="o">-</span><span class="n">i</span><span class="o">:</span><span class="mi">63342</span>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pengyouyideMacBook</span><span class="o">-</span><span class="n">Pro</span><span class="o">:~</span> <span class="n">pengyouyi</span><span class="err">$</span> <span class="n">lsof</span> <span class="o">-</span><span class="n">i</span><span class="o">:</span><span class="mi">63342</span>
 <span class="n">COMMAND</span>   <span class="n">PID</span>      <span class="n">USER</span>   <span class="n">FD</span>   <span class="n">TYPE</span>             <span class="n">DEVICE</span> <span class="n">SIZE</span><span class="o">/</span><span class="n">OFF</span> <span class="n">NODE</span> <span class="n">NAME</span>
 <span class="n">Google</span>    <span class="mi">236</span> <span class="n">pengyouyi</span>   <span class="mi">93u</span>  <span class="n">IPv4</span> <span class="mh">0xe55f3646947d799f</span>      <span class="mi">0</span><span class="n">t0</span>  <span class="n">TCP</span> <span class="n">localhost</span><span class="o">:</span><span class="mi">56933</span><span class="o">-&gt;</span><span class="n">localhost</span><span class="o">:</span><span class="mi">63342</span> <span class="p">(</span><span class="n">ESTABLISHED</span><span class="p">)</span>
 <span class="n">Google</span>    <span class="mi">236</span> <span class="n">pengyouyi</span>  <span class="mi">155u</span>  <span class="n">IPv4</span> <span class="mh">0xe55f36469507ceb7</span>      <span class="mi">0</span><span class="n">t0</span>  <span class="n">TCP</span> <span class="n">localhost</span><span class="o">:</span><span class="mi">49264</span><span class="o">-&gt;</span><span class="n">localhost</span><span class="o">:</span><span class="mi">63342</span> <span class="p">(</span><span class="n">ESTABLISHED</span><span class="p">)</span>
 <span class="n">webstorm</span>  <span class="mi">375</span> <span class="n">pengyouyi</span>   <span class="mi">28u</span>  <span class="n">IPv4</span> <span class="mh">0xe55f364694d605bf</span>      <span class="mi">0</span><span class="n">t0</span>  <span class="n">TCP</span> <span class="n">localhost</span><span class="o">:</span><span class="mi">63342</span><span class="o">-&gt;</span><span class="n">localhost</span><span class="o">:</span><span class="mi">49264</span> <span class="p">(</span><span class="n">ESTABLISHED</span><span class="p">)</span>
 <span class="n">webstorm</span>  <span class="mi">375</span> <span class="n">pengyouyi</span>   <span class="mi">29u</span>  <span class="n">IPv4</span> <span class="mh">0xe55f3646923c5eb7</span>      <span class="mi">0</span><span class="n">t0</span>  <span class="n">TCP</span> <span class="n">localhost</span><span class="o">:</span><span class="mi">63342</span><span class="o">-&gt;</span><span class="n">localhost</span><span class="o">:</span><span class="mi">56933</span> <span class="p">(</span><span class="n">ESTABLISHED</span><span class="p">)</span>
 <span class="n">webstorm</span>  <span class="mi">375</span> <span class="n">pengyouyi</span>  <span class="mi">280u</span>  <span class="n">IPv4</span> <span class="mh">0xe55f36469711deb7</span>      <span class="mi">0</span><span class="n">t0</span>  <span class="n">TCP</span> <span class="n">localhost</span><span class="o">:</span><span class="mi">63342</span> <span class="p">(</span><span class="n">LISTEN</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="pid-kill">根据PID,使用kill命令杀掉进程</h2>
+</code></pre></div></div>
+<h2 id="根据pid使用kill命令杀掉进程">根据PID,使用kill命令杀掉进程</h2>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">kill</span> -9 PID</code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">kill</span> <span class="nt">-9</span> PID</code></pre></figure>
 
 <p>比如杀掉PID为236的Google浏览器,如下</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="gp">...$ </span><span class="nb">kill</span> -9 236</code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">...<span class="nv">$ </span><span class="nb">kill</span> <span class="nt">-9</span> 236</code></pre></figure>
 
 <p>参数说明: -9表示强制杀死</p>
 
-<h2 id="github-ip">如何查看github的服务器ip</h2>
+<h2 id="如何查看github的服务器ip">如何查看github的服务器ip</h2>
 
 <ul>
-<li>windows下按Win+R，输入cmd后回车，在命令行里输入<code>ping pengyouyi.github.io</code>，回车后会看到一个IP，就是它了。</li>
-<li>如果是mac，可以在终端输入<code>dig pengyouyi.github.io</code>，同样回车后会看到一个对应的IP地址。</li>
+  <li>windows下按Win+R，输入cmd后回车，在命令行里输入<code class="highlighter-rouge">ping pengyouyi.github.io</code>，回车后会看到一个IP，就是它了。</li>
+  <li>如果是mac，可以在终端输入<code class="highlighter-rouge">dig pengyouyi.github.io</code>，同样回车后会看到一个对应的IP地址。</li>
 </ul>
+
+<h2 id="npm权限修复">npm权限修复</h2>
+
+<p><a href="https://www.jianshu.com/p/eed1cfeee7ec">npm权限修复</a></p>
+
+<h2 id="修改bash">修改bash</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~
+vim .bash_profile
+</code></pre></div></div>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -313,7 +323,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -467,6 +477,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

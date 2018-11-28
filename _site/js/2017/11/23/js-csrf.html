@@ -161,7 +161,7 @@
 		
 		</div>
 		
-		<h1 id="csrf">CSRF 简介</h1>
+		<h1 id="csrf-简介">CSRF 简介</h1>
 
 <p>Cross Site Request Forgy</p>
 
@@ -171,62 +171,64 @@
 
 <p>相比于XSS，CSRF是利用了系统对页面浏览器的信任，XSS则利用了系统对用户的信任。</p>
 
-<h1 id="csrf">CSRF 攻击原理</h1>
+<h1 id="csrf-攻击原理">CSRF 攻击原理</h1>
 
 <p>CSRF攻击者在用户已经登录目标网站之后，诱使用户访问一个攻击页面，利用目标网站对用户的信任，以用户身份在攻击页面对目标网站发起伪造用户操作的请求，达到攻击目的。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-23-1.jpg" alt="">
+    <img src="/assets/images/2017/10-11-12/11-23-1.jpg" alt="" />
 </div>
 
 <p>构成CSRF攻击是有条件的：</p>
 
 <ol>
-<li>客户端必须一个网站并生成cookie凭证存储在浏览器中<br></li>
-<li>该cookie没有清除，客户端又tab一个页面进行访问别的网站</li>
+  <li>客户端必须一个网站并生成cookie凭证存储在浏览器中</li>
+  <li>该cookie没有清除，客户端又tab一个页面进行访问别的网站</li>
 </ol>
 
-<h1 id="csrf">CSRF 危害</h1>
+<h1 id="csrf-危害">CSRF 危害</h1>
 
-<p>✸ 冒充用户发送邮件，发消息，发帖<br><br>
-✸ 盗取用户的账号，消费(购买商品，虚拟货币)、转账<br><br>
-✸ 损坏网站名誉  </p>
+<p>✸ 冒充用户发送邮件，发消息，发帖<br />
+✸ 盗取用户的账号，消费(购买商品，虚拟货币)、转账<br />
+✸ 损坏网站名誉</p>
 
 <p>CSRF造成的问题包括：个人隐私泄露以及财产安全。</p>
 
-<h1 id="csrf">CSRF 防御措施</h1>
+<h1 id="csrf-防御措施">CSRF 防御措施</h1>
 
-<p>① 使用验证码<br><br>
-② 添加token<br><br>
-③ 验证Referer<br><br>
-④ 禁止第三方网站带Cookies<br><br>
-⑤ 在http头中自定义属性并验证<br><br>
-⑥ 尽量使用POST，限制GET  </p>
+<p>① 使用验证码<br />
+② 添加token<br />
+③ 验证Referer<br />
+④ 禁止第三方网站带Cookies<br />
+⑤ 在http头中自定义属性并验证<br />
+⑥ 尽量使用POST，限制GET</p>
 
-<h2 id="http-referer">验证 HTTP Referer 字段</h2>
+<h2 id="验证-http-referer-字段">验证 HTTP Referer 字段</h2>
 
 <p>禁止来自第三方网站的请求</p>
 
 <p>http头中有一个referer，记录http请求的来源地址，访问一个安全受限的页面的请求必须来自同一个网站。当用户要提交一个请求时，请求的referer值需是提交按钮（触发请求）所在的页面的URL。</p>
 
-<h2 id="cookies">禁止第三方网站带Cookies</h2>
+<h2 id="禁止第三方网站带cookies">禁止第三方网站带Cookies</h2>
 
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie</a></p>
 
 <p>user.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 登录成功，设置cookie</span>
-<span class="nx">ctx</span><span class="p">.</span><span class="nx">cookies</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'userId'</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 登录成功，设置cookie</span>
+<span class="nx">ctx</span><span class="p">.</span><span class="nx">cookies</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="s1">'userId'</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,{</span>
     <span class="na">httpOnly</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
     <span class="na">sameSite</span><span class="p">:</span> <span class="s1">'strict'</span>
 <span class="p">});</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>但是问题是sameSite这个属性只有chrome和Opera支持</p>
 
-<h2 id="verification-code">使用验证码-Verification Code</h2>
+<h2 id="使用验证码-verification-code">使用验证码-Verification Code</h2>
 
 <p>每次用户提交都在表单上填写一个图片上的随机字符串作为验证码。</p>
 
-<h2 id="token">在请求地址中添加token并验证</h2>
+<h2 id="在请求地址中添加token并验证">在请求地址中添加token并验证</h2>
 
 <p>CSRF攻击之所以能够成功，是因为攻击者可以伪造用户的请求，该请求中所有的用户验证信息都存在于Cookie中，因此攻击者可以在不知道这些验证信息的情况下直接利用用户自己的Cookie来通过安全验证。由此可知，抵御CSRF攻击的关键在于：在请求中放入攻击者所不能伪造的信息，并且该信息不存在于Cookie之中。</p>
 
@@ -235,30 +237,39 @@
 <p>例子：</p>
 
 <ol>
-<li><p>用户访问某个表单页面。</p></li>
-<li><p>服务端生成一个Token，放在用户的Session中，或者浏览器的Cookie中。</p></li>
-<li><p>在页面表单附带上Token参数。</p></li>
-<li><p>用户提交请求后， 服务端验证表单中的Token是否与用户Session（或Cookies）中的Token一致，一致为合法请求，不是则非法请求。</p></li>
+  <li>
+    <p>用户访问某个表单页面。</p>
+  </li>
+  <li>
+    <p>服务端生成一个Token，放在用户的Session中，或者浏览器的Cookie中。</p>
+  </li>
+  <li>
+    <p>在页面表单附带上Token参数。</p>
+  </li>
+  <li>
+    <p>用户提交请求后， 服务端验证表单中的Token是否与用户Session（或Cookies）中的Token一致，一致为合法请求，不是则非法请求。</p>
+  </li>
 </ol>
 
 <p>这个Token的值必须是随机的，不可预测的。由于Token的存在，攻击者无法再构造一个带有合法Token的请求实施CSRF攻击。另外使用Token时应注意Token的保密性，尽量把敏感操作由GET改为POST，以form或AJAX形式提交，避免Token泄露。</p>
 
-<h2 id="http">在http头中自定义属性并验证</h2>
+<h2 id="在http头中自定义属性并验证">在http头中自定义属性并验证</h2>
 
 <p>通过XHR这个类，一次性给所有该类请求加上csrftoken这个http头属性，并且把token值放入其中。</p>
 
-<h2 id="post-get">尽量使用POST，限制GET</h2>
+<h2 id="尽量使用post限制get">尽量使用POST，限制GET</h2>
 
 <p>GET接口太容易被拿来做CSRF攻击，看第一个示例就知道，只要构造一个img标签，而img标签又是不能过滤的数据。接口最好限制为POST使用，GET则无效，降低攻击风险。</p>
 
 <p>当然POST并不是万无一失，攻击者只要构造一个form就可以，但需要在第三方页面做，这样就增加暴露的可能性。</p>
 
-<h3 id="get">用GET方式攻击更简单</h3>
+<h3 id="用get方式攻击更简单">用GET方式攻击更简单</h3>
 
 <p><strong>如果不用用户点击</strong></p>
 
 <p>csrf.html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 
 <span class="nt">&lt;head&gt;</span>
@@ -274,11 +285,13 @@
 <span class="nt">&lt;/body&gt;</span>
 
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>这里用户需要点击</strong></p>
 
 <p>csrf.html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 
 <span class="nt">&lt;head&gt;</span>
@@ -294,15 +307,17 @@
 <span class="nt">&lt;/body&gt;</span>
 
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h3 id="post">用POST方式攻击</h3>
+</code></pre></div></div>
+
+<h3 id="用post方式攻击">用POST方式攻击</h3>
 
 <p>创建iframe, 在iframe中提交和跳转，由于iframe隐藏，所以看不到跳转页。</p>
 
 <p>用的是POST，需要第三方构建表单提交才可以</p>
 
 <p>csrf.html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!doctype html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!doctype html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="nt">/&gt;</span>
@@ -312,12 +327,12 @@
     hello，这里什么也没有。
     <span class="nt">&lt;script&gt;</span>
         <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span>
-            <span class="err">`</span>
-<span class="err">                </span><span class="o">&lt;</span><span class="nx">form</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"commentForm"</span> <span class="nx">target</span><span class="o">=</span><span class="s2">"csrf"</span> <span class="nx">method</span><span class="o">=</span><span class="s2">"post"</span> <span class="nx">action</span><span class="o">=</span><span class="s2">"http://localhost:1521/post/addComment"</span><span class="o">&gt;</span>
-<span class="err">                    </span><span class="o">&lt;</span><span class="nx">input</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"postId"</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"hidden"</span> <span class="nx">value</span><span class="o">=</span><span class="s2">"1"</span><span class="o">&gt;</span>
-<span class="err">                    </span><span class="o">&lt;</span><span class="nx">textarea</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"content"</span><span class="o">&gt;</span><span class="err">来自</span><span class="nx">CSRF</span><span class="err">！</span><span class="o">&lt;</span><span class="sr">/textarea</span><span class="err">&gt;
-                </span><span class="o">&lt;</span><span class="sr">/form&gt;</span><span class="err">`
-</span>        <span class="p">);</span>
+            <span class="s2">`
+                &lt;form name="commentForm" target="csrf" method="post" action="http://localhost:1521/post/addComment"&gt;
+                    &lt;input name="postId" type="hidden" value="1"&gt;
+                    &lt;textarea name="content"&gt;来自CSRF！&lt;/textarea&gt;
+                &lt;/form&gt;`</span>
+        <span class="p">);</span>
 
         <span class="kd">var</span> <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'iframe'</span><span class="p">);</span>
         <span class="nx">iframe</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'csrf'</span><span class="p">;</span>
@@ -330,18 +345,19 @@
     <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <h2 id="php-csrf">PHP-CSRF</h2>
 
-<p>cookie samesite<br><br>
-HTTP referer头<br><br>
-token  </p>
+<p>cookie samesite<br />
+HTTP referer头<br />
+token</p>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><a href="http://www.cnblogs.com/cxying93/p/6035031.html">cnblogs Web安全之CSRF攻击的防御措施</a></li>
-<li><a href="https://www.cnblogs.com/phpstudy2015-6/p/6771239.html">cnblogs CSRF攻击与防御</a></li>
+  <li><a href="http://www.cnblogs.com/cxying93/p/6035031.html">cnblogs Web安全之CSRF攻击的防御措施</a></li>
+  <li><a href="https://www.cnblogs.com/phpstudy2015-6/p/6771239.html">cnblogs CSRF攻击与防御</a></li>
 </ul>
   
 	</div>
@@ -460,7 +476,7 @@ token  </p>
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -614,6 +630,10 @@ token  </p>
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -161,68 +161,72 @@
 		
 		</div>
 		
-		<h1 id="http-2-0-http-1-1">HTTP/2.0与HTTP/1.1区别</h1>
+		<h1 id="http20与http11区别">HTTP/2.0与HTTP/1.1区别</h1>
 
 <ol>
-<li>采用二进制格式（Binary Format）解析<br></li>
-<li>多路复用（MultiPlexing）<br></li>
-<li>header压缩<br></li>
-<li>服务端推送（server push）<br></li>
+  <li>采用二进制格式（Binary Format）解析</li>
+  <li>多路复用（MultiPlexing）</li>
+  <li>header压缩</li>
+  <li>服务端推送（server push）</li>
 </ol>
 
 <p><a href="https://http2.github.io/">https://http2.github.io/</a></p>
 
-<h2 id="binary-format">新的二进制格式（Binary Format）</h2>
+<h2 id="新的二进制格式binary-format">新的二进制格式（Binary Format）</h2>
 
 <p>HTTP1.x的解析是基于文本，HTTP2.0的协议解析采用二进制格式。</p>
 
 <p>二进制协议解析起来更高效、“线上”更紧凑，更重要的是错误更少。</p>
 
-<h2 id="multiplexing">多路复用（MultiPlexing）</h2>
+<h2 id="多路复用multiplexing">多路复用（MultiPlexing）</h2>
 
 <p><strong>HTTP2.0的多路复用和HTTP1.X中的长连接复用有什么区别</strong></p>
 
 <p>HTTP/1.* 一次请求-响应，建立一个连接，用完关闭；每一个请求都要建立一个连接。</p>
 
 <ul>
-<li><p>HTTP/1.1 试过用流水线(pipelining)来解决这个问题, 若干个请求排队串行化单线程处理，后面的请求等待前面请求的返回才能获得执行机会，一旦有某请求超时等，后续请求只能被<code>阻塞</code>。此外, 由于网络媒介(intermediary )和服务器不能很好的支持流水线, 导致部署起来困难重重。</p></li>
-<li><p>HTTP/2多个消息的请求和响应可同时在一个连接上<code>并行执行</code>。某个请求任务耗时严重，不会影响到其它连接的正常执行。</p></li>
+  <li>
+    <p>HTTP/1.1 试过用流水线(pipelining)来解决这个问题, 若干个请求排队串行化单线程处理，后面的请求等待前面请求的返回才能获得执行机会，一旦有某请求超时等，后续请求只能被<code class="highlighter-rouge">阻塞</code>。此外, 由于网络媒介(intermediary )和服务器不能很好的支持流水线, 导致部署起来困难重重。</p>
+  </li>
+  <li>
+    <p>HTTP/2多个消息的请求和响应可同时在一个连接上<code class="highlighter-rouge">并行执行</code>。某个请求任务耗时严重，不会影响到其它连接的正常执行。</p>
+  </li>
 </ul>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-01-9.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-01-9.png" alt="" />
 </div>
 
-<h2 id="header">header压缩</h2>
+<h2 id="header压缩">header压缩</h2>
 
 <p>HTTP/2 对消息头采用 HPACK 进行压缩传输，通讯双方各自cache一份header fields表，既避免了重复header的传输，又减小了需要传输的大小。</p>
 
-<h2 id="server-push">服务端推送（server push）</h2>
+<h2 id="服务端推送server-push">服务端推送（server push）</h2>
 
 <p>当浏览器请求一个网页时，服务器将会发回HTML，在服务器开始发送JavaScript、图片和CSS前，服务器需要等待浏览器解析HTML和发送所有内嵌资源的请求。服务器推送服务通过“推送”那些它认为客户端将会需要的内容到客户端的缓存中，以此来避免往返的延迟。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-01-7.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-01-7.png" alt="" />
 </div>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-01-8.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-01-8.png" alt="" />
 </div>
 
-<h1 id="http">HTTP历史</h1>
+<h1 id="http历史">HTTP历史</h1>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-01-6.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-01-6.png" alt="" />
 </div>
 
-<h1 id="http">HTTP瓶颈</h1>
+<h1 id="http瓶颈">HTTP瓶颈</h1>
 
 <ul>
-<li>一条连接上只可发送一个请求。<br></li>
-<li>请求只能从客户端开始。客户端不可以接收除响应以外的指令。<br></li>
-<li>请求/响应首部未经压缩就发送。首部信息越多延迟越大。<br></li>
-<li>发送冗长的首部。每次互相发送相同的首部造成的浪费较多。<br></li>
-<li>可任意选择数据压缩格式。非强制压缩发送。<br></li>
+  <li>一条连接上只可发送一个请求。</li>
+  <li>请求只能从客户端开始。客户端不可以接收除响应以外的指令。</li>
+  <li>请求/响应首部未经压缩就发送。首部信息越多延迟越大。</li>
+  <li>发送冗长的首部。每次互相发送相同的首部造成的浪费较多。</li>
+  <li>可任意选择数据压缩格式。非强制压缩发送。</li>
 </ul>
 
 <p>影响一个HTTP网络请求的因素主要有两个：带宽和延迟。</p>
@@ -239,17 +243,17 @@
 
 <p>Google在2010发布了SPDY，其开发目标旨在解决HTTP的性能瓶颈，缩短Web页面的加载时间（50%）。</p>
 
-<h1 id="spdy-http1-x">SPDY：HTTP1.x的优化</h1>
+<h1 id="spdyhttp1x的优化">SPDY：HTTP1.x的优化</h1>
 
 <p><a href="http://www.chromium.org/spdy/">http://www.chromium.org/spdy/</a></p>
 
 <p>SPDY没有完全改写HTTP协议，而是在TCP/IP的应用层与传输层之间通过新加会话的形式运作。同时，考虑到安全性问题，SPDY规定通信中使用SSL。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-01-1.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-01-1.png" alt="" />
 </div>
 
-<h2 id="spdy">SPDY特点</h2>
+<h2 id="spdy特点">SPDY特点</h2>
 
 <p><strong>1.多路复用流</strong></p>
 
@@ -271,7 +275,7 @@
 
 <p>服务器可以主动提示客户端请求所需的资源。由于在客户端发现资源之前就可以获知资源的存在，因此在资源已缓存等情况下，可以避免发送不必要的请求。</p>
 
-<h2 id="spdy-web">SPDY消除web瓶颈了吗</h2>
+<h2 id="spdy消除web瓶颈了吗">SPDY消除web瓶颈了吗</h2>
 
 <p>SPDY只是将单个域名（IP地址）的通信多路复用，当一个网站上使用多个域名下的资源，改善效果受限。</p>
 
@@ -279,17 +283,17 @@
 
 <p>还有非HTTP瓶颈导致的速度提升问题，比如改善web内容的编写方式等。</p>
 
-<h1 id="websccket">使用浏览器进行全双工通信的WebSccket</h1>
+<h1 id="使用浏览器进行全双工通信的websccket">使用浏览器进行全双工通信的WebSccket</h1>
 
 <p>WebSocket通信协议在2011年被定为标准。</p>
 
 <p>web浏览器与web服务器之间全双工通信标准。主要为了解决Ajax和Comet里XMLHttpRequest附带的缺陷所引起的问题。</p>
 
-<h2 id="websccket">WebSccket协议</h2>
+<h2 id="websccket协议">WebSccket协议</h2>
 
 <p>一旦web服务器与客户端之间建立起webSocket协议的通信连接，之后所有的通信都依靠这个专用协议进行。通信过程中可互相发送JSON、XML、HTML或图片等任意格式的数据。</p>
 
-<h2 id="websccket">WebSccket特点</h2>
+<h2 id="websccket特点">WebSccket特点</h2>
 
 <p><strong>1. 推送功能</strong></p>
 
@@ -297,7 +301,7 @@
 
 <p><strong>2. 减少通信量</strong></p>
 
-<p>只要建立起WebSocket连接，就希望一直保持连接状态。和HTTP相比，不但每次连接时的总开销减少，而且由于WebSocket的首部信息很小，通信量也相应减少了。  </p>
+<p>只要建立起WebSocket连接，就希望一直保持连接状态。和HTTP相比，不但每次连接时的总开销减少，而且由于WebSocket的首部信息很小，通信量也相应减少了。</p>
 
 <p><strong>3. 没有同源限制</strong></p>
 
@@ -306,49 +310,51 @@
 <p><strong>4. 协议标识符是ws</strong></p>
 
 <p>协议标识符是ws（如果加密，则为wss），服务器网址就是 URL。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html">ws://example.com:80/some/path
-</code></pre></div>
-<h2 id="websccket">WebSccket实现</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ws://example.com:80/some/path
+</code></pre></div></div>
+
+<h2 id="websccket实现">WebSccket实现</h2>
 
 <p><strong>实现WebSocket通信，在HTTP连接建立后，需要完成一次“握手”的步骤。</strong></p>
 
 <p>握手-请求</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-01-2.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-01-2.png" alt="" />
 </div>
 
 <p>握手-相应</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-01-3.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-01-3.png" alt="" />
 </div>
 
 <p>成功握手确立WebSocket连接之后，通信时不再使用HTTP的数据帧，而采用WebSocket独立的数据帧。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-01-4.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-01-4.png" alt="" />
 </div>
 
-<p><a href="https://www.w3.org/TR/websockets/">W3C The WebSocket API</a><br><br>
+<p><a href="https://www.w3.org/TR/websockets/">W3C The WebSocket API</a><br />
 <a href="http://www.ruanyifeng.com/blog/2017/05/websocket.html">http://www.ruanyifeng.com/blog/2017/05/websocket.html</a></p>
 
-<h1 id="http-2-0-spdy">HTTP/2.0：SPDY的升级版</h1>
+<h1 id="http20spdy的升级版">HTTP/2.0：SPDY的升级版</h1>
 
 <p>HTTP/2.0的目标是改善用户在使用Web时的速度体验。</p>
 
-<h2 id="http2-0-spdy">HTTP2.0和SPDY的区别</h2>
+<h2 id="http20和spdy的区别">HTTP2.0和SPDY的区别</h2>
 
 <p>HTTP2.0 支持明文 HTTP 传输，而 SPDY 强制使用 HTTPS</p>
 
 <p>HTTP2.0 消息头的压缩算法采用 HPACK，而非 SPDY 采用的 DEFLATE</p>
 
-<h2 id="http-2-0">HTTP/2.0的特点</h2>
+<h2 id="http20的特点">HTTP/2.0的特点</h2>
 
 <ul>
-<li><strong>SPDY</strong><br></li>
-<li><strong>HTTP Speed + Mobility</strong><br></li>
-<li><strong>Network-Friendly HTTP Upgrade</strong><br></li>
+  <li><strong>SPDY</strong></li>
+  <li><strong>HTTP Speed + Mobility</strong></li>
+  <li><strong>Network-Friendly HTTP Upgrade</strong></li>
 </ul>
 
 <p>HTTP Speed + Mobility 是用于改善并提高移动端通信时速度和性能的标准。基于SPDY和WebSocket。</p>
@@ -356,26 +362,26 @@
 <p>Network-Friendly HTTP Upgrade 主要是在移动端通信时改善HTTP性能的标准。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-01-5.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-01-5.png" alt="" />
 </div>
 
-<h1 id="http1-1-http1-0">HTTP1.1和HTTP1.0的区别</h1>
+<h1 id="http11和http10的区别">HTTP1.1和HTTP1.0的区别</h1>
 
 <ul>
-<li>HTTP1.1增加host字段。HTTP1.1请求消息中如果没有Host头域会报告一个错误（400 Bad Request）。<br></li>
-<li>HTTP1.1新增状态码。比如100、409(Conflict)、410(Gone)等。<br></li>
-<li>HTTP1.1支持长连接。HTTP1.1中默认开启Connection： keep-alive<br></li>
-<li>HTTP1.1支持分块传输<br></li>
-<li>带宽优化及网络连接的使用。HTTP1.1则在请求头引入了range头域，它允许只请求资源的某个部分，即返回码是206（Partial Content）<br></li>
-<li>缓存处理。在HTTP1.0中主要使用header里的If-Modified-Since,Expires来做为缓存判断的标准，HTTP1.1则引入了更多的缓存控制策略例如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等更多可供选择的缓存头来控制缓存策略。</li>
+  <li>HTTP1.1增加host字段。HTTP1.1请求消息中如果没有Host头域会报告一个错误（400 Bad Request）。</li>
+  <li>HTTP1.1新增状态码。比如100、409(Conflict)、410(Gone)等。</li>
+  <li>HTTP1.1支持长连接。HTTP1.1中默认开启Connection： keep-alive</li>
+  <li>HTTP1.1支持分块传输</li>
+  <li>带宽优化及网络连接的使用。HTTP1.1则在请求头引入了range头域，它允许只请求资源的某个部分，即返回码是206（Partial Content）</li>
+  <li>缓存处理。在HTTP1.0中主要使用header里的If-Modified-Since,Expires来做为缓存判断的标准，HTTP1.1则引入了更多的缓存控制策略例如Entity tag，If-Unmodified-Since, If-Match, If-None-Match等更多可供选择的缓存头来控制缓存策略。</li>
 </ul>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><a href="http://www.cnblogs.com/frankyou/p/6145485.html">http://www.cnblogs.com/frankyou/p/6145485.html</a><br></li>
-<li><a href="http://www.sohu.com/a/161201715_714863">http://www.sohu.com/a/161201715_714863</a><br></li>
-<li><a href="https://segmentfault.com/a/1190000002765886">https://segmentfault.com/a/1190000002765886</a></li>
+  <li><a href="http://www.cnblogs.com/frankyou/p/6145485.html">http://www.cnblogs.com/frankyou/p/6145485.html</a></li>
+  <li><a href="http://www.sohu.com/a/161201715_714863">http://www.sohu.com/a/161201715_714863</a></li>
+  <li><a href="https://segmentfault.com/a/1190000002765886">https://segmentfault.com/a/1190000002765886</a></li>
 </ul>
   
 	</div>
@@ -492,7 +498,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -646,6 +652,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -161,124 +161,138 @@
 		
 		</div>
 		
-		<h1 id="high-rise-structure">浏览器的High-rise structure</h1>
+		<h1 id="浏览器的high-rise-structure">浏览器的High-rise structure</h1>
 
 <p>浏览器的高层结构:</p>
 
 <ol>
-<li><strong>用户界面</strong> - 包括地址栏、前进/后退按钮、书签菜单等。除了浏览器主窗口显示的您请求的页面外，其他显示的各个部分都属于用户界面。<br></li>
-<li><strong>浏览器引擎</strong> - 在用户界面和呈现引擎之间传送指令。<br></li>
-<li><strong>呈现引擎</strong> - 负责显示请求的内容。如果请求的内容是 HTML，它就负责解析 HTML 和 CSS 内容，并将解析后的内容显示在屏幕上。<br></li>
-<li><strong>网络</strong> - 用于网络调用，比如 HTTP 请求。其接口与平台无关，并为所有平台提供底层实现。<br></li>
-<li><strong>用户界面后端</strong> - 用于绘制基本的窗口小部件，比如组合框和窗口。其公开了与平台无关的通用接口，而在底层使用操作系统的用户界面方法。<br></li>
-<li><strong>JavaScript 解释器</strong>。用于解析和执行 JavaScript 代码。<br></li>
-<li><strong>数据存储</strong>。这是持久层。浏览器需要在硬盘上保存各种数据，例如 Cookie。新的 HTML 规范 (HTML5) 定义了“网络数据库”，这是一个完整（但是轻便）的浏览器内数据库。<br></li>
+  <li><strong>用户界面</strong> - 包括地址栏、前进/后退按钮、书签菜单等。除了浏览器主窗口显示的您请求的页面外，其他显示的各个部分都属于用户界面。</li>
+  <li><strong>浏览器引擎</strong> - 在用户界面和呈现引擎之间传送指令。</li>
+  <li><strong>呈现引擎</strong> - 负责显示请求的内容。如果请求的内容是 HTML，它就负责解析 HTML 和 CSS 内容，并将解析后的内容显示在屏幕上。</li>
+  <li><strong>网络</strong> - 用于网络调用，比如 HTTP 请求。其接口与平台无关，并为所有平台提供底层实现。</li>
+  <li><strong>用户界面后端</strong> - 用于绘制基本的窗口小部件，比如组合框和窗口。其公开了与平台无关的通用接口，而在底层使用操作系统的用户界面方法。</li>
+  <li><strong>JavaScript 解释器</strong>。用于解析和执行 JavaScript 代码。</li>
+  <li><strong>数据存储</strong>。这是持久层。浏览器需要在硬盘上保存各种数据，例如 Cookie。新的 HTML 规范 (HTML5) 定义了“网络数据库”，这是一个完整（但是轻便）的浏览器内数据库。</li>
 </ol>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-04-1.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-04-1.png" alt="" />
 </div>
 
 <p>渲染引擎(layout engineer或Rendering Engine)</p>
 
-<h1 id="rendering-engine">呈现引擎-Rendering Engine</h1>
+<h1 id="呈现引擎-rendering-engine">呈现引擎-Rendering Engine</h1>
 
-<h2 id="role">呈现引擎的作用-role</h2>
+<h2 id="呈现引擎的作用-role">呈现引擎的作用-role</h2>
 
 <p>默认情况下，呈现引擎可显示 HTML 和 XML 文档与图片。通过插件（或浏览器扩展程序），还可以显示其他类型的内容；例如，使用 PDF 查看器插件就能显示 PDF 文档。但是在本章中，我们将集中介绍其主要用途：显示使用 CSS 格式化的 HTML 内容和图片。</p>
 
-<h2 id="classification">呈现引擎分类-classification</h2>
+<h2 id="呈现引擎分类-classification">呈现引擎分类-classification</h2>
 
-<p>本文所讨论的浏览器（Firefox、Chrome 浏览器和 Safari）是基于两种呈现引擎构建的。<br><br>
-Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的呈现引擎。<br><br>
-而 Safari 和 Chrome 浏览器使用的都是 <code>WebKit</code>。  </p>
+<p>本文所讨论的浏览器（Firefox、Chrome 浏览器和 Safari）是基于两种呈现引擎构建的。<br />
+Firefox 使用的是 <code class="highlighter-rouge">Gecko</code>，这是 Mozilla 公司“自制”的呈现引擎。<br />
+而 Safari 和 Chrome 浏览器使用的都是 <code class="highlighter-rouge">WebKit</code>。</p>
 
 <p>其他浏览器内核：</p>
 
-<p><code>Presto</code>内核：Opera7及以上。 [Opera内核原为：Presto，现为：Blink;]<br><br>
-<code>Trident</code>内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]  </p>
+<p><code class="highlighter-rouge">Presto</code>内核：Opera7及以上。 [Opera内核原为：Presto，现为：Blink;]<br />
+<code class="highlighter-rouge">Trident</code>内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]</p>
 
-<h1 id="main-process">呈现引擎的主流程-main process</h1>
+<h1 id="呈现引擎的主流程-main-process">呈现引擎的主流程-main process</h1>
 
 <p>解析html以构建dom树 -&gt; 构建render树 -&gt; 布局render树 -&gt; 绘制render树</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-04-2.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-04-2.png" alt="" />
 </div>
 
-<h2 id="dom-render">dom树和render树</h2>
+<h2 id="dom树和render树">dom树和render树</h2>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-04-5.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-04-5.png" alt="" />
 </div>
 
-<p>Rendering Tree 渲染树并不等同于 DOM 树，因为一些像&quot;head&quot;元素或display:none的东西就没必要放在渲染树中了。</p>
+<p>Rendering Tree 渲染树并不等同于 DOM 树，因为一些像”head”元素或display:none的东西就没必要放在渲染树中了。</p>
 
 <p>display:none 的节点不会被加入 Render Tree，而 visibility: hidden 则会，所以，如果某个节点最开始是不显示的，设为 display:none 是更优的。</p>
 
-<h1 id="webkit">WebKit 主流程</h1>
+<h1 id="webkit-主流程">WebKit 主流程</h1>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-04-3.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-04-3.png" alt="" />
 </div>
 
 <p>Mozilla 的 Gecko 呈现引擎主流程</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-04-4.jpg" alt="">
+    <img src="/assets/images/2017/10-11-12/11-04-4.jpg" alt="" />
 </div>
 
 <p>WebKit 和 Gecko 使用的术语略有不同，但整体流程是基本相同的。</p>
 
 <ol>
-<li><p><strong>Create/Update DOM And request css/image/js</strong>：浏览器请求到HTML代码后，在生成DOM的最开始阶段，并行发起css、图片、js的请求，无论他们是否在HEAD里。</p></li>
-<li><p><strong>Create/Update Render CSSOM</strong>：CSS文件下载完成，开始构建CSSOM</p></li>
-<li><p><strong>Create/Update Render Tree</strong>：所有CSS文件下载完成，CSSOM构建结束后，和 DOM 一起生成 Render Tree。</p></li>
-<li><p><strong>Layout</strong>：有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系。下一步操作称之为Layout，顾名思义就是计算出每个节点在屏幕中的位置。</p></li>
-<li><p><strong>Painting</strong>：Layout后，浏览器已经知道了哪些节点要显示（which nodes are visible）、每个节点的CSS属性是什么（their computed styles）、每个节点在屏幕中的位置是哪里（geometry）。就进入了最后一步：Painting，按照算出来的规则，通过显卡，把内容画到屏幕上。</p></li>
+  <li>
+    <p><strong>Create/Update DOM And request css/image/js</strong>：浏览器请求到HTML代码后，在生成DOM的最开始阶段，并行发起css、图片、js的请求，无论他们是否在HEAD里。</p>
+  </li>
+  <li>
+    <p><strong>Create/Update Render CSSOM</strong>：CSS文件下载完成，开始构建CSSOM</p>
+  </li>
+  <li>
+    <p><strong>Create/Update Render Tree</strong>：所有CSS文件下载完成，CSSOM构建结束后，和 DOM 一起生成 Render Tree。</p>
+  </li>
+  <li>
+    <p><strong>Layout</strong>：有了Render Tree，浏览器已经能知道网页中有哪些节点、各个节点的CSS定义以及他们的从属关系。下一步操作称之为Layout，顾名思义就是计算出每个节点在屏幕中的位置。</p>
+  </li>
+  <li>
+    <p><strong>Painting</strong>：Layout后，浏览器已经知道了哪些节点要显示（which nodes are visible）、每个节点的CSS属性是什么（their computed styles）、每个节点在屏幕中的位置是哪里（geometry）。就进入了最后一步：Painting，按照算出来的规则，通过显卡，把内容画到屏幕上。</p>
+  </li>
 </ol>
 
 <p>需要着重指出的是，这是一个渐进的过程。为达到更好的用户体验，呈现引擎会力求尽快将内容显示在屏幕上。它不必等到整个 HTML 文档解析完毕之后，就会开始构建呈现树和设置布局。在不断接收和处理来自网络的其余内容的同时，呈现引擎会将部分内容解析并显示出来。</p>
 
-<h1 id="doctype">什么是DOCTYPE及作用</h1>
+<h1 id="什么是doctype及作用">什么是DOCTYPE及作用</h1>
 
 <p>DTD（document type definition,文档类型定义）是一系列的语法规则，用来定义XML或 (X)HTML的文件类型。浏览器会使用它来判断文档类型，决定使用何种协议来解析，以及切换浏览器模式。</p>
 
 <p>DOCTYPE是用来声明文档类型和DTD规范的，一个主要的用途便是文件的合法性验证。如果文件代码不合法，那么浏览器解析时便会出一些差错。</p>
 
 <ul>
-<li>HTML5
-<code>html
-&lt;!DOCTYPE html&gt;
-</code></li>
-<li><p>HTML 4.01 Strict<br>
-该DTD包含所有HTML元素和属性，但不包括展示性的和弃用的元素（比如font）</p></li>
-<li><p>HTML 4.01 Transitional<br>
-该DTD包含所有HTML元素和属性，包括展示性的和弃用的元素（比如font）</p></li>
+  <li>HTML5
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>HTML 4.01 Strict
+该DTD包含所有HTML元素和属性，但不包括展示性的和弃用的元素（比如font）</p>
+  </li>
+  <li>HTML 4.01 Transitional
+该DTD包含所有HTML元素和属性，包括展示性的和弃用的元素（比如font）</li>
 </ul>
 
-<h1 id="load">加载-Load</h1>
+<h1 id="加载-load">加载-Load</h1>
 
 <p>了解浏览器如何进行加载，我们可以在引用外部样式文件，外部js时，将他们放到合适的位置，使浏览器以最快的速度将文件加载完毕。</p>
 
-<h2 id="form">加载资源的形式-form</h2>
+<h2 id="加载资源的形式-form">加载资源的形式-form</h2>
 
 <ol>
-<li>输入URL（或跳转页面）加载HTML<br></li>
-<li>加载HTML中的静态资源,比如 <code>&lt;script src=&#39;/static/&#39;&gt;</code></li>
+  <li>输入URL（或跳转页面）加载HTML</li>
+  <li>加载HTML中的静态资源,比如 <code class="highlighter-rouge">&lt;script src='/static/'&gt;</code></li>
 </ol>
 
 <p><strong>加载css和js文件的区别</strong></p>
 
 <ul>
-<li>加载过程中遇到外部css文件，浏览器另外发出一个请求，来获取css文件。遇到图片资源，浏览器也会另外发出一个请求，来获取图片资源。这是异步请求，并不会影响html文档进行加载，<br></li>
-<li>但是当文档加载过程中遇到js文件，html文档会挂起渲染（加载解析渲染同步）的线程，不仅要等待文档中js文件加载完毕，还要等待解析执行完毕，才可以恢复html文档的渲染线程。</li>
+  <li>加载过程中遇到外部css文件，浏览器另外发出一个请求，来获取css文件。遇到图片资源，浏览器也会另外发出一个请求，来获取图片资源。这是异步请求，并不会影响html文档进行加载，</li>
+  <li>但是当文档加载过程中遇到js文件，html文档会挂起渲染（加载解析渲染同步）的线程，不仅要等待文档中js文件加载完毕，还要等待解析执行完毕，才可以恢复html文档的渲染线程。</li>
 </ul>
 
 <blockquote>
-<p>原因：JS有可能会修改DOM，最为经典的document.write，这意味着，在JS执行完成前，后续所有资源的下载可能是没有必要的，这是js阻塞后续资源下载的根本原因。</p>
+  <p>原因：JS有可能会修改DOM，最为经典的document.write，这意味着，在JS执行完成前，后续所有资源的下载可能是没有必要的，这是js阻塞后续资源下载的根本原因。</p>
+</blockquote>
 
-<p>办法：可以将外部引用的js文件放在&lt;/body&gt;前。</p>
+<blockquote>
+  <p>办法：可以将外部引用的js文件放在&lt;/body&gt;前。</p>
 </blockquote>
 
 <p><strong>css文件影响js文件的执行</strong></p>
@@ -286,93 +300,101 @@ Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的�
 <p>虽然css文件的加载不影响js文件的加载，但是却影响js文件的执行，即使js文件内只有一行代码，也会造成阻塞。</p>
 
 <blockquote>
-<p>原因：可能会有 var width = $(&#39;#id&#39;).width()，这意味着，js代码执行前，浏览器必须保证css文件已下载和解析完成。这也是css阻塞后续js的根本原因。</p>
-
-<p>办法：当js文件不需要依赖css文件时，可以将js文件放在头部css的前面。</p>
+  <p>原因：可能会有 var width = $(‘#id’).width()，这意味着，js代码执行前，浏览器必须保证css文件已下载和解析完成。这也是css阻塞后续js的根本原因。</p>
 </blockquote>
 
-<h2 id="asynchronous-loading">异步加载-Asynchronous loading</h2>
+<blockquote>
+  <p>办法：当js文件不需要依赖css文件时，可以将js文件放在头部css的前面。</p>
+</blockquote>
+
+<h2 id="异步加载-asynchronous-loading">异步加载-Asynchronous loading</h2>
 
 <p><strong>1. 异步加载方式</strong></p>
 
 <ul>
-<li>动态脚本加载</li>
-<li>defer</li>
-<li>async</li>
+  <li>动态脚本加载</li>
+  <li>defer</li>
+  <li>async</li>
 </ul>
 
 <p><strong>2. 异步加载的区别</strong></p>
 
 <ul>
-<li>defer是在HTML解析完之后才会执行，如果是多个，按照加载的顺序依次执行<br></li>
-<li>async是在加载完之后立即执行，如果是多个，执行顺序和加载顺序无关<br></li>
+  <li>defer是在HTML解析完之后才会执行，如果是多个，按照加载的顺序依次执行</li>
+  <li>async是在加载完之后立即执行，如果是多个，执行顺序和加载顺序无关</li>
 </ul>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
-    <span class="nt">&lt;style&gt;</span>
-    <span class="nt">&lt;/style&gt;</span>
-    <span class="c">&lt;!-- &lt;script src="js/defer1.js" defer&gt;&lt;/script&gt;
-    &lt;script src="js/defer2.js" defer&gt;&lt;/script&gt; --&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;style&gt;</span>
+	<span class="nt">&lt;/style&gt;</span>
+	<span class="c">&lt;!-- &lt;script src="js/defer1.js" defer&gt;&lt;/script&gt;
+	&lt;script src="js/defer2.js" defer&gt;&lt;/script&gt; --&gt;</span>
 
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/seajs/3.0.2/sea.js"</span> <span class="na">async</span><span class="nt">&gt;&lt;/script&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/defer2.js"</span> <span class="na">async</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/seajs/3.0.2/sea.js"</span> <span class="na">async</span><span class="nt">&gt;&lt;/script&gt;</span>
+	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/defer2.js"</span> <span class="na">async</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"dome"</span><span class="nt">&gt;</span>
-        test
-        <span class="nt">&lt;script&gt;</span>  
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'write'</span><span class="p">);</span>
-            <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">'&lt;span&gt;write&lt;/span&gt;'</span><span class="p">);</span>
-        <span class="nt">&lt;/script&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"dome"</span><span class="nt">&gt;</span>
+		test
+		<span class="nt">&lt;script&gt;</span>  
+		    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'write'</span><span class="p">);</span>
+		    <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">'&lt;span&gt;write&lt;/span&gt;'</span><span class="p">);</span>
+		<span class="nt">&lt;/script&gt;</span>
+	<span class="nt">&lt;/div&gt;</span>
 
 <span class="nt">&lt;script&gt;</span>  
 <span class="k">for</span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span><span class="o">&lt;</span><span class="mi">200000</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="nx">i</span><span class="o">%</span><span class="mi">20000</span><span class="o">===</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-    <span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">i</span><span class="o">%</span><span class="mi">20000</span><span class="o">===</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>defer1.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'defer1'</span><span class="p">);</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'defer1'</span><span class="p">);</span>
+</code></pre></div></div>
+
 <p>defer2.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'defer2'</span><span class="p">);</span>
-</code></pre></div>
-<h1 id="url-html">输入URL（或跳转页面）加载HTML</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'defer2'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h1 id="输入url或跳转页面加载html">输入URL（或跳转页面）加载HTML</h1>
 
 <p><strong>加载一个资源的过程</strong></p>
 
 <ol>
-<li>浏览器根据DNS服务器得到域名的IP地址<br></li>
-<li>向这个IP的机器发送HTTP请求<br></li>
-<li>服务器收到、处理并返回HTTP请求<br></li>
-<li>浏览器得到返回内容<br></li>
+  <li>浏览器根据DNS服务器得到域名的IP地址</li>
+  <li>向这个IP的机器发送HTTP请求</li>
+  <li>服务器收到、处理并返回HTTP请求</li>
+  <li>浏览器得到返回内容</li>
 </ol>
 
 <p><strong>浏览器渲染页面的过程</strong></p>
 
 <ol>
-<li>根据HTML结构生成 DOM树<br></li>
-<li>根据CSS生成CSSOM<br></li>
-<li>将DOM和CSSOM整合成render树<br></li>
-<li>根据render树开始渲染和展示<br></li>
-<li>遇到 <code>&lt;script&gt;</code> 时，会执行并阻塞渲染<br></li>
+  <li>根据HTML结构生成 DOM树</li>
+  <li>根据CSS生成CSSOM</li>
+  <li>将DOM和CSSOM整合成render树</li>
+  <li>根据render树开始渲染和展示</li>
+  <li>遇到 <code class="highlighter-rouge">&lt;script&gt;</code> 时，会执行并阻塞渲染</li>
 </ol>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/">浏览器的工作原理：新式网络浏览器幕后揭秘</a><br></li>
-<li><a href="https://segmentfault.com/a/1190000004292479#articleHeader6">JS 一定要放在 Body 的最底部么</a><br></li>
-<li><a href="http://www.cnblogs.com/slly/p/6640761.html">浏览器渲染原理及流程</a><br></li>
-<li><a href="http://www.jianshu.com/p/e141d1543143">浏览器~加载，解析，渲染</a></li>
+  <li><a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/">浏览器的工作原理：新式网络浏览器幕后揭秘</a></li>
+  <li><a href="https://segmentfault.com/a/1190000004292479#articleHeader6">JS 一定要放在 Body 的最底部么</a></li>
+  <li><a href="http://www.cnblogs.com/slly/p/6640761.html">浏览器渲染原理及流程</a></li>
+  <li><a href="http://www.jianshu.com/p/e141d1543143">浏览器~加载，解析，渲染</a></li>
 </ul>
   
 	</div>
@@ -489,7 +511,7 @@ Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的�
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -643,6 +665,10 @@ Firefox 使用的是 <code>Gecko</code>，这是 Mozilla 公司“自制”的�
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

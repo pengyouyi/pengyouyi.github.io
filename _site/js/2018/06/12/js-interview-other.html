@@ -164,34 +164,34 @@
 		<h1 id="charset">charset</h1>
 
 <ul>
-<li>页面编码和被请求的资源编码如果不一致如何处理？</li>
+  <li>页面编码和被请求的资源编码如果不一致如何处理？</li>
 </ul>
 
 <p><strong>浏览器解析编码：</strong></p>
 
-<p>1.根据http协议中的 content-type 中的charset ，<br>
-<code>Content-Type: text/html;charset:utf-8;</code><br>
+<p>1.根据http协议中的 content-type 中的charset ，
+<code class="highlighter-rouge">Content-Type: text/html;charset:utf-8;</code>
 content-type中的charset的优先级最高，如果有charset选项浏览器将忽略以下规则</p>
 
-<p>2.html页面中meta标签中的charset。<br>
-<code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code><br>
+<p>2.html页面中meta标签中的charset。
+<code class="highlighter-rouge">&lt;meta charset="UTF-8"&gt;</code>
 (js,css 也有charset ，如果有将用此charset ，如果没有就用宿主html的charset)</p>
 
 <p>3.浏览器默认charset </p>
 
 <p><strong>本题答案：</strong></p>
 
-<p>比如：<a href="http://www.yyy.com/a.html">http://www.yyy.com/a.html</a> 中嵌入了一个http://<a href="http://www.xxx.com/test.js">www.xxx.com/test.js</a></p>
+<p>比如：http://www.yyy.com/a.html 中嵌入了一个http://www.xxx.com/test.js</p>
 
 <p>a.html 的编码是gbk或gb2312的。 而引入的js编码为utf-8的 ，那就需要在引入的时候</p>
 
-<p><code>&lt;script src=&quot;http://www.xxx.com/test.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</code><br>
-同理，如果你的页面是utf-8的，引入的js是gbk的，那么就需要加上charset=&quot;gbk&quot;.</p>
+<p><code class="highlighter-rouge">&lt;script src="http://www.xxx.com/test.js" charset="utf-8"&gt;&lt;/script&gt;</code>
+同理，如果你的页面是utf-8的，引入的js是gbk的，那么就需要加上charset=”gbk”.</p>
 
 <h1 id="memory-leak">Memory-leak</h1>
 
 <ul>
-<li>JavaScript常见的内存泄漏原因</li>
+  <li>JavaScript常见的内存泄漏原因</li>
 </ul>
 
 <p>内存泄漏指任何对象在您不再拥有或需要它之后仍然存在。</p>
@@ -203,30 +203,35 @@ content-type中的charset的优先级最高，如果有charset选项浏览器将
 <p>全局变量、setTimeout、闭包、console.log、DOM泄露、循环（在两个对象彼此引用且彼此保留时，就会产生一个循环）</p>
 
 <p><strong>全局变量引起的内存泄漏</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">leaks</span><span class="p">(){</span>  
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">leaks</span><span class="p">(){</span>  
     <span class="nx">leak</span> <span class="o">=</span> <span class="s1">'xxxxxx'</span><span class="p">;</span><span class="c1">//leak 成为一个全局变量，不会被回收</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>闭包引起的内存泄漏</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">leaks</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>  
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">leaks</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>  
     <span class="kd">var</span> <span class="nx">leak</span> <span class="o">=</span> <span class="s1">'xxxxxx'</span><span class="p">;</span><span class="c1">// 被闭包所引用，不会被回收</span>
     <span class="k">return</span> <span class="kd">function</span><span class="p">(){</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">leak</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">})()</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>如果闭包的作用域链中保存着一个HTML元素，那么该元素将无法被销毁</p>
 
 <p><strong>DOM泄露</strong></p>
 
 <p>dom清空或删除时，事件未清除导致的内存泄漏</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"container"</span><span class="o">&gt;</span>  
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"container"</span><span class="o">&gt;</span>  
 <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'#container'</span><span class="p">).</span><span class="nx">bind</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'click'</span><span class="p">);</span>
 <span class="p">}).</span><span class="nx">remove</span><span class="p">();</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>setTimeout 内存泄漏</strong></p>
 
 <p>setTimeout的第一个参数可以是函数，也可以是字符串。当传入字符串时，就会有内存泄漏产生。</p>
@@ -236,7 +241,7 @@ content-type中的charset的优先级最高，如果有charset选项浏览器将
 <h1 id="polyfill">Polyfill</h1>
 
 <ul>
-<li>What is a Polyfill?</li>
+  <li>What is a Polyfill?</li>
 </ul>
 
 <p>polyfill 是“在旧版浏览器上复制标准 API 的 JavaScript 补充”,可以动态地加载 JavaScript 代码或库，在不支持这些标准 API 的浏览器中模拟它们。</p>
@@ -244,7 +249,7 @@ content-type中的charset的优先级最高，如果有charset选项浏览器将
 <p>所有这些都是 W3C 地理位置 API 定义的对象和函数。因为 polyfill 模拟标准 API，所以能够以一种面向所有浏览器未来的方式针对这些 API 进行开发，一旦对这些 API 的支持变成绝对大多数，则可以方便地去掉 polyfill，无需做任何额外工作。</p>
 
 <ul>
-<li>做的项目中，有没有用过或自己实现一些 polyfill 方案（兼容性处理方案）？</li>
+  <li>做的项目中，有没有用过或自己实现一些 polyfill 方案（兼容性处理方案）？</li>
 </ul>
 
 <p>✮ html5shiv.js 让IE6、IE7、IE8支持html</p>
@@ -258,22 +263,24 @@ content-type中的charset的优先级最高，如果有charset选项浏览器将
 <h1 id="get-file-extension-name">Get-file-extension-name</h1>
 
 <ul>
-<li>使用JS实现获取文件扩展名？</li>
+  <li>使用JS实现获取文件扩展名？</li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">getFileExtension</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getFileExtension</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">filename</span><span class="p">.</span><span class="nx">slice</span><span class="p">((</span><span class="nx">filename</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div>
-<p>String.lastIndexOf() 方法返回指定值（本例中的&#39;.&#39;）在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。</p>
+</code></pre></div></div>
 
-<p>对于&#39;filename&#39;和&#39;.hiddenfile&#39;，lastIndexOf的返回值分别为0和-1无符号右移操作符(&gt;&gt;&gt;) 将-1转换为4294967295，将-2转换为4294967294，这个方法可以保证边缘情况时文件名不变。</p>
+<p>String.lastIndexOf() 方法返回指定值（本例中的’.’）在调用该方法的字符串中最后出现的位置，如果没找到则返回 -1。</p>
 
-<p>String.prototype.slice() 从上面计算的索引处提取文件的扩展名。如果索引比文件名的长度大，结果为&quot;&quot;。</p>
+<p>对于’filename’和’.hiddenfile’，lastIndexOf的返回值分别为0和-1无符号右移操作符(»&gt;) 将-1转换为4294967295，将-2转换为4294967294，这个方法可以保证边缘情况时文件名不变。</p>
+
+<p>String.prototype.slice() 从上面计算的索引处提取文件的扩展名。如果索引比文件名的长度大，结果为”“。</p>
 
 <h1 id="public-key-encryption">Public-key-encryption</h1>
 
 <ul>
-<li>是否了解公钥加密和私钥加密。</li>
+  <li>是否了解公钥加密和私钥加密。</li>
 </ul>
 
 <p>一般情况下是指私钥用于对数据进行签名，公钥用于对签名进行验证;</p>
@@ -283,14 +290,22 @@ content-type中的charset的优先级最高，如果有charset选项浏览器将
 <h1 id="comet">Comet</h1>
 
 <ul>
-<li>WEB应用从服务器主动推送Data到客户端有那些方式？</li>
+  <li>WEB应用从服务器主动推送Data到客户端有那些方式？</li>
 </ul>
 
 <ol>
-<li><p>Comet：XHR长轮询和HTTP流【推荐】</p></li>
-<li><p>SSE（Server-sent Events, 服务器发送事件）</p></li>
-<li><p>html5提供的Websockets协议</p></li>
-<li><p>不可见的iframe</p></li>
+  <li>
+    <p>Comet：XHR长轮询和HTTP流【推荐】</p>
+  </li>
+  <li>
+    <p>SSE（Server-sent Events, 服务器发送事件）</p>
+  </li>
+  <li>
+    <p>html5提供的Websockets协议</p>
+  </li>
+  <li>
+    <p>不可见的iframe</p>
+  </li>
 </ol>
 
 <p><strong>轮询: AJAX轮询、JSONP跨域请求的方式轮询(不推荐)</strong></p>
@@ -318,13 +333,14 @@ content-type中的charset的优先级最高，如果有charset选项浏览器将
 <p><strong>SSE（Server-sent Events, 服务器发送事件）：</strong></p>
 
 <p>SSE是围绕只读Comet交互推出的API或模式。SSE API用于创建到服务器的单向连接，服务器通过这个连接可以发送任意数量的数据。SSE支持短轮询、长轮询和HTTP流。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="s1">'myevents.php'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="s1">'myevents.php'</span><span class="p">);</span>
 
 <span class="nx">source</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
     <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
     <span class="c1">// 处理数据</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>注意，传入的URL必须与创建对象的页面同源。</p>
 
 <p><strong>iframe</strong></p>
@@ -334,8 +350,10 @@ content-type中的charset的优先级最高，如果有charset选项浏览器将
 <p><strong>Web Sockets协议</strong></p>
 
 <p>HTML5的WebSockets的目标是在一个单独的持久连接上提供全双工、双向通信。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"ws://www.example.com/server.php"</span><span class="p">)</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"ws://www.example.com/server.php"</span><span class="p">)</span>
+</code></pre></div></div>
+
 <p>同源策略对Web Sockets不适用，因此可以通过它打开到任何站点的连接。</p>
 
 <p>缺点：考虑现有服务器和低版本浏览器是否支持Web Sockets通信</p>
@@ -346,14 +364,14 @@ content-type中的charset的优先级最高，如果有charset选项浏览器将
 
 <p>js高程-Page588~595</p>
 
-<h1 id="url">url-页面加载</h1>
+<h1 id="url-页面加载">url-页面加载</h1>
 
 <ul>
-<li>一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）</li>
+  <li>一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）</li>
 </ul>
 
-<p>注：这题胜在区分度高，知识点覆盖广，再不懂的人，也能答出几句，<br>
-而高手可以根据自己擅长的领域自由发挥，从URL规范、HTTP协议、DNS、CDN、数据库查询、<br>
+<p>注：这题胜在区分度高，知识点覆盖广，再不懂的人，也能答出几句，
+而高手可以根据自己擅长的领域自由发挥，从URL规范、HTTP协议、DNS、CDN、数据库查询、
 到浏览器流式解析、CSS规则构建、layout、paint、onload/domready、JS执行、JS API绑定等等；</p>
 
 <p>详细版：</p>
@@ -388,41 +406,41 @@ content-type中的charset的优先级最高，如果有charset选项浏览器将
 
 <p>载入解析到的资源文件，渲染页面，完成。</p>
 
-<h1 id="page">page重构</h1>
+<h1 id="page重构">page重构</h1>
 
 <ul>
-<li>页面重构怎么操作？</li>
+  <li>页面重构怎么操作？</li>
 </ul>
 
-<p>网站重构：在不改变外部行为的前提下，简化结构、添加可读性，而在网站前端保持一致的行为。<br>
+<p>网站重构：在不改变外部行为的前提下，简化结构、添加可读性，而在网站前端保持一致的行为。
 也就是说是在不改变UI的情况下，对网站进行优化，在扩展的同时保持一致的UI。</p>
 
 <p>对于传统的网站来说重构通常是：</p>
 
-<p>表格(table)布局改为DIV+CSS<br><br>
-使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的)<br><br>
-对于移动平台的优化<br><br>
-针对于SEO进行优化<br><br>
-深层次的网站重构应该考虑的方面  </p>
+<p>表格(table)布局改为DIV+CSS<br />
+使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的)<br />
+对于移动平台的优化<br />
+针对于SEO进行优化<br />
+深层次的网站重构应该考虑的方面</p>
 
-<p>减少代码间的耦合<br><br>
-让代码保持弹性<br><br>
-严格按规范编写代码<br><br>
-设计可扩展的API<br><br>
-代替旧有的框架、语言(如VB)<br><br>
-增强用户体验<br><br>
-通常来说对于速度的优化也包含在重构中  </p>
+<p>减少代码间的耦合<br />
+让代码保持弹性<br />
+严格按规范编写代码<br />
+设计可扩展的API<br />
+代替旧有的框架、语言(如VB)<br />
+增强用户体验<br />
+通常来说对于速度的优化也包含在重构中</p>
 
-<p>压缩JS、CSS、image等前端资源(通常是由服务器来解决)<br><br>
-程序的性能优化(如数据读写)<br><br>
-采用CDN来加速资源加载<br><br>
-对于JS DOM的优化<br><br>
-HTTP服务器的文件缓存  </p>
+<p>压缩JS、CSS、image等前端资源(通常是由服务器来解决)<br />
+程序的性能优化(如数据读写)<br />
+采用CDN来加速资源加载<br />
+对于JS DOM的优化<br />
+HTTP服务器的文件缓存</p>
 
-<h1 id="about">about前端工程师</h1>
+<h1 id="about前端工程师">about前端工程师</h1>
 
 <ul>
-<li>对前端工程师这个职位是怎么样理解的？它的前景会怎么样？</li>
+  <li>对前端工程师这个职位是怎么样理解的？它的前景会怎么样？</li>
 </ul>
 
 <p>前端是最贴近用户的程序员，比后端、数据库、产品经理、运营、安全都近。</p>
@@ -448,7 +466,7 @@ HTTP服务器的文件缓存  </p>
 <h1 id="manage-project">Manage-project</h1>
 
 <ul>
-<li>平时如何管理你的项目？</li>
+  <li>平时如何管理你的项目？</li>
 </ul>
 
 <p>先期团队必须确定好全局样式（globe.css），编码模式(utf-8) 等；</p>
@@ -468,7 +486,7 @@ HTTP服务器的文件缓存  </p>
 <h1 id="new-thing">new-thing</h1>
 
 <ul>
-<li>说说最近最流行的一些东西吧？常去哪些网站？</li>
+  <li>说说最近最流行的一些东西吧？常去哪些网站？</li>
 </ul>
 
 <p>ES6\WebAssembly\Node\MVVM\Web Components\React\React Native\Webpack 组件化</p>
@@ -476,27 +494,47 @@ HTTP服务器的文件缓存  </p>
 <h1 id="seo">SEO</h1>
 
 <ul>
-<li>知道什么是SEO并且怎么优化么? 知道各种meta data的含义么?</li>
+  <li>知道什么是SEO并且怎么优化么? 知道各种meta data的含义么?</li>
 </ul>
 
 <p>网站结构布局优化</p>
 
 <ol>
-<li><p>扁平化的目录层次</p></li>
-<li><p>控制首页的链接数量</p></li>
-<li><p>导航SEO优化</p></li>
-<li><p>页面的大小控制在100k以下</p></li>
+  <li>
+    <p>扁平化的目录层次</p>
+  </li>
+  <li>
+    <p>控制首页的链接数量</p>
+  </li>
+  <li>
+    <p>导航SEO优化</p>
+  </li>
+  <li>
+    <p>页面的大小控制在100k以下</p>
+  </li>
 </ol>
 
 <p>代码SEO优化</p>
 
 <ul>
-<li><p>&lt;head&gt;标签放网页的标题，各个页面不同</p></li>
-<li><p>&lt;meta keywords&gt;列举出几个重要的关键词</p></li>
-<li><p>&lt;meta description&gt;网页内容的高度概括</p></li>
-<li><p>html语义化</p></li>
-<li><p>正确使用H标题</p></li>
-<li><p>&lt;a&gt;标记要加上说明（title属性）、img设置alt属性</p></li>
+  <li>
+    <p>&lt;head&gt;标签放网页的标题，各个页面不同</p>
+  </li>
+  <li>
+    <p>&lt;meta keywords&gt;列举出几个重要的关键词</p>
+  </li>
+  <li>
+    <p>&lt;meta description&gt;网页内容的高度概括</p>
+  </li>
+  <li>
+    <p>html语义化</p>
+  </li>
+  <li>
+    <p>正确使用H标题</p>
+  </li>
+  <li>
+    <p>&lt;a&gt;标记要加上说明（title属性）、img设置alt属性</p>
+  </li>
 </ul>
 
 <p><a href="https://blog.csdn.net/H1069495874/article/details/78826382">前端如何实现SEO优化</a></p>
@@ -508,36 +546,50 @@ HTTP服务器的文件缓存  </p>
 <p><a href="https://www.jb51.net/yunying/419531.html">什么是Meta标签？ 哪些Meta标签对搜索引擎SEO优化有作用？</a></p>
 
 <blockquote>
-<p>前端后端分离，怎么解决SEO优化的问题呢？</p>
+  <p>前端后端分离，怎么解决SEO优化的问题呢？</p>
 </blockquote>
 
-<h1 id="cookie">cookie转发</h1>
+<h1 id="cookie转发">cookie转发</h1>
 
 <ul>
-<li>服务器代理转发时，该如何处理cookie？</li>
+  <li>服务器代理转发时，该如何处理cookie？</li>
 </ul>
 
 <p>nginx ???</p>
 
-<h1 id="webpack">Webpack热更新</h1>
+<h1 id="webpack热更新">Webpack热更新</h1>
 
 <ul>
-<li>Webpack热更新实现原理?</li>
+  <li>Webpack热更新实现原理?</li>
 </ul>
 
 <ol>
-<li><p>Webpack编译期，为需要热更新的 entry 注入热更新代码(EventSource通信)</p></li>
-<li><p>页面首次打开后，服务端与客户端通过 EventSource 建立通信渠道，把下一次的 hash 返回前端</p></li>
-<li><p>客户端获取到hash，这个hash将作为下一次请求服务端 hot-update.js 和 hot-update.json的hash</p></li>
-<li><p>修改页面代码后，Webpack 监听到文件修改后，开始编译，编译完成后，发送 build 消息给客户端</p></li>
-<li><p>客户端获取到hash，成功后客户端构造hot-update.js script链接，然后插入主文档</p></li>
-<li><p>hot-update.js 插入成功后，执行hotAPI 的 createRecord 和 reload方法，获取到 Vue 组件的 render方法，重新 render 组件， 继而实现 UI 无刷新更新。</p></li>
+  <li>
+    <p>Webpack编译期，为需要热更新的 entry 注入热更新代码(EventSource通信)</p>
+  </li>
+  <li>
+    <p>页面首次打开后，服务端与客户端通过 EventSource 建立通信渠道，把下一次的 hash 返回前端</p>
+  </li>
+  <li>
+    <p>客户端获取到hash，这个hash将作为下一次请求服务端 hot-update.js 和 hot-update.json的hash</p>
+  </li>
+  <li>
+    <p>修改页面代码后，Webpack 监听到文件修改后，开始编译，编译完成后，发送 build 消息给客户端</p>
+  </li>
+  <li>
+    <p>客户端获取到hash，成功后客户端构造hot-update.js script链接，然后插入主文档</p>
+  </li>
+  <li>
+    <p>hot-update.js 插入成功后，执行hotAPI 的 createRecord 和 reload方法，获取到 Vue 组件的 render方法，重新 render 组件， 继而实现 UI 无刷新更新。</p>
+  </li>
 </ol>
 
-<h1 id="update">产品Update</h1>
+<p><a href="https://zhuanlan.zhihu.com/p/30623057">Webpack热更新</a></p>
+
+<h1 id="产品update">产品Update</h1>
 
 <ul>
-<li>产品进行版本升级时，可能发生不兼容性问题，如何提前预防和解决？</li>
+  <li>产品进行版本升级时，可能发生不兼容性问题，如何提前预防和解决？</li>
 </ul>
 
 <p>非覆盖式发布，API新增而不是在原来的上面修改；</p>
@@ -658,7 +710,7 @@ HTTP服务器的文件缓存  </p>
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -812,6 +864,10 @@ HTTP服务器的文件缓存  </p>
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

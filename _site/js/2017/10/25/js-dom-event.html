@@ -161,57 +161,65 @@
 		
 		</div>
 		
-		<h1 id="dom">DOM事件模型</h1>
+		<h1 id="dom事件模型">DOM事件模型</h1>
 
 <p>DOM事件模型分为两类：</p>
 
 <ul>
-<li>一类是IE所使用的冒泡型事件（Bubbling）；</li>
-<li>另一类是DOM标准定义的冒泡型与捕获型（Capture）的事件。</li>
+  <li>一类是IE所使用的冒泡型事件（Bubbling）；</li>
+  <li>另一类是DOM标准定义的冒泡型与捕获型（Capture）的事件。</li>
 </ul>
 
 <p>除IE外的其他浏览器都支持标准的DOM事件处理模型。</p>
 
-<h1 id="dom">DOM事件处理程序</h1>
+<h1 id="dom事件处理程序">DOM事件处理程序</h1>
 
-<p>事件就是用户或浏览器自身执行的某种动作。<br>
-诸如click、load、mouseover ，都是事件的名字。<br>
-而响应某个事件的函数就叫做<code>事件处理程序</code>（或事件侦听器）</p>
+<p>事件就是用户或浏览器自身执行的某种动作。
+诸如click、load、mouseover ，都是事件的名字。
+而响应某个事件的函数就叫做<code class="highlighter-rouge">事件处理程序</code>（或事件侦听器）</p>
 
-<h2 id="html">HTML事件处理程序</h2>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"click me"</span> <span class="na">onclick=</span><span class="s">"alert('clicked')"</span><span class="nt">&gt;</span>
-</code></pre></div>
-<p>由于 onclick 里包含的是 JavaScript代码， 因此不能再其中使用未经转义的HTML语法字符，比如 &amp;、“”、&#39;&#39;、&lt; 、&gt;</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"click me"</span> <span class="na">onclick=</span><span class="s">"alert(&amp;quot;clicked&amp;quot;')"</span><span class="nt">&gt;</span>
-</code></pre></div>
+<h2 id="html事件处理程序">HTML事件处理程序</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"click me"</span> <span class="na">onclick=</span><span class="s">"alert('clicked')"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>由于 onclick 里包含的是 JavaScript代码， 因此不能再其中使用未经转义的HTML语法字符，比如 &amp;、“”、’‘、&lt; 、&gt;</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"click me"</span> <span class="na">onclick=</span><span class="s">"alert(&amp;quot;clicked&amp;quot;')"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
 <p>在HTML中定义的事件处理程序可以调用脚本里定义的方法</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
   <span class="kd">function</span> <span class="nx">showMessage</span><span class="p">()</span> <span class="p">{</span>
       <span class="nx">alert</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"click me"</span> <span class="na">onclick=</span><span class="s">"showMessage()"</span><span class="nt">&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>HTML事件处理程序的一个缺点：HTML与JavaScript代码紧密耦合。如果要更换事件处理程序，就需要改动两个地方。所以转而使用JavaScript指定事件处理程序</p>
 
-<h2 id="dom0">DOM0级事件处理程序</h2>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;button</span> <span class="na">id =</span><span class="err"> </span><span class="s">'myBtn'</span><span class="nt">&gt;</span>click me<span class="nt">&lt;/button&gt;</span>
+<h2 id="dom0级事件处理程序">DOM0级事件处理程序</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">id =</span><span class="err"> </span><span class="s">'myBtn'</span><span class="nt">&gt;</span>click me<span class="nt">&lt;/button&gt;</span>
 <span class="nt">&lt;script&gt;</span>
     <span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
     <span class="nx">btn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
         <span class="nx">alert</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>btn.onclick 这种方式添加的事件处理程序会在事件流的冒泡阶段被处理</p>
 
 <p><strong>解除DOM0级事件</strong></p>
-<div class="highlight"><pre><code class="language-" data-lang="">btn.onclick = null;
-</code></pre></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>btn.onclick = null;
+</code></pre></div></div>
 <p>将事件处理程序设置为mull之后，再单击按钮将不会有任何动作发生</p>
 
 <p><strong>一个dom对象只能注册一个同类型的函数，因为注册多个同类型的函数的话，就会发生覆盖，之前注册的函数就会无效。</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
     <span class="nx">alert</span><span class="p">(</span><span class="s1">'you click the first function'</span><span class="p">);</span>
@@ -222,76 +230,79 @@
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span> <span class="c1">// true</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">btn</span><span class="p">);</span>  <span class="c1">// true</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>上述代码只执行第二个注册的函数</p>
 
 <p><strong>DOM0级事件处理程序优点</strong></p>
 
 <ul>
-<li>简单<br></li>
-<li>跨浏览器【所有现代浏览器支持】</li>
-<li>this 指向被绑定的DOM元素，即 event.currentTarget</li>
+  <li>简单</li>
+  <li>跨浏览器【所有现代浏览器支持】</li>
+  <li>this 指向被绑定的DOM元素，即 event.currentTarget</li>
 </ul>
 
 <p><strong>DOM0级事件处理程序缺点</strong></p>
 
 <ul>
-<li>一次只能绑定一个事件处理器在DOM元素上</li>
-<li>function参数中的event参数只对非IE浏览器有效果(因为IE浏览器有特制的window.event)。</li>
+  <li>一次只能绑定一个事件处理器在DOM元素上</li>
+  <li>function参数中的event参数只对非IE浏览器有效果(因为IE浏览器有特制的window.event)。</li>
 </ul>
 
-<h2 id="dom2">DOM2级事件处理程序</h2>
+<h2 id="dom2级事件处理程序">DOM2级事件处理程序</h2>
 
 <p>“DOM2级事件”定义了两个方法来处理和删除事件，所有DOM节点中都包含这两种方法</p>
 
 <ul>
-<li>注册事件: <code>element.addEventListener(&#39;eventName&#39;, function(e){}, true) // 捕获方式</code></li>
-<li>删除事件: <code>element.removeEventListener(&#39;eventName&#39;, function(e){}, false) // 冒泡方式</code></li>
+  <li>注册事件: <code class="highlighter-rouge">element.addEventListener('eventName', function(e){}, true) // 捕获方式</code></li>
+  <li>删除事件: <code class="highlighter-rouge">element.removeEventListener('eventName', function(e){}, false) // 冒泡方式</code></li>
 </ul>
 
 <p>最后一个参数是布尔型，true代表捕获事件，false代表冒泡事件。</p>
 
 <p><strong>DOM2级方法可以添加多个事件处理程序</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
     <span class="nx">alert</span><span class="p">(</span><span class="s1">'click one'</span><span class="p">);</span>
 <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
     <span class="nx">alert</span><span class="p">(</span><span class="s1">'click two'</span><span class="p">);</span>
 <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>以上事件处理程序按照添加他们的方法顺序触发，先弹“click one”，再弹“click two”</p>
 
 <p><strong>解除DOM2级事件</strong></p>
 
-<p>通过 addEventListener() 添加的事件处理程序只能使用 removeListener() 来移除；<br>
-移除时传入的参数与添加程序时使用的参数相同；<br>
-所以通过 addEventListener() 添加的<code>匿名函数无法移除</code></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
+<p>通过 addEventListener() 添加的事件处理程序只能使用 removeListener() 来移除；
+移除时传入的参数与添加程序时使用的参数相同；
+所以通过 addEventListener() 添加的<code class="highlighter-rouge">匿名函数无法移除</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">alert</span><span class="p">(</span><span class="s1">'click one'</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="nx">handler</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="nx">handler</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>  <span class="c1">// 有效</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>DOM2级事件处理程序优点</strong></p>
 
 <ul>
-<li>DOM2支持同一dom元素注册多个同种事件。 </li>
-<li>DOM2新增了捕获和冒泡的概念。 </li>
+  <li>DOM2支持同一dom元素注册多个同种事件。</li>
+  <li>DOM2新增了捕获和冒泡的概念。</li>
 </ul>
 
 <p><strong>note：</strong></p>
 
-<p>IE9、firefox、Safari、chrome、Opera 都支持DOM2级事件处理程序；<br>
-IE8及更早版本不支持DOM事件流（事件捕获）；<br>
+<p>IE9、firefox、Safari、chrome、Opera 都支持DOM2级事件处理程序；
+IE8及更早版本不支持DOM事件流（事件捕获）；
 为了最大限度地兼容各种浏览器，建议将事件处理程序添加到事件流的冒泡阶段。</p>
 
-<h2 id="ie">IE事件处理程序</h2>
+<h2 id="ie事件处理程序">IE事件处理程序</h2>
 
 <ul>
-<li>注册事件：<code>element.attachEvent(&#39;onclick&#39;, function(){})</code></li>
-<li>移除事件：<code>element.detachEvent(&#39;onclick&#39;, function(){})</code></li>
+  <li>注册事件：<code class="highlighter-rouge">element.attachEvent('onclick', function(){})</code></li>
+  <li>移除事件：<code class="highlighter-rouge">element.detachEvent('onclick', function(){})</code></li>
 </ul>
 
 <p>IE8及更早版本只支持事件冒泡，通过attachEvent() 添加的事件处理程序会被添加到冒泡阶段</p>
@@ -301,37 +312,44 @@ IE8及更早版本不支持DOM事件流（事件捕获）；<br>
 <p>在IE中使用attachEvent() 与使用DOM0级方法的主要区别在于事件处理的作用域。</p>
 
 <ul>
-<li>在DOM0级方法，事件处理程序会在其所属元素的作用域内运行；<br></li>
-<li>使用attachEvent()，事件处理程序在全局作用域中运行，<code>this === window</code></li>
+  <li>在DOM0级方法，事件处理程序会在其所属元素的作用域内运行；</li>
+  <li>使用attachEvent()，事件处理程序在全局作用域中运行，<code class="highlighter-rouge">this === window</code></li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'onclick'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">window</span><span class="p">);</span> <span class="c1">// true</span>
 <span class="p">})</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>IE事件为一个元素添加多个事件处理程序</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'onclick'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'clicked'</span><span class="p">);</span> 
 <span class="p">});</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'onclick'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span> 
 <span class="p">});</span>
-</code></pre></div>
-<p>attachEvent()为按钮添加了两个不同的事件处理程序，与DOM方法不同，而是以<code>相反的顺序被触发</code>。<br>
-先弹出“Hello”，再弹出&quot;clicked&quot;</p>
+</code></pre></div></div>
 
-<p><strong>IE事件移除</strong><br>
+<p>attachEvent()为按钮添加了两个不同的事件处理程序，与DOM方法不同，而是以<code class="highlighter-rouge">相反的顺序被触发</code>。
+先弹出“Hello”，再弹出”clicked”</p>
+
+<p><strong>IE事件移除</strong>
 同DOM方法一样，传入相同函数的引用</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">alert</span><span class="p">(</span><span class="s1">'click one'</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'onclick'</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
 <span class="nx">btn</span><span class="p">.</span><span class="nx">detachEvent</span><span class="p">(</span><span class="s1">'onclick'</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>  <span class="c1">// 有效</span>
-</code></pre></div>
-<h2 id="eventutil">跨浏览器的事件处理程序EventUtil</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">EventUtil</span> <span class="o">=</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<h2 id="跨浏览器的事件处理程序eventutil">跨浏览器的事件处理程序EventUtil</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">EventUtil</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">addHandler</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span>
           <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
@@ -351,35 +369,38 @@ IE8及更早版本不支持DOM事件流（事件捕获）；<br>
       <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>使用EventUtil对象</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'myBtn'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">EventUtil</span><span class="p">.</span><span class="nx">addHandler</span><span class="p">(</span><span class="nx">btn</span><span class="p">,</span> <span class="s2">"click"</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
 <span class="nx">EventUtil</span><span class="p">.</span><span class="nx">removeHandler</span><span class="p">(</span><span class="nx">btn</span><span class="p">,</span> <span class="s2">"click"</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
-</code></pre></div>
-<h2 id="dom1-dom3">DOM1、DOM3级事件</h2>
+</code></pre></div></div>
+
+<h2 id="dom1dom3级事件">DOM1、DOM3级事件</h2>
 
 <ul>
-<li>DOM1中没有规定事件相关的内容<br></li>
-<li>DOM3级事件模块在DOM2级事件模块的基础上重新定义了某些事件，也添加了一些新事件。</li>
+  <li>DOM1中没有规定事件相关的内容</li>
+  <li>DOM3级事件模块在DOM2级事件模块的基础上重新定义了某些事件，也添加了一些新事件。</li>
 </ul>
 
-<h1 id="customeevent">customeEvent自定义事件</h1>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<h1 id="customeevent自定义事件">customeEvent自定义事件</h1>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;</span>click me, 事件捕获完整阶段<span class="nt">&lt;/div&gt;</span>    
+	
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;</span>click me, 事件捕获完整阶段<span class="nt">&lt;/div&gt;</span>	
 <span class="nt">&lt;script&gt;</span>
     <span class="kd">var</span> <span class="nx">myDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"myDiv"</span><span class="p">);</span>
-
+    
     <span class="kd">var</span> <span class="nx">eve</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">(</span><span class="s1">'test'</span><span class="p">);</span>
 
     <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'test'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -387,11 +408,12 @@ IE8及更早版本不支持DOM事件流（事件捕获）；<br>
     <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
 
     <span class="nx">myDiv</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="nx">eve</span><span class="p">);</span>
-
-<span class="nt">&lt;/script&gt;</span>       
+    
+<span class="nt">&lt;/script&gt;</span>		
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>  
+</code></pre></div></div>
+  
 	</div>
 	<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -506,7 +528,7 @@ IE8及更早版本不支持DOM事件流（事件捕获）；<br>
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -660,6 +682,10 @@ IE8及更早版本不支持DOM事件流（事件捕获）；<br>
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

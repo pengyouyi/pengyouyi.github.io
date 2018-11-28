@@ -161,38 +161,38 @@
 		
 		</div>
 		
-		<h1 id="http">HTTP连接性能</h1>
+		<h1 id="http连接性能">HTTP连接性能</h1>
 
-<h2 id="http">HTTP事务的时延</h2>
+<h2 id="http事务的时延">HTTP事务的时延</h2>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-9.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-9.png" alt="" />
 </div>
 
-<h2 id="tcp">TCP连接的握手时延</h2>
+<h2 id="tcp连接的握手时延">TCP连接的握手时延</h2>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-10.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-10.png" alt="" />
 </div>
 
 <p>在发送数据之前，TCP要传送两个分组来建立连接</p>
 
-<h2 id="http">HTTP串行事务处理时延</h2>
+<h2 id="http串行事务处理时延">HTTP串行事务处理时延</h2>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-11.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-11.png" alt="" />
 </div>
 
 <p><strong>提高HTTP的连接性能</strong></p>
 
 <ol>
-<li>并行连接。 通过多TCP连接发起并发的HTTP请求。<br></li>
-<li>持久连接。 重用TCP连接，以消除连接及关闭时延。<br></li>
-<li>管道化连接。通过共享的TCP连接发起并发的HTTP请求。<br></li>
-<li>复用的连接。 交替传送请求和响应（实验阶段）。<br></li>
+  <li>并行连接。 通过多TCP连接发起并发的HTTP请求。</li>
+  <li>持久连接。 重用TCP连接，以消除连接及关闭时延。</li>
+  <li>管道化连接。通过共享的TCP连接发起并发的HTTP请求。</li>
+  <li>复用的连接。 交替传送请求和响应（实验阶段）。</li>
 </ol>
 
-<h1 id=">并行连接</h1>
+<h1 id="并行连接">并行连接</h1>
 
 <p>并行连接可能会提高页面的加载速度</p>
 
@@ -200,9 +200,9 @@
 
 <p>浏览器使用了并行连接，并行连接的总数通常是4个。服务器可以随意关闭来自特定客户端的超量连接。</p>
 
-<h1 id="http-1-1">HTTP/1.1持久连接</h1>
+<h1 id="http11持久连接">HTTP/1.1持久连接</h1>
 
-<p>在事务处理结束之后仍然保持在打开状态的TCP连接被称为<code>持久连接</code>。</p>
+<p>在事务处理结束之后仍然保持在打开状态的TCP连接被称为<code class="highlighter-rouge">持久连接</code>。</p>
 
 <p>非持久连接会在每个事务结束之后关闭。持久连接会在不同事务之间保持打开状态，直到客户端或服务器决定将其关闭为止。</p>
 
@@ -216,17 +216,17 @@ Keep-Alive: max <span class="o">=</span> 5, timeout <span class="o">=</span> 120
 <p>以上说明服务器最多还会为另外5个事务保持持久的打开状态，或者将打开状态保持到连接空闲了2分钟之后。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-12.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-12.png" alt="" />
 </div>
 
-<h2 id="connection">Connection首部和哑代理</h2>
+<h2 id="connection首部和哑代理">Connection首部和哑代理</h2>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-13.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-13.png" alt="" />
 </div>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-14.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-14.png" alt="" />
 </div>
 
 <p>现代的代理不能转发Connection首部和所有名字出现在Connection值中的首部。</p>
@@ -234,7 +234,7 @@ Keep-Alive: max <span class="o">=</span> 5, timeout <span class="o">=</span> 120
 <p>使用Proxy-Connection能解决客户端和服务器之间只有一个代理时的哑代理问题。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-15.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-15.png" alt="" />
 </div>
 
 <p>浏览器发送Proxy-Connection。如果遇到聪明的代理（理解持久连接），它会用Connection取代Proxy-Connection，再发送给服务器</p>
@@ -242,10 +242,10 @@ Keep-Alive: max <span class="o">=</span> 5, timeout <span class="o">=</span> 120
 <p>如果有多层代理，Proxy-Connection仍然无法解决问题。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-16.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-16.png" alt="" />
 </div>
 
-<h2 id="http-1-0-http-1-1">HTTP/1.0和HTTP/1.1持久协议区别</h2>
+<h2 id="http10和http11持久协议区别">HTTP/1.0和HTTP/1.1持久协议区别</h2>
 
 <p>HTTP/1.0中默认是关闭持久连接的,通过发送Connection: Keep-Alive请求首部来激活Keep-Alive连接。</p>
 
@@ -259,7 +259,7 @@ Keep-Alive: max <span class="o">=</span> 5, timeout <span class="o">=</span> 120
 
 <p>单用户客户端与任何服务器或代理之间的连接数不应该超过2个。一个代理与其它服务器或代码之间应该使用不超过2 * N的活跃并发连接。这是为了提高HTTP响应时间，避免拥塞（冗余的连接并不能代码执行性能的提升）。</p>
 
-<h1 id="http">HTTP管线化连接</h1>
+<h1 id="http管线化连接">HTTP管线化连接</h1>
 
 <p>在使用持久连接的情况下，某个连接上消息的传递类似于</p>
 
@@ -270,36 +270,37 @@ Keep-Alive: max <span class="o">=</span> 5, timeout <span class="o">=</span> 120
 <p>请求1 -&gt; 请求2 -&gt; 请求3 -&gt; 响应1  -&gt; 响应2 -&gt; 响应3</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/10-28-17.png" alt="">
+    <img src="/assets/images/2017/10-11-12/10-28-17.png" alt="" />
 </div>
 
 <p><strong>HTTP管线化连接限制</strong></p>
 
 <ul>
-<li>管线化机制通过持久连接完成，仅HTTP/1.1支持此技术<br></li>
-<li>只有GET和HEAD请求可以进行管线化，而POST则有所限制<br></li>
-<li>初次建立连接时不应启动管线机制，因为对方（服务器）不一定支持HTTP/1.1版本的协议<br></li>
-<li>管线化不会影响响应到来的顺序，如上面的例子所示，响应返回的顺序未改变<br></li>
-<li>HTTP/1.1要求服务器支持管线化，但并不要求服务器端也对响应进行管线化处理，只是要求对于管线化的请求不失败即可<br></li>
-<li>由于上面提到的服务器端问题，开启管线化很可能并不会带来大幅度的性能提升，而且很多服务器端和代理程序对管线化的支持并不好，因此现代浏览器chrome和Firefox默认并未开启管线化支持<br></li>
+  <li>管线化机制通过持久连接完成，仅HTTP/1.1支持此技术</li>
+  <li>只有GET和HEAD请求可以进行管线化，而POST则有所限制</li>
+  <li>初次建立连接时不应启动管线机制，因为对方（服务器）不一定支持HTTP/1.1版本的协议</li>
+  <li>管线化不会影响响应到来的顺序，如上面的例子所示，响应返回的顺序未改变</li>
+  <li>HTTP/1.1要求服务器支持管线化，但并不要求服务器端也对响应进行管线化处理，只是要求对于管线化的请求不失败即可</li>
+  <li>由于上面提到的服务器端问题，开启管线化很可能并不会带来大幅度的性能提升，而且很多服务器端和代理程序对管线化的支持并不好，因此现代浏览器chrome和Firefox默认并未开启管线化支持</li>
 </ul>
 
-<h1 id="close">关闭连接-close</h1>
+<h1 id="关闭连接-close">关闭连接-close</h1>
 
 <p>所有HTTP客户端、服务器或代理都可以在任意时刻关闭一TCP传输连接。通常在一条报文结束时关闭，也有出错的时候。</p>
 
 <p><strong>如何确定传输的实体大小？</strong></p>
 
 <ul>
-<li>当服务器知道消息的长度时，使用消息首部字段Conent-Length<br></li>
-<li>当服务器不知道内容的大小时，使用消息首部字段Transfer-Encoding<br></li>
+  <li>当服务器知道消息的长度时，使用消息首部字段Conent-Length</li>
+  <li>当服务器不知道内容的大小时，使用消息首部字段Transfer-Encoding</li>
 </ul>
 
 <p>Transfer-Encoding 与 Conent-Length 不共存，Transfer-Encoding 优先级高于 Conent-Length</p>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <p><a href="https://www.kafan.cn/edu/5110681.html">https://www.kafan.cn/edu/5110681.html</a></p>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -415,7 +416,7 @@ Keep-Alive: max <span class="o">=</span> 5, timeout <span class="o">=</span> 120
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -569,6 +570,10 @@ Keep-Alive: max <span class="o">=</span> 5, timeout <span class="o">=</span> 120
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

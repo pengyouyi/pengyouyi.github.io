@@ -161,7 +161,7 @@
 		
 		</div>
 		
-		<h1 id="stack">堆stack简介</h1>
+		<h1 id="堆stack简介">堆stack简介</h1>
 
 <p>二叉堆 binary heap</p>
 
@@ -170,29 +170,39 @@
 <p>堆分为两种：</p>
 
 <ul>
-<li><p>最大堆：堆中某个节点的值总是不大于其父节点的值</p></li>
-<li><p>最小堆</p></li>
+  <li>
+    <p>最大堆：堆中某个节点的值总是不大于其父节点的值</p>
+  </li>
+  <li>
+    <p>最小堆</p>
+  </li>
 </ul>
 
 <p>以下都以最大堆讲解。</p>
 
-<h2 id="stack">堆stack复杂度</h2>
+<h2 id="堆stack复杂度">堆stack复杂度</h2>
 
 <ul>
-<li><p>时间复杂度：O(nlog2n)</p></li>
-<li><p>空间复杂度： O(1)</p></li>
-<li><p>稳定性：不稳定</p></li>
+  <li>
+    <p>时间复杂度：O(nlog2n)</p>
+  </li>
+  <li>
+    <p>空间复杂度： O(1)</p>
+  </li>
+  <li>
+    <p>稳定性：不稳定</p>
+  </li>
 </ul>
 
-<h1 id="heapstorage">堆的基本存储-heapstorage</h1>
+<h1 id="堆的基本存储-heapstorage">堆的基本存储-heapstorage</h1>
 
 <p>用数组存储二叉堆</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-30-1-0.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-30-1-0.png" alt="" />
 </div>
 
-<h1 id="shift-up">Shift Up 入队</h1>
+<h1 id="shift-up-入队">Shift Up 入队</h1>
 
 <p>插入一个随机数后，重新排列最大二叉堆的顺序</p>
 
@@ -203,14 +213,16 @@
 <p>（2）插入的数对比它父节点上的数，若比父节点大，两个交换，</p>
 
 <p>（3）重复（2），直到插入的数比父节点小。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">shiftUp</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">shiftUp</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">while</span><span class="p">(</span><span class="nx">k</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">k</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">k</span><span class="p">])</span> <span class="p">{</span>
     <span class="nx">swap</span><span class="p">(</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">k</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span> <span class="p">,</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">k</span><span class="p">]);</span>
     <span class="nx">k</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<h1 id="shift-down">Shift Down 出队</h1>
+</code></pre></div></div>
+
+<h1 id="shift-down-出队">Shift Down 出队</h1>
 
 <p>做法：</p>
 
@@ -221,7 +233,8 @@
 <p>（3）重复（2）直到数A比两个子节点都大</p>
 
 <p>索引从1开始</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">shiftDown</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">shiftDown</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">while</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nx">k</span> <span class="o">&lt;=</span> <span class="nx">count</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="nx">k</span><span class="p">;</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">j</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="nx">count</span> <span class="o">&amp;&amp;</span> <span class="nx">data</span><span class="p">[</span><span class="nx">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">data</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span> <span class="p">{</span>
@@ -234,18 +247,20 @@
     <span class="nx">k</span> <span class="o">=</span> <span class="nx">j</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<h1 id="heapify">构建一个最大堆-Heapify</h1>
+</code></pre></div></div>
+
+<h1 id="构建一个最大堆-heapify">构建一个最大堆-Heapify</h1>
 
 <p><strong>Heapify过程</strong></p>
 
 <p>（1）将一个数组的内容逐一放入堆中；</p>
 
 <p>（2）从第一个不是叶子节点的数(索引为k=n/2)，向上(直到k=1)依次做shiftDown(k)</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* 将最大的元素调整到堆顶 */</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* 将最大的元素调整到堆顶 */</span>
 <span class="cm">/* pos为从当前位置向下遍历所有子节点，len为需要考虑的arr形成大堆顶的长度 */</span>
 <span class="kd">function</span> <span class="nx">AdjustHeap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">pos</span><span class="p">,</span> <span class="nx">len</span><span class="p">){</span>  <span class="c1">// 从索引0开始</span>
-
+    
     <span class="k">while</span><span class="p">(</span><span class="nx">pos</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">){</span>       <span class="c1">//递归遍历所有的子节点</span>
 
       <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">pos</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">//定位到当前节点的左边的子节点</span>
@@ -271,13 +286,14 @@
    <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span><span class="o">=</span><span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
    <span class="nx">arr</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span><span class="o">=</span><span class="nx">temp</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<h1 id="heap-sort">堆排序-heap sort</h1>
+</code></pre></div></div>
+
+<h1 id="堆排序-heap-sort">堆排序-heap sort</h1>
 
 <p>堆排序：原理是，将数组看成一个完全二叉树；</p>
 
-<p>形如：    </p>
-<div class="highlight"><pre><code class="language-" data-lang="">               0
+<p>形如：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>               0
            /      \
          1          2
       /     \    /    \
@@ -285,15 +301,17 @@
   /   \    /
  7     8  9
 
-</code></pre></div>
+</code></pre></div></div>
+
 <p>（1）只需要遍历一半的值，进行循环比对，把最大的节点赋值到根的位置，然后把根部的值和最后一个数值交换，排除最后一个数值</p>
 
 <p>（2）继续打造大顶堆，最终形成一个小顶堆的算法！</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 
@@ -301,13 +319,13 @@
 <span class="c1">// function AdjustHeap(arr, pos, len){</span>
 <span class="c1">//     var swap = arr[pos];      //保存当前节点</span>
 <span class="c1">//     var child = pos * 2 + 1;  //定位到当前节点的左边的子节点</span>
-<span class="c1">//     while(child &lt; len){       //递归遍历所有的子节点</span>
+<span class="c1">//     while(child </span><span class="o">&lt;</span> <span class="nx">len</span><span class="p">){</span>       <span class="c1">//递归遍历所有的子节点</span>
 <span class="c1">//         //判断当前节点是否有右节点，若右节点较大，就采用右节点和当前节点进行比较</span>
-<span class="c1">//         if(child + 1 &lt; len &amp;&amp; arr[child] &lt; arr[child + 1]){</span>
+<span class="c1">//         if(child + 1 </span><span class="o">&lt;</span> <span class="nx">len</span> <span class="o">&amp;&amp;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">child</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">child</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]){</span>
 <span class="c1">//             child += 1;</span>
 <span class="c1">//         }</span>
 <span class="c1">//         //比较当前节点和最大的子节点，小于就交换，交换后将当前节点定位到子节点上</span>
-<span class="c1">//         if(arr[pos] &lt; arr[child]){</span>
+<span class="c1">//         if(arr[pos] </span><span class="o">&lt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">child</span><span class="p">]){</span>
 <span class="c1">//             arr[pos] = arr[child];</span>
 <span class="c1">//             pos = child;</span>
 <span class="c1">//             child = pos * 2 + 1;</span>
@@ -322,7 +340,7 @@
 <span class="cm">/* 将最大的元素调整到堆顶 */</span>
 <span class="cm">/* pos为从当前位置向下遍历所有子节点，len为需要考虑的arr形成大堆顶的长度 */</span>
 <span class="kd">function</span> <span class="nx">AdjustHeap</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">pos</span><span class="p">,</span> <span class="nx">len</span><span class="p">){</span>
-
+    
     <span class="k">while</span><span class="p">(</span><span class="nx">pos</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">){</span>       <span class="c1">//递归遍历所有的子节点</span>
 
       <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">pos</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>  <span class="c1">//定位到当前节点的左边的子节点</span>
@@ -377,13 +395,15 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>堆排序-法二</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 
@@ -430,16 +450,29 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1 id="more">更多-more</h1>
+</code></pre></div></div>
+
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><p><a href="https://segmentfault.com/a/1190000009196232">堆排序 js实现</a></p></li>
-<li><p><a href="https://segmentfault.com/a/1190000004363860">堆和堆排序</a></p></li>
-<li><p><a href="http://blog.csdn.net/ganyingxie123456/article/details/69053478">JS实现堆排序</a></p></li>
-<li><p><a href="http://www.jb51.net/article/83529.htm">图文详解Heap Sort堆排序算法及JavaScript的代码实现</a></p></li>
-<li><p><a href="http://blog.csdn.net/u013063153/article/details/52667542">JavaScript十大经典排序算法</a></p></li>
-<li><p><a href="http://www.jianshu.com/p/7e6589306a27">排序图解：js排序算法实现</a></p></li>
+  <li>
+    <p><a href="https://segmentfault.com/a/1190000009196232">堆排序 js实现</a></p>
+  </li>
+  <li>
+    <p><a href="https://segmentfault.com/a/1190000004363860">堆和堆排序</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.csdn.net/ganyingxie123456/article/details/69053478">JS实现堆排序</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jb51.net/article/83529.htm">图文详解Heap Sort堆排序算法及JavaScript的代码实现</a></p>
+  </li>
+  <li>
+    <p><a href="http://blog.csdn.net/u013063153/article/details/52667542">JavaScript十大经典排序算法</a></p>
+  </li>
+  <li>
+    <p><a href="http://www.jianshu.com/p/7e6589306a27">排序图解：js排序算法实现</a></p>
+  </li>
 </ul>
   
 	</div>
@@ -556,7 +589,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -710,6 +743,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

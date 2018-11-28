@@ -161,24 +161,31 @@
 		
 		</div>
 		
-		<h1 id="bst">二叉搜索树（BST）简介</h1>
+		<h1 id="二叉搜索树bst简介">二叉搜索树（BST）简介</h1>
 
-<p>二叉查找树（Binary Search Tree），（又：二叉搜索树，二叉排序树）它或者是一棵空树，或者是具有下列性质的二叉树： </p>
+<p>二叉查找树（Binary Search Tree），（又：二叉搜索树，二叉排序树）它或者是一棵空树，或者是具有下列性质的二叉树：</p>
 
 <ul>
-<li><p>若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值； </p></li>
-<li><p>若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</p></li>
-<li><p>它的左、右子树也分别为二叉排序树。</p></li>
+  <li>
+    <p>若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；</p>
+  </li>
+  <li>
+    <p>若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；</p>
+  </li>
+  <li>
+    <p>它的左、右子树也分别为二叉排序树。</p>
+  </li>
 </ul>
 
 <p>二分搜索树不一定是完全二叉树</p>
 
 <p>二叉搜索树的基本操作和树的高度成正比，所以如果是一棵完全二叉树的话最坏运行时间为Θ(lgn)，但是若是一个n个节点连接成的线性树，那么最坏运行时间是Θ(n)。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 
@@ -204,13 +211,15 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1 id="insert">二分搜索树的节点插入-insert</h1>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</code></pre></div></div>
+
+<h1 id="二分搜索树的节点插入-insert">二分搜索树的节点插入-insert</h1>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 
@@ -233,41 +242,43 @@
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">insert</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Node</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">root</span> <span class="o">===</span> <span class="kc">null</span><span class="p">);</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">root</span> <span class="o">===</span> <span class="nx">node</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">curNode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">root</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">parent</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">parent</span> <span class="o">=</span> <span class="nx">curNode</span><span class="p">;</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">data</span> <span class="o">&lt;</span> <span class="nx">curNode</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nx">curNode</span> <span class="o">=</span> <span class="nx">curNode</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">curNode</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">parent</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">node</span><span class="p">;</span>
-                    <span class="k">break</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nx">curNode</span> <span class="o">=</span> <span class="nx">curNode</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
-                <span class="k">if</span> <span class="p">(</span><span class="nx">curNode</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">parent</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">node</span><span class="p">;</span>
-                    <span class="k">break</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+	<span class="kd">var</span> <span class="nx">node</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Node</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">root</span> <span class="o">===</span> <span class="kc">null</span><span class="p">);</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">root</span> <span class="o">===</span> <span class="nx">node</span><span class="p">;</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">curNode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">root</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">parent</span><span class="p">;</span>
+		<span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">parent</span> <span class="o">=</span> <span class="nx">curNode</span><span class="p">;</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">data</span> <span class="o">&lt;</span> <span class="nx">curNode</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+				<span class="nx">curNode</span> <span class="o">=</span> <span class="nx">curNode</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">curNode</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">parent</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">node</span><span class="p">;</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nx">curNode</span> <span class="o">=</span> <span class="nx">curNode</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+				<span class="k">if</span> <span class="p">(</span><span class="nx">curNode</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+					<span class="nx">parent</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">node</span><span class="p">;</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="p">}</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 
 <span class="p">}</span>
 
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1 id="find">二分搜索树的查找-find</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">find</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div></div>
 
-    <span class="kd">var</span> <span class="nx">curNode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">root</span><span class="p">;</span>
+<h1 id="二分搜索树的查找-find">二分搜索树的查找-find</h1>
 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">find</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+
+	<span class="kd">var</span> <span class="nx">curNode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">root</span><span class="p">;</span>
+    
   <span class="k">while</span> <span class="p">(</span><span class="nx">curNode</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">curNode</span><span class="p">.</span><span class="nx">data</span> <span class="o">===</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
@@ -284,9 +295,11 @@
   <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
 
 <span class="p">}</span>
-</code></pre></div>
-<h2 id="getmax">查找最大最小值-getMax</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"> <span class="c1">//取最大值</span>
+</code></pre></div></div>
+
+<h2 id="查找最大最小值-getmax">查找最大最小值-getMax</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">//取最大值</span>
 <span class="kd">function</span> <span class="nx">getMax</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="kd">var</span> <span class="nx">currNode</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">root</span><span class="p">;</span>
     <span class="k">while</span><span class="p">(</span><span class="nx">currNode</span><span class="p">.</span><span class="nx">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">){</span>
@@ -303,33 +316,35 @@
     <span class="p">}</span>
     <span class="k">return</span> <span class="nx">currNode</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<h1 id="traversal">二分搜索树的遍历-traversal</h1>
+</code></pre></div></div>
+
+<h1 id="二分搜索树的遍历-traversal">二分搜索树的遍历-traversal</h1>
 
 <p>（深度优先遍历）</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/12-06-1.png" alt="">
+    <img src="/assets/images/2017/10-11-12/12-06-1.png" alt="" />
 </div>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/12-06-2.png" alt="">
+    <img src="/assets/images/2017/10-11-12/12-06-2.png" alt="" />
 </div>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/12-06-3.png" alt="">
+    <img src="/assets/images/2017/10-11-12/12-06-3.png" alt="" />
 </div>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/12-06-4.png" alt="">
+    <img src="/assets/images/2017/10-11-12/12-06-4.png" alt="" />
 </div>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//前序遍历</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//前序遍历</span>
 <span class="kd">function</span> <span class="nx">preOrder</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">node</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">preOrder</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">node</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">preOrder</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">left</span><span class="p">);</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">preOrder</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">right</span><span class="p">);</span>
-    <span class="p">}</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">//中序遍历</span>
@@ -349,9 +364,11 @@
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<h1 id="deletion">二分搜索树节点的删除-Deletion</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">remove</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<h1 id="二分搜索树节点的删除-deletion">二分搜索树节点的删除-Deletion</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">remove</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">root</span> <span class="o">=</span> <span class="nx">removeNode</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">root</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">removeNode</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
@@ -381,17 +398,19 @@
      <span class="nx">node</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">removeNode</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
      <span class="k">return</span> <span class="nx">node</span><span class="p">;</span>
   <span class="p">}</span>
-
+  
   <span class="k">else</span> <span class="p">{</span>
      <span class="nx">node</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">removeNode</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">right</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
      <span class="k">return</span> <span class="nx">node</span><span class="p">;</span>
   <span class="p">}</span> 
 <span class="p">}</span>
-</code></pre></div>
-<h1 id="all">二分搜索树完整代码-all</h1>
+</code></pre></div></div>
+
+<h1 id="二分搜索树完整代码-all">二分搜索树完整代码-all</h1>
 
 <p>BSTNode.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
     <span class="s2">"use strict"</span><span class="p">;</span>
 
     <span class="kd">function</span> <span class="nx">Node</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">right</span><span class="p">){</span>
@@ -402,9 +421,11 @@
 
     <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">Node</span><span class="p">;</span>
 <span class="p">})();</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>BSTree.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
     <span class="s2">"use strict"</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">Node</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"./lib/BSTNode"</span><span class="p">);</span>
 
@@ -543,11 +564,12 @@
 
     <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">BSTree</span><span class="p">;</span>
 <span class="p">})();</span>
-</code></pre></div>
-<h1 id="more">更多-more</h1>
+</code></pre></div></div>
+
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><a href="https://segmentfault.com/a/1190000003810746">segmentfault 二叉搜索树（BST）的javascript实现</a></li>
+  <li><a href="https://segmentfault.com/a/1190000003810746">segmentfault 二叉搜索树（BST）的javascript实现</a></li>
 </ul>
   
 	</div>
@@ -664,7 +686,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -818,6 +840,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -161,57 +161,56 @@
 		
 		</div>
 		
-		<h1 id="handlebars-js">handlebars.js初学</h1>
+		<h1 id="handlebarsjs初学">handlebars.js初学</h1>
 
 <p><strong>a.简介-introduction</strong></p>
 
 <p>Handlebars 是 JavaScript 一个语义模板库，通过对view和data的分离来快速构建web模板。</p>
 
-<p>它采用&quot;Logic-less template&quot;（无逻辑模版）的思路，在加载时被预编译，而不是到了客户端执行到代码时再去编译，这样可以保证模板加载和运行的速度。</p>
+<p>它采用”Logic-less template”（无逻辑模版）的思路，在加载时被预编译，而不是到了客户端执行到代码时再去编译，这样可以保证模板加载和运行的速度。</p>
 
 <p>利用Handlebars处理HTML模板时，一般步骤如下：</p>
 
 <ol>
-<li>获取模板内容</li>
-<li>预编译模板</li>
-<li>模板数据填充</li>
-<li>将结果追加到页面中</li>
+  <li>获取模板内容</li>
+  <li>预编译模板</li>
+  <li>模板数据填充</li>
+  <li>将结果追加到页面中</li>
 </ol>
 
 <p>Handlebars兼容Mustache，你可以在Handlebars中导入Mustache模板。</p>
 
 <p><strong>b.安装-install</strong></p>
 
-<p>去handlebarsjs官方网站<a href="http://handlebarsjs.com/">http://handlebarsjs.com/</a> 直接下载handlebars.js,用&lt;script&gt;标签引入, </p>
+<p>去handlebarsjs官方网站http://handlebarsjs.com/ 直接下载handlebars.js,用&lt;script&gt;标签引入,</p>
 
 <p>也可通过NPM和Bower安装,详见<a href="http://handlebarsjs.com/installation.html">http://handlebarsjs.com/installation.html</a></p>
 
 <h1 id="getting-started">Getting Started</h1>
-
 <p>Handlebars expressions 是handlebars模板中最基本的单元，使用方法是加两个花括号{{value}}, handlebars模板会自动匹配相应的数值，对象甚至是函数</p>
 
 <p>例如:</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
 7
-8</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"entry"</span><span class="nt">&gt;</span>
+8
+</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"entry"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1&gt;</span>{{title}}<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"body"</span><span class="nt">&gt;</span>
     
       {{body}}
     
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/div&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>你可以使用&quot;script&quot;标签引入handlebars模板：</p>
+<p>你可以使用”script”标签引入handlebars模板：</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -220,30 +219,30 @@
 7
 8
 9
-10</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">id=</span><span class="s">"entry-template"</span> <span class="na">type=</span><span class="s">"text/x-handlebars-template"</span><span class="nt">&gt;</span>
-  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"entry"</span><span class="o">&gt;</span>
+10
+</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">id=</span><span class="s">"entry-template"</span> <span class="na">type=</span><span class="s">"text/x-handlebars-template"</span><span class="nt">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kd">class</span><span class="o">=</span><span class="s2">"entry"</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"body"</span><span class="o">&gt;</span>
+</span>    <span class="o">&lt;</span><span class="nx">div</span> <span class="kd">class</span><span class="o">=</span><span class="s2">"body"</span><span class="o">&gt;</span>
       
         <span class="p">{{</span><span class="nx">body</span><span class="p">}}</span>
       
     <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
-</span><span class="nt">&lt;/script&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+</span><span class="nt">&lt;/script&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>在javascript中使用Handlebars.compile编译模板</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2</pre></td><td class="code"><pre>var source   = $("#entry-template").html();
-var template = Handlebars.compile(source);<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre>var source   = $("#entry-template").html();
+var template = Handlebars.compile(source);</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>你也可以预编译你的模板，然后只需引入更小的运行时库（handlebars.runtime.js），避免在浏览器中编译，提高性能，这在移动设备中显得更重要。</p>
 
 <p><strong>完整例子-直接在HTML中渲染</strong></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -269,7 +268,8 @@ var template = Handlebars.compile(source);<span class="w">
 24
 25
 26
-27</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+27
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -295,12 +295,11 @@ var template = Handlebars.compile(source);<span class="w">
 <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"entry"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">html</span><span class="p">;</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p><strong>完整例子-借用&quot;script&quot;标签</strong></p>
+<p><strong>完整例子-借用”script”标签</strong></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -331,7 +330,8 @@ var template = Handlebars.compile(source);<span class="w">
 29
 30
 31
-32</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+32
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -342,9 +342,9 @@ var template = Handlebars.compile(source);<span class="w">
 <span class="nt">&lt;body&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;script </span><span class="na">id=</span><span class="s">"entry-template"</span> <span class="na">type=</span><span class="s">"text/x-handlebars-template"</span><span class="nt">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"entry"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="kd">class</span><span class="o">=</span><span class="s2">"entry"</span><span class="o">&gt;</span>
             <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
-</span>            <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"body"</span><span class="o">&gt;</span>
+</span>            <span class="o">&lt;</span><span class="nx">div</span> <span class="kd">class</span><span class="o">=</span><span class="s2">"body"</span><span class="o">&gt;</span>
               <span class="p">{{</span><span class="nx">body</span><span class="p">}}</span>
             <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
@@ -362,29 +362,27 @@ var template = Handlebars.compile(source);<span class="w">
 <span class="nx">$</span><span class="p">(</span><span class="s2">"#demo"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong>results in</strong></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"entry"</span><span class="nt">&gt;</span>
+6
+</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"entry"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1&gt;</span>My New Post<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"body"</span><span class="nt">&gt;</span>
     This is my first post!
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/div&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="html">HTML编码</h1>
+<h1 id="html编码">HTML编码</h1>
+<p>在handlebars里，{{expression}}会返回一个经过编码的HTML，也就是说，如果取出的内容中包含html标签，会被转码成纯文本，不会被当成html解析，实际上就是做了类似这样的操作：把<code class="highlighter-rouge">&lt;</code>用 <code class="highlighter-rouge">&amp;lt;</code> 替代。如果你不希望被编码，可以使用{{{</p>
 
-<p>在handlebars里，{{expression}}会返回一个经过编码的HTML，也就是说，如果取出的内容中包含html标签，会被转码成纯文本，不会被当成html解析，实际上就是做了类似这样的操作：把<code>&lt;</code>用 <code>&amp;lt;</code> 替代。如果你不希望被编码，可以使用{{{</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -410,7 +408,8 @@ var template = Handlebars.compile(source);<span class="w">
 24
 25
 26
-27</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+27
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -436,50 +435,48 @@ var template = Handlebars.compile(source);<span class="w">
 <span class="nx">$</span><span class="p">(</span><span class="s2">"#entry"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong>results in</strong></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"entry"</span><span class="nt">&gt;</span>
+6
+</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"entry"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;h1&gt;</span>All About <span class="ni">&amp;lt;</span>p<span class="ni">&amp;gt;</span> Tags<span class="nt">&lt;/h1&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"body"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;p&gt;</span>This is a post about <span class="ni">&amp;lt;</span>p<span class="ni">&amp;gt;</span> tags<span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/div&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>handlebars不会编码Handlebars.SafeString。如果你自定义一个helper，返回一段HTML代码，你需要返回new Handlebars.SafeString(result)。此时，你需要手动对内容进行编码：</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
 7
-8</pre></td><td class="code"><pre>Handlebars.registerHelper('link', function(text, url) {
+8
+</pre></td><td class="code"><pre>Handlebars.registerHelper('link', function(text, url) {
   text = Handlebars.Utils.escapeExpression(text);
   url  = Handlebars.Utils.escapeExpression(url);
 
   var result = '<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"' + url + '"</span><span class="nt">&gt;</span>' + text + '<span class="nt">&lt;/a&gt;</span>';
 
   return new Handlebars.SafeString(result);
-});<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+});</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>这里将会对传入的参数进行编码，返回值是“安全的”，所以就算你不使用{{{，handlebars也不会再次编码了。</p>
-
-<h1 id="block-expressions">块表达式-Block Expressions</h1>
+<h1 id="块表达式-block-expressions">块表达式-Block Expressions</h1>
 
 <p>块表达式在Handlebars中由一个代码块，一个开标志{{#}}，一个闭合标志{{/}}组成。</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -520,7 +517,8 @@ var template = Handlebars.compile(source);<span class="w">
 39
 40
 41
-42</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+42
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -561,33 +559,31 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 <span class="nx">$</span><span class="p">(</span><span class="s2">"#demo"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong>results in</strong></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
-5</pre></td><td class="code"><pre><span class="nt">&lt;ul&gt;</span>
+5
+</pre></td><td class="code"><pre><span class="nt">&lt;ul&gt;</span>
   <span class="nt">&lt;li&gt;</span>Yehuda Katz<span class="nt">&lt;/li&gt;</span>
   <span class="nt">&lt;li&gt;</span>Carl Lerche<span class="nt">&lt;/li&gt;</span>
   <span class="nt">&lt;li&gt;</span>Alan Johnson<span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/ul&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>当我们注册了一个自定义块辅助函数时，Handlebars自动在回调函数中添加了一个可选择对象作为最后一个参数。这个可选择对象拥有一个fn方法，一个hash对象，以及一个inverse方法</p>
 
 <p>options.fn方法：</p>
 
 <p>fn方法接收一个对象（你的数据）作为它在自定义辅助函数块模板中作为上下文来使用的参数。你可以传递任何数据对象，或者如果你想使用引用模板的同样的上下文</p>
-
-<h1 id="paths">路径-paths</h1>
+<h1 id="路径-paths">路径-paths</h1>
 
 <p><strong>Handlebars支持简单的路径,也支持嵌套路径，可以查找下一级的属性</strong></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -621,7 +617,8 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 32
 33
 34
-35</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+35
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -655,12 +652,11 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 <span class="nx">$</span><span class="p">(</span><span class="s2">".entry"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong>嵌套路径同样支持../</strong></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -696,7 +692,8 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 34
 35
 36
-37</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+37
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -732,12 +729,11 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 <span class="nx">$</span><span class="p">(</span><span class="s2">".entry"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">html</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="or">模板注释 {{! }} or {{!-- --}}</h1>
+<h1 id="模板注释---or--">模板注释 {{! }} or {{!– –}}</h1>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -747,7 +743,8 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 8
 9
 10
-11</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"entry"</span><span class="nt">&gt;</span>
+11
+</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"entry"</span><span class="nt">&gt;</span>
 
     {{! 我是单行注释 }}
 
@@ -757,12 +754,11 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
           多行注释
     --}}
 
-<span class="nt">&lt;/div&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/div&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="each">each循环</h1>
+<h1 id="each循环">each循环</h1>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -811,7 +807,8 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 47
 48
 49
-50</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+50
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -860,14 +857,12 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
       <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="with">指定上下文:with</h1>
-
+<h1 id="指定上下文with">指定上下文:with</h1>
 <p>with指令可以转移上下文环境，让当前的上下文进入到一个属性中</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -935,7 +930,8 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 66
 67
 68
-69</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+69
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -1003,35 +999,34 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>{{#with favorite}}表示进入到favorite属性的上下文中，而favorite属性中又是一个list，因此可以用{{#each this}}进行遍历，表示遍历当前上下文环境，对于每次遍历，都是map结构，取name属性，最终拿到所有兴趣爱好。</p>
 
 <p>with可以结合handlebars的路径访问一起使用。Handlebars提供了.来访问属性也可以使用../来访问父级属性。</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
 7
-8</pre></td><td class="code"><pre>{{#with person}}
+8
+</pre></td><td class="code"><pre>{{#with person}}
     <span class="nt">&lt;h1&gt;</span>{{../company.name}}<span class="nt">&lt;/h1&gt;</span>
 {{/with}}
 //对应的json数据
 {
     "person": { "name": "Alan" },
      company: {"name": "Rad, Inc." }
-}<span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+}</pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="this">this的使用</h1>
+<h1 id="this的使用">this的使用</h1>
 
 <p>this表示当前的上下文</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -1063,7 +1058,8 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 30
 31
 32
-33</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+33
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -1095,12 +1091,11 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
       <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="if-unless">if、unless</h1>
+<h1 id="ifunless">if、unless</h1>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -1141,7 +1136,8 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 39
 40
 41
-42</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+42
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -1182,16 +1178,15 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>对于if指令，如果返回的为undefined、null、&quot;&quot;、[ ]、{ }、false任意一个，都会导致最终结果为假。</p>
+<p>对于if指令，如果返回的为undefined、null、”“、[ ]、{ }、false任意一个，都会导致最终结果为假。</p>
 
 <p>unless则是和if指令相反，当判断的值为false时他会渲染DOM</p>
 
-<h1 id="function-helper">自定义函数辅助函数（function helper）</h1>
+<h1 id="自定义函数辅助函数function-helper">自定义函数辅助函数（function helper）</h1>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -1235,7 +1230,8 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 42
 43
 44
-45</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+45
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -1279,16 +1275,15 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 <span class="p">});</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="more">更多-more</h1>
-
+<h1 id="更多-more">更多-more</h1>
 <ul>
-<li><a href="http://handlebarsjs.com/">http://handlebarsjs.com/</a></li>
-<li><a href="http://www.ido321.com/1629.html">http://www.ido321.com/1629.html</a></li>
-<li><a href="http://www.html-js.com/article/The-Javascript-template-of-Handlebarsjs-junior-tutorial-learning-Javascript-template-Handlebarsjs-two">http://www.html-js.com/article/The-Javascript-template-of-Handlebarsjs-junior-tutorial-learning-Javascript-template-Handlebarsjs-two</a></li>
+  <li><a href="http://handlebarsjs.com/">http://handlebarsjs.com/</a></li>
+  <li><a href="http://www.ido321.com/1629.html">http://www.ido321.com/1629.html</a></li>
+  <li><a href="http://www.html-js.com/article/The-Javascript-template-of-Handlebarsjs-junior-tutorial-learning-Javascript-template-Handlebarsjs-two">http://www.html-js.com/article/The-Javascript-template-of-Handlebarsjs-junior-tutorial-learning-Javascript-template-Handlebarsjs-two</a></li>
 </ul>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -1404,7 +1399,7 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -1558,6 +1553,10 @@ option包含一个属性fn，他可以调用一个context就像普通模板一�
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

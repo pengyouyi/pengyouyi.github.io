@@ -161,91 +161,116 @@
 		
 		</div>
 		
-		<h1 id="vue">vue生命周期</h1>
+		<h1 id="vue生命周期">vue生命周期</h1>
 
-<p><img src="https://cn.vuejs.org/images/lifecycle.png" alt="https://cn.vuejs.org/images/lifecycle.png"></p>
+<p><img src="https://cn.vuejs.org/images/lifecycle.png" alt="https://cn.vuejs.org/images/lifecycle.png" /></p>
 
 <p><a href="https://cn.vuejs.org/v2/guide/instance.html#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%9B%BE%E7%A4%BA">vue生命周期图示</a></p>
 
-<h2 id="vue">什么是vue生命周期？</h2>
+<h2 id="什么是vue生命周期">什么是vue生命周期？</h2>
 
 <p>Vue 实例从创建到销毁的过程，就是生命周期。</p>
 
 <p>也就是从开始创建、初始化数据、编译模板、挂载Dom→渲染、更新→渲染、卸载等一系列过程，我们称这是 Vue 的生命周期。</p>
 
-<h2 id="vue">vue生命周期的作用是什么？</h2>
+<h2 id="vue生命周期的作用是什么">vue生命周期的作用是什么？</h2>
 
 <p>它的生命周期中有多个事件钩子，让我们在控制整个Vue实例的过程时更容易形成好的逻辑。</p>
 
-<h2 id="vue">请详细说下你对vue生命周期的理解？</h2>
+<h2 id="请详细说下你对vue生命周期的理解">请详细说下你对vue生命周期的理解？</h2>
 
 <p>总共分为8个阶段:</p>
 
-<p>beforeCreate（创建前）, created（创建后） </p>
+<p>beforeCreate（创建前）, created（创建后）</p>
 
-<p>beforeMount（载入前）, mounted（载入后） </p>
+<p>beforeMount（载入前）, mounted（载入后）</p>
 
-<p>beforeUpdate（更新前）, updated（更新后） </p>
+<p>beforeUpdate（更新前）, updated（更新后）</p>
 
 <p>beforeDestroy（销毁前）, destroyed（销毁后）</p>
 
-<h3 id="beforecreate-created">beforeCreate（创建前）/ created（创建后）：</h3>
+<h3 id="beforecreate创建前-created创建后">beforeCreate（创建前）/ created（创建后）：</h3>
 
 <ul>
-<li><p>beforeCreate: vue实例的挂载元素 \$el 和 数据对象data 都没有初始化 全部为 undefined </p></li>
-<li><p>created: data 初始化完成，但 $el 没有初始化 </p></li>
+  <li>
+    <p>beforeCreate: vue实例的挂载元素 $el 和 数据对象data 都没有初始化 全部为 undefined </p>
+  </li>
+  <li>
+    <p>created: data 初始化完成，但 $el 没有初始化 </p>
+  </li>
 </ul>
 
-<h3 id="beforemount-mounted">beforeMount（载入前）/ mounted（载入后）：</h3>
+<h3 id="beforemount载入前-mounted载入后">beforeMount（载入前）/ mounted（载入后）：</h3>
 
 <ul>
-<li>beforeMount: vue实例的$el和data都初始化了，但还是挂载之前为虚拟的dom节点，eg：</li>
-</ul>
-<div class="highlight"><pre><code class="language-" data-lang="">&lt;div&gt;&lt;/div&gt;
-</code></pre></div>
-<ul>
-<li>mounted: vue实例挂载完成(DOM 加载完成)，data.message成功渲染。</li>
+  <li>beforeMount: vue实例的$el和data都初始化了，但还是挂载之前为虚拟的dom节点，eg：</li>
 </ul>
 
-<h3 id="beforeupdate-updated">beforeUpdate（更新前）/ updated（更新后）：</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div&gt;&lt;/div&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>mounted: vue实例挂载完成(DOM 加载完成)，data.message成功渲染。</li>
+</ul>
+
+<h3 id="beforeupdate更新前-updated更新后">beforeUpdate（更新前）/ updated（更新后）：</h3>
 
 <p>当data变化时，会触发beforeUpdate和updated方法。</p>
 
 <ul>
-<li><p>beforeUpdate: 渲染完成，并监测到data发生变化，在变化的数据重新渲染视图之前会触发，这也是重新渲染之前最后修改数据的机会 </p></li>
-<li><p>updated: 监测到data发生变化，并完成渲染更新视图之后触发</p></li>
+  <li>
+    <p>beforeUpdate: 渲染完成，并监测到data发生变化，在变化的数据重新渲染视图之前会触发，这也是重新渲染之前最后修改数据的机会 </p>
+  </li>
+  <li>
+    <p>updated: 监测到data发生变化，并完成渲染更新视图之后触发</p>
+  </li>
 </ul>
 
-<h3 id="beforedestroy-destroyed">beforeDestroy（销毁前）/ destroyed（销毁后）：</h3>
+<h3 id="beforedestroy销毁前-destroyed销毁后">beforeDestroy（销毁前）/ destroyed（销毁后）：</h3>
 
 <p>在执行destroy方法后，对data的改变不会再触发周期函数，说明此时vue实例已经解除了事件监听以及和dom的绑定，但是dom结构依然存在</p>
 
 <ul>
-<li><p>beforeDestory: 实例销毁之前调用 ， 实例仍然完全可用。 </p></li>
-<li><p>destroyed: 实例销毁后调用。调用后，对data的改变不会再触发周期函数，说明此时vue实例已经解除了事件监听以及和dom的绑定，但是dom结构依然存在</p></li>
+  <li>
+    <p>beforeDestory: 实例销毁之前调用 ， 实例仍然完全可用。 </p>
+  </li>
+  <li>
+    <p>destroyed: 实例销毁后调用。调用后，对data的改变不会再触发周期函数，说明此时vue实例已经解除了事件监听以及和dom的绑定，但是dom结构依然存在</p>
+  </li>
 </ul>
 
-<h2 id=">第一次页面加载会触发哪几个钩子？</h2>
+<h2 id="第一次页面加载会触发哪几个钩子">第一次页面加载会触发哪几个钩子？</h2>
 
 <p>第一次页面加载时会触发 beforeCreate, created, beforeMount, mounted 这几个钩子</p>
 
-<h2 id="dom">DOM 渲染在 哪个周期中就已经完成？</h2>
+<h2 id="dom-渲染在-哪个周期中就已经完成">DOM 渲染在 哪个周期中就已经完成？</h2>
 
 <p>DOM 渲染在 mounted 中就已经完成了</p>
 
-<h2 id="scene">简单描述每个周期具体适合哪些场景-scene？</h2>
+<h2 id="简单描述每个周期具体适合哪些场景-scene">简单描述每个周期具体适合哪些场景-scene？</h2>
 
 <ul>
-<li><p>beforeCreate: 可以在此时加一些loading效果，在created时进行移除</p></li>
-<li><p>created : (可以调用实例的数据和实例的方法). 初始化完成时的事件写在这里，如在这结束loading事件，需要异步请求数据的方法可以在此时执行</p></li>
-<li><p>mounted : 用于初始数据的dom渲染,获取到DOM节点（需要操作dom的方法放这里）</p></li>
-<li><p>updated : 用于对数据更新做统一处理 （如果想分别区分不同的数据更新，同时进行dom操作就使用 $nextTick）</p></li>
-<li><p>beforeDestroy : 可以做一个确认停止事件的确认框 </p></li>
+  <li>
+    <p>beforeCreate: 可以在此时加一些loading效果，在created时进行移除</p>
+  </li>
+  <li>
+    <p>created : (可以调用实例的数据和实例的方法). 初始化完成时的事件写在这里，如在这结束loading事件，需要异步请求数据的方法可以在此时执行</p>
+  </li>
+  <li>
+    <p>mounted : 用于初始数据的dom渲染,获取到DOM节点（需要操作dom的方法放这里）</p>
+  </li>
+  <li>
+    <p>updated : 用于对数据更新做统一处理 （如果想分别区分不同的数据更新，同时进行dom操作就使用 $nextTick）</p>
+  </li>
+  <li>
+    <p>beforeDestroy : 可以做一个确认停止事件的确认框</p>
+  </li>
 </ul>
 
 <p><a href="https://blog.csdn.net/m0_37805167/article/details/79655346">vue 生命周期 应用场景 概述</a></p>
 
 <p><a href="https://www.cnblogs.com/Breaveleon/p/6664503.html">vue 生命周期使用场景</a></p>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -363,7 +388,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -517,6 +542,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

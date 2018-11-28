@@ -161,55 +161,56 @@
 		
 		</div>
 		
-		<h1 id="graph">图的基础-graph</h1>
+		<h1 id="图的基础-graph">图的基础-graph</h1>
 
-<p>图和散列表、二叉树一样，是一种<code>非线性数据结构</code>。</p>
+<p>图和散列表、二叉树一样，是一种<code class="highlighter-rouge">非线性数据结构</code>。</p>
 
-<p><code>图由一系列顶点以及连接顶点的边构成</code>。</p>
+<p><code class="highlighter-rouge">图由一系列顶点以及连接顶点的边构成</code>。</p>
 
-<p>如果图中每两个顶点之间都有路径相连，则称该图是<code>连通</code>的。</p>
+<p>如果图中每两个顶点之间都有路径相连，则称该图是<code class="highlighter-rouge">连通</code>的。</p>
 
-<h2 id="classification">图的分类-classification</h2>
+<h2 id="图的分类-classification">图的分类-classification</h2>
 
 <p>㈠</p>
 
 <blockquote>
-<p>无向图<br><br>
+  <p>无向图<br />
 有向图</p>
 </blockquote>
 
 <p>㈡</p>
 
 <blockquote>
-<p>有权图<br><br>
+  <p>有权图<br />
 无权图</p>
 </blockquote>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/12-16-1.png" alt="">
+    <img src="/assets/images/2017/10-11-12/12-16-1.png" alt="" />
 </div>
 
-<h1 id="representation">图的表示-representation</h1>
+<h1 id="图的表示-representation">图的表示-representation</h1>
 
 <ul>
-<li>邻接表：适合表示稀疏图<br></li>
-<li>邻接矩阵：适合表示稠密图</li>
+  <li>邻接表：适合表示稀疏图</li>
+  <li>邻接矩阵：适合表示稠密图</li>
 </ul>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/12-16-2.png" alt="">
+    <img src="/assets/images/2017/10-11-12/12-16-2.png" alt="" />
 </div>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/12-16-3.png" alt="">
+    <img src="/assets/images/2017/10-11-12/12-16-3.png" alt="" />
 </div>
 
-<h2 id="adjacency-list">邻接表-Adjacency list</h2>
+<h2 id="邻接表-adjacency-list">邻接表-Adjacency list</h2>
 
 <p>邻接表-表示无向图</p>
 
 <p>创建图类</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Graph</span><span class="p">(</span><span class="nx">v</span><span class="p">){</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Graph</span><span class="p">(</span><span class="nx">v</span><span class="p">){</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">vertices</span> <span class="o">=</span> <span class="nx">v</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">edges</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">adj</span> <span class="o">=</span> <span class="p">[];</span>
@@ -228,16 +229,19 @@
     <span class="k">this</span><span class="p">.</span><span class="nx">dfs</span> <span class="o">=</span> <span class="nx">dfs</span><span class="p">;</span> <span class="c1">// 深度优先搜索</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">bfs</span> <span class="o">=</span> <span class="nx">bfs</span><span class="p">;</span> <span class="c1">// 广度优先搜索</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>添加边</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"> <span class="kd">function</span> <span class="nx">addEdge</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span><span class="nx">w</span><span class="p">){</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">function</span> <span class="nx">addEdge</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span><span class="nx">w</span><span class="p">){</span>
      <span class="k">this</span><span class="p">.</span><span class="nx">adj</span><span class="p">[</span><span class="nx">v</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">w</span><span class="p">);</span>
      <span class="k">this</span><span class="p">.</span><span class="nx">adj</span><span class="p">[</span><span class="nx">w</span><span class="p">].</span><span class="nx">push</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
      <span class="k">this</span><span class="p">.</span><span class="nx">edges</span><span class="o">++</span><span class="p">;</span>
  <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>遍历</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">showGraph</span><span class="p">(){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showGraph</span><span class="p">(){</span>
     <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">vertices</span><span class="p">;</span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
         <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">j</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">vertices</span><span class="p">;</span><span class="nx">j</span><span class="o">++</span><span class="p">){</span>
             <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">adj</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="nx">j</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span>
@@ -246,27 +250,29 @@
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<h1 id="traversal">图的遍历-Traversal</h1>
+</code></pre></div></div>
+
+<h1 id="图的遍历-traversal">图的遍历-Traversal</h1>
 
 <ul>
-<li>深度优先搜索（Depth-First Search，DFS）<br></li>
-<li>广度优先搜索（Breadth-First Search，BFS）</li>
+  <li>深度优先搜索（Depth-First Search，DFS）</li>
+  <li>广度优先搜索（Breadth-First Search，BFS）</li>
 </ul>
 
-<h2 id="dfs">深度优先搜索-DFS</h2>
+<h2 id="深度优先搜索-dfs">深度优先搜索-DFS</h2>
 
 <p>图的深度优先遍历 - 复杂度</p>
 
 <ul>
-<li>稀疏图-邻接表：O(V + E)<br></li>
-<li>稠密图-邻接矩阵：O(V^2)</li>
+  <li>稀疏图-邻接表：O(V + E)</li>
+  <li>稠密图-邻接矩阵：O(V^2)</li>
 </ul>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/12-16-4.png" alt="">
+    <img src="/assets/images/2017/10-11-12/12-16-4.png" alt="" />
 </div>
-<div class="highlight"><pre><code class="language-js" data-lang="js"> <span class="c1">//深度优先搜索</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">//深度优先搜索</span>
 <span class="kd">function</span> <span class="nx">dfs</span><span class="p">(</span><span class="nx">v</span><span class="p">){</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">marked</span><span class="p">[</span><span class="nx">v</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
     <span class="c1">//输出一下 </span>
@@ -281,15 +287,17 @@
             <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
-<h2 id="bfs">广度优先搜索-BFS</h2>
+</code></pre></div></div>
+
+<h2 id="广度优先搜索-bfs">广度优先搜索-BFS</h2>
 
 <p>广度优先遍历求出了无权图的最短路径</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/12-16-5.png" alt="">
+    <img src="/assets/images/2017/10-11-12/12-16-5.png" alt="" />
 </div>
-<div class="highlight"><pre><code class="language-js" data-lang="js">  <span class="c1">//广度优先</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">//广度优先</span>
  <span class="kd">function</span> <span class="nx">bfs</span><span class="p">(</span><span class="nx">s</span><span class="p">){</span>
      <span class="kd">var</span> <span class="nx">queue</span> <span class="o">=</span> <span class="p">[];</span>
      <span class="k">this</span><span class="p">.</span><span class="nx">marked</span><span class="p">[</span><span class="nx">s</span><span class="p">]</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
@@ -308,9 +316,11 @@
          <span class="p">}</span>
      <span class="p">}</span>        
  <span class="p">}</span>
-</code></pre></div>
-<h1 id="demo">完整demo</h1>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</code></pre></div></div>
+
+<h1 id="完整demo">完整demo</h1>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
 <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -420,15 +430,16 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<h1 id="application">更多无权图的应用-application</h1>
+</code></pre></div></div>
+
+<h1 id="更多无权图的应用-application">更多无权图的应用-application</h1>
 
 <p>flood fill</p>
 
 <p>扫雷</p>
 
-<p>走迷宫，<a href="http://blog.csdn.net/scargtt/article/details/71078275">迷宫生成</a>，<br>
-迷宫的本质是一颗树 <br>
+<p>走迷宫，<a href="http://blog.csdn.net/scargtt/article/details/71078275">迷宫生成</a>，
+迷宫的本质是一颗树 
 迷宫生成，是一个生成树的过程</p>
 
 <p>欧拉路径</p>
@@ -439,12 +450,18 @@
 
 <p>地图填色问题</p>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><p><a href="http://blog.csdn.net/future_todo/article/details/52765097">blog.csdn javascript数据结构8-图（Graph）</a></p></li>
-<li><p><a href="https://www.cnblogs.com/chengyunshen/p/7191930.html">cnblogs JavaScript数据结构-17.图结构</a></p></li>
-<li><p><a href="https://segmentfault.com/a/1190000011216330">segmentfault 学习JavaScript数据结构与算法 — 图</a></p></li>
+  <li>
+    <p><a href="http://blog.csdn.net/future_todo/article/details/52765097">blog.csdn javascript数据结构8-图（Graph）</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.cnblogs.com/chengyunshen/p/7191930.html">cnblogs JavaScript数据结构-17.图结构</a></p>
+  </li>
+  <li>
+    <p><a href="https://segmentfault.com/a/1190000011216330">segmentfault 学习JavaScript数据结构与算法 — 图</a></p>
+  </li>
 </ul>
   
 	</div>
@@ -561,7 +578,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>3</sup></a></li>
 		  
 		
 		  
@@ -715,6 +732,10 @@
 		
 			
 				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
 			
 		
 		</ul>

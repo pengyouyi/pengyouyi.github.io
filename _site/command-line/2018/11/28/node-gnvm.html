@@ -7,7 +7,7 @@
     
     
     
-    <title>慕课网-前端JavaScript面试技巧(双越)-作用域、闭包 | 彭友谊的博客</title>
+    <title>windows下管理多个版本nodejs-gnvm | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="慕课网-前端JavaScript面试技巧(双越)-作用域、闭包">
-    <meta property="og:url" content="/js/2018/06/14/muke-primary-interview-shuangyue-bibao">
+    <meta property="og:title" content="windows下管理多个版本nodejs-gnvm">
+    <meta property="og:url" content="/command-line/2018/11/28/node-gnvm">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="慕课网-前端JavaScript面试技巧(双越)-作用域、闭包">
+    <meta property="og:description" content="windows下管理多个版本nodejs-gnvm">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="慕课网-前端JavaScript面试技巧(双越)-作用域、闭包">
+    <meta name="twitter:title" content="windows下管理多个版本nodejs-gnvm">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -142,14 +142,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2018/06/14/muke-primary-interview-shuangyue-bibao" title="慕课网-前端JavaScript面试技巧(双越)-作用域、闭包" itemprop="url">慕课网-前端JavaScript面试技巧(双越)-作用域、闭包</a>
+      <a href="/command-line/2018/11/28/node-gnvm" title="windows下管理多个版本nodejs-gnvm" itemprop="url">windows下管理多个版本nodejs-gnvm</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2018-06-14 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-06-14</time>
+    <time datetime="2018-11-28 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-11-28</time>
     
   </p>
 </header>
@@ -161,241 +161,70 @@
 		
 		</div>
 		
-		<p>慕课网学习笔记-前端JavaScript面试技巧(双越)- 第3章 JS基础知识（中）- 作用域、闭包</p>
+		<h1 id="windows下管理多个版本nodejs-gnvm">windows下管理多个版本nodejs-gnvm</h1>
 
-<h1 id="question">question</h1>
+<h2 id="下载gnvm">下载GNVM</h2>
 
-<p><strong>题目：</strong></p>
+<p><a href="http://ksria.com/gnvm/">gnvm官网</a></p>
 
-<p>1、说一下对变量提升的理解</p>
+<p><a href="https://github.com/kenshin/gnvm">gnvm github</a></p>
 
-<p>2、说明this几种不同的使用场景</p>
+<h3 id="git-用户下载gnvm">git 用户下载GNVM</h3>
 
-<p>3、创建10个 <code class="highlighter-rouge">&lt;a&gt;</code> 标签，点击的时候弹出对应的序号</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:Kenshin/gnvm-bin.git
+</code></pre></div></div>
 
-<p>4、如何理解作用域</p>
+<h2 id="安装gnvm">安装GNVM</h2>
 
-<p>5、实际开发中闭包的应用</p>
-
-<h1 id="knowledge-point">Knowledge-point</h1>
-
-<p><strong>知识点：</strong></p>
+<p>将以上下载的exe文件放到 nodejs安装的目录下面, 会有node.exe的</p>
 
 <ul>
-  <li>
-    <p>执行上下文</p>
-  </li>
-  <li>
-    <p>this</p>
-  </li>
-  <li>
-    <p>作用域</p>
-  </li>
-  <li>
-    <p>作用域链</p>
-  </li>
-  <li>
-    <p>闭包</p>
-  </li>
+  <li>安装过node且已加入环境变量 把下载下来的gnvm.exe放到node.exe所在的目录下</li>
+  <li>没有安装过node 把gnvm.exe放到自定义的一个目录下，并把这个目录添加到环境变量path中</li>
 </ul>
 
-<h2 id="执行上下文-execution-context">执行上下文-Execution-context</h2>
+<h2 id="gnvm是否安装成功">GNVM是否安装成功</h2>
 
-<p><strong>执行上下文</strong></p>
+<p>然后打开命令行，运行</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gnvm version
+</code></pre></div></div>
+<p>输出
+Current version x.x.x
+则表示安装成功</p>
 
-<ul>
-  <li>
-    <p>范围：一段 <code class="highlighter-rouge">&lt;script&gt;</code> 或者一个函数</p>
-  </li>
-  <li>
-    <p>全局：变量定义、函数声明 【针对一段<code class="highlighter-rouge">&lt;script&gt;</code>里面】</p>
-  </li>
-  <li>
-    <p>函数：变量定义、函数声明、this、arguments</p>
-  </li>
-</ul>
+<h2 id="使用gnvm安装node">使用gnvm安装node</h2>
 
-<p>PS：注意“函数声明” 和 “函数表达式” 的区别</p>
+<h3 id="1初始化gnvm">1、初始化gnvm</h3>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>  <span class="c1">// undefined</span>
-<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gnvm config INIT
+</code></pre></div></div>
+<p>如果执行上面的报错</p>
 
-<span class="nx">fn</span><span class="p">(</span><span class="s1">'zhansan'</span><span class="p">);</span> <span class="c1">// zhangsan, 20</span>
-<span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span> 
-	<span class="kd">var</span> <span class="nx">age</span><span class="p">;</span>
-<span class="p">}</span>
+<p><code class="highlighter-rouge">Error: config file create Error: open C:\Program Files\nodejs\\.gnvmrc: Access is denied.</code></p>
+
+<p>解决：搜索出现CMD命令工具，然后右键，选择“以管理员身份运行”</p>
+
+<p><a href="https://blog.csdn.net/zhangshufei8001/article/details/51777370">以管理员的身份运行cd</a></p>
+
+<h3 id="2查看本地安装了什么版本">2、查看本地安装了什么版本</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gnvm <span class="nb">ls</span>
 </code></pre></div></div>
 
-<h2 id="this">this</h2>
+<h3 id="3安装需要的版本">3、安装需要的版本</h3>
 
-<p><em>this 要在执行时才能确认值，定义时无法确认</em></p>
-
-<p><strong>this的使用场景</strong></p>
-
-<ul>
-  <li>
-    <p>作为构造函数执行</p>
-  </li>
-  <li>
-    <p>作为对象属性执行</p>
-  </li>
-  <li>
-    <p>作为普通函数执行 【this指向window】</p>
-  </li>
-  <li>
-    <p>call、 apply、 bind</p>
-  </li>
-</ul>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">name</span><span class="p">:</span> <span class="s1">'A'</span><span class="p">,</span>
-	<span class="na">fn</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="nx">a</span><span class="p">.</span><span class="nx">fn</span><span class="p">();</span>  <span class="c1">// A, this === a</span>
-<span class="nx">a</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="s1">'B'</span><span class="p">});</span>  <span class="c1">// B, this === {name: 'B'}</span>
-<span class="kd">var</span> <span class="nx">fn1</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">fn</span><span class="p">;</span>
-<span class="nx">fn1</span><span class="p">();</span> <span class="c1">// 空， this === window</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gnvm 4.4.0 6.9.2 7.3.0
 </code></pre></div></div>
 
-<h2 id="作用域-action-scope">作用域-action-scope</h2>
+<h3 id="4-gnvm-ls查看所有版本后-切换到想要的版本">4、 gnvm ls查看所有版本后 切换到想要的版本</h3>
 
-<p>作用域</p>
-
-<ul>
-  <li>
-    <p>无块级作用域</p>
-  </li>
-  <li>
-    <p>只有函数和全局作用域</p>
-  </li>
-</ul>
-
-<p>作用域链</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-<span class="kd">function</span> <span class="nx">fn</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-	<span class="c1">// 当前作用域没有定义的变量，即“自由变量”</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
-<span class="p">}</span>
-<span class="nx">fn</span><span class="p">();</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gnvm use 6.9.2
 </code></pre></div></div>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-<span class="kd">function</span> <span class="nx">F1</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-	<span class="kd">function</span> <span class="nx">F2</span><span class="p">()</span> <span class="p">{</span>
-		<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>  <span class="c1">// a是自由变量</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>  <span class="c1">// b是自由变量</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="nx">F2</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="nx">F1</span><span class="p">();</span>
-</code></pre></div></div>
+<h1 id="更多gnvm相关">更多GNVM相关</h1>
+<p><a href="https://www.cnblogs.com/kevinlvhsl/p/6226758.html">windows下装多个node版本的方法(gnvm)</a></p>
 
-<h2 id="闭包-closure">闭包-closure</h2>
-
-<p><strong>闭包的使用场景</strong></p>
-
-<ul>
-  <li>
-    <p>函数作为返回值</p>
-  </li>
-  <li>
-    <p>函数作为参数传递</p>
-  </li>
-</ul>
-
-<p><strong>函数作为返回值</strong></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">F1</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-	<span class="c1">// 返回一个函数（函数作为返回值）</span>
-	<span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 自由变量，去定义它的父作用域寻找</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="c1">// f1 得到一个函数</span>
-<span class="kd">var</span> <span class="nx">f1</span> <span class="o">=</span> <span class="nx">F1</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-<span class="nx">f1</span><span class="p">();</span>
-</code></pre></div></div>
-
-<p><strong>函数作为参数传递</strong></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">F1</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-  <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">function</span> <span class="nx">F2</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-  <span class="nx">fn</span><span class="p">()</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">f1</span> <span class="o">=</span> <span class="nx">F1</span><span class="p">();</span>
-
-<span class="nx">F2</span><span class="p">(</span><span class="nx">f1</span><span class="p">);</span>  <span class="c1">// 100</span>
-</code></pre></div></div>
-
-<h1 id="answer">Answer</h1>
-
-<h2 id="创建10个-a-标签点击的时候弹出对应的序号">创建10个 <code class="highlighter-rouge">&lt;a&gt;</code> 标签，点击的时候弹出对应的序号</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
-	<span class="nx">a</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
-	<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">oA</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">oA</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">oA</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-				<span class="nx">alert</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
-			<span class="p">}</span>
-		<span class="p">}(</span><span class="nx">i</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="application-of-closure">Application-of-closure</h2>
-
-<ul>
-  <li>实际开发中闭包的应用</li>
-</ul>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isFirstLoad</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">_list</span> <span class="o">=</span> <span class="p">[];</span>
-	<span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="nx">_list</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">_list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
-			<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-<span class="kd">var</span> <span class="nx">firstLoad</span> <span class="o">=</span> <span class="nx">isFirstLoad</span><span class="p">();</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">firstLoad</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">firstLoad</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span> <span class="c1">// false</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">firstLoad</span><span class="p">(</span><span class="mi">20</span><span class="p">));</span> <span class="c1">// true</span>
-</code></pre></div></div>
-
-<h1 id="更多-more">更多-more</h1>
-
-<p><a href="https://coding.imooc.com/learn/list/115.html">前端JavaScript面试技巧</a></p>
+<p><a href="http://shalles.github.io/blog/tools/2015/04/27/windows-nodejs-version-controller">windows下管理多个版本nodejs</a></p>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -412,7 +241,7 @@
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#JS">JS</a>
+  <a class="article-category-link" href="/categories/#Command-Line">Command-Line</a>
   
 </div>
 
@@ -426,9 +255,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#Interview">Interview</a>
-  
-  <a href="/tags/#imooc">imooc</a>
+  <a href="/tags/#windows">windows</a>
   
   </div>
 
@@ -438,7 +265,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2018/06/14/muke-primary-interview-shuangyue-bibao" data-title="慕课网-前端JavaScript面试技巧(双越)-作用域、闭包 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/command-line/2018/11/28/node-gnvm" data-title="windows下管理多个版本nodejs-gnvm | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -450,21 +277,13 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2018/06/14/muke-primary-interview-shuangyue-bianliang" title="慕课网-前端JavaScript面试技巧(双越)-变量类型和计算">
+ <a href="/framework/2018/08/09/interview-wechat-small-program" title="微信小程序面试题">
   <strong>上一篇：</strong><br/>
   <span>
-  慕课网-前端JavaScript面试技巧(双越)-变量类型和计算</span>
+  微信小程序面试题</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/js/2018/06/14/muke-primary-interview-shuangyue-dev-environment"  title="慕课网-前端JavaScript面试技巧(双越)-开发环境">
- <strong>下一篇：</strong><br/> 
- <span>慕课网-前端JavaScript面试技巧(双越)-开发环境
-</span>
-</a>
-</div>
 
 </nav>
 
