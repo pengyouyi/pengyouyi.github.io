@@ -197,13 +197,10 @@ url上作为路由的params参数【id】不变，但是页面中获取到的没
 
 ## query方式和params方式区别
 
-- 1. 传参时，push里面：query要用path来引入；params要用name来引入
-
-- 2. url跳转后展示：query 在浏览器地址栏中显示参数【类似于我们ajax中get传参】；params 参数不会在地址栏中显示【类似于post】
-
-- 3. 传参时，push里面的参数是否必须：query是拼接在url后面的参数，没有也没关，且query不设置也可以传参；当params参数作为路由的一部分,必须要有。
-
-- 4. 刷新时：query不丢失参数；params不会丢失url中使用的参数，但params会丢失没在url中使用的参数。
+1. 传参时，push里面：query要用path来引入；params要用name来引入
+2. url跳转后展示：query 在浏览器地址栏中显示参数【类似于我们ajax中get传参】；params 参数不会在地址栏中显示【类似于post】
+3. 传参时，push里面的参数是否必须：query是拼接在url后面的参数，没有也没关，且query不设置也可以传参；当params参数作为路由的一部分,必须要有。
+4. 刷新时：query不丢失参数；params不会丢失url中使用的参数，但params会丢失没在url中使用的参数。
 
 # more
 
