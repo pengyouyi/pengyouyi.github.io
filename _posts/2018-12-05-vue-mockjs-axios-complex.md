@@ -139,7 +139,7 @@ export default HTTP;
 
 ## 创建请求api方法
 
-新建 src/feedback.js
+新建 src/api/feedback.js
 
 ```js
 import HTTP from '../utils/fetch';
@@ -227,6 +227,75 @@ export function getProjectClassify() {
   });
 }
 ```
+
+# mockjs深入学习
+
+## mockjs生成随机对象
+
+src/mock/feecback.js
+
+```js
+import Mock from 'mockjs';
+
+var Random = Mock.Random;
+
+export default {
+  getFeedback: () => ({
+  	chinese_name: Mock.mock('@cname'),
+  	english_name: Mock.mock('@name'),
+    number: Mock.mock('@integer(1, 100)'),
+    string: Mock.mock({
+      "string|1-10": "★"
+    }),
+    date: Mock.mock('@date("yyyy-MM-dd")'),
+    time: Mock.mock('@time("HH:mm:ss")'),
+    email: Random.email()
+  })
+};
+```
+
+浏览器控制台随机打印出来的结果:
+
+```js
+{
+  chinese_name: "周超"
+  date: "2012-06-28"
+  english_name: "Timothy Rodriguez"
+  number: 63
+  string: {string: "★★★★★"}
+  time: "01:34:48",
+  email: 'd.ipmkjj@xdbl.sa'
+}
+```
+
+## mockjs生成随机数组
+
+src/mock/feecback.js
+
+```js
+import Mock from 'mockjs';
+
+const List = [];
+const count = 10;
+
+for(let i = 0; i < count; i++) {
+	List.push(Mock.mock({
+		id: '@id',
+	    title: '@ctitle(10, 20)',
+	    'status|1': ['published', 'draft'],
+	    author: '@cname',
+	    display_time: '@datetime',
+	    pageviews: '@integer(300, 5000)'
+	}))
+}
+
+export default {
+  getFeedback: () => List
+};
+```
+
+[更多例子请查看http://mockjs.com/examples.html](http://mockjs.com/examples.html)
+
 
 # more
 - [http://mockjs.com/](http://mockjs.com/)
