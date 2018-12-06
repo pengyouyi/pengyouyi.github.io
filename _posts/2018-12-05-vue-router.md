@@ -204,4 +204,5 @@ url上作为路由的params参数【id】不变，但是页面中获取到的没
 
 # more
 
-[https://router.vuejs.org/zh/](https://router.vuejs.org/zh/)
+- [https://router.vuejs.org/zh/](https://router.vuejs.org/zh/)
+- 完整项目请看github, 项目v-vue-router待上传，地址待添加。。。

@@ -167,6 +167,6 @@ export default {
 
 - [http://mockjs.com/](http://mockjs.com/)
 - [https://github.com/axios/axios](https://github.com/axios/axios)
-- 完整项目请看github, 项目待上传，地址待添加。。。
+- 完整项目请看github, 项目v-mockjs-axios-simple待上传，地址待添加。。。
 
 

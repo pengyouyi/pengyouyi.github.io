@@ -258,11 +258,11 @@ export default {
 
 ```js
 {
-  chinese_name: "周超"
-  date: "2012-06-28"
-  english_name: "Timothy Rodriguez"
-  number: 63
-  string: {string: "★★★★★"}
+  chinese_name: "周超",
+  date: "2012-06-28",
+  english_name: "Timothy Rodriguez",
+  number: 63,
+  string: {string: "★★★★★"},
   time: "01:34:48",
   email: 'd.ipmkjj@xdbl.sa'
 }
@@ -300,4 +300,4 @@ export default {
 # more
 - [http://mockjs.com/](http://mockjs.com/)
 - [https://github.com/axios/axios](https://github.com/axios/axios)
-- 完整项目请看github, 项目待上传，地址待添加。。。
+- 完整项目请看github, 项目v-mockjs-axios-complex待上传，地址待添加。。。
