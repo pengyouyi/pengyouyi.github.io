@@ -7,7 +7,7 @@
     
     
     
-    <title>CSS 命名推荐 | 彭友谊的博客</title>
+    <title>vue+mockjs+axios 模拟请求数据-简化版 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="CSS 命名推荐">
-    <meta property="og:url" content="/css/2016/10/16/css-class-name">
+    <meta property="og:title" content="vue+mockjs+axios 模拟请求数据-简化版">
+    <meta property="og:url" content="/framework/2018/12/05/vue-mockjs-axios-simple">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="CSS 命名推荐">
+    <meta property="og:description" content="vue+mockjs+axios 模拟请求数据-简化版">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="CSS 命名推荐">
+    <meta name="twitter:title" content="vue+mockjs+axios 模拟请求数据-简化版">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -142,14 +142,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/css/2016/10/16/css-class-name" title="CSS 命名推荐" itemprop="url">CSS 命名推荐</a>
+      <a href="/framework/2018/12/05/vue-mockjs-axios-simple" title="vue+mockjs+axios 模拟请求数据-简化版" itemprop="url">vue+mockjs+axios 模拟请求数据-简化版</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-16 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-16</time>
+    <time datetime="2018-12-05 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-12-05</time>
     
   </p>
 </header>
@@ -161,246 +161,173 @@
 		
 		</div>
 		
-		<h1 id="css-命名推荐">CSS 命名推荐</h1>
+		<h1 id="vuemockjsaxios-模拟请求数据-简化版">vue+mockjs+axios 模拟请求数据-简化版</h1>
 
-<h1 id="文件引用link">文件引用link</h1>
+<h2 id="基础知识">基础知识</h2>
 
-<ul>
-  <li>一律使用link的方式调用外部样式</li>
-  <li>不允许在页面中使用&lt;style&gt;块；</li>
-  <li>不允许在 &lt;style&gt;块中使用 @import；</li>
-  <li>不允许使用 style 属性写行内样式。</li>
-</ul>
+<ol>
+  <li>
+    <p>npm 安装 vue-cli 脚手架后，通过命令“ vue init webpack 项目名 ”来创建项目；</p>
+  </li>
+  <li>
+    <p>了解 mockjs：可以拦截 Ajax 请求，返回模拟的响应数据，实现前后端分离；</p>
+  </li>
+  <li>
+    <p>了解 axios: 基于http客户端的promise，面向浏览器和nodejs。</p>
+  </li>
+</ol>
 
-<h1 id="name-组成元素">name-组成元素</h1>
-
-<p>命名必须由单词、中划线-或数字组成；<br />
-不允许使用拼音（约定俗成的除外，如：youku, baidu），尤其是缩写的拼音、拼音与英文的混合。</p>
-
-<pre class="badcode">
-不推荐：
-.xiangqing { sRules; }
-.news_list { sRules; }
-.zhuti { sRules; }
-</pre>
-<pre class="goodcode">
-推荐：
-.detail { sRules; }
-.news-list { sRules; }
-.topic { sRules; }
-</pre>
-
-<h1 id="name-词汇规范">name-词汇规范</h1>
-<ul>
-  <li>不依据表现形式来命名；</li>
-  <li>可根据内容来命名；</li>
-  <li>可根据功能来命名。</li>
-</ul>
-
-<pre class="badcode">
-不推荐：
-left, right, center, red, black
-</pre>
-<pre class="goodcode">
-推荐：
-nav, aside, news, type, search
-</pre>
-
-<h1 id="name-缩写规范">name-缩写规范</h1>
+<p><strong>axios特色</strong></p>
 
 <ul>
-  <li>保证缩写后还能较为清晰保持原单词所能表述的意思；</li>
-  <li>使用业界熟知的或者约定俗成的。</li>
+  <li>浏览器端发起XMLHttpRequests请求</li>
+  <li>node端发起http请求</li>
+  <li>支持Promise API</li>
+  <li>拦截请求和返回</li>
+  <li>转化请求和返回（数据）</li>
+  <li>取消请求</li>
+  <li>自动转化json数据</li>
+  <li>客户端支持抵御XSRF（跨站请求伪造）</li>
 </ul>
 
-<pre class="badcode">
-不推荐：
-navigation   =&gt;  navi
-header       =&gt;  head
-description  =&gt;  des
-</pre>
+<h2 id="vue项目初始化">vue项目初始化</h2>
 
-<pre class="goodcode">
-推荐：
-navigation   =&gt;  nav
-header       =&gt;  hd
-description  =&gt;  desc
-</pre>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vue init webpack Vue-ProjectName
+npm install
+<span class="c"># serve with hot reload at localhost:8080</span>
+npm run dev
+</code></pre></div></div>
 
-<h1 id="name-前缀规范">name-前缀规范</h1>
+<h2 id="安装-mockjs-和-axios">安装 mockjs 和 axios</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>前缀</th>
-      <th>说明</th>
-      <th>示例</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>g-</td>
-      <td>全局通用样式命名，前缀g全称为global，一旦修改将影响全站样式</td>
-      <td>g-mod</td>
-    </tr>
-    <tr>
-      <td>m-</td>
-      <td>模块命名方式</td>
-      <td>m-detail</td>
-    </tr>
-    <tr>
-      <td>ui-</td>
-      <td>组件命名方式</td>
-      <td>ui-selector</td>
-    </tr>
-    <tr>
-      <td>js-</td>
-      <td>所有用于纯交互的命名，不涉及任何样式规则。JSer拥有全部定义权限</td>
-      <td>js-switch</td>
-    </tr>
-  </tbody>
-</table>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install mockjs <span class="nt">--save-dev</span>
+npm install axios <span class="nt">--save-dev</span>
+</code></pre></div></div>
 
-<p>选择器必须是以某个前缀开头</p>
+<h2 id="在项目中引用mockjs">在项目中引用mockjs</h2>
 
-<pre class="badcode">
-不推荐：
-.info { sRules; }
-.current { sRules; }
-.news { sRules; }
-</pre>
+<p>项目src目录下新建一个mock文件夹</p>
 
-<pre class="goodcode">
-推荐：
-.m-detail .info { sRules; }
-.m-detail .current { sRules; }
-.m-detail .news { sRules; }
-</pre>
+<p>在mock文件夹下新建 index.js 【存放所有的http模拟返回的接口数据】</p>
 
-<h1 id="id命名规范">ID命名规范</h1>
+<h3 id="编辑indexjs">编辑index.js</h3>
 
-<p>页面框架命名，一般具有唯一性，推荐用ID命名。推荐驼峰式命名。
-页面结构，导航，功能都可用</p>
+<p>包括引用mockjs插件，设定mock规则、拦截ajax请求</p>
 
-<p><strong><em>1)页面结构</em></strong><br />
-容器: container <br />
-页头：header <br />
-内容：content/container <br />
-页面主体：main <br />
-页尾：footer <br />
-导航：nav <br />
-侧栏：sidebar <br />
-栏目：column <br />
-页面外围控制整体佈局宽度：wrapper <br />
-左右中：left right center</p>
+<p>src/mock/index.js</p>
 
-<p><strong><em>(2)导航</em></strong><br />
-导航：nav <br />
-主导航：mainnav <br />
-子导航：subnav <br />
-顶导航：topnav <br />
-边导航：sidebar <br />
-左导航：leftsidebar <br />
-右导航：rightsidebar <br />
-菜单：menu <br />
-子菜单：submenu <br />
-标题: title <br />
-摘要: summary</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Mock</span> <span class="k">from</span> <span class="s1">'mockjs'</span><span class="p">;</span>
 
-<p><strong><em>(3)功能</em></strong><br />
-标志：logo <br />
-广告：banner <br />
-登陆：login <br />
-登录条：loginbar <br />
-注册：register <br />
-搜索：search <br />
-功能区：shop <br />
-标题：title <br />
-加入：joinus <br />
-状态：status <br />
-按钮：btn <br />
-滚动：scroll <br />
-标籤页：tab <br />
-文章列表：list <br />
-提示信息：msg <br />
-当前的: current <br />
-小技巧：tips <br />
-图标: icon <br />
-注释：note <br />
-指南：guild <br />
-服务：service <br />
-热点：hot <br />
-新闻：news <br />
-下载：download <br />
-投票：vote <br />
-合作伙伴：partner <br />
-友情链接：link <br />
-版权：copyright</p>
+<span class="kd">const</span> <span class="nx">vehicle</span> <span class="o">=</span> <span class="nx">Mock</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="s1">'/api/vehicle'</span><span class="p">,</span><span class="s1">'get'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">return</span>  <span class="p">{</span>
+        <span class="na">code</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:[{</span>
+            <span class="na">id</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="na">licNumber</span><span class="p">:</span><span class="s1">'渝A79898'</span><span class="p">,</span>
+            <span class="na">color</span><span class="p">:</span><span class="s2">"red"</span><span class="p">,</span>
+            <span class="na">buyTime</span><span class="p">:</span><span class="s1">'2017-04-01'</span>
 
-<h1 id="常用css命名规则">常用css命名规则</h1>
-<p>头：header <br />
-内容：content/container <br />
-尾：footer <br />
-导航：nav <br />
-侧栏：sidebar <br />
-栏目：column <br />
-页面外围控制整体佈局宽度：wrapper <br />
-左右中：left right center <br />
-登录条：loginbar <br />
-标志：logo <br />
-广告：banner <br />
-页面主体：main <br />
-热点：hot <br />
-新闻：news <br />
-下载：download <br />
-子导航：subnav <br />
-菜单：menu <br />
-子菜单：submenu <br />
-搜索：search <br />
-友情链接：friendlink <br />
-页脚：footer <br />
-版权：copyright <br />
-滚动：scroll <br />
-内容：content <br />
-标签：tags <br />
-文章列表：list <br />
-提示信息：msg <br />
-小技巧：tips <br />
-栏目标题：title <br />
-加入：joinus <br />
-指南：guide <br />
-服务：service <br />
-注册：regsiter <br />
-状态：status <br />
-投票：vote <br />
-合作伙伴：partner</p>
+        <span class="p">},{</span>
+            <span class="na">id</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+            <span class="na">licNumber</span><span class="p">:</span><span class="s1">'京A79898'</span><span class="p">,</span>
+            <span class="na">color</span><span class="p">:</span><span class="s2">"white"</span><span class="p">,</span>
+            <span class="na">buyTime</span><span class="p">:</span><span class="s1">'2018-04-01'</span>
 
-<p><strong><em>四、注意事项:</em></strong><br />
-1.一律小写; <br />
-2.尽量用英文; <br />
-3.不加中槓和下划线; <br />
-4.尽量不缩写，除非一看就明白的单词。</p>
+        <span class="p">}],</span>
+        <span class="na">message</span><span class="p">:</span><span class="s1">'success'</span>
+    <span class="p">}</span>
+<span class="p">});</span>
 
-<p><strong><em>五、CSS样式表文件命名</em></strong><br />
-主要的 master.css <br />
-模块 module.css <br />
-基本共用 base.css <br />
-布局、版面 layout.css <br />
-主题 themes.css <br />
-专栏 columns.css <br />
-文字 font.css <br />
-表单 forms.css <br />
-补丁 mend.css <br />
-打印 print.css</p>
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">Mock</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="s1">'/api/user'</span><span class="p">,</span><span class="s1">'get'</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span><span class="p">{</span>
+    <span class="k">return</span>  <span class="p">{</span>
+        <span class="na">code</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:{</span>
+            <span class="na">id</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="na">sex</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+            <span class="na">age</span><span class="p">:</span><span class="mi">25</span><span class="p">,</span>
+            <span class="na">createTime</span><span class="p">:</span><span class="s1">'2017-04-01'</span>
+        <span class="p">},</span>
+        <span class="na">message</span><span class="p">:</span><span class="s1">'查询成功'</span>
+    <span class="p">}</span>
+<span class="p">})</span>
 
-<h1 id="更多-more">更多-more</h1>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span> <span class="nx">vehicle</span><span class="p">,</span><span class="nx">user</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="在mainjs中全局引入axios并设定为vue的原型属性http和mockjs文件">在main.js中全局引入axios（并设定为Vue的原型属性$http）和mock.js文件</h2>
+
+<p>src/main.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="s1">'vue'</span>
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="s1">'./App'</span>
+<span class="k">import</span> <span class="nx">router</span> <span class="k">from</span> <span class="s1">'./router'</span>
+<span class="k">import</span> <span class="s2">"./mock"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">axios</span> <span class="k">from</span> <span class="s1">'axios'</span><span class="p">;</span>
+
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">$http</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">;</span>
+
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">productionTip</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#app'</span><span class="p">,</span>
+  <span class="nx">router</span><span class="p">,</span>
+  <span class="na">components</span><span class="p">:</span> <span class="p">{</span> <span class="nx">App</span> <span class="p">},</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s1">'&lt;App/&gt;'</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h2 id="在组件中使用axios发送请求并将响应数据渲染到html">在组件中使用axios发送请求并将响应数据渲染到html</h2>
+
+<p>src/components/HelloWord.vue</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"hello"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;&lt;/h1&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">v-for=</span><span class="s">"(item, index) in data"</span><span class="nt">&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="c1">// import axios from 'axios';</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'HelloWorld'</span><span class="p">,</span>
+  <span class="nx">data</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">msg</span><span class="p">:</span> <span class="s1">'Welcome to Your Vue.js App'</span><span class="p">,</span>
+      <span class="na">data</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nx">created</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">$http</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'/api/vehicle'</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span> <span class="nx">response</span> <span class="o">=&gt;</span><span class="p">{</span> 
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">response</span> <span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+
+    <span class="c1">// axios.get('/api/user').then(response =&gt; {</span>
+    <span class="c1">//   console.log(response)</span>
+    <span class="c1">// })</span>
+    <span class="c1">// .catch(error =&gt; console.log(error))</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+
+<span class="c">&lt;!-- Add "scoped" attribute to limit CSS to this component only --&gt;</span>
+<span class="nt">&lt;</span><span class="k">style</span> <span class="na">scoped</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/</span><span class="k">style</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<h1 id="more">more</h1>
+
 <ul>
-  <li><a href="http://csscomb.com/online">css属性在线重排工具</a></li>
-  <li><a href="http://jigsaw.w3.org/css-validator/">css在线校验</a></li>
-  <li><a href="https://github.com/hoosin/lite/blob/master/Standard/CSS%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.md">https://github.com/hoosin/lite/blob/master/Standard/CSS%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83.md</a></li>
-  <li><a href="https://google.github.io/styleguide/htmlcssguide.xml#Protocol">https://google.github.io/styleguide/htmlcssguide.xml#Protocol</a></li>
-  <li><a href="http://www.h-ui.net/Hui-notes-htmlStructure.shtml">http://www.h-ui.net/Hui-notes-htmlStructure.shtml</a></li>
+  <li><a href="http://mockjs.com/">http://mockjs.com/</a></li>
+  <li><a href="https://github.com/axios/axios">https://github.com/axios/axios</a></li>
+  <li>完整项目请看github, 项目待上传，地址待添加。。。</li>
 </ul>
+
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -417,7 +344,7 @@ description  =&gt;  desc
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#CSS">CSS</a>
+  <a class="article-category-link" href="/categories/#Framework">Framework</a>
   
 </div>
 
@@ -431,7 +358,7 @@ description  =&gt;  desc
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#standard">standard</a>
+  <a href="/tags/#vue">vue</a>
   
   </div>
 
@@ -441,7 +368,7 @@ description  =&gt;  desc
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/css/2016/10/16/css-class-name" data-title="CSS 命名推荐 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/framework/2018/12/05/vue-mockjs-axios-simple" data-title="vue+mockjs+axios 模拟请求数据-简化版 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -453,18 +380,18 @@ description  =&gt;  desc
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/css/2016/10/12/CSS-interview-questions" title="CSS面试题">
+ <a href="/framework/2018/12/05/vue-mockjs-axios-complex" title="vue+mockjs+axios 模拟请求数据-复杂版">
   <strong>上一篇：</strong><br/>
   <span>
-  CSS面试题</span>
+  vue+mockjs+axios 模拟请求数据-复杂版</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/css/2016/10/16/css-lint"  title="CSS Lint检测规范">
+<a href="/framework/2018/12/05/vue-router"  title="vue-router传参（params 与 query）的区别">
  <strong>下一篇：</strong><br/> 
- <span>CSS Lint检测规范
+ <span>vue-router传参（params 与 query）的区别
 </span>
 </a>
 </div>
