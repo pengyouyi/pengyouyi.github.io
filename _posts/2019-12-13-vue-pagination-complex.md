@@ -271,7 +271,7 @@ export default {
 
     // 获取项目数据
     getProjects(page=this.currentPage) {
-      // 首先获取一个token
+      // 首先获取一个token,正式项目不需要这一步
       this.$axios.post('http://test.pandanc.com/api/v1/accounts/rest-auth/login/',{
         username: 'pengyouyi',
         password: 'pengyouyi'
@@ -368,7 +368,7 @@ export default {
 
     // 获取项目数据
     getInvestors(page=this.currentPage) {
-      // 首先获取一个token
+      // 首先获取一个token，正式项目不需要这一步，这里为了绕过token验证，获取到数据
       this.$axios.post('http://test.pandanc.com/api/v1/accounts/rest-auth/login/',{
         username: 'pengyouyi',
         password: 'pengyouyi'

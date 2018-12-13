@@ -69,20 +69,12 @@ src/components/Project.vue
     <h1>{{ msg }}</h1>
     <div id="Pagination" :total="total" :limit="limit">
       <ul id="turn">
-        <li v-for="i in showingPages" @click="onRouter(i)">
-        {% raw %}
-          {{i}}
-        {% endraw %}
-        </li>
+        <li v-for="i in showingPages" @click="onRouter(i)">{% raw %}{{i}}{% endraw %}</li>
       </ul>
     </div>
     <ul>
       <li v-for="item in projects">
-        <h2>
-        {% raw %}
-          {{item.name}}
-        {% endraw %}
-        </h2>
+        <h2>{% raw %}{{item.name}}{% endraw %}</h2>
         <img :src="item.cover_image" alt="">
       </li>
     </ul>
@@ -233,7 +225,7 @@ Vue.prototype.$axios = axios;
 
 # more
 
-- 完整项目请看github, 项目v-pageturning-simple待上传，地址待添加。。。
+- 完整项目请看github, 项目v-page-turning-simple待上传，地址待添加。。。
 
 
 
