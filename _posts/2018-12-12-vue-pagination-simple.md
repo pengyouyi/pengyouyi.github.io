@@ -11,11 +11,17 @@ description: vue实现简单的翻页功能
 
 接口地址： http://test.pandanc.com/api/v1/projects/project/
 
-http://localhost:8080/project/library/1
+浏览器访问如下：
+http://localhost:8080/project/library/page
 
-**通过  'library/:page' 中page来实现翻页**
+**翻页思路**
 
-- 解决 'library/:page' 中page改变不刷新的问题
+1. 翻页的时候通过改变url上params参数page
+2. 路由参数page改变，刷新页面
+3. 刷新页面的的时候，created 重新请求数据，getProjects(page)
+
+
+**解决 'library/:page' 中page改变不刷新的问题**
 
 通过给router-view添加一个动态变化的参数，让Vue认为这个组件每一次都是一个新组件，从而重新刷新。
 
@@ -63,12 +69,12 @@ src/components/Project.vue
     <h1>{{ msg }}</h1>
     <div id="Pagination" :total="total" :limit="limit">
       <ul id="turn">
-        <li v-for="i in showingPages" @click="onRouter(i)">{{i}}</li>
+        <li v-for="i in showingPages" @click="onRouter(i)">\{\{i\}\}</li>
       </ul>
     </div>
     <ul>
       <li v-for="item in projects">
-        <h2>{{item.name}}</h2>
+        <h2>\{\{item.name\}\}</h2>
         <img :src="item.cover_image" alt="">
       </li>
     </ul>
@@ -111,7 +117,7 @@ export default {
 
     // 获取项目数据
     getProjects(page=this.currentPage) {
-      // 首先获取一个token
+      // 首先获取一个token，正式项目不需要这一步，这里为了绕过token验证，获取到projects数据
       this.$axios.post('http://test.pandanc.com/api/v1/accounts/rest-auth/login/',{
         username: 'pengyouyi',
         password: 'pengyouyi'
@@ -209,13 +215,17 @@ export default {
 </script>
 ```
 
+src/main.js 新增
 
+```js
+import axios from 'axios';
 
-
+Vue.prototype.$axios = axios;
+```
 
 # more
 
-
+- 完整项目请看github, 项目v-pageturning-simple待上传，地址待添加。。。
 
 
 
