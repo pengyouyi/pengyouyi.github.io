@@ -99,13 +99,13 @@ src/base/pagination.vue 翻页组件
         
         <!--中间显示区的页码-->
         <!-- <button v-for="i in showingPages" @click="currentPage=i">{{i}}</button> -->
-        <button v-for="i in showingPages" :class="{active: currentPage == i}" @click="changePage(i)">{{i}}</button>
+        <button v-for="i in showingPages" :class="{active: currentPage == i}" @click="changePage(i)">{% raw %}{{i}}{% endraw %}</button>
 
         <!--向后5页-->
         <button class="quick-next" v-if="isShowQuickNext" @click="quickNext">...</button>
 
         <!--最后1页，当页数大于1页时永久显示-->
-        <button :class="{active: currentPage == totalPage}" @click="changePage(totalPage)">{{totalPage}}</button>
+        <button :class="{active: currentPage == totalPage}" @click="changePage(totalPage)">{% raw %}{{totalPage}}{% endraw %}</button>
        
         <!--向后一页，当前页面为最后一页时无法点击-->
         <button class="next" v-if="isShowNext" @click="next">next</button>
@@ -235,7 +235,7 @@ src/components/Project.vue
     </div>
     <ul class="project-section">
       <li v-for="item in projects">
-        <h2>{{item.name}}</h2>
+        <h2>{% raw %}{{item.name}}{% endraw %}</h2>
         <img class="img-project" :src="item.cover_image" alt="">
       </li>
     </ul>
@@ -332,7 +332,7 @@ src/components/Investor.vue
     </div>
     <ul class="project-section">
       <li v-for="item in projects">
-        <h2>{{item.name}}</h2>
+        <h2>{% raw %}{{item.name}}{% endraw %}</h2>
         <img class="img-project" :src="item.logo" alt="">
       </li>
     </ul>

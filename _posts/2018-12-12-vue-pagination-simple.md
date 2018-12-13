@@ -69,12 +69,20 @@ src/components/Project.vue
     <h1>{{ msg }}</h1>
     <div id="Pagination" :total="total" :limit="limit">
       <ul id="turn">
-        <li v-for="i in showingPages" @click="onRouter(i)">\{\{i\}\}</li>
+        <li v-for="i in showingPages" @click="onRouter(i)">
+        {% raw %}
+          {{i}}
+        {% endraw %}
+        </li>
       </ul>
     </div>
     <ul>
       <li v-for="item in projects">
-        <h2>\{\{item.name\}\}</h2>
+        <h2>
+        {% raw %}
+          {{item.name}}
+        {% endraw %}
+        </h2>
         <img :src="item.cover_image" alt="">
       </li>
     </ul>
