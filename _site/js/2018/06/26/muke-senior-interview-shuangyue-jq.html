@@ -166,34 +166,27 @@
 <h1 id="begin">begin</h1>
 
 <ul>
-  <li>
-    <p>zepto 和 jquery 中如何使用原型 ？</p>
-  </li>
-  <li>
-    <p>说一个原型的实际应用</p>
-  </li>
-  <li>
-    <p>原型如何体现它的扩展性</p>
-  </li>
+<li><p>zepto 和 jquery 中如何使用原型 ？</p></li>
+<li><p>说一个原型的实际应用</p></li>
+<li><p>原型如何体现它的扩展性</p></li>
 </ul>
 
-<h1 id="实际应用---jquery使用">实际应用 - jQuery使用</h1>
+<h1 id="jquery">实际应用 - jQuery使用</h1>
 
 <p><a href="http://www.cnblogs.com/aaronjs/p/3279314.html">jQuery源码分析系列</a></p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 
 <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 
-	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"div1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"div1"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;p&gt;</span>hello<span class="nt">&lt;/p&gt;</span>
-	<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
 
 <span class="nt">&lt;script&gt;</span>  
   <span class="kd">var</span> <span class="nx">$div1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#div1'</span><span class="p">);</span>
@@ -203,48 +196,46 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
-
-<h1 id="jquery---实现原型">jQuery - 实现原型</h1>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</code></pre></div>
+<h1 id="jquery">jQuery - 实现原型</h1>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"div1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"div1"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;p&gt;</span>hello<span class="nt">&lt;/p&gt;</span>
-	<span class="nt">&lt;/div&gt;</span>
-	
+    <span class="nt">&lt;/div&gt;</span>
+
 <span class="nt">&lt;script&gt;</span>
 <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nb">window</span><span class="p">){</span>
-	<span class="kd">var</span> <span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="k">new</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">selector</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="p">{</span>
-		<span class="na">css</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">alert</span><span class="p">(</span><span class="s1">'css'</span><span class="p">)</span>
-		<span class="p">},</span>
-		<span class="na">html</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">jQuery</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">selector</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">css</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">alert</span><span class="p">(</span><span class="s1">'css'</span><span class="p">)</span>
+        <span class="p">},</span>
+        <span class="na">html</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
 
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="kd">var</span> <span class="nx">init</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
-		<span class="kd">var</span> <span class="nx">slice</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">;</span>
-		<span class="kd">var</span> <span class="nx">dom</span> <span class="o">=</span> <span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">init</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">slice</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">dom</span> <span class="o">=</span> <span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">));</span>
 
-		<span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">dom</span> <span class="p">?</span> <span class="nx">dom</span><span class="p">.</span><span class="nx">length</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-		<span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dom</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-		<span class="p">}</span>
-		<span class="k">this</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="nx">len</span><span class="p">;</span>
-		<span class="k">this</span><span class="p">.</span><span class="nx">selector</span> <span class="o">=</span> <span class="nx">selector</span> <span class="o">||</span> <span class="s1">''</span>
-	<span class="p">}</span>
-	<span class="nx">init</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">;</span>
-	<span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">;</span>
-<span class="p">})(</span><span class="nb">window</span><span class="p">)</span>	
+        <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">dom</span> <span class="p">?</span> <span class="nx">dom</span><span class="p">.</span><span class="nx">length</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dom</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="nx">len</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">selector</span> <span class="o">=</span> <span class="nx">selector</span> <span class="o">||</span> <span class="s1">''</span>
+    <span class="p">}</span>
+    <span class="nx">init</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">;</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">;</span>
+<span class="p">})(</span><span class="nb">window</span><span class="p">)</span>  
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>  
   <span class="kd">var</span> <span class="nx">$div1</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'#div1'</span><span class="p">);</span>
@@ -254,22 +245,19 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
-
-<h2 id="一般构造方法的定义和调用-general">一般构造方法的定义和调用-General</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">A</span><span class="p">(){</span>
+</code></pre></div>
+<h2 id="general">一般构造方法的定义和调用-General</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">A</span><span class="p">(){</span>
 <span class="p">}</span>
 <span class="nx">A</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
 <span class="nx">A</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">css</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
 <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">A</span><span class="p">();</span>
 <span class="nx">a</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
 <span class="nx">a</span><span class="p">.</span><span class="nx">css</span><span class="p">();</span>
-</code></pre></div></div>
-<h2 id="jquery设计模式却是return-new-jqueryfninit">jQuery设计模式却是return new jQuery.fn.init()</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">jQuery</span><span class="p">(){</span>
-	<span class="k">return</span> <span class="k">new</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+</code></pre></div>
+<h2 id="jquery-return-new-jquery-fn-init">jQuery设计模式却是return new jQuery.fn.init()</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">jQuery</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
 <span class="nx">jQuery</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">css</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
@@ -277,23 +265,21 @@
 <span class="c1">//line-283</span>
 <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">init</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">;</span>
 <span class="nx">jQuery</span><span class="p">().</span><span class="nx">css</span><span class="p">();</span>
-</code></pre></div></div>
-<p>jQuery.fn = jQuery.prototype，
+</code></pre></div>
+<p>jQuery.fn = jQuery.prototype，<br>
 执行jQuery()时，new jQuery.fn.init()，创造了jQuery.fn.init对象，同时执行jQuery.prototype.init() 方法。</p>
 
 <p>jQuery.prototype.init.prototype = jQuery.prototype;把jQuery的原型赋给jQuery.prototype.init的原型，jQuery.fn.init对象就可以使用jQuery的方法css(),所以我们可以这样调用jQuery().css()；</p>
 
 <!--line-8826-->
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">;</span>
-</code></pre></div></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">;</span>
+</code></pre></div>
 <p>将jQuery挂在到全局window上,这样能在外部调用jQuery()、$()方法。</p>
 
-<h1 id="实际应用-zepto">实际应用-Zepto</h1>
+<h1 id="zepto">实际应用-Zepto</h1>
 
 <p><a href="https://segmentfault.com/a/1190000008950420">读Zepto源码之代码结构</a></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">zepto</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">zepto</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="nx">zepto</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">slice</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">;</span>
@@ -319,71 +305,67 @@
   <span class="c1">// 出现new</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nx">Z</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span><span class="nx">selector</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>zepto 如何使用原型</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">constructor</span><span class="p">:</span> <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span><span class="p">,</span>
   <span class="na">css</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){},</span>
   <span class="na">html</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){}</span>
 <span class="p">}</span>
 <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Z</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span>
-</code></pre></div></div>
-
-<h1 id="zepto---实现原型">zepto - 实现原型</h1>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</code></pre></div>
+<h1 id="zepto">zepto - 实现原型</h1>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"div1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"div1"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;p&gt;</span>hello<span class="nt">&lt;/p&gt;</span>
-	<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;script&gt;</span>
 <span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-	<span class="kd">var</span> <span class="nx">zepto</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="kd">var</span> <span class="nx">zepto</span> <span class="o">=</span> <span class="p">{}</span>
 
-	<span class="nx">zepto</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
-	  <span class="kd">var</span> <span class="nx">slice</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">;</span>
-	  <span class="kd">var</span> <span class="nx">dom</span> <span class="o">=</span> <span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">));</span>
-	  <span class="k">return</span> <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">selector</span><span class="p">)</span>
-	<span class="p">}</span>
+    <span class="nx">zepto</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">slice</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">dom</span> <span class="o">=</span> <span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">));</span>
+      <span class="k">return</span> <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">selector</span><span class="p">)</span>
+    <span class="p">}</span>
 
-	<span class="c1">// 即使用zepto时候的$</span>
-	<span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">){</span>
-	  <span class="k">return</span> <span class="nx">zepto</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="c1">// 构造函数</span>
-	<span class="kd">function</span> <span class="nx">Z</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
-	  <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">dom</span> <span class="p">?</span> <span class="nx">dom</span><span class="p">.</span><span class="nx">length</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-	  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-	    <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dom</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
-	  <span class="p">}</span>
-	  <span class="k">this</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="nx">len</span><span class="p">;</span>
-	  <span class="k">this</span><span class="p">.</span><span class="nx">selector</span> <span class="o">=</span> <span class="nx">selector</span> <span class="o">||</span> <span class="s1">''</span>
-	<span class="p">}</span>
+    <span class="c1">// 即使用zepto时候的$</span>
+    <span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">selector</span><span class="p">){</span>
+      <span class="k">return</span> <span class="nx">zepto</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">selector</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="c1">// 构造函数</span>
+    <span class="kd">function</span> <span class="nx">Z</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">dom</span> <span class="p">?</span> <span class="nx">dom</span><span class="p">.</span><span class="nx">length</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">dom</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+      <span class="p">}</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="nx">len</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">selector</span> <span class="o">=</span> <span class="nx">selector</span> <span class="o">||</span> <span class="s1">''</span>
+    <span class="p">}</span>
 
-	<span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
-	  <span class="c1">// 出现new</span>
-	  <span class="k">return</span> <span class="k">new</span> <span class="nx">Z</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span><span class="nx">selector</span><span class="p">)</span>
-	<span class="p">}</span>
+    <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 出现new</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">Z</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span><span class="nx">selector</span><span class="p">)</span>
+    <span class="p">}</span>
 
-	<span class="nx">$</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="p">{</span>
-	  <span class="na">constructor</span><span class="p">:</span> <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span><span class="p">,</span>
-	  <span class="na">css</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span>
-	  	<span class="nx">alert</span><span class="p">(</span><span class="s1">'css'</span><span class="p">)</span>
-	  <span class="p">},</span>
-	  <span class="na">html</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){}</span>
-	<span class="p">}</span>
-	
-	<span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Z</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">constructor</span><span class="p">:</span> <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span><span class="p">,</span>
+      <span class="na">css</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">'css'</span><span class="p">)</span>
+      <span class="p">},</span>
+      <span class="na">html</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">){}</span>
+    <span class="p">}</span>
 
-	<span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nx">$</span><span class="p">;</span>
-    
+    <span class="nx">zepto</span><span class="p">.</span><span class="nx">Z</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Z</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">fn</span>
+
+    <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nx">$</span><span class="p">;</span>
+
 <span class="p">})(</span><span class="nb">window</span><span class="p">)</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;script&gt;</span>  
@@ -394,45 +376,35 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
-
-<h1 id="扩展性-插件机制-extensibility">扩展性-插件机制-Extensibility</h1>
+</code></pre></div>
+<h1 id="extensibility">扩展性-插件机制-Extensibility</h1>
 
 <p><strong>为何要把原型方法放在$.fn ?</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">css</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s1">'css'</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="na">html</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">css</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">alert</span><span class="p">(</span><span class="s1">'css'</span><span class="p">)</span>
-	<span class="p">},</span>
-	<span class="na">html</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-
-	<span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 <span class="nx">init</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">jQuery</span><span class="p">.</span><span class="nx">fn</span><span class="p">;</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><strong>因为要扩展插件</strong></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">getNodeName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">getNodeName</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
   <span class="k">return</span> <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">nodeName</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><strong>好处</strong></p>
 
 <ul>
-  <li>
-    <p>只有$会暴露在window全局变量</p>
-  </li>
-  <li>
-    <p>将插件扩展统一到$.fn.xxx这一个接口，方便使用</p>
-  </li>
+<li><p>只有$会暴露在window全局变量</p></li>
+<li><p>将插件扩展统一到$.fn.xxx这一个接口，方便使用</p></li>
 </ul>
 
-<h1 id="更多-more">更多-more</h1>
+<h1 id="more">更多-more</h1>
 
 <p><a href="https://coding.imooc.com/learn/list/190.html">揭秘一线互联网企业 前端JavaScript高级面试</a></p>
-
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -544,11 +516,11 @@
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -593,7 +565,7 @@
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -693,7 +665,7 @@
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

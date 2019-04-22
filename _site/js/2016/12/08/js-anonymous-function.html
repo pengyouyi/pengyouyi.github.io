@@ -161,92 +161,90 @@
 		
 		</div>
 		
-		<h1 id="js中的匿名函数">js中的匿名函数</h1>
+		<h1 id="js">js中的匿名函数</h1>
 
 <h1 id="what-is-anonymous-function">what is anonymous function</h1>
+
 <p>第一种方式，创建匿名函数，形如以下：</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
 <span class="c1">//代码</span>
 <span class="p">})();</span>
-</code></pre></div></div>
+</code></pre></div>
 <p>匿名函数例子</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">){</span> 
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">){</span> 
   <span class="nx">alert</span><span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">);</span> 
 <span class="p">})(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-</code></pre></div></div>
+</code></pre></div>
 <p>这里创建了一个匿名函数(在第一个括号内)，第二个括号用于调用该匿名函数，并传入参数。括号是表达式，是表达式就有返回值，所以可以在后面加一对括号让它们执行.</p>
 
 <p>第二种方式，创建匿名函数，函数表达式的右侧。</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="kr">double</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">2</span><span class="o">*</span> <span class="nx">x</span><span class="p">;</span> <span class="p">}</span>
-</code></pre></div></div>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="kr">double</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">2</span><span class="o">*</span> <span class="nx">x</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></div>
 <p>右边的函数就是一个匿名函数，创造完毕函数后，又将该函数赋给了变量double。</p>
 
 <h2 id="self-executing-anonymous-function">self-executing anonymous function</h2>
-<p>为什么(function {// code})();可以被执行, 而function {// code}();却会报错?
+
+<p>为什么(function {// code})();可以被执行, 而function {// code}();却会报错?<br>
 // SyntaxError: Unexpected token (</p>
 
-<p>分析：<br />
-(1). 首先, 要清楚两者的区别:<br />
+<p>分析：<br><br>
+(1). 首先, 要清楚两者的区别:<br><br>
 (function {// code})是表达式, function {// code}是函数声明.</p>
 
-<p>(2). 其次, js”预编译”的特点:<br />
-js在”预编译”阶段, 会解释函数声明, 但却会忽略表式.</p>
+<p>(2). 其次, js&quot;预编译&quot;的特点:<br><br>
+js在&quot;预编译&quot;阶段, 会解释函数声明, 但却会忽略表式.</p>
 
-<p>(3). 当js执行到function() {//code}();时, 由于function() {//code}在”预编译”阶段已经被解释过, js会跳过function(){//code}, 试图去执行();, 故会报错;<br />
+<p>(3). 当js执行到function() {//code}();时, 由于function() {//code}在&quot;预编译&quot;阶段已经被解释过, js会跳过function(){//code}, 试图去执行();, 故会报错;<br><br>
 在解析器解析全局的function或者function内部function关键字的时候，默认是认为function声明，而不是function表达式，如果你不显示告诉编译器，它默认会声明成一个缺少名字的function，并且抛出一个语法错误信息，因为function声明需要一个名字。</p>
 
 <p>当js执行到(function {// code})();时, 由于(function {// code})是表达式, js会去对它求解得到返回值, 由于返回值是一 个函数, 故而遇到();时, 便会被执行.</p>
 
 <p>另外， 函数转换为表达式的方法并不一定要靠分组操作符()，我们还可以用void操作符，~操作符，!操作符</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">~</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> 
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">~</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span> 
 <span class="nx">alert</span><span class="p">(</span><span class="s1">'water'</span><span class="p">);</span> 
 <span class="p">})();</span><span class="c1">//写法有点酷~</span>
- 
+
 <span class="k">void</span> <span class="kd">function</span><span class="p">(){</span> 
 <span class="nx">alert</span><span class="p">(</span><span class="s1">'water'</span><span class="p">);</span> 
 <span class="p">}();</span><span class="c1">//据说效率最高~</span>
- 
+
 <span class="o">+</span><span class="kd">function</span><span class="p">(){</span> 
 <span class="nx">alert</span><span class="p">(</span><span class="s1">'water'</span><span class="p">);</span> 
 <span class="p">}();</span>
- 
+
 <span class="o">-</span><span class="kd">function</span><span class="p">(){</span> 
 <span class="nx">alert</span><span class="p">(</span><span class="s1">'water'</span><span class="p">);</span> 
 <span class="p">}();</span>
- 
+
 <span class="o">!</span><span class="kd">function</span><span class="p">(){</span> 
 <span class="nx">alert</span><span class="p">(</span><span class="s1">'water'</span><span class="p">);</span> 
 <span class="p">}();</span>
-</code></pre></div></div>
+</code></pre></div>
+<h1 id="anonymous-function">anonymous function好处</h1>
 
-<h1 id="anonymous-function好处">anonymous function好处</h1>
-
-<p>1.避免占用全局变量名<br />
-2.参数保护,函数是独立作用域,传递参数可以保护临时变量,闭包可以保存循环中需要保留的临时变量,还有组件开发时将命名空间传递到函数中用闭包保护起来,即使命名空间被后面的代码重置,原变量被闭包保护将仍然生存<br />
+<p>1.避免占用全局变量名<br><br>
+2.参数保护,函数是独立作用域,传递参数可以保护临时变量,闭包可以保存循环中需要保留的临时变量,还有组件开发时将命名空间传递到函数中用闭包保护起来,即使命名空间被后面的代码重置,原变量被闭包保护将仍然生存<br><br>
 3.降低风险,因为没有变量名,中间代码又被闭包保护,js注入无法访问,减少被攻击风险</p>
 
 <p>1.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-	<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s2">"a"</span><span class="p">;</span>
-	<span class="nx">b</span> <span class="o">=</span> <span class="s2">"b"</span><span class="p">;</span>
-	<span class="kd">function</span> <span class="nx">c</span><span class="p">(){</span>
-		<span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
-	<span class="p">}</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="s2">"a"</span><span class="p">;</span>
+    <span class="nx">b</span> <span class="o">=</span> <span class="s2">"b"</span><span class="p">;</span>
+    <span class="kd">function</span> <span class="nx">c</span><span class="p">(){</span>
+        <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">})()</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>    <span class="c1">// a is not defined(…)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">());</span>  <span class="c1">// c is not defined(…)</span>
-</code></pre></div></div>
+</code></pre></div>
+<h1 id="anonymous-function">anonymous function使用场景</h1>
 
-<h1 id="anonymous-function使用场景">anonymous function使用场景</h1>
 <p>一是回调函数，二是直接执行函数。</p>
 
-<h1 id="anonymous-function--closure">anonymous function &amp; closure</h1>
+<h1 id="anonymous-function-amp-closure">anonymous function &amp; closure</h1>
 
-<h1 id="更多-more">更多-more</h1>
-
+<h1 id="more">更多-more</h1>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -354,11 +352,11 @@ js在”预编译”阶段, 会解释函数声明, 但却会忽略表式.</p>
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -403,7 +401,7 @@ js在”预编译”阶段, 会解释函数声明, 但却会忽略表式.</p>
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -503,7 +501,7 @@ js在”预编译”阶段, 会解释函数声明, 但却会忽略表式.</p>
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

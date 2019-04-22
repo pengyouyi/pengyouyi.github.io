@@ -7,7 +7,7 @@
     
     
     
-    <title>babel | 彭友谊的博客</title>
+    <title>vuex小示例 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="babel">
-    <meta property="og:url" content="/build-tool/2016/10/04/Babel">
+    <meta property="og:title" content="vuex小示例">
+    <meta property="og:url" content="/framework/2018/12/10/vue-vuex">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="babel">
+    <meta property="og:description" content="vuex小示例">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="babel">
+    <meta name="twitter:title" content="vuex小示例">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -142,14 +142,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/build-tool/2016/10/04/Babel" title="babel" itemprop="url">babel</a>
+      <a href="/framework/2018/12/10/vue-vuex" title="vuex小示例" itemprop="url">vuex小示例</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-04 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-04</time>
+    <time datetime="2018-12-10 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-12-10</time>
     
   </p>
 </header>
@@ -161,159 +161,217 @@
 		
 		</div>
 		
-		<h1 id="babel是什么">Babel是什么</h1>
-<blockquote>
-  <p>Babel 是一个 JavaScript 编译器，可以将ES6代码转为ES5代码，从而在现有环境执行。</p>
-</blockquote>
-
-<h1 id="安装babel">安装Babel</h1>
-<p>babel-cli 是babel解释器的客户端主程序</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm install <span class="nt">-g</span> babel-cli</pre></td></tr></tbody></table></code></pre></figure>
-
-<p><strong>在项目内运行 babel-cli</strong><br />
-初始化项目</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm init</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>安装babel-cli</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre>npm install <span class="nt">--save-dev</span> babel-cli</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>安装ec2015的转化器,因为ec2015语法并不是所有浏览器都兼容</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm install <span class="nt">--save-dev</span> babel-preset-es2015</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>安装react转码规则</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm install <span class="nt">--save-dev</span> babel-preset-react</pre></td></tr></tbody></table></code></pre></figure>
-
-<h1 id="配置文件babelrc">配置文件.babelrc</h1>
-<p>然后在项目的根目录下新建一个 .babelrc 文件，写入:</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="code"><pre>{
-    "presets": ["es2015"]
-  }</pre></td></tr></tbody></table></code></pre></figure>
-
-<p><strong><em>notice</em></strong></p>
+		<h1 id="v-vuex">v-vuex</h1>
 
 <blockquote>
-  <p>所有Babel工具和模块的使用，都必须先写好.babelrc 。</p>
+<p>A Vue.js project</p>
 </blockquote>
 
-<p>此时babel已安装好，可以使用bable命令对文件进行转码输出了</p>
+<h2 id="vue">vue项目初始化</h2>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">vue init webpack Vue-ProjectName
+npm install
+npm run dev
+</code></pre></div>
+<h2 id="vuex">安装 vuex</h2>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">npm install vuex --save
+</code></pre></div>
+<h1 id="vuex">项目中使用vuex</h1>
 
-<h1 id="babel基本用法">babel基本用法</h1>
+<h2 id="src-store">新建src下的store文件夹</h2>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-</pre></td><td class="code"><pre># 转码结果输出到标准输出
-$ babel example.js
-
-# 转码结果写入一个文件
-# --out-file 或 -o 参数指定输出文件
-$ babel example.js --out-file compiled.js
-# 或者
-$ babel example.js -o compiled.js
-
-# 整个目录转码,把src文件中所有的文件转码到lib文件夹中对应文件名下，
-# --out-dir 或 -d 参数指定输出目录
-$ babel src --out-dir lib
-# 或者
-$ babel src -d lib
-
-# -s 参数生成source map文件
-$ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>延伸babel在项目中的使用<br />
-修改package.json</p>
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="err">//...</span><span class="w">
-  </span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"babel src -d lib"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"babel-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"babel-preset-es2015"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"babel-preset-react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>转码的时候，就执行下面的命令。</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm run build</pre></td></tr></tbody></table></code></pre></figure>
-
-<h1 id="babel-demo">babel demo</h1>
-<p>Project-file-name/es2015/index.js</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>我们来利用babel转化一下，命令行执行：</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>babel ./es2015/index.js <span class="nt">--out-file</span> ./es2015/index-build.js</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>index-build.js就是转换后的js：</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"use strict"</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h1 id="浏览器环境browser">浏览器环境browser</h1>
-<p>通过安装5.x版本的babel-core模块获取。</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm install babel-core@5</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>运行上面的命令以后，就可以在当前目录的node_modules/babel-core/子目录里面，找到babel的浏览器版本browser.js（未精简）和browser.min.js（已精简）
-然后，将下面的代码插入网页。</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"node_modules/babel-core/browser.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/babel"</span><span class="nt">&gt;</span>
-<span class="c1">// Your ES6 code</span>
-<span class="nt">&lt;/script&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<h1 id="babel-在线转换es6-to-es5">babel 在线转换ES6 to ES5</h1>
-<p><a href="https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=">https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=</a></p>
-<h1 id="更多-more">更多-more</h1>
 <ul>
-  <li><a href="http://babeljs.cn/">http://babeljs.cn/</a></li>
-  <li><a href="http://www.ruanyifeng.com/blog/2016/01/babel.html">http://www.ruanyifeng.com/blog/2016/01/babel.html</a></li>
+<li>src
+
+<ul>
+<li>store
+
+<ul>
+<li>index.js</li>
+<li>state.js</li>
+<li>getters.js</li>
+<li>mutation-types.js</li>
+<li>actions</li>
+<li>mutations.js</li>
+</ul></li>
+</ul></li>
 </ul>
 
+<p>store/index.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">'vue'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Vuex</span> <span class="nx">from</span> <span class="s1">'vuex'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">actions</span> <span class="nx">from</span> <span class="s1">'./actions'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">getters</span> <span class="nx">from</span> <span class="s1">'./getters'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">state</span> <span class="nx">from</span> <span class="s1">'./state'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">mutations</span> <span class="nx">from</span> <span class="s1">'./mutations'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">createLogger</span> <span class="nx">from</span> <span class="s1">'vuex/dist/logger'</span><span class="p">;</span>
+
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Vuex</span><span class="p">);</span>
+
+<span class="kr">const</span> <span class="nx">debug</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">!==</span> <span class="s1">'production'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Vuex</span><span class="p">.</span><span class="nx">Store</span><span class="p">({</span>
+    <span class="nx">actions</span><span class="p">,</span>
+    <span class="nx">getters</span><span class="p">,</span>
+    <span class="nx">state</span><span class="p">,</span>
+    <span class="nx">mutations</span><span class="p">,</span>
+    <span class="na">strict</span><span class="p">:</span> <span class="nx">debug</span><span class="p">,</span>
+    <span class="na">plugins</span><span class="p">:</span> <span class="nx">debug</span> <span class="p">?</span> <span class="p">[</span><span class="nx">createLogger</span><span class="p">()]</span> <span class="p">:</span> <span class="p">[]</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>store/state.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">isShowNav</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="c1">// Add another one.</span>
+<span class="p">};</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">state</span><span class="p">;</span>
+</code></pre></div>
+<p>store/getters.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">isShowNav</span> <span class="o">=</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">;</span>
+<span class="c1">// Add another one.</span>
+</code></pre></div>
+<p>store/mutation-types.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">SET_NAV</span> <span class="o">=</span> <span class="s1">'SET_NAV'</span><span class="p">;</span>
+<span class="c1">// Add another one.</span>
+</code></pre></div>
+<p>store/actions.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">types</span> <span class="nx">from</span> <span class="s1">'./mutation-types'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="kr">const</span> <span class="nx">setNav</span> <span class="o">=</span> <span class="kd">function</span><span class="p">({</span><span class="nx">commit</span><span class="p">},</span> <span class="nx">isShowNav</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">commit</span><span class="p">(</span><span class="s1">'SET_NAV'</span><span class="p">,</span> <span class="nx">isShowNav</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="c1">// Add another one.</span>
+</code></pre></div>
+<p>store/mutations.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">types</span> <span class="nx">from</span> <span class="s1">'./mutation-types'</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">mutations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">types</span><span class="p">.</span><span class="nx">SET_NAV</span><span class="p">](</span><span class="nx">state</span><span class="p">,</span> <span class="nx">isShowNav</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">state</span><span class="p">.</span><span class="nx">isShowNav</span> <span class="o">=</span> <span class="nx">isShowNav</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="c1">// Add another one.</span>
+<span class="p">};</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">mutations</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="main-js-store">main.js引入store入口文件</h2>
+
+<p>src/main.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">'vue'</span>
+<span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">'./App'</span>
+<span class="kr">import</span> <span class="nx">router</span> <span class="nx">from</span> <span class="s1">'./router'</span>
+<span class="kr">import</span> <span class="nx">store</span> <span class="nx">from</span> <span class="s1">'./store/index'</span><span class="p">;</span>
+
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">productionTip</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="cm">/* eslint-disable no-new */</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="s1">'#app'</span><span class="p">,</span>
+  <span class="nx">router</span><span class="p">,</span>
+  <span class="nx">store</span><span class="p">,</span>
+  <span class="na">components</span><span class="p">:</span> <span class="p">{</span> <span class="nx">App</span> <span class="p">},</span>
+  <span class="na">template</span><span class="p">:</span> <span class="s1">'&lt;App/&gt;'</span>
+<span class="p">})</span>
+</code></pre></div>
+<h2 id="vue-state">vue组件中获取state中的值</h2>
+
+<p><code>this.$store.getters.stateName</code></p>
+
+<p>src/components/pageA.vue</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"hello"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="nx">data</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">msg</span><span class="p">:</span> <span class="s1">'Welcome to Page A'</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nx">isShowNav</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="c1">// isShowNav: {</span>
+    <span class="c1">//  get() {</span>
+    <span class="c1">//      return this.$store.getters.isShowNav;</span>
+    <span class="c1">//  },</span>
+    <span class="c1">//  set(value) {</span>
+    <span class="c1">//      this.$store.dispatch('setNav', this.$store.getters.isShowNav)</span>
+    <span class="c1">//  }</span>
+    <span class="c1">// }</span>
+  <span class="p">},</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">style</span> <span class="nx">scoped</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="sr">/style</span><span class="err">&gt;
+</span>
+</code></pre></div>
+<h2 id="vue-state">vue组件中修改state中的值</h2>
+
+<p><code>this.$store.dispatch(&#39;actionType&#39;, newVal)</code></p>
+
+<p>src/components/pageB</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;template&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"hello"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h1&gt;&lt;/h1&gt;</span>
+    <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
+    <span class="nt">&lt;button</span> <span class="err">@</span><span class="na">click=</span><span class="s">"changeNav"</span><span class="nt">&gt;</span>change isShowNav<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="nx">data</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">msg</span><span class="p">:</span> <span class="s1">'Welcome to Page B'</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nx">isShowNav</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nx">changeNav</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s1">'setNav'</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">);</span>
+        <span class="c1">// 严格模式，那么任何修改state的操作，只要不经过mutation的函数，vue就会throw error </span>
+        <span class="c1">// this.$store.state.isShowNav = 'test';  // 不建议这样使用</span>
+        <span class="c1">// this.$store.commit('SET_NAV', !this.$store.getters.isShowNav);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="nt">&lt;style </span><span class="na">scoped</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/style&gt;</span>
+</code></pre></div>
+<p>这样 state 中的 isShowNav 就在vue组件中共享了，无论在哪个页面修改它的值，其他页面都能立即通过 computed 监测state中的值发生的变化。</p>
+
+<h1 id="dispatch-commit-mutations">dispatch和commit来调用mutations的区别</h1>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s1">'setNav'</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">);</span>
+
+<span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="s1">'SET_NAV'</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">);</span>
+</code></pre></div>
+<p>区别：</p>
+
+<p>dispatch：含有异步操作，例如向后台提交数据，写法： this.$store.dispatch(&#39;mutations方法名&#39;,值)</p>
+
+<p>commit：同步操作，写法：this.$store.commit(&#39;mutations方法名&#39;,值)</p>
+
+<h1 id="more">more</h1>
+
+<ul>
+<li><a href="https://vuex.vuejs.org/">https://vuex.vuejs.org/</a></li>
+<li>完整项目请看github, 项目v-vuex待上传，地址待添加。。。</li>
+</ul>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -330,7 +388,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#Build-Tool">Build-Tool</a>
+  <a class="article-category-link" href="/categories/#Framework">Framework</a>
   
 </div>
 
@@ -344,7 +402,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#ES6">ES6</a>
+  <a href="/tags/#vue">vue</a>
   
   </div>
 
@@ -354,7 +412,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/build-tool/2016/10/04/Babel" data-title="babel | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/framework/2018/12/10/vue-vuex" data-title="vuex小示例 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -366,18 +424,18 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/framework/2016/10/03/requirejs&seajs" title="requirejs和seajs的区别">
+ <a href="/framework/2018/12/10/vue-vuex-mapgetters-mapmutations" title="vuex中引入mapGetters、mapMutations">
   <strong>上一篇：</strong><br/>
   <span>
-  requirejs和seajs的区别</span>
+  vuex中引入mapGetters、mapMutations</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/js/2016/10/05/ES6"  title="ES6">
+<a href="/tool/2018/12/12/rsync"  title="使用rsync将本地数据同步到服务器">
  <strong>下一篇：</strong><br/> 
- <span>ES6
+ <span>使用rsync将本地数据同步到服务器
 </span>
 </a>
 </div>
@@ -421,11 +479,11 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -470,7 +528,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -570,7 +628,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

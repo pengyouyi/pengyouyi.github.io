@@ -161,63 +161,58 @@
 		
 		</div>
 		
-		<h1 id="原型链继承-prototype-chain">原型链继承-Prototype chain</h1>
+		<h1 id="prototype-chain">原型链继承-Prototype chain</h1>
 
-<p><code class="highlighter-rouge">Child.prototype = new Parent();</code></p>
+<p><code>Child.prototype = new Parent();</code></p>
 
-<p>借助原型链实现继承, 引起<code class="highlighter-rouge">引用类型的原型属性会被所有实例共享</code></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Parent2</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent2'</span><span class="p">;</span>
+<p>借助原型链实现继承, 引起<code>引用类型的原型属性会被所有实例共享</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Parent2</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent2'</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nx">Parent2</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">say</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">Child2</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child2'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child2'</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nx">Child2</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent2</span><span class="p">();</span>  <span class="c1">// 缺点是父类构造函数执行两次</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span> <span class="nx">Child2</span><span class="p">().</span><span class="nx">say</span><span class="p">())</span>
-</code></pre></div></div>
+</code></pre></div>
+<h1 id="constructed-function">借助构造函数继承-constructed function</h1>
 
-<h1 id="借助构造函数继承-constructed-function">借助构造函数继承-constructed function</h1>
-
-<p>借助构造函数实现继承,<code class="highlighter-rouge">子类不能继承父类prototype上的方法</code></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<p>借助构造函数实现继承,<code>子类不能继承父类prototype上的方法</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js">
 <span class="kd">function</span> <span class="nx">Parent1</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent1'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent1'</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">Parent1</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">say</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">Child1</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child1'</span><span class="p">;</span>
-	<span class="nx">Parent1</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child1'</span><span class="p">;</span>
+    <span class="nx">Parent1</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span> <span class="nx">Child1</span><span class="p">());</span>
-</code></pre></div></div>
-
-<h1 id="组合继承-combination">组合继承-combination</h1>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Parent3</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent3'</span><span class="p">;</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">play</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+</code></pre></div>
+<h1 id="combination">组合继承-combination</h1>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Parent3</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent3'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">play</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
 <span class="p">}</span>
 
 <span class="nx">Parent3</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">say</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">Child3</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child3'</span><span class="p">;</span>
-	<span class="nx">Parent3</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child3'</span><span class="p">;</span>
+    <span class="nx">Parent3</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nx">Child3</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent3</span><span class="p">();</span>
@@ -228,27 +223,25 @@
 <span class="nx">s3</span><span class="p">.</span><span class="nx">play</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s3</span><span class="p">.</span><span class="nx">play</span><span class="p">,</span> <span class="nx">s4</span><span class="p">.</span><span class="nx">play</span><span class="p">)</span> <span class="c1">// [1, 2, 3, 4],  [1, 2, 3];</span>
-</code></pre></div></div>
-
-<h1 id="共享原型-shared-prototype">共享原型-Shared-prototype</h1>
+</code></pre></div>
+<h1 id="shared-prototype">共享原型-Shared-prototype</h1>
 
 <p>组合继承优化-1</p>
 
-<p><code class="highlighter-rouge">Child.prototype = Parent.prototype</code></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 组合继承，优化1</span>
+<p><code>Child.prototype = Parent.prototype</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 组合继承，优化1</span>
 <span class="kd">function</span> <span class="nx">Parent4</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent4'</span><span class="p">;</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">play</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent4'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">play</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
 <span class="p">}</span>
 
 <span class="nx">Parent4</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">say</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">Child4</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child4'</span><span class="p">;</span>
-	<span class="nx">Parent4</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child4'</span><span class="p">;</span>
+    <span class="nx">Parent4</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nx">Child4</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">Parent4</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>  <span class="c1">// 缺点是，子类指向的构造函数与父类是一个</span>
@@ -260,98 +253,92 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s5</span><span class="p">,</span> <span class="nx">s6</span><span class="p">);</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s5</span> <span class="k">instanceof</span> <span class="nx">Child4</span><span class="p">,</span><span class="nx">s5</span> <span class="k">instanceof</span> <span class="nx">Parent4</span><span class="p">);</span>  <span class="c1">// true, true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s5</span><span class="p">.</span><span class="kd">constructor</span><span class="p">)</span>  <span class="c1">// Parent4</span>
-</code></pre></div></div>
-
-<h1 id="objectcreate">Object.create</h1>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s5</span><span class="p">.</span><span class="nx">constructor</span><span class="p">)</span>  <span class="c1">// Parent4</span>
+</code></pre></div>
+<h1 id="object-create">Object.create</h1>
 
 <p>组合继承优化-2</p>
 
-<p><code class="highlighter-rouge">Child.prototype = Object.create(Parent.prototype)</code></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Parent5</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent5'</span><span class="p">;</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">play</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<p><code>Child.prototype = Object.create(Parent.prototype)</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Parent5</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'parent5'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">play</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">Child5</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child5'</span><span class="p">;</span>
-	<span class="nx">Parent5</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'child5'</span><span class="p">;</span>
+    <span class="nx">Parent5</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nx">Child5</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Parent5</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
-<span class="nx">Child5</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="kd">constructor</span> <span class="o">=</span> <span class="nx">Child5</span><span class="p">;</span>
+<span class="nx">Child5</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Child5</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">s7</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Child5</span><span class="p">();</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s7</span> <span class="k">instanceof</span> <span class="nx">Child5</span><span class="p">,</span> <span class="nx">s7</span> <span class="k">instanceof</span> <span class="nx">Parent5</span><span class="p">);</span> <span class="c1">// true, true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s7</span><span class="p">.</span><span class="kd">constructor</span><span class="p">);</span>  <span class="c1">// Child5</span>
-</code></pre></div></div>
-
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">s7</span><span class="p">.</span><span class="nx">constructor</span><span class="p">);</span>  <span class="c1">// Child5</span>
+</code></pre></div>
 <p><a href="https://blog.csdn.net/blueblueskyhua/article/details/73135938">你不知道的javascript之Object.create 和new区别</a></p>
 
 <p><a href="https://blog.csdn.net/TuoHai_/article/details/72954100">Object.create方法及其在继承上的应用</a></p>
 
-<h1 id="使用-class-关键字">使用 class 关键字</h1>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Polygon</span> <span class="p">{</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
+<h1 id="class">使用 class 关键字</h1>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Polygon</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">height</span><span class="p">,</span> <span class="nx">width</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">class</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">Polygon</span> <span class="p">{</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">sideLength</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">super</span><span class="p">(</span><span class="nx">sideLength</span><span class="p">,</span> <span class="nx">sideLength</span><span class="p">);</span>
+<span class="kr">class</span> <span class="nx">Square</span> <span class="kr">extends</span> <span class="nx">Polygon</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">sideLength</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">(</span><span class="nx">sideLength</span><span class="p">,</span> <span class="nx">sideLength</span><span class="p">);</span>
   <span class="p">}</span>
-  <span class="kd">get</span> <span class="nx">area</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">get</span> <span class="nx">area</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
   <span class="p">}</span>
-  <span class="kd">set</span> <span class="nx">sideLength</span><span class="p">(</span><span class="nx">newLength</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">set</span> <span class="nx">sideLength</span><span class="p">(</span><span class="nx">newLength</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">newLength</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">newLength</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">square</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Square</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h1 id="写一个贴近实际开发原型链继承的例子-demo">写一个贴近实际开发原型链继承的例子-demo</h1>
+</code></pre></div>
+<h1 id="demo">写一个贴近实际开发原型链继承的例子-demo</h1>
 
 <p>写一个封装DOM查询的例子</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Elem</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Elem</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">Elem</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">html</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">elem</span><span class="p">;</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
-  	<span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
-  	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
-  	<span class="k">return</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// 链式操作</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">;</span> <span class="c1">// 链式操作</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  	<span class="k">return</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 <span class="nx">Elem</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">on</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">elem</span><span class="p">;</span>
-	<span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">);</span>
-	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-		<span class="nx">elem</span><span class="p">[</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">;</span>
-	<span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">elem</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">elem</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">elem</span><span class="p">[</span><span class="s1">'on'</span> <span class="o">+</span> <span class="nx">type</span><span class="p">]</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">;</span>
+    <span class="p">}</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">div1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Elem</span><span class="p">(</span><span class="s1">'div1'</span><span class="p">);</span>
 <span class="nx">div1</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s1">'有'</span><span class="p">);</span>
 <span class="nx">div1</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="nx">alert</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)).</span><span class="nx">html</span><span class="p">(</span><span class="s1">'youyi'</span><span class="p">);</span>
-</code></pre></div></div>
+</code></pre></div>
+<h1 id="more">更多-more</h1>
 
-<h1 id="更多-more">更多-more</h1>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">mozilla.org/Inheritance_and_the_prototype_chain</a></p>
   
 	</div>
@@ -460,11 +447,11 @@
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -509,7 +496,7 @@
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -609,7 +596,7 @@
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

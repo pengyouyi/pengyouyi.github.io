@@ -161,27 +161,24 @@
 		
 		</div>
 		
-		<h1 id="js中的this">js中的this</h1>
+		<h1 id="js-this">js中的this</h1>
 
 <h1 id="global-context">Global context</h1>
-<p>全局的this<br />
-In the global execution context (outside of any function), this refers to the global object, whether in strict mode or not.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// In web browsers, the window object is also the global object:</span>
+<p>全局的this<br><br>
+In the global execution context (outside of any function), this refers to the global object, whether in strict mode or not.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In web browsers, the window object is also the global object:</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nb">window</span><span class="p">);</span> <span class="c1">// true</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nb">document</span> <span class="o">===</span> <span class="nb">document</span><span class="p">);</span> <span class="c1">// true</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><a href="http://www.w3school.com.cn/jsref/dom_obj_document.asp">document</a>是<a href="http://www.w3school.com.cn/jsref/dom_obj_window.asp">window</a>的一个对象属性</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//非函数内直接使用 var 声明的变量默认为全局变量，且默认挂在 window 上作为属性。</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//非函数内直接使用 var 声明的变量默认为全局变量，且默认挂在 window 上作为属性。</span>
 <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">37</span><span class="p">;</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 37</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>延伸</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 
 <span class="kd">function</span> <span class="nx">func</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span>
@@ -201,43 +198,39 @@ In the global execution context (outside of any function), this refers to the gl
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">fn</span><span class="p">())</span> <span class="c1">// 20</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fn</span><span class="p">())</span> <span class="c1">// 10</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>func()和fn()最终输出的都是全局的 10。永远记住这一点：判断 this 指向谁，看执行时而非定义时，只要函数(function)没有绑定在对象上调用，它的 this 就是 window。</p>
 
 <h1 id="function-context">Function context</h1>
 
 <h2 id="simple-call">Simple call</h2>
-<p>一般函数的 this<br />
-Since the following code is not in strict mode, and because the value of this is not set by the call, this will default to the global object:</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span>
+<p>一般函数的 this<br><br>
+Since the following code is not in strict mode, and because the value of this is not set by the call, this will default to the global object:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f1</span><span class="p">(){</span>
   <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="c1">// In a browser:</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">f1</span><span class="p">()</span> <span class="o">===</span> <span class="nb">window</span> <span class="p">);</span> <span class="c1">//true, the window is the global object in browsers</span>
 
 <span class="c1">// In Node:</span>
-<span class="nx">f1</span><span class="p">()</span> <span class="o">===</span> <span class="nb">global</span>
-</code></pre></div></div>
-
+<span class="nx">f1</span><span class="p">()</span> <span class="o">===</span> <span class="nx">global</span>
+</code></pre></div>
 <p>一般函数的 this 也指向 window，在 nodeJS 中为 global object</p>
 
 <p>in strict mode, if this was not defined by the execution context, it remains undefined.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">f2</span> <span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">f2</span> <span class="p">()</span> <span class="p">{</span>
     <span class="s2">"use strict"</span><span class="p">;</span><span class="c1">//使用严格模式</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">f1</span><span class="p">()</span> <span class="o">===</span> <span class="kc">undefined</span> <span class="p">);</span><span class="c1">//true</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>严格模式中，函数的 this 为 undefined,因为严格模式禁止this关键字指向全局对象；对于js“严格模式”具体可以看<a href="http://www.ruanyifeng.com/blog/2013/01/javascript_strict_mode.html">阮一峰先生的Javascript 严格模式详解</a></p>
 
 <h2 id="as-an-object-method">As an object method</h2>
-<p>作为对象的方法调用</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+<p>作为对象的方法调用</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">prop</span><span class="p">:</span> <span class="mi">37</span><span class="p">,</span>
   <span class="na">f</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="k">this</span> <span class="o">===</span> <span class="nx">o</span> <span class="p">);</span>  <span class="c1">// true</span>
@@ -246,11 +239,9 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="p">};</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">f</span><span class="p">());</span> <span class="c1">// logs 37</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>当函数作为对象内的一个方法被调用的时候，this指向拥有该方法的对象。</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span><span class="na">prop</span><span class="p">:</span> <span class="mi">37</span><span class="p">};</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span><span class="na">prop</span><span class="p">:</span> <span class="mi">37</span><span class="p">};</span>
 
 <span class="kd">function</span> <span class="nx">independent</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">prop</span><span class="p">;</span>
@@ -259,25 +250,20 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="nx">o</span><span class="p">.</span><span class="nx">f</span> <span class="o">=</span> <span class="nx">independent</span><span class="p">;</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">f</span><span class="p">());</span> <span class="c1">// logs 37</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">o</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="p">{</span><span class="na">g</span><span class="p">:</span> <span class="nx">independent</span><span class="p">,</span> <span class="na">prop</span><span class="p">:</span> <span class="mi">42</span><span class="p">};</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">o</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="p">{</span><span class="na">g</span><span class="p">:</span> <span class="nx">independent</span><span class="p">,</span> <span class="na">prop</span><span class="p">:</span> <span class="mi">42</span><span class="p">};</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">b</span><span class="p">.</span><span class="nx">g</span><span class="p">());</span> <span class="c1">// logs 42</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <h3 id="as-a-function-call">As a function call</h3>
-<p>作为函数调用</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">makeNoSense</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+<p>作为函数调用</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">makeNoSense</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">makeNoSense</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
 <span class="nx">x</span><span class="p">;</span><span class="c1">// x 已经成为一个值为 5 的全局变量</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>此时 this 绑定到全局对象。在浏览器中，window 就是该全局对象。比如下面的例子：函数被调用时，this被绑定到全局对象，接下来执行赋值语句，相当于隐式的声明了一个全局变量</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">x</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="na">y</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="na">moveTo</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
@@ -298,50 +284,44 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="p">)</span> <span class="c1">//0</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>       <span class="c1">//1</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span>       <span class="c1">//1</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>that方法解决绑定到point对象上</p>
 
 <h3 id="as-internal-function">As Internal function</h3>
 
 <p>内部函数</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"clever coder"</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"clever coder"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">name</span> <span class="p">:</span> <span class="s2">"foocoder"</span><span class="p">,</span>
-	<span class="na">hello</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sth</span><span class="p">){</span>
-		<span class="kd">var</span> <span class="nx">sayhello</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sth</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">" says "</span> <span class="o">+</span> <span class="nx">sth</span><span class="p">);</span>
-		<span class="p">};</span>
-		<span class="nx">sayhello</span><span class="p">(</span><span class="nx">sth</span><span class="p">);</span>
-	<span class="p">}</span>
+    <span class="na">name</span> <span class="p">:</span> <span class="s2">"foocoder"</span><span class="p">,</span>
+    <span class="na">hello</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sth</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">sayhello</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sth</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">" says "</span> <span class="o">+</span> <span class="nx">sth</span><span class="p">);</span>
+        <span class="p">};</span>
+        <span class="nx">sayhello</span><span class="p">(</span><span class="nx">sth</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 <span class="nx">person</span><span class="p">.</span><span class="nx">hello</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">);</span><span class="c1">//clever coder says hello world</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>此时内部函数中的this指向全局对象。</p>
 
 <p>绑定到外层函数对象person上：一般的处理方式是将this作为变量保存下来，一般约定为that或者self。</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"clever coder"</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"clever coder"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">name</span> <span class="p">:</span> <span class="s2">"foocoder"</span><span class="p">,</span>
-	<span class="na">hello</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sth</span><span class="p">){</span>
-		<span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-		<span class="kd">var</span> <span class="nx">sayhello</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sth</span><span class="p">)</span> <span class="p">{</span>
-			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">that</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">" says "</span> <span class="o">+</span> <span class="nx">sth</span><span class="p">);</span>
-		<span class="p">};</span>
-		<span class="nx">sayhello</span><span class="p">(</span><span class="nx">sth</span><span class="p">);</span>
-	<span class="p">}</span>
+    <span class="na">name</span> <span class="p">:</span> <span class="s2">"foocoder"</span><span class="p">,</span>
+    <span class="na">hello</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sth</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">sayhello</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sth</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">that</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">" says "</span> <span class="o">+</span> <span class="nx">sth</span><span class="p">);</span>
+        <span class="p">};</span>
+        <span class="nx">sayhello</span><span class="p">(</span><span class="nx">sth</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 <span class="nx">person</span><span class="p">.</span><span class="nx">hello</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">);</span><span class="c1">//foocoder says hello world</span>
-</code></pre></div></div>
-
-<h3 id="this-on-the-objects-prototype-chain">this on the object’s prototype chain</h3>
+</code></pre></div>
+<h3 id="this-on-the-object-39-s-prototype-chain">this on the object&#39;s prototype chain</h3>
 
 <p>对象原型链上的this</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">f</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">b</span><span class="p">;</span>
     <span class="p">}</span>
@@ -350,8 +330,7 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="nx">p</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="nx">p</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">f</span><span class="p">());</span> <span class="c1">//3</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>通过 var p = Object.create(o) 创建的对象，p 是基于原型 o 创建出的对象。</p>
 
 <p>p 的原型是 o，调用 f() 的时候是调用了 o 上的方法 f()，这里面的 this 是可以指向当前对象的，即对象 p。</p>
@@ -359,8 +338,7 @@ Since the following code is not in strict mode, and because the value of this is
 <h3 id="this-with-a-getter-or-setter">this with a getter or setter</h3>
 
 <p>get/set 方法与 this</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sum</span><span class="p">(){</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">sum</span><span class="p">(){</span>
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">c</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -368,7 +346,7 @@ Since the following code is not in strict mode, and because the value of this is
   <span class="na">a</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
   <span class="na">b</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
   <span class="na">c</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="kd">get</span> <span class="nx">average</span><span class="p">(){</span>
+  <span class="nx">get</span> <span class="nx">average</span><span class="p">(){</span>
     <span class="k">return</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">};</span>
@@ -380,36 +358,30 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="p">});</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">average</span><span class="p">,</span> <span class="nx">o</span><span class="p">.</span><span class="nx">sum</span><span class="p">);</span> <span class="c1">//  2, 6</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <h2 id="as-a-constructor">As a constructor</h2>
 
 <p>作为构造函数</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">C</span><span class="p">(){</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">C</span><span class="p">(){</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">37</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">C</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 37</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>没有返回值或者返回为基本类型时，默认将 this 返回。</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">C2</span><span class="p">(){</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">C2</span><span class="p">(){</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">37</span><span class="p">;</span>
   <span class="k">return</span> <span class="p">{</span><span class="na">a</span><span class="p">:</span><span class="mi">38</span><span class="p">};</span>
 <span class="p">}</span>
 
 <span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">C2</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 38</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>因为返回了对象，将这个对象作为返回值</p>
 
 <h2 id="call-and-apply">call and apply</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">+</span> <span class="nx">c</span> <span class="o">+</span> <span class="nx">d</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
@@ -418,9 +390,7 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="p">};</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">add</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="p">);</span> <span class="c1">// 1 + 3 + 5 + 7 = 16</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">add</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span> <span class="p">);</span> <span class="c1">// 1 + 3 + 10 + 20 = 34</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
 <span class="p">}</span>
 <span class="nx">bar</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span> <span class="c1">// "[object Number]"</span>
@@ -428,11 +398,10 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="nx">bar</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="c1">//[object Boolean]</span>
 <span class="nx">bar</span><span class="p">.</span><span class="nx">call</span><span class="p">();</span> <span class="c1">//[object Window]</span>
 <span class="nx">bar</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span> <span class="c1">//[object Window]</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <h2 id="the-bind-method">The bind method</h2>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
@@ -442,8 +411,7 @@ Since the following code is not in strict mode, and because the value of this is
 8
 9
 10
-11
-</pre></td><td class="code"><pre><span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
+11</pre></td><td class="code"><pre><span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
@@ -453,9 +421,10 @@ Since the following code is not in strict mode, and because the value of this is
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">f</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">);</span>   <span class="c1">// hello</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">f</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">);</span>   <span class="c1">//function f(){... }</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">f</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">o</span><span class="p">)()</span> <span class="p">);</span> <span class="c1">// hello</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">f</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">o</span><span class="p">)()</span> <span class="p">);</span> <span class="c1">// hello</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
@@ -468,8 +437,7 @@ Since the following code is not in strict mode, and because the value of this is
 11
 12
 13
-14
-</pre></td><td class="code"><pre><span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
+14</pre></td><td class="code"><pre><span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
@@ -482,43 +450,41 @@ Since the following code is not in strict mode, and because the value of this is
   <span class="na">f</span><span class="p">:</span> <span class="nx">f</span><span class="p">,</span>
   <span class="na">g</span><span class="p">:</span> <span class="nx">g</span>
 <span class="p">}</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">f</span><span class="p">(),</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">g</span><span class="p">());</span> <span class="c1">//37 hello</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">f</span><span class="p">(),</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">g</span><span class="p">());</span> <span class="c1">//37 hello</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="as-a-dom-event-handler">As a DOM event handler</h2>
 
-<p><code class="highlighter-rouge">this === e.currentTarget</code></p>
+<p><code>this === e.currentTarget</code></p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>click<span class="nt">&lt;/div&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;</span>click<span class="nt">&lt;/div&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
 
 <span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>               <span class="c1">// &lt;div id="demo"&gt;click&lt;/div&gt;</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>           <span class="c1">// &lt;div id="demo"&gt;click&lt;/div&gt;</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>    <span class="c1">// &lt;div id="demo"&gt;click&lt;/div&gt;</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>  <span class="c1">// true,or false</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>               <span class="c1">// &lt;div id="demo"&gt;click&lt;/div&gt;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>           <span class="c1">// &lt;div id="demo"&gt;click&lt;/div&gt;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>    <span class="c1">// &lt;div id="demo"&gt;click&lt;/div&gt;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>  <span class="c1">// true,or false</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span>   <span class="c1">// true</span>
 <span class="p">}</span>
 <span class="nx">demo</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="nx">f</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
-</code></pre></div></div>
+</code></pre></div>
+<h2 id="in-an-in-line-event-handler">In an in–line event handler</h2>
 
-<h2 id="in-an-inline-event-handler">In an in–line event handler</h2>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
-5
-</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span> <span class="na">onclick=</span><span class="s">"console.log(this)"</span><span class="nt">&gt;</span>click<span class="nt">&lt;/div&gt;</span>
+5</pre></td><td class="code"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span> <span class="na">onclick=</span><span class="s">"console.log(this)"</span><span class="nt">&gt;</span>click<span class="nt">&lt;/div&gt;</span>
 <span class="c">&lt;!-- &lt;div id="demo" onclick="console.log(this)"&gt;click&lt;/div&gt;  --&gt;</span>
 
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span> <span class="na">onclick=</span><span class="s">"console.log( (function(){ return this })() )"</span><span class="nt">&gt;</span>click2<span class="nt">&lt;/div&gt;</span>
-<span class="c">&lt;!-- window对象 --&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="c">&lt;!-- window对象 --&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="arrow-functions">Arrow functions</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">book</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">book</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">author</span><span class="p">:</span> <span class="s1">'John Resig'</span><span class="p">,</span>
   <span class="na">init</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nb">document</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">ev</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -527,8 +493,7 @@ Since the following code is not in strict mode, and because the value of this is
   <span class="p">}</span>
 <span class="p">};</span>
 <span class="nx">book</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>总结：</p>
 
 <p>1.当函数作为对象的方法调用时，this指向该对象。</p>
@@ -539,9 +504,8 @@ Since the following code is not in strict mode, and because the value of this is
 
 <p>4.嵌套函数中的this不会继承上层函数的this，如果需要，可以用一个变量保存上层函数的this。</p>
 
-<h2 id="番外篇一些关于this的笔试题">番外篇一些关于this的笔试题</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"The Window"</span><span class="p">;</span>
+<h2 id="this">番外篇一些关于this的笔试题</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"The Window"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span>
 <span class="err">　　</span><span class="na">name</span> <span class="p">:</span> <span class="s2">"My Object"</span><span class="p">,</span>
 <span class="err">　　</span><span class="na">getNameFunc</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
@@ -556,13 +520,11 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">getNameFunc</span><span class="p">()());</span>  <span class="c1">// The Window</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">());</span>  <span class="c1">// The Window</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"The Window"</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"The Window"</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">object</span> <span class="o">=</span> <span class="p">{</span>
 <span class="err">　　</span><span class="na">name</span> <span class="p">:</span> <span class="s2">"My Object"</span><span class="p">,</span>
 <span class="err">　　</span><span class="na">getNameFunc</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
-	     <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+         <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 <span class="err">　　　　</span><span class="k">return</span> <span class="kd">function</span><span class="p">(){</span>
 <span class="err">　　　　　　</span><span class="k">return</span> <span class="nx">that</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
 <span class="err">　　　　</span><span class="p">};</span>
@@ -574,14 +536,13 @@ Since the following code is not in strict mode, and because the value of this is
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">object</span><span class="p">.</span><span class="nx">getNameFunc</span><span class="p">()());</span>  <span class="c1">// My Object</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">());</span>  <span class="c1">// My Object</span>
-</code></pre></div></div>
+</code></pre></div>
+<h1 id="more">更多-more</h1>
 
-<h1 id="更多-more">更多-more</h1>
 <ul>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this</a></li>
-  <li><a href="http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/">http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this</a></li>
+<li><a href="http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/">http://javascriptissexy.com/understand-javascripts-this-with-clarity-and-master-it/</a></li>
 </ul>
-
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -689,11 +650,11 @@ Since the following code is not in strict mode, and because the value of this is
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -738,7 +699,7 @@ Since the following code is not in strict mode, and because the value of this is
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -838,7 +799,7 @@ Since the following code is not in strict mode, and because the value of this is
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

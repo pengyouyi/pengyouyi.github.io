@@ -1,13 +1,13 @@
 ---
 layout: post
-title: vue实现简单的翻页功能
+title: vue实现的翻页功能-复杂版
 tags:
 - vue
 categories: Framework
-description: vue实现简单的翻页功能
+description: vue实现翻页功能
 ---
 
-# v-pageturning-complex
+# v-pageturning-complex-复杂版
 
 > A Vue.js project
 

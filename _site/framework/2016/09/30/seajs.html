@@ -161,55 +161,46 @@
 		
 		</div>
 		
-		<h1 id="seajs初学">seajs初学</h1>
+		<h1 id="seajs">seajs初学</h1>
 
 <p><strong>a.什么是seaJS</strong></p>
 
 <blockquote>
-  <p>SeaJS是一个遵循 CMD （通用模块定义）规范的JavaScript模块加载框架，可以像 Node.js 一般书写模块代码;</p>
-</blockquote>
+<p>SeaJS是一个遵循 CMD （通用模块定义）规范的JavaScript模块加载框架，可以像 Node.js 一般书写模块代码;</p>
 
-<blockquote>
-  <p>可以实现JavaScript的模块化开发及加载机制。</p>
+<p>可以实现JavaScript的模块化开发及加载机制。</p>
 </blockquote>
 
 <p><strong>b.引用-reference</strong></p>
 
-<p>去seajs官网下载<a href="http://seajs.org/docs/#downloads">http://seajs.org/docs/#downloads</a>,在页面头部head标签内引入seaJS，如下：
-<code class="highlighter-rouge">&lt;script src="js/sea.js" id="seajsnode"&gt;&lt;/script&gt;</code>，注意，这里加上了id=”seajsnode”，原因如下：</p>
+<p>去seajs官网下载<a href="http://seajs.org/docs/#downloads">http://seajs.org/docs/#downloads</a>,在页面头部head标签内引入seaJS，如下：<br>
+<code>&lt;script src=&quot;js/sea.js&quot; id=&quot;seajsnode&quot;&gt;&lt;/script&gt;</code>，注意，这里加上了id=&quot;seajsnode&quot;，原因如下：</p>
 
 <ul>
-  <li>
-    <ol>
-      <li>SeaJS加载自身的script标签的其他属性（如data-config、data-main）等来实现不同的功能</li>
-    </ol>
-  </li>
-  <li>
-    <ol>
-      <li>SeaJS内部通过document.getElementById(“seajsnode”)来获取这个script标签</li>
-    </ol>
-  </li>
+<li>1. SeaJS加载自身的script标签的其他属性（如data-config、data-main）等来实现不同的功能</li>
+<li>2. SeaJS内部通过document.getElementById(&quot;seajsnode&quot;)来获取这个script标签</li>
 </ul>
 
-<h1 id="入口-eajsuse">入口-eajs.use</h1>
+<h1 id="eajs-use">入口-eajs.use</h1>
+
 <p>seajs.use 用来在页面中加载一个或多个模块。</p>
 
 <p>example,如下文件结构</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
-6
-</pre></td><td class="code"><pre>-helloSeajs
-	 index.html
-	-js
-		seajs
-		main.js
-		a.js</pre></td></tr></tbody></table></code></pre></figure>
+6</pre></td><td class="code"><pre>-helloSeajs
+     index.html
+    -js
+        seajs
+        main.js
+        a.js<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
@@ -223,29 +214,29 @@
 12
 13
 14
-15
-</pre></td><td class="code"><pre>//index.html
+15</pre></td><td class="code"><pre>//index.html
 <span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;title&gt;</span>seajs<span class="nt">&lt;/title&gt;</span>
-	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/sea.js"</span> <span class="na">id=</span><span class="s">"seajsnode"</span> <span class="nt">&gt;&lt;/script&gt;</span>
-	<span class="nt">&lt;script&gt;</span>
-		<span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s2">"main"</span><span class="p">);</span>
-	<span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>seajs<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/sea.js"</span> <span class="na">id=</span><span class="s">"seajsnode"</span> <span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s2">"main"</span><span class="p">);</span>
+    <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-	hi
+    hi
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <blockquote>
-  <p>attention，以上index.html引用main.js的目录是相对于seajs所在的路劲</p>
+<p>attention，以上index.html引用main.js的目录是相对于seajs所在的路劲</p>
 </blockquote>
 
 <p>在调用 seajs.use 之前，需要先引入 sea.js 文件</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 加载一个模块</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 加载一个模块</span>
 <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'mian'</span><span class="p">);</span>
 
 <span class="c1">// 加载一个模块，在加载完成时，执行回调</span>
@@ -258,9 +249,9 @@
   <span class="nx">main</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
   <span class="nx">a</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
 <span class="p">});</span>
-</code></pre></div></div>
-<h1 id="seajsconfig-配置">seajs.config 配置</h1>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">seajs</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+</code></pre></div>
+<h1 id="seajs-config">seajs.config 配置</h1>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">seajs</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
 
   <span class="c1">// 设置路径，方便跨目录调用</span>
   <span class="na">paths</span><span class="p">:</span> <span class="p">{</span>
@@ -275,127 +266,129 @@
   <span class="p">}</span>
 
 <span class="p">});</span>
-</code></pre></div></div>
-<h1 id="define-定义模块">define 定义模块</h1>
-<p>Sea.js 推崇一个模块一个文件，遵循统一的写法：
-define define(factory)
+</code></pre></div>
+<h1 id="define">define 定义模块</h1>
+
+<p>Sea.js 推崇一个模块一个文件，遵循统一的写法：<br>
+define define(factory)<br>
 define 接受 factory 参数，factory 可以是一个函数，也可以是一个对象或字符串。</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//a.js</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//a.js</span>
 <span class="nx">define</span><span class="p">({</span>
-	<span class="s2">"my"</span><span class="p">:</span><span class="s2">"pengyouyi"</span>
+    <span class="s2">"my"</span><span class="p">:</span><span class="s2">"pengyouyi"</span>
 <span class="p">})</span>
-</code></pre></div></div>
+</code></pre></div>
 <p>or</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//a.js</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//a.js</span>
 <span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">,</span><span class="nx">module</span><span class="p">){</span>
- 	<span class="nx">exports</span><span class="p">.</span><span class="nx">sayhi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
- 		<span class="nx">alert</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">);</span>
- 	<span class="p">};</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">sayhi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">);</span>
+    <span class="p">};</span>
  <span class="p">})</span>
-</code></pre></div></div>
+</code></pre></div>
 <p>or</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//a.js</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//a.js</span>
 <span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">,</span><span class="nx">module</span><span class="p">){</span>
-	<span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
-	<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{};</span>
-	<span class="nx">a</span><span class="p">.</span><span class="nx">sayhi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-		<span class="nx">$</span><span class="p">(</span><span class="s2">"#demo"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"hello seajs"</span><span class="p">);</span>
-	<span class="p">};</span>
-	<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="nx">a</span><span class="p">.</span><span class="nx">sayhi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s2">"#demo"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s2">"hello seajs"</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">a</span><span class="p">;</span>
 <span class="p">})</span>
-</code></pre></div></div>
+</code></pre></div>
 <p>index.html</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;title&gt;</span>seajs<span class="nt">&lt;/title&gt;</span>
-	<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/sea.js"</span> <span class="na">id=</span><span class="s">"seajsnode"</span><span class="nt">&gt;&lt;/script&gt;</span>
-	<span class="nt">&lt;script&gt;</span>
-		<span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s2">"main"</span><span class="p">,</span><span class="s2">"a"</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">main</span><span class="p">,</span><span class="nx">a</span><span class="p">){</span>
-			<span class="c1">//console.log(a)</span>
-			<span class="nx">a</span><span class="p">.</span><span class="nx">sayhi</span><span class="p">();</span>
-		<span class="p">});</span>
-	<span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>seajs<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"js/sea.js"</span> <span class="na">id=</span><span class="s">"seajsnode"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">([</span><span class="s2">"main"</span><span class="p">,</span><span class="s2">"a"</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">main</span><span class="p">,</span><span class="nx">a</span><span class="p">){</span>
+            <span class="c1">//console.log(a)</span>
+            <span class="nx">a</span><span class="p">.</span><span class="nx">sayhi</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"demo"</span><span class="nt">&gt;&lt;/div&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
+</code></pre></div>
 <blockquote>
-  <p>attention: 上面var $ = require(“jquery”)的使用，需要按照CMD定义封装一次jQuery原文件</p>
+<p>attention: 上面var $ = require(&quot;jquery&quot;)的使用，需要按照CMD定义封装一次jQuery原文件</p>
 </blockquote>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
     <span class="c1">//jquery源代码</span>
     <span class="k">return</span> <span class="nx">$</span><span class="p">.</span><span class="nx">noConflict</span><span class="p">();</span>
 <span class="p">});</span>
-</code></pre></div></div>
+</code></pre></div>
 <p>define 更多<a href="https://github.com/seajs/seajs/issues/242">https://github.com/seajs/seajs/issues/242</a></p>
 
 <h1 id="require">require</h1>
-<p>require 用来获取指定模块的接口。</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//main.js</span>
+<p>require 用来获取指定模块的接口。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//main.js</span>
 <span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">){</span>
-	<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
-	<span class="nx">a</span><span class="p">.</span><span class="nx">sayhi</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+    <span class="nx">a</span><span class="p">.</span><span class="nx">sayhi</span><span class="p">();</span>
 <span class="p">})</span>
 
-</code></pre></div></div>
+</code></pre></div>
 <p><strong><em>attention</em></strong></p>
 
 <blockquote>
-  <p>1.模块 factory 构造方法的第一个参数 必须 命名为 require ,    不能是req等其他的<br />
-2.不要重命名 require 函数，或在任何作用域中给 require 重新赋值。    如var req = require; …are error<br />
-3.require 的参数值 必须 是字符串直接量。    require(myModule); … are error</p>
+<p>1.模块 factory 构造方法的第一个参数 必须 命名为 require ,    不能是req等其他的<br><br>
+2.不要重命名 require 函数，或在任何作用域中给 require 重新赋值。    如var req = require; ...are error<br><br>
+3.require 的参数值 必须 是字符串直接量。    require(myModule); ... are error  </p>
 </blockquote>
 
 <p>require 更多<a href="https://github.com/seajs/seajs/issues/259">https://github.com/seajs/seajs/issues/259</a></p>
 
-<h1 id="requireasync">require.async</h1>
+<h1 id="require-async">require.async</h1>
+
 <p>用来在模块内部异步加载一个或多个模块。</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//other.js</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//other.js</span>
 <span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">)</span> <span class="p">{</span>
 
   <span class="c1">// 异步加载一个模块，在加载完成时，执行回调</span>
-  <span class="nx">require</span><span class="p">.</span><span class="k">async</span><span class="p">(</span><span class="s1">'./b'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">require</span><span class="p">.</span><span class="nx">async</span><span class="p">(</span><span class="s1">'./b'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">b</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
   <span class="p">});</span>
 
   <span class="c1">// 异步加载多个模块，在加载完成时，执行回调</span>
-  <span class="nx">require</span><span class="p">.</span><span class="k">async</span><span class="p">([</span><span class="s1">'./c'</span><span class="p">,</span> <span class="s1">'./d'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">require</span><span class="p">.</span><span class="nx">async</span><span class="p">([</span><span class="s1">'./c'</span><span class="p">,</span> <span class="s1">'./d'</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">c</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
     <span class="nx">d</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">();</span>
   <span class="p">});</span>
 
 <span class="p">});</span>
-</code></pre></div></div>
+</code></pre></div>
 <h1 id="exports">exports</h1>
+
 <p>用来在模块内部对外提供接口。</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">){</span>
-	<span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s2">"bar"</span><span class="p">;</span>
-	<span class="nx">exports</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
-		<span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
-	<span class="p">}</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span><span class="nx">exports</span><span class="p">){</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="s2">"bar"</span><span class="p">;</span>
+    <span class="nx">exports</span><span class="p">.</span><span class="nx">add</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">b</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">})</span>
-</code></pre></div></div>
-<h1 id="moduleexports">module.exports</h1>
+</code></pre></div>
+<h1 id="module-exports">module.exports</h1>
+
 <p>与 exports 类似，用来在模块内部对外提供接口。</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">define</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">require</span><span class="p">,</span> <span class="nx">exports</span><span class="p">,</span> <span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">foo</span><span class="p">:</span> <span class="s1">'bar'</span><span class="p">,</span>
     <span class="na">doSomething</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
   <span class="p">};</span>
 <span class="p">});</span>
-</code></pre></div></div>
+</code></pre></div>
+<h1 id="more">更多-more</h1>
 
-<h1 id="更多-more">更多-more</h1>
 <ul>
-  <li><a href="https://github.com/seajs/seajs/issues/266">https://github.com/seajs/seajs/issues/266</a></li>
+<li><a href="https://github.com/seajs/seajs/issues/266">https://github.com/seajs/seajs/issues/266</a></li>
 </ul>
-
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -503,11 +496,11 @@ define 接受 factory 参数，factory 可以是一个函数，也可以是一�
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -552,7 +545,7 @@ define 接受 factory 参数，factory 可以是一个函数，也可以是一�
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -652,7 +645,7 @@ define 接受 factory 参数，factory 可以是一个函数，也可以是一�
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

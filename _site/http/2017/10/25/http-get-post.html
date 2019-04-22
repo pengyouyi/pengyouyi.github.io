@@ -161,44 +161,44 @@
 		
 		</div>
 		
-		<h1 id="get请求和post请求的区别">GET请求和POST请求的区别</h1>
+		<h1 id="get-post">GET请求和POST请求的区别</h1>
 
 <p>两种 HTTP 请求方法：GET 和 POST</p>
 
 <p>在客户机和服务器之间进行请求-响应时，两种最常被用到的方法是：GET 和 POST。</p>
 
 <ul>
-  <li>GET: 从服务器获取资源</li>
-  <li>POST: 向服务器发送需要处理的数据</li>
+<li>GET: 从服务器获取资源</li>
+<li>POST: 向服务器发送需要处理的数据</li>
 </ul>
 
 <p><strong>GET 方法</strong></p>
 
-<p>查询字符串（名称/值对）是在 GET 请求的 URL 中发送的,<br />
-（就是把数据放置在HTTP协议头中），以?分割URL和传输数据，参数之间以&amp;相连;<br />
+<p>查询字符串（名称/值对）是在 GET 请求的 URL 中发送的,<br><br>
+（就是把数据放置在HTTP协议头中），以?分割URL和传输数据，参数之间以&amp;相连;<br><br>
 GET提交的数据会在地址栏中显示出来</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
 5
-6
-</pre></td><td class="code"><pre>GET /books/?sex<span class="o">=</span>man&amp;name<span class="o">=</span>Professional HTTP/1.1
+6</pre></td><td class="code"><pre>GET /books/?sex<span class="o">=</span>man&amp;name<span class="o">=</span>Professional HTTP/1.1
 Host: www.wrox.com
-User-Agent: Mozilla/5.0 <span class="o">(</span>Windows<span class="p">;</span> U<span class="p">;</span> Windows NT 5.1<span class="p">;</span> en-US<span class="p">;</span> rv:1.7.6<span class="o">)</span>
+User-Agent: Mozilla/5.0 <span class="o">(</span>Windows; U; Windows NT 5.1; en-US; rv:1.7.6<span class="o">)</span>
 Gecko/20050225 Firefox/1.0.1
 Connection: Keep-Alive
-  </pre></td></tr></tbody></table></code></pre></figure>
+  <span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>最后一行是空行</p>
 
 <p><strong>POST 方法</strong></p>
 
-<p>查询字符串（名称/值对）是在 POST 请求的 HTTP 消息主体中发送的;<br />
+<p>查询字符串（名称/值对）是在 POST 请求的 HTTP 消息主体中发送的;<br><br>
 POST提交，地址栏不会改变</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
 2
 3
 4
@@ -206,123 +206,120 @@ POST提交，地址栏不会改变</p>
 6
 7
 8
-9
-</pre></td><td class="code"><pre>POST / HTTP/1.1
+9</pre></td><td class="code"><pre>POST / HTTP/1.1
 Host: www.wrox.com
-User-Agent: Mozilla/5.0 <span class="o">(</span>Windows<span class="p">;</span> U<span class="p">;</span> Windows NT 5.1<span class="p">;</span> en-US<span class="p">;</span> rv:1.7.6<span class="o">)</span>
+User-Agent: Mozilla/5.0 <span class="o">(</span>Windows; U; Windows NT 5.1; en-US; rv:1.7.6<span class="o">)</span>
 Gecko/20050225 Firefox/1.0.1
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 40
 Connection: Keep-Alive
 
-<span class="nv">name</span><span class="o">=</span>Professional%20Ajax&amp;publisher<span class="o">=</span>Wiley</pre></td></tr></tbody></table></code></pre></figure>
+<span class="nv">name</span><span class="o">=</span>Professional%20Ajax&amp;publisher<span class="o">=</span>Wiley<span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><br /></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>比较</th>
-      <th>GET请求</th>
-      <th>POST请求</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>提交数据方式</td>
-      <td>GET请求的数据会附在URL之后</td>
-      <td>POST提交的数据放置在Request body中</td>
-    </tr>
-    <tr>
-      <td>可见性</td>
-      <td>数据在 URL 中对所有人都是可见的</td>
-      <td>数据不会显示在 URL 中</td>
-    </tr>
-    <tr>
-      <td>传输数据的大小</td>
-      <td>传输数据受到URL长度的限制</td>
-      <td>理论上数据不受限,但实际各个WEB服务器会规定对post提交数据大小进行限制</td>
-    </tr>
-    <tr>
-      <td>传输数据的类型</td>
-      <td>只允许 ASCII 字符</td>
-      <td>没有限制。也允许二进制数据</td>
-    </tr>
-    <tr>
-      <td>传输数据的编码方式</td>
-      <td>application/x-www-form-urlencoded, <br />只能进行url编码</td>
-      <td>application/x-www-form-urlencoded 或 multipart/form-data, 支持多种编码方式</td>
-    </tr>
-    <tr>
-      <td>安全性</td>
-      <td>不安全，因为参数直接暴露在URL上，所以不能用来传递密码或敏感信息,<br />使用GET提交数据还可能会造成Cross-site request forgery攻击</td>
-      <td>POST比GET更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中</td>
-    </tr>
-    <tr>
-      <td>收藏</td>
-      <td>可收藏为书签</td>
-      <td>不可收藏为书签</td>
-    </tr>
-    <tr>
-      <td>缓存</td>
-      <td>被浏览器主动缓存</td>
-      <td>不能缓存,除非手动设置</td>
-    </tr>
-    <tr>
-      <td>历史记录</td>
-      <td>参数被完整保留在浏览器历史中</td>
-      <td>参数不会被保留</td>
-    </tr>
-    <tr>
-      <td>后退/刷新</td>
-      <td>无害</td>
-      <td>数据会被重新提交<br />（浏览器应该告知用户数据会被重新提交）</td>
-    </tr>
-    <tr>
-      <td>安全</td>
-      <td>GET请求安全，不会改变资源的状态</td>
-      <td>不安全</td>
-    </tr>
-    <tr>
-      <td>幂等</td>
-      <td>GET请求幂等，对同一URL的多个请求返回同样的结果</td>
-      <td>不幂等</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead>
+<tr>
+<th>比较</th>
+<th>GET请求</th>
+<th>POST请求</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>提交数据方式</td>
+<td>GET请求的数据会附在URL之后</td>
+<td>POST提交的数据放置在Request body中</td>
+</tr>
+<tr>
+<td>可见性</td>
+<td>数据在 URL 中对所有人都是可见的</td>
+<td>数据不会显示在 URL 中</td>
+</tr>
+<tr>
+<td>传输数据的大小</td>
+<td>传输数据受到URL长度的限制</td>
+<td>理论上数据不受限,但实际各个WEB服务器会规定对post提交数据大小进行限制</td>
+</tr>
+<tr>
+<td>传输数据的类型</td>
+<td>只允许 ASCII 字符</td>
+<td>没有限制。也允许二进制数据</td>
+</tr>
+<tr>
+<td>传输数据的编码方式</td>
+<td>application/x-www-form-urlencoded, <br>只能进行url编码</td>
+<td>application/x-www-form-urlencoded 或 multipart/form-data, 支持多种编码方式</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>不安全，因为参数直接暴露在URL上，所以不能用来传递密码或敏感信息,<br>使用GET提交数据还可能会造成Cross-site request forgery攻击</td>
+<td>POST比GET更安全，因为参数不会被保存在浏览器历史或 web 服务器日志中</td>
+</tr>
+<tr>
+<td>收藏</td>
+<td>可收藏为书签</td>
+<td>不可收藏为书签</td>
+</tr>
+<tr>
+<td>缓存</td>
+<td>被浏览器主动缓存</td>
+<td>不能缓存,除非手动设置</td>
+</tr>
+<tr>
+<td>历史记录</td>
+<td>参数被完整保留在浏览器历史中</td>
+<td>参数不会被保留</td>
+</tr>
+<tr>
+<td>后退/刷新</td>
+<td>无害</td>
+<td>数据会被重新提交<br>（浏览器应该告知用户数据会被重新提交）</td>
+</tr>
+<tr>
+<td>安全</td>
+<td>GET请求安全，不会改变资源的状态</td>
+<td>不安全</td>
+</tr>
+<tr>
+<td>幂等</td>
+<td>GET请求幂等，对同一URL的多个请求返回同样的结果</td>
+<td>不幂等</td>
+</tr>
+</tbody></table>
 
-<p><br />
+<p><br/><br>
 <a href="http://www.runoob.com/nodejs/node-js-get-post.html">Node.js GET/POST请求</a></p>
 
 <p><strong>补充知识：编码类型</strong></p>
 
 <ul>
-  <li><a href="https://imququ.com/post/four-ways-to-post-data-in-http.html">四种常见的 POST 提交数据方式</a></li>
-  <li><a href="application/x-www-form-urlencoded和multipart/form-data的区别">application/x-www-form-urlencoded和multipart/form-data的区别</a></li>
+<li><a href="https://imququ.com/post/four-ways-to-post-data-in-http.html">四种常见的 POST 提交数据方式</a><br></li>
+<li><a href="application/x-www-form-urlencoded%E5%92%8Cmultipart/form-data%E7%9A%84%E5%8C%BA%E5%88%AB">application/x-www-form-urlencoded和multipart/form-data的区别</a></li>
 </ul>
 
 <p>总结以上表格要表达的意思</p>
 
 <ol>
-  <li>GET请求安全、幂等；</li>
-  <li>GET通过URL提交数据，不安全；</li>
-  <li>GET传输的数据量小、数据类型单一、数据编码方式单一；</li>
-  <li>GET请求可以被收藏、被缓存、被历史记录，刷新无害</li>
+<li>GET请求安全、幂等；</li>
+<li>GET通过URL提交数据，不安全；</li>
+<li>GET传输的数据量小、数据类型单一、数据编码方式单一；</li>
+<li>GET请求可以被收藏、被缓存、被历史记录，刷新无害</li>
 </ol>
 
 <p><strong>GET和POST区别补充点</strong></p>
 
 <ul>
-  <li>GET和POST本质上没有区别，都是是TCP链接。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。</li>
-  <li>GET产生一个TCP数据包；POST产生两个TCP数据包。</li>
+<li>GET和POST本质上没有区别，都是是TCP链接。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。<br></li>
+<li>GET产生一个TCP数据包；POST产生两个TCP数据包。</li>
 </ul>
 
-<h1 id="更多-more">更多-more</h1>
+<h1 id="more">更多-more</h1>
 
 <ul>
-  <li><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol</a></li>
-  <li><a href="http://www.w3school.com.cn/tags/html_ref_httpmethods.asp">http://www.w3school.com.cn/tags/html_ref_httpmethods.asp</a></li>
-  <li><a href="https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd">99%的人都理解错了HTTP中GET与POST的区别</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol</a></li>
+<li><a href="http://www.w3school.com.cn/tags/html_ref_httpmethods.asp">http://www.w3school.com.cn/tags/html_ref_httpmethods.asp</a></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd">99%的人都理解错了HTTP中GET与POST的区别</a></li>
 </ul>
   
 	</div>
@@ -431,11 +428,11 @@ Connection: Keep-Alive
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -480,7 +477,7 @@ Connection: Keep-Alive
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -580,7 +577,7 @@ Connection: Keep-Alive
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

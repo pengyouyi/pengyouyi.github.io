@@ -171,7 +171,7 @@
 
 <p>2、说明this几种不同的使用场景</p>
 
-<p>3、创建10个 <code class="highlighter-rouge">&lt;a&gt;</code> 标签，点击的时候弹出对应的序号</p>
+<p>3、创建10个 <code>&lt;a&gt;</code> 标签，点击的时候弹出对应的序号</p>
 
 <p>4、如何理解作用域</p>
 
@@ -182,52 +182,34 @@
 <p><strong>知识点：</strong></p>
 
 <ul>
-  <li>
-    <p>执行上下文</p>
-  </li>
-  <li>
-    <p>this</p>
-  </li>
-  <li>
-    <p>作用域</p>
-  </li>
-  <li>
-    <p>作用域链</p>
-  </li>
-  <li>
-    <p>闭包</p>
-  </li>
+<li><p>执行上下文</p></li>
+<li><p>this</p></li>
+<li><p>作用域</p></li>
+<li><p>作用域链</p></li>
+<li><p>闭包</p></li>
 </ul>
 
-<h2 id="执行上下文-execution-context">执行上下文-Execution-context</h2>
+<h2 id="execution-context">执行上下文-Execution-context</h2>
 
 <p><strong>执行上下文</strong></p>
 
 <ul>
-  <li>
-    <p>范围：一段 <code class="highlighter-rouge">&lt;script&gt;</code> 或者一个函数</p>
-  </li>
-  <li>
-    <p>全局：变量定义、函数声明 【针对一段<code class="highlighter-rouge">&lt;script&gt;</code>里面】</p>
-  </li>
-  <li>
-    <p>函数：变量定义、函数声明、this、arguments</p>
-  </li>
+<li><p>范围：一段 <code>&lt;script&gt;</code> 或者一个函数</p></li>
+<li><p>全局：变量定义、函数声明 【针对一段<code>&lt;script&gt;</code>里面】</p></li>
+<li><p>函数：变量定义、函数声明、this、arguments</p></li>
 </ul>
 
 <p>PS：注意“函数声明” 和 “函数表达式” 的区别</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>  <span class="c1">// undefined</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>  <span class="c1">// undefined</span>
 <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
 
 <span class="nx">fn</span><span class="p">(</span><span class="s1">'zhansan'</span><span class="p">);</span> <span class="c1">// zhangsan, 20</span>
 <span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span> 
-	<span class="kd">var</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="nx">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span> 
+    <span class="kd">var</span> <span class="nx">age</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <h2 id="this">this</h2>
 
 <p><em>this 要在执行时才能确认值，定义时无法确认</em></p>
@@ -235,103 +217,78 @@
 <p><strong>this的使用场景</strong></p>
 
 <ul>
-  <li>
-    <p>作为构造函数执行</p>
-  </li>
-  <li>
-    <p>作为对象属性执行</p>
-  </li>
-  <li>
-    <p>作为普通函数执行 【this指向window】</p>
-  </li>
-  <li>
-    <p>call、 apply、 bind</p>
-  </li>
+<li><p>作为构造函数执行</p></li>
+<li><p>作为对象属性执行</p></li>
+<li><p>作为普通函数执行 【this指向window】</p></li>
+<li><p>call、 apply、 bind</p></li>
 </ul>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="na">name</span><span class="p">:</span> <span class="s1">'A'</span><span class="p">,</span>
-	<span class="na">fn</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-	<span class="p">}</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'A'</span><span class="p">,</span>
+    <span class="na">fn</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="nx">a</span><span class="p">.</span><span class="nx">fn</span><span class="p">();</span>  <span class="c1">// A, this === a</span>
 <span class="nx">a</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="s1">'B'</span><span class="p">});</span>  <span class="c1">// B, this === {name: 'B'}</span>
 <span class="kd">var</span> <span class="nx">fn1</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">fn</span><span class="p">;</span>
 <span class="nx">fn1</span><span class="p">();</span> <span class="c1">// 空， this === window</span>
-</code></pre></div></div>
-
-<h2 id="作用域-action-scope">作用域-action-scope</h2>
+</code></pre></div>
+<h2 id="action-scope">作用域-action-scope</h2>
 
 <p>作用域</p>
 
 <ul>
-  <li>
-    <p>无块级作用域</p>
-  </li>
-  <li>
-    <p>只有函数和全局作用域</p>
-  </li>
+<li><p>无块级作用域</p></li>
+<li><p>只有函数和全局作用域</p></li>
 </ul>
 
 <p>作用域链</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
 <span class="kd">function</span> <span class="nx">fn</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-	<span class="c1">// 当前作用域没有定义的变量，即“自由变量”</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+    <span class="c1">// 当前作用域没有定义的变量，即“自由变量”</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">fn</span><span class="p">();</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
 <span class="kd">function</span> <span class="nx">F1</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
-	<span class="kd">function</span> <span class="nx">F2</span><span class="p">()</span> <span class="p">{</span>
-		<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>  <span class="c1">// a是自由变量</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>  <span class="c1">// b是自由变量</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
-	<span class="p">}</span>
-	<span class="nx">F2</span><span class="p">();</span>
+    <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
+    <span class="kd">function</span> <span class="nx">F2</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>  <span class="c1">// a是自由变量</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>  <span class="c1">// b是自由变量</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">F2</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="nx">F1</span><span class="p">();</span>
-</code></pre></div></div>
-
-<h2 id="闭包-closure">闭包-closure</h2>
+</code></pre></div>
+<h2 id="closure">闭包-closure</h2>
 
 <p><strong>闭包的使用场景</strong></p>
 
 <ul>
-  <li>
-    <p>函数作为返回值</p>
-  </li>
-  <li>
-    <p>函数作为参数传递</p>
-  </li>
+<li><p>函数作为返回值</p></li>
+<li><p>函数作为参数传递</p></li>
 </ul>
 
 <p><strong>函数作为返回值</strong></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">F1</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-	<span class="c1">// 返回一个函数（函数作为返回值）</span>
-	<span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 自由变量，去定义它的父作用域寻找</span>
-	<span class="p">}</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">F1</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="c1">// 返回一个函数（函数作为返回值）</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 自由变量，去定义它的父作用域寻找</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 <span class="c1">// f1 得到一个函数</span>
 <span class="kd">var</span> <span class="nx">f1</span> <span class="o">=</span> <span class="nx">F1</span><span class="p">();</span>
 <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">200</span><span class="p">;</span>
 <span class="nx">f1</span><span class="p">();</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><strong>函数作为参数传递</strong></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">F1</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">F1</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
   <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
@@ -346,54 +303,49 @@
 <span class="kd">var</span> <span class="nx">f1</span> <span class="o">=</span> <span class="nx">F1</span><span class="p">();</span>
 
 <span class="nx">F2</span><span class="p">(</span><span class="nx">f1</span><span class="p">);</span>  <span class="c1">// 100</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <h1 id="answer">Answer</h1>
 
-<h2 id="创建10个-a-标签点击的时候弹出对应的序号">创建10个 <code class="highlighter-rouge">&lt;a&gt;</code> 标签，点击的时候弹出对应的序号</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
-	<span class="nx">a</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
-	<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+<h2 id="10-lt-a-gt">创建10个 <code>&lt;a&gt;</code> 标签，点击的时候弹出对应的序号</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+    <span class="nx">a</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;"</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">oA</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
-	<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">oA</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">oA</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-				<span class="nx">alert</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
-			<span class="p">}</span>
-		<span class="p">}(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">oA</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">oA</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">oA</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">alert</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}(</span><span class="nx">i</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <h2 id="application-of-closure">Application-of-closure</h2>
 
 <ul>
-  <li>实际开发中闭包的应用</li>
+<li>实际开发中闭包的应用</li>
 </ul>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isFirstLoad</span><span class="p">()</span> <span class="p">{</span>
-	<span class="kd">var</span> <span class="nx">_list</span> <span class="o">=</span> <span class="p">[];</span>
-	<span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="p">(</span><span class="nx">_list</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">_list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
-			<span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">isFirstLoad</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">_list</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">_list</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">_list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">firstLoad</span> <span class="o">=</span> <span class="nx">isFirstLoad</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">firstLoad</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span> <span class="c1">// true</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">firstLoad</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span> <span class="c1">// false</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">firstLoad</span><span class="p">(</span><span class="mi">20</span><span class="p">));</span> <span class="c1">// true</span>
-</code></pre></div></div>
-
-<h1 id="更多-more">更多-more</h1>
+</code></pre></div>
+<h1 id="more">更多-more</h1>
 
 <p><a href="https://coding.imooc.com/learn/list/115.html">前端JavaScript面试技巧</a></p>
   
@@ -505,11 +457,11 @@
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -554,7 +506,7 @@
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -654,7 +606,7 @@
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

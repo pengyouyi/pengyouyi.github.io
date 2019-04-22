@@ -161,34 +161,25 @@
 		
 		</div>
 		
-		<h1 id="selenium的node实现-对一个网站进行批量注册">selenium的node实现-对一个网站进行批量注册</h1>
+		<h1 id="selenium-node">selenium的node实现-对一个网站进行批量注册</h1>
 
 <p><strong>需求:在一个网站根据邮箱、用户名、自动生成的密码进行批量注册</strong></p>
 
-<h2 id="环境搭建-environment-building">环境搭建-Environment building</h2>
+<h2 id="environment-building">环境搭建-Environment building</h2>
 
 <p>用js搭建selenium真的很简单！你需要的仅仅是浏览器（以chrome为例）、chromedriver、node及selenium-webdriver模块.</p>
 
 <ol>
-  <li>
-    <p>本地安装node.</p>
-  </li>
-  <li>
-    <p>本地安装一款浏览器（肯定都有吧，用自己喜欢的就好），并安装与其对应的浏览器驱动，例如我下载的是chromedriver.exe -v2.33。（国内镜像https://npm.taobao.org/mirrors/chromedriver/）</p>
-  </li>
-  <li>
-    <p>将驱动chromedrive.exe存于 C:/demo/ 下，将 C:/demo/ 加入到系统环境变量</p>
-  </li>
-  <li>
-    <p>创建个目录准备试码了。在该目录下安装npm模块selenium-webdriver，npm install selenium-webdriver</p>
-  </li>
+<li><p>本地安装node.</p></li>
+<li><p>本地安装一款浏览器（肯定都有吧，用自己喜欢的就好），并安装与其对应的浏览器驱动，例如我下载的是chromedriver.exe -v2.33。（国内镜像<a href="https://npm.taobao.org/mirrors/chromedriver/%EF%BC%89">https://npm.taobao.org/mirrors/chromedriver/）</a></p></li>
+<li><p>将驱动chromedrive.exe存于 C:/demo/ 下，将 C:/demo/ 加入到系统环境变量</p></li>
+<li><p>创建个目录准备试码了。在该目录下安装npm模块selenium-webdriver，npm install selenium-webdriver</p></li>
 </ol>
 
-<h2 id="自动注册-automatic-logon">自动注册-automatic logon</h2>
+<h2 id="automatic-logon">自动注册-automatic logon</h2>
 
 <p>非常厉害的自动注册代码，老公儿指导的</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">process</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'uncaughtException'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span> <span class="c1">//容错 非必需</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">process</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'uncaughtException'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span> <span class="c1">//容错 非必需</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"意外的错误: "</span> <span class="o">+</span> <span class="nx">err</span><span class="p">.</span><span class="nx">stack</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">)</span>
@@ -204,89 +195,79 @@
 
 <span class="c1">//核心</span>
 <span class="c1">// dr.get('http://www.baidu.com')      //打开百度页面</span>
-<span class="nx">dr</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'http://test.pandanc.com/english/register'</span><span class="p">)</span>      <span class="c1">//打开注册页面</span>
+<span class="nx">dr</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'http://test.pandanc.com/english/register'</span><span class="p">)</span>      <span class="c1">//打开注册页面</span>
 
 <span class="nx">data</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">{</span>
-    	<span class="na">username</span><span class="p">:</span> <span class="s2">"tes_zhuce_111e1"</span><span class="p">,</span>
-    	<span class="na">email</span><span class="p">:</span> <span class="s2">"tes_zhuce_1411@qq.com"</span><span class="p">,</span>
-    	<span class="na">password1</span><span class="p">:</span> <span class="s2">"tests_zhuce1"</span><span class="p">,</span>
-    	<span class="na">password2</span><span class="p">:</span> <span class="s2">"tests_zhuce1"</span>
+        <span class="na">username</span><span class="p">:</span> <span class="s2">"tes_zhuce_111e1"</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="s2">"tes_zhuce_1411@qq.com"</span><span class="p">,</span>
+        <span class="na">password1</span><span class="p">:</span> <span class="s2">"tests_zhuce1"</span><span class="p">,</span>
+        <span class="na">password2</span><span class="p">:</span> <span class="s2">"tests_zhuce1"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-    	<span class="na">username</span><span class="p">:</span> <span class="s2">"tes_zhuce_222e1"</span><span class="p">,</span>
-    	<span class="na">email</span><span class="p">:</span> <span class="s2">"tes_zhuce_2422@qq.com"</span><span class="p">,</span>
-    	<span class="na">password1</span><span class="p">:</span> <span class="s2">"tests_zhuce2"</span><span class="p">,</span>
-    	<span class="na">password2</span><span class="p">:</span> <span class="s2">"tests_zhuce2"</span>
+        <span class="na">username</span><span class="p">:</span> <span class="s2">"tes_zhuce_222e1"</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="s2">"tes_zhuce_2422@qq.com"</span><span class="p">,</span>
+        <span class="na">password1</span><span class="p">:</span> <span class="s2">"tests_zhuce2"</span><span class="p">,</span>
+        <span class="na">password2</span><span class="p">:</span> <span class="s2">"tests_zhuce2"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-    	<span class="na">username</span><span class="p">:</span> <span class="s2">"tes_zhuce_333e1"</span><span class="p">,</span>
-    	<span class="na">email</span><span class="p">:</span> <span class="s2">"tes_zhuce_3343@qq.com"</span><span class="p">,</span>
-    	<span class="na">password1</span><span class="p">:</span> <span class="s2">"tests_zhuce3"</span><span class="p">,</span>
-    	<span class="na">password2</span><span class="p">:</span> <span class="s2">"tests_zhuce3"</span>
+        <span class="na">username</span><span class="p">:</span> <span class="s2">"tes_zhuce_333e1"</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="s2">"tes_zhuce_3343@qq.com"</span><span class="p">,</span>
+        <span class="na">password1</span><span class="p">:</span> <span class="s2">"tests_zhuce3"</span><span class="p">,</span>
+        <span class="na">password2</span><span class="p">:</span> <span class="s2">"tests_zhuce3"</span>
     <span class="p">}</span>
 <span class="p">];</span>
 
 
 <span class="kd">var</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
 
-<span class="p">(</span><span class="k">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">(</span><span class="nx">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    	<span class="c1">// 清除cookie</span>
-        <span class="kr">await</span> <span class="nx">dr</span><span class="p">.</span><span class="nx">manage</span><span class="p">().</span><span class="nx">deleteAllCookies</span><span class="p">();</span>
-    	<span class="c1">// 打开页面</span>
-    	<span class="c1">//await dr.get('http://www.baidu.com');</span>
-    	<span class="kr">await</span> <span class="nx">dr</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'http://test.pandanc.com/english/register'</span><span class="p">);</span>
+        <span class="c1">// 清除cookie</span>
+        <span class="nx">await</span> <span class="nx">dr</span><span class="p">.</span><span class="nx">manage</span><span class="p">().</span><span class="nx">deleteAllCookies</span><span class="p">();</span>
+        <span class="c1">// 打开页面</span>
+        <span class="c1">//await dr.get('http://www.baidu.com');</span>
+        <span class="nx">await</span> <span class="nx">dr</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'http://test.pandanc.com/english/register'</span><span class="p">);</span>
 
-    	<span class="nx">dr</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>  
+        <span class="nx">dr</span><span class="p">.</span><span class="nx">executeScript</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>  
         <span class="c1">// console.log(arguments[0][arguments[1]]) </span>
         <span class="c1">// 注册</span>
-		    <span class="nx">vue</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="kr">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="kr">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nx">username</span><span class="p">;</span>
-			  <span class="nx">vue</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="kr">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="kr">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nx">email</span><span class="p">;</span>
-			  <span class="nx">vue</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">password1</span> <span class="o">=</span> <span class="kr">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="kr">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nx">password1</span><span class="p">;</span>
-			  <span class="nx">vue</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">password2</span> <span class="o">=</span> <span class="kr">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="kr">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nx">password2</span><span class="p">;</span>
-		    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btnRegister"</span><span class="p">);</span>
-	        <span class="nx">a</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span> 
+            <span class="nx">vue</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nx">username</span><span class="p">;</span>
+              <span class="nx">vue</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nx">email</span><span class="p">;</span>
+              <span class="nx">vue</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">password1</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nx">password1</span><span class="p">;</span>
+              <span class="nx">vue</span><span class="p">.</span><span class="nx">form</span><span class="p">.</span><span class="nx">password2</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="nx">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]].</span><span class="nx">password2</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btnRegister"</span><span class="p">);</span>
+            <span class="nx">a</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span> 
         <span class="p">},</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">i</span><span class="p">);</span>
         <span class="c1">// 等待2s</span>
-        <span class="kr">await</span> <span class="nx">dr</span><span class="p">.</span><span class="nx">sleep</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="nx">await</span> <span class="nx">dr</span><span class="p">.</span><span class="nx">sleep</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">1000</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">})()</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>以上文件保存为 zhuce.js</p>
 
 <p>进入cmd 命令行条件下，</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node zhuce.js
-</code></pre></div></div>
-
-<h1 id="password自动生成">password自动生成</h1>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">node zhuce.js
+</code></pre></div>
+<h1 id="password">password自动生成</h1>
 
 <p>密码自动生成可以用以下两种裤：</p>
 
 <ul>
-  <li>
-    <p><a href="https://www.npmjs.com/package/password-generator">password-generator</a></p>
-  </li>
-  <li>
-    <p><a href="https://www.npmjs.com/package/generate-password">generate-password</a></p>
-  </li>
+<li><p><a href="https://www.npmjs.com/package/password-generator">password-generator</a></p></li>
+<li><p><a href="https://www.npmjs.com/package/generate-password">generate-password</a></p></li>
 </ul>
 
 <p>我使用的是 password-generator</p>
 
 <p>新建一个目录 password-test</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm install password-generator <span class="nt">-g</span>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="gp">$ </span>npm install password-generator -g
 <span class="nb">cd </span>password-test
-npm install password-generator <span class="nt">--save</span>
-</code></pre></div></div>
-
+npm install password-generator --save
+</code></pre></div>
 <p>在password-test文件夹下新建password.js</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">generatePassword</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"password-generator"</span><span class="p">);</span>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">generatePassword</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"password-generator"</span><span class="p">);</span>
- 
 <span class="kd">var</span> <span class="nx">maxLength</span> <span class="o">=</span> <span class="mi">18</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">minLength</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">uppercaseMinCount</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
@@ -298,7 +279,7 @@ npm install password-generator <span class="nt">--save</span>
 <span class="kd">var</span> <span class="nx">NUMBER_RE</span> <span class="o">=</span> <span class="sr">/</span><span class="se">([\d])</span><span class="sr">/g</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">SPECIAL_CHAR_RE</span> <span class="o">=</span> <span class="sr">/</span><span class="se">([\?\-])</span><span class="sr">/g</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">NON_REPEATING_CHAR_RE</span> <span class="o">=</span> <span class="sr">/</span><span class="se">([\w\d\?\-])\1{2,}</span><span class="sr">/g</span><span class="p">;</span>
- 
+
 <span class="kd">function</span> <span class="nx">isStrongEnough</span><span class="p">(</span><span class="nx">password</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">uc</span> <span class="o">=</span> <span class="nx">password</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">UPPERCASE_RE</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">lc</span> <span class="o">=</span> <span class="nx">password</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">LOWERCASE_RE</span><span class="p">);</span>
@@ -312,7 +293,7 @@ npm install password-generator <span class="nt">--save</span>
     <span class="nx">n</span> <span class="o">&amp;&amp;</span> <span class="nx">n</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">numberMinCount</span> <span class="o">&amp;&amp;</span>
     <span class="nx">sc</span> <span class="o">&amp;&amp;</span> <span class="nx">sc</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">specialMinCount</span><span class="p">;</span>
 <span class="p">}</span>
- 
+
 <span class="kd">function</span> <span class="nx">customPassword</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
   <span class="kd">var</span> <span class="nx">randomLength</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">maxLength</span> <span class="o">-</span> <span class="nx">minLength</span><span class="p">))</span> <span class="o">+</span> <span class="nx">minLength</span><span class="p">;</span>
@@ -321,20 +302,17 @@ npm install password-generator <span class="nt">--save</span>
   <span class="p">}</span>
   <span class="k">return</span> <span class="nx">password</span><span class="p">;</span>
 <span class="p">}</span>
- 
+
 <span class="c1">//console.log(customPassword());</span>
 <span class="kd">var</span> <span class="nx">length</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">customPassword</span><span class="p">());</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>打印出随机生成的多少个密码，cmd执行</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node password.js
-</code></pre></div></div>
-
-<h1 id="更多selenium相关">更多selenium相关</h1>
+<div class="highlight"><pre><code class="language-" data-lang="">node password.js
+</code></pre></div>
+<h1 id="selenium">更多selenium相关</h1>
 
 <p><a href="http://dingdong.io/tech/selenium%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E7%9A%84node%E5%AE%9E%E7%8E%B0.html">selenium的node实现——基础篇</a></p>
 
@@ -450,11 +428,11 @@ npm install password-generator <span class="nt">--save</span>
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -499,7 +477,7 @@ npm install password-generator <span class="nt">--save</span>
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -599,7 +577,7 @@ npm install password-generator <span class="nt">--save</span>
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

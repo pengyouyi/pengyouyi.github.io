@@ -161,67 +161,57 @@
 		
 		</div>
 		
-		<h1 id="js对象">js对象</h1>
+		<h1 id="js">js对象</h1>
 
 <p>创建对象的几种方式</p>
 
 <p>⑴ 字面量</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">o1</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s1">'o1'</span><span class="p">};</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">o1</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s1">'o1'</span><span class="p">};</span>
 <span class="kd">var</span> <span class="nx">o11</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">({</span><span class="na">name</span><span class="p">:</span> <span class="s1">'o11'</span><span class="p">});</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">o1</span><span class="p">);</span>  <span class="c1">// Object </span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>⑵ 通过构造函数</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">M</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">};</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">M</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">){</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">};</span>
 <span class="kd">var</span> <span class="nx">o2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">M</span><span class="p">(</span><span class="s1">'o2'</span><span class="p">);</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>⑶ Object.create</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">P</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s1">'o3'</span><span class="p">};</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">P</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s1">'o3'</span><span class="p">};</span>
 <span class="kd">var</span> <span class="nx">o3</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">P</span><span class="p">);</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-09-1.png" alt="" />
+    <img src="/assets/images/2017/10-11-12/11-09-1.png" alt="">
 </div>
 
 <p>使用Object.create()是将对象继承到__proto__属性上</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">test</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="na">x</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="na">y</span><span class="p">:</span><span class="mi">345</span><span class="p">});</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">test</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span><span class="na">x</span><span class="p">:</span><span class="mi">123</span><span class="p">,</span><span class="na">y</span><span class="p">:</span><span class="mi">345</span><span class="p">});</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span><span class="c1">//{__proto__: {x:123,y:345}}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span><span class="c1">//123</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span><span class="c1">//3</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">test</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">x</span> <span class="o">===</span> <span class="nx">test</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span><span class="c1">//true</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create">Object.create()</a></p>
 
-<h1 id="对象分类-classify">对象分类-classify</h1>
+<h1 id="classify">对象分类-classify</h1>
 
-<p>❃  普通对象：有__proto__属性（指向其原型链），没有prototype属性。<br />
-❃  原型对象：原型对象（Person.prototype）是 构造函数（Person）的一个实例。(Person.prototype 原型对象还有constructor属性，指向构造函数对象)<br />
-❃  (构造)函数对象：凡是通过new Function()创建的都是构造函数对象。拥有__proto__、prototype属性（指向原型对象）。</p>
+<p>❃  普通对象：有__proto__属性（指向其原型链），没有prototype属性。<br><br>
+❃  原型对象：原型对象（Person.prototype）是 构造函数（Person）的一个实例。(Person.prototype 原型对象还有constructor属性，指向构造函数对象)<br><br>
+❃  (构造)函数对象：凡是通过new Function()创建的都是构造函数对象。拥有__proto__、prototype属性（指向原型对象）。  </p>
+
 <ul>
-  <li>Function、Object、Array、Date、String、自定义函数</li>
-  <li>特例： Function.prototype 是原型对象，却是函数对象</li>
+<li>Function、Object、Array、Date、String、自定义函数<br></li>
+<li>特例： Function.prototype 是原型对象，却是函数对象 </li>
 </ul>
 
 <p>在 Person 创建的时候，创建了一个它的实例对象并赋值给它的 prototype</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 原型对象</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 原型对象</span>
 <span class="kd">var</span> <span class="nx">A</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">();</span>
 <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">A</span><span class="p">;</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">函数对象</span>  
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="err">函数对象</span>  
 <span class="kd">function</span> <span class="nx">f1</span><span class="p">(){};</span> 
 <span class="kd">var</span> <span class="nx">f2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
 <span class="kd">var</span> <span class="nx">f3</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span><span class="p">(</span><span class="s1">'str'</span><span class="p">,</span><span class="s1">'console.log(str)'</span><span class="p">);</span>
-  
+
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">f1</span><span class="p">);</span>  <span class="c1">//function  </span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">f2</span><span class="p">);</span>  <span class="c1">//function  </span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">f3</span><span class="p">);</span>  <span class="c1">//function  </span>
@@ -231,24 +221,20 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">String</span><span class="p">);</span>   <span class="c1">//function  </span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">Date</span><span class="p">);</span>   <span class="c1">//function  </span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">Function</span><span class="p">);</span>   <span class="c1">//function </span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>Function.prototype是个例外，它是原型对象，却又是函数对象，作为一个函数对象，它又没有prototype属性。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Person</span><span class="p">(){};</span>  
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(){};</span>  
-  
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// Object  </span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// Object  </span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// function  它是特殊 Function  </span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">//undefined 函数对象却没有prototype属性 </span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>通过 new Function( ) 产生的对象都是函数对象。因为 A 是函数对象，所以Function.prototype 是函数对象。</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">A</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span> <span class="p">();</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">A</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Function</span> <span class="p">();</span>
 <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">A</span><span class="p">;</span>
-</code></pre></div></div>
-
-<h1 id="new运算符">new运算符</h1>
+</code></pre></div>
+<h1 id="new">new运算符</h1>
 
 <p>描述 new 一个对象的过程</p>
 
@@ -259,19 +245,16 @@
 <p>⑶ 执行构造函数中的代码（为这个新对象添加属性，即对this赋值）</p>
 
 <p>⑷ 返回this。如果构造函数return了一个新的“对象”，那么这个对象就会取代整个new出来的结果。如果构造函数没有return对象，那么就会返回步骤1所创建的对象，即隐式返回this。</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">Foo</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">this</span> <span class="o">=</span> <span class="p">{};</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
   <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
-  <span class="k">this</span><span class="p">.</span><span class="kd">class</span> <span class="o">=</span> <span class="s1">'class-1'</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="kr">class</span> <span class="o">=</span> <span class="s1">'class-1'</span><span class="p">;</span>
   <span class="c1">// return this;  // 默认有这一行</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="s1">'zhangsan'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">foo1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">(</span><span class="s1">'lisi'</span><span class="p">,</span> <span class="mi">22</span><span class="p">);</span>  <span class="c1">//创造多个对象</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">new2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">func</span><span class="p">){</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">new2</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">func</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">func</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">k</span> <span class="o">=</span> <span class="nx">func</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">o</span><span class="p">);</span>
   <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">k</span> <span class="o">===</span> <span class="s1">'object'</span><span class="p">)</span> <span class="p">{</span>
@@ -280,42 +263,35 @@
     <span class="k">return</span> <span class="nx">o</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <h1 id="instanceof">instanceof</h1>
 
 <p>instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上。</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">object</span> <span class="k">instanceof</span> <span class="kd">constructor</span>
-</code></pre></div></div>
-
-<p><strong>object instanceof constructor 的判断逻辑是：</strong>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">object</span> <span class="k">instanceof</span> <span class="nx">constructor</span>
+</code></pre></div>
+<p><strong>object instanceof constructor 的判断逻辑是：</strong><br>
 object 的 __proto__ 一层一层往上，能否对应到constructor.prototype</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-09-2.png" alt="" />
+    <img src="/assets/images/2017/10-11-12/11-09-2.png" alt="">
 </div>
 
 <p>㈠ 使用 instanceof 就是判断一个实例是否属于某种类型。</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 判断 foo 是否是 Foo 类的实例</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 判断 foo 是否是 Foo 类的实例</span>
 <span class="kd">function</span> <span class="nx">Foo</span><span class="p">(){}</span> 
 <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">();</span> 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span> <span class="k">instanceof</span> <span class="nx">Foo</span><span class="p">)</span><span class="c1">//true</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>㈡ instanceof 可以在继承关系中用来判断一个实例是否属于它的父类型。</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 判断 foo 是否是 Foo 类的实例 , 并且是否是其父类型的实例</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 判断 foo 是否是 Foo 类的实例 , 并且是否是其父类型的实例</span>
 <span class="kd">function</span> <span class="nx">Aoo</span><span class="p">(){}</span> 
 <span class="kd">function</span> <span class="nx">Foo</span><span class="p">(){}</span> 
 <span class="nx">Foo</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Aoo</span><span class="p">();</span><span class="c1">//JavaScript 原型继承</span>
- 
+
 <span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Foo</span><span class="p">();</span> 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span> <span class="k">instanceof</span> <span class="nx">Foo</span><span class="p">)</span><span class="c1">//true </span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">foo</span> <span class="k">instanceof</span> <span class="nx">Aoo</span><span class="p">)</span><span class="c1">//true</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof">https://developer.mozilla.org/instanceof</a></p>
 
 <p><a href="https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/">https://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/</a></p>
@@ -323,50 +299,41 @@ object 的 __proto__ 一层一层往上，能否对应到constructor.prototype</
 <h1 id="hasownproperty">hasOwnProperty</h1>
 
 <p>hasOwnProperty() 方法会返回一个布尔值，指示对象是否具有指定的属性作为自身（不继承）属性。</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
 <span class="nx">o</span><span class="p">.</span><span class="nx">prop</span> <span class="o">=</span> <span class="s1">'exists'</span><span class="p">;</span>
 <span class="nx">o</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'prop'</span><span class="p">);</span>             <span class="c1">// 返回 true</span>
 <span class="nx">o</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'toString'</span><span class="p">);</span>         <span class="c1">// 返回 false</span>
 <span class="nx">o</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'hasOwnProperty'</span><span class="p">);</span>   <span class="c1">// 返回 false</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">buz</span> <span class="o">=</span> <span class="p">{</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">buz</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">fog</span><span class="p">:</span> <span class="s1">'stack'</span>
 <span class="p">};</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">name</span> <span class="k">in</span> <span class="nx">buz</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 高级浏览器已经在 for in 中屏蔽了来自原型的属性</span>
-	<span class="c1">// 但是这里建议大家还是加上这个判断，保证程序的健壮性</span>
+    <span class="c1">// 但是这里建议大家还是加上这个判断，保证程序的健壮性</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">buz</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">name</span><span class="p">))</span> <span class="p">{</span>
         <span class="nx">alert</span><span class="p">(</span><span class="s2">"this is fog ("</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s2">") for sure. Value: "</span> <span class="o">+</span> <span class="nx">buz</span><span class="p">[</span><span class="nx">name</span><span class="p">]);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty">developer.mozilla.org/hasOwnProperty</a></p>
 
-<h1 id="类的声明与实例化-class">类的声明与实例化-class</h1>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 类的声明</span>
+<h1 id="class">类的声明与实例化-class</h1>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 类的声明</span>
 <span class="kd">function</span> <span class="nx">Animal</span><span class="p">()</span> <span class="p">{</span>
-	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'name'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'name'</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ES6中class的声明</span>
-<span class="kd">class</span> <span class="nx">Animal2</span><span class="p">{</span>
-  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
-  	<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// ES6中class的声明</span>
+<span class="kr">class</span> <span class="nx">Animal2</span><span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 实例化</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 实例化</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span> <span class="nx">Animal</span><span class="p">(),</span> <span class="k">new</span> <span class="nx">Animal2</span><span class="p">());</span>
-</code></pre></div></div>
+</code></pre></div>
+<h1 id="more">更多-more</h1>
 
-<h1 id="更多-more">更多-more</h1>
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">mozilla.org/Inheritance_and_the_prototype_chain</a></p>
   
 	</div>
@@ -475,11 +442,11 @@ object 的 __proto__ 一层一层往上，能否对应到constructor.prototype</
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -524,7 +491,7 @@ object 的 __proto__ 一层一层往上，能否对应到constructor.prototype</
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -624,7 +591,7 @@ object 的 __proto__ 一层一层往上，能否对应到constructor.prototype</
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

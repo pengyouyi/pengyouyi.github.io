@@ -161,169 +161,154 @@
 		
 		</div>
 		
-		<h1 id="js运行机制是单线程">js运行机制是单线程</h1>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+		<h1 id="js">js运行机制是单线程</h1>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
 <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>结果：<br />
-100<br />
-300<br />
-200</p>
+</code></pre></div>
+<p>结果：<br><br>
+100<br><br>
+300<br><br>
+200  </p>
 
 <p><em>以上程序执行过程分析：</em></p>
 
 <ul>
-  <li>执行第一行，打印100</li>
-  <li>执行setTimeout后，传入setTimeout的函数会被暂存起来，不会立即执行（单线程的特点，不能同时干两件事）</li>
-  <li>执行最后一行，打印300</li>
-  <li>待所有程序执行完，处于空闲状态时，会立马看有没有暂存起来的要执行。</li>
-  <li>发现暂存起来的setTimeout中的函数无需等待时间，就立即过来执行</li>
+<li>执行第一行，打印100<br></li>
+<li>执行setTimeout后，传入setTimeout的函数会被暂存起来，不会立即执行（单线程的特点，不能同时干两件事）<br></li>
+<li>执行最后一行，打印300<br></li>
+<li>待所有程序执行完，处于空闲状态时，会立马看有没有暂存起来的要执行。<br></li>
+<li>发现暂存起来的setTimeout中的函数无需等待时间，就立即过来执行<br></li>
 </ul>
 
-<h1 id="任务队列-task-queue">任务队列-Task queue</h1>
+<h1 id="task-queue">任务队列-Task queue</h1>
 
-<p>所有任务可以分成两种，一种是同步任务（synchronous），另一种是异步任务（asynchronous）。</p>
+<p>所有任务可以分成两种，一种是同步任务（synchronous），另一种是异步任务（asynchronous）。  </p>
 
-<p>❀ 同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；</p>
+<p>❀ 同步任务指的是，在主线程上排队执行的任务，只有前一个任务执行完毕，才能执行后一个任务；  </p>
 
-<p>❀ 异步任务指的是，不进入主线程、而进入”任务队列”（task queue）的任务，只有”任务队列”通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。</p>
+<p>❀ 异步任务指的是，不进入主线程、而进入&quot;任务队列&quot;（task queue）的任务，只有&quot;任务队列&quot;通知主线程，某个异步任务可以执行了，该任务才会进入主线程执行。  </p>
 
 <p>异步执行的运行机制如下。（同步执行也是如此，因为它可以被视为没有异步任务的异步执行。）</p>
 
-<p>（1）所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。<br />
-（2）主线程之外，还存在一个”任务队列”（task queue）。只要异步任务有了运行结果，就在”任务队列”之中放置一个事件。<br />
-（3）一旦”执行栈”中的所有同步任务执行完毕，系统就会读取”任务队列”，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。<br />
-（4）主线程不断重复上面的第三步。</p>
+<p>（1）所有同步任务都在主线程上执行，形成一个执行栈（execution context stack）。<br><br>
+（2）主线程之外，还存在一个&quot;任务队列&quot;（task queue）。只要异步任务有了运行结果，就在&quot;任务队列&quot;之中放置一个事件。<br><br>
+（3）一旦&quot;执行栈&quot;中的所有同步任务执行完毕，系统就会读取&quot;任务队列&quot;，看看里面有哪些事件。那些对应的异步任务，于是结束等待状态，进入执行栈，开始执行。<br><br>
+（4）主线程不断重复上面的第三步。  </p>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-06-1.jpg" alt="" />
+    <img src="/assets/images/2017/10-11-12/11-06-1.jpg" alt="">
 </div>
 
-<p>只要主线程空了，就会去读取”任务队列”，这就是JavaScript的运行机制。这个过程会不断重复。</p>
+<p>只要主线程空了，就会去读取&quot;任务队列&quot;，这就是JavaScript的运行机制。这个过程会不断重复。</p>
 
-<h1 id="同步任务-synchronization-task">同步任务-Synchronization task</h1>
+<h1 id="synchronization-task">同步任务-Synchronization task</h1>
 
 <blockquote>
-  <p>console.log()<br />
+<p>console.log()<br><br>
 alert()</p>
 </blockquote>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'peng'</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'peng'</span><span class="p">);</span>
 <span class="nx">alert</span><span class="p">(</span><span class="s1">'you'</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'yi'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h1 id="异步任务-asynchronous-task">异步任务-Asynchronous task</h1>
+</code></pre></div>
+<h1 id="asynchronous-task">异步任务-Asynchronous task</h1>
 
 <p><strong>前端使用异步的场景</strong></p>
 
 <blockquote>
-  <p>定时任务：setTimeout、setInterval<br />
-网络请求：ajax请求，动态<code class="highlighter-rouge">&lt;img&gt;</code>加载<br />
-DOM事件绑定<br />
-ES6中Promise</p>
+<p>定时任务：setTimeout、setInterval<br><br>
+网络请求：ajax请求，动态<code>&lt;img&gt;</code>加载<br><br>
+DOM事件绑定<br><br>
+ES6中Promise  </p>
 </blockquote>
 
 <h2 id="settimeout">setTimeout</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
 <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
 <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
-</code></pre></div></div>
+</code></pre></div>
+<p>结果：<br><br>
+100<br><br>
+300<br><br>
+200  </p>
 
-<p>结果：<br />
-100<br />
-300<br />
-200</p>
-
-<h2 id="ajax请求代码示例">ajax请求代码示例</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'./data1.json'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data1</span><span class="p">);</span>
+<h2 id="ajax">ajax请求代码示例</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'./data1.json'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">(</span><span class="mi">1</span><span class="p">)){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data1</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h2 id="img加载">img加载</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="img">img加载</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'img'</span><span class="p">);</span>
 <span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'loaded'</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'loaded'</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">'/xxx.png'</span><span class="p">;</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h2 id="dom事件绑定">DOM事件绑定</h2>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="dom">DOM事件绑定</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start'</span><span class="p">);</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn1'</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">alert</span><span class="p">(</span><span class="s1">'clicked'</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'clicked'</span><span class="p">);</span>
 <span class="p">})</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">);</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><strong>何时需要异步</strong></p>
 
 <ul>
-  <li>在可能发生等待的情况</li>
-  <li>等待过程中不能像alert一样阻塞程序运行</li>
+<li>在可能发生等待的情况<br></li>
+<li>等待过程中不能像alert一样阻塞程序运行<br></li>
 </ul>
 
-<h1 id="同步和异步的区别-difference">同步和异步的区别-Difference</h1>
+<h1 id="difference">同步和异步的区别-Difference</h1>
 
 <p>同步会阻塞代码执行，而异步不会</p>
 
 <h1 id="event-loop">Event Loop</h1>
 
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-06-2.png" alt="" />
+    <img src="/assets/images/2017/10-11-12/11-06-2.png" alt="">
 </div>
 
-<h1 id="同步和异步执行顺序-order">同步和异步执行顺序-order</h1>
+<h1 id="order">同步和异步执行顺序-order</h1>
 
-<p><code class="highlighter-rouge">执行栈中的代码（同步任务），总是在读取"任务队列"（异步任务）之前执行。</code></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A"</span><span class="p">);</span>
+<p><code>执行栈中的代码（同步任务），总是在读取&quot;任务队列&quot;（异步任务）之前执行。</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A"</span><span class="p">);</span>
 <span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"B"</span><span class="p">);</span>
-</code></pre></div></div>
+</code></pre></div>
 <p>结果只执行A</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A"</span><span class="p">);</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"A"</span><span class="p">);</span>
 <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'B'</span><span class="p">);</span>
 <span class="p">},</span> <span class="mi">0</span><span class="p">)</span>
 <span class="k">while</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre></div>
 <p>结果还是只执行A</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
-  	 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
   <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre></div>
 <p>1s后打出4个4</p>
 
-<h1 id="更多-more">更多-more</h1>
+<h1 id="more">更多-more</h1>
 
 <ul>
-  <li><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html">http://www.ruanyifeng.com/blog/2014/10/event-loop.html</a></li>
-  <li><a href="http://web.jobbole.com/82631/">http://web.jobbole.com/82631/</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/10/event-loop.html">http://www.ruanyifeng.com/blog/2014/10/event-loop.html</a><br></li>
+<li><a href="http://web.jobbole.com/82631/">http://web.jobbole.com/82631/</a></li>
 </ul>
   
 	</div>
@@ -432,11 +417,11 @@ ES6中Promise</p>
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -481,7 +466,7 @@ ES6中Promise</p>
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -581,7 +566,7 @@ ES6中Promise</p>
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

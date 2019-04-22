@@ -161,7 +161,7 @@
 		
 		</div>
 		
-		<h1 id="微信小程序interview">微信小程序interview</h1>
+		<h1 id="interview">微信小程序interview</h1>
 
 <p><strong>简单描述下微信小程序的相关文件类型？</strong></p>
 
@@ -226,15 +226,9 @@
 <p>微信小程序采用JavaScript、WXML、WXSS三种技术进行开发，从技术讲和现有的前端开发差不多，但深入挖掘的话却又有所不同。</p>
 
 <ul>
-  <li>
-    <p>JavaScript：首先JavaScript的代码是运行在微信App中的，并不是运行在浏览器中，因此一些H5技术的应用，需要微信App提供对应的API支持，而这限制住了H5技术的应用，且其不能称为严格的H5，可以称其为伪H5，同理，微信提供的独有的某些API，H5也不支持或支持的不是特别好。</p>
-  </li>
-  <li>
-    <p>WXML：WXML微信自己基于XML语法开发的，因此开发时，只能使用微信提供的现有标签，HTML的标签是无法使用的。</p>
-  </li>
-  <li>
-    <p>WXSS：WXSS具有CSS的大部分特性，但并不是所有的都支持，而且支持哪些，不支持哪些并没有详细的文档。</p>
-  </li>
+<li><p>JavaScript：首先JavaScript的代码是运行在微信App中的，并不是运行在浏览器中，因此一些H5技术的应用，需要微信App提供对应的API支持，而这限制住了H5技术的应用，且其不能称为严格的H5，可以称其为伪H5，同理，微信提供的独有的某些API，H5也不支持或支持的不是特别好。</p></li>
+<li><p>WXML：WXML微信自己基于XML语法开发的，因此开发时，只能使用微信提供的现有标签，HTML的标签是无法使用的。</p></li>
+<li><p>WXSS：WXSS具有CSS的大部分特性，但并不是所有的都支持，而且支持哪些，不支持哪些并没有详细的文档。</p></li>
 </ul>
 
 <p>微信的架构，是数据驱动的架构模式，它的UI和数据是分离的，所有的页面更新，都需要通过对数据的更改来实现。</p>
@@ -288,28 +282,24 @@
 <p>在回调函数中调用下一个组件的函数</p>
 
 <p>app.js</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">success</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">success</span><span class="err">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">that</span><span class="p">.</span><span class="nx">apirtnCallback</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>index.js</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">onLoad</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">onLoad</span><span class="err">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="nx">app</span><span class="p">.</span><span class="nx">apirtnCallback</span> <span class="o">=</span> <span class="nx">res</span> <span class="o">=&gt;</span> <span class="p">{</span>
      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> 
     <span class="p">}</span>
 <span class="err">｝</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><strong>小程序的双向绑定和vue哪里不一样？</strong></p>
 
 <p>小程序直接this.data的属性是不可以同步到视图的，必须调用：</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
     <span class="na">noBind</span><span class="p">:</span><span class="kc">true</span>
 <span class="p">})</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><strong>小程序的wxss和css有哪些不一样的地方？</strong></p>
 
 <p>⑴ wxss的图片引入需使用外链地址；</p>
@@ -321,15 +311,13 @@
 <p><strong>webview中的页面怎么跳回小程序中？</strong></p>
 
 <p>首先要引入最新版的jweixin-1.3.2.js，然后</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">wx</span><span class="p">.</span><span class="nx">miniProgram</span><span class="p">.</span><span class="nx">navigateTo</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">wx</span><span class="p">.</span><span class="nx">miniProgram</span><span class="p">.</span><span class="nx">navigateTo</span><span class="p">({</span>
     <span class="na">url</span><span class="p">:</span> <span class="s1">'/pages/login/login'</span><span class="o">+</span><span class="s1">'$params'</span>
 <span class="p">})</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><strong>小程序关联微信公众号如何确定用户的唯一性？</strong></p>
 
-<p>https://developers.weixin.qq.com/miniprogram/dev/api/open.html#wxgetuserinfoobject</p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/api/open.html#wxgetuserinfoobject">https://developers.weixin.qq.com/miniprogram/dev/api/open.html#wxgetuserinfoobject</a></p>
 
 <p>使用 wx.getUserInfo() 方法 withCredentials 为 true 时 可获取 encryptedData，里面有 union_id 。后端需要进行对称解密</p>
 
@@ -358,33 +346,29 @@
 <p>小程序导航的页面可以通过switchTab，但默认情况是不会重新加载数据的。</p>
 
 <p>若需加载新数据，则在success属性中加入以下代码即可：</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">success</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">success</span><span class="err">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">getCurrentPages</span><span class="p">().</span><span class="nx">pop</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">page</span> <span class="o">==</span> <span class="kc">undefined</span> <span class="o">||</span> <span class="nx">page</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
     <span class="nx">page</span><span class="p">.</span><span class="nx">onLoad</span><span class="p">();</span>
 <span class="p">}</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p>webview的页面，则通过</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">wx</span><span class="p">.</span><span class="nx">miniProgram</span><span class="p">.</span><span class="nx">switchTab</span><span class="p">({</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"> <span class="nx">wx</span><span class="p">.</span><span class="nx">miniProgram</span><span class="p">.</span><span class="nx">switchTab</span><span class="p">({</span>
     <span class="na">url</span><span class="p">:</span> <span class="s1">'/pages/index/index'</span>
 <span class="p">})</span>
-</code></pre></div></div>
-
+</code></pre></div>
 <p><strong>小程序和Vue写法的区别？</strong></p>
 
-<p>⓵ 循环遍历的时候：小程序是 wx:for=”list”，而Vue是 v-for=”info in list”</p>
+<p>⓵ 循环遍历的时候：小程序是 wx:for=&quot;list&quot;，而Vue是 v-for=&quot;info in list&quot;</p>
 
 <p>⓶ 调用data模型的时候：小程序是 this.data.uinfo，而Vue是 this.uinfo；</p>
 
 <p>⓷ 给data模型赋值也不一样，小程序是this.setData({uinfo:1})，而Vue是直接 this.uinfo=1</p>
 
-<h1 id="更多-more">更多-more</h1>
+<h1 id="more">更多-more</h1>
 
 <ul>
-  <li><a href="http://www.bslxx.com/a/mianshiti/tiku/2017/1020/1027.html">微信小程序面试题，附答案</a></li>
+<li><a href="http://www.bslxx.com/a/mianshiti/tiku/2017/1020/1027.html">微信小程序面试题，附答案</a></li>
 </ul>
   
 	</div>
@@ -493,11 +477,11 @@
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>20</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -542,7 +526,7 @@
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>14</sup></a></li>
 			
 		
 			
@@ -642,7 +626,7 @@
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			
