@@ -2,7 +2,7 @@
 layout: post
 title: MVVM设计模式-观察者模式
 tags:
-- MVVM
+- design-pattern
 - vue
 categories: Framework
 description: MVVM设计模式
