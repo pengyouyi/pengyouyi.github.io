@@ -1,11 +1,12 @@
 ---
 layout: post
-title: vue实现的翻页功能-复杂版
+title: vue实现可复用的翻页组件
 tags:
 - vue
 categories: Framework
-description: vue实现翻页功能
+description: vue实现可复用的翻页组件
 ---
+
 
 # v-pageturning-complex-复杂版
 
@@ -31,6 +32,8 @@ description: vue实现翻页功能
 1. 翻页的时候通过改变url上params参数page
 2. 路由参数page改变，刷新页面
 3. 刷新页面的的时候，created 重新请求数据，getProjects(page)
+4. 通过传递参数limit【每页请求条数】、offset【请求开始位置】
+`http://test.pandanc.com/api/v1/projects/project/?limit=3&offset=0`
 
 **解决 'library/:page' 中page改变不刷新的问题**
 
@@ -428,7 +431,7 @@ Vue.prototype.$axios = axios;
 
 # more
 
-- 完整项目请看github, 项目v-page-turning-complex待上传，地址待添加。。。
+- 完整项目请看github, 项目[v-page-turning-complex](git@github.com:pyy-vueComponent/v-page-turning-complex.git)
 
 
 
