@@ -7,7 +7,7 @@
     
     
     
-    <title>js设计模式 | 彭友谊的博客</title>
+    <title>js设计原则-代理模式 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="js设计模式">
-    <meta property="og:url" content="/js/2018/07/24/mvvm-design-pattern">
+    <meta property="og:title" content="js设计原则-代理模式">
+    <meta property="og:url" content="/js/2019/04/29/js-design-pattern-proxy">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="js设计模式">
+    <meta property="og:description" content="js设计原则-代理模式">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="js设计模式">
+    <meta name="twitter:title" content="js设计原则-代理模式">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -142,14 +142,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2018/07/24/mvvm-design-pattern" title="js设计模式" itemprop="url">js设计模式</a>
+      <a href="/js/2019/04/29/js-design-pattern-proxy" title="js设计原则-代理模式" itemprop="url">js设计原则-代理模式</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2018-07-24 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-07-24</time>
+    <time datetime="2019-04-29 00:00:00 +0800" itemprop="datePublished"> 发表于 2019-04-29</time>
     
   </p>
 </header>
@@ -161,84 +161,167 @@
 		
 		</div>
 		
-		<h1 id="js设计模式汇总">js设计模式汇总</h1>
+		<h1 id="代理模式-proxy">代理模式-Proxy</h1>
 
-<p>设计模式主要分三个类型: 创建型、结构型和行为型。</p>
+<h1 id="proxy-介绍">Proxy 介绍</h1>
 
-<p>其中创建型有：</p>
+<ul>
+  <li>
+    <p>使用者<code class="highlighter-rouge">无权</code>访问目标对象</p>
+  </li>
+  <li>
+    <p>中间加代理，通过代理做授权和控制</p>
+  </li>
+</ul>
 
-<p>一、Singleton，单例模式：保证一个类只有一个实例，并提供一个访问它的全局访问点</p>
+<h1 id="proxy-示例--uml">Proxy 示例 &amp; UML</h1>
 
-<p>二、Abstract Factory，抽象工厂：提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们的具体类。</p>
+<p>➊ 上网翻墙</p>
 
-<p>三、Factory Method，工厂方法：定义一个用于创建对象的接口，让子类决定实例化哪一个类，Factory Method使一个类的实例化延迟到了子类。</p>
+<p>➋ 公司内网代理</p>
 
-<p>四、Builder，建造模式：将一个复杂对象的构建与他的表示相分离，使得同样的构建过程可以创建不同的表示。</p>
+<p>➌ 明星经纪人</p>
 
-<p>五、Prototype，原型模式：用原型实例指定创建对象的种类，并且通过拷贝这些原型来创建新的对象。</p>
+<div class="rd">
+    <img src="/assets/images/2019/4-5-6/4-29-1.png" alt="" />
+</div>
 
-<p>行为型有：</p>
+<h1 id="proxy-代码">Proxy 代码</h1>
 
-<p>六、Iterator，迭代器模式：提供一个方法顺序访问一个聚合对象的各个元素，而又不需要暴露该对象的内部表示。</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">RealImg</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">fileName</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">loadFromDisk</span><span class="p">();</span> <span class="c1">// 初始化即从硬盘中加载，模拟</span>
+	<span class="p">}</span>
+	<span class="nx">display</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'display...'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">fileName</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">loadFromDisk</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'loading...'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">fileName</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-<p>七、Observer，观察者模式：定义对象间一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知自动更新。</p>
+<span class="kd">class</span> <span class="nx">ProxyImg</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">realImg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RealImg</span><span class="p">(</span><span class="nx">fileName</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">display</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">realImg</span><span class="p">.</span><span class="nx">display</span><span class="p">();</span>
+	<span class="p">}</span>
+<span class="p">}</span>
 
-<p>八、Template Method，模板方法：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中，TemplateMethod使得子类可以不改变一个算法的结构即可以重定义该算法得某些特定步骤。     九、Command，命令模式：将一个请求封装为一个对象，从而使你可以用不同的请求对客户进行参数化，对请求排队和记录请求日志，以及支持可撤销的操作。     十、State，状态模式：允许对象在其内部状态改变时改变他的行为。对象看起来似乎改变了他的类。</p>
+<span class="c1">// 测试</span>
+<span class="kd">let</span> <span class="nx">proxyImg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ProxyImg</span><span class="p">(</span><span class="s1">'1.png'</span><span class="p">);</span>
+<span class="nx">proxyImg</span><span class="p">.</span><span class="nx">display</span><span class="p">();</span>
+</code></pre></div></div>
 
-<p>十一、Strategy，策略模式：定义一系列的算法，把他们一个个封装起来，并使他们可以互相替换，本模式使得算法可以独立于使用它们的客户。</p>
+<h1 id="proxy-场景">Proxy 场景</h1>
 
-<p>十二、China of Responsibility，职责链模式：使多个对象都有机会处理请求，从而避免请求的送发者和接收者之间的耦合关系</p>
+<p>➊ 网页事件代理</p>
 
-<p>十三、Mediator，中介者模式：用一个中介对象封装一些列的对象交互。</p>
+<p>➋ jq 的 proxy</p>
 
-<p>十四、Visitor，访问者模式：表示一个作用于某对象结构中的各元素的操作，它使你可以在不改变各元素类的前提下定义作用于这个元素的新操作。</p>
+<p>➌ ES6 Proxy</p>
 
-<p>十五、Interpreter，解释器模式：给定一个语言，定义他的文法的一个表示，并定义一个解释器，这个解释器使用该表示来解释语言中的句子。</p>
+<p>➍ 浏览器跨域</p>
 
-<p>十六、Memento，备忘录模式：在不破坏对象的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。</p>
+<h2 id="网页事件代理-web-event">网页事件代理-Web Event</h2>
 
-<p>结构型有：</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"demo"</span><span class="o">&gt;</span>
+	<span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a1</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span>	<span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a2</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span>	<span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a3</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span>	<span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a4</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">button</span><span class="o">&gt;</span><span class="err">点击增加一个</span> <span class="nx">a</span> <span class="err">标签</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+	<span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
+	<span class="nx">demo</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">nodeName</span> <span class="o">===</span> <span class="s1">'A'</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">alert</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">})</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
 
-<p>十七、Composite，组合模式：将对象组合成树形结构以表示部分整体的关系，Composite使得用户对单个对象和组合对象的使用具有一致性。</p>
+<h2 id="es6-proxy">ES6 Proxy</h2>
 
-<p>十八、Facade，外观模式：为子系统中的一组接口提供一致的界面，fa?ade提供了一高层接口，这个接口使得子系统更容易使用。</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 明星</span>
+<span class="kd">let</span> <span class="nx">star</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">name</span><span class="p">:</span> <span class="s1">'张XXX'</span><span class="p">,</span>
+	<span class="na">age</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+	<span class="na">phone</span><span class="p">:</span> <span class="s1">'18300001111'</span>
+<span class="p">}</span>
 
-<p>十九、Proxy，代理模式：为其他对象提供一种代理以控制对这个对象的访问</p>
+<span class="c1">// 经纪人</span>
+<span class="kd">let</span> <span class="nx">agent</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Proxy</span><span class="p">(</span><span class="nx">star</span><span class="p">,</span> <span class="p">{</span>
+	<span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'phone'</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">// 返回经纪人自己的手机号</span>
+			<span class="k">return</span> <span class="s1">'18312341234'</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'price'</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">// 明星不报价，经纪人报价</span>
+			<span class="k">return</span> <span class="mi">120000</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="nx">target</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+	<span class="p">},</span>
+	<span class="na">set</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'customPrice'</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">val</span> <span class="o">&lt;</span> <span class="mi">100000</span><span class="p">)</span> <span class="p">{</span>
+				<span class="c1">// 最低 10W</span>
+				<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'价格太低'</span><span class="p">)</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nx">target</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
+				<span class="k">return</span> <span class="kc">true</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">})</span>
 
-<p>二十、Adapter,适配器模式：将一类的接口转换成客户希望的另外一个接口，Adapter模式使得原本由于接口不兼容而不能一起工作那些类可以一起工作。</p>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">agent</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">agent</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">agent</span><span class="p">.</span><span class="nx">phone</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">agent</span><span class="p">.</span><span class="nx">price</span><span class="p">);</span>
 
-<p>二十一、Decrator，装饰模式：动态地给一个对象增加一些额外的职责，就增加的功能来说，Decorator模式相比生成子类更加灵活。</p>
+<span class="nx">agent</span><span class="p">.</span><span class="nx">customPrice</span> <span class="o">=</span> <span class="mi">150000</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">agent</span><span class="p">.</span><span class="nx">customPrice</span><span class="p">);</span>
+</code></pre></div></div>
 
-<p>二十二、Bridge，桥模式：将抽象部分与它的实现部分相分离，使他们可以独立的变化。</p>
+<h1 id="proxy-设计原则验证">Proxy 设计原则验证</h1>
 
-<p>二十三、Flyweight，享元模式</p>
+<ul>
+  <li>
+    <p>代理类和目标类分离，隔离开目标类和使用者</p>
+  </li>
+  <li>
+    <p>符合开放封闭原则</p>
+  </li>
+</ul>
 
-<h1 id="js常用设计模式">js常用设计模式</h1>
+<h1 id="代理--适配器--装饰器-对比-contrast">代理 &amp; 适配器 &amp; 装饰器 对比-Contrast</h1>
 
-<p>单体模式：</p>
+<h2 id="代理模式-vs-适配器模式">代理模式 VS 适配器模式</h2>
 
-<p>工厂模式:</p>
+<blockquote>
+  <p>适配器模式：提供一个不同的接口（如不同版本的插头）</p>
+</blockquote>
 
-<p>单例模式</p>
+<blockquote>
+  <p>代理模式：提供一模一样的接口</p>
+</blockquote>
 
-<p>观察者模式（发布订阅模式）</p>
+<h2 id="代理模式-vs-装饰器模式">代理模式 VS 装饰器模式</h2>
 
-<p>策略模式</p>
+<blockquote>
+  <p>装饰器模式：扩展功能，原有功能不变且可直接使用</p>
+</blockquote>
 
-<p>模板方式模式</p>
-
-<p>代理模式</p>
-
-<p>外观模式</p>
-
-<h1 id="更多-more">更多-more</h1>
-
-<p><a href="https://www.jianshu.com/p/0f11e7cac87f">https://www.jianshu.com/p/0f11e7cac87f</a></p>
-
-<p><a href="https://www.cnblogs.com/xianyulaodi/p/5827821.html">常用的javascript设计模式</a></p>
-
-<p><a href="https://segmentfault.com/a/1190000011704748">JavaScript常用的5种设计模式</a></p>
-
+<blockquote>
+  <p>代理模式：显示原有功能，但是经过限制或者阉割之后的</p>
+</blockquote>
   
 	</div>
 	<footer class="article-footer clearfix">
@@ -269,7 +352,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#MVVM">MVVM</a>
+  <a href="/tags/#design-pattern">design-pattern</a>
   
   </div>
 
@@ -279,7 +362,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2018/07/24/mvvm-design-pattern" data-title="js设计模式 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2019/04/29/js-design-pattern-proxy" data-title="js设计原则-代理模式 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -291,18 +374,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/framework/2018/07/23/vue-communication" title="vue2.0 父子组件通信 兄弟组件通信">
+ <a href="/js/2019/04/28/js-design-pattern-decorator" title="js设计原则-装饰器模式">
   <strong>上一篇：</strong><br/>
   <span>
-  vue2.0 父子组件通信 兄弟组件通信</span>
+  js设计原则-装饰器模式</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/css/2018/07/25/css-transition-animation"  title="【CSS3】transform转换、transition过渡和animation动画">
+<a href="/js/2019/04/30/js-design-pattern-iterator"  title="js设计原则-迭代器模式">
  <strong>下一篇：</strong><br/> 
- <span>【CSS3】transform转换、transition过渡和animation动画
+ <span>js设计原则-迭代器模式
 </span>
 </a>
 </div>
@@ -358,7 +441,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>73</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>85</sup></a></li>
 		  
 		
 		  
@@ -407,7 +490,7 @@
 			
 		
 			
-				<li><a href="/tags/#MVVM" title="MVVM">MVVM<sup>3</sup></a></li>
+				<li><a href="/tags/#design-pattern" title="design-pattern">design-pattern<sup>15</sup></a></li>
 			
 		
 			

@@ -1,13 +1,21 @@
 ---
 layout: post
+<<<<<<< HEAD:_posts/2019-12-13-vue-pagination-complex.md
 title: vue实现可复用的翻页组件
 tags:
 - vue
 categories: Framework
 description: vue实现可复用的翻页组件
+=======
+title: vue实现的翻页功能-复杂版
+tags:
+- vue
+categories: Framework
+description: vue实现翻页功能
+>>>>>>> 948b9e2905c5280bc2f6dcb7ea9e31055f48caec:_posts/2018-12-13-vue-pagination-complex.md
 ---
 
-# v-pageturning-complex
+# v-pageturning-complex-复杂版
 
 > A Vue.js project
 
