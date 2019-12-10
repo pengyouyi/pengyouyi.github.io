@@ -161,46 +161,58 @@
 		
 		</div>
 		
-		<h1 id="vue2-0-router-route">vue2.0中的$router 和 $route的区别</h1>
+		<h1 id="vue20中的router-和-route的区别">vue2.0中的$router 和 $route的区别</h1>
 
 <p>在控制台中打印 this.$router 和 this.$route</p>
 
 <div class="rd">
-    <img src="/assets/images/2018/10-11-12/12-5-1.png" alt="">
+    <img src="/assets/images/2018/10-11-12/12-5-1.png" alt="" />
 </div>
-
 <div class="rd">
-    <img src="/assets/images/2018/10-11-12/12-5-2.png" alt="">
+    <img src="/assets/images/2018/10-11-12/12-5-2.png" alt="" />
 </div>
 
 <ul>
-<li>1. router为VueRouter实例，想要导航到不同URL，则使用router.push方法</li>
-<li>2. $route为当前router跳转对象，里面可以获取name、path、query、params等</li>
+  <li>
+    <ol>
+      <li>router为VueRouter实例，想要导航到不同URL，则使用router.push方法</li>
+    </ol>
+  </li>
+  <li>
+    <ol>
+      <li>$route为当前router跳转对象，里面可以获取name、path、query、params等</li>
+    </ol>
+  </li>
 </ul>
 
-<h1 id="vue-router-params-query">vue-router传参（params 与 query）的区别</h1>
+<h1 id="vue-router传参params-与-query的区别">vue-router传参（params 与 query）的区别</h1>
 
-<h2 id="params-query">params、query是什么？</h2>
+<h2 id="paramsquery是什么">params、query是什么？</h2>
 
 <ul>
-<li><p>params：/router1/:id ，/router1/123，/router1/789 , 这里的id叫做params</p></li>
-<li><p>query：/router1?id=123 ,/router1?id=456 , 这里的id叫做query。</p></li>
+  <li>
+    <p>params：/router1/:id ，/router1/123，/router1/789 , 这里的id叫做params</p>
+  </li>
+  <li>
+    <p>query：/router1?id=123 ,/router1?id=456 , 这里的id叫做query。</p>
+  </li>
 </ul>
 
-<p><code>传参是this.$router,接收参数是this.$route</code></p>
+<p><code class="highlighter-rouge">传参是this.$router,接收参数是this.$route</code></p>
 
-<h2 id="query">query方式传参和接收参数</h2>
+<h2 id="query方式传参和接收参数">query方式传参和接收参数</h2>
 
 <p>router/index.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">'vue'</span>
-<span class="kr">import</span> <span class="nx">Router</span> <span class="nx">from</span> <span class="s1">'vue-router'</span>
-<span class="kr">import</span> <span class="nx">HelloWorld</span> <span class="nx">from</span> <span class="s1">'@/components/HelloWorld'</span>
-<span class="kr">import</span> <span class="nx">Query</span> <span class="nx">from</span> <span class="s1">'@/components/query'</span>
-<span class="kr">import</span> <span class="nx">Params</span> <span class="nx">from</span> <span class="s1">'@/components/params'</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="s1">'vue'</span>
+<span class="k">import</span> <span class="nx">Router</span> <span class="k">from</span> <span class="s1">'vue-router'</span>
+<span class="k">import</span> <span class="nx">HelloWorld</span> <span class="k">from</span> <span class="s1">'@/components/HelloWorld'</span>
+<span class="k">import</span> <span class="nx">Query</span> <span class="k">from</span> <span class="s1">'@/components/query'</span>
+<span class="k">import</span> <span class="nx">Params</span> <span class="k">from</span> <span class="s1">'@/components/params'</span>
 
 <span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Router</span><span class="p">)</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">({</span>
+<span class="k">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">({</span>
   <span class="na">routes</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="na">path</span><span class="p">:</span> <span class="s1">'/'</span><span class="p">,</span>
@@ -219,7 +231,9 @@
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">})</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="err">传参:</span> 
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">传参</span><span class="p">:</span> 
 <span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
         <span class="na">path</span><span class="p">:</span><span class="s1">'/query'</span>
         <span class="na">query</span><span class="p">:{</span>
@@ -227,26 +241,34 @@
           <span class="na">sex</span><span class="p">:</span> <span class="s1">'female'</span>
         <span class="p">}</span>
       <span class="p">})</span>
-
+  
 <span class="err">接收参数</span><span class="p">:</span>
 <span class="k">this</span><span class="p">.</span><span class="nx">$route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">name</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>跳转之后的地址栏：</p>
 
-<p><code>http://localhost:8080/#/query?name=pyy&amp;sex=female</code></p>
+<p><code class="highlighter-rouge">http://localhost:8080/#/query?name=pyy&amp;sex=female</code></p>
 
-<h4 id="query">query传参，刷新页面</h4>
+<h4 id="query传参刷新页面">query传参，刷新页面</h4>
 
-<p>通过query传参，页面发生跳转后，刷新 <code>http://localhost:8080/#/query?name=pyy&amp;sex=female</code> </p>
+<p>通过query传参，页面发生跳转后，刷新 <code class="highlighter-rouge">http://localhost:8080/#/query?name=pyy&amp;sex=female</code></p>
 
 <ol>
-<li><p>页面url地址仍旧没有发生变化,页面中的内容【this.$route.query.name】也没有发生变化。</p></li>
-<li><p>但是我们可以直接修改url上的参数【<code>http://localhost:8080/#/query?name=pengyouyi</code> 】，使页面中的内容发生变化。</p></li>
-<li><p>我们还可以删除url上的query参数，或者router.push()的时候不传递query中的参数，页面依然可以正常跳转</p></li>
+  <li>
+    <p>页面url地址仍旧没有发生变化,页面中的内容【this.$route.query.name】也没有发生变化。</p>
+  </li>
+  <li>
+    <p>但是我们可以直接修改url上的参数【<code class="highlighter-rouge">http://localhost:8080/#/query?name=pengyouyi</code> 】，使页面中的内容发生变化。</p>
+  </li>
+  <li>
+    <p>我们还可以删除url上的query参数，或者router.push()的时候不传递query中的参数，页面依然可以正常跳转</p>
+  </li>
 </ol>
 
-<h2 id="params">params方式传参和接收参数</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="err">传参:</span> 
+<h2 id="params方式传参和接收参数">params方式传参和接收参数</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">传参</span><span class="p">:</span> 
 <span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
         <span class="na">name</span><span class="p">:</span><span class="s1">'Params'</span>
         <span class="na">params</span><span class="p">:{</span>
@@ -254,29 +276,31 @@
           <span class="na">favorite</span><span class="p">:</span> <span class="s1">'Table Tennis'</span>
         <span class="p">}</span>
       <span class="p">})</span>
-
+  
 <span class="err">接收参数</span><span class="p">:</span>
 <span class="k">this</span><span class="p">.</span><span class="nx">$route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">age</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>跳转之后的地址栏：</p>
 
-<p><code>http://localhost:8080/#/params</code></p>
+<p><code class="highlighter-rouge">http://localhost:8080/#/params</code></p>
 
-<h3 id="params">params设置在路由</h3>
+<h3 id="params设置在路由">params设置在路由</h3>
 
 <p>应用场景：当列表页跳转到详情页的时候。</p>
 
 <p>比如：跳转 /params/:id</p>
 
 <p>router/index.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">'vue'</span>
-<span class="kr">import</span> <span class="nx">Router</span> <span class="nx">from</span> <span class="s1">'vue-router'</span>
-<span class="kr">import</span> <span class="nx">HelloWorld</span> <span class="nx">from</span> <span class="s1">'@/components/HelloWorld'</span>
-<span class="kr">import</span> <span class="nx">Params</span> <span class="nx">from</span> <span class="s1">'@/components/params'</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="s1">'vue'</span>
+<span class="k">import</span> <span class="nx">Router</span> <span class="k">from</span> <span class="s1">'vue-router'</span>
+<span class="k">import</span> <span class="nx">HelloWorld</span> <span class="k">from</span> <span class="s1">'@/components/HelloWorld'</span>
+<span class="k">import</span> <span class="nx">Params</span> <span class="k">from</span> <span class="s1">'@/components/params'</span>
 
 <span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Router</span><span class="p">)</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">({</span>
+<span class="k">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">({</span>
   <span class="na">routes</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="na">path</span><span class="p">:</span> <span class="s1">'/'</span><span class="p">,</span>
@@ -290,9 +314,11 @@
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">})</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>要跳转页面 components/HelloWorld.vue</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;template&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"hello"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h2</span> <span class="err">@</span><span class="na">click=</span><span class="s">"toParams"</span><span class="nt">&gt;</span>to Params<span class="nt">&lt;/h2&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
@@ -300,10 +326,10 @@
 
 <span class="nt">&lt;script&gt;</span>
 <span class="c1">// import router from '@/router';</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
   <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
     <span class="nx">toParams</span><span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// router.push({</span>
+	  <span class="c1">// router.push({</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
         <span class="na">name</span><span class="p">:</span> <span class="s1">'Params'</span><span class="p">,</span>
         <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
@@ -316,10 +342,11 @@
   <span class="p">}</span>
 <span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>跳转之后的地址栏：</p>
 
-<p><code>http://localhost:8080/#/params/20</code></p>
+<p><code class="highlighter-rouge">http://localhost:8080/#/params/20</code></p>
 
 <p><strong>notice:</strong></p>
 
@@ -327,9 +354,9 @@
 
 <p>params一旦设置在路由，params就是路由的一部分，如果这个路由有params传参，但是在跳转的时候没有传这个参数，会导致跳转失败或者页面会没有内容。</p>
 
-<h4 id="query">query传参，刷新页面</h4>
+<h4 id="query传参刷新页面-1">query传参，刷新页面</h4>
 
-<p>params方法传参,在跳转后的页面，刷新 <code>http://localhost:8080/#/params/20</code> </p>
+<p>params方法传参,在跳转后的页面，刷新 <code class="highlighter-rouge">http://localhost:8080/#/params/20</code></p>
 
 <p>url上作为路由的params参数【id】不变，但是页面中获取到的没有在url中使用的其他params参数【age、favorite】刷新会消失数据</p>
 
@@ -337,20 +364,20 @@
 
 <p><a href="https://blog.csdn.net/xr510002594/article/details/84302734">beforeunload这个方法是在页面刷新时触发的，将store中的信息存入localStorage</a></p>
 
-<h2 id="query-params">query方式和params方式区别</h2>
+<h2 id="query方式和params方式区别">query方式和params方式区别</h2>
 
 <ol>
-<li>传参时，push里面：query要用path来引入；params要用name来引入</li>
-<li>url跳转后展示：query 在浏览器地址栏中显示参数【类似于我们ajax中get传参】；params 参数不会在地址栏中显示【类似于post】</li>
-<li>传参时，push里面的参数是否必须：query是拼接在url后面的参数，没有也没关，且query不设置也可以传参；当params参数作为路由的一部分,必须要有。</li>
-<li>刷新时：query不丢失参数；params不会丢失url中使用的参数，但params会丢失没在url中使用的参数。</li>
+  <li>传参时，push里面：query要用path来引入；params要用name来引入</li>
+  <li>url跳转后展示：query 在浏览器地址栏中显示参数【类似于我们ajax中get传参】；params 参数不会在地址栏中显示【类似于post】</li>
+  <li>传参时，push里面的参数是否必须：query是拼接在url后面的参数，没有也没关，且query不设置也可以传参；当params参数作为路由的一部分,必须要有。</li>
+  <li>刷新时：query不丢失参数；params不会丢失url中使用的参数，但params会丢失没在url中使用的参数。</li>
 </ol>
 
 <h1 id="more">more</h1>
 
 <ul>
-<li><a href="https://router.vuejs.org/zh/">https://router.vuejs.org/zh/</a></li>
-<li>完整项目请看github, 项目v-vue-router待上传，地址待添加。。。</li>
+  <li><a href="https://router.vuejs.org/zh/">https://router.vuejs.org/zh/</a></li>
+  <li>完整项目请看github, 项目v-vue-router待上传，地址待添加。。。</li>
 </ul>
   
 	</div>

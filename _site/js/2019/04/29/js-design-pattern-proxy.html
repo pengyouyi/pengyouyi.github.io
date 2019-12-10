@@ -161,16 +161,20 @@
 		
 		</div>
 		
-		<h1 id="proxy">代理模式-Proxy</h1>
+		<h1 id="代理模式-proxy">代理模式-Proxy</h1>
 
-<h1 id="proxy">Proxy 介绍</h1>
+<h1 id="proxy-介绍">Proxy 介绍</h1>
 
 <ul>
-<li><p>使用者<code>无权</code>访问目标对象</p></li>
-<li><p>中间加代理，通过代理做授权和控制</p></li>
+  <li>
+    <p>使用者<code class="highlighter-rouge">无权</code>访问目标对象</p>
+  </li>
+  <li>
+    <p>中间加代理，通过代理做授权和控制</p>
+  </li>
 </ul>
 
-<h1 id="proxy-amp-uml">Proxy 示例 &amp; UML</h1>
+<h1 id="proxy-示例--uml">Proxy 示例 &amp; UML</h1>
 
 <p>➊ 上网翻墙</p>
 
@@ -179,37 +183,39 @@
 <p>➌ 明星经纪人</p>
 
 <div class="rd">
-    <img src="/assets/images/2019/4-5-6/4-29-1.png" alt="">
+    <img src="/assets/images/2019/4-5-6/4-29-1.png" alt="" />
 </div>
 
-<h1 id="proxy">Proxy 代码</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">RealImg</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">fileName</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">loadFromDisk</span><span class="p">();</span> <span class="c1">// 初始化即从硬盘中加载，模拟</span>
-    <span class="p">}</span>
-    <span class="nx">display</span><span class="p">()</span> <span class="p">{</span>
+<h1 id="proxy-代码">Proxy 代码</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">RealImg</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">fileName</span> <span class="o">=</span> <span class="nx">fileName</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">loadFromDisk</span><span class="p">();</span> <span class="c1">// 初始化即从硬盘中加载，模拟</span>
+	<span class="p">}</span>
+	<span class="nx">display</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'display...'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">fileName</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nx">loadFromDisk</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'loading...'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">fileName</span><span class="p">)</span>
-    <span class="p">}</span>
+	<span class="p">}</span>
+	<span class="nx">loadFromDisk</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'loading...'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">fileName</span><span class="p">)</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kr">class</span> <span class="nx">ProxyImg</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">realImg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RealImg</span><span class="p">(</span><span class="nx">fileName</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nx">display</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">realImg</span><span class="p">.</span><span class="nx">display</span><span class="p">();</span>
-    <span class="p">}</span>
+<span class="kd">class</span> <span class="nx">ProxyImg</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">realImg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RealImg</span><span class="p">(</span><span class="nx">fileName</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">display</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">realImg</span><span class="p">.</span><span class="nx">display</span><span class="p">();</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 测试</span>
 <span class="kd">let</span> <span class="nx">proxyImg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ProxyImg</span><span class="p">(</span><span class="s1">'1.png'</span><span class="p">);</span>
 <span class="nx">proxyImg</span><span class="p">.</span><span class="nx">display</span><span class="p">();</span>
-</code></pre></div>
-<h1 id="proxy">Proxy 场景</h1>
+</code></pre></div></div>
+
+<h1 id="proxy-场景">Proxy 场景</h1>
 
 <p>➊ 网页事件代理</p>
 
@@ -219,57 +225,60 @@
 
 <p>➍ 浏览器跨域</p>
 
-<h2 id="web-event">网页事件代理-Web Event</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"demo"</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a1</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a2</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a3</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
-</span>    <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a4</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+<h2 id="网页事件代理-web-event">网页事件代理-Web Event</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"demo"</span><span class="o">&gt;</span>
+	<span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a1</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span>	<span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a2</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span>	<span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a3</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span>	<span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="nx">a4</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="nx">button</span><span class="o">&gt;</span><span class="err">点击增加一个</span> <span class="nx">a</span> <span class="err">标签</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>
 <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-    <span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
-    <span class="nx">demo</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">nodeName</span> <span class="o">===</span> <span class="s1">'A'</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">alert</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">})</span>
+	<span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"demo"</span><span class="p">);</span>
+	<span class="nx">demo</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">nodeName</span> <span class="o">===</span> <span class="s1">'A'</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">alert</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">})</span>
 <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div>
+</span></code></pre></div></div>
+
 <h2 id="es6-proxy">ES6 Proxy</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 明星</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 明星</span>
 <span class="kd">let</span> <span class="nx">star</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="s1">'张XXX'</span><span class="p">,</span>
-    <span class="na">age</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-    <span class="na">phone</span><span class="p">:</span> <span class="s1">'18300001111'</span>
+	<span class="na">name</span><span class="p">:</span> <span class="s1">'张XXX'</span><span class="p">,</span>
+	<span class="na">age</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+	<span class="na">phone</span><span class="p">:</span> <span class="s1">'18300001111'</span>
 <span class="p">}</span>
 
 <span class="c1">// 经纪人</span>
-<span class="kd">let</span> <span class="nx">agent</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">star</span><span class="p">,</span> <span class="p">{</span>
-    <span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'phone'</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// 返回经纪人自己的手机号</span>
-            <span class="k">return</span> <span class="s1">'18312341234'</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'price'</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// 明星不报价，经纪人报价</span>
-            <span class="k">return</span> <span class="mi">120000</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">target</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
-    <span class="p">},</span>
-    <span class="na">set</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'customPrice'</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">val</span> <span class="o">&lt;</span> <span class="mi">100000</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// 最低 10W</span>
-                <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'价格太低'</span><span class="p">)</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nx">target</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
-                <span class="k">return</span> <span class="kc">true</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="kd">let</span> <span class="nx">agent</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Proxy</span><span class="p">(</span><span class="nx">star</span><span class="p">,</span> <span class="p">{</span>
+	<span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'phone'</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">// 返回经纪人自己的手机号</span>
+			<span class="k">return</span> <span class="s1">'18312341234'</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'price'</span><span class="p">)</span> <span class="p">{</span>
+			<span class="c1">// 明星不报价，经纪人报价</span>
+			<span class="k">return</span> <span class="mi">120000</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="nx">target</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+	<span class="p">},</span>
+	<span class="na">set</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="s1">'customPrice'</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">val</span> <span class="o">&lt;</span> <span class="mi">100000</span><span class="p">)</span> <span class="p">{</span>
+				<span class="c1">// 最低 10W</span>
+				<span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">'价格太低'</span><span class="p">)</span>
+			<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+				<span class="nx">target</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
+				<span class="k">return</span> <span class="kc">true</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 <span class="p">})</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">agent</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
@@ -279,30 +288,39 @@
 
 <span class="nx">agent</span><span class="p">.</span><span class="nx">customPrice</span> <span class="o">=</span> <span class="mi">150000</span><span class="p">;</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">agent</span><span class="p">.</span><span class="nx">customPrice</span><span class="p">);</span>
-</code></pre></div>
-<h1 id="proxy">Proxy 设计原则验证</h1>
+</code></pre></div></div>
+
+<h1 id="proxy-设计原则验证">Proxy 设计原则验证</h1>
 
 <ul>
-<li><p>代理类和目标类分离，隔离开目标类和使用者</p></li>
-<li><p>符合开放封闭原则</p></li>
+  <li>
+    <p>代理类和目标类分离，隔离开目标类和使用者</p>
+  </li>
+  <li>
+    <p>符合开放封闭原则</p>
+  </li>
 </ul>
 
-<h1 id="amp-amp-contrast">代理 &amp; 适配器 &amp; 装饰器 对比-Contrast</h1>
+<h1 id="代理--适配器--装饰器-对比-contrast">代理 &amp; 适配器 &amp; 装饰器 对比-Contrast</h1>
 
-<h2 id="vs">代理模式 VS 适配器模式</h2>
+<h2 id="代理模式-vs-适配器模式">代理模式 VS 适配器模式</h2>
 
 <blockquote>
-<p>适配器模式：提供一个不同的接口（如不同版本的插头）</p>
-
-<p>代理模式：提供一模一样的接口</p>
+  <p>适配器模式：提供一个不同的接口（如不同版本的插头）</p>
 </blockquote>
 
-<h2 id="vs">代理模式 VS 装饰器模式</h2>
+<blockquote>
+  <p>代理模式：提供一模一样的接口</p>
+</blockquote>
+
+<h2 id="代理模式-vs-装饰器模式">代理模式 VS 装饰器模式</h2>
 
 <blockquote>
-<p>装饰器模式：扩展功能，原有功能不变且可直接使用</p>
+  <p>装饰器模式：扩展功能，原有功能不变且可直接使用</p>
+</blockquote>
 
-<p>代理模式：显示原有功能，但是经过限制或者阉割之后的</p>
+<blockquote>
+  <p>代理模式：显示原有功能，但是经过限制或者阉割之后的</p>
 </blockquote>
   
 	</div>

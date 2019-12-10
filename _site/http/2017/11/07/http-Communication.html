@@ -161,131 +161,142 @@
 		
 		</div>
 		
-		<h1 id="same-origin-policy">同源策略-Same-origin policy</h1>
+		<h1 id="同源策略-same-origin-policy">同源策略-Same-origin policy</h1>
 
-<h2 id="meaning">含义 - Meaning</h2>
+<h2 id="含义---meaning">含义 - Meaning</h2>
 
 <blockquote>
-<p>协议相同 window.location.protocol<br><br>
-域名相同 window.location.hostname<br><br>
-端口相同 window.location.port  </p>
+  <p>协议相同 window.location.protocol<br />
+域名相同 window.location.hostname<br />
+端口相同 window.location.port</p>
 </blockquote>
 
 <p><a href="http://www.w3school.com.cn/jsref/dom_obj_location.asp">location对象</a></p>
 
 <p>域名、端口、协议，其中任何一个不同都算跨域。</p>
 
-<table><thead>
-<tr>
-<th>URL</th>
-<th>说明</th>
-<th>是否允许通信</th>
-</tr>
-</thead><tbody>
-<tr>
-<td><a href="http://www.a.com/a.js">http://www.a.com/a.js</a> <br/> <a href="http://70.32.92.74/b.js">http://70.32.92.74/b.js</a></td>
-<td>域名和域名对应IP</td>
-<td>不允许</td>
-</tr>
-<tr>
-<td><a href="http://www.a.com/a.js">http://www.a.com/a.js</a> <br/> <a href="http://script.a.com/b.js">http://script.a.com/b.js</a></td>
-<td><a href="http://blog.csdn.net/qq_26744901/article/details/52701116">主域相同，子域不同</a></td>
-<td>不允许</td>
-</tr>
-<tr>
-<td><a href="http://www.a.com/a.js">http://www.a.com/a.js</a> <br/> <a href="http://a.com/b.js">http://a.com/b.js</a></td>
-<td><a href="http://blog.csdn.net/yummy_go/article/details/50675421">同一域名，不同二级域名</a>（同上）</td>
-<td>不允许</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>说明</th>
+      <th>是否允许通信</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>http://www.a.com/a.js <br /> http://70.32.92.74/b.js</td>
+      <td>域名和域名对应IP</td>
+      <td>不允许</td>
+    </tr>
+    <tr>
+      <td>http://www.a.com/a.js <br /> http://script.a.com/b.js</td>
+      <td><a href="http://blog.csdn.net/qq_26744901/article/details/52701116">主域相同，子域不同</a></td>
+      <td>不允许</td>
+    </tr>
+    <tr>
+      <td>http://www.a.com/a.js <br /> http://a.com/b.js</td>
+      <td><a href="http://blog.csdn.net/yummy_go/article/details/50675421">同一域名，不同二级域名</a>（同上）</td>
+      <td>不允许</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>在跨域问题上，域仅仅是通过“URL的首部”来识别，而不会去尝试判断相同的ip地址对应着两个域，或是两个域是否在同一个IP上。</p>
 
-<h2 id="purpose">目的 - purpose</h2>
+<h2 id="目的---purpose">目的 - purpose</h2>
 
 <p>同源政策的目的，是为了保证用户信息的安全，防止恶意的网站窃取数据。</p>
 
-<p>&quot;同源政策&quot;是必需的，否则 Cookie 可以共享，互联网就毫无安全可言了。</p>
+<p>“同源政策”是必需的，否则 Cookie 可以共享，互联网就毫无安全可言了。</p>
 
-<h2 id="limit-range">限制范围 - Limit range</h2>
+<h2 id="限制范围---limit-range">限制范围 - Limit range</h2>
 
 <p>如果非同源，共有三种行为受到限制。</p>
 
-<p>（1） Cookie、LocalStorage 和 IndexDB 无法读取。<br><br>
-（2） DOM 无法获得。<br><br>
-（3） AJAX 请求不能发送。  </p>
+<p>（1） Cookie、LocalStorage 和 IndexDB 无法读取。<br />
+（2） DOM 无法获得。<br />
+（3） AJAX 请求不能发送。</p>
 
-<h1 id="cross-domain-tags">跨域的标签-Cross domain Tags</h1>
+<h1 id="跨域的标签-cross-domain-tags">跨域的标签-Cross domain Tags</h1>
 
-<h2 id="tags">可以跨域的标签-Tags</h2>
-
-<ol>
-<li><code>&lt;img src=xxx&gt;</code></li>
-<li><code>&lt;link href=xxx&gt;</code></li>
-<li><code>&lt;script src=xxx&gt;</code></li>
-<li><code>&lt;iframe&gt;</code></li>
-</ol>
-
-<p>这些标签可以跨域加载资源，而不受同源策略的限制。这些带&quot;src&quot;属性的标签每次加载时，实际上是由浏览器发起了一次GET请求。不同于 XMLHttpRequest 的是，通过src属性加载的资源，浏览器限制了JavaScript的权限，使其不能读、写返回的内容。</p>
-
-<h2 id="use-scenarios">跨域的标签的使用场景-Use scenarios</h2>
+<h2 id="可以跨域的标签-tags">可以跨域的标签-Tags</h2>
 
 <ol>
-<li><code>&lt;img&gt;</code> 用于打点统计，统计网站可能是其他域</li>
-<li><code>&lt;link&gt; &lt;script&gt;</code> 可以使用CDN，CDN的也是其他域</li>
-<li><code>&lt;script&gt;</code> 可以用于JSONP</li>
+  <li><code class="highlighter-rouge">&lt;img src=xxx&gt;</code></li>
+  <li><code class="highlighter-rouge">&lt;link href=xxx&gt;</code></li>
+  <li><code class="highlighter-rouge">&lt;script src=xxx&gt;</code></li>
+  <li><code class="highlighter-rouge">&lt;iframe&gt;</code></li>
 </ol>
 
-<h1 id="avoid">规避同源策略-Avoid</h1>
+<p>这些标签可以跨域加载资源，而不受同源策略的限制。这些带”src”属性的标签每次加载时，实际上是由浏览器发起了一次GET请求。不同于 XMLHttpRequest 的是，通过src属性加载的资源，浏览器限制了JavaScript的权限，使其不能读、写返回的内容。</p>
 
-<p>㊀ document.domain<br><br>
-㊁ window.name<br><br>
-㊂ localtion.hash<br><br>
-㊃ window.postMessage (HTML5)<br><br>
-㊄ JSONP<br><br>
-㊅ Websocket协议<br><br>
-㊆ CORS跨域资源共享（W3C标准，支持跨域通信的AJAX）  </p>
+<h2 id="跨域的标签的使用场景-use-scenarios">跨域的标签的使用场景-Use scenarios</h2>
 
-<h1 id="document-domain">通过修改document.domain来跨子域</h1>
+<ol>
+  <li><code class="highlighter-rouge">&lt;img&gt;</code> 用于打点统计，统计网站可能是其他域</li>
+  <li><code class="highlighter-rouge">&lt;link&gt; &lt;script&gt;</code> 可以使用CDN，CDN的也是其他域</li>
+  <li><code class="highlighter-rouge">&lt;script&gt;</code> 可以用于JSONP</li>
+</ol>
+
+<h1 id="规避同源策略-avoid">规避同源策略-Avoid</h1>
+
+<p>㊀ document.domain<br />
+㊁ window.name<br />
+㊂ localtion.hash<br />
+㊃ window.postMessage (HTML5) <br />
+㊄ JSONP<br />
+㊅ Websocket协议<br />
+㊆ CORS跨域资源共享（W3C标准，支持跨域通信的AJAX）</p>
+
+<h1 id="通过修改documentdomain来跨子域">通过修改document.domain来跨子域</h1>
 
 <p><strong>document.domain跨域原理</strong></p>
 
 <p>如果两个window或者frames包含的脚本可以把domain设置成一样的值，那么就可以规避同源策略，每个window之间可以互相沟通。</p>
 
 <ul>
-<li><p>这种方式也不是一直都有用，因为端口号是在内部保存的，有可能被保存成null。换句话说，example.com的端口号80，在我们更新document.domain属性的时候可能会变成null。为null的端口可能不被认为是80，这主要依赖浏览器实现。  </p></li>
-<li><p>document.domain的设置是有限制的，我们只能把<code>document.domain设置成自身或更高一级的父域</code>，且<code>主域必须相同</code>。例如：a.b.example.com 中某个文档的document.domain 可以设成a.b.example.com、b.example.com 、example.com中的任意一个，但是不可以设成 c.a.b.example.com,因为这是当前域的子域，也不可以设成baidu.com,因为主域已经不相同了。</p></li>
+  <li>
+    <p>这种方式也不是一直都有用，因为端口号是在内部保存的，有可能被保存成null。换句话说，example.com的端口号80，在我们更新document.domain属性的时候可能会变成null。为null的端口可能不被认为是80，这主要依赖浏览器实现。</p>
+  </li>
+  <li>
+    <p>document.domain的设置是有限制的，我们只能把<code class="highlighter-rouge">document.domain设置成自身或更高一级的父域</code>，且<code class="highlighter-rouge">主域必须相同</code>。例如：a.b.example.com 中某个文档的document.domain 可以设成a.b.example.com、b.example.com 、example.com中的任意一个，但是不可以设成 c.a.b.example.com,因为这是当前域的子域，也不可以设成baidu.com,因为主域已经不相同了。</p>
+  </li>
 </ul>
 
 <h2 id="cookie">Cookie</h2>
 
 <p>Cookie 是服务器写入浏览器的一小段信息，只有同源的网页才能共享。但是，两个网页一级域名相同，只是二级域名不同，浏览器允许通过设置document.domain共享 Cookie。</p>
 
-<h2 id="document-domain-cookie">document.domain获取Cookie例子</h2>
+<h2 id="documentdomain获取cookie例子">document.domain获取Cookie例子</h2>
 
 <blockquote>
-<p>场景：A网页是 <a href="http://w1.example.com/a.html">http://w1.example.com/a.html</a> ，B网页是 <a href="http://w2.example.com/b.html">http://w2.example.com/b.html</a> ，那么只要设置相同的document.domain，两个网页就可以共享Cookie。</p>
+  <p>场景：A网页是 http://w1.example.com/a.html ，B网页是 http://w2.example.com/b.html ，那么只要设置相同的document.domain，两个网页就可以共享Cookie。</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">document</span><span class="p">.</span><span class="nx">domain</span> <span class="o">=</span> <span class="s1">'example.com'</span><span class="p">;</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">domain</span> <span class="o">=</span> <span class="s1">'example.com'</span><span class="p">;</span>
+</code></pre></div></div>
+
 <p>A网页通过脚本设置一个 Cookie。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="s2">"test1=hello"</span><span class="p">;</span>
-</code></pre></div>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span> <span class="o">=</span> <span class="s2">"test1=hello"</span><span class="p">;</span>
+</code></pre></div></div>
+
 <p>B网页就可以读到这个 Cookie。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">allCookie</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">;</span>
-</code></pre></div>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">allCookie</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">;</span>
+</code></pre></div></div>
+
 <blockquote>
-<p>document.domain这种方法只适用于 Cookie 和 iframe 窗口，LocalStorage 和 IndexDB 无法通过这种方法.</p>
+  <p>document.domain这种方法只适用于 Cookie 和 iframe 窗口，LocalStorage 和 IndexDB 无法通过这种方法.</p>
 </blockquote>
 
-<h2 id="document-domain-iframe">document.domain + iframe例子</h2>
+<h2 id="documentdomain--iframe例子">document.domain + iframe例子</h2>
 
 <blockquote>
-<p>场景：<a href="http://a.study.cn/a.html">http://a.study.cn/a.html</a> 请求 <a href="http://b.study.cn/b.html">http://b.study.cn/b.html</a></p>
+  <p>场景：http://a.study.cn/a.html 请求 http://b.study.cn/b.html</p>
 </blockquote>
 
 <p>a.html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
 <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -293,12 +304,12 @@
         <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
             <span class="nb">document</span><span class="p">.</span><span class="nx">domain</span> <span class="o">=</span> <span class="s1">'study.cn'</span><span class="p">;</span>
             <span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
-                <span class="kd">var</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">;</span>
+            	<span class="kd">var</span> <span class="nx">iframe</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+            	<span class="kd">var</span> <span class="nx">win</span> <span class="o">=</span> <span class="nx">iframe</span><span class="p">.</span><span class="nx">contentWindow</span><span class="p">;</span>
 
-                <span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">;</span>
-                <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">win</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-
+            	<span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">win</span><span class="p">.</span><span class="nb">document</span><span class="p">;</span>
+            	<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">win</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+            	
                 <span class="nx">alert</span><span class="p">(</span><span class="nx">win</span><span class="p">);</span>
             <span class="p">}</span>
         <span class="nt">&lt;/script&gt;</span>
@@ -307,9 +318,10 @@
     <span class="nt">&lt;iframe</span> <span class="na">id=</span><span class="s">'a'</span> <span class="na">src=</span><span class="s">'http://b.study.cn/b.html'</span> <span class="na">onload=</span><span class="s">'test()'</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>b.html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
 <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -323,25 +335,25 @@
     我是b.study.cn的body
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
-<p>运行效果截图:</p>
+</code></pre></div></div>
 
+<p>运行效果截图:</p>
 <div class="rd">
-    <img src="/assets/images/2017/10-11-12/11-07-1.png" alt="">
+    <img src="/assets/images/2017/10-11-12/11-07-1.png" alt="" />
 </div>
 
 <p>可以通过js访问到iframe中的各种属性和对象.</p>
 
-<p>如果你想在 <a href="http://a.study.cn/a.html">http://a.study.cn/a.html</a> 页面中通过ajax直接请求页面 <a href="http://b.study.cn/b.html">http://b.study.cn/b.html</a> ，即使你设置了相同的document.domain也还是不行的.</p>
+<p>如果你想在 http://a.study.cn/a.html 页面中通过ajax直接请求页面 http://b.study.cn/b.html ，即使你设置了相同的document.domain也还是不行的.</p>
 
 <p><em>解决：如果你想通过ajax的方法去与不同子域的页面交互，除了使用jsonp的方法外，还可以用一个隐藏的iframe来做一个代理。原理就是让这个iframe载入一个与你想要通过ajax获取数据的目标页面处在相同的域的页面，所以这个iframe中的页面是可以正常使用ajax去获取你要的数据的，然后就是通过我们刚刚讲得修改document.domain的方法，让我们能通过js完全控制这个iframe，这样我们就可以让iframe去发送ajax请求，然后收到的数据我们也可以获得了。?????</em></p>
 
 <p><strong>document.domain跨域缺点</strong></p>
 
-<p>1、安全性，当一个站点（b.a.com）被攻击后，另一个站点（c.a.com）会引起安全漏洞。<br><br>
+<p>1、安全性，当一个站点（b.a.com）被攻击后，另一个站点（c.a.com）会引起安全漏洞。<br />
 2、如果一个页面中引入多个iframe，要想能够操作所有iframe，必须都得设置相同domain。</p>
 
-<h1 id="location-hash-iframe">location.hash + iframe</h1>
+<h1 id="locationhash--iframe">location.hash + iframe</h1>
 
 <p><strong>location.hash跨域原理：</strong></p>
 
@@ -350,52 +362,59 @@
 <p><strong>location.hash跨域场景：</strong></p>
 
 <blockquote>
-<p>当前页面A通过iframe或iframe嵌入了跨域的页面B</p>
+  <p>当前页面A通过iframe或iframe嵌入了跨域的页面B</p>
 </blockquote>
 
 <p>父窗口A可以把信息，写入子窗口的片段标识符。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">B</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'iframe'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">B</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'iframe'</span><span class="p">);</span>
 <span class="nx">B</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">B</span><span class="p">.</span><span class="nx">src</span> <span class="o">+</span> <span class="s1">'#'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">;</span>
-</code></pre></div>
-<p>子窗口B通过监听<code>hashchange事件</code>得到通知</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">onhashchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</code></pre></div></div>
+
+<p>子窗口B通过监听<code class="highlighter-rouge">hashchange事件</code>得到通知</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onhashchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
   <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">hash</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>同样的，子窗口也可以改变父窗口的片段标识符。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">parent</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="o">=</span> <span class="nx">target</span> <span class="o">+</span> <span class="s2">"#"</span> <span class="o">+</span> <span class="nx">hash</span><span class="p">;</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">parent</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="o">=</span> <span class="nx">target</span> <span class="o">+</span> <span class="s2">"#"</span> <span class="o">+</span> <span class="nx">hash</span><span class="p">;</span>
+</code></pre></div></div>
+
 <p><strong>location.hash跨域缺点</strong></p>
 
 <p>数据直接暴露在了url中，数据容量和类型都有限等</p>
 
-<h1 id="window-name-iframe">window.name + iframe</h1>
+<h1 id="windowname--iframe">window.name + iframe</h1>
 
 <p><strong>window.name跨域原理：</strong></p>
 
 <p>浏览器窗口有window.name属性。这个属性的最大特点是，</p>
 
-<p>在一个窗口(window)的生命周期内,窗口载入的所有的页面（无论是否同源）都是<code>共享一个window.name</code>的，每个页面对window.name都有读写的权限，</p>
+<p>在一个窗口(window)的生命周期内,窗口载入的所有的页面（无论是否同源）都是<code class="highlighter-rouge">共享一个window.name</code>的，每个页面对window.name都有读写的权限，</p>
 
 <p>window.name是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。</p>
 
 <p><strong>window.name跨域场景：</strong></p>
 
-<p>比如有一个 <a href="http://www.example.com/a.html">www.example.com/a.html</a> 页面,需要通过a.html页面里的js来获取另一个位于不同域上的页面 <a href="http://www.cnblogs.com/data.html">www.cnblogs.com/data.html</a> 里的数据。</p>
+<p>比如有一个 www.example.com/a.html 页面,需要通过a.html页面里的js来获取另一个位于不同域上的页面 www.cnblogs.com/data.html 里的数据。</p>
 
 <p>（1）data.html页面里的代码很简单，就是给当前的window.name设置一个a.html页面想要得到的数据值。</p>
 
 <p>data.html里的代码：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
     <span class="nb">window</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'要传送的内容,所有可以转化成字符串来传递的数据都可以在这里使用，比如可以传递一个JSON数据'</span><span class="p">;</span>
 <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div>
+</span></code></pre></div></div>
+
 <p>那么在a.html页面中，我们怎么把data.html页面载入进来呢？显然我们不能直接在a.html页面中通过改变window.location来载入data.html页面，因为我们想要即使a.html页面不跳转也能得到data.html里的数据。答案就是在a.html页面中使用一个隐藏的iframe来充当一个中间人角色，由iframe去获取data.html的数据，然后a.html再去得到iframe获取到的数据。</p>
 
-<p>充当中间人的iframe想要获取到data.html的通过window.name设置的数据，只需要把这个iframe的src设为 <a href="http://www.cnblogs.com/data.html">www.cnblogs.com/data.html</a> 就行了。然后a.html想要得到iframe所获取到的数据，也就是想要得到iframe的window.name的值，还必须把这个iframe的src设成跟a.html页面同一个域才行，不然根据前面讲的同源策略，a.html是不能访问到iframe里的window.name属性的。</p>
+<p>充当中间人的iframe想要获取到data.html的通过window.name设置的数据，只需要把这个iframe的src设为 www.cnblogs.com/data.html 就行了。然后a.html想要得到iframe所获取到的数据，也就是想要得到iframe的window.name的值，还必须把这个iframe的src设成跟a.html页面同一个域才行，不然根据前面讲的同源策略，a.html是不能访问到iframe里的window.name属性的。</p>
 
 <p>（2）a.html页面的代码：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
 <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
@@ -416,56 +435,65 @@
     <span class="nt">&lt;iframe</span> <span class="na">id =</span><span class="err"> </span><span class="s">"proxy"</span> <span class="na">src=</span><span class="s">"www.cnblogs.com/data.html"</span> <span class="na">style=</span><span class="s">"display:none"</span> <span class="na">onload=</span><span class="s">"getData()"</span><span class="nt">&gt;&lt;/iframe&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>window.name 方法的优缺点</strong></p>
 
 <ul>
-<li>优点: window.name容量很大，可以放置非常长的字符串（2MB）；<br></li>
-<li>缺点: 必须监听子窗口window.name属性的变化，影响网页性能。</li>
+  <li>优点: window.name容量很大，可以放置非常长的字符串（2MB）；</li>
+  <li>缺点: 必须监听子窗口window.name属性的变化，影响网页性能。</li>
 </ul>
 
-<h1 id="html5-window-postmessage">HTML5的window.postMessage</h1>
+<h1 id="html5的windowpostmessage">HTML5的window.postMessage</h1>
 
 <p>HTML5引入了一个全新的API：跨文档通信 API（Cross-document messaging）。</p>
 
-<p>这个API为window对象新增了一个<code>otherWindow.postMessage(message, targetOrigin)</code>方法，允许跨窗口通信，不论这两个窗口是否同源。</p>
+<p>这个API为window对象新增了一个<code class="highlighter-rouge">otherWindow.postMessage(message, targetOrigin)</code>方法，允许跨窗口通信，不论这两个窗口是否同源。</p>
 
 <blockquote>
-<p>调用postMessage方法的window对象是指要接收消息的那一个window对象，即otherWindow: 可以是页面中iframe的contentWindow属性；window.open的返回值；通过name或下标从window.frames取到的值。</p>
+  <p>调用postMessage方法的window对象是指要接收消息的那一个window对象，即otherWindow: 可以是页面中iframe的contentWindow属性；window.open的返回值；通过name或下标从window.frames取到的值。</p>
+</blockquote>
 
-<p>该方法的第一个参数message为要发送的消息，类型只能为字符串；</p>
+<blockquote>
+  <p>该方法的第一个参数message为要发送的消息，类型只能为字符串；</p>
+</blockquote>
 
-<p>第二个参数targetOrigin用来限定接收消息的那个window对象所在的域，如果不想限定域，可以使用通配符 *  。</p>
+<blockquote>
+  <p>第二个参数targetOrigin用来限定接收消息的那个window对象所在的域，如果不想限定域，可以使用通配符 *  。</p>
+</blockquote>
 
-<p>需要接收消息的window对象，可是通过监听自身的<code>message事件</code>来获取传过来的消息，消息内容储存在该事件对象的data属性中。</p>
+<blockquote>
+  <p>需要接收消息的window对象，可是通过监听自身的<code class="highlighter-rouge">message事件</code>来获取传过来的消息，消息内容储存在该事件对象的data属性中。</p>
 </blockquote>
 
 <p><strong>window.postMessage跨域场景：</strong></p>
 
 <blockquote>
-<p><strong>场景一：</strong>A窗口 <a href="http://aaa.com">http://aaa.com</a> 向B窗口 <a href="http://bbb.com">http://bbb.com</a> 发消息。</p>
+  <p><strong>场景一：</strong>A窗口 http://aaa.com 向B窗口 http://bbb.com 发消息。</p>
 </blockquote>
 
 <p>A页面通过postMessage方法发送消息：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">popup</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'http://bbb.com'</span><span class="p">,</span> <span class="s1">'title'</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">popup</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">'http://bbb.com'</span><span class="p">,</span> <span class="s1">'title'</span><span class="p">);</span>
 <span class="nx">popup</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="s1">'Hello World!'</span><span class="p">,</span> <span class="s1">'http://bbb.com'</span><span class="p">);</span>
 <span class="c1">// Bwindow.postMessage('data', 'http://bbb.com');</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>B页面通过message事件监听并接受消息:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>  <span class="c1">// data</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">source</span><span class="p">);</span>  <span class="c1">// Bwindow</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">origin</span><span class="p">);</span>  <span class="c1">// http://aaa.com</span>
 <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>同理，也可以B页面发送消息，然后A页面监听并接受消息。</p>
 
 <blockquote>
-<p><strong>场景二：</strong>a.com/index.html页面 向 b.com/index.html页面 发消息。</p>
+  <p><strong>场景二：</strong>a.com/index.html页面 向 b.com/index.html页面 发消息。</p>
 </blockquote>
 
 <p>a.com/index.html中的代码：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">iframe</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"ifr"</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"b.com/index.html"</span><span class="o">&gt;&lt;</span><span class="sr">/iframe</span><span class="err">&gt;
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">iframe</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"ifr"</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"b.com/index.html"</span><span class="o">&gt;&lt;</span><span class="sr">/iframe</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text/javascript"</span><span class="o">&gt;</span>
 <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">ifr</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'ifr'</span><span class="p">);</span>
@@ -476,23 +504,24 @@
     <span class="nx">win</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="s1">'我是来自a页面的消息'</span><span class="p">,</span> <span class="nx">targetOrigin</span><span class="p">);</span>
 <span class="p">};</span>
 <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div>
+</span></code></pre></div></div>
+
 <p>b.com/index.html中的代码：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">alert</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>运行a页面，就能看到b页面收到了消息</p>
 
 <p><strong>postMessage优缺点</strong></p>
 
 <ul>
-<li>优点：postMessage的使用十分简单，在处理一些和多页面通信、页面与iframe等消息通信的跨域问题时，有着很好的适用性。</li>
-<li>缺点：<a href="https://caniuse.com/#feat=x-doc-messaging">IE11才完全支持</a>、IE10对postMessage的支持有限制</li>
+  <li>优点：postMessage的使用十分简单，在处理一些和多页面通信、页面与iframe等消息通信的跨域问题时，有着很好的适用性。</li>
+  <li>缺点：<a href="https://caniuse.com/#feat=x-doc-messaging">IE11才完全支持</a>、IE10对postMessage的支持有限制</li>
 </ul>
 
 <blockquote>
-<p>通过window.postMessage，读写其他窗口的 LocalStorage 也成为了可能。</p>
+  <p>通过window.postMessage，读写其他窗口的 LocalStorage 也成为了可能。</p>
 </blockquote>
 
 <p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage">https://developer.mozilla.org/zh-CN/docs/Web/API/Window/postMessage</a></p>
@@ -506,46 +535,51 @@
 <p>JSONP包含两部分：回调函数和数据。</p>
 
 <ul>
-<li>回调函数是当响应到来时要放在当前页面被调用的函数。<br></li>
-<li>数据就是传入回调函数中的json数据，也就是回调函数的参数了。<br></li>
+  <li>回调函数是当响应到来时要放在当前页面被调用的函数。</li>
+  <li>数据就是传入回调函数中的json数据，也就是回调函数的参数了。</li>
 </ul>
 
 <p><strong>JSONP跨域步骤</strong></p>
 
-<p>（1）网页通过添加一个script元素，向服务器请求JSON数据，这种做法不受同源政策限制；<br><br>
-（2）服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。<br><br>
-（3）回调函数在当前页面被立即调用，前提是浏览器定义了这个回调函数  </p>
+<p>（1）网页通过添加一个script元素，向服务器请求JSON数据，这种做法不受同源政策限制；<br />
+（2）服务器收到请求后，将数据放在一个指定名字的回调函数里传回来。<br />
+（3）回调函数在当前页面被立即调用，前提是浏览器定义了这个回调函数</p>
 
 <p><strong>JSONP跨域场景：</strong></p>
 
 <blockquote>
-<p>有个a.html页面，它里面的代码需要利用ajax获取一个不同域上的json数据，假设这个json数据地址是 <a href="http://example.com/data.php">http://example.com/data.php</a>,</p>
+  <p>有个a.html页面，它里面的代码需要利用ajax获取一个不同域上的json数据，假设这个json数据地址是 http://example.com/data.php,</p>
 </blockquote>
 
 <p>a.html</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
   <span class="kd">function</span> <span class="nx">dosomething</span><span class="p">(</span><span class="nx">jsondata</span><span class="p">)</span> <span class="p">{</span>
 
   <span class="p">}</span>
 <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"http://example.com/data.php?callback=dosomething"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div>
+</span></code></pre></div></div>
+
 <p>script标签向服务器example.com发出请求。注意，该请求的查询字符串有一个callback参数，用来指定回调函数的名字，这对于JSONP是必需的。</p>
 
-<p>因为是当做一个js文件来引入的，所以 <a href="http://example.com/data.php">http://example.com/data.php</a> 返回的必须是一个能执行的js文件，所以这个页面的php代码可能是这样的:</p>
-<div class="highlight"><pre><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<p>因为是当做一个js文件来引入的，所以 http://example.com/data.php 返回的必须是一个能执行的js文件，所以这个页面的php代码可能是这样的:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
 <span class="nv">$callback</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'callback'</span><span class="p">];</span>  <span class="c1">// 得到回调函数名
 </span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">);</span>  <span class="c1">// 要返回的数据
 </span><span class="k">echo</span> <span class="nv">$callback</span><span class="o">.</span><span class="s1">'('</span><span class="o">.</span><span class="nb">json_encode</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span><span class="o">.</span><span class="s1">')'</span><span class="p">;</span>  <span class="c1">// 输出
 </span><span class="cp">?&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>最终那个页面输出的结果是:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">dosomething</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]);</span>
-</code></pre></div>
-<p>所以通过 <a href="http://example.com/data.php?callback=dosomething">http://example.com/data.php?callback=dosomething</a> 得到的js文件，就是我们之前定义的dosomething函数,并且它的参数就是我们需要的json数据，这样我们就跨域获得了我们需要的数据。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">dosomething</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>所以通过 http://example.com/data.php?callback=dosomething 得到的js文件，就是我们之前定义的dosomething函数,并且它的参数就是我们需要的json数据，这样我们就跨域获得了我们需要的数据。</p>
 
 <p>a.html</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
   <span class="kd">function</span> <span class="nx">dosomething</span><span class="p">(</span><span class="nx">jsondata</span><span class="p">)</span> <span class="p">{</span>
   <span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
@@ -553,19 +587,21 @@
 <span class="nt">&lt;script&gt;</span>
   <span class="nx">dosomething</span><span class="p">([</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">]);</span>
 <span class="nt">&lt;/script&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>由于script元素请求的脚本，直接作为代码运行。这时，只要浏览器定义了dosomething函数，该函数就会立即调用。作为参数的JSON数据被视为JavaScript对象，而不是字符串，因此避免了使用JSON.parse的步骤。</p>
 
-<h2 id="jquery-jsonp">jQuery实现JSONP</h2>
+<h2 id="jquery实现jsonp">jQuery实现JSONP</h2>
 
 <p>1) $.getJSON方法来请求跨域数据：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">//callback后面的?会由jQuery自动生成方法名</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//callback后面的?会由jQuery自动生成方法名</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="s1">'http://www.b.com/getdata?callback=?'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span> <span class="c1">// 处理获得的json数据</span>
 <span class="p">});</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>2) $.ajax方法，指定dataType为jsonp：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'http://www.b.com/getdata?callback=?'</span><span class="p">,</span> <span class="c1">//不指定回调名，可省略callback参数，会由jQuery自动生成</span>
   <span class="na">dataType</span><span class="p">:</span> <span class="s1">'jsonp'</span><span class="p">,</span>
   <span class="na">jsonpCallback</span><span class="p">:</span> <span class="s1">'demo'</span><span class="p">,</span> <span class="c1">//可省略</span>
@@ -573,30 +609,32 @@
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">msg</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">});</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>JSONP跨域优缺点</strong></p>
 
 <ul>
-<li>优点：JSONP是服务器与客户端跨源通信的常用方法。最大特点就是简单适用，老式浏览器全部支持。<br></li>
-<li>缺点：<br></li>
-<li>1、JSONP只支持GET请求;<br></li>
-<li>2、JSONP只支持跨域HTTP请求这种情况,不能解决不同域的两个页面之间如何进行JavaScript调用的问题;<br></li>
-<li>3、要确定jsonp请求是否失败并不容易,回调函数调用失败，浏览器会以静默失败的方式处理<br></li>
-<li>4、安全问题(请求代码中可能存在安全隐患)<br></li>
+  <li>优点：JSONP是服务器与客户端跨源通信的常用方法。最大特点就是简单适用，老式浏览器全部支持。</li>
+  <li>缺点：</li>
+  <li>1、JSONP只支持GET请求;</li>
+  <li>2、JSONP只支持跨域HTTP请求这种情况,不能解决不同域的两个页面之间如何进行JavaScript调用的问题;</li>
+  <li>3、要确定jsonp请求是否失败并不容易,回调函数调用失败，浏览器会以静默失败的方式处理</li>
+  <li>4、安全问题(请求代码中可能存在安全隐患)</li>
 </ul>
 
-<h1 id="websocket">WebSocket通信协议</h1>
+<h1 id="websocket通信协议">WebSocket通信协议</h1>
 
 <p><strong>webSocket跨域原理：</strong></p>
 
-<p>WebSocket是一种通信协议，使用ws://（非加密）和wss://（加密）作为协议前缀。该协议<code>不实行同源政策</code>，只要服务器支持，就可以通过它进行跨源通信。</p>
+<p>WebSocket是一种通信协议，使用ws://（非加密）和wss://（加密）作为协议前缀。该协议<code class="highlighter-rouge">不实行同源政策</code>，只要服务器支持，就可以通过它进行跨源通信。</p>
 
 <p><strong>webSocket跨域实现步骤：</strong></p>
 
 <p>在JS创建了webSocket之后，会有一个HTTP请求发送到浏览器以发起连接。取得服务器响应后，建立的连接会使用HTTP升级从HTTP协议交换为webSockt协议。</p>
 
 <p>浏览器发出的WebSocket请求的头信息</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html">GET /chat HTTP/1.1
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /chat HTTP/1.1
 Host: server.example.com
 Upgrade: websocket
 Connection: Upgrade
@@ -604,18 +642,22 @@ Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
 Sec-WebSocket-Protocol: chat, superchat
 Sec-WebSocket-Version: 13
 Origin: http://example.com
-</code></pre></div>
-<p>上面代码中，有一个字段是Origin，表示该请求的<code>请求源（origin）</code>，即发自哪个域名。</p>
+</code></pre></div></div>
 
-<p>正是因为有了Origin这个字段，所以WebSocket才没有实行同源政策。因为服务器可以根据这个字段，判断是否许可本次通信。如果该域名在<code>白名单</code>内，服务器就会做出如下回应。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html">HTTP/1.1 101 Switching Protocols
+<p>上面代码中，有一个字段是Origin，表示该请求的<code class="highlighter-rouge">请求源（origin）</code>，即发自哪个域名。</p>
+
+<p>正是因为有了Origin这个字段，所以WebSocket才没有实行同源政策。因为服务器可以根据这个字段，判断是否许可本次通信。如果该域名在<code class="highlighter-rouge">白名单</code>内，服务器就会做出如下回应。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 101 Switching Protocols
 Upgrade: websocket
 Connection: Upgrade
 Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
 Sec-WebSocket-Protocol: chat
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>WebSocket客户端示例</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"wss://echo.websocket.org"</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">"wss://echo.websocket.org"</span><span class="p">);</span>
 
 <span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span> 
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Connection open ..."</span><span class="p">);</span> 
@@ -630,110 +672,117 @@ Sec-WebSocket-Protocol: chat
 <span class="nx">ws</span><span class="p">.</span><span class="nx">onclose</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Connection closed."</span><span class="p">);</span>
 <span class="p">};</span> 
-</code></pre></div>
+</code></pre></div></div>
+
 <p><a href="http://www.ruanyifeng.com/blog/2017/05/websocket.html">http://www.ruanyifeng.com/blog/2017/05/websocket.html</a></p>
 
-<h1 id="w3c-cors">W3C的CORS跨域资源共享</h1>
+<h1 id="w3c的cors跨域资源共享">W3C的CORS跨域资源共享</h1>
 
 <p><strong>CORS原理</strong></p>
 
-<p>&quot;跨域资源共享&quot;（Cross-origin resource sharing）。它是W3C标准，是跨源AJAX请求的根本解决方法。</p>
+<p>“跨域资源共享”（Cross-origin resource sharing）。它是W3C标准，是跨源AJAX请求的根本解决方法。</p>
 
-<p>CORS使用了一个新的<code>Origin请求头</code>和一个新的<code>Access-Control-Allow-Origin响应头</code>扩展了HTTP。</p>
+<p>CORS使用了一个新的<code class="highlighter-rouge">Origin请求头</code>和一个新的<code class="highlighter-rouge">Access-Control-Allow-Origin响应头</code>扩展了HTTP。</p>
 
 <p>整个CORS通信过程，都是浏览器自动完成，不需要用户参与。对于开发者来说，CORS通信与同源的AJAX通信没有差别，代码完全一样。浏览器一旦发现AJAX请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求，但用户不会有感觉。</p>
 
-<p>因此，实现CORS通信的关键是服务器。只要<code>服务器实现了CORS接口</code>，就可以跨源通信。</p>
+<p>因此，实现CORS通信的关键是服务器。只要<code class="highlighter-rouge">服务器实现了CORS接口</code>，就可以跨源通信。</p>
 
 <blockquote>
-<p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。</p>
+  <p>浏览器将CORS请求分成两类：简单请求（simple request）和非简单请求（not-so-simple request）。</p>
 </blockquote>
 
 <p><strong>CORS简单请求的基本流程</strong></p>
 
 <p>浏览器发现这次跨源AJAX请求是简单请求，就自动在头信息之中，添加一个Origin字段。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">GET</span> <span class="o">/</span><span class="nx">cors</span> <span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
-<span class="nl">Origin</span><span class="p">:</span> <span class="nl">http</span><span class="p">:</span><span class="c1">//api.bob.com</span>
-<span class="nl">Host</span><span class="p">:</span> <span class="nx">api</span><span class="p">.</span><span class="nx">alice</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">Accept</span><span class="o">-</span><span class="nx">Language</span><span class="err">:</span> <span class="nx">en</span><span class="o">-</span><span class="nx">US</span>
-<span class="nl">Connection</span><span class="p">:</span> <span class="nx">keep</span><span class="o">-</span><span class="nx">alive</span>
-<span class="nx">User</span><span class="o">-</span><span class="nx">Agent</span><span class="err">:</span> <span class="nx">Mozilla</span><span class="o">/</span><span class="mf">5.0</span><span class="p">...</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">GET</span> <span class="o">/</span><span class="nx">cors</span> <span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="nx">Origin</span><span class="p">:</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//api.bob.com</span>
+<span class="nx">Host</span><span class="p">:</span> <span class="nx">api</span><span class="p">.</span><span class="nx">alice</span><span class="p">.</span><span class="nx">com</span>
+<span class="nx">Accept</span><span class="o">-</span><span class="nx">Language</span><span class="p">:</span> <span class="nx">en</span><span class="o">-</span><span class="nx">US</span>
+<span class="nx">Connection</span><span class="p">:</span> <span class="nx">keep</span><span class="o">-</span><span class="nx">alive</span>
+<span class="nx">User</span><span class="o">-</span><span class="nx">Agent</span><span class="p">:</span> <span class="nx">Mozilla</span><span class="o">/</span><span class="mf">5.0</span><span class="p">...</span>
+</code></pre></div></div>
+
 <p>Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端口）。服务器根据这个值，决定是否同意这次请求。</p>
 
 <p>服务器端对于CORS的支持，通过设置Access-Control-Allow-Origin头标识哪些站点可以请求文件。如果浏览器检测到相应的设置，就可以允许Ajax进行跨域的访问。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Origin</span><span class="err">:</span> <span class="nx">http</span><span class="err">:</span><span class="c1">//api.bob.com</span>
-<span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Credentials</span><span class="err">:</span> <span class="kc">true</span>
-<span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Expose</span><span class="o">-</span><span class="nx">Headers</span><span class="err">:</span> <span class="nx">FooBar</span>
-<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="err">:</span> <span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">;</span> <span class="nx">charset</span><span class="o">=</span><span class="nx">utf</span><span class="o">-</span><span class="mi">8</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Origin</span><span class="p">:</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//api.bob.com</span>
+<span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Allow</span><span class="o">-</span><span class="nx">Credentials</span><span class="p">:</span> <span class="kc">true</span>
+<span class="nx">Access</span><span class="o">-</span><span class="nx">Control</span><span class="o">-</span><span class="nx">Expose</span><span class="o">-</span><span class="nx">Headers</span><span class="p">:</span> <span class="nx">FooBar</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="p">:</span> <span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">;</span> <span class="nx">charset</span><span class="o">=</span><span class="nx">utf</span><span class="o">-</span><span class="mi">8</span>
+</code></pre></div></div>
+
 <p><strong>CORS具体例子</strong></p>
 
 <p>平时的ajax请求:</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
     <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
     <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span> <span class="s2">"/damonare"</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>
     <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
 <span class="nt">&lt;/script&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>使用CORS的Ajax代码：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
     <span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
     <span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"￼GET"</span><span class="p">,</span> <span class="s2">"http://segmentfault.com/u/trigkit4/"</span><span class="p">,</span><span class="kc">true</span><span class="p">);</span>
     <span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
 <span class="nt">&lt;/script&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>代码与之前的区别就在于相对路径换成了其他域的绝对路径，也就是你要跨域访问的接口地址。</p>
 
 <p><strong>CORS跨域优缺点</strong></p>
 
 <ul>
-<li>优点：CORS支持所有类型的HTTP请求,CORS与JSONP相比，无疑更为先进、方便和可靠。<br></li>
-<li>缺点：CORS需要浏览器和服务器同时支持。IE浏览器不能低于IE10。</li>
+  <li>优点：CORS支持所有类型的HTTP请求,CORS与JSONP相比，无疑更为先进、方便和可靠。</li>
+  <li>缺点：CORS需要浏览器和服务器同时支持。IE浏览器不能低于IE10。</li>
 </ul>
 
 <p><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
 
-<h1 id="all">总结-all</h1>
+<h1 id="总结-all">总结-all</h1>
 
 <p>在不同域的文档之间传输数据,前端的方式:</p>
 
 <p>对于主域相同，子域不同的父子窗口通信</p>
 
 <ul>
-<li>document.domain + iframe, ①获取document.cookie; ②获取子iframe.contentWindow<br></li>
+  <li>document.domain + iframe, ①获取document.cookie; ②获取子iframe.contentWindow</li>
 </ul>
 
 <p>对于完全不同源的网站，有三种方法可以解决跨域窗口的通信问题。</p>
 
 <ul>
-<li>location.hash + iframe，子窗口监听hashchange事件得到消息<br></li>
-<li>window.name + iframe, 同窗口的页面共享window.name，父窗口监听子窗口window.name属性的变化得到消息<br></li>
-<li>otherWindow.postMessage(message, targetOrigin) + iframe，子iframe监听message事件来获取父页面传过来的消息<br></li>
+  <li>location.hash + iframe，子窗口监听hashchange事件得到消息</li>
+  <li>window.name + iframe, 同窗口的页面共享window.name，父窗口监听子窗口window.name属性的变化得到消息</li>
+  <li>otherWindow.postMessage(message, targetOrigin) + iframe，子iframe监听message事件来获取父页面传过来的消息</li>
 </ul>
 
-<p><hr></p>
+<hr />
 
 <p>规避AJAX同源限制:</p>
 
 <ul>
-<li>JSONP - 前后端结合：script.src发请求，callbackFn(data)<br></li>
-<li>WebSocket - 协议不实行同源政策，Origin请求头，服务器白名单<br></li>
-<li>CORS跨域资源共享  - 纯后端方式: 浏览器自动添加Origin，服务器设置Access-Control-Allow-Origin白名单<br></li>
+  <li>JSONP - 前后端结合：script.src发请求，callbackFn(data)</li>
+  <li>WebSocket - 协议不实行同源政策，Origin请求头，服务器白名单</li>
+  <li>CORS跨域资源共享  - 纯后端方式: 浏览器自动添加Origin，服务器设置Access-Control-Allow-Origin白名单</li>
 </ul>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Same-origin_policy">https://en.wikipedia.org/wiki/Same-origin_policy</a><br></li>
-<li><a href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">浏览器同源政策及其规避方法-阮一峰</a><br></li>
-<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy</a><br></li>
-<li><a href="http://www.jianshu.com/p/beb059c43a8b">https://en.wikipedia.org/wiki/Same-origin_policy 翻译</a><br></li>
-<li><a href="http://m.blog.csdn.net/joyhen/article/details/21631833">前端解决跨域问题的8种方案（最新最全）</a><br></li>
-<li><a href="http://www.cnblogs.com/2050/p/3191744.html">前端的跨域请求方法使用场景及各自的局限性</a><br></li>
-<li><a href="https://mp.weixin.qq.com/s/NOmsbKZsryTUONQj2gBFIA">前端跨域知识总结-前端大全-秦至</a><br></li>
-<li><a href="https://mp.weixin.qq.com/s/Ulh3dq-9eHwbS2ggOcu7jA">JavaScript 跨域总结与解决办法-前端大全-rainman</a></li>
-<li><a href="https://mp.weixin.qq.com/s/G37_ZBIj_WkSpCyTuTpg3g">那些年，那些跨域问题-前端早读课-金蝶</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Same-origin_policy">https://en.wikipedia.org/wiki/Same-origin_policy</a></li>
+  <li><a href="http://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html">浏览器同源政策及其规避方法-阮一峰</a></li>
+  <li><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy</a></li>
+  <li><a href="http://www.jianshu.com/p/beb059c43a8b">https://en.wikipedia.org/wiki/Same-origin_policy 翻译</a></li>
+  <li><a href="http://m.blog.csdn.net/joyhen/article/details/21631833">前端解决跨域问题的8种方案（最新最全）</a></li>
+  <li><a href="http://www.cnblogs.com/2050/p/3191744.html">前端的跨域请求方法使用场景及各自的局限性</a></li>
+  <li><a href="https://mp.weixin.qq.com/s/NOmsbKZsryTUONQj2gBFIA">前端跨域知识总结-前端大全-秦至</a></li>
+  <li><a href="https://mp.weixin.qq.com/s/Ulh3dq-9eHwbS2ggOcu7jA">JavaScript 跨域总结与解决办法-前端大全-rainman</a></li>
+  <li><a href="https://mp.weixin.qq.com/s/G37_ZBIj_WkSpCyTuTpg3g">那些年，那些跨域问题-前端早读课-金蝶</a></li>
 </ul>
   
 	</div>

@@ -161,27 +161,35 @@
 		
 		</div>
 		
-		<h1 id="factory">工厂模式-Factory</h1>
+		<h1 id="工厂模式-factory">工厂模式-Factory</h1>
 
-<h1 id="factory">Factory 介绍</h1>
+<h1 id="factory-介绍">Factory 介绍</h1>
 
 <p><strong>简单工厂模式（ Simple Factory ）：</strong>又叫静态工厂方法，由一个工厂对象决定创造某一种产品对象的实例。主要用来创造同一类对象。</p>
 
 <ul>
-<li><p>将 new 操作单独封装</p></li>
-<li><p>遇到 new 时，就要考虑是否该使用工厂模式</p></li>
+  <li>
+    <p>将 new 操作单独封装</p>
+  </li>
+  <li>
+    <p>遇到 new 时，就要考虑是否该使用工厂模式</p>
+  </li>
 </ul>
 
-<h1 id="factory-amp-uml">Factory 示例 &amp; UML</h1>
+<h1 id="factory-示例--uml">Factory 示例 &amp; UML</h1>
 
-<h2 id="one">示例 one</h2>
+<h2 id="示例-one">示例 one</h2>
 
 <ul>
-<li><p>你去购买汉堡，直接点餐、取餐，不会自己亲手做</p></li>
-<li><p>商店要“封装”做汉堡的工作，做好直接给买者</p></li>
+  <li>
+    <p>你去购买汉堡，直接点餐、取餐，不会自己亲手做</p>
+  </li>
+  <li>
+    <p>商店要“封装”做汉堡的工作，做好直接给买者</p>
+  </li>
 </ul>
 
-<h2 id="two">示例 two</h2>
+<h2 id="示例-two">示例 two</h2>
 
 <p>比如说体育商品店卖体育器材，里面有很多体育用品，及其相关介绍等。</p>
 
@@ -190,31 +198,32 @@
 <p>你只需要问售货员，他会帮你找到你所想要的东西。</p>
 
 <div class="rd">
-    <img src="/assets/images/2019/4-5-6/4-24-1.png" alt="">
+    <img src="/assets/images/2019/4-5-6/4-24-1.png" alt="" />
 </div>
 
-<h1 id="factory">Factory 代码</h1>
+<h1 id="factory-代码">Factory 代码</h1>
 
-<h2 id="one">代码 one</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Product</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+<h2 id="代码-one">代码 one</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Product</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'init'</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nx">fn1</span><span class="p">()</span> <span class="p">{</span>
+	<span class="p">}</span>
+	<span class="nx">fn1</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'fn1'</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nx">fn2</span><span class="p">()</span> <span class="p">{</span>
+	<span class="p">}</span>
+	<span class="nx">fn2</span><span class="p">()</span> <span class="p">{</span>
 
-    <span class="p">}</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 <span class="c1">// 工厂函数，返回 Product 实例</span>
-<span class="kr">class</span> <span class="nx">Creator</span> <span class="p">{</span>
-    <span class="nx">create</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nx">Product</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="kd">class</span> <span class="nx">Creator</span> <span class="p">{</span>
+	<span class="nx">create</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nx">Product</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 测试</span>
@@ -223,9 +232,11 @@
 <span class="kd">let</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">creator</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">'peng'</span><span class="p">);</span>
 
 <span class="nx">p</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
-</code></pre></div>
-<h2 id="two">代码 two</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 篮球基类</span>
+</code></pre></div></div>
+
+<h2 id="代码-two">代码 two</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 篮球基类</span>
 <span class="kd">var</span> <span class="nx">Basketball</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">intro</span> <span class="o">=</span> <span class="s1">'篮球盛行于美国'</span><span class="p">;</span>
 <span class="p">}</span>
@@ -283,18 +294,20 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">football</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">football</span><span class="p">.</span><span class="nx">intro</span><span class="p">);</span>
 <span class="nx">football</span><span class="p">.</span><span class="nx">getMember</span><span class="p">();</span>
-</code></pre></div>
-<h1 id="factory">Factory 使用场景</h1>
+</code></pre></div></div>
 
-<p>① jQuery - $(&#39;div&#39;)</p>
+<h1 id="factory-使用场景">Factory 使用场景</h1>
+
+<p>① jQuery - $(‘div’)</p>
 
 <p>② React.createElement 创建虚拟dom</p>
 
 <p>③ vue 异步组件</p>
 
-<h2 id="factory-jquery">Factory - jQuery</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">jQuery</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">selector</span><span class="p">){</span>
+<h2 id="factory---jquery">Factory - jQuery</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">jQuery</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">selector</span><span class="p">){</span>
         <span class="kd">let</span> <span class="nx">slice</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">;</span>
         <span class="kd">let</span> <span class="nx">dom</span> <span class="o">=</span> <span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">));</span>
         <span class="kd">let</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">dom</span> <span class="p">?</span> <span class="nx">dom</span><span class="p">.</span><span class="nx">length</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
@@ -305,13 +318,13 @@
         <span class="k">this</span><span class="p">.</span><span class="nx">selector</span> <span class="o">=</span> <span class="nx">selector</span> <span class="o">||</span> <span class="s2">""</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="nx">append</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
-
+    
     <span class="p">}</span>
     <span class="nx">addClass</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-
+    
     <span class="p">}</span>
     <span class="nx">html</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-
+    
     <span class="p">}</span>
     <span class="c1">// 此处省略若干API</span>
 <span class="p">}</span>
@@ -324,29 +337,41 @@
 <span class="kd">var</span> <span class="nx">$p</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$p</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$p</span><span class="p">.</span><span class="nx">addClass</span><span class="p">)</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <ul>
-<li><p>$(&#39;div&#39;) 和 new $(&#39;div&#39;) 有何区别 ？</p></li>
-<li><p>第一：书写麻烦，jQuery 的链式操作将成为噩梦</p></li>
-<li><p>第二：一旦 jQuery 名字变化，将是灾难性的</p></li>
+  <li>
+    <p>$(‘div’) 和 new $(‘div’) 有何区别 ？</p>
+  </li>
+  <li>
+    <p>第一：书写麻烦，jQuery 的链式操作将成为噩梦</p>
+  </li>
+  <li>
+    <p>第二：一旦 jQuery 名字变化，将是灾难性的</p>
+  </li>
 </ul>
 
-<h2 id="factory-react-createelement">Factory - React.createElement</h2>
+<h2 id="factory---reactcreateelement">Factory - React.createElement</h2>
 
 <p><strong>jsx模板</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">profile</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">profile</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"avator.png"</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"profile"</span><span class="o">/&gt;</span>
     <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="p">{[</span><span class="nx">user</span><span class="p">.</span><span class="nx">firstName</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">lastName</span><span class="p">].</span><span class="nx">join</span><span class="p">(</span><span class="s1">' '</span><span class="p">)}</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="sr">/div&gt;</span><span class="err">;
-</span></code></pre></div>
+</span></code></pre></div></div>
+
 <p><strong>编译完成后</strong></p>
-<div class="highlight"><pre><code class="language-" data-lang="">var profile = React.createElement('div', null, 
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var profile = React.createElement('div', null, 
   React.createElement('img', {src: "avator.png", className: "profile"}); 
   React.createElement('h3', null, [user.firstName, user.lastName].join(" "));  
 );
-</code></pre></div>
-<p>React.createElement 函数<code>创建虚拟dom</code></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">Vnode</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<p>React.createElement 函数<code class="highlighter-rouge">创建虚拟dom</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Vnode</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ....</span>
 <span class="p">}</span>
 
@@ -354,21 +379,28 @@
     <span class="c1">// 工厂模式</span>
     <span class="k">return</span> <span class="k">new</span> <span class="nx">Vnode</span><span class="p">(</span><span class="nx">tag</span><span class="p">,</span> <span class="nx">attrs</span><span class="p">,</span> <span class="nx">children</span><span class="p">)</span>
 <span class="p">}</span>
-</code></pre></div>
-<h2 id="factory-vue">Factory - vue 异步组件</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span><span class="p">(</span><span class="s1">'async-example'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<h2 id="factory---vue-异步组件">Factory - vue 异步组件</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span><span class="p">(</span><span class="s1">'async-example'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">resolve</span><span class="p">({</span>
             <span class="na">template</span><span class="p">:</span> <span class="s1">'&lt;div&gt; I am async! &lt;/div&gt;'</span>
         <span class="p">})</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="p">})</span>
-</code></pre></div>
-<h1 id="factory">Factory 设计原则验证</h1>
+</code></pre></div></div>
+
+<h1 id="factory-设计原则验证">Factory 设计原则验证</h1>
 
 <ul>
-<li><p>构造函数和创建者分离</p></li>
-<li><p>符合开放封闭原则</p></li>
+  <li>
+    <p>构造函数和创建者分离</p>
+  </li>
+  <li>
+    <p>符合开放封闭原则</p>
+  </li>
 </ul>
   
 	</div>

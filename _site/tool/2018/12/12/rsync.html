@@ -161,51 +161,56 @@
 		
 		</div>
 		
-		<h1 id="rsync">rsync简介</h1>
+		<h1 id="rsync简介">rsync简介</h1>
 
 <p>Rsync（remote synchronize）是一个远程数据同步工具。</p>
 
 <p>rsync的目的是实现本地主机和远程主机上的文件同步(包括本地推到远程，远程拉到本地两种同步方式)，也可以实现本地不同路径下文件的同步，但不能实现远程路径1到远程路径2之间的同步(scp可以实现)。</p>
 
-<h1 id="rsync">rsync推送代码</h1>
+<h1 id="rsync推送代码">rsync推送代码</h1>
 
 <p>使用rsync将本地代码直接推到服务器上</p>
 
-<h3 id="xshell">Xshell 连接服务器</h3>
+<h3 id="xshell-连接服务器">Xshell 连接服务器</h3>
 
-<p><a href="http://www.sinoricogroup.com/">http://www.sinoricogroup.com/</a>  的服务器地址</p>
+<p>http://www.sinoricogroup.com/  的服务器地址</p>
 
-<p><code>47.52.112.249</code></p>
+<p><code class="highlighter-rouge">47.52.112.249</code></p>
 
-<h3 id="ssh-rsa">服务器设置ssh-rsa</h3>
+<h3 id="服务器设置ssh-rsa">服务器设置ssh-rsa</h3>
 
 <p><strong>将本地电脑的 ~/.ssh/id_rsa.pub 复制到 服务器上去</strong></p>
 
-<p>a. git 执行 <code>cat ~/.ssh/id_rsa.pub</code>, 得到  “ssh-rsa XXX...” 文本</p>
+<p>a. git 执行 <code class="highlighter-rouge">cat ~/.ssh/id_rsa.pub</code>, 得到  “ssh-rsa XXX…” 文本</p>
 
 <p>b. 在Xshell服务器上，</p>
-<div class="highlight"><pre><code class="language-bashe" data-lang="bashe">mkdir ~/.ssh/
+
+<pre><code class="language-bashe">mkdir ~/.ssh/
 touch ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys // 这一步如果不改权限不行
 echo 'ssh-rsa 去掉个人邮箱'
-</code></pre></div>
+</code></pre>
+
 <p>authorized_keys这个文件,如果已经有的话, 就追加到后面, 为了方便不输密码直接rsync</p>
 
-<h3 id="rsync-exe">下载  rsync.exe</h3>
+<h3 id="下载--rsyncexe">下载  rsync.exe</h3>
 
-<p>a. 下载地址：<br>
-<code>http://www2.futureware.at/~nickoe/msys2-mirror/msys/x86_64/rsync-3.1.3-1-x86_64.pkg.tar.xz</code></p>
+<p>a. 下载地址：
+<code class="highlighter-rouge">http://www2.futureware.at/~nickoe/msys2-mirror/msys/x86_64/rsync-3.1.3-1-x86_64.pkg.tar.xz</code></p>
 
 <p>b. 把这个文件解压出来</p>
 
 <p>c. 复制到 /git安装目录/usr/bin 里面</p>
 
-<h3 id="push">本地代码push到服务器</h3>
+<h3 id="本地代码push到服务器">本地代码push到服务器</h3>
 
 <p>git bash打开本地项目 sinorico， 里面执行 </p>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">rsync -avz ./ root@47.52.112.249:/var/www/html/ztrk/
-</code></pre></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rsync -avz ./ root@47.52.112.249:/var/www/html/ztrk/
+</code></pre></div></div>
+
 <h1 id="more">more</h1>
+
   
 	</div>
 	<footer class="article-footer clearfix">

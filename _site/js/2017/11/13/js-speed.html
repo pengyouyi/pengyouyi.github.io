@@ -161,300 +161,329 @@
 		
 		</div>
 		
-		<h1 id="hight-performance">雅虎军规-hight performance</h1>
+		<h1 id="雅虎军规-hight-performance">雅虎军规-hight performance</h1>
 
-<h1 id="content">内容部分-Content</h1>
+<h1 id="内容部分-content">内容部分-Content</h1>
 
-<table><thead>
-<tr>
-<th>内容部分</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>① 减少HTTP请求</td>
-</tr>
-<tr>
-<td>② 减少DNS查询</td>
-</tr>
-<tr>
-<td>③ 避免重定向</td>
-</tr>
-<tr>
-<td>④ 让Ajax可缓存</td>
-</tr>
-<tr>
-<td>⑤ 延迟加载组件</td>
-</tr>
-<tr>
-<td>⑥ 预加载组件</td>
-</tr>
-<tr>
-<td>⑦ 减少DOM元素的数量</td>
-</tr>
-<tr>
-<td>⑧ 跨域分离组件</td>
-</tr>
-<tr>
-<td>⑨ 尽量少用iframe</td>
-</tr>
-<tr>
-<td>⑩ 杜绝404</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>内容部分</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>① 减少HTTP请求</td>
+    </tr>
+    <tr>
+      <td>② 减少DNS查询</td>
+    </tr>
+    <tr>
+      <td>③ 避免重定向</td>
+    </tr>
+    <tr>
+      <td>④ 让Ajax可缓存</td>
+    </tr>
+    <tr>
+      <td>⑤ 延迟加载组件</td>
+    </tr>
+    <tr>
+      <td>⑥ 预加载组件</td>
+    </tr>
+    <tr>
+      <td>⑦ 减少DOM元素的数量</td>
+    </tr>
+    <tr>
+      <td>⑧ 跨域分离组件</td>
+    </tr>
+    <tr>
+      <td>⑨ 尽量少用iframe</td>
+    </tr>
+    <tr>
+      <td>⑩ 杜绝404</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="http-make-fewer-http-requests">减少HTTP请求-Make Fewer HTTP Requests</h2>
+<h2 id="减少http请求-make-fewer-http-requests">减少HTTP请求-Make Fewer HTTP Requests</h2>
 
 <p><strong>性能黄金法则：</strong>只有10%~20%的最终用户响应时间花在接收所请求的HTML文档上，剩下的80%~90%时间花在为HTML文档所引用的组件（图片、脚本、样式表、flash等）进行的HTTP请求上。</p>
 
-<p>⑴ <strong>合并脚本和样式表：</strong>合并js、css都能减少请求数。如果页面间脚本和样式差异很大，合并会更具挑战性。<br><br>
-⑵ <strong>CSS Sprites：</strong>雪碧图可以合并多个背景图片，通过background-image 和 background-position 来显示不同部分。<br><br>
-⑶ <strong><span style="text-decoration:line-through">内联图片</span>：</strong> 使用data: URL模式来把图片嵌入页面，但无需任何额外的HTTP请求。缺点是浏览器支持不好。<br><br>
-⑷ <strong><span style="text-decoration:line-through">图片地图</span>：</strong>合并多个图片到一个图片，一般用于如导航条。由于定义坐标的枯燥和易错，一般<em>不推荐</em>。  </p>
+<p>⑴ <strong>合并脚本和样式表：</strong>合并js、css都能减少请求数。如果页面间脚本和样式差异很大，合并会更具挑战性。<br />
+⑵ <strong>CSS Sprites：</strong>雪碧图可以合并多个背景图片，通过background-image 和 background-position 来显示不同部分。<br />
+⑶ <strong><span style="text-decoration:line-through">内联图片</span>：</strong> 使用data: URL模式来把图片嵌入页面，但无需任何额外的HTTP请求。缺点是浏览器支持不好。<br />
+⑷ <strong><span style="text-decoration:line-through">图片地图</span>：</strong>合并多个图片到一个图片，一般用于如导航条。由于定义坐标的枯燥和易错，一般_不推荐_。</p>
 
-<h2 id="dns-reduce-dns-lookups">减少DNS查询-Reduce DNS Lookups</h2>
+<h2 id="减少dns查询-reduce-dns-lookups">减少DNS查询-Reduce DNS Lookups</h2>
 
 <p>DNS域名系统 (Domain Name System)：负责将域名URL转化为服务器主机IP。</p>
 
-<p><strong>DNS查找流程：</strong><br>
+<p><strong>DNS查找流程：</strong>
 首先查看浏览器缓存是否存在，不存在则访问本机DNS缓存，再不存在则访问本地DNS服务器。所以DNS也是开销，通常浏览器查找一个给定URL的IP地址要花费20-120ms，在DNS查找完成前，浏览器不能从host那里下载任何东西。</p>
 
 <p>DNS查找可以被缓存起来以提高性能。</p>
 
-<h2 id="avoid-redirects">避免重定向-Avoid Redirects</h2>
+<h2 id="避免重定向-avoid-redirects">避免重定向-Avoid Redirects</h2>
 
 <p>重定向：浏览器自动跳转到Location指定的路径。</p>
 
 <p>重定向常用状态码：</p>
 
 <ul>
-<li>301 Moved Permanently 永久重定向<br></li>
-<li>302 Found 临时重定向</li>
+  <li>301 Moved Permanently 永久重定向</li>
+  <li>302 Found 临时重定向</li>
 </ul>
-<div class="highlight"><pre><code class="language-html" data-lang="html">HTTP/1.1 301 Moved Permanently
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP/1.1 301 Moved Permanently
 Location: http://example.com/newuri
 Content-Type: text/html
-</code></pre></div>
+</code></pre></div></div>
+
 <p>重定向对用户看到的来说没有区别，但是对搜索引擎来说有差别</p>
 
 <ul>
-<li>301智能，不会再找原来的域名<br></li>
-<li>302，每次都要找旧地址，再跳新地址<br></li>
+  <li>301智能，不会再找原来的域名</li>
+  <li>302，每次都要找旧地址，再跳新地址</li>
 </ul>
 
 <p><strong>为什么避免重定向？</strong></p>
 
-<p><a href="http://www.a.com">www.a.com</a>   -(请求)&gt;   a.com服务器<br>
-<a href="http://www.a.com">www.a.com</a>   &lt;(新地址b.com)-   a.com服务器</p>
+<p>www.a.com   -(请求)&gt;   a.com服务器
+www.a.com   &lt;(新地址b.com)-   a.com服务器</p>
 
-<p>a.com服务器  -(重定向)&gt;  b.com服务器，<code>增加了HTTP请求</code></p>
+<p>a.com服务器  -(重定向)&gt;  b.com服务器，<code class="highlighter-rouge">增加了HTTP请求</code></p>
 
-<p><a href="http://www.a.com">www.a.com</a>   -(请求)&gt;   b.com服务器<br>
-<a href="http://www.a.com">www.a.com</a>   &lt;(下载资源)-   b.com服务器</p>
+<p>www.a.com   -(请求)&gt;   b.com服务器
+www.a.com   &lt;(下载资源)-   b.com服务器</p>
 
 <p>a.com服务器 返回 给客户端重定向内容在头部，body无内容,301 302响应一般不会被缓存</p>
 
-<p>① <code>重定向会拖慢用户体验</code>，在跳转的页面被获取前浏览器没什么能渲染，没什么组件能下载。</p>
+<p>① <code class="highlighter-rouge">重定向会拖慢用户体验</code>，在跳转的页面被获取前浏览器没什么能渲染，没什么组件能下载。</p>
 
 <p>② 为了确保“后退”按钮可以正确地使用，使用标准的 3XXHTTP状态代码；</p>
 
-<p>③ 同域中注意避免反斜杠 “/” 的跳转；URL尾部缺少一个斜线的时候,例如，跳转到 <a href="http://astrology.yahoo.com/astrology">http://astrology.yahoo.com/astrology</a> 会返回一个重定向到 <a href="http://astrology.yahoo.com/astrology/">http://astrology.yahoo.com/astrology/</a> 的301响应</p>
+<p>③ 同域中注意避免反斜杠 “/” 的跳转；URL尾部缺少一个斜线的时候,例如，跳转到 http://astrology.yahoo.com/astrology 会返回一个重定向到 http://astrology.yahoo.com/astrology/ 的301响应</p>
 
 <p>④ 跨域使用 Alias或者 mod_rewirte建立 CNAME（保存一个域名和另外一个域名之间关系的DNS记录）</p>
 
-<h2 id="ajax-make-ajax-cacheable">让Ajax可缓存-Make Ajax Cacheable</h2>
+<h2 id="让ajax可缓存-make-ajax-cacheable">让Ajax可缓存-Make Ajax Cacheable</h2>
 
 <p>提高Ajax性能的方法就是让响应变得可缓存</p>
 
 <ul>
-<li>Gzip组件<br></li>
-<li>减少DNS查找<br></li>
-<li>压缩JavaScript<br></li>
-<li>避免重定向<br></li>
-<li>配置ETags<br></li>
+  <li>Gzip组件</li>
+  <li>减少DNS查找</li>
+  <li>压缩JavaScript</li>
+  <li>避免重定向</li>
+  <li>配置ETags</li>
 </ul>
 
 <p>使用ajax的好处是可以向用户提供很快的反馈，因为它是向后台异步请求数据。但是，这些异步请求不保证用户等待的时间——异步不意味着瞬时。</p>
 
-<h2 id="postload-components">延迟加载组件-Postload Components</h2>
+<h2 id="延迟加载组件-postload-components">延迟加载组件-Postload Components</h2>
 
 <p>什么是页面初始化必须的？剩下的内容和组件可以延迟。</p>
 
 <p>JavaScript是理想的（延迟）候选者，可以切分到onload事件之前和之后。比如拖放的js库可以延迟，因为拖动必须在页面初始化之后。其它可延迟的包括隐藏的内容，折叠起来的图片等等。</p>
 
-<h2 id="preload-components">预加载组件-Preload Components</h2>
+<h2 id="预加载组件-preload-components">预加载组件-Preload Components</h2>
 
 <p>通过预加载你可以利用浏览器的空闲时间来请求你将来会用到的组件。这样当用户访问下一个页面时，你会有更多的组件已经在缓存中，这样会极大加快页面加载。</p>
 
 <p>有几种预加载类型：</p>
 
 <ul>
-<li>无条件预加载：一旦onload触发，你立即获取另外的组件。比如谷歌会在主页这样加载搜索结果页面用到的雪碧图。<br></li>
-<li>有条件预加载：基于用户动作，你推测用户下一步会去哪里并加载相应组件。<br></li>
-<li>预期的预加载：在发布重新设计（的网站）前提前加载。在旧网页预加载新网页的部分组件，那么切换到新网页时就不会是没有任何缓存了。<br></li>
+  <li>无条件预加载：一旦onload触发，你立即获取另外的组件。比如谷歌会在主页这样加载搜索结果页面用到的雪碧图。</li>
+  <li>有条件预加载：基于用户动作，你推测用户下一步会去哪里并加载相应组件。</li>
+  <li>预期的预加载：在发布重新设计（的网站）前提前加载。在旧网页预加载新网页的部分组件，那么切换到新网页时就不会是没有任何缓存了。</li>
 </ul>
 
-<h2 id="dom-reduce-the-number-of-dom-elements">减少DOM元素的数量-Reduce the Number of DOM Elements</h2>
+<h2 id="减少dom元素的数量-reduce-the-number-of-dom-elements">减少DOM元素的数量-Reduce the Number of DOM Elements</h2>
 
 <p>一个复杂的页面意味着要下载更多的字节，而且用JavaScript访问DOM也会更慢。举个例子，想要添加一个事件处理器的时候，循环遍历页面上的500个DOM元素和5000个DOM元素是有区别的。</p>
 
 <p>DOM元素的数量:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'*'</span><span class="p">).</span><span class="nx">length</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'*'</span><span class="p">).</span><span class="nx">length</span>
+</code></pre></div></div>
+
 <p>如果你的页面dom元素很多，那么意味着你可能需要删除无用的内容和标签来优化。</p>
 
-<h2 id="split-components-across-domains">跨域分离组件-Split Components Across Domains</h2>
+<h2 id="跨域分离组件-split-components-across-domains">跨域分离组件-Split Components Across Domains</h2>
 
-<p>分离组件可以最大化并行下载，但要确保只用不超过2-4个域，因为存在DNS查找的代价。例如，可以把HTML和动态内容部署在 <a href="http://www.example.org">www.example.org</a> ，而把静态组件分离到 static1.example.org 和 static2.example.org 。</p>
+<p>分离组件可以最大化并行下载，但要确保只用不超过2-4个域，因为存在DNS查找的代价。例如，可以把HTML和动态内容部署在 www.example.org ，而把静态组件分离到 static1.example.org 和 static2.example.org 。</p>
 
-<h2 id="iframe-minimize-the-number-of-iframes">尽量少用iframe-Minimize the Number of iframes</h2>
+<h2 id="尽量少用iframe-minimize-the-number-of-iframes">尽量少用iframe-Minimize the Number of iframes</h2>
 
 <p>iframe允许html文档被插入到父文档。</p>
 
 <p>&lt;iframe&gt;优点：</p>
 
 <ul>
-<li>帮助解决缓慢的第三方内容的加载，如广告和徽章<br></li>
-<li>安全沙盒<br></li>
-<li>并行下载脚本<br></li>
+  <li>帮助解决缓慢的第三方内容的加载，如广告和徽章</li>
+  <li>安全沙盒</li>
+  <li>并行下载脚本</li>
 </ul>
 
 <p>&lt;iframe&gt;缺点：</p>
 
 <ul>
-<li>即使空的也消耗（资源和时间）<br></li>
-<li>阻塞了页面的onload<br></li>
-<li>非语义化（标签）<br></li>
+  <li>即使空的也消耗（资源和时间）</li>
+  <li>阻塞了页面的onload</li>
+  <li>非语义化（标签）</li>
 </ul>
 
-<h2 id="404-avoid-404s">杜绝404-Avoid 404s</h2>
+<h2 id="杜绝404-avoid-404s">杜绝404-Avoid 404s</h2>
 
 <p>HTTP请求代价高昂，完全没有必要用一个HTTP请求去获取一个无用的响应（比如404 Not Found），只会拖慢用户体验而没有任何好处。</p>
 
 <p>一些网站会有特别的404页面提高用户体验，但也浪费了服务器资源（比如数据库等等）。特别坏的是当链接指向外部js但却得到404结果。这样首先会降低（占用）并行下载数，其次浏览器可能会把404响应体当作js来解析，试图从里面找出可用的东西。</p>
 
-<h1 id="server">服务器-server</h1>
+<h1 id="服务器-server">服务器-server</h1>
 
-<table><thead>
-<tr>
-<th>服务器</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>① 使用CDN（内容分发网络）</td>
-</tr>
-<tr>
-<td>② 添上Expires或者Cache-Control HTTP头</td>
-</tr>
-<tr>
-<td>③ Gzip组件</td>
-</tr>
-<tr>
-<td>④ 配置ETags</td>
-</tr>
-<tr>
-<td>⑤ 尽早清空缓冲区</td>
-</tr>
-<tr>
-<td>⑥ 对Ajax用GET请求</td>
-</tr>
-<tr>
-<td>⑦ 避免图片src属性为空</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>服务器</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>① 使用CDN（内容分发网络）</td>
+    </tr>
+    <tr>
+      <td>② 添上Expires或者Cache-Control HTTP头</td>
+    </tr>
+    <tr>
+      <td>③ Gzip组件</td>
+    </tr>
+    <tr>
+      <td>④ 配置ETags</td>
+    </tr>
+    <tr>
+      <td>⑤ 尽早清空缓冲区</td>
+    </tr>
+    <tr>
+      <td>⑥ 对Ajax用GET请求</td>
+    </tr>
+    <tr>
+      <td>⑦ 避免图片src属性为空</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="cdn-use-a-content-delivery-network">使用CDN内容分发网络-Use a Content Delivery Network</h2>
+<h2 id="使用cdn内容分发网络-use-a-content-delivery-network">使用CDN内容分发网络-Use a Content Delivery Network</h2>
 
 <p>用户与服务器的物理距离对响应时间也有影响。把内容部署在多个地理位置分散的服务器上能让用户更快地载入页面。</p>
 
 <p>终端用户80%到90%的响应时间都花在下载页面组件上了：图片，样式，脚本，Flash等等</p>
 
-<h2 id="expires-cache-control-http">添上Expires或者Cache-Control HTTP头</h2>
+<h2 id="添上expires或者cache-control-http头">添上Expires或者Cache-Control HTTP头</h2>
 
 <ul>
-<li>对于静态组件：通过设置一个遥远的将来时间作为Expires来实现“永不失效”<br></li>
-<li>多余动态组件：用合适的Cache-ControlHTTP头来让浏览器进行条件性的请求</li>
+  <li>对于静态组件：通过设置一个遥远的将来时间作为Expires来实现“永不失效”</li>
+  <li>多余动态组件：用合适的Cache-ControlHTTP头来让浏览器进行条件性的请求</li>
 </ul>
-<div class="highlight"><pre><code class="language-" data-lang="">Expires: Thu, 15 Apr 2010 20:00:00 GMT
-</code></pre></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Expires: Thu, 15 Apr 2010 20:00:00 GMT
+</code></pre></div></div>
+
 <p>注意，如果你设置了Expires头部，当组件更新后，你必须更改文件名。</p>
 
-<h2 id="gzip-gzip-components">Gzip组件-Gzip Components</h2>
+<h2 id="gzip组件-gzip-components">Gzip组件-Gzip Components</h2>
 
 <p>Gzip压缩所有可能的文件类型以来减少文件体积,目前几乎所有浏览器都支持gzip压缩文件的解压.</p>
 
 <p>从HTTP/1.1开始，客户端通过http请求中的Accept-Encoding头部来提示支持的压缩：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">Accept</span><span class="o">-</span><span class="nx">Encoding</span><span class="err">:</span> <span class="nx">gzip</span><span class="p">,</span> <span class="nx">deflate</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Accept</span><span class="o">-</span><span class="nx">Encoding</span><span class="p">:</span> <span class="nx">gzip</span><span class="p">,</span> <span class="nx">deflate</span>
+</code></pre></div></div>
+
 <p>如果服务器看到这个头部，它可能会选用列表中的某个方法压缩响应。服务器通过Content-Encoding头部提示客户端：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">Content</span><span class="o">-</span><span class="nx">Encoding</span><span class="err">:</span> <span class="nx">gzip</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Content</span><span class="o">-</span><span class="nx">Encoding</span><span class="p">:</span> <span class="nx">gzip</span>
+</code></pre></div></div>
+
 <p>gzip一般可减小响应的70%。尽可能去gzip更多（文本）类型的文件。html，脚本，样式，xml和json等等都应该被gzip，而图片，pdf等等不应该被gzip，因为它们本身已被压缩过，gzip它们只是浪费cpu，甚至增加文件大小。</p>
 
-<h2 id="etags-configure-etags">配置ETags-Configure ETags</h2>
+<h2 id="配置etags-configure-etags">配置ETags-Configure ETags</h2>
 
 <p>实体标记（Entity tags，ETag）是服务器和浏览器之间判断浏览器缓存中某个组件是否匹配服务器端原组件的一种机制。实体就是组件：图片，脚本，样式等等。ETag被当作验证实体的比最后更改（last-modified）日期更高效的机制。服务器这样设置组件的ETag：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="nx">OK</span>
-<span class="nx">Last</span><span class="o">-</span><span class="nx">Modified</span><span class="err">:</span> <span class="nx">Tue</span><span class="p">,</span> <span class="mi">12</span> <span class="nx">Dec</span> <span class="mi">2006</span> <span class="mi">03</span><span class="err">:</span><span class="mi">03</span><span class="err">:</span><span class="mi">59</span> <span class="nx">GMT</span>
-<span class="nl">ETag</span><span class="p">:</span> <span class="s2">"10c24bc-4ab-457e1c1f"</span>
-<span class="nx">Content</span><span class="o">-</span><span class="nx">Length</span><span class="err">:</span> <span class="mi">12195</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="nx">OK</span>
+<span class="nx">Last</span><span class="o">-</span><span class="nx">Modified</span><span class="p">:</span> <span class="nx">Tue</span><span class="p">,</span> <span class="mi">12</span> <span class="nx">Dec</span> <span class="mi">2006</span> <span class="mi">03</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">59</span> <span class="nx">GMT</span>
+<span class="nx">ETag</span><span class="p">:</span> <span class="s2">"10c24bc-4ab-457e1c1f"</span>
+<span class="nx">Content</span><span class="o">-</span><span class="nx">Length</span><span class="p">:</span> <span class="mi">12195</span>
+</code></pre></div></div>
+
 <p>之后，如果浏览器要验证组件，它用If-None-Match头部来传ETag给服务器。如果ETag匹配，服务器返回304：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">GET</span> <span class="o">/</span><span class="nx">i</span><span class="o">/</span><span class="nx">yahoo</span><span class="p">.</span><span class="nx">gif</span> <span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
-<span class="nl">Host</span><span class="p">:</span> <span class="nx">us</span><span class="p">.</span><span class="nx">yimg</span><span class="p">.</span><span class="nx">com</span>
-<span class="nx">If</span><span class="o">-</span><span class="nx">Modified</span><span class="o">-</span><span class="nx">Since</span><span class="err">:</span> <span class="nx">Tue</span><span class="p">,</span> <span class="mi">12</span> <span class="nx">Dec</span> <span class="mi">2006</span> <span class="mi">03</span><span class="err">:</span><span class="mi">03</span><span class="err">:</span><span class="mi">59</span> <span class="nx">GMT</span>
-<span class="nx">If</span><span class="o">-</span><span class="nx">None</span><span class="o">-</span><span class="nx">Match</span><span class="err">:</span> <span class="s2">"10c24bc-4ab-457e1c1f"</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">GET</span> <span class="o">/</span><span class="nx">i</span><span class="o">/</span><span class="nx">yahoo</span><span class="p">.</span><span class="nx">gif</span> <span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+<span class="nx">Host</span><span class="p">:</span> <span class="nx">us</span><span class="p">.</span><span class="nx">yimg</span><span class="p">.</span><span class="nx">com</span>
+<span class="nx">If</span><span class="o">-</span><span class="nx">Modified</span><span class="o">-</span><span class="nx">Since</span><span class="p">:</span> <span class="nx">Tue</span><span class="p">,</span> <span class="mi">12</span> <span class="nx">Dec</span> <span class="mi">2006</span> <span class="mi">03</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">59</span> <span class="nx">GMT</span>
+<span class="nx">If</span><span class="o">-</span><span class="nx">None</span><span class="o">-</span><span class="nx">Match</span><span class="p">:</span> <span class="s2">"10c24bc-4ab-457e1c1f"</span>
 <span class="nx">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">304</span> <span class="nx">Not</span> <span class="nx">Modified</span>
-</code></pre></div>
-<h2 id="flush-buffer-early">尽早清空缓冲区-Flush Buffer Early</h2>
+</code></pre></div></div>
+
+<h2 id="尽早清空缓冲区-flush-buffer-early">尽早清空缓冲区-Flush Buffer Early</h2>
 
 <p>当用户请求一个页面，服务器一般要花200-500ms来拼凑整个页面。这段时间，浏览器是空闲的（等数据返回）。在php，有个方法flush()允许你传输部分准备好的html响应给浏览器。这样的话浏览器就可以开始下载组件，而同时后台可以继续生成页面剩下的部分。这种好处更多是在忙碌的后台或轻前端网站可以看到。</p>
 
 <p>一个比较好的flush的位置是在head之后，因为浏览器可以加载其中的样式和脚本文件，而后台继续生成页面剩余部分。</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- css, js --&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- css, js --&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="cp">&lt;?php flush(); ?&gt;</span>
 <span class="nt">&lt;body&gt;</span>
 <span class="c">&lt;!-- content --&gt;</span>
-</code></pre></div>
-<h2 id="ajax-get-use-get-for-ajax-requests">对Ajax用GET请求-Use GET for Ajax Requests</h2>
+</code></pre></div></div>
+
+<h2 id="对ajax用get请求-use-get-for-ajax-requests">对Ajax用GET请求-Use GET for Ajax Requests</h2>
 
 <p>Yahoo! Mail团队发现当使用XMLHttpRequest，POST 被浏览器实现为两步：首先发送头部，然后发送数据。所以使用GET最好，仅用一个TCP包发送（除非cookie太多）。IE的url长度限制是2K,所以如果要发送的数据超过2K就无法使用GET了。</p>
 
 <p>POST但不提交任何数据根GET行为类似，但从语义上讲，获取数据应该用GET，提交数据到服务器用POST。</p>
 
-<h2 id="src-avoid-empty-image-src">避免图片src属性为空-Avoid Empty Image src</h2>
+<h2 id="避免图片src属性为空-avoid-empty-image-src">避免图片src属性为空-Avoid Empty Image src</h2>
 
 <p>html标签：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">""</span><span class="nt">&gt;</span>
-</code></pre></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">""</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
 <p>js：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span> 
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Image</span><span class="p">();</span> 
 <span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>这两种形式都会引起相同的问题：浏览器会向服务器发送另一个请求。</p>
 
 <h1 id="css">css</h1>
 
-<table><thead>
-<tr>
-<th>css</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>① 把样式表放在顶部</td>
-</tr>
-<tr>
-<td>② 避免使用CSS表达式</td>
-</tr>
-<tr>
-<td>③ 选择&lt;link&gt;舍弃@import</td>
-</tr>
-<tr>
-<td>④ 避免使用滤镜</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>css</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>① 把样式表放在顶部</td>
+    </tr>
+    <tr>
+      <td>② 避免使用CSS表达式</td>
+    </tr>
+    <tr>
+      <td>③ 选择&lt;link&gt;舍弃@import</td>
+    </tr>
+    <tr>
+      <td>④ 避免使用滤镜</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="put-stylesheets-at-top">把样式表放在顶部-Put Stylesheets at Top</h2>
+<h2 id="把样式表放在顶部-put-stylesheets-at-top">把样式表放在顶部-Put Stylesheets at Top</h2>
 
 <p>把样式表放到文档的HEAD部分能让页面看起来加载地更快。这是因为把样式表放在head里能让页面逐步渲染。</p>
 
@@ -464,22 +493,24 @@ Content-Type: text/html
 
 <p>HTML规范清楚表明样式应该在&lt;head&gt;里。</p>
 
-<h2 id="css-avoid-css-expressions">避免使用CSS表达式-Avoid CSS Expressions</h2>
+<h2 id="避免使用css表达式-avoid-css-expressions">避免使用CSS表达式-Avoid CSS Expressions</h2>
 
 <p>CSS表达式是强大的（可能也是危险的）设置动态CSS属性的方法。IE5开始支持，IE8开始不赞成使用。例如，背景颜色可以设置成每小时轮换：</p>
-<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">background-color</span><span class="o">:</span> <span class="nt">expression</span><span class="o">(</span> <span class="o">(</span><span class="nt">new</span> <span class="nt">Date</span><span class="o">())</span><span class="nc">.getHours</span><span class="o">()%</span><span class="nt">2</span> <span class="o">?</span> <span class="s1">"#B8D4FF"</span> <span class="o">:</span> <span class="s1">"#F08A00"</span> <span class="o">);</span>
-</code></pre></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">background-color</span><span class="o">:</span> <span class="nt">expression</span><span class="o">(</span> <span class="o">(</span><span class="nt">new</span> <span class="nt">Date</span><span class="o">())</span><span class="nc">.getHours</span><span class="o">()%</span><span class="nt">2</span> <span class="o">?</span> <span class="s1">"#B8D4FF"</span> <span class="o">:</span> <span class="s1">"#F08A00"</span> <span class="o">);</span>
+</code></pre></div></div>
+
 <p>CSS表达式的问题是它们可能比大多数人预期的计算的更频繁。它们不仅在页面载入和调整大小时重新计算，也在滚动页面甚至是用户在页面上移动鼠标时计算。比如在页面上移动鼠标可能轻易计算超过10000次。</p>
 
 <p>要避免CSS表达式计算太多次，可以在它第一次计算后替换成确切值，或者用事件处理函数而不是CSS表达式。</p>
 
-<h2 id="lt-link-gt-import-choose-over-import">选择&lt;link&gt;舍弃@import-Choose <link> Over @import</h2>
+<h2 id="选择link舍弃import-choose--over-import">选择&lt;link&gt;舍弃@import-Choose <link /> Over @import</h2>
 
 <p>前面提到了一个最佳实践：为了实现逐步渲染，CSS应该放在顶部。</p>
 
 <p>在IE中用@import与在底部用&lt;link&gt;效果一样，所以最好不要用它。</p>
 
-<h2 id="avoid-filters">避免使用滤镜-Avoid Filters</h2>
+<h2 id="避免使用滤镜-avoid-filters">避免使用滤镜-Avoid Filters</h2>
 
 <p>IE专有的AlphaImageLoader过滤器用于修复IE7以下版本的半透明真彩色PNG的问题。这个过滤器的问题是它阻止了渲染，并在图片下载时冻结了浏览器。另外它还引起内存消耗，并且它被应用到每个元素而不是每个图片，所以问题（的严重性）翻倍了。</p>
 
@@ -487,38 +518,41 @@ Content-Type: text/html
 
 <h1 id="js">js</h1>
 
-<table><thead>
-<tr>
-<th>js部分</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>① 把脚本放在底部</td>
-</tr>
-<tr>
-<td>② 把JavaScript和CSS放到外面</td>
-</tr>
-<tr>
-<td>③ 压缩JavaScript和CSS</td>
-</tr>
-<tr>
-<td>④ 去除重复脚本</td>
-</tr>
-<tr>
-<td>⑤ 尽量减少DOM访问</td>
-</tr>
-<tr>
-<td>⑥ 用智能的事件处理器</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>js部分</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>① 把脚本放在底部</td>
+    </tr>
+    <tr>
+      <td>② 把JavaScript和CSS放到外面</td>
+    </tr>
+    <tr>
+      <td>③ 压缩JavaScript和CSS</td>
+    </tr>
+    <tr>
+      <td>④ 去除重复脚本</td>
+    </tr>
+    <tr>
+      <td>⑤ 尽量减少DOM访问</td>
+    </tr>
+    <tr>
+      <td>⑥ 用智能的事件处理器</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="put-scripts-at-bottom">把脚本放在底部-Put Scripts at Bottom</h2>
+<h2 id="把脚本放在底部-put-scripts-at-bottom">把脚本放在底部-Put Scripts at Bottom</h2>
 
 <p>脚本引起的问题是它们阻塞了并行下载。HTTP1.1规范建议浏览器每个域名下不要一次下载超过2个组件。如果你的图片分散在不同服务器，那么你能并行下载多个图片。但当脚本在下载，浏览器不会再下载其它组件，即使在不同域名下。</p>
 
 <p>一个替代建议是使用异步脚本。defer属性表明脚本不包含document.write，是提示浏览器继续渲染的线索。不幸的是，Firefox不支持。如果脚本能异步，那么也就可以移动到底部。</p>
 
-<h2 id="javascript-css-make-javascript-and-css-external">把JavaScript和CSS放到外面-Make JavaScript and CSS External</h2>
+<h2 id="把javascript和css放到外面-make-javascript-and-css-external">把JavaScript和CSS放到外面-Make JavaScript and CSS External</h2>
 
 <p>用外部文件可以让页面更快，因为JavaScript和CSS文件会被缓存在浏览器。</p>
 
@@ -526,13 +560,13 @@ Content-Type: text/html
 
 <p>另一方面，如果JavaScript和CSS在外部文件中，并且已经被浏览器缓存起来了，那么我们就成功地把HTML文档变小了，而且还没有增加HTTP请求数。</p>
 
-<h2 id="javascript-css-minify-javascript-and-css">压缩JavaScript和CSS-Minify JavaScript and CSS</h2>
+<h2 id="压缩javascript和css-minify-javascript-and-css">压缩JavaScript和CSS-Minify JavaScript and CSS</h2>
 
 <p>压缩就是删除代码中不必要的字符来减小文件大小，从而提高加载速度。当代码压缩时，注释删除，不需要的空格（空白，换行，tab）也被删除。</p>
 
 <p>除了外部脚本和样式，內连的脚本和样式同样应该被压缩。</p>
 
-<h2 id="remove-duplicate-scripts">去除重复脚本-Remove Duplicate Scripts</h2>
+<h2 id="去除重复脚本-remove-duplicate-scripts">去除重复脚本-Remove Duplicate Scripts</h2>
 
 <p>重复脚本会创建不必要的HTTP请求，执行无用的JavaScript代码，而影响页面性能。</p>
 
@@ -541,19 +575,21 @@ Content-Type: text/html
 <p>除了产生没有意义的HTTP请求之外，多次对脚本求值也会浪费时间。因为无论脚本是否可缓存，在Firefox和IE中都会执行冗余的JavaScript代码。</p>
 
 <p>避免不小心把相同脚本引入两次的一种方法就是在模版系统中实现脚本管理模块。典型的脚本引入方法就是在HTML页面中用SCRIPT标签：</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"menu_1.0.17.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div>
-<h2 id="dom-minimize-dom-access">尽量减少DOM访问-Minimize DOM Access</h2>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"menu_1.0.17.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h2 id="尽量减少dom访问-minimize-dom-access">尽量减少DOM访问-Minimize DOM Access</h2>
 
 <p>用JavaScript访问DOM元素是很慢的，所以，为了让页面反应更迅速，应该：</p>
 
 <ul>
-<li>缓存已访问过的元素的索引<br></li>
-<li>先“离线”更新节点，再把它们添到DOM树上<br></li>
-<li>避免用JavaScript修复布局问题<br></li>
+  <li>缓存已访问过的元素的索引</li>
+  <li>先“离线”更新节点，再把它们添到DOM树上</li>
+  <li>避免用JavaScript修复布局问题</li>
 </ul>
 
-<h2 id="develop-smart-event-handlers">用智能的事件处理器-Develop Smart Event Handlers</h2>
+<h2 id="用智能的事件处理器-develop-smart-event-handlers">用智能的事件处理器-Develop Smart Event Handlers</h2>
 
 <p>有时候感觉页面反映不够灵敏，是因为有太多频繁执行的事件处理器被添加到了DOM树的不同元素上，这就是推荐使用事件委托的原因。如果一个div里面有10个按钮，应该只给div容器添加一个事件处理器，而不是给每个按钮都添加一个。事件能够冒泡，所以可以捕获事件并得知哪个按钮是事件源。</p>
 
@@ -561,126 +597,137 @@ Content-Type: text/html
 
 <h1 id="image">image</h1>
 
-<table><thead>
-<tr>
-<th>图片</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>① 优化图片</td>
-</tr>
-<tr>
-<td>② 优化CSS Sprite</td>
-</tr>
-<tr>
-<td>③ 不要用HTML缩放图片</td>
-</tr>
-<tr>
-<td>④ 用小的可缓存的favicon.ico（P.S. 收藏夹图标）</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>图片</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>① 优化图片</td>
+    </tr>
+    <tr>
+      <td>② 优化CSS Sprite</td>
+    </tr>
+    <tr>
+      <td>③ 不要用HTML缩放图片</td>
+    </tr>
+    <tr>
+      <td>④ 用小的可缓存的favicon.ico（P.S. 收藏夹图标）</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="optimize-images">优化图片-Optimize Images</h2>
+<h2 id="优化图片-optimize-images">优化图片-Optimize Images</h2>
 
 <p>在设计师建好图片后，在上传图片到服务器前你仍可以做些事：</p>
 
 <ul>
-<li>检查gif图片的调色板大小是否匹配图片颜色数。<br></li>
-<li>可以把gif转成png看看有没有变小。除了动画，gif一般可以转成png8。<br></li>
-<li>运行pngcrush或其它工具压缩png。<br></li>
-<li>运行jpegtran或其它工具压缩jpeg。<br></li>
+  <li>检查gif图片的调色板大小是否匹配图片颜色数。</li>
+  <li>可以把gif转成png看看有没有变小。除了动画，gif一般可以转成png8。</li>
+  <li>运行pngcrush或其它工具压缩png。</li>
+  <li>运行jpegtran或其它工具压缩jpeg。</li>
 </ul>
 
-<h2 id="css-sprite-optimize-css-sprites">优化CSS Sprite-Optimize CSS Sprites</h2>
+<h2 id="优化css-sprite-optimize-css-sprites">优化CSS Sprite-Optimize CSS Sprites</h2>
 
 <ul>
-<li>把图片横向合并而不是纵向，横向更小。</li>
-<li>把颜色近似的图片合并到一张雪碧图，这样可以让颜色数更少，如果低于256就可以用png8.</li>
-<li>“对移动端友好”，不要在Sprite图片中留下太大的空隙。这对图片大小影响不是太大，但客户端解压时需要的内存更少。100×100是10000个像素，1000×1000是1000000个像素。</li>
+  <li>把图片横向合并而不是纵向，横向更小。</li>
+  <li>把颜色近似的图片合并到一张雪碧图，这样可以让颜色数更少，如果低于256就可以用png8.</li>
+  <li>“对移动端友好”，不要在Sprite图片中留下太大的空隙。这对图片大小影响不是太大，但客户端解压时需要的内存更少。100×100是10000个像素，1000×1000是1000000个像素。</li>
 </ul>
 
-<h2 id="html-do-not-scale-images-in-html">不要用HTML缩放图片-Do Not Scale Images in HTML</h2>
+<h2 id="不要用html缩放图片-do-not-scale-images-in-html">不要用HTML缩放图片-Do Not Scale Images in HTML</h2>
 
 <p>不要因为你可以设置图片的宽高就去用比你需要的大得多的图片。如果你需要</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;img</span> <span class="na">width=</span><span class="s">"100"</span> <span class="na">height=</span><span class="s">"100"</span> <span class="na">src=</span><span class="s">"mycat.jpg"</span> <span class="na">alt=</span><span class="s">"My Cat"</span> <span class="nt">/&gt;</span> 
-</code></pre></div>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">width=</span><span class="s">"100"</span> <span class="na">height=</span><span class="s">"100"</span> <span class="na">src=</span><span class="s">"mycat.jpg"</span> <span class="na">alt=</span><span class="s">"My Cat"</span> <span class="nt">/&gt;</span> 
+</code></pre></div></div>
+
 <p>那么，就用100x100px的图片，而不是500x500px的。</p>
 
-<h2 id="favicon-ico">用小的可缓存的favicon.ico</h2>
+<h2 id="用小的可缓存的faviconico">用小的可缓存的favicon.ico</h2>
 
 <p>favicon.ico是在你服务器根路径的图片。邪恶的是即使你不关心它，浏览器仍然会请求它。所以最好不要响应404。另外由于在同一服务器，每次请求favicon.ico时也会带上cookie。这个图片还会影响下载顺序，比如在IE，如果你在onload时下载额外的组件，fcvicon会在这些组件之前被下载。</p>
 
 <p>怎么减轻favicon.ico的缺点？</p>
 
 <ul>
-<li>小，最好1K以下<br></li>
-<li>设置Expires头部。也许可以安全地设置为几个月。</li>
+  <li>小，最好1K以下</li>
+  <li>设置Expires头部。也许可以安全地设置为几个月。</li>
 </ul>
 
 <h1 id="cookie">cookie</h1>
 
-<table><thead>
-<tr>
-<th>cookie</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>① 给Cookie减肥</td>
-</tr>
-<tr>
-<td>② 把组件放在不含cookie的域下</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>cookie</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>① 给Cookie减肥</td>
+    </tr>
+    <tr>
+      <td>② 把组件放在不含cookie的域下</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="cookie-reduce-cookie-size">给Cookie减肥-Reduce Cookie Size</h2>
+<h2 id="给cookie减肥-reduce-cookie-size">给Cookie减肥-Reduce Cookie Size</h2>
 
 <p>http cookie的使用有多种原因，比如授权和个性化。cookie的信息通过http头部在浏览器和服务器端交换。尽可能减小cookie的大小来降低响应时间。</p>
 
 <ul>
-<li>消除不必要的cookie。<br></li>
-<li>尽可能减小cookie的大小来降低响应时间。<br></li>
-<li>注意设置cookie到合适的域名级别，以免影响其它子域。<br></li>
-<li>正确设置Expires日期。早一点的Expires日期或者没有会尽早删除cookie，优化响应时间。</li>
+  <li>消除不必要的cookie。</li>
+  <li>尽可能减小cookie的大小来降低响应时间。</li>
+  <li>注意设置cookie到合适的域名级别，以免影响其它子域。</li>
+  <li>正确设置Expires日期。早一点的Expires日期或者没有会尽早删除cookie，优化响应时间。</li>
 </ul>
 
-<h2 id="cookie-use-cookie-free-domains-for-components">把组件放在不含cookie的域下-Use Cookie-Free Domains for Components</h2>
+<h2 id="把组件放在不含cookie的域下-use-cookie-free-domains-for-components">把组件放在不含cookie的域下-Use Cookie-Free Domains for Components</h2>
 
 <p>当浏览器请求静态图片并把cookie一起发送到服务器时，cookie此时对服务器没什么用处。所以这些cookie只是增加了网络流量。所以你应该保证静态组件的请求是没有cookie的。可以创建一个子域名来托管所有静态组件。</p>
 
-<p>比如，你域名是 <a href="http://www.example.org%EF%BC%8C">www.example.org，</a> 可以把静态组件托管在 static.example.org。 不过，你如果把cookie设置在顶级域名 example.org 下，这些cookie仍然会被传给 static.example.org。 这种情况下，启用一个全新的域名来托管静态组件。</p>
+<p>比如，你域名是 www.example.org， 可以把静态组件托管在 static.example.org。 不过，你如果把cookie设置在顶级域名 example.org 下，这些cookie仍然会被传给 static.example.org。 这种情况下，启用一个全新的域名来托管静态组件。</p>
 
 <p>把静态组件部署在不含cookie的域下还有一个好处是,有些代理可能会拒绝缓存带cookie的组件。</p>
 
 <h1 id="mobile">mobile</h1>
 
-<table><thead>
-<tr>
-<th>移动端</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>① 保证所有组件都小于25K</td>
-</tr>
-<tr>
-<td>② 把组件打包到一个复合文档里</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>移动端</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>① 保证所有组件都小于25K</td>
+    </tr>
+    <tr>
+      <td>② 把组件打包到一个复合文档里</td>
+    </tr>
+  </tbody>
+</table>
 
-<h2 id="25k-keep-components-under-25-kb">保证所有组件都小于25K-Keep Components Under 25 KB</h2>
+<h2 id="保证所有组件都小于25k-keep-components-under-25-kb">保证所有组件都小于25K-Keep Components Under 25 KB</h2>
 
 <p>这个限制是因为iPhone不能缓存大于25K的组件，注意这里指的是未压缩的大小。这就是为什么缩减内容本身也很重要，因为单纯的gzip可能不够。</p>
 
-<h2 id="pack-components-into-a-multipart-document">把组件打包到一个复合文档里-Pack Components Into a Multipart Document</h2>
+<h2 id="把组件打包到一个复合文档里-pack-components-into-a-multipart-document">把组件打包到一个复合文档里-Pack Components Into a Multipart Document</h2>
 
 <p>把各个组件打包成一个像有附件的电子邮件一样的复合文档里，可以用一个HTTP请求获取多个组件（记住一点：HTTP请求是代价高昂的）。用这种方式的时候，要先检查用户代理是否支持（iPhone就不支持）</p>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <ul>
-<li><a href="https://developer.yahoo.com/performance/rules.html">https://developer.yahoo.com/performance/rules.html</a><br></li>
-<li><a href="https://github.com/creeperyang/blog/issues/1">https://github.com/creeperyang/blog/issues/1</a><br></li>
-<li><a href="http://www.cnblogs.com/xianyulaodi/p/5755079.html">http://www.cnblogs.com/xianyulaodi/p/5755079.html</a><br></li>
-<li><a href="http://www1.qdfuns.com/blog-5479247-5411024.html">http://www1.qdfuns.com/blog-5479247-5411024.html</a> </li>
+  <li><a href="https://developer.yahoo.com/performance/rules.html">https://developer.yahoo.com/performance/rules.html</a></li>
+  <li><a href="https://github.com/creeperyang/blog/issues/1">https://github.com/creeperyang/blog/issues/1</a></li>
+  <li><a href="http://www.cnblogs.com/xianyulaodi/p/5755079.html">http://www.cnblogs.com/xianyulaodi/p/5755079.html</a></li>
+  <li><a href="http://www1.qdfuns.com/blog-5479247-5411024.html">http://www1.qdfuns.com/blog-5479247-5411024.html</a></li>
 </ul>
   
 	</div>

@@ -161,51 +161,52 @@
 		
 		</div>
 		
-		<h1 id="js">js事件委托</h1>
+		<h1 id="js事件委托">js事件委托</h1>
 
 <h1 id="what-is-event-delegation">what is Event Delegation</h1>
-
-<p>事件就是onclick，onmouseover，onmouseout，等就是事件。<br><br>
-事件委托是指目标元素将自身的响应事件委托给其父级元素来响应。<br><br>
+<p>事件就是onclick，onmouseover，onmouseout，等就是事件。<br />
+事件委托是指目标元素将自身的响应事件委托给其父级元素来响应。<br />
 事件委托的工作原理基于浏览器的冒泡机制。</p>
 
 <h1 id="why-use-event-delegation">why use Event Delegation</h1>
-
 <ol>
-<li><p>在JavaScript中，添加到页面上的事件处理程序数量将直接关系到页面的整体运行性能，因为需要不断的与dom节点进行交互，访问dom的次数越多，引起浏览器重绘与重排的次数也就越多，就会延长整个页面的交互就绪时间，这就是为什么性能优化的主要思想之一就是减少DOM操作的原因；如果要用事件委托，就会将所有的操作放到js程序里面，与dom的操作就只需要交互一次，这样就能大大的减少与dom的交互次数，提高性能；</p></li>
-<li><p>每个函数都是一个对象，是对象就会占用内存，对象越多，内存占用率就越大，自然性能就越差了，比如有100个li，就要占用100个内存空间，如果是1000个，10000个呢？？？如果用事件委托，那么我们就可以只对它的父级（如果只有一个父级）这一个对象进行操作，这样我们就需要一个内存空间就够了，省了很多，自然性能就会更好。</p></li>
+  <li>
+    <p>在JavaScript中，添加到页面上的事件处理程序数量将直接关系到页面的整体运行性能，因为需要不断的与dom节点进行交互，访问dom的次数越多，引起浏览器重绘与重排的次数也就越多，就会延长整个页面的交互就绪时间，这就是为什么性能优化的主要思想之一就是减少DOM操作的原因；如果要用事件委托，就会将所有的操作放到js程序里面，与dom的操作就只需要交互一次，这样就能大大的减少与dom的交互次数，提高性能；</p>
+  </li>
+  <li>
+    <p>每个函数都是一个对象，是对象就会占用内存，对象越多，内存占用率就越大，自然性能就越差了，比如有100个li，就要占用100个内存空间，如果是1000个，10000个呢？？？如果用事件委托，那么我们就可以只对它的父级（如果只有一个父级）这一个对象进行操作，这样我们就需要一个内存空间就够了，省了很多，自然性能就会更好。</p>
+  </li>
 </ol>
 
 <h1 id="how-to-realize-event-delegation">how to realize Event Delegation</h1>
-
 <p>比如要实现，点击每个li，弹出里面的内容</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-6</pre></td><td class="code"><pre><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"list"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item1"</span><span class="nt">&gt;</span>item 1<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item2"</span><span class="nt">&gt;</span>item 2<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item3"</span><span class="nt">&gt;</span>item 3<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item4"</span><span class="nt">&gt;</span>item 4<span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+6
+</pre></td><td class="code"><pre><span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"list"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item1"</span><span class="nt">&gt;</span>item 1<span class="nt">&lt;/li&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item2"</span><span class="nt">&gt;</span>item 2<span class="nt">&lt;/li&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item3"</span><span class="nt">&gt;</span>item 3<span class="nt">&lt;/li&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item4"</span><span class="nt">&gt;</span>item 4<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>一般做法</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="kd">var</span> <span class="nx">oLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">oLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
 
-    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">oLi</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">oLi</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+	<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">oLi</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">oLi</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+			<span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>用事件代理方式</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">oUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"list"</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"list"</span><span class="p">);</span>
 
 <span class="nx">oUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
     <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="nx">e</span> <span class="o">||</span> <span class="nb">window</span><span class="p">.</span><span class="nx">event</span><span class="p">;</span>
@@ -214,54 +215,58 @@
         <span class="nx">alert</span><span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-</code></pre></div>
-<p>现在讲的都是document加载完成的现有dom节点下的操作，那么如果是新增的节点，新增的节点会有事件吗？<br>
+</code></pre></div></div>
+
+<p>现在讲的都是document加载完成的现有dom节点下的操作，那么如果是新增的节点，新增的节点会有事件吗？
 正常的添加节点的方法：</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
 5
 6
-7</pre></td><td class="code"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"btn"</span> <span class="na">value=</span><span class="s">"新增"</span><span class="nt">&gt;</span>
+7
+</pre></td><td class="code"><pre><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">id=</span><span class="s">"btn"</span> <span class="na">value=</span><span class="s">"新增"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">"list"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item1"</span><span class="nt">&gt;</span>item 1<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item2"</span><span class="nt">&gt;</span>item 2<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item3"</span><span class="nt">&gt;</span>item 3<span class="nt">&lt;/li&gt;</span>
-    <span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item4"</span><span class="nt">&gt;</span>item 4<span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+	<span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item1"</span><span class="nt">&gt;</span>item 1<span class="nt">&lt;/li&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item2"</span><span class="nt">&gt;</span>item 2<span class="nt">&lt;/li&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item3"</span><span class="nt">&gt;</span>item 3<span class="nt">&lt;/li&gt;</span>
+	<span class="nt">&lt;li</span> <span class="na">id=</span><span class="s">"item4"</span><span class="nt">&gt;</span>item 4<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>一般的做法</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="kd">var</span> <span class="nx">oUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"list"</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">oBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn"</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">oLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">iNow</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 
-    <span class="c1">//添加新节点</span>
-    <span class="nx">oBtn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-        <span class="nx">iNow</span><span class="o">++</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">aLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
-        <span class="nx">aLi</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">"item "</span> <span class="o">+</span> <span class="nx">iNow</span><span class="p">;</span>
-        <span class="nx">oUl</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">aLi</span><span class="p">);</span>
-    <span class="p">}</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+	<span class="kd">var</span> <span class="nx">oUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"list"</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">oBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn"</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">oLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
+	<span class="kd">var</span> <span class="nx">iNow</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 
-    <span class="c1">//鼠标移入背景变橙色，移出变白</span>
-    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">oLi</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="nx">oLi</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onmouseover</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s2">"#f60"</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="nx">oLi</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onmouseout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+	<span class="c1">//添加新节点</span>
+	<span class="nx">oBtn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+		<span class="nx">iNow</span><span class="o">++</span><span class="p">;</span>
+		<span class="kd">var</span> <span class="nx">aLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
+		<span class="nx">aLi</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">"item "</span> <span class="o">+</span> <span class="nx">iNow</span><span class="p">;</span>
+		<span class="nx">oUl</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">aLi</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="c1">//鼠标移入背景变橙色，移出变白</span>
+	<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">oLi</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+		<span class="nx">oLi</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onmouseover</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s2">"#f60"</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="nx">oLi</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">onmouseout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+			<span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
 <span class="p">}</span>   
-</code></pre></div>
-<p>新增的li是没有事件的，说明添加子节点的时候，事件没有一起添加进去<br>
+</code></pre></div></div>
+
+<p>新增的li是没有事件的，说明添加子节点的时候，事件没有一起添加进去
 一般的解决方案会是这样，将for循环用一个函数包起来，命名为mHover，如下：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">oUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"list"</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"list"</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">oBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn"</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">oLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">iNow</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
@@ -285,9 +290,11 @@
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="nx">mHover</span><span class="p">();</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>虽然功能实现了，但又增加了一个dom操作，在优化性能方面是不可取的。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">oUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"list"</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">oUl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"list"</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">oBtn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"btn"</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">oLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">iNow</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
@@ -315,22 +322,29 @@
         <span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>事件委托的方式，新添加的元素还会有之前的事件。</p>
 
 <h1 id="the-benefits-of-using-event-delegation">The benefits of using event delegation</h1>
 
 <ul>
-<li><p>1.管理的函数变少，不需要为每个元素都添加事件监听函数。</p></li>
-<li><p>2.可以动态的增加和修改元素，无需因为元素的改动而修改事件绑定。</p></li>
-<li><p>3.Javascript和DOM节点之间的关联变少，降低了循环引用的导致内存泄漏的可能性。</p></li>
+  <li>
+    <p>1.管理的函数变少，不需要为每个元素都添加事件监听函数。</p>
+  </li>
+  <li>
+    <p>2.可以动态的增加和修改元素，无需因为元素的改动而修改事件绑定。</p>
+  </li>
+  <li>
+    <p>3.Javascript和DOM节点之间的关联变少，降低了循环引用的导致内存泄漏的可能性。</p>
+  </li>
 </ul>
 
 <h1 id="the-shortcomings-of-using-event-delegation">The Shortcomings of using event delegation</h1>
-
 <p>如果绑定监听器的父元素和目标元素的层级相距较远，那么在冒泡过程中会消耗一定的时间。</p>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
+
   
 	</div>
 	<footer class="article-footer clearfix">

@@ -161,17 +161,17 @@
 		
 		</div>
 		
-		<h1 id="facade">外观模式-Facade</h1>
+		<h1 id="外观模式-facade">外观模式-Facade</h1>
 
-<h1 id="facade">Facade 介绍</h1>
+<h1 id="facade-介绍">Facade 介绍</h1>
 
 <p><strong>外观模式（ Facade ）：</strong>为一组复杂的子系统接口提供一个更高级的统一接口，通过这个接口使得对子系统接口的访问更容易。</p>
 
 <div class="rd">
-    <img src="/assets/images/2019/4-5-6/4-26-1.png" alt="">
+    <img src="/assets/images/2019/4-5-6/4-26-1.png" alt="" />
 </div>
 
-<h1 id="facade-amp-uml">Facade 示例 &amp; UML</h1>
+<h1 id="facade-示例--uml">Facade 示例 &amp; UML</h1>
 
 <p>⓵ 去医院看病，接待员去挂号、门诊、划价、取药</p>
 
@@ -180,13 +180,14 @@
 <p>⓷ 浏览器兼容</p>
 
 <div class="rd">
-    <img src="/assets/images/2019/4-5-6/4-26-2.png" alt="">
+    <img src="/assets/images/2019/4-5-6/4-26-2.png" alt="" />
 </div>
 
-<h1 id="facade">Facade 使用场景</h1>
+<h1 id="facade-使用场景">Facade 使用场景</h1>
 
 <p>外观模式可以简化底层接口复杂性，也可以解决浏览器兼容性问题。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 外观模式实现，浏览器绑定事件</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 外观模式实现，浏览器绑定事件</span>
 <span class="kd">function</span> <span class="nx">addEvent</span><span class="p">(</span><span class="nx">dom</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">dom</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">dom</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
@@ -200,9 +201,11 @@
 <span class="c1">// </span>
 <span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn);
 addEvent(btn, '</span><span class="nx">click</span><span class="s1">', function() {
-    console.log('</span><span class="err">绑定第一个事件'</span><span class="p">)</span>
-<span class="p">})</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">bindEvent</span><span class="p">(</span><span class="nx">elem</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    console.log('</span><span class="err">绑定第一个事件</span><span class="s1">')
+})
+</span></code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">bindEvent</span><span class="p">(</span><span class="nx">elem</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">fn</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">fn</span> <span class="o">=</span> <span class="nx">selector</span><span class="p">;</span>
         <span class="nx">selector</span> <span class="o">=</span> <span class="kc">null</span>
@@ -213,11 +216,12 @@ addEvent(btn, '</span><span class="nx">click</span><span class="s1">', function(
 <span class="c1">// 调用</span>
 <span class="nx">bindEvent</span><span class="p">(</span><span class="nx">elem</span><span class="p">,</span> <span class="s1">'click'</span><span class="p">,</span> <span class="s1">'#demo'</span><span class="p">,</span> <span class="nx">fn</span><span class="p">);</span>
 <span class="nx">bindEvent</span><span class="p">(</span><span class="nx">elem</span><span class="p">,</span> <span class="s1">'click'</span><span class="p">,</span> <span class="nx">fn</span><span class="p">);</span>
-</code></pre></div>
-<h1 id="facade">Facade 设计原则验证</h1>
+</code></pre></div></div>
+
+<h1 id="facade-设计原则验证">Facade 设计原则验证</h1>
 
 <ul>
-<li>不符合单一职责原则和开放封闭原则，因此谨慎使用，不可滥用</li>
+  <li>不符合单一职责原则和开放封闭原则，因此谨慎使用，不可滥用</li>
 </ul>
   
 	</div>

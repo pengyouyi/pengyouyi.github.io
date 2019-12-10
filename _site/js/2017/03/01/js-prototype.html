@@ -161,13 +161,16 @@
 		
 		</div>
 		
-		<h1 id="prototype">prototype的定义和用法</h1>
+		<h1 id="prototype的定义和用法">prototype的定义和用法</h1>
 
 <p>prototype 属性使您有能力向对象添加属性和方法。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span><span class="o">=</span><span class="nx">value</span>
-</code></pre></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span><span class="o">=</span><span class="nx">value</span>
+</code></pre></div></div>
+
 <p>不是所有的对象都拥有prototype这一属性：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="s2">"hello"</span><span class="p">;</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="s2">"hello"</span><span class="p">;</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str1</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// undefined</span>
 
 <span class="kd">var</span> <span class="nx">str2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="s2">"test"</span><span class="p">);</span>
@@ -175,10 +178,11 @@
 
 <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">};</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// undefined</span>
-</code></pre></div>
-<p>我们在定义函数的时候，函数定义的时候函数本身就会默认有一个prototype的属性(还有一个length属性)，<br>
+</code></pre></div></div>
+
+<p>我们在定义函数的时候，函数定义的时候函数本身就会默认有一个prototype的属性(还有一个length属性)，
 而我们如果用new 运算符来生成一个对象的时候就没有prototype属性。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="nx">c</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -189,74 +193,81 @@
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span><span class="c1">// undefined</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span><span class="c1">// undefined</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <blockquote>
-<p>我们创建的每个函数都有一个 prototype（原型）属性，这个属性是一个指针，指向一个<code>对象</code>，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。</p>
+  <p>我们创建的每个函数都有一个 prototype（原型）属性，这个属性是一个指针，指向一个<code class="highlighter-rouge">对象</code>，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。</p>
+</blockquote>
 
-<p>无论什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象。</p>
+<blockquote>
+  <p>无论什么时候，只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象。</p>
+</blockquote>
 
-<p>在默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，这个属性包含一个指向 prototype 属性所在函数的指针。</p>
+<blockquote>
+  <p>在默认情况下，所有原型对象都会自动获得一个constructor（构造函数）属性，这个属性包含一个指向 prototype 属性所在函数的指针。</p>
 </blockquote>
 
 <div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-4.png" alt="">
+    <img src="/assets/images/2017/1-2-3/03-01-4.png" alt="" />
 </div>
 
-<p><strong><code>prototype属性是函数所特有</code></strong>,准确来说是构造函数所特有。</p>
+<p><strong><code class="highlighter-rouge">prototype属性是函数所特有</code></strong>,准确来说是构造函数所特有。</p>
 
-<h2 id="function-prototype">function.prototype</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span>
+<h2 id="functionprototype">function.prototype</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">a</span><span class="p">(</span><span class="nx">c</span><span class="p">){</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="nx">c</span><span class="p">;</span>
 <span class="p">}</span>
-</code></pre></div>
-<p><strong><code>a.prototype 包含了2个属性，一个是constructor ，另外一个是__proto__</code></strong></p>
-
+</code></pre></div></div>
+<p><strong><code class="highlighter-rouge">a.prototype 包含了2个属性，一个是constructor ，另外一个是__proto__</code></strong></p>
 <div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-1.png" alt="">
+    <img src="/assets/images/2017/1-2-3/03-01-1.png" alt="" />
 </div>
 
-<p><strong><code>a.prototype.constructor</code> === a</strong></p>
-
+<p><strong><code class="highlighter-rouge">a.prototype.constructor</code> === a</strong></p>
 <div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-2.png" alt="">
+    <img src="/assets/images/2017/1-2-3/03-01-2.png" alt="" />
 </div>
 
-<p><strong><code>a.prototype.__proto__</code> === Object.prototype</strong></p>
-
+<p><strong><code class="highlighter-rouge">a.prototype.__proto__</code> === Object.prototype</strong></p>
 <div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-3.png" alt="">
+    <img src="/assets/images/2017/1-2-3/03-01-3.png" alt="" />
 </div>
 
 <h1 id="__proto__">__proto__</h1>
 
 <blockquote>
-<p>1.所有构造器/函数的__proto__都指向Function.prototype，它是一个空函数（Empty function）</p>
+  <p>1.所有构造器/函数的__proto__都指向Function.prototype，它是一个空函数（Empty function）</p>
+</blockquote>
 
-<p>2.所有对象的__proto__都指向其构造器的prototype</p>
+<blockquote>
+  <p>2.所有对象的__proto__都指向其构造器的prototype</p>
 </blockquote>
 
 <p>每个对象都会在其内部初始化一个属性，就是__proto__，当我们访问一个对象的属性 时，如果这个对象内部不存在这个属性，那么他就会去__proto__里找这个属性，这个__proto__又会有自己的__proto__，于是就这样 一直找下去。</p>
 
 <div class="rd">
-    <img src="/assets/images/2017/1-2-3/03-01-5.png" alt="">
+    <img src="/assets/images/2017/1-2-3/03-01-5.png" alt="" />
 </div>
 
-<p>__proto__:<code>每个对象都有一个名为__proto__的内部隐藏属性</code>，指向于它所对应的原型对象(chrome、firefox中名称为__proto__，并且可以被访问到)。原型链正是基于__proto__才得以形成(note：不是基于函数对象的属性prototype)。</p>
+<p>__proto__:<code class="highlighter-rouge">每个对象都有一个名为__proto__的内部隐藏属性</code>，指向于它所对应的原型对象(chrome、firefox中名称为__proto__，并且可以被访问到)。原型链正是基于__proto__才得以形成(note：不是基于函数对象的属性prototype)。</p>
 
 <p><strong>Object.create(obj).__proto__ === obj</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{};</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{};</span>
 <span class="kd">var</span> <span class="nx">a2</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
 <span class="nx">a2</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nx">a</span><span class="p">;</span>  <span class="c1">// true</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>prototype本质上还是一个JavaScript对象。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">// String {length: 0, [[PrimitiveValue]]: ""}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>  <span class="c1">// Object {}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Number</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span> <span class="c1">// Number {[[PrimitiveValue]]: 0}</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">.</span><span class="nx">prototype</span><span class="p">)</span>
-</code></pre></div>
-<p>上述对数组操作的很多方法（比如concat、join、push），对字符串等的操作方法都是在prototype属性中定义的。 </p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 构造函数</span>
+</code></pre></div></div>
+<p>上述对数组操作的很多方法（比如concat、join、push），对字符串等的操作方法都是在prototype属性中定义的。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 构造函数</span>
 <span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
 <span class="p">}</span>
@@ -268,11 +279,11 @@
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">hao</span><span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s2">"haorooms"</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">hao</span><span class="p">.</span><span class="nx">getName</span><span class="p">());</span>  <span class="c1">// "haorooms"</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>作为类比，我们考虑下JavaScript中的数据类型 - 字符串（String）、数字（Number）、数组（Array）、对象（Object）、日期（Date）等。</p>
 
 <p>在JavaScript内部这些类型都是作为构造函数来实现的，比如：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 定义数组的构造函数，作为JavaScript的一种预定义类型</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 定义数组的构造函数，作为JavaScript的一种预定义类型</span>
 <span class="kd">function</span> <span class="nb">Array</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
@@ -281,18 +292,21 @@
 <span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>
 <span class="c1">// 但是，我们更倾向于如下的语法定义：</span>
 <span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">];</span>
-</code></pre></div>
-<p>var a = {} 其实是 var a = new Object() 的语法糖<br>
-var a = [] 其实是 var a = new Array() 的语法糖<br>
-function Foo() {...} 其实是 var Foo = new Function(...)</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">String</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<p>var a = {} 其实是 var a = new Object() 的语法糖
+var a = [] 其实是 var a = new Array() 的语法糖
+function Foo() {…} 其实是 var Foo = new Function(…)</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">String</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
 <span class="nb">Number</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
 <span class="nb">Array</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
 <span class="nb">Object</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
 <span class="nb">Date</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">===</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span> <span class="c1">// true</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>实际上，JavaScript所有的固有数据类型都具有只读的prototype属性 （这是可以理解的：因为如果修改了这些类型的prototype属性，则哪些预定义的方法就消失了）， 但是我们可以向其中添加自己的扩展方法。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 向JavaScript固有类型Array扩展一个获取最小值的方法</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 向JavaScript固有类型Array扩展一个获取最小值的方法</span>
 <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">min</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">min</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -305,29 +319,30 @@ function Foo() {...} 其实是 var Foo = new Function(...)</p>
 
 <span class="c1">// 在任意Array的实例上调用min方法</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">12</span><span class="p">].</span><span class="nx">min</span><span class="p">());</span> <span class="c1">// 1</span>
-</code></pre></div>
-<h1 id="rule">原型和原型链-rule</h1>
+</code></pre></div></div>
+
+<h1 id="原型和原型链-rule">原型和原型链-rule</h1>
 
 <p><strong>原型和原型链的5个规则</strong></p>
 
 <ol>
-<li>所有的<em>引用类型</em>（数组、对象、函数），都具有<strong>对象特性</strong>，即可自由扩展属性（除了 &#39;null&#39; 意外）。<br></li>
-<li>所有的<code>引用类型</code>（数组、对象、函数），都有一个 <code>__proto__</code> 属性【隐式原型】，属性值是一个普通的对象。<br></li>
-<li>所有<code>函数</code>，都有一个<code>prototype</code> 属性【显式原型】，属性值也是一个普通的对象。<br></li>
-<li>所有的<code>引用类型（数组、对象、函数） __proto__ 属性值指向它的构造函数的 “prototype” 属性值</code><br></li>
-<li>当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的 __proto__ （即它的构造函数的prototype）中寻找。<br></li>
+  <li>所有的<em>引用类型</em>（数组、对象、函数），都具有<strong>对象特性</strong>，即可自由扩展属性（除了 ‘null’ 意外）。</li>
+  <li>所有的<code class="highlighter-rouge">引用类型</code>（数组、对象、函数），都有一个 <code class="highlighter-rouge">__proto__</code> 属性【隐式原型】，属性值是一个普通的对象。</li>
+  <li>所有<code class="highlighter-rouge">函数</code>，都有一个<code class="highlighter-rouge">prototype</code> 属性【显式原型】，属性值也是一个普通的对象。</li>
+  <li>所有的<code class="highlighter-rouge">引用类型（数组、对象、函数） __proto__ 属性值指向它的构造函数的 “prototype” 属性值</code></li>
+  <li>当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么会去它的 __proto__ （即它的构造函数的prototype）中寻找。</li>
 </ol>
 
-<p><div class="rd"><br>
-    <img src="/assets/images/2017/1-2-3/03-01-6.jpg" alt=""><br>
-</div></p>
+<div class="rd">
+    <img src="/assets/images/2017/1-2-3/03-01-6.jpg" alt="" />
+</div>
 
-<h1 id="more">更多-more</h1>
-
+<h1 id="更多-more">更多-more</h1>
 <ul>
-<li><a href="http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html">http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html</a></li>
-<li><a href="http://www.imooc.com/article/3654">http://www.imooc.com/article/3654</a></li>
+  <li><a href="http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html">http://www.cnblogs.com/snandy/archive/2012/09/01/2664134.html</a></li>
+  <li><a href="http://www.imooc.com/article/3654">http://www.imooc.com/article/3654</a></li>
 </ul>
+
   
 	</div>
 	<footer class="article-footer clearfix">

@@ -161,44 +161,51 @@
 		
 		</div>
 		
-		<h1 id="state">状态模式-State</h1>
+		<h1 id="状态模式-state">状态模式-State</h1>
 
-<h1 id="state">State 介绍</h1>
+<h1 id="state-介绍">State 介绍</h1>
 
 <p><strong>状态模式（ State ）：</strong>当一个对象状态发生改变时，会导致其行为的改变，这看起来像是改变了对象。</p>
 
 <ul>
-<li><p>一个对象有状态变化</p></li>
-<li><p>每次状态变化都会触发一个逻辑</p></li>
-<li><p>不能总是用 if...else... 来控制</p></li>
+  <li>
+    <p>一个对象有状态变化</p>
+  </li>
+  <li>
+    <p>每次状态变化都会触发一个逻辑</p>
+  </li>
+  <li>
+    <p>不能总是用 if…else… 来控制</p>
+  </li>
 </ul>
 
-<h1 id="state-amp-uml">State 示例 &amp; UML</h1>
+<h1 id="state-示例--uml">State 示例 &amp; UML</h1>
 
 <ul>
-<li>红黄绿灯</li>
+  <li>红黄绿灯</li>
 </ul>
 
 <div class="rd">
-    <img src="/assets/images/2019/4-5-6/5-1-1.png" alt="">
+    <img src="/assets/images/2019/4-5-6/5-1-1.png" alt="" />
 </div>
 
-<h1 id="state">State 代码</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 状态（红灯、黄灯、绿灯）</span>
-<span class="kr">class</span> <span class="nx">State</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+<h1 id="state-代码">State 代码</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 状态（红灯、黄灯、绿灯）</span>
+<span class="kd">class</span> <span class="nx">State</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">color</span><span class="p">)</span> <span class="p">{</span>
+    	<span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="nx">handle</span><span class="p">(</span><span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">turn</span> <span class="nx">to</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">color</span><span class="p">}</span> <span class="nx">light</span><span class="err">`</span><span class="p">);</span>
-        <span class="nx">context</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`turn to </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">color</span><span class="p">}</span><span class="s2"> light`</span><span class="p">);</span>
+    	<span class="nx">context</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 主体</span>
-<span class="kr">class</span> <span class="nx">Context</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="kd">class</span> <span class="nx">Context</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    	<span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="c1">// 获取状态</span>
     <span class="nx">getState</span><span class="p">()</span> <span class="p">{</span>
@@ -225,10 +232,11 @@
 <span class="c1">// 绿灯亮了</span>
 <span class="nx">green</span><span class="p">.</span><span class="nx">handle</span><span class="p">(</span><span class="nx">context</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">context</span><span class="p">.</span><span class="nx">getState</span><span class="p">());</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>状态的获取和主体改变状态是分离的。</p>
 
-<h1 id="state">State 场景</h1>
+<h1 id="state-场景">State 场景</h1>
 
 <p>➊ 有限状态机</p>
 
@@ -236,17 +244,26 @@
 
 <p>➌ 超级玛丽</p>
 
-<h2 id="state">有限状态机-state</h2>
+<h2 id="有限状态机-state">有限状态机-state</h2>
 
 <ul>
-<li><p>有限个状态、以及在这些状态之间的变化</p></li>
-<li><p>如交通信号灯</p></li>
-<li><p>使用开源 lib : javascript-state-matchine</p></li>
+  <li>
+    <p>有限个状态、以及在这些状态之间的变化</p>
+  </li>
+  <li>
+    <p>如交通信号灯</p>
+  </li>
+  <li>
+    <p>使用开源 lib : javascript-state-matchine</p>
+  </li>
 </ul>
 
-<p><a href="https://github.com/jakesgordon/javascript-state-machine">https://github.com/jakesgordon/javascript-state-machine</a></p>
-<div class="highlight"><pre><code class="language-shell" data-lang="shell">npm i javascript-state-machine --save
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
+<p>https://github.com/jakesgordon/javascript-state-machine</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i javascript-state-machine <span class="nt">--save</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;!</span><span class="nx">DOCTYPE</span> <span class="nx">html</span><span class="o">&gt;</span>
 <span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
 <span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">meta</span> <span class="nx">charset</span><span class="o">=</span><span class="s2">"UTF-8"</span><span class="o">&gt;</span>
@@ -255,7 +272,7 @@
 </span><span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="err">有限状态机</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"btn"</span><span class="o">&gt;&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>
+</span>    
     <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"./03-javascript-state-machine.js"</span><span class="o">&gt;&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
@@ -309,23 +326,31 @@
     <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="sr">/body</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="sr">/html</span><span class="err">&gt;
-</span></code></pre></div>
-<p>fsm.doStore() 执行时，<br>
-改变 transitions 中 name 的 state 的状态从 from 到 to，<br>
+</span></code></pre></div></div>
+
+<p>fsm.doStore() 执行时，
+改变 transitions 中 name 的 state 的状态从 from 到 to，
 同时执行 methods 中命名的函数 onDoStore。</p>
 
-<h2 id="promise">写一个 Promise</h2>
+<h2 id="写一个-promise">写一个 Promise</h2>
 
 <ul>
-<li><p>回顾 Promise 的语法</p></li>
-<li><p>分析： Promise 就是一个有限状态机</p></li>
-<li><p>Promise 三种状态：pending 、fullfilled、rejected</p></li>
+  <li>
+    <p>回顾 Promise 的语法</p>
+  </li>
+  <li>
+    <p>分析： Promise 就是一个有限状态机</p>
+  </li>
+  <li>
+    <p>Promise 三种状态：pending 、fullfilled、rejected</p>
+  </li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">StateMachine</span>  <span class="nx">from</span> <span class="s1">'javascript-state-machine'</span><span class="p">;</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">StateMachine</span>  <span class="k">from</span> <span class="s1">'javascript-state-machine'</span><span class="p">;</span>
 
 <span class="c1">// 定义 Promise</span>
-<span class="kr">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">class</span> <span class="nx">MyPromise</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">successList</span> <span class="o">=</span> <span class="p">[];</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">failList</span> <span class="o">=</span> <span class="p">[];</span>
 
@@ -374,7 +399,7 @@
 
 <span class="c1">// test</span>
 <span class="kd">function</span> <span class="nx">loadImg</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span><span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'img'</span><span class="p">);</span>
         <span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
             <span class="nx">resolve</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
@@ -400,8 +425,9 @@
 <span class="nx">result</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'ok2'</span><span class="p">);</span>
 <span class="p">})</span>
-</code></pre></div>
-<h2 id="state">超级玛丽-state</h2>
+</code></pre></div></div>
+
+<h2 id="超级玛丽-state">超级玛丽-state</h2>
 
 <p><strong>状态模式目的：</strong></p>
 
@@ -410,7 +436,8 @@
 <p><strong>状态模式思路：</strong></p>
 
 <p>首相创建一个状态对象，内部保存状态变量，然后内部封装好每种动作对应的状态，最后状态对象返回一个接口对象，它可以对内部状态修改或者调用。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 创建超级玛丽状态类</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 创建超级玛丽状态类</span>
 <span class="kd">var</span> <span class="nx">MarryState</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="c1">// 内部状态私有变量</span>
     <span class="kd">var</span> <span class="nx">_currentState</span> <span class="o">=</span> <span class="p">{},</span>
@@ -435,7 +462,7 @@
         <span class="c1">// 改变状态方法</span>
         <span class="na">changeState</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
             <span class="c1">// 组合动作通过传递多个参数实现</span>
-            <span class="kd">var</span> <span class="nx">arg</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">arg</span> <span class="o">=</span> <span class="kr">arguments</span><span class="p">;</span>
             <span class="c1">// 重置内部状态</span>
             <span class="nx">_currentState</span> <span class="o">=</span> <span class="p">{};</span>
             <span class="c1">// 如果有动作则添加动作</span>
@@ -476,9 +503,11 @@
      <span class="p">.</span><span class="nx">change</span><span class="p">(</span><span class="s1">'shoot'</span><span class="p">)</span>
      <span class="p">.</span><span class="nx">goes</span><span class="p">()</span>
 
-</code></pre></div>
+</code></pre></div></div>
+
 <p>结果显示：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="err">触发一次动作</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">触发一次动作</span>
 <span class="nx">jump</span>
 <span class="nx">shoot</span>
 <span class="err">触发一次动作</span>
@@ -486,15 +515,21 @@
 <span class="nx">shoot</span>
 <span class="err">触发一次动作</span>
 <span class="nx">shoot</span>
-</code></pre></div>
-<h1 id="state">State 设计原则验证</h1>
+</code></pre></div></div>
+
+<h1 id="state-设计原则验证">State 设计原则验证</h1>
 
 <ul>
-<li><p>将状态对象和主题2对象分离，状态呢的变化逻辑单独处理</p></li>
-<li><p>符合开放封闭原则</p></li>
+  <li>
+    <p>将状态对象和主题2对象分离，状态呢的变化逻辑单独处理</p>
+  </li>
+  <li>
+    <p>符合开放封闭原则</p>
+  </li>
 </ul>
 
 <p>状态模式既是解决程序中臃肿的分支判断语句问题，将每个分支转化为一种状态独立出来，方便每种状态的管理又不至于每次执行时遍历所有分支。最终目的是简化分支判断流程。</p>
+
   
 	</div>
 	<footer class="article-footer clearfix">

@@ -163,12 +163,13 @@
 		
 		<p>慕课网学习笔记-揭秘一线互联网企业 前端JavaScript高级面试（双越）- 第2章 ES6 语法 - Promise的基本使用和原理</p>
 
-<h1 id="promise">Promise的基本使用和原理</h1>
+<h1 id="promise的基本使用和原理">Promise的基本使用和原理</h1>
 
 <p>Promise 是异步编程的一种解决方案，比传统的解决方案——回调函数和事件——更合理和更强大。</p>
 
 <h1 id="callback-hell">callback hell</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">loadImg</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">fail</span><span class="p">){</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">loadImg</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">fail</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'img'</span><span class="p">);</span>
   <span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
     <span class="nx">callback</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span>
@@ -186,9 +187,11 @@
 <span class="p">},</span> <span class="kd">function</span><span class="p">(){</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'failed'</span><span class="p">)</span>
 <span class="p">})</span>
-</code></pre></div>
-<h1 id="promise">Promise 语法</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<h1 id="promise-语法">Promise 语法</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// ... some code</span>
 
   <span class="k">if</span> <span class="p">(</span><span class="cm">/* 异步操作成功 */</span><span class="p">){</span>
@@ -203,8 +206,10 @@
 <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// failure</span>
 <span class="p">});</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">loadImg</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kr">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">loadImg</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'img'</span><span class="p">);</span>
     <span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
       <span class="nx">resolve</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span>
@@ -229,21 +234,31 @@
 <span class="nx">result</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">){</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">height</span><span class="p">)</span>
 <span class="p">})</span>
-</code></pre></div>
-<h1 id="promise">promise - 总结</h1>
+</code></pre></div></div>
+
+<h1 id="promise---总结">promise - 总结</h1>
 
 <ol>
-<li><p>new Promise实例，而且要return</p></li>
-<li><p>new Promise时要传入函数，函数有resolve 、reject 两个参数</p></li>
-<li><p>成功时执行resolve(),失败时执行reject()</p></li>
-<li><p>用.then 监听结果</p></li>
+  <li>
+    <p>new Promise实例，而且要return</p>
+  </li>
+  <li>
+    <p>new Promise时要传入函数，函数有resolve 、reject 两个参数</p>
+  </li>
+  <li>
+    <p>成功时执行resolve(),失败时执行reject()</p>
+  </li>
+  <li>
+    <p>用.then 监听结果</p>
+  </li>
 </ol>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
 
 <p><a href="https://coding.imooc.com/learn/list/190.html">揭秘一线互联网企业 前端JavaScript高级面试</a></p>
 
 <p><a href="http://es6.ruanyifeng.com/#docs/promise">Promise 对象</a></p>
+
   
 	</div>
 	<footer class="article-footer clearfix">

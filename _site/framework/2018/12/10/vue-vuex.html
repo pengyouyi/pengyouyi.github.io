@@ -164,103 +164,120 @@
 		<h1 id="v-vuex">v-vuex</h1>
 
 <blockquote>
-<p>A Vue.js project</p>
+  <p>A Vue.js project</p>
 </blockquote>
 
-<h2 id="vue">vue项目初始化</h2>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">vue init webpack Vue-ProjectName
+<h2 id="vue项目初始化">vue项目初始化</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vue init webpack Vue-ProjectName
 npm install
 npm run dev
-</code></pre></div>
-<h2 id="vuex">安装 vuex</h2>
-<div class="highlight"><pre><code class="language-bash" data-lang="bash">npm install vuex --save
-</code></pre></div>
-<h1 id="vuex">项目中使用vuex</h1>
+</code></pre></div></div>
 
-<h2 id="src-store">新建src下的store文件夹</h2>
+<h2 id="安装-vuex">安装 vuex</h2>
 
-<ul>
-<li>src
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install vuex <span class="nt">--save</span>
+</code></pre></div></div>
 
-<ul>
-<li>store
+<h1 id="项目中使用vuex">项目中使用vuex</h1>
+
+<h2 id="新建src下的store文件夹">新建src下的store文件夹</h2>
 
 <ul>
-<li>index.js</li>
-<li>state.js</li>
-<li>getters.js</li>
-<li>mutation-types.js</li>
-<li>actions</li>
-<li>mutations.js</li>
-</ul></li>
-</ul></li>
+  <li>src
+    <ul>
+      <li>store
+        <ul>
+          <li>index.js</li>
+          <li>state.js</li>
+          <li>getters.js</li>
+          <li>mutation-types.js</li>
+          <li>actions</li>
+          <li>mutations.js</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
 <p>store/index.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">'vue'</span><span class="p">;</span>
-<span class="kr">import</span> <span class="nx">Vuex</span> <span class="nx">from</span> <span class="s1">'vuex'</span><span class="p">;</span>
-<span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">actions</span> <span class="nx">from</span> <span class="s1">'./actions'</span><span class="p">;</span>
-<span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">getters</span> <span class="nx">from</span> <span class="s1">'./getters'</span><span class="p">;</span>
-<span class="kr">import</span> <span class="nx">state</span> <span class="nx">from</span> <span class="s1">'./state'</span><span class="p">;</span>
-<span class="kr">import</span> <span class="nx">mutations</span> <span class="nx">from</span> <span class="s1">'./mutations'</span><span class="p">;</span>
-<span class="kr">import</span> <span class="nx">createLogger</span> <span class="nx">from</span> <span class="s1">'vuex/dist/logger'</span><span class="p">;</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="s1">'vue'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Vuex</span> <span class="k">from</span> <span class="s1">'vuex'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">actions</span> <span class="k">from</span> <span class="s1">'./actions'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">getters</span> <span class="k">from</span> <span class="s1">'./getters'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">state</span> <span class="k">from</span> <span class="s1">'./state'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">mutations</span> <span class="k">from</span> <span class="s1">'./mutations'</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">createLogger</span> <span class="k">from</span> <span class="s1">'vuex/dist/logger'</span><span class="p">;</span>
 
 <span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Vuex</span><span class="p">);</span>
 
-<span class="kr">const</span> <span class="nx">debug</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">!==</span> <span class="s1">'production'</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">debug</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">!==</span> <span class="s1">'production'</span><span class="p">;</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Vuex</span><span class="p">.</span><span class="nx">Store</span><span class="p">({</span>
-    <span class="nx">actions</span><span class="p">,</span>
-    <span class="nx">getters</span><span class="p">,</span>
-    <span class="nx">state</span><span class="p">,</span>
-    <span class="nx">mutations</span><span class="p">,</span>
-    <span class="na">strict</span><span class="p">:</span> <span class="nx">debug</span><span class="p">,</span>
+<span class="k">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Vuex</span><span class="p">.</span><span class="nx">Store</span><span class="p">({</span>
+	<span class="nx">actions</span><span class="p">,</span>
+	<span class="nx">getters</span><span class="p">,</span>
+	<span class="nx">state</span><span class="p">,</span>
+	<span class="nx">mutations</span><span class="p">,</span>
+	<span class="na">strict</span><span class="p">:</span> <span class="nx">debug</span><span class="p">,</span>
     <span class="na">plugins</span><span class="p">:</span> <span class="nx">debug</span> <span class="p">?</span> <span class="p">[</span><span class="nx">createLogger</span><span class="p">()]</span> <span class="p">:</span> <span class="p">[]</span>
 <span class="p">})</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>store/state.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">isShowNav</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="c1">// Add another one.</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="na">isShowNav</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+	<span class="c1">// Add another one.</span>
 <span class="p">};</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">state</span><span class="p">;</span>
-</code></pre></div>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">state</span><span class="p">;</span>
+</code></pre></div></div>
+
 <p>store/getters.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">isShowNav</span> <span class="o">=</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">;</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">isShowNav</span> <span class="o">=</span> <span class="nx">state</span> <span class="o">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">;</span>
 <span class="c1">// Add another one.</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>store/mutation-types.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">SET_NAV</span> <span class="o">=</span> <span class="s1">'SET_NAV'</span><span class="p">;</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="kd">const</span> <span class="nx">SET_NAV</span> <span class="o">=</span> <span class="s1">'SET_NAV'</span><span class="p">;</span>
 <span class="c1">// Add another one.</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>store/actions.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">types</span> <span class="nx">from</span> <span class="s1">'./mutation-types'</span><span class="p">;</span>
 
-<span class="kr">export</span> <span class="kr">const</span> <span class="nx">setNav</span> <span class="o">=</span> <span class="kd">function</span><span class="p">({</span><span class="nx">commit</span><span class="p">},</span> <span class="nx">isShowNav</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">commit</span><span class="p">(</span><span class="s1">'SET_NAV'</span><span class="p">,</span> <span class="nx">isShowNav</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">types</span> <span class="k">from</span> <span class="s1">'./mutation-types'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">setNav</span> <span class="o">=</span> <span class="kd">function</span><span class="p">({</span><span class="nx">commit</span><span class="p">},</span> <span class="nx">isShowNav</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">commit</span><span class="p">(</span><span class="nx">types</span><span class="p">.</span><span class="nx">SET_NAV</span><span class="p">,</span> <span class="nx">isShowNav</span><span class="p">);</span>
 <span class="p">};</span>
 <span class="c1">// Add another one.</span>
-</code></pre></div>
-<p>store/mutations.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">types</span> <span class="nx">from</span> <span class="s1">'./mutation-types'</span><span class="p">;</span>
+</code></pre></div></div>
 
-<span class="kr">const</span> <span class="nx">mutations</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">[</span><span class="nx">types</span><span class="p">.</span><span class="nx">SET_NAV</span><span class="p">](</span><span class="nx">state</span><span class="p">,</span> <span class="nx">isShowNav</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">state</span><span class="p">.</span><span class="nx">isShowNav</span> <span class="o">=</span> <span class="nx">isShowNav</span><span class="p">;</span>
-    <span class="p">},</span>
-    <span class="c1">// Add another one.</span>
+<p>store/mutations.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">types</span> <span class="k">from</span> <span class="s1">'./mutation-types'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">mutations</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="p">[</span><span class="nx">types</span><span class="p">.</span><span class="nx">SET_NAV</span><span class="p">](</span><span class="nx">state</span><span class="p">,</span> <span class="nx">isShowNav</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">state</span><span class="p">.</span><span class="nx">isShowNav</span> <span class="o">=</span> <span class="nx">isShowNav</span><span class="p">;</span>
+	<span class="p">},</span>
+	<span class="c1">// Add another one.</span>
 <span class="p">};</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="nx">mutations</span><span class="p">;</span>
-</code></pre></div>
-<h2 id="main-js-store">main.js引入store入口文件</h2>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">mutations</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="mainjs引入store入口文件">main.js引入store入口文件</h2>
 
 <p>src/main.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">'vue'</span>
-<span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">'./App'</span>
-<span class="kr">import</span> <span class="nx">router</span> <span class="nx">from</span> <span class="s1">'./router'</span>
-<span class="kr">import</span> <span class="nx">store</span> <span class="nx">from</span> <span class="s1">'./store/index'</span><span class="p">;</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="s1">'vue'</span>
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="s1">'./App'</span>
+<span class="k">import</span> <span class="nx">router</span> <span class="k">from</span> <span class="s1">'./router'</span>
+<span class="k">import</span> <span class="nx">store</span> <span class="k">from</span> <span class="s1">'./store/index'</span><span class="p">;</span>
 
 <span class="nx">Vue</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">productionTip</span> <span class="o">=</span> <span class="kc">false</span>
 
@@ -272,21 +289,23 @@ npm run dev
   <span class="na">components</span><span class="p">:</span> <span class="p">{</span> <span class="nx">App</span> <span class="p">},</span>
   <span class="na">template</span><span class="p">:</span> <span class="s1">'&lt;App/&gt;'</span>
 <span class="p">})</span>
-</code></pre></div>
-<h2 id="vue-state">vue组件中获取state中的值</h2>
+</code></pre></div></div>
 
-<p><code>this.$store.getters.stateName</code></p>
+<h2 id="vue组件中获取state中的值">vue组件中获取state中的值</h2>
+
+<p><code class="highlighter-rouge">this.$store.getters.stateName</code></p>
 
 <p>src/components/pageA.vue</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">"hello"</span><span class="o">&gt;</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="kd">class</span><span class="o">=</span><span class="s2">"hello"</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;&lt;</span><span class="sr">/h1</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="sr">/p</span><span class="err">&gt;
 </span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
 </span>
 <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
   <span class="nx">data</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">{</span>
       <span class="na">msg</span><span class="p">:</span> <span class="s1">'Welcome to Page A'</span>
@@ -294,15 +313,15 @@ npm run dev
   <span class="p">},</span>
   <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
     <span class="nx">isShowNav</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">;</span>
+    	<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">;</span>
     <span class="p">},</span>
     <span class="c1">// isShowNav: {</span>
-    <span class="c1">//  get() {</span>
-    <span class="c1">//      return this.$store.getters.isShowNav;</span>
-    <span class="c1">//  },</span>
-    <span class="c1">//  set(value) {</span>
-    <span class="c1">//      this.$store.dispatch('setNav', this.$store.getters.isShowNav)</span>
-    <span class="c1">//  }</span>
+    <span class="c1">// 	get() {</span>
+    <span class="c1">// 		return this.$store.getters.isShowNav;</span>
+    <span class="c1">// 	},</span>
+    <span class="c1">// 	set(value) {</span>
+    <span class="c1">// 		this.$store.dispatch('setNav', this.$store.getters.isShowNav)</span>
+    <span class="c1">// 	}</span>
     <span class="c1">// }</span>
   <span class="p">},</span>
 <span class="p">}</span>
@@ -312,13 +331,15 @@ npm run dev
 
 <span class="o">&lt;</span><span class="sr">/style</span><span class="err">&gt;
 </span>
-</code></pre></div>
-<h2 id="vue-state">vue组件中修改state中的值</h2>
+</code></pre></div></div>
 
-<p><code>this.$store.dispatch(&#39;actionType&#39;, newVal)</code></p>
+<h2 id="vue组件中修改state中的值">vue组件中修改state中的值</h2>
+
+<p><code class="highlighter-rouge">this.$store.dispatch('actionType', newVal)</code></p>
 
 <p>src/components/pageB</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;template&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"hello"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1&gt;&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;&lt;/p&gt;</span>
@@ -327,23 +348,23 @@ npm run dev
 <span class="nt">&lt;/template&gt;</span>
 
 <span class="nt">&lt;script&gt;</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
   <span class="nx">data</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">{</span>
       <span class="na">msg</span><span class="p">:</span> <span class="s1">'Welcome to Page B'</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nx">isShowNav</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">;</span>
-    <span class="p">}</span>
+  	<span class="nx">isShowNav</span><span class="p">()</span> <span class="p">{</span>
+  		<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">;</span>
+  	<span class="p">}</span>
   <span class="p">},</span>
   <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
     <span class="nx">changeNav</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s1">'setNav'</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">);</span>
-        <span class="c1">// 严格模式，那么任何修改state的操作，只要不经过mutation的函数，vue就会throw error </span>
-        <span class="c1">// this.$store.state.isShowNav = 'test';  // 不建议这样使用</span>
-        <span class="c1">// this.$store.commit('SET_NAV', !this.$store.getters.isShowNav);</span>
+    	<span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s1">'setNav'</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">);</span>
+    	<span class="c1">// 严格模式，那么任何修改state的操作，只要不经过mutation的函数，vue就会throw error </span>
+    	<span class="c1">// this.$store.state.isShowNav = 'test';  // 不建议这样使用</span>
+    	<span class="c1">// this.$store.commit('SET_NAV', !this.$store.getters.isShowNav);</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -352,26 +373,30 @@ npm run dev
 <span class="nt">&lt;style </span><span class="na">scoped</span><span class="nt">&gt;</span>
 
 <span class="nt">&lt;/style&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>这样 state 中的 isShowNav 就在vue组件中共享了，无论在哪个页面修改它的值，其他页面都能立即通过 computed 监测state中的值发生的变化。</p>
 
-<h1 id="dispatch-commit-mutations">dispatch和commit来调用mutations的区别</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s1">'setNav'</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">);</span>
+<h1 id="dispatch和commit来调用mutations的区别">dispatch和commit来调用mutations的区别</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">(</span><span class="s1">'setNav'</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">);</span>
 
 <span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="s1">'SET_NAV'</span><span class="p">,</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">$store</span><span class="p">.</span><span class="nx">getters</span><span class="p">.</span><span class="nx">isShowNav</span><span class="p">);</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>区别：</p>
 
-<p>dispatch：含有异步操作，例如向后台提交数据，写法： this.$store.dispatch(&#39;mutations方法名&#39;,值)</p>
+<p>dispatch：含有异步操作，例如向后台提交数据，写法： this.$store.dispatch(‘mutations方法名’,值)</p>
 
-<p>commit：同步操作，写法：this.$store.commit(&#39;mutations方法名&#39;,值)</p>
+<p>commit：同步操作，写法：this.$store.commit(‘mutations方法名’,值)</p>
 
 <h1 id="more">more</h1>
 
 <ul>
-<li><a href="https://vuex.vuejs.org/">https://vuex.vuejs.org/</a></li>
-<li>完整项目请看github, 项目v-vuex待上传，地址待添加。。。</li>
+  <li><a href="https://vuex.vuejs.org/">https://vuex.vuejs.org/</a></li>
+  <li>完整项目请看github, 项目v-vuex待上传，地址待添加。。。</li>
 </ul>
+
   
 	</div>
 	<footer class="article-footer clearfix">

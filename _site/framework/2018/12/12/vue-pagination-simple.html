@@ -161,22 +161,22 @@
 		
 		</div>
 		
-		<h1 id="vue">vue翻页组件</h1>
+		<h1 id="vue翻页组件">vue翻页组件</h1>
 
-<p>接口地址： <a href="http://test.pandanc.com/api/v1/projects/project/">http://test.pandanc.com/api/v1/projects/project/</a></p>
+<p>接口地址： http://test.pandanc.com/api/v1/projects/project/</p>
 
-<p>浏览器访问如下：<br>
-<a href="http://localhost:8080/project/library/page">http://localhost:8080/project/library/page</a></p>
+<p>浏览器访问如下：
+http://localhost:8080/project/library/page</p>
 
 <p><strong>翻页思路</strong></p>
 
 <ol>
-<li>翻页的时候通过改变url上params参数page</li>
-<li>路由参数page改变，刷新页面</li>
-<li>刷新页面的的时候，created 重新请求数据，getProjects(page)</li>
+  <li>翻页的时候通过改变url上params参数page</li>
+  <li>路由参数page改变，刷新页面</li>
+  <li>刷新页面的的时候，created 重新请求数据，getProjects(page)</li>
 </ol>
 
-<p><strong>解决 &#39;library/:page&#39; 中page改变不刷新的问题</strong></p>
+<p><strong>解决 ‘library/:page’ 中page改变不刷新的问题</strong></p>
 
 <p>通过给router-view添加一个动态变化的参数，让Vue认为这个组件每一次都是一个新组件，从而重新刷新。</p>
 
@@ -185,14 +185,15 @@
 <h1 id="pagination-demo">pagination demo</h1>
 
 <p>src/router/index.js</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">'vue'</span>
-<span class="kr">import</span> <span class="nx">Router</span> <span class="nx">from</span> <span class="s1">'vue-router'</span>
-<span class="kr">import</span> <span class="nx">HelloWorld</span> <span class="nx">from</span> <span class="s1">'@/components/HelloWorld'</span>
-<span class="kr">import</span> <span class="nx">Project</span> <span class="nx">from</span> <span class="s1">'@/components/Project'</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="s1">'vue'</span>
+<span class="k">import</span> <span class="nx">Router</span> <span class="k">from</span> <span class="s1">'vue-router'</span>
+<span class="k">import</span> <span class="nx">HelloWorld</span> <span class="k">from</span> <span class="s1">'@/components/HelloWorld'</span>
+<span class="k">import</span> <span class="nx">Project</span> <span class="k">from</span> <span class="s1">'@/components/Project'</span>
 
 <span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Router</span><span class="p">)</span>
 
-<span class="kr">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">({</span>
+<span class="k">export</span> <span class="k">default</span> <span class="k">new</span> <span class="nx">Router</span><span class="p">({</span>
   <span class="na">mode</span><span class="p">:</span> <span class="s1">'history'</span><span class="p">,</span>
   <span class="na">routes</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
@@ -206,15 +207,17 @@
       <span class="na">name</span><span class="p">:</span> <span class="s1">'Project'</span><span class="p">,</span>
       <span class="na">component</span><span class="p">:</span> <span class="nx">Project</span><span class="p">,</span>
       <span class="na">children</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="na">path</span><span class="p">:</span> <span class="s1">'library/:page'</span><span class="p">,</span>
-        <span class="na">component</span><span class="p">:</span> <span class="nx">Project</span><span class="p">,</span>
+      	<span class="na">path</span><span class="p">:</span> <span class="s1">'library/:page'</span><span class="p">,</span>
+      	<span class="na">component</span><span class="p">:</span> <span class="nx">Project</span><span class="p">,</span>
       <span class="p">}]</span>
     <span class="p">}</span>
   <span class="p">]</span>
 <span class="p">})</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>src/components/Project.vue</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;template&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"project"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1&gt;&lt;/h1&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"Pagination"</span> <span class="na">:total=</span><span class="s">"total"</span> <span class="na">:limit=</span><span class="s">"limit"</span><span class="nt">&gt;</span>
@@ -232,7 +235,7 @@
 <span class="nt">&lt;/template&gt;</span>
 
 <span class="nt">&lt;script&gt;</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
   <span class="nx">data</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">{</span>
       <span class="na">msg</span><span class="p">:</span> <span class="s1">'Welcome to Project'</span><span class="p">,</span>
@@ -245,16 +248,16 @@
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nx">totalPage</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">total</span> <span class="o">/</span> <span class="k">this</span><span class="p">.</span><span class="nx">limit</span><span class="p">);</span>
-    <span class="p">},</span>
-    <span class="nx">showingPages</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="p">[];</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">totalPage</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">temp</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="nx">temp</span><span class="p">;</span>
-    <span class="p">}</span>
+  	<span class="nx">totalPage</span><span class="p">()</span> <span class="p">{</span>
+  		<span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">total</span> <span class="o">/</span> <span class="k">this</span><span class="p">.</span><span class="nx">limit</span><span class="p">);</span>
+  	<span class="p">},</span>
+  	<span class="nx">showingPages</span><span class="p">()</span> <span class="p">{</span>
+  		<span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="p">[];</span>
+  		<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">totalPage</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  			<span class="nx">temp</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+  		<span class="p">}</span>
+  		<span class="k">return</span> <span class="nx">temp</span><span class="p">;</span>
+  	<span class="p">}</span>
   <span class="p">},</span>
   <span class="nx">mounted</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">getProjects</span><span class="p">();</span>
@@ -262,7 +265,7 @@
   <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
     <span class="c1">// 翻页</span>
     <span class="nx">onRouter</span><span class="p">(</span><span class="nx">page</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="err">`</span><span class="o">/</span><span class="nx">project</span><span class="o">/</span><span class="nx">library</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">page</span><span class="p">}</span><span class="err">`</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">`/project/library/</span><span class="p">${</span><span class="nx">page</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
     <span class="p">},</span>
 
     <span class="c1">// 获取项目数据</span>
@@ -274,18 +277,18 @@
       <span class="p">}).</span><span class="nx">then</span><span class="p">(</span> <span class="nx">res</span><span class="o">=&gt;</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">token</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">token</span><span class="p">;</span>
         <span class="c1">// 获取projects</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">$axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'http://test.pandanc.com/api/v1/projects/project/'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">$axios</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'http://test.pandanc.com/api/v1/projects/project/'</span><span class="p">,</span> <span class="p">{</span>
           <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
             <span class="na">limit</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">limit</span><span class="p">,</span>
             <span class="na">offset</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">limit</span> <span class="o">*</span> <span class="p">(</span><span class="nx">page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span>
             <span class="na">ordering</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">defaultOrdering</span>
           <span class="p">},</span>
           <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-            <span class="na">Authorization</span><span class="p">:</span> <span class="err">`</span><span class="nx">JWT</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">token</span><span class="p">}</span><span class="err">`</span>
+            <span class="na">Authorization</span><span class="p">:</span> <span class="s2">`JWT </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
           <span class="p">},</span>
         <span class="p">}).</span><span class="nx">then</span><span class="p">(</span> <span class="nx">res</span><span class="o">=&gt;</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">projects</span> <span class="o">=</span> <span class="p">[];</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">total</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+        	<span class="k">this</span><span class="p">.</span><span class="nx">projects</span> <span class="o">=</span> <span class="p">[];</span>
+        	<span class="k">this</span><span class="p">.</span><span class="nx">total</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">projects</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">results</span><span class="p">;</span>
         <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
@@ -306,7 +309,7 @@
     <span class="c1">//     console.log(err);</span>
     <span class="c1">//   })</span>
     <span class="c1">// },</span>
-
+    
     <span class="c1">// getProjects() {</span>
     <span class="c1">//   this.$axios.get('http://test.pandanc.com/api/v1/projects/project/', {</span>
     <span class="c1">//     headers: {</span>
@@ -328,28 +331,30 @@
   <span class="nl">list-style-type</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nf">#turn</span> <span class="p">{</span>
-    <span class="nl">margin</span><span class="p">:</span> <span class="m">20px</span> <span class="nb">auto</span><span class="p">;</span>
+	<span class="nl">margin</span><span class="p">:</span> <span class="m">20px</span> <span class="nb">auto</span><span class="p">;</span>
     <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
     <span class="nl">line-height</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nf">#turn</span> <span class="nt">li</span><span class="p">{</span>
-    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
-    <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
-    <span class="nl">width</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
-    <span class="nl">border</span><span class="p">:</span><span class="m">1px</span> <span class="nb">solid</span> <span class="no">green</span><span class="p">;</span>
-    <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+	<span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+	<span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+	<span class="nl">width</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
+	<span class="nl">border</span><span class="p">:</span><span class="m">1px</span> <span class="nb">solid</span> <span class="no">green</span><span class="p">;</span>
+	<span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>src/App.vue</p>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;template&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;template&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"app"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;router-view</span> <span class="na">:key=</span><span class="s">"key"</span><span class="nt">&gt;&lt;/router-view&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/template&gt;</span>
 
 <span class="nt">&lt;script&gt;</span>
-<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
   <span class="na">name</span><span class="p">:</span> <span class="s1">'App'</span><span class="p">,</span>
   <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
     <span class="nx">key</span><span class="p">()</span> <span class="p">{</span>
@@ -360,17 +365,21 @@
   <span class="p">}</span>
 <span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>src/main.js 新增</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">axios</span> <span class="k">from</span> <span class="s1">'axios'</span><span class="p">;</span>
 
 <span class="nx">Vue</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">$axios</span> <span class="o">=</span> <span class="nx">axios</span><span class="p">;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <h1 id="more">more</h1>
 
 <ul>
-<li>完整项目请看github, 项目v-page-turning-simple待上传，地址待添加。。。</li>
+  <li>完整项目请看github, 项目v-page-turning-simple待上传，地址待添加。。。</li>
 </ul>
+
   
 	</div>
 	<footer class="article-footer clearfix">

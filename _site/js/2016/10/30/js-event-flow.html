@@ -161,8 +161,7 @@
 		
 		</div>
 		
-		<h1 id="dom">DOM事件流</h1>
-
+		<h1 id="dom事件流">DOM事件流</h1>
 <p>DOM事件流</p>
 
 <p>DOM2级事件规定事件包括三个阶段：</p>
@@ -173,7 +172,7 @@
 
 <p>③ 事件冒泡阶段</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -182,40 +181,38 @@
 7
 8
 9
-10</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+10
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;&lt;/div&gt;</span>       
+	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;&lt;/div&gt;</span>		
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="event-capturing">事件捕获event capturing</h1>
+<h1 id="事件捕获event-capturing">事件捕获event capturing</h1>
+<p>如果点击div元素，事件捕获的传播顺序</p>
 
-<p>如果点击div元素，事件捕获的传播顺序  </p>
+<p>**  window对象<br />
+(1) document对象<br />
+(2) html<br />
+(3) body<br />
+(4) div</p>
 
-<p>**  window对象<br><br>
-(1) document对象<br><br>
-(2) html<br><br>
-(3) body<br><br>
-(4) div  </p>
-
-<p>尽管“DOM2级事件”规范要求事件应该从document对象开始传播和结束，但大部分兼容标准的浏览器会继续将事件的捕获和冒泡延伸到window对象。  </p>
+<p>尽管“DOM2级事件”规范要求事件应该从document对象开始传播和结束，但大部分兼容标准的浏览器会继续将事件的捕获和冒泡延伸到window对象。</p>
 
 <p>由于老版本的浏览器（such as: IE8及以下版本）不支持事件流，所以很少有人使用事件捕获。</p>
 
-<h1 id="event-bubbling">事件冒泡event bubbling</h1>
-
-<p>如果点击div元素，事件冒泡的传播顺序<br><br>
-(1) div<br><br>
-(2) body<br><br>
-(3) html<br><br>
-(4) document<br><br>
-**  window对象  </p>
+<h1 id="事件冒泡event-bubbling">事件冒泡event bubbling</h1>
+<p>如果点击div元素，事件冒泡的传播顺序<br />
+(1) div<br />
+(2) body<br />
+(3) html<br />
+(4) document<br />
+**  window对象</p>
 
 <p>注：【IE9、Firefox、chrome、Safari 会将事件冒泡到window对象】</p>
 
@@ -223,16 +220,16 @@
 
 <p>我们在注册事件的时候，通常使用的是 捕获 或者 冒泡 的 一种：</p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
-2</pre></td><td class="code"><pre><span class="nx">obj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="nx">func</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">// 捕获方式</span>
-<span class="nx">obj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="nx">func</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span> <span class="c1">// 冒泡方式</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nx">obj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="nx">func</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">// 捕获方式</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="nx">func</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span> <span class="c1">// 冒泡方式</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>事件只会因为捕获或者冒泡触发一次。</p>
 
 <p>example-1</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -262,48 +259,47 @@
 28
 29
 30
-31</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+31
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
    <span class="nf">#p</span> <span class="p">{</span> <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span> <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span> <span class="p">}</span>
    <span class="nf">#c</span> <span class="p">{</span> <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span> <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">red</span><span class="p">;</span> <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"p"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"p"</span><span class="nt">&gt;</span>
         parent
         <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"c"</span><span class="nt">&gt;</span>
             child
         <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>    
+    <span class="nt">&lt;/div&gt;</span>	
     <span class="nt">&lt;script&gt;</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"p"</span><span class="p">),</span>
-                <span class="nx">c</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"c"</span><span class="p">);</span>
-            <span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点捕获'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-            <span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点冒泡'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-        <span class="p">}</span>
+    	<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    		<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"p"</span><span class="p">),</span>
+    			<span class="nx">c</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"c"</span><span class="p">);</span>
+    		<span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点捕获'</span><span class="p">);</span>
+    		<span class="p">},</span><span class="kc">true</span><span class="p">);</span>
+    		<span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点冒泡'</span><span class="p">);</span>
+    		<span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+    	<span class="p">}</span>
     <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-<img src="/assets/images/2016/10-11-12/event-bubbling.png" alt="">
+<img src="/assets/images/2016/10-11-12/event-bubbling.png" alt="" />
 </div>
 
 <p>example-2</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -339,54 +335,53 @@
 34
 35
 36
-37</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+37
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
    <span class="nf">#p</span> <span class="p">{</span> <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span> <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span> <span class="p">}</span>
    <span class="nf">#c</span> <span class="p">{</span> <span class="nl">width</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span> <span class="nl">height</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span> <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">red</span><span class="p">;</span> <span class="p">}</span>
 <span class="nt">&lt;/style&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"p"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"p"</span><span class="nt">&gt;</span>
         parent
         <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"c"</span><span class="nt">&gt;</span>
             child
         <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>    
+    <span class="nt">&lt;/div&gt;</span>	
     <span class="nt">&lt;script&gt;</span>
-        <span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-            <span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"p"</span><span class="p">),</span>
-                <span class="nx">c</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"c"</span><span class="p">);</span>
-            <span class="nx">p</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'父节点捕获'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-            <span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点捕获'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-            <span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点冒泡'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-            <span class="nx">p</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'父节点冒泡'</span><span class="p">);</span>
-            <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-        <span class="p">}</span>
+    	<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+    		<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"p"</span><span class="p">),</span>
+    			<span class="nx">c</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"c"</span><span class="p">);</span>
+    		<span class="nx">p</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'父节点捕获'</span><span class="p">);</span>
+    		<span class="p">},</span><span class="kc">true</span><span class="p">);</span>
+    		<span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点捕获'</span><span class="p">);</span>
+    		<span class="p">},</span><span class="kc">true</span><span class="p">);</span>
+    		<span class="nx">c</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'子节点冒泡'</span><span class="p">);</span>
+    		<span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+    		<span class="nx">p</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="kd">function</span><span class="p">(){</span>
+    			<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'父节点冒泡'</span><span class="p">);</span>
+    		<span class="p">},</span><span class="kc">false</span><span class="p">);</span>
+    	<span class="p">}</span>
     <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-<img src="/assets/images/2016/10-11-12/event-capturing.png" alt="">
+<img src="/assets/images/2016/10-11-12/event-capturing.png" alt="" />
 </div>
 
-<h1 id="event-capturing">event capturing 完整例子</h1>
+<h1 id="event-capturing-完整例子">event capturing 完整例子</h1>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -428,75 +423,77 @@
 40
 41
 42
-43</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+43
+</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>test<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
-    
-    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;</span>click me, 事件捕获完整阶段<span class="nt">&lt;/div&gt;</span> 
+	
+	<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"myDiv"</span><span class="nt">&gt;</span>click me, 事件捕获完整阶段<span class="nt">&lt;/div&gt;</span>	
 
 <span class="nt">&lt;script&gt;</span>
     <span class="kd">var</span> <span class="nx">myDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"myDiv"</span><span class="p">);</span>
 
     <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件捕获"</span><span class="p">);</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件捕获"</span><span class="p">);</span>
     <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
     
     <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件捕获，once again"</span><span class="p">);</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件捕获，once again"</span><span class="p">);</span>
     <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
 
     <span class="nx">myDiv</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件冒泡"</span><span class="p">);</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"div 事件冒泡"</span><span class="p">);</span>
     <span class="p">},</span><span class="kc">false</span><span class="p">);</span>
-    
+	
     <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"window 事件捕获"</span><span class="p">);</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"window 事件捕获"</span><span class="p">);</span>
     <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
 
     <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"document 事件捕获"</span><span class="p">);</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"document 事件捕获"</span><span class="p">);</span>
     <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
 
     <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"html 事件捕获"</span><span class="p">);</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"html 事件捕获"</span><span class="p">);</span>
     <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
 
     <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"body 事件捕获"</span><span class="p">);</span>
+    	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"body 事件捕获"</span><span class="p">);</span>
     <span class="p">},</span><span class="kc">true</span><span class="p">);</span>
-<span class="nt">&lt;/script&gt;</span>     
+<span class="nt">&lt;/script&gt;</span>		
 <span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span><span class="w">
-</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>在div事件捕获阶段注册的两个事件按照注册顺序执行</p>
 
 <p><strong><em>result display</em></strong></p>
-
 <div class="rd">
-    <img src="/assets/images/2016/10-11-12/10-30-1.png" alt="">
+    <img src="/assets/images/2016/10-11-12/10-30-1.png" alt="" />
 </div>
 
-<h1 id="dom">给一个dom同时绑定两个点击事件</h1>
+<h1 id="给一个dom同时绑定两个点击事件">给一个dom同时绑定两个点击事件</h1>
 
 <ul>
-<li>我们给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。会执行几次事件，会先执行冒泡还是捕获？</li>
+  <li>我们给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。会执行几次事件，会先执行冒泡还是捕获？</li>
 </ul>
 
 <blockquote>
-<p>如果点击的为目标元素，<code>目标元素</code>的事情按<code>事件定义的顺序</code>从上到下顺序执行，</p>
-
-<p>而<code>其他元素</code>根据W3C的标准执行，即<code>先捕获后冒泡</code>。</p>
+  <p>如果点击的为目标元素，<code class="highlighter-rouge">目标元素</code>的事情按<code class="highlighter-rouge">事件定义的顺序</code>从上到下顺序执行，</p>
 </blockquote>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+
+<blockquote>
+  <p>而<code class="highlighter-rouge">其他元素</code>根据W3C的标准执行，即<code class="highlighter-rouge">先捕获后冒泡</code>。</p>
+</blockquote>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
+	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;style&gt;</span>
 
 <span class="nt">&lt;/style&gt;</span>
@@ -529,14 +526,16 @@
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>如果点击parent: 父节点冒泡, 父节点捕获;</p>
 
 <p>如果点击child: 父节点捕获, 子节点捕获, 子节点冒泡, 父节点冒泡</p>
 
 <p><a href="https://blog.csdn.net/u011719449/article/details/23787627">W3C下的冒泡和捕获机制。到底是冒泡呢。还是捕获呢。一个DOM元素绑定多个事件时如何执行。</a></p>
 
-<h1 id="more">更多-more</h1>
+<h1 id="更多-more">更多-more</h1>
+
   
 	</div>
 	<footer class="article-footer clearfix">

@@ -161,55 +161,58 @@
 		
 		</div>
 		
-		<h1 id="adapter">适配器模式-Adapter</h1>
+		<h1 id="适配器模式-adapter">适配器模式-Adapter</h1>
 
-<h1 id="adapter">Adapter 介绍</h1>
+<h1 id="adapter-介绍">Adapter 介绍</h1>
 
-<p><strong>适配器模式（ Adapter ）：</strong>将一个类（对象）的接口（属性或者方法）转化成另外一个接口，以满足用户需求，使类（对象）之间的<code>接口不兼容</code>问题通过适配器得以解决。</p>
+<p><strong>适配器模式（ Adapter ）：</strong>将一个类（对象）的接口（属性或者方法）转化成另外一个接口，以满足用户需求，使类（对象）之间的<code class="highlighter-rouge">接口不兼容</code>问题通过适配器得以解决。</p>
 
-<h1 id="adapter-amp-uml">Adapter 示例 &amp; UML</h1>
+<h1 id="adapter-示例--uml">Adapter 示例 &amp; UML</h1>
 
 <p>➊ 电源插头转换器</p>
 
 <p>➋ 电源电压转换器</p>
 
 <div class="rd">
-    <img src="/assets/images/2019/4-5-6/4-27-1.png" alt="">
+    <img src="/assets/images/2019/4-5-6/4-27-1.png" alt="" />
 </div>
 
-<h1 id="adapter">Adapter 代码</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 不能使用的插头</span>
-<span class="kr">class</span> <span class="nx">Adapte</span> <span class="p">{</span>
-    <span class="nx">specificRequest</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="s1">'德国标准的插头'</span><span class="p">;</span>
-    <span class="p">}</span>
+<h1 id="adapter-代码">Adapter 代码</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 不能使用的插头</span>
+<span class="kd">class</span> <span class="nx">Adapte</span> <span class="p">{</span>
+	<span class="nx">specificRequest</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="s1">'德国标准的插头'</span><span class="p">;</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 中间转换器</span>
-<span class="kr">class</span> <span class="nx">Target</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">adapte</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Adapte</span><span class="p">();</span>
-    <span class="p">}</span>
-    <span class="nx">request</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kd">let</span> <span class="nx">info</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">adapte</span><span class="p">.</span><span class="nx">specificRequest</span><span class="p">();</span>
-        <span class="k">return</span> <span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">info</span><span class="p">}</span> <span class="o">-&gt;</span> <span class="err">转换器</span> <span class="o">-&gt;</span> <span class="err">中国标准的插头`</span>
-    <span class="p">}</span>
+<span class="kd">class</span> <span class="nx">Target</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">adapte</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Adapte</span><span class="p">();</span>
+	<span class="p">}</span>
+	<span class="nx">request</span><span class="p">()</span> <span class="p">{</span>
+		<span class="kd">let</span> <span class="nx">info</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">adapte</span><span class="p">.</span><span class="nx">specificRequest</span><span class="p">();</span>
+		<span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">info</span><span class="p">}</span><span class="s2"> -&gt; 转换器 -&gt; 中国标准的插头`</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 测试</span>
 <span class="kd">let</span> <span class="nx">target</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Target</span><span class="p">();</span>
 <span class="kd">let</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">target</span><span class="p">.</span><span class="nx">request</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
-</code></pre></div>
-<h1 id="adapter">Adapter 使用场景</h1>
+</code></pre></div></div>
 
-<p>① 封装旧接口<br>
+<h1 id="adapter-使用场景">Adapter 使用场景</h1>
+
+<p>① 封装旧接口
 ② vue computed</p>
 
 <p>在传统设计模式中，适配器模式往往是适配两个类接口不兼容的问题，然而在 JS 中，适配器的应用更广，比如适配两个代码库、适配参数对象、适配前后端数据等等。</p>
 
-<h2 id="ajax">ajax封装</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 自己封装的 ajax ,使用方法如下：</span>
+<h2 id="ajax封装">ajax封装</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 自己封装的 ajax ,使用方法如下：</span>
 <span class="nx">ajax</span><span class="p">({</span>
     <span class="na">url</span><span class="p">:</span> <span class="s1">'/getData'</span><span class="p">,</span>
     <span class="na">type</span><span class="p">:</span> <span class="s1">'Post'</span><span class="p">,</span>
@@ -222,19 +225,25 @@
 
 <span class="c1">// 但是因为历史原因，代码中全是：</span>
 <span class="c1">// $.ajax({})</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 做一层适配器</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 做一层适配器</span>
 <span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">ajax</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">ajax</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <h2 id="vue-computed">vue computed</h2>
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"example"</span><span class="nt">&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"example"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;p&gt;</span> Original message : ""<span class="nt">&lt;/p&gt;</span>
     <span class="nt">&lt;p&gt;</span>Computed reversed message : ""<span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">vm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
     <span class="na">el</span><span class="p">:</span> <span class="s1">'#example'</span><span class="p">,</span>
     <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">message</span><span class="p">:</span> <span class="s1">'Hello'</span>
@@ -247,12 +256,17 @@
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">})</span>
-</code></pre></div>
-<h1 id="adapter">Adapter 设计原则验证</h1>
+</code></pre></div></div>
+
+<h1 id="adapter-设计原则验证">Adapter 设计原则验证</h1>
 
 <ul>
-<li><p>将旧接口和使用者进行分离</p></li>
-<li><p>符合开放封闭原则</p></li>
+  <li>
+    <p>将旧接口和使用者进行分离</p>
+  </li>
+  <li>
+    <p>符合开放封闭原则</p>
+  </li>
 </ul>
   
 	</div>

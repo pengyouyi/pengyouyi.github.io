@@ -161,104 +161,133 @@
 		
 		</div>
 		
-		<h1 id="js-amp-uml">js设计模式-面向对象 &amp; UML类图介绍</h1>
+		<h1 id="js设计模式-面向对象--uml类图介绍">js设计模式-面向对象 &amp; UML类图介绍</h1>
 
 <p>OOP： Object Oriented Programming</p>
 
 <p>面向对象编程</p>
 
-<h1 id="oop">OOP概念</h1>
+<h1 id="oop概念">OOP概念</h1>
 
-<p>面向对象编程就是将你的需求抽象成一个<code>对象</code>，然后针对这个对象分析其特征（<code>属性</code>）与动作（<code>方法</code>）。这个对象我们称之为<code>类</code>。</p>
+<p>面向对象编程就是将你的需求抽象成一个<code class="highlighter-rouge">对象</code>，然后针对这个对象分析其特征（<code class="highlighter-rouge">属性</code>）与动作（<code class="highlighter-rouge">方法</code>）。这个对象我们称之为<code class="highlighter-rouge">类</code>。</p>
 
 <p>JavaScript 是一种解释性的弱类型语言（无类语言），但是可以使用函数来模拟类。</p>
 
-<h2 id="es5">ES5 创建对象</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 类，创建一个类</span>
+<h2 id="es5-创建对象">ES5 创建对象</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 类，创建一个类</span>
 <span class="kd">var</span> <span class="nx">People</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nx">People</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">eat</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span> <span class="nx">eat</span> <span class="nx">something</span><span class="err">`</span><span class="p">)</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> eat something`</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="c1">// 创建实例</span>
 <span class="kd">let</span> <span class="nx">zhang</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">People</span><span class="p">(</span><span class="s1">'zhang'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
 <span class="nx">zhang</span><span class="p">.</span><span class="nx">eat</span><span class="p">();</span>
-</code></pre></div>
-<h2 id="es6">ES6 创建对象</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 类 Class，创建一个类</span>
-<span class="kr">class</span> <span class="nx">People</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">){</span>
+</code></pre></div></div>
+
+<h2 id="es6-创建对象">ES6 创建对象</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 类 Class，创建一个类</span>
+<span class="kd">class</span> <span class="nx">People</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">){</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="nx">eat</span><span class="p">(){</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span> <span class="nx">eat</span> <span class="nx">something</span><span class="err">`</span><span class="p">)</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> eat something`</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 对象（实例）,创建实例</span>
 <span class="kd">let</span> <span class="nx">zhang</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">People</span><span class="p">(</span><span class="s1">'zhang'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
 <span class="nx">zhang</span><span class="p">.</span><span class="nx">eat</span><span class="p">();</span>
-</code></pre></div>
-<h1 id="oop">OOP三要素：继承、封装、多态</h1>
+</code></pre></div></div>
+
+<h1 id="oop三要素继承封装多态">OOP三要素：继承、封装、多态</h1>
 
 <ul>
-<li><p>继承，子类继承父类</p></li>
-<li><p>封装，数据的权限和保密</p></li>
-<li><p>多态，同一接口不同实现</p></li>
+  <li>
+    <p>继承，子类继承父类</p>
+  </li>
+  <li>
+    <p>封装，数据的权限和保密</p>
+  </li>
+  <li>
+    <p>多态，同一接口不同实现</p>
+  </li>
 </ul>
 
-<h2 id="oop">OOP 继承</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 父类</span>
-<span class="kr">class</span> <span class="nx">People</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">){</span>
+<h2 id="oop-继承">OOP 继承</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 父类</span>
+<span class="kd">class</span> <span class="nx">People</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">){</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="nx">speak</span><span class="p">(){</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="err">`</span><span class="nx">My</span> <span class="nx">name</span> <span class="nx">is</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">},</span> <span class="nx">age</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">`My name is </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">, age </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 子类继承父类</span>
-<span class="kr">class</span> <span class="nx">Student</span> <span class="kr">extends</span> <span class="nx">People</span> <span class="p">{</span>
-  <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kr">super</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 子类继承父类</span>
+<span class="kd">class</span> <span class="nx">Student</span> <span class="kd">extends</span> <span class="nx">People</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">super</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">);</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">number</span> <span class="o">=</span> <span class="nx">number</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="nx">study</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">alert</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span> <span class="nx">study</span><span class="err">`</span><span class="p">)</span>
+      <span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> study`</span><span class="p">)</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 实例</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 实例</span>
 <span class="kd">let</span> <span class="nx">xiaoming</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Student</span><span class="p">(</span><span class="s1">'xiaoming'</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'A1'</span><span class="p">);</span>
 <span class="nx">xiaoming</span><span class="p">.</span><span class="nx">study</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xiaoming</span><span class="p">.</span><span class="nx">number</span><span class="p">);</span>
 <span class="nx">xiaoming</span><span class="p">.</span><span class="nx">speak</span><span class="p">();</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <ul>
-<li><p>People 是父类，公共的，不仅仅服务于 Student</p></li>
-<li><p>继承可将公共方法抽离出来，提高复用，减少冗余</p></li>
+  <li>
+    <p>People 是父类，公共的，不仅仅服务于 Student</p>
+  </li>
+  <li>
+    <p>继承可将公共方法抽离出来，提高复用，减少冗余</p>
+  </li>
 </ul>
 
-<h2 id="oop">OOP 封装</h2>
+<h2 id="oop-封装">OOP 封装</h2>
 
 <ul>
-<li><p>public 完全开放</p></li>
-<li><p>protected 对子类开放</p></li>
-<li><p>private 对自己开放</p></li>
-<li><p>（ES6尚不支持）</p></li>
+  <li>
+    <p>public 完全开放</p>
+  </li>
+  <li>
+    <p>protected 对子类开放</p>
+  </li>
+  <li>
+    <p>private 对自己开放</p>
+  </li>
+  <li>
+    <p>（ES6尚不支持）</p>
+  </li>
 </ul>
 
 <p><strong>Javascript 是函数级作用域</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">Book</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Book</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 私有属性</span>
     <span class="kd">var</span> <span class="nx">num</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="c1">// 私有方法</span>
     <span class="kd">function</span> <span class="nx">checkId</span><span class="p">()</span> <span class="p">{</span>
-
+      
     <span class="p">}</span>
     <span class="c1">// 特权方法</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">getNum</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -296,32 +325,46 @@
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Book</span><span class="p">.</span><span class="nx">isChinese</span><span class="p">);</span> <span class="c1">// true</span>
 <span class="nx">Book</span><span class="p">.</span><span class="nx">resetTime</span><span class="p">();</span> <span class="c1">// 'new Time'</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p><strong>封装优点：</strong></p>
 
 <ul>
-<li><p>减少耦合，不该外露的不外露</p></li>
-<li><p>利于数据、接口的权限管理</p></li>
-<li><p>ES6目前不支持，一般认为 _ 开头的属性都是 private</p></li>
+  <li>
+    <p>减少耦合，不该外露的不外露</p>
+  </li>
+  <li>
+    <p>利于数据、接口的权限管理</p>
+  </li>
+  <li>
+    <p>ES6目前不支持，一般认为 _ 开头的属性都是 private</p>
+  </li>
 </ul>
 
-<h2 id="oop">OOP 多态</h2>
+<h2 id="oop-多态">OOP 多态</h2>
 
 <ul>
-<li><p>同一个接口，不同表现</p></li>
-<li><p>JS应用极少</p></li>
-<li><p>需要结合Java等语言的接口、重写、重载等功能</p></li>
+  <li>
+    <p>同一个接口，不同表现</p>
+  </li>
+  <li>
+    <p>JS应用极少</p>
+  </li>
+  <li>
+    <p>需要结合Java等语言的接口、重写、重载等功能</p>
+  </li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 多态</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 多态</span>
 <span class="kd">function</span> <span class="nx">add</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">arg</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">,</span>
+  <span class="kd">var</span> <span class="nx">arg</span> <span class="o">=</span> <span class="kr">arguments</span><span class="p">,</span>
       <span class="nx">length</span> <span class="o">=</span> <span class="nx">arg</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
   <span class="k">switch</span> <span class="p">(</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="mi">0</span><span class="err">:</span>
+    <span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">10</span><span class="p">;</span>
-    <span class="k">case</span> <span class="mi">1</span><span class="err">:</span>
+    <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">10</span> <span class="o">+</span> <span class="nx">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-    <span class="k">case</span> <span class="mi">2</span><span class="err">:</span>
+    <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">return</span> <span class="nx">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="nx">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -329,21 +372,33 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">());</span> <span class="c1">// 10</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span> <span class="c1">// 15</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span> <span class="c1">// 50</span>
-</code></pre></div>
-<ul>
-<li><p>保持子类的开放性和灵活性</p></li>
-<li><p>面向接口编程</p></li>
-<li><p>（JS引用极少，了解即可）</p></li>
-</ul>
-
-<h1 id="oop-js">OOP js的应用举例</h1>
+</code></pre></div></div>
 
 <ul>
-<li><p>jQuery 是一个 Class</p></li>
-<li><p>$(&#39;p&#39;) 是jQuery 的一个实例</p></li>
+  <li>
+    <p>保持子类的开放性和灵活性</p>
+  </li>
+  <li>
+    <p>面向接口编程</p>
+  </li>
+  <li>
+    <p>（JS引用极少，了解即可）</p>
+  </li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">jQuery</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">selector</span><span class="p">){</span>
+
+<h1 id="oop-js的应用举例">OOP js的应用举例</h1>
+
+<ul>
+  <li>
+    <p>jQuery 是一个 Class</p>
+  </li>
+  <li>
+    <p>$(‘p’) 是jQuery 的一个实例</p>
+  </li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">jQuery</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">selector</span><span class="p">){</span>
         <span class="kd">let</span> <span class="nx">slice</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">;</span>
         <span class="kd">let</span> <span class="nx">dom</span> <span class="o">=</span> <span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="nx">selector</span><span class="p">));</span>
         <span class="kd">let</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">dom</span> <span class="p">?</span> <span class="nx">dom</span><span class="p">.</span><span class="nx">length</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
@@ -354,13 +409,13 @@
         <span class="k">this</span><span class="p">.</span><span class="nx">selector</span> <span class="o">=</span> <span class="nx">selector</span> <span class="o">||</span> <span class="s2">""</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="nx">append</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
-
+    
     <span class="p">}</span>
     <span class="nx">addClass</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-
+    
     <span class="p">}</span>
     <span class="nx">html</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-
+    
     <span class="p">}</span>
     <span class="c1">// 此处省略若干API</span>
 <span class="p">}</span>
@@ -373,117 +428,150 @@
 <span class="kd">var</span> <span class="nx">$p</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$p</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$p</span><span class="p">.</span><span class="nx">addClass</span><span class="p">)</span>
-</code></pre></div>
-<h1 id="oop">OOP 的意义</h1>
+</code></pre></div></div>
+
+<h1 id="oop-的意义">OOP 的意义</h1>
 
 <p><strong>为何使用面向对象？</strong></p>
 
 <ul>
-<li><p>程序执行：顺序、判断、循环 - 结构化</p></li>
-<li><p>面向对象 - 数据结构化</p></li>
-<li><p>对于计算机，结构化的才是最简单的</p></li>
-<li><p>编程应该：简单&amp;抽象</p></li>
+  <li>
+    <p>程序执行：顺序、判断、循环 - 结构化</p>
+  </li>
+  <li>
+    <p>面向对象 - 数据结构化</p>
+  </li>
+  <li>
+    <p>对于计算机，结构化的才是最简单的</p>
+  </li>
+  <li>
+    <p>编程应该：简单&amp;抽象</p>
+  </li>
 </ul>
 
-<h1 id="uml">UML 类图-介绍</h1>
+<h1 id="uml-类图-介绍">UML 类图-介绍</h1>
 
 <ul>
-<li><p>Unified Modeling Language 统一建模语言</p></li>
-<li><p>类图，UML 包含很多种图，和本课相关的是类图</p></li>
-<li><p>关系，主要讲解泛化和关联</p></li>
-<li><p>演示，代码和类图结合</p></li>
+  <li>
+    <p>Unified Modeling Language 统一建模语言</p>
+  </li>
+  <li>
+    <p>类图，UML 包含很多种图，和本课相关的是类图</p>
+  </li>
+  <li>
+    <p>关系，主要讲解泛化和关联</p>
+  </li>
+  <li>
+    <p>演示，代码和类图结合</p>
+  </li>
 </ul>
 
 <p><strong>画图工具</strong></p>
 
 <ul>
-<li><p>MS Office Visio</p></li>
-<li><p><a href="https://www.processon.com">https://www.processon.com</a></p></li>
+  <li>
+    <p>MS Office Visio</p>
+  </li>
+  <li>
+    <p>https://www.processon.com</p>
+  </li>
 </ul>
 
 <p><strong>类图,属性、方法</strong></p>
 
-<table><thead>
-<tr>
-<th>类名</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>+ public 属性名A：类型 <br> # protected 属性名B：类型 <br> - private 属性名C：类型</td>
-</tr>
-<tr>
-<td>+ public 方法名A（参数1，参数2）: 返回值类型 <br> # protected 方法名A（参数1，参数2）: 返回值类型 <br> - private 方法名A（参数1，参数2）: 返回值类型</td>
-</tr>
-</tbody></table>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 父类</span>
-<span class="kr">class</span> <span class="nx">People</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">){</span>
+<table>
+  <thead>
+    <tr>
+      <th>类名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>+ public 属性名A：类型 <br /> # protected 属性名B：类型 <br /> - private 属性名C：类型</td>
+    </tr>
+    <tr>
+      <td>+ public 方法名A（参数1，参数2）: 返回值类型 <br /> # protected 方法名A（参数1，参数2）: 返回值类型 <br /> - private 方法名A（参数1，参数2）: 返回值类型</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 父类</span>
+<span class="kd">class</span> <span class="nx">People</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">){</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="nx">eat</span><span class="p">(){</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span> <span class="nx">eat</span> <span class="nx">something</span><span class="err">`</span><span class="p">)</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> eat something`</span><span class="p">)</span>
     <span class="p">}</span>
     <span class="nx">speak</span><span class="p">(){</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="err">`</span><span class="nx">My</span> <span class="nx">name</span> <span class="nx">is</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">},</span> <span class="nx">age</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="p">}</span><span class="err">`</span><span class="p">)</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">`My name is </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">, age </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">age</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div>
+</code></pre></div></div>
 <p>以上js的类图是</p>
 
-<table><thead>
-<tr>
-<th>People</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>+ name: String <br> + age: Number</td>
-</tr>
-<tr>
-<td>+ eat(): void <br> + speak(): void</td>
-</tr>
-</tbody></table>
+<table>
+  <thead>
+    <tr>
+      <th>People</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>+ name: String <br /> + age: Number</td>
+    </tr>
+    <tr>
+      <td>+ eat(): void <br /> + speak(): void</td>
+    </tr>
+  </tbody>
+</table>
 
-<h1 id="uml">UML类图-关系</h1>
+<h1 id="uml类图-关系">UML类图-关系</h1>
 
 <ul>
-<li><p>泛化，表示继承</p></li>
-<li><p>关联，表示引用</p></li>
+  <li>
+    <p>泛化，表示继承</p>
+  </li>
+  <li>
+    <p>关联，表示引用</p>
+  </li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">class</span> <span class="nx">People</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">People</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">house</span> <span class="o">=</span> <span class="nx">house</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="nx">saySomething</span><span class="p">()</span> <span class="p">{</span>
-
+    
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kr">class</span> <span class="nx">A</span> <span class="kr">extends</span> <span class="nx">People</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">);</span>
+<span class="kd">class</span> <span class="nx">A</span> <span class="kd">extends</span> <span class="nx">People</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="nx">saySomething</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">alert</span><span class="p">(</span><span class="s1">'I am A'</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kr">class</span> <span class="nx">B</span> <span class="kr">extends</span> <span class="nx">People</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">);</span>
+<span class="kd">class</span> <span class="nx">B</span> <span class="kd">extends</span> <span class="nx">People</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">house</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="nx">saySomething</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">alert</span><span class="p">(</span><span class="s1">'I am B'</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kr">class</span> <span class="nx">House</span> <span class="p">{</span>
-  <span class="nx">constructor</span><span class="p">(</span><span class="nx">city</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">class</span> <span class="nx">House</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">city</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">city</span> <span class="o">=</span> <span class="nx">city</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="nx">showCity</span><span class="p">()</span> <span class="p">{</span>
-      <span class="nx">alert</span><span class="p">(</span><span class="err">`</span><span class="nx">house</span> <span class="k">in</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">city</span><span class="p">}</span><span class="err">`</span><span class="p">);</span>
+      <span class="nx">alert</span><span class="p">(</span><span class="s2">`house in </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">city</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
@@ -494,9 +582,10 @@
 
 <span class="kd">let</span> <span class="nx">b</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">B</span><span class="p">(</span><span class="s1">'bbb'</span><span class="p">);</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span> <span class="c1">/// b无房子</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <div class="rd">
-    <img src="/assets/images/2019/4-5-6/4-22-1.png" alt="">
+    <img src="/assets/images/2019/4-5-6/4-22-1.png" alt="" />
 </div>
   
 	</div>

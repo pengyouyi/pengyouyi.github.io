@@ -161,62 +161,63 @@
 		
 		</div>
 		
-		<h1 id="observer">观察者模式-Observer</h1>
+		<h1 id="观察者模式-observer">观察者模式-Observer</h1>
 
-<h1 id="observer">Observer 介绍</h1>
+<h1 id="observer-介绍">Observer 介绍</h1>
 
 <p><strong>观察者模式（ Observer ）：</strong>又被称作发布-订阅者模式或消息机制，定义了一种依赖关系，解决了主体对象与观察者之间功能的耦合。</p>
 
 <ul>
-<li>一对多</li>
+  <li>一对多</li>
 </ul>
 
 <p>观察者模式在前端中使用是最多的。重点学习.</p>
 
-<h1 id="observer-amp-uml">Observer 示例 &amp; UML</h1>
+<h1 id="observer-示例--uml">Observer 示例 &amp; UML</h1>
 
 <ul>
-<li>点咖啡，点好之后坐等被叫</li>
+  <li>点咖啡，点好之后坐等被叫</li>
 </ul>
 
 <div class="rd">
-    <img src="/assets/images/2019/4-5-6/5-2-1.png" alt="">
+    <img src="/assets/images/2019/4-5-6/5-2-1.png" alt="" />
 </div>
 
-<h1 id="observer">Observer 代码</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 主体，保存状态，状态变化之后触发所有观察者对象</span>
-<span class="kr">class</span> <span class="nx">Subject</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">observers</span> <span class="o">=</span> <span class="p">[];</span>
+<h1 id="observer-代码">Observer 代码</h1>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 主体，保存状态，状态变化之后触发所有观察者对象</span>
+<span class="kd">class</span> <span class="nx">Subject</span> <span class="p">{</span>
+    <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    	<span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    	<span class="k">this</span><span class="p">.</span><span class="nx">observers</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="p">}</span>
     <span class="nx">getState</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+    	<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="nx">setState</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">state</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">notifyAllObservers</span><span class="p">();</span>
+    	<span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="nx">state</span><span class="p">;</span>
+    	<span class="k">this</span><span class="p">.</span><span class="nx">notifyAllObservers</span><span class="p">();</span>
     <span class="p">}</span>
     <span class="nx">notifyAllObservers</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">observers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">{</span>
-            <span class="nx">item</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
-        <span class="p">})</span>
+    	<span class="k">this</span><span class="p">.</span><span class="nx">observers</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">item</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    		<span class="nx">item</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+    	<span class="p">})</span>
     <span class="p">}</span>
     <span class="nx">attach</span><span class="p">(</span><span class="nx">observer</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">observers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">observer</span><span class="p">);</span>
+    	<span class="k">this</span><span class="p">.</span><span class="nx">observers</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">observer</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// 观察者</span>
-<span class="kr">class</span> <span class="nx">Observer</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">subject</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">subject</span> <span class="o">=</span> <span class="nx">subject</span><span class="p">;</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">subject</span><span class="p">.</span><span class="nx">attach</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="nx">update</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span> <span class="nx">update</span><span class="p">,</span> <span class="nx">state</span> <span class="nx">$</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">subject</span><span class="p">.</span><span class="nx">getState</span><span class="p">()}</span><span class="err">`</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="kd">class</span> <span class="nx">Observer</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">subject</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">subject</span> <span class="o">=</span> <span class="nx">subject</span><span class="p">;</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">subject</span><span class="p">.</span><span class="nx">attach</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="nx">update</span><span class="p">()</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> update, state </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">subject</span><span class="p">.</span><span class="nx">getState</span><span class="p">()}</span><span class="s2">`</span><span class="p">);</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="c1">// test</span>
@@ -226,8 +227,9 @@
 
 <span class="nx">subject</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="nx">subject</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre></div>
-<h1 id="observer">Observer 场景</h1>
+</code></pre></div></div>
+
+<h1 id="observer-场景">Observer 场景</h1>
 
 <p>➊ 网页事件绑定</p>
 
@@ -237,10 +239,11 @@
 
 <p>➍ nodejs 自定义事件</p>
 
-<h2 id="event-binding">网页事件绑定-Event binding</h2>
+<h2 id="网页事件绑定-event-binding">网页事件绑定-Event binding</h2>
 
 <p>网页事件监听机制：点击、拖拽都是观察者模式。</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">button</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"btn1"</span><span class="o">&gt;</span><span class="nx">btn</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">button</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"btn1"</span><span class="o">&gt;</span><span class="nx">btn</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>
 <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
     <span class="nx">$</span><span class="p">(</span><span class="s1">'#btn1'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -253,11 +256,13 @@
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
     <span class="p">});</span>
 <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
-</span></code></pre></div>
+</span></code></pre></div></div>
+
 <h2 id="promise">Promise</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 加载图片</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 加载图片</span>
 <span class="kd">function</span> <span class="nx">loadImg</span><span class="p">(</span><span class="nx">src</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">img</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'img'</span><span class="p">);</span>
         <span class="nx">img</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
             <span class="nx">resolve</span><span class="p">(</span><span class="nx">img</span><span class="p">);</span>
@@ -281,11 +286,13 @@
 <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">ex</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ex</span><span class="p">)</span>
 <span class="p">});</span>
-</code></pre></div>
-<p>.then也是观察者，监听Promise的resolve变为成功状态或者reject失败状态。 </p>
+</code></pre></div></div>
+
+<p>.then也是观察者，监听Promise的resolve变为成功状态或者reject失败状态。</p>
 
 <h2 id="jquery-callbacks">jQuery callbacks</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Callbacks</span><span class="p">();</span> <span class="c1">// 注意大小写</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">callbacks</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">Callbacks</span><span class="p">();</span> <span class="c1">// 注意大小写</span>
 
 <span class="nx">callbacks</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'fn1'</span><span class="p">,</span> <span class="nx">info</span><span class="p">)</span>
@@ -299,102 +306,120 @@
 
 <span class="nx">callbacks</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">'gogogo'</span><span class="p">);</span>
 <span class="nx">callbacks</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">'fire'</span><span class="p">);</span>
-</code></pre></div>
+</code></pre></div></div>
+
 <p>运行结果：</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">fn1</span> <span class="nx">gogogo</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fn1</span> <span class="nx">gogogo</span>
 <span class="nx">fn2</span> <span class="nx">gogogo</span>
 <span class="nx">fn3</span> <span class="nx">gogogo</span>
 <span class="nx">fn1</span> <span class="nx">fire</span>
 <span class="nx">fn2</span> <span class="nx">fire</span>
 <span class="nx">fn3</span> <span class="nx">fire</span>
-</code></pre></div>
-<h2 id="2-nodejs">场景2-NodeJs自定义事件</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">EventEmitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'events'</span><span class="p">).</span><span class="nx">EventEmitter</span><span class="p">;</span>
+</code></pre></div></div>
 
-<span class="kr">const</span> <span class="nx">emitter1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="p">();</span>
+<h2 id="场景2-nodejs自定义事件">场景2-NodeJs自定义事件</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">EventEmitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'events'</span><span class="p">).</span><span class="nx">EventEmitter</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">emitter1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventEmitter</span><span class="p">();</span>
 
 <span class="nx">emitter1</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'some'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// 监听some事件</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'some event is occured 1'</span><span class="p">)</span>
+	<span class="c1">// 监听some事件</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'some event is occured 1'</span><span class="p">)</span>
 <span class="p">})</span>
 
 <span class="nx">emitter1</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'some'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// 监听some事件</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'some event is occured 2'</span><span class="p">)</span>
+	<span class="c1">// 监听some事件</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'some event is occured 2'</span><span class="p">)</span>
 <span class="p">})</span>
 
 <span class="nx">emitter1</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'some'</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="eventemitter">继承 EventEmitter</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">EventEmitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'events'</span><span class="p">).</span><span class="nx">EventEmitter</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="继承-eventemitter">继承 EventEmitter</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">EventEmitter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'events'</span><span class="p">).</span><span class="nx">EventEmitter</span><span class="p">;</span>
 
 <span class="c1">// 任何构造函数都可以继承 EventEmitter 的方法 on emit</span>
-<span class="kr">class</span> <span class="nx">Dog</span> <span class="kr">extends</span> <span class="nx">EventEmitter</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">();</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="kd">class</span> <span class="nx">Dog</span> <span class="kd">extends</span> <span class="nx">EventEmitter</span> <span class="p">{</span>
+	<span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">super</span><span class="p">();</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">var</span> <span class="nx">simon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">(</span><span class="s1">'simon'</span><span class="p">);</span>
 <span class="nx">simon</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'bark'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="s1">' barked'</span><span class="p">);</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="s1">' barked'</span><span class="p">);</span>
 <span class="p">})</span>
 
 <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">simon</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'bark'</span><span class="p">)</span>
+	<span class="nx">simon</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'bark'</span><span class="p">)</span>
 <span class="p">},</span> <span class="mi">2000</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="character">统计文件有多少个字符-character</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Stream 用到了自定义事件</span>
-<span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">readStream</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s1">'./data/file.txt'</span><span class="p">);</span> <span class="c1">// 读取文件的 Stream</span>
+</code></pre></div></div>
+
+<h3 id="统计文件有多少个字符-character">统计文件有多少个字符-character</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Stream 用到了自定义事件</span>
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">readStream</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s1">'./data/file.txt'</span><span class="p">);</span> <span class="c1">// 读取文件的 Stream</span>
 
 <span class="kd">let</span> <span class="nx">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
 <span class="nx">readStream</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">chunk</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">let</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">chunk</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">length</span><span class="p">;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'len'</span><span class="p">,</span> <span class="nx">len</span><span class="p">);</span>
-    <span class="nx">length</span> <span class="o">+=</span> <span class="nx">len</span><span class="p">;</span>
+	<span class="kd">let</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">chunk</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">length</span><span class="p">;</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'len'</span><span class="p">,</span> <span class="nx">len</span><span class="p">);</span>
+	<span class="nx">length</span> <span class="o">+=</span> <span class="nx">len</span><span class="p">;</span>
 <span class="p">})</span>
 
 <span class="nx">readStream</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">length</span><span class="p">);</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">length</span><span class="p">);</span>
 <span class="p">})</span>
-</code></pre></div>
-<h3 id="row">统计文件有多少行-row</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">readline</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'readline'</span><span class="p">);</span>
-<span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="统计文件有多少行-row">统计文件有多少行-row</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">readline</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'readline'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
 
 <span class="kd">let</span> <span class="nx">rl</span> <span class="o">=</span> <span class="nx">readline</span><span class="p">.</span><span class="nx">createInterface</span><span class="p">({</span>
-    <span class="na">input</span><span class="p">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s1">'./data/file.txt'</span><span class="p">)</span>
+	<span class="na">input</span><span class="p">:</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">createReadStream</span><span class="p">(</span><span class="s1">'./data/file.txt'</span><span class="p">)</span>
 <span class="p">})</span>
 
 <span class="kd">let</span> <span class="nx">lineNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
 <span class="nx">rl</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'line'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">line</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">lineNum</span><span class="o">++</span><span class="p">;</span>
+	<span class="nx">lineNum</span><span class="o">++</span><span class="p">;</span>
 <span class="p">})</span>
 
 <span class="nx">rl</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'close'</span><span class="p">,</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'lineNum'</span><span class="p">,</span> <span class="nx">lineNum</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'lineNum'</span><span class="p">,</span> <span class="nx">lineNum</span><span class="p">)</span>
 <span class="p">})</span>
-</code></pre></div>
-<h2 id="other">其他场景-other</h2>
+</code></pre></div></div>
+
+<h2 id="其他场景-other">其他场景-other</h2>
 
 <ul>
-<li><p>nodejs 中：处理 http 请求；多进程通讯</p></li>
-<li><p>vue 和 React 组件生命周期触发</p></li>
-<li><p>vue watch data的变化</p></li>
+  <li>
+    <p>nodejs 中：处理 http 请求；多进程通讯</p>
+  </li>
+  <li>
+    <p>vue 和 React 组件生命周期触发</p>
+  </li>
+  <li>
+    <p>vue watch data的变化</p>
+  </li>
 </ul>
 
-<h1 id="observer">Observer 设计原则验证</h1>
+<h1 id="observer-设计原则验证">Observer 设计原则验证</h1>
 
 <ul>
-<li>主体和观察者分离，不是主动触发而是被动监听，两者解耦</li>
+  <li>主体和观察者分离，不是主动触发而是被动监听，两者解耦</li>
 </ul>
 
 <p>符合开放封闭原则</p>
+
   
 	</div>
 	<footer class="article-footer clearfix">
