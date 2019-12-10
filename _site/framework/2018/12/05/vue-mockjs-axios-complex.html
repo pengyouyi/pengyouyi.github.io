@@ -308,7 +308,7 @@ npm install axios <span class="nt">--save-dev</span>
 
 <h2 id="创建请求api方法">创建请求api方法</h2>
 
-<p>新建 src/feedback.js</p>
+<p>新建 src/api/feedback.js</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">HTTP</span> <span class="k">from</span> <span class="s1">'../utils/fetch'</span><span class="p">;</span>
 
@@ -394,11 +394,76 @@ npm install axios <span class="nt">--save-dev</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
+<h1 id="mockjs深入学习">mockjs深入学习</h1>
+
+<h2 id="mockjs生成随机对象">mockjs生成随机对象</h2>
+
+<p>src/mock/feecback.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Mock</span> <span class="k">from</span> <span class="s1">'mockjs'</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">Random</span> <span class="o">=</span> <span class="nx">Mock</span><span class="p">.</span><span class="nx">Random</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">getFeedback</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">({</span>
+  	<span class="na">chinese_name</span><span class="p">:</span> <span class="nx">Mock</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="s1">'@cname'</span><span class="p">),</span>
+  	<span class="na">english_name</span><span class="p">:</span> <span class="nx">Mock</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="s1">'@name'</span><span class="p">),</span>
+    <span class="na">number</span><span class="p">:</span> <span class="nx">Mock</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="s1">'@integer(1, 100)'</span><span class="p">),</span>
+    <span class="na">string</span><span class="p">:</span> <span class="nx">Mock</span><span class="p">.</span><span class="nx">mock</span><span class="p">({</span>
+      <span class="s2">"string|1-10"</span><span class="p">:</span> <span class="s2">"★"</span>
+    <span class="p">}),</span>
+    <span class="na">date</span><span class="p">:</span> <span class="nx">Mock</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="s1">'@date("yyyy-MM-dd")'</span><span class="p">),</span>
+    <span class="na">time</span><span class="p">:</span> <span class="nx">Mock</span><span class="p">.</span><span class="nx">mock</span><span class="p">(</span><span class="s1">'@time("HH:mm:ss")'</span><span class="p">),</span>
+    <span class="na">email</span><span class="p">:</span> <span class="nx">Random</span><span class="p">.</span><span class="nx">email</span><span class="p">()</span>
+  <span class="p">})</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>浏览器控制台随机打印出来的结果:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+  <span class="nl">chinese_name</span><span class="p">:</span> <span class="s2">"周超"</span><span class="p">,</span>
+  <span class="nx">date</span><span class="p">:</span> <span class="s2">"2012-06-28"</span><span class="p">,</span>
+  <span class="nx">english_name</span><span class="p">:</span> <span class="s2">"Timothy Rodriguez"</span><span class="p">,</span>
+  <span class="nx">number</span><span class="p">:</span> <span class="mi">63</span><span class="p">,</span>
+  <span class="nx">string</span><span class="p">:</span> <span class="p">{</span><span class="nl">string</span><span class="p">:</span> <span class="s2">"★★★★★"</span><span class="p">},</span>
+  <span class="nx">time</span><span class="p">:</span> <span class="s2">"01:34:48"</span><span class="p">,</span>
+  <span class="nx">email</span><span class="p">:</span> <span class="s1">'d.ipmkjj@xdbl.sa'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="mockjs生成随机数组">mockjs生成随机数组</h2>
+
+<p>src/mock/feecback.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Mock</span> <span class="k">from</span> <span class="s1">'mockjs'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">List</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="kd">const</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">count</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">List</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">Mock</span><span class="p">.</span><span class="nx">mock</span><span class="p">({</span>
+		<span class="na">id</span><span class="p">:</span> <span class="s1">'@id'</span><span class="p">,</span>
+	    <span class="na">title</span><span class="p">:</span> <span class="s1">'@ctitle(10, 20)'</span><span class="p">,</span>
+	    <span class="s1">'status|1'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'published'</span><span class="p">,</span> <span class="s1">'draft'</span><span class="p">],</span>
+	    <span class="na">author</span><span class="p">:</span> <span class="s1">'@cname'</span><span class="p">,</span>
+	    <span class="na">display_time</span><span class="p">:</span> <span class="s1">'@datetime'</span><span class="p">,</span>
+	    <span class="na">pageviews</span><span class="p">:</span> <span class="s1">'@integer(300, 5000)'</span>
+	<span class="p">}))</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">getFeedback</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">List</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p><a href="http://mockjs.com/examples.html">更多例子请查看http://mockjs.com/examples.html</a></p>
+
 <h1 id="more">more</h1>
 <ul>
   <li><a href="http://mockjs.com/">http://mockjs.com/</a></li>
   <li><a href="https://github.com/axios/axios">https://github.com/axios/axios</a></li>
-  <li>完整项目请看github, 项目待上传，地址待添加。。。</li>
+  <li>完整项目请看github, 项目v-mockjs-axios-complex待上传，地址待添加。。。</li>
 </ul>
   
 	</div>
@@ -507,11 +572,11 @@ npm install axios <span class="nt">--save-dev</span>
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>19</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -556,7 +621,7 @@ npm install axios <span class="nt">--save-dev</span>
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>13</sup></a></li>
 			
 		
 			
@@ -656,7 +721,7 @@ npm install axios <span class="nt">--save-dev</span>
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

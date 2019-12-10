@@ -7,7 +7,7 @@
     
     
     
-    <title>babel | 彭友谊的博客</title>
+    <title>使用rsync将本地数据同步到服务器 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="babel">
-    <meta property="og:url" content="/build-tool/2016/10/04/Babel">
+    <meta property="og:title" content="使用rsync将本地数据同步到服务器">
+    <meta property="og:url" content="/tool/2018/12/12/rsync">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="babel">
+    <meta property="og:description" content="使用rsync将本地数据同步到服务器">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="babel">
+    <meta name="twitter:title" content="使用rsync将本地数据同步到服务器">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -142,14 +142,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/build-tool/2016/10/04/Babel" title="babel" itemprop="url">babel</a>
+      <a href="/tool/2018/12/12/rsync" title="使用rsync将本地数据同步到服务器" itemprop="url">使用rsync将本地数据同步到服务器</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-10-04 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-04</time>
+    <time datetime="2018-12-12 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-12-12</time>
     
   </p>
 </header>
@@ -161,158 +161,55 @@
 		
 		</div>
 		
-		<h1 id="babel是什么">Babel是什么</h1>
-<blockquote>
-  <p>Babel 是一个 JavaScript 编译器，可以将ES6代码转为ES5代码，从而在现有环境执行。</p>
-</blockquote>
+		<h1 id="rsync简介">rsync简介</h1>
 
-<h1 id="安装babel">安装Babel</h1>
-<p>babel-cli 是babel解释器的客户端主程序</p>
+<p>Rsync（remote synchronize）是一个远程数据同步工具。</p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm install <span class="nt">-g</span> babel-cli</pre></td></tr></tbody></table></code></pre></figure>
+<p>rsync的目的是实现本地主机和远程主机上的文件同步(包括本地推到远程，远程拉到本地两种同步方式)，也可以实现本地不同路径下文件的同步，但不能实现远程路径1到远程路径2之间的同步(scp可以实现)。</p>
 
-<p><strong>在项目内运行 babel-cli</strong><br />
-初始化项目</p>
+<h1 id="rsync推送代码">rsync推送代码</h1>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm init</pre></td></tr></tbody></table></code></pre></figure>
+<p>使用rsync将本地代码直接推到服务器上</p>
 
-<p>安装babel-cli</p>
+<h3 id="xshell-连接服务器">Xshell 连接服务器</h3>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre>npm install <span class="nt">--save-dev</span> babel-cli</pre></td></tr></tbody></table></code></pre></figure>
+<p>http://www.sinoricogroup.com/  的服务器地址</p>
 
-<p>安装ec2015的转化器,因为ec2015语法并不是所有浏览器都兼容</p>
+<p><code class="highlighter-rouge">47.52.112.249</code></p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm install <span class="nt">--save-dev</span> babel-preset-es2015</pre></td></tr></tbody></table></code></pre></figure>
+<h3 id="服务器设置ssh-rsa">服务器设置ssh-rsa</h3>
 
-<p>安装react转码规则</p>
+<p><strong>将本地电脑的 ~/.ssh/id_rsa.pub 复制到 服务器上去</strong></p>
 
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm install <span class="nt">--save-dev</span> babel-preset-react</pre></td></tr></tbody></table></code></pre></figure>
+<p>a. git 执行 <code class="highlighter-rouge">cat ~/.ssh/id_rsa.pub</code>, 得到  “ssh-rsa XXX…” 文本</p>
 
-<h1 id="配置文件babelrc">配置文件.babelrc</h1>
-<p>然后在项目的根目录下新建一个 .babelrc 文件，写入:</p>
+<p>b. 在Xshell服务器上，</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="code"><pre>{
-    "presets": ["es2015"]
-  }</pre></td></tr></tbody></table></code></pre></figure>
+<pre><code class="language-bashe">mkdir ~/.ssh/
+touch ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys // 这一步如果不改权限不行
+echo 'ssh-rsa 去掉个人邮箱'
+</code></pre>
 
-<p><strong><em>notice</em></strong></p>
+<p>authorized_keys这个文件,如果已经有的话, 就追加到后面, 为了方便不输密码直接rsync</p>
 
-<blockquote>
-  <p>所有Babel工具和模块的使用，都必须先写好.babelrc 。</p>
-</blockquote>
+<h3 id="下载--rsyncexe">下载  rsync.exe</h3>
 
-<p>此时babel已安装好，可以使用bable命令对文件进行转码输出了</p>
+<p>a. 下载地址：
+<code class="highlighter-rouge">http://www2.futureware.at/~nickoe/msys2-mirror/msys/x86_64/rsync-3.1.3-1-x86_64.pkg.tar.xz</code></p>
 
-<h1 id="babel基本用法">babel基本用法</h1>
+<p>b. 把这个文件解压出来</p>
 
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-</pre></td><td class="code"><pre># 转码结果输出到标准输出
-$ babel example.js
+<p>c. 复制到 /git安装目录/usr/bin 里面</p>
 
-# 转码结果写入一个文件
-# --out-file 或 -o 参数指定输出文件
-$ babel example.js --out-file compiled.js
-# 或者
-$ babel example.js -o compiled.js
+<h3 id="本地代码push到服务器">本地代码push到服务器</h3>
 
-# 整个目录转码,把src文件中所有的文件转码到lib文件夹中对应文件名下，
-# --out-dir 或 -d 参数指定输出目录
-$ babel src --out-dir lib
-# 或者
-$ babel src -d lib
+<p>git bash打开本地项目 sinorico， 里面执行 </p>
 
-# -s 参数生成source map文件
-$ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>延伸babel在项目中的使用<br />
-修改package.json</p>
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="err">//...</span><span class="w">
-  </span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"babel src -d lib"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"babel-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"babel-preset-es2015"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"babel-preset-react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>转码的时候，就执行下面的命令。</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm run build</pre></td></tr></tbody></table></code></pre></figure>
-
-<h1 id="babel-demo">babel demo</h1>
-<p>Project-file-name/es2015/index.js</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rsync -avz ./ root@47.52.112.249:/var/www/html/ztrk/
 </code></pre></div></div>
 
-<p>我们来利用babel转化一下，命令行执行：</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>babel ./es2015/index.js <span class="nt">--out-file</span> ./es2015/index-build.js</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>index-build.js就是转换后的js：</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"use strict"</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div></div>
-
-<h1 id="浏览器环境browser">浏览器环境browser</h1>
-<p>通过安装5.x版本的babel-core模块获取。</p>
-
-<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm install babel-core@5</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>运行上面的命令以后，就可以在当前目录的node_modules/babel-core/子目录里面，找到babel的浏览器版本browser.js（未精简）和browser.min.js（已精简）
-然后，将下面的代码插入网页。</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"node_modules/babel-core/browser.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/babel"</span><span class="nt">&gt;</span>
-<span class="c1">// Your ES6 code</span>
-<span class="nt">&lt;/script&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<h1 id="babel-在线转换es6-to-es5">babel 在线转换ES6 to ES5</h1>
-<p><a href="https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=">https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=</a></p>
-<h1 id="更多-more">更多-more</h1>
-<ul>
-  <li><a href="http://babeljs.cn/">http://babeljs.cn/</a></li>
-  <li><a href="http://www.ruanyifeng.com/blog/2016/01/babel.html">http://www.ruanyifeng.com/blog/2016/01/babel.html</a></li>
-</ul>
+<h1 id="more">more</h1>
 
   
 	</div>
@@ -330,7 +227,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#Build-Tool">Build-Tool</a>
+  <a class="article-category-link" href="/categories/#Tool">Tool</a>
   
 </div>
 
@@ -344,7 +241,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#ES6">ES6</a>
+  <a href="/tags/#Tool">Tool</a>
   
   </div>
 
@@ -354,7 +251,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/build-tool/2016/10/04/Babel" data-title="babel | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/tool/2018/12/12/rsync" data-title="使用rsync将本地数据同步到服务器 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -366,18 +263,18 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/framework/2016/10/03/requirejs&seajs" title="requirejs和seajs的区别">
+ <a href="/framework/2018/12/10/vue-vuex" title="vuex小示例">
   <strong>上一篇：</strong><br/>
   <span>
-  requirejs和seajs的区别</span>
+  vuex小示例</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/js/2016/10/05/ES6"  title="ES6">
+<a href="/framework/2018/12/12/vue-pagination-simple"  title="vue实现简单的翻页功能">
  <strong>下一篇：</strong><br/> 
- <span>ES6
+ <span>vue实现简单的翻页功能
 </span>
 </a>
 </div>
@@ -421,11 +318,11 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>19</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -470,7 +367,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>13</sup></a></li>
 			
 		
 			
@@ -570,7 +467,7 @@ $ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			

@@ -7,7 +7,7 @@
     
     
     
-    <title>Webpack初学 | 彭友谊的博客</title>
+    <title>babel | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="Webpack初学">
-    <meta property="og:url" content="/build-tool/2016/09/20/webpack">
+    <meta property="og:title" content="babel">
+    <meta property="og:url" content="/tool/2016/10/04/Babel">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="Webpack初学">
+    <meta property="og:description" content="babel">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Webpack初学">
+    <meta name="twitter:title" content="babel">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -142,14 +142,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/build-tool/2016/09/20/webpack" title="Webpack初学" itemprop="url">Webpack初学</a>
+      <a href="/tool/2016/10/04/Babel" title="babel" itemprop="url">babel</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2016-09-20 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-09-20</time>
+    <time datetime="2016-10-04 00:00:00 +0800" itemprop="datePublished"> 发表于 2016-10-04</time>
     
   </p>
 </header>
@@ -161,48 +161,59 @@
 		
 		</div>
 		
-		<h1 id="webpack初学">Webpack初学</h1>
-
-<p><strong>a.简介-introduction</strong></p>
-
+		<h1 id="babel是什么">Babel是什么</h1>
 <blockquote>
-  <p>1.一个打包工具<br />
-2.一个模块加载工具<br />
-3.各种资源(例如JS（含JSX）、coffee、样式（含less/sass）、图片等)都可以当成模块来处理</p>
+  <p>Babel 是一个 JavaScript 编译器，可以将ES6代码转为ES5代码，从而在现有环境执行。</p>
 </blockquote>
 
-<p><strong>WebPack的优势</strong></p>
-
-<blockquote>
-  <p>1.webpack 是以 commonJS 的形式来书写脚本滴，但对 AMD/CMD 的支持也很全面，方便旧项目进行代码迁移。<br />
-2.能被模块化的不仅仅是 JS 了。<br />
-3.开发便捷，能替代部分 grunt/gulp 的工作，比如打包、压缩混淆、图片转base64等。<br />
-4.扩展性强，插件机制完善，特别是支持 React 热插拔（见 react-hot-loader ）的功能让人眼前一亮<br />
-5.代码分割，提供按需加载的能力<br />
-6.发布工具</p>
-</blockquote>
-
-<p><strong>b.安装-install</strong></p>
-
-<p>首先需要安装Node.js，node自带了包管理工具npm。</p>
-
-<p><code class="highlighter-rouge">$ npm install webpack -g</code></p>
-
-<p>常规项目还是把依赖写入 package.json 包去更人性化：</p>
+<h1 id="安装babel">安装Babel</h1>
+<p>babel-cli 是babel解释器的客户端主程序</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nv">$ </span>npm install <span class="nt">-g</span> babel-cli</pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>在项目内运行 babel-cli</strong><br />
+初始化项目</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nv">$ </span>npm init</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>安装babel-cli</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre>npm install <span class="nt">--save-dev</span> babel-cli</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>安装ec2015的转化器,因为ec2015语法并不是所有浏览器都兼容</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nv">$ </span>npm install <span class="nt">--save-dev</span> babel-preset-es2015</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>安装react转码规则</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nv">$ </span>npm install <span class="nt">--save-dev</span> babel-preset-react</pre></td></tr></tbody></table></code></pre></figure>
+
+<h1 id="配置文件babelrc">配置文件.babelrc</h1>
+<p>然后在项目的根目录下新建一个 .babelrc 文件，写入:</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
-</pre></td><td class="code"><pre><span class="nv">$ </span>npm init
-<span class="nv">$ </span>npm install webpack <span class="nt">--save-dev</span>
-<span class="nv">$ </span>npm install webpack-dev-server <span class="nt">--save-dev</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre>{
+    "presets": ["es2015"]
+  }</pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="配置-configure">配置-configure</h1>
-<p>每个项目下都必须配置有一个 webpack.config.js，它的作用如同常规的 gulpfile.js/Gruntfile.js ，就是一个配置项，告诉 webpack 它需要做什么</p>
+<p><strong><em>notice</em></strong></p>
 
-<p><strong>看看下方的示例</strong></p>
+<blockquote>
+  <p>所有Babel工具和模块的使用，都必须先写好.babelrc 。</p>
+</blockquote>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<p>此时babel已安装好，可以使用bable命令对文件进行转码输出了</p>
+
+<h1 id="babel基本用法">babel基本用法</h1>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -219,223 +230,88 @@
 15
 16
 17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-</pre></td><td class="code"><pre><span class="kd">var</span> <span class="nx">webpack</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">);</span>
+</pre></td><td class="code"><pre># 转码结果输出到标准输出
+$ babel example.js
 
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">//插件项</span>
-    <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
-        <span class="c1">//提公用js到common.js文件中</span>
-        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">(</span><span class="s1">'common.js'</span><span class="p">),</span>
-        <span class="c1">//将样式统一发布到style.css中</span>
-        <span class="k">new</span> <span class="nx">ExtractTextPlugin</span><span class="p">(</span><span class="s2">"style.css"</span><span class="p">,</span> <span class="p">{</span>
-            <span class="na">allChunks</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-            <span class="na">disable</span><span class="p">:</span> <span class="kc">false</span>
-        <span class="p">}),</span>
-        <span class="c1">//使用ProvidePlugin加载使用频率高的模块</span>
-        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">ProvidePlugin</span><span class="p">({</span>
-            <span class="na">$</span><span class="p">:</span> <span class="s2">"webpack-zepto"</span>
-        <span class="p">})</span>
-    <span class="p">],</span>
-    <span class="c1">//页面入口文件配置</span>
-    <span class="na">entry</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">index</span> <span class="p">:</span> <span class="s1">'./src/main.js'</span>
-    <span class="p">},</span>
-    <span class="c1">//入口文件输出配置</span>
-    <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">path</span><span class="p">:</span> <span class="nx">__dirname</span> <span class="o">+</span><span class="s1">'/dist/'</span><span class="p">,</span>
-        <span class="na">filename</span><span class="p">:</span> <span class="s1">'[name].js'</span>
-    <span class="p">},</span>
-    <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
-        <span class="c1">//加载器配置</span>
-        <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'style-loader!css-loader'</span> <span class="p">},</span>
-            <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">scss$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'style!css!sass?sourceMap'</span><span class="p">},</span>
-            <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.(</span><span class="sr">png|jpg</span><span class="se">)</span><span class="sr">$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'url-loader?limit=8192'</span><span class="p">}</span>
-        <span class="p">]</span>
-    <span class="p">},</span>
-    <span class="c1">//其它解决方案配置</span>
-    <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">extensions</span><span class="p">:</span> <span class="p">[</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'.js'</span><span class="p">,</span> <span class="s1">'.json'</span><span class="p">,</span> <span class="s1">'.scss'</span><span class="p">],</span>
-        <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
-            <span class="na">filter</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'src/filters'</span><span class="p">)</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">};</span></pre></td></tr></tbody></table></code></pre></figure>
+# 转码结果写入一个文件
+# --out-file 或 -o 参数指定输出文件
+$ babel example.js --out-file compiled.js
+# 或者
+$ babel example.js -o compiled.js
 
-<p><strong>entry</strong></p>
+# 整个目录转码,把src文件中所有的文件转码到lib文件夹中对应文件名下，
+# --out-dir 或 -d 参数指定输出目录
+$ babel src --out-dir lib
+# 或者
+$ babel src -d lib
 
-<p>entry是页面入口文件配置，可以是一个文件或者多个入口文件，可以是对象格式或者数组格式。</p>
+# -s 参数生成source map文件
+$ babel src -d lib -s</pre></td></tr></tbody></table></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="code"><pre><span class="nx">entry</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">index</span> <span class="p">:</span> <span class="s1">'./src/main.js'</span>
-<span class="p">}</span>
-<span class="nl">entry</span><span class="p">:[</span><span class="s1">'./src/main.js'</span><span class="p">,</span><span class="s1">'./src/index.js'</span><span class="p">]</span></pre></td></tr></tbody></table></code></pre></figure>
+<p>延伸babel在项目中的使用<br />
+修改package.json</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="err">//...</span><span class="w">
+  </span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"echo </span><span class="se">\"</span><span class="s2">Error: no test specified</span><span class="se">\"</span><span class="s2"> &amp;&amp; exit 1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"babel src -d lib"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"devDependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"babel-cli"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"babel-preset-es2015"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"babel-preset-react"</span><span class="p">:</span><span class="w"> </span><span class="s2">"^6.16.0"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
 
-<p><strong>output</strong></p>
-
-<p>output 是对应输出项配置,主要包括path,filename和publishPath属性。path代表输出的路径，filename代表输出的文件名称，publishPath代表静态资源发布后的前缀地址</p>
-
-<p><strong>module.loaders</strong></p>
-
-<p>module.loaders 是最关键的一块配置。它告知 webpack 每一种文件都需要使用什么加载器来处理。点击这里可以查看loader list</p>
-
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="code"><pre><span class="nx">module</span><span class="p">:</span> <span class="p">{</span>
-    <span class="c1">//加载器配置</span>
-    <span class="nl">loaders</span><span class="p">:</span> <span class="p">[</span>
-        <span class="c1">//.css 文件使用 style-loader 和 css-loader 来处理</span>
-        <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'style-loader!css-loader'</span> <span class="p">},</span>
-        <span class="c1">//.scss 文件使用 style-loader、css-loader 和 sass-loader 来编译处理</span>
-        <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">scss$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'style!css!sass?sourceMap'</span><span class="p">},</span>
-        <span class="c1">//图片文件使用 url-loader 来处理，小于8kb的直接转为base64</span>
-        <span class="p">{</span> <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.(</span><span class="sr">png|jpg</span><span class="se">)</span><span class="sr">$/</span><span class="p">,</span> <span class="na">loader</span><span class="p">:</span> <span class="s1">'url-loader?limit=8192'</span><span class="p">}</span>
-    <span class="p">]</span>
-<span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
-
-<p>loader主要有3种使用方式：</p>
-
-<p>1、在页面里面引用资源使用
-<code class="highlighter-rouge">require("url-loader?mimetype=image/png!./file.png");</code></p>
-
-<p>2、在webpack.config.js文件夹中使用
-<code class="highlighter-rouge">{ test: /.png$/, loader: "url?mimetype=image/png" };</code></p>
-
-<p>3、在命令行中编译使用
-<code class="highlighter-rouge">webpack --module-bind "png=url-loader?mimetype=image/png";</code></p>
-
-<p>如上，”-loader”其实是可以省略不写的，多个loader之间用“!”连接起来。
-注意所有的加载器都需要通过 npm 来加载，并建议查阅它们对应的 readme 来看看如何使用。
-拿最后一个 url-loader 来说，它会将样式中引用到的图片转为模块来处理，使用该加载器需要先进行安装：
-<code class="highlighter-rouge">npm install url-loader -save-dev</code>
-配置信息的参数“?limit=8192”表示将所有小于8kb的图片都转为base64形式（其实应该说超过8kb的才使用 url-loader 来映射到文件，否则转为data url形式）。也可以使用file-loader来加载资源文件。</p>
-
-<p><strong>plugins</strong></p>
-
-<p>plugins 是插件项，这里我们使用了一个 CommonsChunkPlugin 的插件，它用于提取多个入口文件的公共脚本部分，然后生成一个 common.js 来方便多页面之间进行复用</p>
-
-<p>如上，包含两种：</p>
-
-<p>1、第一种webpack自带的一些插件：webpack.ProvidePlugin、webpack.optimize.CommonsChunkPlugin，</p>
-
-<p>2、另外一种则通过npm包安装的：ExtractTextPlugin</p>
-
-<p><strong>resolve</strong></p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">resolve</span><span class="p">:</span> <span class="p">{</span>
-    <span class="c1">// require时省略的扩展名，如：require('module') 不需要module.js</span>
-    <span class="nl">extension</span><span class="p">:</span> <span class="p">[</span><span class="s1">''</span><span class="p">,</span> <span class="s1">'.js'</span><span class="p">],</span>
-    <span class="c1">//别名</span>
-    <span class="nx">alias</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">filter</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'src/filters'</span><span class="p">)</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<h1 id="运行-webpack">运行 webpack</h1>
-
-<p>webpack 的执行也很简单，直接执行</p>
+<p>转码的时候，就执行下面的命令。</p>
 
 <figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="code"><pre><span class="nv">$ </span>webpack <span class="nt">--display-error-details</span>
-<span class="nv">$ </span>webpack <span class="nt">--mode</span><span class="o">=</span>production</pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="nv">$ </span>npm run build</pre></td></tr></tbody></table></code></pre></figure>
 
-<h1 id="demo1-webpack-js">demo1-webpack-js</h1>
+<h1 id="babel-demo">babel demo</h1>
+<p>Project-file-name/es2015/index.js</p>
 
-<p>直接将app.js打包成bundle.js</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">webpack</span> <span class="nx">app</span><span class="p">.</span><span class="nx">js</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">bundle</span><span class="p">.</span><span class="nx">js</span> <span class="o">--</span><span class="nx">mode</span> <span class="nx">development</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 </code></pre></div></div>
 
-<h1 id="demo2-entry-file">demo2-Entry file</h1>
-<p>For example, main.js is an entry file.</p>
+<p>我们来利用babel转化一下，命令行执行：</p>
 
-<figure class="highlight"><pre><code class="language-js" data-lang="js"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="code"><pre><span class="c1">// main.js</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">'&lt;h1&gt;Hello World&lt;/h1&gt;'</span><span class="p">);</span></pre></td></tr></tbody></table></code></pre></figure>
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nv">$ </span>babel ./es2015/index.js <span class="nt">--out-file</span> ./es2015/index-build.js</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>index.html</p>
+<p>index-build.js就是转换后的js：</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"use strict"</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"zhangsan"</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h1 id="浏览器环境browser">浏览器环境browser</h1>
+<p>通过安装5.x版本的babel-core模块获取。</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nv">$ </span>npm install babel-core@5</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>运行上面的命令以后，就可以在当前目录的node_modules/babel-core/子目录里面，找到babel的浏览器版本browser.js（未精简）和browser.min.js（已精简）
+然后，将下面的代码插入网页。</p>
 
 <figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="code"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;head&gt;</span>
-	<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;title&gt;</span>Document<span class="nt">&lt;/title&gt;</span>
-<span class="nt">&lt;/head&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
+</pre></td><td class="code"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"node_modules/babel-core/browser.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/babel"</span><span class="nt">&gt;</span>
+<span class="c1">// Your ES6 code</span>
+<span class="nt">&lt;/script&gt;</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Webpack follows webpack.config.js to build bundle.js.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// webpack.config.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">entry</span><span class="p">:</span> <span class="s1">'./main.js'</span><span class="p">,</span>
-  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">filename</span><span class="p">:</span> <span class="s1">'bundle.js'</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<p>Launch the server, visit http://127.0.0.1:8080 .</p>
-
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-</pre></td><td class="code"><pre>$ webpack-dev-server</pre></td></tr></tbody></table></code></pre></figure>
-
+<h1 id="babel-在线转换es6-to-es5">babel 在线转换ES6 to ES5</h1>
+<p><a href="https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=">https://babeljs.io/repl/#?babili=false&amp;evaluate=true&amp;lineWrap=false&amp;presets=es2015%2Creact%2Cstage-2&amp;code=</a></p>
 <h1 id="更多-more">更多-more</h1>
 <ul>
-  <li><a href="http://webpack.github.io/docs/">http://webpack.github.io/docs/</a></li>
-  <li><a href="https://github.com/ruanyf/webpack-demos#demo01-entry-file-source">最好懂的Webpack教程–阮一峰</a></li>
+  <li><a href="http://babeljs.cn/">http://babeljs.cn/</a></li>
+  <li><a href="http://www.ruanyifeng.com/blog/2016/01/babel.html">http://www.ruanyifeng.com/blog/2016/01/babel.html</a></li>
 </ul>
 
   
@@ -454,7 +330,7 @@
   }) %>
   -->
   
-  <a class="article-category-link" href="/categories/#Build-Tool">Build-Tool</a>
+  <a class="article-category-link" href="/categories/#Tool">Tool</a>
   
 </div>
 
@@ -468,7 +344,7 @@
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#webpack">webpack</a>
+  <a href="/tags/#ES6">ES6</a>
   
   </div>
 
@@ -478,7 +354,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/build-tool/2016/09/20/webpack" data-title="Webpack初学 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/tool/2016/10/04/Babel" data-title="babel | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -490,18 +366,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/framework/2016/09/07/handlebars.js" title="handlebars.js初学">
+ <a href="/framework/2016/10/03/requirejs&seajs" title="requirejs和seajs的区别">
   <strong>上一篇：</strong><br/>
   <span>
-  handlebars.js初学</span>
+  requirejs和seajs的区别</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/framework/2016/09/21/MVC&MVVM"  title="设计模式 MVC & MVVM">
+<a href="/js/2016/10/05/ES6"  title="ES6">
  <strong>下一篇：</strong><br/> 
- <span>设计模式 MVC & MVVM
+ <span>ES6
 </span>
 </a>
 </div>
@@ -545,11 +421,11 @@
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>15</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>19</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Build-Tool" title="Build-Tool">Build-Tool<sup>2</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>3</sup></a></li>
 		  
 		
 		  
@@ -594,7 +470,7 @@
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>9</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>13</sup></a></li>
 			
 		
 			
@@ -694,7 +570,7 @@
 			
 		
 			
-				<li><a href="/tags/#Build-Tool" title="Build-Tool">Build-Tool<sup>1</sup></a></li>
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
 			
 		
 			
