@@ -1,0 +1,902 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+    
+    
+    
+    
+    <title>常用 Git 命令 | 彭友谊的博客</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="pengyouyi">
+    
+
+    
+    <!--<%- open_graph({twitter_id: theme.author.twitter, google_plus: theme.author.google_plus}) %>-->
+
+    <meta name="description" content="page.description">
+    
+    <meta property="og:type" content="article">
+    
+    <meta property="og:title" content="常用 Git 命令">
+    <meta property="og:url" content="/tool/2017/12/21/js-git">
+    <meta property="og:site_name" content="彭友谊的博客">
+    <meta property="og:description" content="常用 Git 命令">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="常用 Git 命令">
+    <meta name="twitter:description" content="page.description">
+    <meta name="twitter:creator" content="@">
+
+  <!-- <meta name="baidu-site-verification" content="omJRdVnwTK" /> -->
+  <meta name="baidu-site-verification" content="BCTXxB6hux" />
+
+    <link rel="publisher" href="">
+
+    
+    
+    <link rel="icon" href="/assets/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/assets/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/assets/img/jacman.jpg">
+    
+
+    <link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/highlight.css" type="text/css">
+</head>
+
+<!--  flagcounter   -->
+
+<!--<a href="http://info.flagcounter.com/Q6yu"><img src="http://s10.flagcounter.com/count2/Q6yu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>-->
+
+
+
+<!--百度站内搜索开始
+<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=6765244687647673409' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+
+
+<div id="bdcs-frame-box"></div>
+<script type="text/javascript">
+  var bdcsFrameSid="6765244687647673409";
+  var bdcsFrameWidth = 552;
+  var bdcsFrameWt = 1;
+  var bdcsFrameHt = 1;
+  var bdcsFrameResultNum = 10;
+  var bdcsFrameBgColor = "#ffffff";
+</script>
+<script type="text/javascript" src="http://zhannei.baidu.com/static/js/iframe.js"></script>
+
+百度站内搜索结束-->
+
+<!--百度站内搜索开始  彭友谊好好 - 18233560490  -->
+<script type="text/javascript">(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=9872709389462059831' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();</script>
+<!--百度站内搜索结束  http://zn.baidu.com/cse/searchbox/index?sid=9872709389462059831  -->
+
+
+<!-- target=blank  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    //为超链接加上target='_blank'属性
+    $('a[href^="http"]').each(function() {
+      $(this).attr('target', '_blank');
+    });
+  });
+</script>
+
+  <body>
+    <header>
+        <div>
+		    
+			<div id="imglogo">
+				<a href="/"><img src="/assets/img/logo.png" alt="彭友谊的博客" title="彭友谊的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="彭友谊的博客">彭友谊的博客</a></h1>
+				<h2 class="blog-motto">努力做好一名前端攻城狮</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="menu">
+			</a></div>
+	<!-----  flagcounter   ----->
+	<!--<a href="http://info.flagcounter.com/Q6yu" target="_blank" style="position: absolute;right: 0;"><img src="http://s10.flagcounter.com/count2/Q6yu/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>-->
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+						<!-- <form class="search" action="http://pengyouyi.site" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 9872709389462059831 >
+							<input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form> -->
+					
+					</li>
+				</ul>
+			</nav>	
+</div>
+
+
+
+
+
+    </header>
+    <div id="container">
+      
+
+
+<div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+	<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/tool/2017/12/21/js-git" title="常用 Git 命令" itemprop="url">常用 Git 命令</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
+		
+  <p class="article-time">
+    <time datetime="2017-12-21 00:00:00 +0800" itemprop="datePublished"> 发表于 2017-12-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article toc-content">
+		
+			<!--<%- toc(item.content) %>-->
+		
+		</div>
+		
+		<h1 id="git">常用 Git 命令</h1>
+
+<p>Git 和 svn 都是版本控制工具，区别是SVN是集成式的，git是分布式，总的来说，git在多人合作上的优势大于SVN，</p>
+
+<p>克隆项目：</p>
+
+<p>进入到要克隆的文件夹下：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">git clone url  <span class="o">(</span>github 上要克隆项目的URL<span class="o">)</span>
+</code></pre></div>
+<p>设置提交代码的用户和邮箱： 最好和github 上的一致</p>
+
+<p>先进入项目中，</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProjectName <span class="o">[</span>master] &gt; git config user.name “pengyouyi”
+ProjectName <span class="o">[</span>master] &gt; git config user.email “2390803922@qq.com”
+</code></pre></div>
+<p>查看项目的作者：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProjectName <span class="o">[</span>master] &gt; git config user.name 
+</code></pre></div>
+<p>查看所有的：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProjectName <span class="o">[</span>master] &gt; git config –list
+</code></pre></div>
+<p>Git 的三个区：</p>
+
+<p>工作区：</p>
+
+<p>暂存区：<br>
+    --作为过渡层<br>
+    --避免误操作<br>
+    --保护工作区和版本区<br>
+    --分支处理<br><br>
+版本区:</p>
+
+<p>查看工作区的所有文件：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git status
+</code></pre></div>
+<p>把工作区的内容添加到暂存区：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="se">\p</span>rotectName <span class="o">[</span>master] &gt;git add demo.html
+</code></pre></div>
+<p>提示内容</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="se">\p</span>rotectName <span class="o">[</span> master  +1  ~0  -0 ： +1  ~0  -0  ! <span class="o">]</span>   
+</code></pre></div>
+<p>意思：红色代表工作区，+1 有1个文件可以被移动，~0代表被修改的文件数目，-0代表被删除的文件数目</p>
+
+<p>绿色代表暂存区，参数同工作区</p>
+
+<p>Git add .  把所有修改后的文件重新添加到暂存区</p>
+
+<p>把暂存区的内容添加到版本库中：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="se">\p</span>rotectName <span class="o">[</span> master  +2  ~0  -0 <span class="o">]</span>  &gt; git commit
+</code></pre></div>
+<p>会弹出一个记事本要求填写注释，让它不谈注释，直接写注释</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="se">\p</span>rotectName <span class="o">[</span> master  +2  ~0  -0 <span class="o">]</span>  &gt; git commit –m “change demo1”
+</code></pre></div>
+<p>工作区不能跳过暂存区直接提交到版本库，但是有一种简写方式</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git commit –a –m “add js”
+</code></pre></div>
+<p>Git 命令</p>
+
+<p>对比：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">    Git diff 工作区和暂存区对比
+    Git diff –cached <span class="o">(</span>--staged<span class="o">)</span>  暂存区和版本库对比
+    Git diff master  工作区和版本库对比
+</code></pre></div>
+<p>撤销:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">    Git reset Head drag.js  从缓存区撤销到工作区
+    Git checkout - -  filename  从工作区撤回到版本库
+    Git commit – amend  从暂存区撤销到版本库， 合并一次新的提交方案
+例如：git commit –m “change3 drag.js and demo.js” –amend 撤销上一次的提交，重新再提交一次
+</code></pre></div>
+<p>删除：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">    Git rm filename  删除缓存区的文件，但是删除的时候要先在工作区中删除
+    Git rm –f test.txt  删除缓存区的文件,也强行删除了工作区中的文件
+  Git rm – cached  test.txt  删除缓存区的文件,不删除 工作区中的文件
+</code></pre></div>
+<p>恢复：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git checkout  id filename  恢复工作区中指定的某个文件（删除的某个文件）
+Git reset –hard id  恢复某个指定的版本，可以是对多个文件同时的操作
+Git reset –hard HEAD^  指针往回走一步，
+Git reset –hard HEAD~2  往回走两个版本，扩展到N 
+Git reflog 打印对版本的操作记录，其中的ID可用于回到现在的某个版本
+</code></pre></div>
+<p>推送到远程：</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git remote   查看远程仓库的名称 ，默认 origin
+Git remote  查看远程地址
+Git push origin master   推送 
+</code></pre></div>
+<p>多人协作解决冲突：</p>
+
+<p>拉取 </p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">Git fetch  拉取下来的与自己的不合并
+Git pull  拉取下来的与自己的自动合并
+</code></pre></div>
+<p><strong>方式Git fetch：</strong></p>
+
+<p>先用git fetch 拉取下来，</p>
+
+<p>然后对比 git diff master origin/master   有冲突的部分就会被显示出来   红色表示本地，绿色表示远程</p>
+
+<p>Git merge origin/master   有冲突的地方，两个不同的都会显示在本地文件夹下，然后手动选择处理，取舍自己的还是别人的。</p>
+
+<p>处理好冲突后，git commit –a –m “add style by pengyouyi to demo1”</p>
+
+<p>最后Git  push origin master 远端</p>
+
+<p><strong>方式Git pull：</strong></p>
+
+<p>Git pull origin master  从远端拉下，发现冲突</p>
+
+<p>直接git pull 会同步，本地会被拉取下来的文件覆盖 </p>
+
+<p>当想要参与到别人的项目而没有权限的时候，该如何做：</p>
+
+<p>Folk：</p>
+
+<p>先搜索到作者，然后找到要想参与的项目，，点击右上角fork ，就把项目克隆到自己的与户名下了。 </p>
+
+<p>Pull request: </p>
+
+<p>修改者改好之后可以pull request ,交给有权限的人处理，是否可以通过merge，‘</p>
+
+<p>也可以不拉到本地，在github上直接进行修改</p>
+
+<p>删除从别的地方folk过来的项目，</p>
+
+<p>进入要删除的项目中，右下角设置，最下面按钮Delete this repository ，在弹窗中输入要删除的镜像    仓库的名字，点击删除</p>
+
+<p><strong>分支：</strong></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProfileName &gt; git branch  查看分支
+ProfileName &gt; git branch   branchName    创建分支
+ProfileName &gt; git checkout branchName   切换到某个分支
+ProfileName &gt; git checkout –b  branchName   创建某个分支并切换到它上面去<span class="o">(</span>-b branch简写 <span class="o">)</span>
+ProfileName &gt; git merge branchName 在主分支上合并其他分支，会将其他分支上的修改直接反应到主分支上
+ProfileName &gt; git branch  --merged  查看被合并的分支
+ProfileName &gt; git branch  --no –merged   查看未被合并的分支
+ProfileName &gt; git branch –d branchName  若与主分支合并了，则可将其删除
+ProfileName &gt; git branch –D  branchName  若未与主分支合并，也可将其强行 删除
+</code></pre></div>
+<p><strong>打标签：</strong></p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ProfileName &gt; git tag   查看打的标签
+ProfileName &gt; git tag  tagName    打一个标签
+ProfileName &gt; git push origin   v1.0
+</code></pre></div>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a></p>
+
+<p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013760174128707b935b0be6fc4fc6ace66c4f15618f8d000">git多人协作</a></p>
+  
+	</div>
+	<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <!--
+  <%- list_categories(item.categories, {
+      show_count: false,
+      class: 'article-category',
+      style: 'none',
+      separator: '►'
+  }) %>
+  -->
+  
+  <a class="article-category-link" href="/categories/#Tool">Tool</a>
+  
+</div>
+
+
+  <div class="article-tags">
+  <!--
+  <% var tags = [];
+    item.tags.forEach(function(tag){
+      tags.push('<a href="' + config.root + tag.path + '">' + tag.name + '</a>');
+    }); %>-->
+  <span></span> <!--<%- tags.join('') %>-->
+  
+  
+  <a href="/tags/#Command-Line">Command-Line</a>
+  
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="/tool/2017/12/21/js-git" data-title="常用 Git 命令 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>   
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/js/2017/12/20/js-algorithms-insertSort" title="插入排序">
+  <strong>上一篇：</strong><br/>
+  <span>
+  插入排序</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/js/2018/06/11/js-interview-code"  title="JavaScript面试题-小code">
+ <strong>下一篇：</strong><br/> 
+ <span>JavaScript面试题-小code
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<!--  -->
+</div>  
+
+
+
+
+
+      
+      
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside toc-content">
+ 
+ <!--<%- toc(item.content) %>-->
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/#Editor" title="Editor">Editor<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>21</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>21</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#Command-Line" title="Command-Line">Command-Line<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#JS" title="JS">JS<sup>84</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#CSS" title="CSS">CSS<sup>20</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#HTML" title="HTML">HTML<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/#other" title="other">other<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/#markdown" title="markdown">markdown<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#mac" title="mac">mac<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#apache" title="apache">apache<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#vue" title="vue">vue<sup>15</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#handlebars" title="handlebars">handlebars<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#webpack" title="webpack">webpack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#design-pattern" title="design-pattern">design-pattern<sup>15</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#react" title="react">react<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#requirejs" title="requirejs">requirejs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#seajs" title="seajs">seajs<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#shell" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#ES6" title="ES6">ES6<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>36</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#layout" title="layout">layout<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#standard" title="standard">standard<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#CSS-Basic" title="CSS-Basic">CSS-Basic<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#DOM" title="DOM">DOM<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#optimize" title="optimize">optimize<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#JS-Function" title="JS-Function">JS-Function<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#BOM" title="BOM">BOM<sup>9</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#RegExp" title="RegExp">RegExp<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#jQuery" title="jQuery">jQuery<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#HTTP" title="HTTP">HTTP<sup>18</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#security" title="security">security<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#algorithm" title="algorithm">algorithm<sup>10</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Command-Line" title="Command-Line">Command-Line<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#imooc" title="imooc">imooc<sup>21</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Tool" title="Tool">Tool<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Module" title="Module">Module<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#animation" title="animation">animation<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#Sass" title="Sass">Sass<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#windows" title="windows">windows<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#node" title="node">node<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            <a href="https://developer.mozilla.org/zh-CN/" target="_blank" title="MDN web docs">MDN web docs</a>
+          </li>
+        
+          <li>
+            <a href="https://leohxj.gitbooks.io/front-end-database/content/" target="_blank" title="前端工程师手册">前端工程师手册</a>
+          </li>
+        
+          <li>
+            <a href="http://www.bootcdn.cn/" target="_blank" title="BootCDN">BootCDN</a>
+          </li>
+        
+          <li>
+            <a href="https://cdnjs.com/" target="_blank" title="cdnjs">cdnjs</a>
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Make a little progress every day. <br/>
+			stronger and powerful.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/pengyouyi" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+	<!--
+			<%  Array.prototype.S=String.fromCharCode(2);
+			  Array.prototype.in_array=function(e){
+    			var r=new RegExp(this.S+e+this.S);
+    			return (r.test(this.S+this.join(this.S)+this.S));
+				};
+				var cc = new Array('by','by-nc','by-nc-nd','by-nc-sa','by-nd','by-sa','zero'); %>
+		<% if (cc.in_array(theme.creative_commons) ) { %>
+				<div class="cc-license">
+          <a href="http://creativecommons.org/licenses/<%= theme.creative_commons %>/4.0" class="cc-opacity" target="_blank">
+            <img src="<%- config.root %>img/cc-<%= theme.creative_commons %>.svg" alt="Creative Commons" />
+          </a>
+        </div>
+    <% } %>
+				-->
+
+		<p class="copyright">
+		Powered by <a href="http://jekyllrb.com" target="_blank" title="jekyll">jekyll</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="about" target="_blank" title="pengyouyi">pengyouyi</a>
+		
+		
+		</p>
+</div>
+
+
+</footer>
+    <script src="/assets/js/jquery-2.0.3.min.js"></script>
+<script src="/assets/js/jquery.imagesloaded.min.js"></script>
+<script src="/assets/js/gallery.js"></script>
+<script src="/assets/js/jquery.qrcode-0.12.0.min.js"></script>
+<script src="/assets/js/toc.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+      
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.toc-content').toc();
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+/*
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      //$('.hoverqrcode').hide();
+  });
+  */
+});   
+</script>
+
+
+
+
+
+<!--
+
+-->
+
+
+
+
+<link rel="stylesheet" href="/assets/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/assets/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      if ($(this).hasClass('emoji')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+<!-- Analytics Begin -->
+
+
+
+<!--<script type="text/javascript">-->
+<!--var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");-->
+<!--document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F130eaab551382bf609b702558cf803a0' type='text/javascript'%3E%3C/script%3E"));-->
+<!--</script>-->
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?130eaab551382bf609b702558cf803a0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/assets/img/scrollup.png"/></a>
+	</div>
+	<script src="/assets/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+  </body>
+</html>
+
