@@ -77,7 +77,7 @@ myChart.setOption(option);
 
 注意：我们要在mounted生命周期函数中实例化echarts对象。因为我们要确保dom元素已经挂载到页面中
 
-# 完整示例代码
+# 完整demo示例代码
 
 ```html
 <template>
