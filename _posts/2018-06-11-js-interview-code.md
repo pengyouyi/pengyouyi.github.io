@@ -455,12 +455,113 @@ camry.sell();
 
 ## clone
 
+**- 浅拷贝：**有两种方式，一种是把一个对象里面的所有的属性值和方法都复制给另一个对象，另一种是直接把一个对象赋给另一个对象，使得两个都指向同一个对象。
+
+**- 深拷贝：**把一个对象的属性和方法一个个找出来，在另一个对象中开辟对应的空间，一个个存储到另一个对象中。
+
+**- 两者就在于**，浅拷贝只是简单的复制，对对象里面的对象属性和数组属性只是复制了地址，并没有创建新的相同对象或者数组。而深拷贝是完完全全的复制一份，空间大小占用一样但是位置不同！！**简单点来说**，就是假设B复制了A，当修改A时，看B是否会发生变化，如果B也跟着变了，说明这是浅拷贝，拿人手短，如果B没变，那就是深拷贝，自食其力。
+
+[js浅拷贝与深拷贝的区别和实现方式](https://www.jianshu.com/p/1c142ec2ca45)
+
+### 浅拷贝 shallow copy
+
+法一：直接用=赋值
+
+```js
+let a = [0, 1, 2, 3, 4],
+    b = a;
+console.log(a === b);
+a[0] = 1;
+console.log(a, b);
+```
+
+法二： Object.assign 方法
+
+```js
+var obj = {
+    a: 1,
+    b: 2
+}
+var obj1 = Object.assign({},obj);
+boj1.a = 3;
+console.log(obj.a) // 3
+```
+
+法三： for···in只循环第一层
+
+```js
+var obj = { 
+	a:1, 
+	arr: [2,3] 
+};
+var shallowObj = shallowCopy(obj);
+
+function shallowCopy(src) {
+  var dst = {};
+  for (var prop in src) {
+    if (src.hasOwnProperty(prop)) {
+      dst[prop] = src[prop];
+    }
+  }
+  return dst;
+}
+
+//当一个对象属性的引用值改变时将导致另一个也改变
+shallowObj.arr[1] = 5;
+obj.arr[1]   // = 5
+```
+
+### 深拷贝 deep copy
+
+- 深拷贝一个对象
+
+```js
+function deepClone(obj) {
+	// obj 是 null, 或者不是对象和数组，直接返回
+	if (typeof obj !== 'object' || obj == null) {
+        return obj
+	}
+
+	// 初始化返回结果
+	let result
+	if (obj instanceof Array) {
+		result = []
+	} else {
+		result = {}
+	}
+
+	for (let key in obj) {
+		// 保证 key 不是原型的属性
+		if (obj.hasOwnProperty(key)) {
+			// 递归调用
+			result[key] = deepClone(obj[key])
+		}
+	}
+
+	return result
+}
+
+const obj1 = {
+	age: 20,
+	address: {
+		city: 'chongqing'
+	},
+	arr: [1,2,3]
+}
+
+const obj2 = obj1
+
+obj2.address.city = 'beijing'
+
+console.log(obj1.address.city)
+```
+
 - 实现一个函数clone，可以对JavaScript中的5种主要的数据类型（包括Number、String、Object、Array、Boolean）进行值复制
 
 法一：递归
 
 ```js
-function clone(obj){
+function deepClone(obj){
 	var o;
 	switch(typeof obj) {
 		case "undefined":
@@ -479,8 +580,8 @@ function clone(obj){
 				o = null;
 			}else if(obj instanceof Array){
 				o = [];
-				for(var i = 0; i < obj.length; i++){
-					o.push(obj[i]);
+				for(var k in obj){
+					o[k] = clone(obj[k]);
 				}
 			}else{
 				o = {};
@@ -497,7 +598,7 @@ function clone(obj){
 	return o;
 }
 var s = {fd:"df",fde:{we:3}};
-console.log(clone(s));
+console.log(deepClone(s));
 ```
 
 法二：JSON.parse(JSON.stringify(obj)) 用JSON实现深拷贝

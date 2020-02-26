@@ -180,13 +180,16 @@ symbol
 ## question:何时使用 === 何时 == ?
 
 ```js
+const obj = {
+	x: 100
+}
 if (obj.a == null) {
   // 这里相当于 obj.a === null || obj.a === undefined ,简写形式
   // 这是 jQuery 源码中推荐的写法
 }
 ```
 
-除以上之外都用 === 
+除了判断一个变量是否 == null 之外，其他一律用 === 。
 
 ## js中有哪些内置函数-数据封装类对象?
 

@@ -22,6 +22,8 @@ description: 慕课网-前端JavaScript面试技巧(双越)-原型和原型链
 
 4、zepto(或其他框架) 源码如何使用原型链
 
+5、手写一个简易的jQuery，考虑插件和扩展性
+
 # Knowledge-point
 
 **知识点：**
@@ -382,6 +384,85 @@ zepto.isZ = function(object) {
 [读 Zepto 源码系列](https://www.cnblogs.com/libin-1/p/6888574.html)
 
 [读Zepto源码之代码结构](https://segmentfault.com/a/1190000008950420)
+
+## 手写一个简易的jQuery，考虑插件和扩展性
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<style>
+	</style>
+</head>
+<body>
+	<p>一段文字 1</p>
+	<p>一段文字 2</p>
+	<p>一段文字 3</p>
+
+<script>  
+
+class jQuery {
+	constructor(selector) {
+		const result = document.querySelectorAll(selector)
+		const length = result.length
+		for (let i = 0; i < length; i++) {
+			this[i] = result[i]
+		}
+		this.length = length
+		this.selector = selector
+	}
+	get(index) {
+		return this[index]
+	}
+	each(fn) {
+		for (let i = 0; i < this.length; i++) {
+			const elem = this[i]
+			fn(elem)
+		}
+	}
+	on(type, fn) {
+		return this.each((elem) => {
+            elem.addEventListener(type, fn, false)
+		})
+	}
+	// 扩展很多 DOM API
+}
+
+
+// 使用jQuery
+const $p = new jQuery('p')
+$p.get(1)
+$p.each((elem) => console.log(elem.nodeName))
+$p.on('click', () => alert('clicked'))
+
+
+// 扩展-1、插件
+
+jQuery.prototype.dialog = function(info) {
+    alert(info)
+}
+
+// 扩展-2、造轮子
+
+class myJQuery extends jQuery {
+	constructor(selector) {
+		super(selector)
+	}
+	// 扩展自己的方法
+	addClass(className) {
+
+	}
+	style(data) {
+
+	}
+}
+
+</script>
+</body>
+</html>
+```
 
 # 更多-more
 

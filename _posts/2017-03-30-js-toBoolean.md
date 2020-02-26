@@ -23,24 +23,24 @@ description: js显示、隐式转为布尔值
 > for(..;..;..)语句中的条件判断表达式（第二个）  
 > while(..) 和 do..while(..)循环语句中的条件判断表达式  
 > ? : 中的条件判断表达式  
-> 逻辑运算符或|| 和 逻辑与&& [左边的操作数，作为条件判断表达式]
+> 逻辑运算符 或|| 和 逻辑 与&& [左边的操作数，作为条件判断表达式] 和逻辑 非！
 
 ## while语句
 
 ```js
 var arr = ["test",9,1];
 var a;
-while(a=arr.pop()){
+while(a = arr.pop()){
 	console.log(a); //1,9,test
 }
 ```
 等价于
 ```js
 var arr = ["test",0,null,1,undefined,1,3];
-var a=arr.pop();
+var a = arr.pop();
 while(a){
 	console.log(a);  //3,1
-	a=arr.pop()
+	a = arr.pop()
 }
 ```
 
