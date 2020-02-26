@@ -401,6 +401,56 @@ call()方法接受的是若干个参数的列表，而apply()方法接受的是�
   <span class="p">};</span>
 <span class="p">}</span>
 </code></pre></div>
+<h3 id="bind1">我手写 bind1 函数</h3>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">a</span><span class="p">:</span> <span class="mi">20</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">fn</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'this'</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">,</span> <span class="nx">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span>
+<span class="p">}</span>
+
+<span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">bind1</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 将参数解析为数组</span>
+    <span class="kr">const</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)</span>
+    <span class="c1">// 获取 this (取出数组第一项，数组剩余的就是传递的参数)</span>
+    <span class="kr">const</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+    <span class="c1">// 当前函数, 即 fn.bind1(...) 中的 fn</span>
+    <span class="kr">const</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span>
+    <span class="c1">// 返回一个函数</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 执行原函数，并返回结果</span>
+        <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="c1">// fn() // 10</span>
+
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">fn</span><span class="p">.</span><span class="nx">bind1</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="s1">'peng'</span><span class="p">,</span><span class="s1">'you'</span><span class="p">)</span>
+<span class="nx">b</span><span class="p">()</span> <span class="c1">// 20</span>
+</code></pre></div>
+<p>1、以上 bind1() 函数中的 arguments 是一个类数组对象</p>
+<div class="highlight"><pre><code class="language-shell" data-lang="shell">arguments <span class="o">=</span> <span class="o">{</span>
+    0: <span class="o">{</span>a: 20<span class="o">}</span>,
+    1: <span class="s1">'peng'</span>,
+    2:  <span class="s1">'you'</span>,
+    length: 3
+<span class="o">}</span>
+</code></pre></div>
+<p>2、将类数组对象转化成数组的方法</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">args</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)</span>  <span class="c1">// ES6</span>
+</code></pre></div>
+<p>以上几个方法都等价</p>
+
+<p>3、args 是一个数组</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">args</span> <span class="o">=</span> <span class="p">[{</span><span class="na">a</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="s1">'peng'</span><span class="p">,</span> <span class="s1">'you'</span><span class="p">]</span>
+</code></pre></div>
 <h1 id="apply-call-bind">apply、call、bind比较</h1>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">x</span><span class="p">:</span> <span class="mi">81</span><span class="p">,</span>

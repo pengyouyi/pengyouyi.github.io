@@ -92,13 +92,17 @@ fn1(); // 空， this === window
 
 ## 作用域-action-scope
 
-作用域
+**作用域**
 
-- 无块级作用域
+- 全局作用域
 
-- 只有函数和全局作用域
+- 函数作用域
 
-作用域链
+- 块级作用域（ES6新增）
+
+**作用域链**
+
+> 自由变量：一个变量在当前作用域没有定义，但被使用了
 
 ```js
 var a = 100;
@@ -147,28 +151,26 @@ function F1() {
 // f1 得到一个函数
 var f1 = F1();
 var a = 200;
-f1();
+f1(); // 100
 ```
 
 **函数作为参数传递**
 
 ```js 
-function F1() {
-  var a = 100;
-  return function() {
-    console.log(a);
-  }
+function print(fn) {
+    let b = 200
+    fn()
 }
 
-function F2(fn) {
-  var a = 200;
-  fn()
+let b = 100
+function fnb() {
+    console.log(b)
 }
 
-var f1 = F1();
-
-F2(f1);  // 100
+print(fnb) // 100
 ```
+
+> 所有的自由变量【闭包】的查找，是在函数定义的地方，向上级作用域查找，不是在执行的地方！！！
 
 # Answer
 

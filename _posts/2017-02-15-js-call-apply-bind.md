@@ -276,6 +276,68 @@ if (!Function.prototype.bind) {
 }
 ```
 
+### 我手写 bind1 函数
+
+```js
+var a = 10
+var obj = {
+    a: 20
+}
+function fn(b, c) {
+    console.log('this', this)
+    console.log(b, c)
+    return this.a
+}
+
+Function.prototype.bind1 = function() {
+    // 将参数解析为数组
+    const args = Array.prototype.slice.call(arguments)
+    // 获取 this (取出数组第一项，数组剩余的就是传递的参数)
+    const t = args.shift()
+    // 当前函数, 即 fn.bind1(...) 中的 fn
+    const self = this
+    // 返回一个函数
+    return function() {
+        // 执行原函数，并返回结果
+        return self.apply(t, args)
+    }
+    
+}
+
+// fn() // 10
+
+var b = fn.bind1(obj,'peng','you')
+b() // 20
+```
+
+1、以上 bind1() 函数中的 arguments 是一个类数组对象
+
+```shell
+arguments = {
+    0: {a: 20},
+    1: 'peng',
+    2:  'you',
+    length: 3
+}
+```
+
+2、将类数组对象转化成数组的方法
+
+```js
+const args = Array.prototype.slice.call(arguments)
+const args = Array.prototype.slice.call(arguments, 0)
+const args = [].slice.call(arguments)
+const args = Array.from(arguments)  // ES6
+```
+
+以上几个方法都等价
+
+3、args 是一个数组
+
+```js
+args = [{a: 20}, 'peng', 'you']
+```
+
 # apply、call、bind比较
 
 ```js
