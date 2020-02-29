@@ -334,7 +334,26 @@
 <ul>
 <li>实际开发中闭包的应用</li>
 </ul>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">isFirstLoad</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 闭包隐藏数据，只提供 API</span>
+
+<span class="kd">function</span> <span class="nx">createCache</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 闭包中的数据，被隐藏，不被外界访问</span>
+    <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="na">set</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+             <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">val</span>
+        <span class="p">},</span>
+        <span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">createCache</span><span class="p">()</span>
+<span class="nx">c</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'a'</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 封装变量，收敛权限。</span>
+<span class="kd">function</span> <span class="nx">isFirstLoad</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">_list</span> <span class="o">=</span> <span class="p">[];</span>
     <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="nx">_list</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
@@ -474,7 +493,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>84</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>85</sup></a></li>
 		  
 		
 		  
@@ -551,7 +570,7 @@
 			
 		
 			
-				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>17</sup></a></li>
+				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>18</sup></a></li>
 			
 		
 			
@@ -575,7 +594,7 @@
 			
 		
 			
-				<li><a href="/tags/#JS-Function" title="JS-Function">JS-Function<sup>4</sup></a></li>
+				<li><a href="/tags/#JS-Function" title="JS-Function">JS-Function<sup>5</sup></a></li>
 			
 		
 			
