@@ -330,6 +330,66 @@
 
 <p>如果绑定监听器的父元素和目标元素的层级相距较远，那么在冒泡过程中会消耗一定的时间。</p>
 
+<h1 id="demo">demo</h1>
+
+<p>编写一个通用的【事件代理和普通】事件监听函数</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">button</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"btn1"</span><span class="o">&gt;</span>
+    <span class="nx">clickMe</span>
+<span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"outter"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;br</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;br</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;</span><span class="sr">/a&gt;&lt;br</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="s2">"#"</span><span class="o">&gt;</span><span class="mi">4</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>  
+
+<span class="kd">function</span> <span class="nx">bindEvent</span><span class="p">(</span><span class="nx">elem</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">selector</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">fn</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">fn</span> <span class="o">=</span> <span class="nx">selector</span>
+        <span class="nx">selector</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="p">}</span>
+    <span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="nx">type</span><span class="p">,</span> <span class="nx">event</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">selector</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 代理</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">target</span><span class="p">.</span><span class="nx">matches</span><span class="p">(</span><span class="nx">selector</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// 普通</span>
+            <span class="nx">fn</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="c1">// 调用</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="c1">// 通用</span>
+    <span class="kr">const</span> <span class="nx">btn1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'btn1'</span><span class="p">)</span>
+    <span class="nx">bindEvent</span><span class="p">(</span><span class="nx">btn1</span><span class="p">,</span> <span class="s1">'click'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">)</span>
+        <span class="c1">// console.log(event.target.innerHTML)</span>
+    <span class="p">})</span>
+
+    <span class="c1">// bindEvent(btn1, 'click', (event) =&gt; { // 使用箭头函数中的this 代表 Window</span>
+    <span class="c1">//     console.log(this) // Window</span>
+    <span class="c1">//     console.log(btn1.innerHTML)</span>
+    <span class="c1">// })</span>
+
+
+    <span class="c1">// 代理</span>
+    <span class="kr">const</span> <span class="nx">outter</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'outter'</span><span class="p">)</span>
+    <span class="nx">bindEvent</span><span class="p">(</span><span class="nx">outter</span><span class="p">,</span> <span class="s1">'click'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">)</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Element/matches">Element.matches()</a></p>
+
 <h1 id="more">更多-more</h1>
   
 	</div>

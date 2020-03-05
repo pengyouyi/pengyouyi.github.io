@@ -59,6 +59,8 @@ description: 慕课网-前端JavaScript面试技巧(双越)-DOM&BOM
 
 - DOM节点的attr 和property 有何区别
 
+- 一次性插入多个 DOM 节点，考虑性能
+
 **知识点**
 
 - DOM本质
@@ -66,6 +68,8 @@ description: 慕课网-前端JavaScript面试技巧(双越)-DOM&BOM
 - DOM节点操作
 
 - DOM结构操作
+
+- DOM性能
 
 ## DOM节点操作
 
@@ -166,9 +170,60 @@ div1.removeChild(child[0]);
 
 ## DOM节点的attr 和property 有何区别
 
-- property 只是一个JS对象的属性的修改
+- property 只是一个JS对象的属性的修改,不会体现到HTML结构中
 
-- Attribute 是对html标签属性的修改
+- Attribute 是对html标签属性的修改，会改变HTML结构
+
+[Attribute和property的区别！](https://www.jianshu.com/p/f7a7cda463df)
+[JS中attribute和property的区别](https://www.cnblogs.com/lmjZone/p/8760232.html)
+
+## DOM性能
+
+- DOM 操作非常昂贵，避免频繁的DOM操作
+
+- 对DOM查询做缓存
+
+- 将频繁操作改为一次性操作
+
+### DOM查询做缓存
+
+```js
+// 不缓存 DOM 查询结果
+for(let i = 0; i < document.getElementsByTagName('p').length; i++) {
+    // 每次循环，都会计算 length，频繁进行 DOM 查询
+}
+
+const pList = document.getElementsByTagName('p')
+const length = pList.length
+for(let i = 0; i < length; i++) {
+    // 缓存 length，只进行一次 DOM查询
+}
+```
+
+### document.createDocumentFragment()
+
+```js
+let outter = document.getElementById('outter')
+
+// for(let i = 0; i < 100; i++) {
+//     let oLi = document.createElement('li')
+//     oLi.innerHTML = i
+//     outter.appendChild(oLi)
+// }
+
+// 创建一个文档片段，此时还没有插入到DOM树中
+let frag = document.createDocumentFragment()
+// 执行插入
+for( let i = 0; i < 10000; i++) {
+   let oLi = document.createElement('li')
+   oLi.innerHTML = i
+   frag.appendChild(oLi)
+}
+// 都完成之后，再插入到DOM树中
+outter.appendChild(frag)
+```
+
+
 
 # BOM操作
 

@@ -175,6 +175,69 @@ oUl.addEventListener("mouseout",function(e){
 # The Shortcomings of using event delegation
 如果绑定监听器的父元素和目标元素的层级相距较远，那么在冒泡过程中会消耗一定的时间。
 
+# demo
+
+编写一个通用的【事件代理和普通】事件监听函数
+
+```js
+<button id="btn1">
+    clickMe
+</button>
+<div id="outter">
+    <a href="#">1</a><br>
+    <a href="#">2</a><br>
+    <a href="#">3</a><br>
+    <a href="#">4</a>
+</div>
+<script>  
+
+function bindEvent(elem, type, selector, fn) {
+    if (fn == null) {
+        fn = selector
+        selector = null
+    }
+    elem.addEventListener(type, event => {
+        const target = event.target
+        if (selector) {
+            // 代理
+            if (target.matches(selector)) {
+                fn.call(target, event)
+            }
+        
+        } else {
+            // 普通
+            fn.call(target, event)
+        }
+    })
+}
+
+// 调用
+window.onload = function() {
+
+	// 通用
+    const btn1 = document.getElementById('btn1')
+    bindEvent(btn1, 'click', function(event) {
+        console.log(this.innerHTML)
+        // console.log(event.target.innerHTML)
+    })
+
+    // bindEvent(btn1, 'click', (event) => { // 使用箭头函数中的this 代表 Window
+    //     console.log(this) // Window
+    //     console.log(btn1.innerHTML)
+    // })
+
+
+    // 代理
+    const outter = document.getElementById('outter')
+    bindEvent(outter, 'click', 'a', function(event) {
+        event.preventDefault()
+        console.log(this.innerHTML)
+    })
+}
+```
+
+[Element.matches()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/matches)
+
 # 更多-more
 
 
