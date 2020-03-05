@@ -903,6 +903,8 @@ ajax的全称：Asynchronous Javascript And XML。
 
 (6)使用JavaScript和DOM实现局部刷新
 
+**get**
+
 ```js
 var xhr = new XMLHttpRequest();
 
@@ -917,6 +919,28 @@ xhr.onreadystatechange = function() {
 }
 
 xhr.send(null);
+```
+
+**post**
+
+```js
+var xhr = new XMLHttpRequest();
+
+xhr.open('POST', '/api', true);
+
+xhr.onreadystatechange = function() {
+	if (xhr.readyState === 4) {
+		if (xhr.status === 200) {
+			console.log(JSON.parse(xhr.responseText))
+		}
+	}
+}
+
+const postData = {
+    userName: 'zhangsan',
+    password: 'xxx'
+}
+xhr.send(JSON.stringify(postData));
 ```
 
 readyState
@@ -946,6 +970,100 @@ status
 - true 表示异步,就是不等待,直接返回，异步获取数据！
 
 - false 表示同步,等待有返回数据的时候再继续往下走，还没有得到数据的时候就会卡在那里，直到获取数据为止。
+
+## 手写一个简易的axios请求
+
+```js
+function myAxios(config) {
+    return new Promise((resolve,reject) => {
+        const xhr = new XMLHttpRequest()
+        const { data = null, url, method = 'get', headers} = config
+        xhr.open(method, url, true)
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    resolve(
+                        JSON.parse(xhr.responseText)  
+                    )
+                } else {
+                    reject(new Error(`Request failed with status code ${xhr.status}`))
+                }
+            }
+        }
+        xhr.send(data)
+    })
+}
+
+// 使用
+const url = '/data/test.json'
+myAxios({
+    method: 'get',
+    url: url,
+    params: {
+      foo: 'bar'
+    }
+}).then((res) => {
+    console.log(res)
+}).catch((err) => {
+    console.error(err)
+})
+```
+
+## ajax的常用插件
+
+1、 jQuery.ajax()方法，指定dataType为jsonp
+
+```js
+$.ajax({
+  url: 'http://www.b.com/getdata?callback=?', //不指定回调名，可省略callback参数，会由jQuery自动生成
+  dataType: 'jsonp',
+  jsonpCallback: 'demo', //可省略
+  success: function(data) {
+    console.log(data.msg);
+  }
+});
+```
+
+2、 [fetch()](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
+
+```js
+fetch('http://example.com/movies.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(myJson);
+  });
+```
+
+3、 [axios](http://axios-js.com/zh-cn/docs/)
+
+axios(config)
+
+```js
+// 发送 POST 请求
+axios({
+  method: 'post',
+  url: '/user/12345',
+  data: {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  }
+});
+```
+
+执行 GET 请求
+
+```js
+// 为给定 ID 的 user 创建请求
+axios.get('/user?ID=12345')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
 
 ## Ajax-cache
 

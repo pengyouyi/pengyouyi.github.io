@@ -45,9 +45,11 @@ description: 同源策略及限制
 
 ## 可以跨域的标签-Tags
 
-1. `<img src=xxx>`
-2. `<link href=xxx>`
-3. `<script src=xxx>`
+**加载图片、css、js 可无视同源策略**
+
+1. `<img src=跨域的图片地址>`
+2. `<link href=跨域的css地址>`
+3. `<script src=跨域的js地址>`
 4. `<iframe>`
 
 这些标签可以跨域加载资源，而不受同源策略的限制。这些带"src"属性的标签每次加载时，实际上是由浏览器发起了一次GET请求。不同于 XMLHttpRequest 的是，通过src属性加载的资源，浏览器限制了JavaScript的权限，使其不能读、写返回的内容。
@@ -516,7 +518,7 @@ Origin字段用来说明，本次请求来自哪个源（协议 + 域名 + 端�
 
 ```js
 Access-Control-Allow-Origin: http://api.bob.com
-Access-Control-Allow-Credentials: true
+Access-Control-Allow-Credentials: true // 接收跨域的cookie
 Access-Control-Expose-Headers: FooBar
 Content-Type: text/html; charset=utf-8
 ```
