@@ -101,17 +101,22 @@ description: 慕课网-前端JavaScript面试技巧(双越)-运行环境
 
 - 其实 jsp 、php 、 asp 都属于后端渲染
 
+> 服务端渲染：将网页和数据一起加载，一起渲染
+
+> 非SSR（前后端分离）：先加载网页，再加载数据，再渲染数据
+
 ### two-渲染优化
 
 1. css放前面，js放后面
 2. 懒加载（图片懒加载、下拉加载更多）
 3. 减少DOM查询，对DOM查询做缓存
 4. 减少DOM操作，多个操作尽量合并在一起执行
-5. 事件节流
+5. 事件节流 throttle、防抖 debounce
 6. 尽早执行操作（如DOMContentLoaded）
 
 
 *图片懒加载*
+
 ```js
 <img id="img1" src="preview.png" data-realsrc="abc.png" />
 <script>
@@ -120,19 +125,120 @@ description: 慕课网-前端JavaScript面试技巧(双越)-运行环境
 </script>
 ```
 
-*事件节流*
+*缓存DOM查询*
+
+```js
+// 不缓存 DOM 查询结果
+for(let i = 0; i < document.getElementsByTagName('p').length; i++) {
+  // 每次循环，都会计算 length,频繁进行 DOM 查询
+}
+
+// 缓存 DOM 查询结果
+const pList = document.getElementsByTagName('p').length;
+for (let i = 0; i < pList; i++) {
+	// 缓存 length，只进行一次 DOM 查询
+}
+```
+
+*多个 DOM 操作一起插入到 DOM 结构*
+
+```js
+let outter = document.getElementById('outter')
+
+// 创建一个文档片段，此时还没有插入到DOM树中
+let frag = document.createDocumentFragment()
+// 执行插入
+for( let i = 0; i < 10000; i++) {
+	let oLi = document.createElement('li')
+	oLi.innerHTML = i
+	frag.appendChild(oLi)
+}
+// 都完成之后，再插入到DOM树中
+outter.appendChild(frag)
+```
+
+*事件防抖*
+
 ```js
 var textarea = document.getElementById('text');
-var timeoutId；
+var timeoutId = null;
 textarea.addEventListener('keyup', function() {
 	if (timeoutId) {
 		clearTimeout(timeoutId);
 	}
 	timeoutId = setTimeout(function() {
 		// 触发change事件
-	}， 100)；
+		console.log(textarea.value)
+		// 清空定时器
+		timeoutId = null
+	}， 500)；
 });
 ```
+
+```js
+// 封装通用的防抖函数
+function debounce(fn, delay = 500) {
+	let timer = null;
+	return function() {
+		if(timer) {
+			clearTimeout(timer)
+		}
+		timer = setTimeout(() => {
+			fn.apply(this, arguments)
+			// fn() // 错误，调用的时候不能接收到e参数
+			timer = null
+		},delay)
+	}
+}
+
+// 如何使用防抖函数
+const input1 = document.getElementById('input1')
+input1.addEventListener('keyup',debounce(function(e) {
+	console.log(e.target)
+	console.log(input1.value)
+}), 1000)
+```
+
+*事件节流*
+
+```js
+const div1 = document.getElementById('div1')
+let timer = null
+div1.addEventListener('drag', function(e) {
+	if (timer) {
+		return
+	}
+	timer = setTimeout(function() {
+		console.log(e.offsetX,e.offsetY)
+		timer = null
+	}, 1000)
+})
+```
+
+```js
+// 封装通用的节流函数
+function throttle(fn, delay = 100) {
+	let timer = null
+	return function() {
+		if (timer) {
+		    return
+		}
+		timer = setTimeout(() => {
+			fn.apply(this, arguments)
+			// fn() // 错误，调用的时候不能接收到event参数
+			timer = null
+		}, delay)
+	}
+}
+  
+// 如何使用节流函数
+const div1 = document.getElementById('div1')
+div1.addEventListener('drag',throttle(function(e){
+	console.log(e.offsetX, e.offsetY)
+}, 200))
+```
+
+> 防抖和节流的区别：防抖是将多次执行变为最后一次执行，节流是将多次执行变为每隔一段时间执行
 
 *尽早执行操作*
 ```js
