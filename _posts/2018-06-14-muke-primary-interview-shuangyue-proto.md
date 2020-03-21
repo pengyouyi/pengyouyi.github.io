@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 慕课网-前端JavaScript面试技巧(双越)-原型和原型链
+title: 慕课网-前端JavaScript面试技巧(双越)-第3章 原型和原型链
 tags:
 - Interview
 - imooc
@@ -8,7 +8,7 @@ categories: JS
 description: 慕课网-前端JavaScript面试技巧(双越)-原型和原型链
 ---
 
-慕课网学习笔记-前端JavaScript面试技巧(双越)-第2章 JS基础知识（上）- 原型和原型链
+慕课网学习笔记-前端JavaScript面试技巧(双越)-第3章 JS基础知识（上）- 原型和原型链
 
 # question
 

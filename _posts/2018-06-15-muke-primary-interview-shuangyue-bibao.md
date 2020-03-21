@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 慕课网-前端JavaScript面试技巧(双越)-作用域、闭包
+title: 慕课网-前端JavaScript面试技巧(双越)-第4章 作用域、闭包
 tags:
 - Interview
 - imooc
@@ -8,7 +8,7 @@ categories: JS
 description: 慕课网-前端JavaScript面试技巧(双越)-作用域、闭包
 ---
 
-慕课网学习笔记-前端JavaScript面试技巧(双越)- 第3章 JS基础知识（中）- 作用域、闭包
+慕课网学习笔记-前端JavaScript面试技巧(双越)- 第4章 JS基础知识（中）- 作用域、闭包
 
 # question
 

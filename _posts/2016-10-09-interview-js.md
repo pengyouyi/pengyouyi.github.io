@@ -633,9 +633,15 @@ getElementByClassName()
 
 # JSON
 
-- JSON 的了解
+**什么是JSON？**
 
-JSON字符串转换为JSON对象:
+- json 是一种数据格式，本质是一段字符串。
+
+- json 格式和 JS 对象结构一致，对 JS 语言更友好
+
+- window.JSON 是一个全局对象：JSON.parse、JSON.stringify
+
+**JSON字符串转换为JSON对象:**
 
 {% highlight js linenos %}
 var obj = eval('('+ str +')');
@@ -643,7 +649,7 @@ var obj = str.parseJSON();
 var obj = JSON.parse(str);
 {% endhighlight %}
 
-JSON对象转换为JSON字符串：
+**JSON对象转换为JSON字符串：**
 
 {% highlight js linenos %}
 var last = obj.toJSONString();

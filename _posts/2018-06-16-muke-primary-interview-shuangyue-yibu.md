@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 慕课网-前端JavaScript面试技巧(双越)-异步和单线程
+title: 慕课网-前端JavaScript面试技巧(双越)-第5章 异步和单线程
 tags:
 - Interview
 - imooc
@@ -8,7 +8,7 @@ categories: JS
 description: 慕课网-前端JavaScript面试技巧(双越)-异步和单线程
 ---
 
-慕课网学习笔记-前端JavaScript面试技巧(双越)- 第4章 JS基础知识（下）- 异步和单线程
+慕课网学习笔记-前端JavaScript面试技巧(双越)- 第5章 JS基础知识（下）- 异步和单线程
 
 # question
 

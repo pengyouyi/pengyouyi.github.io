@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 慕课网-前端JavaScript面试技巧(双越)-运行环境
+title: 慕课网-前端JavaScript面试技巧(双越)-第8章 运行环境
 tags:
 - Interview
 - imooc
@@ -157,6 +157,10 @@ for( let i = 0; i < 10000; i++) {
 outter.appendChild(frag)
 ```
 
+在前端开发的过程中，我们经常会需要绑定一些持续触发的事件，如 resize、scroll、mousemove 等等，但有些时候我们并不希望在事件持续触发的过程中那么频繁地去执行函数。
+
+通常这种情况下我们怎么去解决的呢？一般来讲，防抖和节流是比较好的解决方案。
+
 *事件防抖*
 
 ```js
@@ -174,6 +178,12 @@ textarea.addEventListener('keyup', function() {
 	}， 500)；
 });
 ```
+
+- 监听一个输入框，文字变化后触发 change 事件
+
+- 直接用 keyup 事件，则会频繁触发 change 事件
+
+- 防抖：用户输入结束或暂停时，才会触发 change 事件
 
 ```js
 // 封装通用的防抖函数
@@ -214,6 +224,12 @@ div1.addEventListener('drag', function(e) {
 	}, 1000)
 })
 ```
+
+- 拖拽一个元素时，要随时拿到该元素被拖拽的位置
+
+- 直接用 drag 事件，则会频繁触发，很容易导致卡顿
+
+- 节流：无论拖拽速度多快，都会每隔 100ms 触发一次
 
 ```js
 // 封装通用的节流函数

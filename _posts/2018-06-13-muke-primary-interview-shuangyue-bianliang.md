@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 慕课网-前端JavaScript面试技巧(双越)-变量类型和计算
+title: 慕课网-前端JavaScript面试技巧(双越)-第2章 变量类型和计算
 tags:
 - Interview
 - imooc

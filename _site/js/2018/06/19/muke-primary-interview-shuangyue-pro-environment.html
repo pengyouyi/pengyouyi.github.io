@@ -7,7 +7,7 @@
     
     
     
-    <title>慕课网-前端JavaScript面试技巧(双越)-DOM&BOM | 彭友谊的博客</title>
+    <title>慕课网-前端JavaScript面试技巧(双越)-第8章 运行环境 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="慕课网-前端JavaScript面试技巧(双越)-DOM&BOM">
-    <meta property="og:url" content="/js/2018/06/14/muke-primary-interview-shuangyue-dom-bom">
+    <meta property="og:title" content="慕课网-前端JavaScript面试技巧(双越)-第8章 运行环境">
+    <meta property="og:url" content="/js/2018/06/19/muke-primary-interview-shuangyue-pro-environment">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="慕课网-前端JavaScript面试技巧(双越)-DOM&BOM">
+    <meta property="og:description" content="慕课网-前端JavaScript面试技巧(双越)-运行环境">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="慕课网-前端JavaScript面试技巧(双越)-DOM&BOM">
+    <meta name="twitter:title" content="慕课网-前端JavaScript面试技巧(双越)-第8章 运行环境">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -142,14 +142,14 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2018/06/14/muke-primary-interview-shuangyue-dom-bom" title="慕课网-前端JavaScript面试技巧(双越)-DOM&BOM" itemprop="url">慕课网-前端JavaScript面试技巧(双越)-DOM&BOM</a>
+      <a href="/js/2018/06/19/muke-primary-interview-shuangyue-pro-environment" title="慕课网-前端JavaScript面试技巧(双越)-第8章 运行环境" itemprop="url">慕课网-前端JavaScript面试技巧(双越)-第8章 运行环境</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pengyouyi" target="_blank" itemprop="author">pengyouyi</a>
 		
   <p class="article-time">
-    <time datetime="2018-06-14 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-06-14</time>
+    <time datetime="2018-06-19 00:00:00 +0800" itemprop="datePublished"> 发表于 2018-06-19</time>
     
   </p>
 </header>
@@ -161,266 +161,266 @@
 		
 		</div>
 		
-		<p>慕课网学习笔记-前端JavaScript面试技巧(双越)- # 第5章 JS-Web-API（上）- DOM&amp;BOM</p>
+		<p>慕课网学习笔记-前端JavaScript面试技巧(双越)- 第8章 运行环境</p>
 
-<h1 id="jswebapi">从基础知识到JSWebAPI</h1>
+<h1 id="question">question</h1>
 
-<p><strong>W3C 标准中关于js的规定有：</strong></p>
-
-<ul>
-<li><p>DOM操作</p></li>
-<li><p>BOM操作</p></li>
-<li><p>事件绑定</p></li>
-<li><p>ajax 请求（包括HTTP协议）</p></li>
-<li><p>存储</p></li>
-</ul>
-
-<p><strong>W3C 标准没有规定任何js基础相关的东西</strong></p>
+<p><strong>题目：</strong></p>
 
 <ul>
-<li><p>不管什么变量、原型、作用域、和异步</p></li>
-<li><p>只管定义与浏览器中js操作页面的API和全局变量</p></li>
+<li><p>浏览器就可以通过访问连接来得到页面的内容</p></li>
+<li><p>通过绘制和渲染，显示出页面的最终的样子</p></li>
+<li><p>整个过程中，我们需要考虑什么问题？</p></li>
 </ul>
 
-<p><strong>js内置的全局函数和对象有哪些</strong></p>
+<h1 id="knowledge-point">Knowledge-point</h1>
+
+<p><strong>知识点：</strong></p>
 
 <ul>
-<li><p>Object 、Array 、Boolean 、String 、Math 、JSON、Number、Date、RegExp、Error等</p></li>
-<li><p>URI编码方法：encodeURI()、encodeURIComponent()编码；decodeURI()、decodeURIComponent()解码</p></li>
-<li><p>window 、document</p></li>
-<li><p>navigator.userAgent </p></li>
+<li><p>页面加载过程</p></li>
+<li><p>性能优化</p></li>
+<li><p>安全性</p></li>
 </ul>
 
-<p><strong>常说的JS（浏览器执行的JS）包含两部分：</strong></p>
+<h2 id="page-load">页面加载-Page-load</h2>
+
+<p><strong>加载资源的形式</strong></p>
+
+<ol>
+<li>输入URL（或跳转页面）加载HTML</li>
+<li>加载HTML中的静态资源,比如 <code>&lt;script src=&#39;/static/&#39;&gt;</code></li>
+</ol>
+
+<p><strong>加载一个资源的过程</strong></p>
+
+<ol>
+<li>浏览器根据DNS服务器得到域名的IP地址</li>
+<li>向这个IP的机器发送HTTP请求</li>
+<li>服务器收到、处理并返回HTTP请求</li>
+<li>浏览器得到返回内容</li>
+</ol>
+
+<p><strong>浏览器渲染页面的过程</strong></p>
+
+<ol>
+<li>根据HTML结构生成 DOM树</li>
+<li>根据CSS生成cssOM</li>
+<li>将DOM和CSSOM整合成render树</li>
+<li>根据render树开始渲染和展示</li>
+<li>遇到 <code>&lt;script&gt;</code> 时，会执行并阻塞渲染</li>
+</ol>
+
+<p><strong>为何要把css放到head中？</strong></p>
 
 <ul>
-<li><p>js基础知识（ECMA标准）</p></li>
-<li><p>js-Web-API (W3C标准)</p></li>
+<li><p>用户体验差，卡顿、抖动；</p></li>
+<li><p>性能差，如果css放head里渲染DOM的元素的时候知道规则，一次渲染成功，否则DOM元素先按照默认的样式渲染，再按规定它样式的CSS渲染。</p></li>
 </ul>
 
-<h1 id="dom">DOM本质</h1>
-
-<p>浏览器把拿到的HTML代码，结构化一个浏览器能识别并且js可操作的一个模型而已。</p>
-
-<p><strong>题目</strong></p>
+<p><strong>window.onload 和 DOMContentLoaded 的区别</strong></p>
 
 <ul>
-<li><p>DOM是哪种基本的数据结构</p></li>
-<li><p>DOM操作常用的API有哪些</p></li>
-<li><p>DOM节点的attr 和property 有何区别</p></li>
-<li><p>一次性插入多个 DOM 节点，考虑性能</p></li>
+<li><p>window.onload  页面的全部资源加载完成才会执行，包括图片、视频</p></li>
+<li><p>DOMContentLoaded DOM渲染完即可执行，此时图片、视频可能没有加载完</p></li>
 </ul>
 
-<p><strong>知识点</strong></p>
+<h2 id="performance-optimization">性能优化-performance-optimization</h2>
 
 <ul>
-<li><p>DOM本质</p></li>
-<li><p>DOM节点操作</p></li>
-<li><p>DOM结构操作</p></li>
-<li><p>DOM性能</p></li>
+<li>性能优化 - 优化策略</li>
 </ul>
 
-<h2 id="dom">DOM节点操作</h2>
+<p><strong>原则</strong> </p>
 
 <ul>
-<li><p>获取DOM节点</p></li>
-<li><p>prototype</p></li>
-<li><p>Attribute</p></li>
+<li><p>多使用内存、缓存或者其他方法</p></li>
+<li><p>减少CPU计算、减少网络</p></li>
 </ul>
 
-<h3 id="dom">获取DOM节点</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">div1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'div1'</span><span class="p">);</span> 
+<p><strong>从哪里入手</strong></p>
 
-<span class="kd">var</span> <span class="nx">divList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'div'</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">divList</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">divList</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<ol>
+<li>加载页面和静态资源</li>
+<li>页面渲染</li>
+</ol>
 
-<span class="kd">var</span> <span class="nx">containerList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">'container'</span><span class="p">);</span>
+<h3 id="one">one-加载资源优化</h3>
 
-<span class="kd">var</span> <span class="nx">pList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="dom-property">获取DOM节点的property</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">pList</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<ol>
+<li>静态资源的压缩合并</li>
+<li>静态资源缓存</li>
+<li>使用CDN让资源加载更快</li>
+<li>使用SSR（server side render）后端渲染，数据直接输出到HTML中</li>
+</ol>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
-<span class="nx">p</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="s1">'100px'</span><span class="p">;</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">className</span><span class="p">);</span>
-<span class="nx">p</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s1">'p1'</span><span class="p">;</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">nodeName</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">nodeType</span><span class="p">);</span>
-</code></pre></div>
-<h3 id="dom-attribute">获取DOM节点的Attribute</h3>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">pList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">pList</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-
-<span class="nx">p</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'data-name'</span><span class="p">);</span>
-<span class="nx">p</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'data-name'</span><span class="p">,</span> <span class="s1">'omooc'</span><span class="p">);</span>
-
-<span class="nx">p</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'style'</span><span class="p">);</span>
-<span class="nx">p</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'style'</span><span class="p">,</span> <span class="s1">'font-size: 30px'</span><span class="p">);</span>
-</code></pre></div>
-<h2 id="dom">DOM结构操作</h2>
+<p><em>静态资源缓存</em></p>
 
 <ul>
-<li><p>新增节点</p></li>
-<li><p>获取父节点</p></li>
-<li><p>获取子节点</p></li>
-<li><p>删除节点</p></li>
+<li><p>通过连接名称控制缓存，<script src="abc_1.js"></script></p></li>
+<li><p>只有内容改变的时候，链接名称才会改变，<script src="abc_2.js"></script></p></li>
 </ul>
 
-<p><strong>新增DOM节点</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">div1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'div1'</span><span class="p">);</span>
-<span class="c1">// 添加新节点</span>
-<span class="kd">var</span> <span class="nx">p1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'p'</span><span class="p">);</span>
-<span class="nx">p1</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s1">'this is p1'</span><span class="p">;</span>
-<span class="nx">div1</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">p1</span><span class="p">);</span>
-<span class="c1">// 移动已有节点</span>
-<span class="kd">var</span> <span class="nx">p2</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'p2'</span><span class="p">);</span>
-<span class="nx">div1</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">p2</span><span class="p">);</span>
-</code></pre></div>
-<p><strong>获取DOM父元素和子元素</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">div1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'div1'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">div1</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">div1</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">;</span>
-</code></pre></div>
-<p><strong>删除节点</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">div1</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">child</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-</code></pre></div>
-<h2 id="dom">DOM是哪种基本的数据结构</h2>
-
-<p>树</p>
-
-<h2 id="dom-api">DOM操作常用的API有哪些</h2>
+<p><em>使用SSR（server side render）后端渲染</em></p>
 
 <ul>
-<li><p>获取DOM节点，以及节点的property和Attribute</p></li>
-<li><p>获取父节点，获取子节点</p></li>
-<li><p>新增节点，删除节点</p></li>
+<li><p>现在 Vue 、React 提出了这样的概念</p></li>
+<li><p>其实 jsp 、php 、 asp 都属于后端渲染</p></li>
 </ul>
 
-<h2 id="dom-attr-property">DOM节点的attr 和property 有何区别</h2>
+<blockquote>
+<p>服务端渲染：将网页和数据一起加载，一起渲染</p>
 
-<ul>
-<li><p>property 只是一个JS对象的属性的修改,不会体现到HTML结构中</p></li>
-<li><p>Attribute 是对html标签属性的修改，会改变HTML结构</p></li>
-</ul>
+<p>非SSR（前后端分离）：先加载网页，再加载数据，再渲染数据</p>
+</blockquote>
 
-<p><a href="https://www.jianshu.com/p/f7a7cda463df">Attribute和property的区别！</a><br>
-<a href="https://www.cnblogs.com/lmjZone/p/8760232.html">JS中attribute和property的区别</a></p>
+<h3 id="two">two-渲染优化</h3>
 
-<h2 id="dom">DOM性能</h2>
+<ol>
+<li>css放前面，js放后面</li>
+<li>懒加载（图片懒加载、下拉加载更多）</li>
+<li>减少DOM查询，对DOM查询做缓存</li>
+<li>减少DOM操作，多个操作尽量合并在一起执行</li>
+<li>事件节流 throttle、防抖 debounce</li>
+<li>尽早执行操作（如DOMContentLoaded）</li>
+</ol>
 
-<ul>
-<li><p>DOM 操作非常昂贵，避免频繁的DOM操作</p></li>
-<li><p>对DOM查询做缓存</p></li>
-<li><p>将频繁操作改为一次性操作</p></li>
-</ul>
-
-<h3 id="dom">DOM查询做缓存</h3>
+<p><em>图片懒加载</em></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"img1"</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"preview.png"</span> <span class="nx">data</span><span class="o">-</span><span class="nx">realsrc</span><span class="o">=</span><span class="s2">"abc.png"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">img1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'img1'</span><span class="p">);</span>
+  <span class="nx">img1</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="nx">img1</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="s1">'data-realsrc'</span><span class="p">);</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div>
+<p><em>缓存DOM查询</em></p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 不缓存 DOM 查询结果</span>
 <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// 每次循环，都会计算 length，频繁进行 DOM 查询</span>
+  <span class="c1">// 每次循环，都会计算 length,频繁进行 DOM 查询</span>
 <span class="p">}</span>
 
-<span class="kr">const</span> <span class="nx">pList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'p'</span><span class="p">)</span>
-<span class="kr">const</span> <span class="nx">length</span> <span class="o">=</span> <span class="nx">pList</span><span class="p">.</span><span class="nx">length</span>
-<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// 缓存 length，只进行一次 DOM查询</span>
+<span class="c1">// 缓存 DOM 查询结果</span>
+<span class="kr">const</span> <span class="nx">pList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'p'</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">pList</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 缓存 length，只进行一次 DOM 查询</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="document-createdocumentfragment">document.createDocumentFragment()</h3>
+<p><em>多个 DOM 操作一起插入到 DOM 结构</em></p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">outter</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'outter'</span><span class="p">)</span>
-
-<span class="c1">// for(let i = 0; i &lt; 100; i++) {</span>
-<span class="c1">//     let oLi = document.createElement('li')</span>
-<span class="c1">//     oLi.innerHTML = i</span>
-<span class="c1">//     outter.appendChild(oLi)</span>
-<span class="c1">// }</span>
 
 <span class="c1">// 创建一个文档片段，此时还没有插入到DOM树中</span>
 <span class="kd">let</span> <span class="nx">frag</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createDocumentFragment</span><span class="p">()</span>
 <span class="c1">// 执行插入</span>
 <span class="k">for</span><span class="p">(</span> <span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-   <span class="kd">let</span> <span class="nx">oLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'li'</span><span class="p">)</span>
-   <span class="nx">oLi</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">i</span>
-   <span class="nx">frag</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">oLi</span><span class="p">)</span>
+    <span class="kd">let</span> <span class="nx">oLi</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">'li'</span><span class="p">)</span>
+    <span class="nx">oLi</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">i</span>
+    <span class="nx">frag</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">oLi</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="c1">// 都完成之后，再插入到DOM树中</span>
 <span class="nx">outter</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">frag</span><span class="p">)</span>
 </code></pre></div>
-<h1 id="bom">BOM操作</h1>
+<p>在前端开发的过程中，我们经常会需要绑定一些持续触发的事件，如 resize、scroll、mousemove 等等，但有些时候我们并不希望在事件持续触发的过程中那么频繁地去执行函数。</p>
 
-<p><strong>题目</strong></p>
+<p>通常这种情况下我们怎么去解决的呢？一般来讲，防抖和节流是比较好的解决方案。</p>
 
-<ul>
-<li><p>如何检测浏览器的类型</p></li>
-<li><p>拆解URL的各部分</p></li>
-</ul>
-
-<p><strong>知识点</strong></p>
-
-<ul>
-<li><p>navigator</p></li>
-<li><p>screen</p></li>
-<li><p>Location</p></li>
-<li><p>history</p></li>
-</ul>
-
-<p>navigator &amp; screen</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// navigator</span>
-<span class="kd">var</span> <span class="nx">ua</span> <span class="o">=</span> <span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isChrome</span> <span class="o">=</span> <span class="nx">ua</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'Chrome'</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isChrome</span><span class="p">);</span>
-
-<span class="c1">// screen</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">screen</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
-</code></pre></div>
-<p>Location &amp; history</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// location</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">pathname</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">hash</span><span class="p">);</span>
-
-<span class="c1">// history </span>
-<span class="nx">history</span><span class="p">.</span><span class="nx">back</span><span class="p">();</span>
-<span class="nx">history</span><span class="p">.</span><span class="nx">forward</span><span class="p">();</span>
-</code></pre></div>
-<p><strong>查询字符串参数</strong></p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">getQueryStringArgs</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">qs</span> <span class="o">=</span> <span class="p">(</span><span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="nx">location</span><span class="p">.</span><span class="nx">search</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">:</span> <span class="s2">""</span><span class="p">),</span> <span class="c1">//取得查询字符串并去掉开头的问号</span>
-        <span class="nx">args</span> <span class="o">=</span> <span class="p">{},</span> <span class="c1">//保存数据的对象</span>
-        <span class="nx">items</span> <span class="o">=</span> <span class="nx">qs</span><span class="p">.</span><span class="nx">length</span> <span class="p">?</span> <span class="nx">qs</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"&amp;"</span><span class="p">)</span> <span class="p">:</span> <span class="p">[],</span> <span class="c1">//根据和号（&amp;）来分割查询字符串，并返回name=value 格式的字符串数组</span>
-        <span class="nx">item</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
-        <span class="nx">name</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
-        <span class="nx">value</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
-        <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">len</span> <span class="o">=</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-
-    <span class="c1">//逐个将每一项添加到args 对象中</span>
-    <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">item</span> <span class="o">=</span> <span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">split</span><span class="p">(</span><span class="s2">"="</span><span class="p">);</span>
-        <span class="nx">name</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-        <span class="nx">value</span> <span class="o">=</span> <span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">args</span><span class="p">[</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
-        <span class="p">}</span>
+<p><em>事件防抖</em></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">textarea</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'text'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">timeoutId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="nx">textarea</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'keyup'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">timeoutId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timeoutId</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="nx">args</span><span class="p">;</span>
+    <span class="nx">timeoutId</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// 触发change事件</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">textarea</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+        <span class="c1">// 清空定时器</span>
+        <span class="nx">timeoutId</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="p">}</span><span class="err">，</span> <span class="mi">500</span><span class="p">)</span><span class="err">；</span>
+<span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><p>监听一个输入框，文字变化后触发 change 事件</p></li>
+<li><p>直接用 keyup 事件，则会频繁触发 change 事件</p></li>
+<li><p>防抖：用户输入结束或暂停时，才会触发 change 事件</p></li>
+</ul>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 封装通用的防抖函数</span>
+<span class="kd">function</span> <span class="nx">debounce</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">delay</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">)</span>
+            <span class="c1">// fn() // 错误，调用的时候不能接收到e参数</span>
+            <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span>
+        <span class="p">},</span><span class="nx">delay</span><span class="p">)</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="c1">//假设查询字符串是?q=javascript&amp;num=10</span>
-<span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">getQueryStringArgs</span><span class="p">();</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="s2">"q"</span><span class="p">]);</span> <span class="c1">//"javascript"</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="s2">"num"</span><span class="p">]);</span> <span class="c1">//"10"</span>
+<span class="c1">// 如何使用防抖函数</span>
+<span class="kr">const</span> <span class="nx">input1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'input1'</span><span class="p">)</span>
+<span class="nx">input1</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'keyup'</span><span class="p">,</span><span class="nx">debounce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">input1</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+<span class="p">}),</span> <span class="mi">1000</span><span class="p">)</span>
 </code></pre></div>
-<p>《JavaScript高级程序设计第三版》</p>
+<p><em>事件节流</em></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kr">const</span> <span class="nx">div1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'div1'</span><span class="p">)</span>
+<span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="nx">div1</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'drag'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">offsetX</span><span class="p">,</span><span class="nx">e</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">)</span>
+        <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
+<ul>
+<li><p>拖拽一个元素时，要随时拿到该元素被拖拽的位置</p></li>
+<li><p>直接用 drag 事件，则会频繁触发，很容易导致卡顿</p></li>
+<li><p>节流：无论拖拽速度多快，都会每隔 100ms 触发一次</p></li>
+</ul>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 封装通用的节流函数</span>
+<span class="kd">function</span> <span class="nx">throttle</span><span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">delay</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">timer</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+        <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">)</span>
+            <span class="c1">// fn() // 错误，调用的时候不能接收到event参数</span>
+            <span class="nx">timer</span> <span class="o">=</span> <span class="kc">null</span>
+        <span class="p">},</span> <span class="nx">delay</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 如何使用节流函数</span>
+<span class="kr">const</span> <span class="nx">div1</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'div1'</span><span class="p">)</span>
+<span class="nx">div1</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'drag'</span><span class="p">,</span><span class="nx">throttle</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">offsetX</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">offsetY</span><span class="p">)</span>
+<span class="p">},</span> <span class="mi">200</span><span class="p">))</span>
+</code></pre></div>
+<blockquote>
+<p>防抖和节流的区别：防抖是将多次执行变为最后一次执行，节流是将多次执行变为每隔一段时间执行</p>
+</blockquote>
+
+<p><em>尽早执行操作</em></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'load'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="c1">// 页面的全部资源加载完才会执行，包括图片、视频等</span>
+<span class="p">});</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'DOMContentLoaded'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// DOM渲染完即可执行，此时图片、视频还可能没有加载完</span>
+<span class="p">})</span>
+</code></pre></div>
+<h2 id="xss">安全性 - XSS</h2>
+
+<ul>
+<li><p>xss 跨站请求攻击</p></li>
+<li><p>XSRF 跨站请求伪造</p></li>
+</ul>
 
 <h1 id="more">更多-more</h1>
 
@@ -459,6 +459,10 @@
   
   <a href="/tags/#imooc">imooc</a>
   
+  <a href="/tags/#BOM">BOM</a>
+  
+  <a href="/tags/#optimize">optimize</a>
+  
   </div>
 
 </div>
@@ -467,7 +471,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2018/06/14/muke-primary-interview-shuangyue-dom-bom" data-title="慕课网-前端JavaScript面试技巧(双越)-DOM&BOM | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2018/06/19/muke-primary-interview-shuangyue-pro-environment" data-title="慕课网-前端JavaScript面试技巧(双越)-第8章 运行环境 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -479,18 +483,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/js/2018/06/14/muke-primary-interview-shuangyue-dev-environment" title="慕课网-前端JavaScript面试技巧(双越)-开发环境">
+ <a href="/js/2018/06/18/muke-primary-interview-shuangyue-dev-environment" title="慕课网-前端JavaScript面试技巧(双越)-第7章 开发环境">
   <strong>上一篇：</strong><br/>
   <span>
-  慕课网-前端JavaScript面试技巧(双越)-开发环境</span>
+  慕课网-前端JavaScript面试技巧(双越)-第7章 开发环境</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/js/2018/06/14/muke-primary-interview-shuangyue-pro-environment"  title="慕课网-前端JavaScript面试技巧(双越)-运行环境">
+<a href="/js/2018/06/21/js-type-conversion"  title="js显示类型转换&隐式类型转换">
  <strong>下一篇：</strong><br/> 
- <span>慕课网-前端JavaScript面试技巧(双越)-运行环境
+ <span>js显示类型转换&隐式类型转换
 </span>
 </a>
 </div>

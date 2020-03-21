@@ -16,8 +16,8 @@ description: 前端错误监控
 
 ## 即时运行error
 
-1、try..catch  
-2、window.onerror
+1、try..catch  手动捕获
+2、window.onerror 自动捕获
 
 ```js
 try
@@ -28,6 +28,13 @@ catch(err)
   {
   //在这里处理错误
   }
+```
+
+```js
+window.onerror = function (message, source, lineNum, colNum, error) {
+  // 第一，对跨域的 js，如 CDN 的，不会有详细的报错信息
+  // 第二，对于压缩的 JS, 还要配合 sourceMap 反查到未压缩代码的行、列
+}
 ```
 
 ## 资源加载error

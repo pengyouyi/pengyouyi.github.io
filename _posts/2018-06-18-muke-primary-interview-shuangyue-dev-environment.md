@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 慕课网-前端JavaScript面试技巧(双越)-开发环境
+title: 慕课网-前端JavaScript面试技巧(双越)-第7章 开发环境
 tags:
 - Interview
 - imooc

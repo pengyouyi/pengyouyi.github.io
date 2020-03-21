@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 慕课网-前端JavaScript面试技巧(双越)-DOM&BOM
+title: 慕课网-前端JavaScript面试技巧(双越)-第6章 DOM&BOM
 tags:
 - Interview
 - imooc
@@ -8,7 +8,7 @@ categories: JS
 description: 慕课网-前端JavaScript面试技巧(双越)-DOM&BOM
 ---
 
-慕课网学习笔记-前端JavaScript面试技巧(双越)- # 第5章 JS-Web-API（上）- DOM&BOM
+慕课网学习笔记-前端JavaScript面试技巧(双越)- # 第6章 JS-Web-API（上）- DOM&BOM
 
 # 从基础知识到JSWebAPI
 
@@ -223,8 +223,6 @@ for( let i = 0; i < 10000; i++) {
 outter.appendChild(frag)
 ```
 
-
-
 # BOM操作
 
 **题目**
@@ -270,7 +268,11 @@ history.back();
 history.forward();
 ```
 
-**查询字符串参数**
+## location.search
+
+### 将 url 查询字符串参数解析为 JS 对象
+
+**法一：**
 
 ```js
 function getQueryStringArgs() {
@@ -301,6 +303,30 @@ console.log(args["q"]); //"javascript"
 console.log(args["num"]); //"10"
 ```
 《JavaScript高级程序设计第三版》
+
+**法二：new URLSearchParams()**
+
+```js
+// 使用 URLSearchParams
+function queryToObj() {
+	const res = {}
+	const pList = new URLSearchParams(location.search)
+	pList.forEach((item, index) => {
+		res[index] = item
+	})
+	return res
+}
+```
+
+### 获取当前页面 url 参数
+
+```js
+// 使用 URLSearchParams
+function query(name) {
+	const pList = new URLSearchParams(location.search)
+	return pList.get(name)
+}
+```
 
 # 更多-more
 

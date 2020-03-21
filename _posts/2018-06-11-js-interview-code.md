@@ -279,53 +279,60 @@ Array.isArray(arr);
 ```js
 var arr = [ 1,2,3,"1"];
 
-	function getArrUnique(arr){
-		var newArr = [ ];
-		for (var i=0; i < arr.length;i++){
+function getArrUnique(arr){
+	var newArr = [ ];
+	for (var i = 0; i < arr.length; i++){
 
-			if(newArr.indexOf(arr[i]) == -1)
-				newArr.push(arr[i]);	
-		}
-		return newArr;
+		if(newArr.indexOf(arr[i]) == -1)
+			newArr.push(arr[i]);	
 	}
+	return newArr;
+}
 ```
 
 方法2,不完善：
 
 ```js	
-	function getArrUnique2(arr){
-		var newArr = [];
-		var obj ={};
-		for(var i=0;i<arr.length;i++){
-			if(!obj[arr[i]]){
-				obj[arr[i]] = true;
-				newArr.push(arr[i]);
-			}
-
+function getArrUnique2(arr){
+	var newArr = [];
+	var obj = {};
+	for(var i = 0; i < arr.length; i++){
+		if(!obj[arr[i]]){
+			obj[arr[i]] = true;
+			newArr.push(arr[i]);
 		}
-		return newArr;
 	}
-	console.log(getArrUnique2(arr));  //[1,2,3]  error result
+	return newArr;
+}
+console.log(getArrUnique2(arr));  //[1,2,3]  error result
 ```
 
 改进以上方法,方法2:
 
 ```js
-	function getArrUnique3(arr){
-		var newArr = [];
-		var obj ={};
-		for(var i=0;i<arr.length;i++){
-			if(!obj[ typeof (arr[i]) + arr[i] ]){
-				obj[ typeof (arr[i]) + arr[i] ] = true;
-				newArr.push(arr[i]);
-			}
-
+function getArrUnique3(arr){
+	var newArr = [];
+	var obj ={};
+	for(var i=0;i<arr.length;i++){
+		if(!obj[ typeof (arr[i]) + arr[i] ]){
+			obj[ typeof (arr[i]) + arr[i] ] = true;
+			newArr.push(arr[i]);
 		}
-		return newArr;
+
 	}
-	console.log(getArrUnique3(arr));  //[1,2,3,"1"]
+	return newArr;
+}
+console.log(getArrUnique3(arr));  //[1,2,3,"1"]
 ```
 
+方法3: 使用 Set
+
+```js
+function getArrUnique(arr){
+	const set = new Set(arr)
+	return [...set]
+}
+```
 
 ## Random-ordering
 
@@ -382,18 +389,18 @@ console.log(arr);
 1、对象字面量的方式   
 
 ```js
-person={firstname:"Mark",lastname:"Yun",age:25,eyecolor:"black"};
+person = {firstname:"Mark", lastname:"Yun", age:25, eyecolor:"black"};
 ```
 
 2、用function来模拟无参的构造函数
 
 ```js
 function Person(){}
-var person=new Person();//定义一个function，如果使用new"实例化",该function可以看作是一个Class
-person.name="Mark";
-person.age="25";
-person.work=function(){
-    alert(person.name+" hello...");
+var person = new Person();//定义一个function，如果使用new"实例化",该function可以看作是一个Class
+person.name = "Mark";
+person.age = "25";
+person.work = function(){
+    alert(person.name + " hello...");
 }
 person.work();
 ```
@@ -401,26 +408,26 @@ person.work();
 3、用function来模拟参构造函数来实现（用this关键字定义构造的上下文属性）
 
 ```js
-function Pet(name,age,hobby){
-    this.name=name;//this作用域：当前对象
-    this.age=age;
-    this.hobby=hobby;
-    this.eat=function(){
-        alert("我叫"+this.name+",我喜欢"+this.hobby+",是个程序员");
+function Pet(name, age, hobby){
+    this.name = name;//this作用域：当前对象
+    this.age = age;
+    this.hobby = hobby;
+    this.eat = function() {
+        alert("我叫" + this.name + ",我喜欢" + this.hobby + ",是个程序员");
     }
 }
-var maidou =new Pet("麦兜",25,"coding");//实例化、创建对象
+var maidou = new Pet("麦兜", 25, "coding");//实例化、创建对象
 maidou.eat();//调用eat方法
 ```
 
 4、用工厂方式来创建（内置对象）
 
 ```js
-var wcDog =new Object();
-wcDog.name="旺财";
-wcDog.age=3;
-wcDog.work=function(){
-    alert("我是"+wcDog.name+",汪汪汪......");
+var wcDog =n ew Object();
+wcDog.name = "旺财";
+wcDog.age = 3;
+wcDog.work = function() {
+    alert("我是" + wcDog.name + ",汪汪汪......");
 }
 wcDog.work();
 ```
@@ -431,11 +438,11 @@ wcDog.work();
 function Dog(){
 
 }
-Dog.prototype.name="旺财";
-Dog.prototype.eat=function(){
-    alert(this.name+"是个吃货");
+Dog.prototype.name = "旺财";
+Dog.prototype.eat = function(){
+    alert(this.name + "是个吃货");
 }
-var wangcai =new Dog();
+var wangcai = new Dog();
 wangcai.eat();
 ```
 
@@ -443,13 +450,13 @@ wangcai.eat();
 
 ```js
 function Car(name,price){
-    this.name=name;
-    this.price=price; 
+    this.name = name;
+    this.price = price; 
 }
-Car.prototype.sell=function(){
-    alert("我是"+this.name+"，我现在卖"+this.price+"万元");
+Car.prototype.sell = function(){
+    alert("我是" + this.name + "，我现在卖" + this.price + "万元");
 }
-var camry =new Car("凯美瑞",27);
+var camry = new Car("凯美瑞",27);
 camry.sell(); 
 ```
 
@@ -621,6 +628,68 @@ console.log(test1);
 ```
 
 [使用JSON.parse(),JSON.stringify()实现对对象的深拷贝](https://www.cnblogs.com/baiyangyuanzi/p/6519612.html)
+
+## isEqual
+
+手写对象深度比较，模拟 lodash 的 isEqual
+
+```js
+function isObject(obj) {
+	return Object.prototype.toString.call(obj) === '[object Object]'
+}
+
+function isArray(arr) {
+	return Object.prototype.toString.call(arr) === '[Object Array]'
+}
+
+function isEqual(obj1, obj2) {
+	// 值类型
+	if (obj1 === obj2) {
+		return true
+	}
+	// 类型为对象并且元素个数相同
+	if (isObject(obj1) && isObject(obj2) && Object.keys(obj1).length === Object.keys(obj2).length) {
+        for (let key in obj1) {
+        	if (obj1.hasOwnProperty(key)) {
+        		// 递归
+	            const res = isEqual(obj1[key], obj2[key])
+			    if (!res) {
+			    	return false
+			    }
+        	}
+        	
+        }
+    // 类型为数组并且数组长度相同
+	} else if(isArray(obj1) && isArray(obj2) && obj1.length === obj2.length) {
+        for (let key in obj1) {
+        	// 递归
+        	const res = isEqual(obj1[key], obj2[key])
+		    if (!res) {
+		    	return false
+		    }
+        }
+    // 其它类型,均返回false
+	} else {
+		return false
+	}
+	// 走到这里,说明数组或者对象中所有元素都相同,返回true
+	return true
+}
+
+let obj1 = {
+    a: 100,
+    b: {x: 100},
+    c: ['x', 'y']
+}
+
+let obj2 = {
+	a: 10,
+	b: {x: 100},
+	c: {'0':'x','1':'y'}
+}
+
+console.log(isEqual(obj1, obj2))
+```
 
 ## 继承的使用-inherit
 
