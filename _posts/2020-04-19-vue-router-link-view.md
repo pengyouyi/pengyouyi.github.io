@@ -155,5 +155,5 @@ export default {
 
 # more 
 
-vue-router-view demo 代码请看 github, 项目 [v-router-view]](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue%E5%AE%9E%E7%94%A8%E7%BB%84%E4%BB%B6/v-router-view)
+vue-router-view demo 代码请看 github, 项目 [v-router-view](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue%E5%AE%9E%E7%94%A8%E7%BB%84%E4%BB%B6/v-router-view)
 
