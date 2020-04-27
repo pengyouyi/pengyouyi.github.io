@@ -197,7 +197,7 @@
 <div class="red" > ❿ 全局 afterEach </div>
 
 <blockquote>
-<p>一定要确保调用 next() 方法。 （afterEach 除外）<br>
+<p>一定要确保调用 next() 方法。 （afterEach 除外）<br><br>
 afterEach 不接收第三个参数 next 函数，也不会改变导航本身</p>
 </blockquote>
 
@@ -448,21 +448,12 @@ afterEach 不接收第三个参数 next 函数，也不会改变导航本身</p>
 <span class="p">}</span>
 </code></pre></div>
 <p>2、 当页面中有未关闭的窗口, 或未保存的内容时, 阻止页面跳转</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// 判断是否弹出框的状态和保存信息与否</span>
-<span class="nx">beforeRouteLeave</span> <span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span> 
- <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">dialogVisibility</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>    
-     <span class="c1">// 关闭弹出框</span>
-     <span class="k">this</span><span class="p">.</span><span class="nx">dialogVisibility</span> <span class="o">=</span> <span class="kc">false</span> 
-     <span class="c1">// 回到当前页面, 阻止页面跳转</span>
-     <span class="nx">next</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span> 
-  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span> <span class="k">this</span><span class="p">.</span><span class="nx">saveMessage</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// 弹出警告</span>
-    <span class="nx">alert</span><span class="p">(</span><span class="s1">'请保存信息后退出!'</span><span class="p">)</span> 
-    <span class="c1">// 回到当前页面, 阻止页面跳转</span>
-    <span class="nx">next</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span> 
-  <span class="c1">// 否则允许跳转</span>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">beforeRouteLeave</span> <span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">answer</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">confirm</span><span class="p">(</span><span class="s1">'Do you really want to leave? you have unsaved changes!'</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">answer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">next</span><span class="p">()</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nx">next</span><span class="p">()</span> 
+    <span class="nx">next</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -546,6 +537,14 @@ afterEach 不接收第三个参数 next 函数，也不会改变导航本身</p>
 </div>
 
 
+<div class="next">
+<a href="/framework/2020/04/20/vue-user-center"  title="Vue pnc用户信息个人中心">
+ <strong>下一篇：</strong><br/> 
+ <span>Vue pnc用户信息个人中心
+</span>
+</a>
+</div>
+
 </nav>
 
 	
@@ -585,7 +584,7 @@ afterEach 不接收第三个参数 next 函数，也不会改变导航本身</p>
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>27</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>28</sup></a></li>
 		  
 		
 		  
@@ -634,7 +633,7 @@ afterEach 不接收第三个参数 next 函数，也不会改变导航本身</p>
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>21</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>22</sup></a></li>
 			
 		
 			

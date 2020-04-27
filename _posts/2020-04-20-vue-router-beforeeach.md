@@ -45,7 +45,7 @@ description: Vue Router 中的 导航守卫
 
 
 
-> 一定要确保调用 next() 方法。 （afterEach 除外）
+> 一定要确保调用 next() 方法。 （afterEach 除外）  
 > afterEach 不接收第三个参数 next 函数，也不会改变导航本身
 
 # two 流程 demo
@@ -321,21 +321,12 @@ beforeRouteLeave (to, from, next) {
 2、 当页面中有未关闭的窗口, 或未保存的内容时, 阻止页面跳转
 
 ```js
-// 判断是否弹出框的状态和保存信息与否
-beforeRouteLeave (to, from, next) { 
- if (this.dialogVisibility === true) {    
-     // 关闭弹出框
-     this.dialogVisibility = false 
-     // 回到当前页面, 阻止页面跳转
-     next(false) 
-  } else if( this.saveMessage === false) {
-      // 弹出警告
-    alert('请保存信息后退出!') 
-    // 回到当前页面, 阻止页面跳转
-    next(false) 
-  // 否则允许跳转
+beforeRouteLeave (to, from, next) {
+  const answer = window.confirm('Do you really want to leave? you have unsaved changes!')
+  if (answer) {
+    next()
   } else {
-    next() 
+    next(false)
   }
 }
 ```
