@@ -194,7 +194,29 @@ for(let i = 0; i < 5; i++) {
 ```
 
 法四：
-ES6的Promise、ES7的 async/await
+ES6的Promise、
+
+
+法五：
+ES7的 async/await
+
+```js
+function sleep(interval) {
+  return new Promise(resolve => {
+    setTimeout(resolve, interval);
+  })
+}
+
+// 用法
+async function countInAsync() {
+  for(let i = 0; i < 5; i++) {
+    console.log(i);
+    await sleep(1000);
+  }
+}
+
+countInAsync();
+```
 
 > setTimeout 不支持传带参数的函数
 
