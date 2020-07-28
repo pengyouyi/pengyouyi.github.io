@@ -4,7 +4,7 @@ title: Vue生命周期
 tags:
 - Interview
 - vue
-categories: JS
+categories: Framework
 description: Vue生命周期
 ---
 
@@ -90,7 +90,7 @@ DOM 渲染在 mounted 中就已经完成了
 
 - updated : 用于对数据更新做统一处理 （如果想分别区分不同的数据更新，同时进行dom操作就使用 $nextTick）
 
-- beforeDestroy : 可以做一个确认停止事件的确认框, 解绑自定义事件【比如：用自定义事件进行vue组件通讯时，event.$on('onAddTitle', this.addTitleHandler)，及时销毁，否则可能造成内存泄露event.$off('onAddTitle', this.addTitleHandler)】,或者 setTimeout
+- beforeDestroy : 可以做一个确认停止事件的确认框, 解绑自定义事件【比如：用自定义事件进行vue组件通讯时，event.$on('onAddTitle', this.addTitleHandler)，及时销毁，否则可能造成内存泄露event.$off('onAddTitle', this.addTitleHandler)】,或者 setTimeout, 解绑自定义 DOM 事件【如 window.removeEventListener('scroll', this.onScroll);】。
 
 
 [vue 生命周期 应用场景 概述](https://blog.csdn.net/m0_37805167/article/details/79655346)

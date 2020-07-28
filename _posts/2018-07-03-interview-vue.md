@@ -312,6 +312,10 @@ vue的model层的data属性。
 
 ## v-if与v-show的区别
 
+✪ 相同点：v-if 与 v-show 都可以动态控制 dom 元素显示隐藏
+
+✪ 不同点：v-if 显示隐藏是将 dom 元素整个添加或删除，而 v-show 隐藏则是为该元素添加 css--display:none， dom 元素还在。
+
 v-if 是“真正的”条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
 
 v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
@@ -320,7 +324,7 @@ v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做
 
 一般来说， v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常`频繁地切换`，则使用 v-show 较好；如果在运行时条件不太可能改变，则使用 v-if 较好。
 
-[v-if vs v-show](https://cn.vuejs.org/v2/guide/conditional.html#v-if-vs-v-show)
+[v-if vs v-show](https://cn.vuejs.org/v2/guide/conditional.html#v-if-vs-v-show)  
 [【Vue】v-if与v-show的区别](https://www.cnblogs.com/echolun/p/7803943.html)
 
 ## 自定义指令-directive
