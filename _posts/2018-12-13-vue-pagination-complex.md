@@ -3,6 +3,7 @@ layout: post
 title: vue实现可复用的翻页组件
 tags:
 - vue
+- GCIP
 categories: Framework
 description: vue实现可复用的翻页组件
 ---
@@ -431,7 +432,7 @@ Vue.prototype.$axios = axios;
 
 # more
 
-- 完整项目请看github, 项目[v-page-turning-complex](git@github.com:pyy-vueComponent/v-page-turning-complex.git)
+- 完整项目请看 github, 项目[v-page-turning-complex](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue-practical-components/v-page-turning-complex)
 
 
 

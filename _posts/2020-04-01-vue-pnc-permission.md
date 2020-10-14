@@ -3,6 +3,7 @@ layout: post
 title: GCIP 项目中的权限逻辑
 tags:
 - vue
+- GCIP
 categories: Framework
 description: GCIP 项目中的权限逻辑
 ---
@@ -145,4 +146,4 @@ router.beforeEach((to, from, next) => {
 
 # more
 
-- 权限逻辑伪代码请看github, 项目 [v-permission](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue%E5%AE%9E%E7%94%A8%E7%BB%84%E4%BB%B6/%E6%9D%83%E9%99%90%E4%BC%AA%E4%BB%A3%E7%A0%81)
+- 权限逻辑伪代码请看 github, 项目 [v-permission](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue-practical-components/v-permission)

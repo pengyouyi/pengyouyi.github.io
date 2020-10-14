@@ -3,6 +3,7 @@ layout: post
 title: Vue Router 中的 导航守卫
 tags:
 - vue
+- GCIP
 categories: Framework
 description: Vue Router 中的 导航守卫
 ---
@@ -353,4 +354,4 @@ beforeRouteLeave (to, from, next) {
 
 # more 
 
-vue-router-beforeeach demo 代码请看 github, 项目 [v-router-beforeeach](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue%E5%AE%9E%E7%94%A8%E7%BB%84%E4%BB%B6/v-router-beforeeach)
+vue-router-beforeeach demo 代码请看 github, 项目 [v-router-beforeeach](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue-practical-components/v-router-beforeeach)

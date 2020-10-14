@@ -3,6 +3,7 @@ layout: post
 title: vue实现简单的翻页功能
 tags:
 - vue
+- GCIP
 categories: Framework
 description: vue实现简单的翻页功能
 ---
@@ -225,7 +226,7 @@ Vue.prototype.$axios = axios;
 
 # more
 
-- 完整项目请看github, 项目v-page-turning-simple待上传，地址待添加。。。
+- 完整项目请看 github, 项目 [v-page-turning-simple](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue-practical-components/v-page-turning-simple)
 
 
 

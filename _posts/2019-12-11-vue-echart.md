@@ -3,6 +3,7 @@ layout: post
 title: vue中使用echarts
 tags:
 - vue
+- GCIP
 categories: Framework
 description: vue中使用echarts
 ---
@@ -167,4 +168,4 @@ export default {
 
 # more
 
-- 完整项目请看github, 项目[v-echart](git@github.com:pyy-vueComponent/v-echart.git)
+- 完整项目请看 github, 项目 [v-echart](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue-practical-components/v-echart)

@@ -3,6 +3,7 @@ layout: post
 title: vue+mockjs+axios 模拟请求数据-复杂版
 tags:
 - vue
+- GCIP
 categories: Framework
 description: vue+mockjs+axios 模拟请求数据-复杂版
 ---
@@ -300,4 +301,4 @@ export default {
 # more
 - [http://mockjs.com/](http://mockjs.com/)
 - [https://github.com/axios/axios](https://github.com/axios/axios)
-- 完整项目请看github, 项目v-mockjs-axios-complex待上传，地址待添加。。。
+- 完整项目请看 github, 项目 [v-mockjs-axios-complex](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue-practical-components/v-mockjs-axios-complex)

@@ -1,8 +1,9 @@
 ---
 layout: post
-title: vuex中引入mapGetters、mapMutations
+title: vuex 中引入 mapGetters、mapMutations
 tags:
 - vue
+- GCIP
 categories: Framework
 description: vuex中引入mapGetters、mapMutations
 ---
@@ -191,7 +192,7 @@ export default {
 # more
 
 - [https://vuex.vuejs.org/](https://vuex.vuejs.org/)
-- 完整项目请看github, 项目v-vuex-mapgetters-mapmutations待上传，地址待添加。。。
+- 完整项目请看 github, 项目 [v-vuex-mapgetters-mapmutations](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue-practical-components/v-vuex-mapgetters-mapmutations)
 
 
 

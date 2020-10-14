@@ -3,6 +3,7 @@ layout: post
 title: GCIP 项目中的登录逻辑
 tags:
 - vue
+- GCIP
 categories: Framework
 description: GCIP 项目中的登录逻辑
 ---
@@ -874,5 +875,5 @@ const constantRouterGenerator = function (lang) {
 
 # more
 
-- 登录逻辑伪代码请看github, 项目 [v-login](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue%E5%AE%9E%E7%94%A8%E7%BB%84%E4%BB%B6/%E7%99%BB%E5%BD%95%E9%80%BB%E8%BE%91%E4%BC%AA%E4%BB%A3%E7%A0%81)
+- 登录逻辑伪代码请看 github, 项目 [v-login](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue-practical-components/v-login)
 
