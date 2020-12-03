@@ -268,19 +268,29 @@
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">childNodes</span><span class="p">);</span> <span class="c1">// 输出 object</span>
 </code></pre></div>
 <h1 id="converting-an-array-like-object-to-an-array">Converting an array-like object to an array</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">fakeArray01</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">'a'</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">'b'</span><span class="p">,</span><span class="na">length</span><span class="p">:</span><span class="mi">2</span><span class="p">};</span><span class="c1">//这是一个标准的有伪数组对象 </span>
 
-<span class="kd">var</span> <span class="nx">arr01</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">fakeArray01</span><span class="p">);</span> 
-<span class="c1">//var arr01 = Array.prototype.slice.call(fakeArray01,0);  也可</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr01</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="c1">//a </span>
+<h2 id="array-protype-slice-call-obj">Array.protype.slice.call(obj)</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">fakeArray</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">'a'</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">'b'</span><span class="p">,</span><span class="na">length</span><span class="p">:</span><span class="mi">2</span><span class="p">};</span> <span class="c1">//这是一个标准的有伪数组对象 </span>
 
-<span class="kd">var</span> <span class="nx">arr02</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">fakeArray01</span><span class="p">);</span> 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr02</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="c1">//a </span>
+<span class="kd">var</span> <span class="nx">newArr1</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">fakeArray</span><span class="p">);</span> 
+<span class="c1">//var newArr1 = Array.prototype.slice.call(fakeArray, 0);  也可</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newArr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="c1">//a </span>
+
+<span class="kd">var</span> <span class="nx">newArr2</span> <span class="o">=</span> <span class="p">[].</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">fakeArray</span><span class="p">);</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">newArr2</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="c1">//a </span>
 </code></pre></div>
 <p>slice 可以用来获取数组片段，它返回新数组，不会修改原数组。 </p>
 
-<p>fakeArray01被成功的转换成了Array对象。通过[].slice.call这种形式实现同样的效果,但以prototype的形式执行程序效率更高，同样代码也更加优美。 </p>
+<p>fakeArray被成功的转换成了Array对象。通过[].slice.call这种形式实现同样的效果,但以prototype的形式执行程序效率更高，同样代码也更加优美。 </p>
 
+<h2 id="array-from-fakearray">Array.from(fakeArray)</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">newArr</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">fakeArray</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="fakearray">[...fakeArray]</h2>
+
+<p>使用扩展运算符,也是 ES6 的语法</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">newArr</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">fakeArray</span><span class="p">]</span>
+</code></pre></div>
 <h1 id="slice">slice</h1>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">fakeArray01</span> <span class="o">=</span> <span class="p">{</span><span class="na">a</span><span class="p">:</span><span class="s1">'a'</span><span class="p">,</span><span class="na">b</span><span class="p">:</span><span class="s1">'b'</span><span class="p">,</span><span class="na">length</span><span class="p">:</span><span class="mi">2</span><span class="p">};</span><span class="c1">//没有length下标对应的值 </span>
 
@@ -493,7 +503,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#other" title="other">other<sup>2</sup></a></li>
+			<li><a href="/categories/#other" title="other">other<sup>3</sup></a></li>
 		  
 		
 		</ul>
@@ -554,7 +564,7 @@
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>47</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>48</sup></a></li>
 			
 		
 			
@@ -578,7 +588,7 @@
 			
 		
 			
-				<li><a href="/tags/#optimize" title="optimize">optimize<sup>9</sup></a></li>
+				<li><a href="/tags/#optimize" title="optimize">optimize<sup>10</sup></a></li>
 			
 		
 			
@@ -614,7 +624,7 @@
 			
 		
 			
-				<li><a href="/tags/#imooc" title="imooc">imooc<sup>32</sup></a></li>
+				<li><a href="/tags/#imooc" title="imooc">imooc<sup>33</sup></a></li>
 			
 		
 			
@@ -642,7 +652,7 @@
 			
 		
 			
-				<li><a href="/tags/#GCIP" title="GCIP">GCIP<sup>17</sup></a></li>
+				<li><a href="/tags/#GCIP" title="GCIP">GCIP<sup>18</sup></a></li>
 			
 		
 			

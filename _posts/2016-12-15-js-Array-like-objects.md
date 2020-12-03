@@ -106,20 +106,37 @@ console.log(typeof document.body.childNodes); // 输出 object
 
 
 # Converting an array-like object to an array
+
+## Array.protype.slice.call(obj)
+
 ```js
-var fakeArray01 = {0:'a',1:'b',length:2};//这是一个标准的有伪数组对象 
+var fakeArray = {0:'a',1:'b',length:2}; //这是一个标准的有伪数组对象 
 
-var arr01 = Array.prototype.slice.call(fakeArray01); 
-//var arr01 = Array.prototype.slice.call(fakeArray01,0);  也可
-console.log(arr01[0]);//a 
+var newArr1 = Array.prototype.slice.call(fakeArray); 
+//var newArr1 = Array.prototype.slice.call(fakeArray, 0);  也可
+console.log(newArr[0]);//a 
 
-var arr02 = [].slice.call(fakeArray01); 
-console.log(arr02[0]);//a 
+var newArr2 = [].slice.call(fakeArray); 
+console.log(newArr2[0]);//a 
 ```
 
 slice 可以用来获取数组片段，它返回新数组，不会修改原数组。 
 
-fakeArray01被成功的转换成了Array对象。通过[].slice.call这种形式实现同样的效果,但以prototype的形式执行程序效率更高，同样代码也更加优美。 
+fakeArray被成功的转换成了Array对象。通过[].slice.call这种形式实现同样的效果,但以prototype的形式执行程序效率更高，同样代码也更加优美。 
+
+## Array.from(fakeArray)
+
+```js
+var newArr = Array.from(fakeArray)
+```
+
+## [...fakeArray]
+
+使用扩展运算符,也是 ES6 的语法
+
+```js
+var newArr = [...fakeArray]
+```
 
 # slice
 ```js
