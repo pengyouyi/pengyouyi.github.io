@@ -9,9 +9,9 @@ description: URI和URL
 
 # URI、URL、URN定义
 
-- URI（Uniform Resource Identifier）,统一资源标识符，用来唯一的标识一个资源。
+- URI（Uniform Resource Identifier）,统一资源标识符，用来唯一的标识一个资源。【相当于一个人身份证号码】
 
-- URL（Uniform Resource Locator）,统一资源定位符，表示资源的地点（互联网上所处的位置）
+- URL（Uniform Resource Locator）,统一资源定位符，表示资源的地点（互联网上所处的位置）【相当于一个人的家庭住址】
 
 - URN （Uniform Resource Name）统一资源名，作为特定内容的唯一名称使用的，与目前的资源所在地无关。
 

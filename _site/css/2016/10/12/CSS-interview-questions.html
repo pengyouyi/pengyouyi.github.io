@@ -364,16 +364,117 @@ inherit       规定应该从父元素继承 display 属性的值。  </p>
 <li>CSS3有哪些新特性？</li>
 </ul>
 
-<p>新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）<br><br>
-圆角           （border-radius:8px）<br><br>
-多列布局        （multi-column layout）<br><br>
-阴影和反射        （Shadow\Reflect）<br><br>
-文字特效      （text-shadow、）<br><br>
-文字渲染      （Text-decoration）<br><br>
-线性渐变      （gradient）<br><br>
-旋转          （transform）<br><br>
-增加了旋转,缩放,定位,倾斜,动画，多背景<br><br>
-transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:</p>
+<p>❶ 新增各种 CSS 选择器  </p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="p">{</span>
+    <span class="py">E</span><span class="p">:</span><span class="n">last-child</span><span class="p">;</span>  <span class="c">/* 匹配父元素的最后一个子元素 E。 */</span>
+    <span class="py">E</span><span class="p">:</span><span class="n">nth-child</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c">/* 匹配父元素的第 n 个子元素 E。 */</span>
+    <span class="py">E</span><span class="p">:</span><span class="n">nth-last-child</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="c">/* 匹配父元素的倒数第 n 个子元素 E。 */</span>
+    <span class="py">E</span><span class="p">:</span><span class="n">not</span><span class="p">(.</span><span class="n">input</span><span class="p">);</span> <span class="c">/* 所有 class 不是"input"的节点。 */</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>❷ @Font-face 字体样式  </p>
+
+<p>Font-face 可以用来加载字体样式，而且它还能够加载服务器端的字体文件，让客户端显示客户端所没有安装的字体。</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="k">@font-face</span> <span class="p">{</span> 
+    <span class="nl">font-family</span><span class="p">:</span> <span class="n">BorderWeb</span><span class="p">;</span> 
+    <span class="nl">src</span><span class="p">:</span> <span class="sx">url(BORDERW0.eot)</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre></div>
+<p>❸ 边框与圆角</p>
+
+<p>圆角 border-radius: 8px<br><br>
+边框效果 border-image: url（bt_blue.png） 0 10;  </p>
+
+<p>❹ 颜色透明度 color: rgba（255, 0, 0, 0.75）</p>
+
+<p>❺ 多列布局（multi-column layout）</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;style&gt;</span>
+<span class="nc">.mul-col</span> <span class="p">{</span>
+    <span class="nl">column-count</span><span class="p">:</span> <span class="m">3</span><span class="p">;</span>  <span class="c">/* 设置列的具体个数 */</span>
+    <span class="nl">column-gap</span><span class="p">:</span> <span class="m">1px</span><span class="p">;</span>  <span class="c">/* 两列之间的缝隙间隔 */</span>
+    <span class="nl">column-rule</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">red</span><span class="p">;</span>  <span class="c">/* 规定列之间的宽度、样式和颜色 */</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">blue</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mul-col"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div&gt;</span>新手上路<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>付款方式<span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div&gt;</span>淘宝特色<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span> 
+</code></pre></div>
+<p>缺点：兼容性不好，还不够成熟。还不能用在实际项目中。<br>
+应用：分栏布局实现古书的方式。</p>
+
+<p>❻ 弹性盒模型 display: flex;</p>
+
+<p>❼ 阴影和倒影</p>
+
+<p>阴影 </p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="p">{</span>
+    <span class="nl">box-shadow</span><span class="p">:</span> <span class="m">3px</span> <span class="m">3px</span> <span class="m">3px</span> <span class="n">rgba</span><span class="err">（</span><span class="m">0</span><span class="p">,</span> <span class="m">64</span><span class="p">,</span> <span class="m">128</span><span class="p">,</span> <span class="m">0.3</span><span class="p">);</span>
+    <span class="nl">text-shadow</span><span class="p">:</span> <span class="m">5px</span> <span class="m">2px</span> <span class="m">6px</span> <span class="n">rgba</span><span class="p">(</span><span class="m">64</span><span class="p">,</span> <span class="m">64</span><span class="p">,</span> <span class="m">64</span><span class="p">,</span> <span class="m">0.5</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>倒影 </p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="p">{</span>
+    <span class="py">box-reflect</span><span class="p">:</span> <span class="nb">below</span> <span class="m">2px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>❽ 文字效果</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="p">{</span>
+    <span class="nl">text-shadow</span><span class="p">:</span> <span class="m">4px</span> <span class="m">5px</span> <span class="m">5px</span> <span class="no">pink</span><span class="p">;</span>  <span class="c">/* 文本阴影 */</span>
+    <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="p">;</span>  <span class="c">/* 文本换行设置 */</span>
+    <span class="nl">word-break</span><span class="p">:</span> <span class="n">break-all</span><span class="p">;</span>   <span class="c">/* 单词换行设置 */</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">ellipsis</span><span class="p">;</span>  <span class="c">/* 单词溢出的处理 */</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>❾ 渐变（gradient）</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="p">{</span>
+    <span class="nl">background-image</span><span class="p">:</span> <span class="n">-webkit-gradient</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span><span class="m">0%</span> <span class="m">0%</span><span class="p">,</span><span class="m">100%</span> <span class="m">0%</span><span class="p">,</span><span class="n">from</span><span class="p">(</span><span class="m">#2A8BBE</span><span class="p">),</span><span class="n">to</span><span class="p">(</span><span class="m">#FE280E</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>这里 linear 表示线性渐变，从左到右，由蓝色（#2A8BBE）到红色（#FE280E）的渐变。</p>
+
+<p>❿① transform 转换</p>
+
+<p>Transform 属性应用于元素的2D或3D转换。这个属性允许你将元素旋转，缩放，移动，倾斜等。</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="p">{</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="m">50px</span><span class="p">,</span><span class="m">100px</span><span class="p">);</span>  <span class="c">/* 移动 */</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">rotate</span><span class="p">(</span><span class="m">30deg</span><span class="p">);</span> <span class="c">/* 旋转 */</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">scale</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">);</span> <span class="c">/* 缩放 */</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">skew</span><span class="p">(</span><span class="m">30deg</span><span class="p">,</span><span class="m">20deg</span><span class="p">);</span> <span class="c">/* 倾斜 */</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">matrix</span><span class="p">(</span><span class="m">0.866</span><span class="p">,</span><span class="m">0.5</span><span class="p">,</span><span class="m">-0.5</span><span class="p">,</span><span class="m">0.866</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">);</span> <span class="c">/* 把所有 2D 转换方法组合在一起 */</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>❿② transition 过渡</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nc">.box</span> <span class="p">{</span>
+    <span class="nl">transition</span><span class="p">:</span> <span class="n">width</span> <span class="m">1s</span> <span class="n">linear</span> <span class="m">2s</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.box</span><span class="nd">:hover</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>❿③ 动画 @keyframes、animation</p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">div</span>
+<span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
+    <span class="nl">animation</span><span class="p">:</span> <span class="n">myfirst</span> <span class="m">5s</span><span class="p">;</span>
+    <span class="nl">-webkit-animation</span><span class="p">:</span> <span class="n">myfirst</span> <span class="m">5s</span><span class="p">;</span> <span class="c">/* Safari and Chrome */</span>
+<span class="p">}</span>
+
+<span class="k">@keyframes</span> <span class="n">myfirst</span> <span class="p">{</span>
+    <span class="nt">from</span> <span class="p">{</span> 
+        <span class="nl">background</span><span class="p">:</span><span class="no">red</span><span class="p">;</span> 
+    <span class="p">}</span>
+    <span class="nt">to</span> <span class="p">{</span> 
+        <span class="nl">background</span><span class="p">:</span><span class="no">yellow</span><span class="p">;</span> 
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><a href="https://blog.csdn.net/lxcao/article/details/52797914">CSS3有哪些新特性？</a></p>
 
 <h1 id="flexbox">Flexbox</h1>
 
@@ -394,6 +495,34 @@ transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:</
 <p>在布局上有了比以前更加灵活的空间。</p>
 
 <p><a href="http://www.w3cplus.com/css3/flexbox-basics.html">具体</a></p>
+
+<h1 id="css3-pseudo-class">CSS3 新增伪类 pseudo class</h1>
+
+<p>❶ 动态伪类</p>
+
+<p>:link<br><br>
+:visited<br><br>
+:hover<br><br>
+:active  </p>
+
+<p>❷ UI元素状态伪类</p>
+
+<p>:enabled<br><br>
+:disabled<br><br>
+:checked</p>
+
+<p>❸ :nth 选择器</p>
+
+<p>❹ 否定选择器（:not）</p>
+
+<p>❺ 伪元素</p>
+
+<p>::first-letter<br><br>
+::first-line<br><br>
+::before<br><br>
+::after  </p>
+
+<p><a href="https://www.w3school.com.cn/css/css_pseudo_classes.asp">https://www.w3school.com.cn/css/css_pseudo_classes.asp</a></p>
 
 <h1 id="triangle">Triangle</h1>
 

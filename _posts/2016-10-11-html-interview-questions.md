@@ -96,13 +96,21 @@ Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]
 
 **HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。**
 
-绘画 canvas;  
-用于媒介回放的 video 和 audio 元素;  
-本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;  
-sessionStorage 的数据在浏览器关闭后自动删除;  
-语意化更好的内容元素，比如 article、footer、header、nav、section;  
-表单控件，calendar、date、time、email、url、search;  
-新的技术webworker, websocket, Geolocation;  
+(1) 语义标签, 比如 article、footer、header、nav、section;   
+(2) 增强型表单, 比如新的表单 Input 输入类型[date、time、email、url、search]，和新增的表单属性;  
+(3) 视频 video 和音频 audio;  
+(4) Canvas 绘图;  
+(5) SVG 绘图;  
+(6) Geolocation（地理定位）;  
+(7) 拖放 API;  
+(8) Web Worker 为 JavaScript 创造多线程环境;  
+(9) Web Storage 存储【localStorage永久化、sessionStorage临时】;  
+(10) WebSocket 全双工通讯的协议;  
+
+[HTML5的十大新特性](https://www.cnblogs.com/vicky1018/p/7705223.html)
+
+- [Web Worker 使用教程](http://www.ruanyifeng.com/blog/2018/07/web-worker.html);  
+- WebSocket 可以实现跨域通讯，服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息。  
 
 **移除的元素：**
 
@@ -197,16 +205,22 @@ sessionStorage和localStorage不会自动把数据发给服务器，仅在本地
     sessionStorage  数据在当前浏览器窗口关闭后自动删除。  
     cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
 
-# iframe
-- iframe有那些缺点？
+# iframe 的优缺点？
 
-iframe会阻塞主页面的Onload事件；
+- iframe 优点：
 
-搜索引擎的检索程序无法解读这种页面，不利于SEO;
+1. iframe 能够原封不动的把嵌入的网页展现出来。  
+2. 如果有多个网页引用 iframe，那么你只需要修改 iframe 的内容，就可以实现调用的每一个页面内容的更改，方便快捷【可以增加代码的可重用】。   
+3. 如果遇到加载缓慢的第三方内容如图标和广告，这些问题可以由 iframe 来解决。  
 
-iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
+- iframe 缺点
 
-使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript动态给iframe添加src属性值，这样可以绕开以上两个问题。
+1. 会产生很多页面，不容易管理。如果框架个数多的话，可能会出现上下、左右滚动条，会分散访问者的注意力，用户体验度差;
+2. 搜索引擎的检索程序无法解读这种页面，不利于 SEO;  
+3. iframe 会阻塞主页面的 Onload 事件;  
+4. iframe 和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。  
+
+使用 iframe 之前需要考虑这两个缺点。如果需要使用 iframe，最好是通过 javascript 动态给 iframe 添加 src 属性值，这样可以绕开以上两个问题。
 
 # Label
 - Label的作用是什么？是怎么用的？
@@ -250,9 +264,10 @@ ActiveX HTMLFile (IE) 、
 在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
 
 # circle click
+
 - 如何在页面上实现一个圆形的可点击区域？
 
-1、map+area或者svg
+1、map+area 或者 svg
 
 2、border-radius
 
@@ -289,3 +304,13 @@ Semantic Style Elements -- 语义样式标签 : strong, em, ins, del, code
 # Reprint
 
 [转载-markYun](https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers)
+
+# img 中的 alt 与 title 属性
+
+- alt 是图片加载失败时，显示在网页上的替代文字；
+- title 是鼠标放在图片上面时显示的文字，title 是对图片的描述与进一步说明；
+
+`alt 是 img 必要的属性`，而 title 不是；
+对于网站 seo 优化来说，title 与 alt 还有最重要的一点：
+搜索引擎对图片意思的判断，主要靠 alt 属性。所以在图片 alt 属性中以简要的文字说明，同时包含关键词，也是页面优化的一部分。
+条件允许的话，可以在 title 属性里进一步对图片说明。

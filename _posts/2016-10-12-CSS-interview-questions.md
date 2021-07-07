@@ -182,18 +182,146 @@ inherit
 规定从父元素继承 position 属性的值。
 
 # css3 new features
+
 - CSS3有哪些新特性？
 
-新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）  
-圆角           （border-radius:8px）  
-多列布局        （multi-column layout）  
-阴影和反射        （Shadow\Reflect）  
-文字特效      （text-shadow、）  
-文字渲染      （Text-decoration）  
-线性渐变      （gradient）  
-旋转          （transform）  
-增加了旋转,缩放,定位,倾斜,动画，多背景  
-transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:
+❶ 新增各种 CSS 选择器  
+
+```css
+.box {
+    E:last-child;  /* 匹配父元素的最后一个子元素 E。 */
+    E:nth-child(n); /* 匹配父元素的第 n 个子元素 E。 */
+    E:nth-last-child(n); /* 匹配父元素的倒数第 n 个子元素 E。 */
+    E:not(.input); /* 所有 class 不是"input"的节点。 */
+}
+```
+❷ @Font-face 字体样式  
+
+Font-face 可以用来加载字体样式，而且它还能够加载服务器端的字体文件，让客户端显示客户端所没有安装的字体。
+
+```css
+@font-face { 
+    font-family: BorderWeb; 
+    src: url(BORDERW0.eot); 
+}
+```
+
+❸ 边框与圆角
+
+圆角 border-radius: 8px  
+边框效果 border-image: url（bt_blue.png） 0 10;  
+
+❹ 颜色透明度 color: rgba（255, 0, 0, 0.75）
+
+❺ 多列布局（multi-column layout）
+
+```html
+<style>
+.mul-col {
+    column-count: 3;  /* 设置列的具体个数 */
+    column-gap: 1px;  /* 两列之间的缝隙间隔 */
+    column-rule: 1px solid red;  /* 规定列之间的宽度、样式和颜色 */
+    border: 1px solid blue;
+}
+</style>
+
+<div class="mul-col">
+    <div>新手上路</div>
+    <div>付款方式</div>
+    <div>淘宝特色</div>
+</div> 
+```
+
+缺点：兼容性不好，还不够成熟。还不能用在实际项目中。
+应用：分栏布局实现古书的方式。
+
+❻ 弹性盒模型 display: flex;
+
+❼ 阴影和倒影
+
+阴影 
+
+```css
+.box {
+    box-shadow: 3px 3px 3px rgba（0, 64, 128, 0.3);
+    text-shadow: 5px 2px 6px rgba(64, 64, 64, 0.5);
+}
+```
+
+倒影 
+```css
+.box {
+    box-reflect: below 2px;
+}
+````
+
+❽ 文字效果
+
+```css
+.box {
+    text-shadow: 4px 5px 5px pink;  /* 文本阴影 */
+    white-space: nowrap;  /* 文本换行设置 */
+    word-break: break-all;   /* 单词换行设置 */
+    text-overflow: ellipsis;  /* 单词溢出的处理 */
+}
+```
+  
+❾ 渐变（gradient）
+
+```css
+.box {
+    background-image: -webkit-gradient(linear,0% 0%,100% 0%,from(#2A8BBE),to(#FE280E));
+}
+```
+这里 linear 表示线性渐变，从左到右，由蓝色（#2A8BBE）到红色（#FE280E）的渐变。
+
+ ❿① transform 转换
+
+Transform 属性应用于元素的2D或3D转换。这个属性允许你将元素旋转，缩放，移动，倾斜等。
+
+```css
+.box {
+    transform: translate(50px,100px);  /* 移动 */
+    transform: rotate(30deg); /* 旋转 */
+    transform: scale(2,4); /* 缩放 */
+    transform: skew(30deg,20deg); /* 倾斜 */
+    transform: matrix(0.866,0.5,-0.5,0.866,0,0); /* 把所有 2D 转换方法组合在一起 */
+}
+```
+ ❿② transition 过渡
+
+ ```css
+.box {
+    transition: width 1s linear 2s;
+}
+.box:hover {
+    width: 300px;
+}
+ ```
+
+ ❿③ 动画 @keyframes、animation
+
+ ```css
+div
+{
+	width: 100px;
+	height: 100px;
+	background: red;
+	animation: myfirst 5s;
+	-webkit-animation: myfirst 5s; /* Safari and Chrome */
+}
+
+@keyframes myfirst {
+	from { 
+        background:red; 
+    }
+	to { 
+        background:yellow; 
+    }
+}
+ ```
+
+[CSS3有哪些新特性？](https://blog.csdn.net/lxcao/article/details/52797914)
 
 # Flexbox
 - 请解释一下CSS3的Flexbox（弹性盒布局模型）,以及适用场景？
@@ -212,7 +340,36 @@ transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:
 
 [具体](http://www.w3cplus.com/css3/flexbox-basics.html)
 
+# CSS3 新增伪类 pseudo class
+
+❶ 动态伪类
+
+:link  
+:visited  
+:hover  
+:active  
+
+❷ UI元素状态伪类
+
+:enabled  
+:disabled  
+:checked
+
+❸ :nth 选择器
+
+❹ 否定选择器（:not）
+
+❺ 伪元素
+
+::first-letter  
+::first-line  
+::before  
+::after  
+
+[https://www.w3school.com.cn/css/css_pseudo_classes.asp](https://www.w3school.com.cn/css/css_pseudo_classes.asp)
+
 # Triangle
+
 - 用纯CSS创建一个三角形的原理是什么？
 
 把上、左、右三条边隐藏掉（颜色设为 transparent）

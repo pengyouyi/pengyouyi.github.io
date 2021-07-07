@@ -278,13 +278,23 @@ Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]  
 
 <p><strong>HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。</strong></p>
 
-<p>绘画 canvas;<br><br>
-用于媒介回放的 video 和 audio 元素;<br><br>
-本地离线存储 localStorage 长期存储数据，浏览器关闭后数据不丢失;<br><br>
-sessionStorage 的数据在浏览器关闭后自动删除;<br><br>
-语意化更好的内容元素，比如 article、footer、header、nav、section;<br><br>
-表单控件，calendar、date、time、email、url、search;<br><br>
-新的技术webworker, websocket, Geolocation;  </p>
+<p>(1) 语义标签, 比如 article、footer、header、nav、section;<br><br>
+(2) 增强型表单, 比如新的表单 Input 输入类型[date、time、email、url、search]，和新增的表单属性;<br><br>
+(3) 视频 video 和音频 audio;<br><br>
+(4) Canvas 绘图;<br><br>
+(5) SVG 绘图;<br><br>
+(6) Geolocation（地理定位）;<br><br>
+(7) 拖放 API;<br><br>
+(8) Web Worker 为 JavaScript 创造多线程环境;<br><br>
+(9) Web Storage 存储【localStorage永久化、sessionStorage临时】;<br><br>
+(10) WebSocket 全双工通讯的协议;  </p>
+
+<p><a href="https://www.cnblogs.com/vicky1018/p/7705223.html">HTML5的十大新特性</a></p>
+
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2018/07/web-worker.html">Web Worker 使用教程</a>;<br></li>
+<li>WebSocket 可以实现跨域通讯，服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息。<br></li>
+</ul>
 
 <p><strong>移除的元素：</strong></p>
 
@@ -399,19 +409,30 @@ sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie�
 sessionStorage  数据在当前浏览器窗口关闭后自动删除。  
 cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
 </code></pre></div>
-<h1 id="iframe">iframe</h1>
+<h1 id="iframe">iframe 的优缺点？</h1>
 
 <ul>
-<li>iframe有那些缺点？</li>
+<li>iframe 优点：</li>
 </ul>
 
-<p>iframe会阻塞主页面的Onload事件；</p>
+<ol>
+<li>iframe 能够原封不动的把嵌入的网页展现出来。<br></li>
+<li>如果有多个网页引用 iframe，那么你只需要修改 iframe 的内容，就可以实现调用的每一个页面内容的更改，方便快捷【可以增加代码的可重用】。<br></li>
+<li>如果遇到加载缓慢的第三方内容如图标和广告，这些问题可以由 iframe 来解决。<br></li>
+</ol>
 
-<p>搜索引擎的检索程序无法解读这种页面，不利于SEO;</p>
+<ul>
+<li>iframe 缺点</li>
+</ul>
 
-<p>iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。</p>
+<ol>
+<li>会产生很多页面，不容易管理。如果框架个数多的话，可能会出现上下、左右滚动条，会分散访问者的注意力，用户体验度差;</li>
+<li>搜索引擎的检索程序无法解读这种页面，不利于 SEO;<br></li>
+<li>iframe 会阻塞主页面的 Onload 事件;<br></li>
+<li>iframe 和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。<br></li>
+</ol>
 
-<p>使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript动态给iframe添加src属性值，这样可以绕开以上两个问题。</p>
+<p>使用 iframe 之前需要考虑这两个缺点。如果需要使用 iframe，最好是通过 javascript 动态给 iframe 添加 src 属性值，这样可以绕开以上两个问题。</p>
 
 <h1 id="label">Label</h1>
 
@@ -477,7 +498,7 @@ ActiveX HTMLFile (IE) 、<br>
 <li>如何在页面上实现一个圆形的可点击区域？</li>
 </ul>
 
-<p>1、map+area或者svg</p>
+<p>1、map+area 或者 svg</p>
 
 <p>2、border-radius</p>
 
@@ -522,6 +543,18 @@ ActiveX HTMLFile (IE) 、<br>
 <h1 id="reprint">Reprint</h1>
 
 <p><a href="https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions/Questions-and-Answers">转载-markYun</a></p>
+
+<h1 id="img-alt-title">img 中的 alt 与 title 属性</h1>
+
+<ul>
+<li>alt 是图片加载失败时，显示在网页上的替代文字；</li>
+<li>title 是鼠标放在图片上面时显示的文字，title 是对图片的描述与进一步说明；</li>
+</ul>
+
+<p><code>alt 是 img 必要的属性</code>，而 title 不是；<br>
+对于网站 seo 优化来说，title 与 alt 还有最重要的一点：<br>
+搜索引擎对图片意思的判断，主要靠 alt 属性。所以在图片 alt 属性中以简要的文字说明，同时包含关键词，也是页面优化的一部分。<br>
+条件允许的话，可以在 title 属性里进一步对图片说明。</p>
   
 	</div>
 	<footer class="article-footer clearfix">
