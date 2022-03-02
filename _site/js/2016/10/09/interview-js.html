@@ -429,7 +429,22 @@ proName是必选项。一个属性名称的字符串值。</p>
 <p>2、属性和方法被加入到 this 引用的对象中。</p>
 
 <p>3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/*
+  create函数要接受不定量的参数，第一个参数是构造函数（也就是new操作符的目标函数），其余参数被构造函数使用。
+  new Create() 是一种js语法糖。我们可以用函数调用的方式模拟实现
+*/</span>
+<span class="kd">function</span> <span class="nx">create</span><span class="p">(</span><span class="nx">Con</span><span class="p">,...</span><span class="nx">args</span><span class="p">){</span>
+    <span class="c1">//1、创建一个空的对象</span>
+    <span class="kd">let</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// let obj = Object.create({});</span>
+    <span class="c1">//2、将空对象的原型 prototype 指向构造函数的原型</span>
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">setPrototypeOf</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">Con</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span> <span class="c1">// obj.__proto__ = Con.prototype</span>
+    <span class="c1">//3、改变构造函数的上下文（this）,并将剩余的参数传入</span>
+    <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Con</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">args</span><span class="p">);</span>
+    <span class="c1">//4、在构造函数有返回值的情况进行判断</span>
+    <span class="k">return</span> <span class="nx">result</span> <span class="k">instanceof</span> <span class="nb">Object</span> <span class="p">?</span> <span class="nx">result</span> <span class="p">:</span> <span class="nx">obj</span><span class="p">;</span>
+<span class="p">}</span>
 
+</code></pre></div>
 <h2 id="closure">闭包（closure）</h2>
 
 <ul>

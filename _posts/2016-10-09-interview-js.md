@@ -279,6 +279,24 @@ var a = 1;
 
 3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。
 
+```js
+/*
+  create函数要接受不定量的参数，第一个参数是构造函数（也就是new操作符的目标函数），其余参数被构造函数使用。
+  new Create() 是一种js语法糖。我们可以用函数调用的方式模拟实现
+*/
+function create(Con,...args){
+    //1、创建一个空的对象
+    let obj = {}; // let obj = Object.create({});
+    //2、将空对象的原型 prototype 指向构造函数的原型
+    Object.setPrototypeOf(obj,Con.prototype); // obj.__proto__ = Con.prototype
+    //3、改变构造函数的上下文（this）,并将剩余的参数传入
+    let result = Con.apply(obj,args);
+    //4、在构造函数有返回值的情况进行判断
+    return result instanceof Object ? result : obj;
+}
+
+```
+
 ## 闭包（closure）
 
 - 什么是闭包（closure），为什么要用它？

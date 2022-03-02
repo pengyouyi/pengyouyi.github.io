@@ -590,12 +590,12 @@ function deepClone(obj){
 			}else if(obj instanceof Array){
 				o = [];
 				for(var k in obj){
-					o[k] = clone(obj[k]);
+					o[k] = deepClone(obj[k]);
 				}
 			}else{
 				o = {};
 				for(var k in obj){
-					o[k] = clone(obj[k]);
+					o[k] = deepClone(obj[k]);
 				}
 			}
 			break;

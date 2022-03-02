@@ -266,6 +266,8 @@ console.log(location.hash);
 // history 
 history.back();
 history.forward();
+history.pushState(state, title[, url]);
+history.replaceState(stateObj, title[, url]);
 ```
 
 ## location.search
