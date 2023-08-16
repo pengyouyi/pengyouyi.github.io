@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 慕课网-前端性能优化企业级解决方案 6大角度+大厂视野实现项目全面优化
+title: 慕课网-前端性能优化企业级解决方案 6大角度+大厂视野实现项目全面优化test
 tags:
 - Interview
 - imooc
