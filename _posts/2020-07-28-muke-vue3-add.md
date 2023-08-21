@@ -38,24 +38,24 @@ description: 慕课网-前端框架及项目面试 聚焦Vue/React/Webpack - 第
 
 ### ㊀ vue3 新功能
 
-❶ createApp
-❷ emits 属性
-❸ 多事件处理
-❹ Fragment
-❺ 移除 .sync 改为 v-model 参数
-❻ 异步组件的引用方式
-❼ 移除 filter
-❽ Teleport
-❾ Suspense
+❶ createApp  
+❷ emits 属性  
+❸ 多事件处理  
+❹ Fragment  
+❺ 移除 .sync 改为 v-model 参数  
+❻ 异步组件的引用方式  
+❼ 移除 filter  
+❽ Teleport  
+❾ Suspense  
 
 #### ❿ Composition API【重点】
 
-① reactive
-② ref toRef toRefs
-③ readonly
-④ computed
-⑤ watch watchEffect
-⑥ 钩子函数生命周期
+① reactive  
+② ref toRef toRefs  
+③ readonly  
+④ computed  
+⑤ watch watchEffect  
+⑥ 钩子函数生命周期  
 
 ### ㊁ vue3 原理
 
@@ -63,11 +63,11 @@ description: 慕课网-前端框架及项目面试 聚焦Vue/React/Webpack - 第
 
 #### ❷ 编译优化
 
-① PatchFlag 静态标记
-② hoistStaic 静态提升
-③ cacheHandler 缓存事件
-④ SSR 优化
-⑤ Tree-shaking 优化
+① PatchFlag 静态标记  
+② hoistStaic 静态提升  
+③ cacheHandler 缓存事件  
+④ SSR 优化  
+⑤ Tree-shaking 优化  
 
 
 ### ㊂ Vite -- ES6 module

@@ -254,6 +254,27 @@ p:nth-child(2)  选择属于其父元素的第二个子元素的每个 <span cla
 :checked        单选框或复选框被选中。<span class="w">
 </span></pre></td></tr></tbody></table></code></pre></figure>
 
+<h1 id="layout">页面布局有哪几种方式？layout</h1>
+
+<ul>
+<li>普通布局 display:inline/inline-block<br></li>
+<li>浮动布局 float:left/right<br></li>
+<li>定位布局 position: absolute/relative<br></li>
+<li>弹性布局 display: flex<br></li>
+<li>多列布局 column-count<br></li>
+<li>表格布局 display:table/table-row<br></li>
+<li>栅格布局 display: grid<br></li>
+</ul>
+
+<h1 id="css-hide">三种 CSS hide元素的方式有哪些</h1>
+
+<ul>
+<li>设置 display: none；样式。这个样式会让元素在页面上彻底消失。元素本来占有的空间，也会被其他元素占有，所以，他会导致浏览器的重排和重绘。<br></li>
+<li>第二种方式设置 visibilty：hidden；的样式。它和 display: none；的区别在于，元素在页面消失之后，它原本占有的空间依然会保留，所以，他只会导致浏览器的重绘，而不会重排。<br></li>
+<li>第三种是设置 opacity：0；透明度为0。在视觉上元素也是隐藏的，所以这也是一种隐藏元素的方式。如果该元素已经绑定一些事件，如click 事件，那么点击该区域，也能触发点击事件的。<br></li>
+<li>还有其他方法，利用定位，让元素不出现在可视区域，等等。<br></li>
+</ul>
+
 <h1 id="div-center">div center</h1>
 
 <ul>
@@ -523,6 +544,39 @@ inherit       规定应该从父元素继承 display 属性的值。  </p>
 ::after  </p>
 
 <p><a href="https://www.w3school.com.cn/css/css_pseudo_classes.asp">https://www.w3school.com.cn/css/css_pseudo_classes.asp</a></p>
+
+<h1 id="pseudo-element">伪类和伪元素的区别？pseudo-element</h1>
+
+<p>在 CSS3 中，伪类和伪元素的<strong>语法</strong>不同</p>
+
+<ul>
+<li>伪类，单冒号   :link  :hover<br></li>
+<li>伪元素，双冒号  ::before   ::after<br></li>
+</ul>
+
+<p>对于css3之前已经存在的伪元素，也是支持单冒号的，但我们在开发过程中还是要尽量规范写法。</p>
+
+<p><strong>本质</strong></p>
+
+<ul>
+<li>伪类本质上是为了弥补常规css选择器的不足，以便获取到更多信息<br></li>
+<li>伪元素本质上是创建了一个有内容的虚拟容器<br></li>
+</ul>
+
+<p><strong>作用对象</strong></p>
+
+<ul>
+<li>伪类作用对象是整个元素，比如整个链接、段落、div等<br></li>
+<li>伪元素作用于元素的一部分，比如一个段落的第一行或者第一个字母<br></li>
+</ul>
+
+<p>【区别】</p>
+
+<p>伪类：当我们希望样式在某些特定状态下才被呈现到指定的元素时，换句话说就是，当某个元素状态改变时，我们期待给这个元素添加一些特殊效果，那么我们就可以往元素的选择器后面加上对应的伪类。比如: hover就能够指定当我们悬浮在某元素上时，期望该元素要显示的样式。</p>
+
+<p>伪元素：则是创建了一些不在文档树中的元素，并为其添加样式，需要注意的是伪元素样式里必须要给它一个content属性。比如可以通过::before伪元素在个元素前增加一些文本，并为这些文本添加样式。这些文本实际上不在文档树中的，所以叫伪元素。</p>
+
+<p>总结来看，伪类的操作对象是文档树中已有的元素，而伪元素则是创建文档树以外的元素并为其添加样式。所以二者最核心区别就在于，<code>是否创造了“新的元素&quot;</code>。</p>
 
 <h1 id="triangle">Triangle</h1>
 
@@ -1280,6 +1334,21 @@ div{<br>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"ElementID"</span><span class="p">).</span><span class="nx">style</span><span class="p">.</span><span class="nx">fontSize</span><span class="o">=</span><span class="s2">"1.5em"</span> 
 </code></pre></div>
 <p>em是个相对单位。</p>
+
+<h1 id="rem-em">rem 和 em</h1>
+
+<ul>
+<li>rem 和 em 都是 css 中的相对长度单位，他们的区别就是，rem 是相对于根元素字体大小进行计算的，任意浏览器的默认字体都是16px，所以一般 1rem = 16px。<br></li>
+<li>而 em 是相对于当前元素的字体大小来计算的，但是为什么我们经常说相对于父元素呢，其实也很好理解，因为 font-size 字体大小这个属性是可以被继承的，所以父元素的字体大小势必会影响到他的子元素的字体大小，也就是说子元素如果没有自己的font-size，那么它的 font-size 就会继承父元素，那此时 1em 的值就可以认为是相对于父元素字体大小来计算。<br></li>
+<li>另外 rem 是 css3 新增的一个相对单位，r 就是 root 根的缩写，它的出现也就是为了解决 em 的缺点，em 是相对于父元素或当前元素的字体大小进行换算的，当当前元素或父元素字体大小改变时，就又得重新计算了，那么层级较多的时候，换算也就会越来越复杂，而 rem 只相对于 HTML 根元素，有了 rem这个单位我们只需要调整根元素 HTML 的 font-size，就能达到所有元素的动态适配，避免了一些复杂的层级关系。<br></li>
+</ul>
+
+<p>补充：</p>
+
+<ol>
+<li> rem 是相对于根元素进行计算，而 em 是相对于当前元素或父元素的字体大小。rem 不仅可以设置字体的大小，还支持元素宽、高等属性。<br></li>
+<li>em 的一些应用场景：设置行高 line-height: 1.5em; 给中文文字段首空两个字符 text-indent: 2em;<br></li>
+</ol>
 
 <h1 id="readonly-amp-disable">readonly &amp; disable</h1>
 
