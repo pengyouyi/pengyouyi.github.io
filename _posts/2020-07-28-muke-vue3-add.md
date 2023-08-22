@@ -65,9 +65,9 @@ description: 慕课网-前端框架及项目面试 聚焦Vue/React/Webpack - 第
 
 ① PatchFlag 静态标记  
 ② hoistStaic 静态提升  
-③ cacheHandler 缓存事件  
-④ SSR 优化  
-⑤ Tree-shaking 优化  
+③ cacheHandler 缓存事件
+④ SSR 优化
+⑤ Tree-shaking 优化
 
 
 ### ㊂ Vite -- ES6 module
@@ -1254,7 +1254,6 @@ vue3
      - Tree-shaking 优化
 - Vite - ES6 module
 
-
 vue3面试题
 
 - Vue3 比 Vue2 有什么优势？  
@@ -1267,7 +1266,7 @@ vue3面试题
 - watch 和 watchEffect 的区别是什么？  
 - setup 中如何获取组件实例？  
 - Vue 3为何比vue2 快？  
-- Vite 是什么？
+- Vite 是什么？  
 - Composition API 和 ReactHooks 的对比  
 
 

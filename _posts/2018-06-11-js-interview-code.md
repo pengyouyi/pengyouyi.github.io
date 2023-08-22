@@ -479,9 +479,9 @@ camry.sell();
 ```js
 let a = [0, 1, 2, 3, 4],
     b = a;
-console.log(a === b);
-a[0] = 1;
-console.log(a, b);
+console.log(a === b);  // true
+a[0] = 5;
+console.log(a, b);  // 相同 [5, 1, 2, 3, 4]
 ```
 
 法二： Object.assign 方法
@@ -492,8 +492,9 @@ var obj = {
     b: 2
 }
 var obj1 = Object.assign({},obj);
-boj1.a = 3;
-console.log(obj.a) // 3
+obj1.a = 3;
+console.log(obj.a) // 1
+console.log(obj1.a) // 3
 ```
 
 法三： for···in只循环第一层

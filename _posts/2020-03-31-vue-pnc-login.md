@@ -873,6 +873,14 @@ const constantRouterGenerator = function (lang) {
 
 ⑮ 这样正确登录之后就来到了news 页面
 
+# 前端通用登陆流程 common
+
+❶ 在登录页点击登录的时候，前端会带着用户名和密码去调用后端的登录接口。  
+❷ 后端收到请求，验证用户名和密码，验证失败，会返回错误信息，前端提示相应错误信息，如果验证成功，就会给前端返回一个 token。  
+❸ 前端拿到 token，将 token 储存到 Vuex 和 localStorage 中，并跳转页面，即登录成功。  
+❹ 前端每次跳转至需要具备登录状态的页面时，都需要判断当前 token 是否存在，不存在就跳转到登录页，存在则正常跳转(通常封装在路由守卫中)。  
+❺ 另外，在向后端发送其他请求时，需要在请求头中带上 token (项目中通常封装在请求拦截器中)，后端判断请求头中有无 token，有则验证该 token，验证成功就正常返回数据，验证失败(如已过期)则返回相应错误码。前端拿到错误信息，清除 token 并回退至登录页。  
+
 # more
 
 - 登录逻辑伪代码请看 github, 项目 [v-login](https://github.com/pengyouyi/Framework_test/tree/master/vue-test/vue-practical-components/v-login)
