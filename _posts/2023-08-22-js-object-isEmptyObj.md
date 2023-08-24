@@ -3,7 +3,7 @@ layout: post
 title: js 判断空对象的方法
 tags:
 - Interview
-- js
+- JS
 categories: JS
 description: js 判断空对象的方法
 ---

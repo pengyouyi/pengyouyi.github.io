@@ -3,7 +3,7 @@ layout: post
 title: JSON.stringify() 有什么缺点
 tags:
 - Interview
-- js
+- JS
 categories: JS
 description: JSON.stringify() 有什么缺点
 ---

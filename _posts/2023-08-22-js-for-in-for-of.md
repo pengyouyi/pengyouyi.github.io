@@ -3,7 +3,7 @@ layout: post
 title: for...in 和 for...of 的区别
 tags:
 - Interview
-- js
+- JS
 categories: JS
 description: for...in 和 for...of 的区别
 ---

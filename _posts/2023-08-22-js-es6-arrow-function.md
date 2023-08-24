@@ -3,8 +3,8 @@ layout: post
 title: ES6箭头函数和普通函数的区别
 tags:
 - Interview
-- js
-- es6
+- JS
+- ES6
 categories: JS
 description: ES6箭头函数和普通函数的区别
 ---

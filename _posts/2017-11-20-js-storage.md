@@ -3,6 +3,7 @@ layout: post
 title: Cookie，sessionStorage, localStorage 的区别
 tags:
 - Interview
+- BOM
 categories: JS
 description: Cookie，sessionStorage, localStorage 的区别
 ---
