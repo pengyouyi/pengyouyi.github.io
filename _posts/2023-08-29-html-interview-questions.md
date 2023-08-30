@@ -60,14 +60,14 @@ description: HTML面试题
 不同浏览器（版本）、HTML4（5）、CSS2等实际略有差异
 [参考:](http://stackoverflow.com/questions/6867254/browsers-default-css-for-html-elements)
 
-# link和@import
-- 页面导入样式时，使用link和@import有什么区别？
+# link 和 @import
 
-（1）link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;
+- 两者都是外部引用 CSS 的方式，使用 link 和 @import 有什么区别？
 
-（2）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;
-
-（3）import是CSS2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;
+（1）link 属于 XHTML 标签，除了加载 CSS 外，还能用于定义 RSS, 定义 rel 连接属性等作用；而 @import 是 CSS 提供的，只能用于加载 CSS;  
+（2）页面被加载的时，link 会同时被加载，而 @import 引用的 CSS会等到页面被加载完再加载;  
+（3）link 是 XHTML 标签，无兼容问题; import 是 CSS2.1 提出的，只在 IE5 以上才能被识别;  
+（4）link 支持使用 Javascript 控制 DOM 去改变样式；而 @import不支持。  
 
 
 # Browser kernel

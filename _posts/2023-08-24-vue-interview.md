@@ -2,7 +2,7 @@
 layout: post
 title: vue 面试题集合
 tags:
-- interview
+- Interview
 - vue
 categories: Framework
 description: vue 面试题集合
@@ -626,3 +626,9 @@ methods:{
 
 判断进入可视区域的条件有变，通过下图，可以看出，这里进入可视区域的判断条件是某一元素e的 e.offsetTop < document.body.clientHeight + document.body.scrollTop
 获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置 < 网页可视区域的高度 + 网页被卷去的高度
+
+# more
+
+文章抄写
+
+[2023前端面试题汇总](http://www.taodudu.cc/news/show-5964710.html?action=onClick)

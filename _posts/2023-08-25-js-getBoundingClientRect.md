@@ -2,7 +2,7 @@
 layout: post
 title: JS 判断一个元素是否在可视区域中
 tags:
-- interview
+- Interview
 - BOM
 categories: JS
 description: JS 判断一个元素是否在可视区域中
