@@ -4,7 +4,7 @@ title: token
 tags:
 - Interview
 - HTTP
-categories: BOM
+categories: JS
 description: token 在项目中是用来干什么的？
 ---
 

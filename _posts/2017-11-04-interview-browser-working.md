@@ -208,6 +208,6 @@ console.log('defer2');
 # 更多-more
 
 - [浏览器的工作原理：新式网络浏览器幕后揭秘](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/)  
-- [JS 一定要放在 Body 的最底部么](https://segmentfault.com/a/1190000004292479#articleHeader6)  
+- [JS 一定要放在 Body 的最底部么](https://segmentfault.com/a/1190000004292479#articleHeader6)  
 - [浏览器渲染原理及流程](http://www.cnblogs.com/slly/p/6640761.html)  
 - [浏览器~加载，解析，渲染](http://www.jianshu.com/p/e141d1543143)

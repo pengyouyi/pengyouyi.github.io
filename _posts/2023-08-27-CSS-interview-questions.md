@@ -374,20 +374,6 @@ p::first-letter { font-size:30px; }
 
 总结来看，伪类的操作对象是文档树中已有的元素，而伪元素则是创建文档树以外的元素并为其添加样式。所以二者最核心区别就在于，`是否创造了“新的元素"`。
 
-# Triangle
-
-- 用纯CSS创建一个三角形的原理是什么？
-
-把上、左、右三条边隐藏掉（颜色设为 transparent）
-```css
-#demo{
-  width: 0; 
-  height: 0;  
-  border-width: 20px;  
-  border-style: solid;  
-  border-color: transparent transparent red transparent;
-}
-```
 
 # layout-PING
 - 一个满屏 品 字布局 如何设计?
@@ -422,10 +408,6 @@ padding-bottom时的高度，当它里面的任一列高度增加了，则父容
 
 [css等高布局](http://pengyouyi.site/css/2017/03/22/css-layout)
 
-# 12px
-- Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,
-
-可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决
 
 # hover
 - 超链接访问过后hover样式就不出现了 
@@ -733,22 +715,7 @@ fixed的元素是相对整个页面固定位置的，你在屏幕上滑动只是
 
 [CSS-页面滑屏滚动原理](https://www.cnblogs.com/xiaofeixiang/p/5042324.html)
 
-# @dedia
-- 什么是响应式设计？响应式设计的基本原理是什么？如何兼容低版本的IE？
 
-页面的设计和开发应当根据用户行为以及设备环境（系统平台、屏幕尺寸、屏幕定向等）进行相应的响应和调整。具体的实践方式由多方面组成，包括弹性网格和布局、图片、css media query的使用等。无论用户正在使用笔记本还是iPad，我们的页面都应该能够自动切换分辨率、图片尺寸及相关脚本功能等，以适应不同设备；换句话说，页面应该有能力去自动响应用户的设备环境。
-
-响应式网页设计就是一个网站能够兼容多个终端——而不是为每个终端做一个特定的版本。这样，我们就可以不必为不断到来的新设备做专门的版本设计和开发了。
-
-响应式设计的基本原理是通过媒体查询@media检测不同的设备屏幕尺寸做处理。页面头部必须有meta声明viewport：
-
-\<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no”>
-
-兼容IE可以使用JS辅助一下来解决
-
-[浏览器兼容与响应式布局](https://www.cnblogs.com/baiyygynui/p/5903749.html)
-
-[什么是响应式设计？为什么要做响应式设计？响应式设计的基本原理是什么？](https://www.cnblogs.com/luckyXcc/p/5772274.html)
 
 # screen-rolling
 - 视差滚动效果，如何给每页做不同的动画？（回到顶部，向下滑动要再次出现，和只出现一次分别怎么做？）
@@ -948,26 +915,6 @@ css3弹性盒子(Flex Box)解法：
 写在body标签后由于浏览器以逐行方式对html文档进行解析，当解析到写在尾部的样式表（外联或写在style标签）会导致浏览器停止之前的渲染，等待加载且解析样式表完成之后重新渲染，在windows的IE下可能会出现FOUC现象（即样式失效导致的页面闪烁问题）
 
 建议：用link加载css文件，一般样式放在head标签里面
-
-# 解释em
-
-```js
-document.getElementById("ElementID").style.fontSize="1.5em" 
-```
-
-em是个相对单位。
-
-# rem 和 em
-
-
-- rem 和 em 都是 css 中的相对长度单位，他们的区别就是，rem 是相对于根元素字体大小进行计算的，任意浏览器的默认字体都是16px，所以一般 1rem = 16px。  
-- 而 em 是相对于当前元素的字体大小来计算的，但是为什么我们经常说相对于父元素呢，其实也很好理解，因为 font-size 字体大小这个属性是可以被继承的，所以父元素的字体大小势必会影响到他的子元素的字体大小，也就是说子元素如果没有自己的font-size，那么它的 font-size 就会继承父元素，那此时 1em 的值就可以认为是相对于父元素字体大小来计算。  
-- 另外 rem 是 css3 新增的一个相对单位，r 就是 root 根的缩写，它的出现也就是为了解决 em 的缺点，em 是相对于父元素或当前元素的字体大小进行换算的，当当前元素或父元素字体大小改变时，就又得重新计算了，那么层级较多的时候，换算也就会越来越复杂，而 rem 只相对于 HTML 根元素，有了 rem这个单位我们只需要调整根元素 HTML 的 font-size，就能达到所有元素的动态适配，避免了一些复杂的层级关系。  
-	
-补充：
-
-1.	rem 是相对于根元素进行计算，而 em 是相对于当前元素或父元素的字体大小。rem 不仅可以设置字体的大小，还支持元素宽、高等属性。  
-2. em 的一些应用场景：设置行高 line-height: 1.5em; 给中文文字段首空两个字符 text-indent: 2em;  
 
 
 # readonly & disable
