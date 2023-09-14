@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 堆和排序
+title: JS算法-堆和排序
 tags:
 - algorithm
 categories: JS

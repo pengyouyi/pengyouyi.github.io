@@ -32,6 +32,12 @@ DOM操作、Ajax、事件绑定
 
 页面渲染、性能优化、前端安全
 
+# JS 知识导图
+
+<div class="rd">
+    <img src="/assets/images/2017/10-11-12/JS-zhishitixi.png" alt="">
+</div>
+
 # 前言-Preface
 
 - 基层工程师 - 基础知识

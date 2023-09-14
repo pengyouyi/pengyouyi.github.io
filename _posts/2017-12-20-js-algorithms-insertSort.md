@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 插入排序
+title: JS算法-插入排序
 tags:
 - algorithm
 categories: JS

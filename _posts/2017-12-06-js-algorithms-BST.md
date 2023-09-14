@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 二叉搜索树（BST）
+title: JS算法-二叉搜索树（BST）
 tags:
 - algorithm
 categories: JS

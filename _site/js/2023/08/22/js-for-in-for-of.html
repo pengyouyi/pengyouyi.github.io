@@ -163,6 +163,11 @@
 		
 		<h1 id="for-in-for-of">for...in 和 for...of 的区别</h1>
 
+<ul>
+<li>for...in 遍历得到 key<br></li>
+<li>for...of 遍历得到 value<br></li>
+</ul>
+
 <h1 id="for-in">for...in</h1>
 
 <p>for...in 可以遍历对象和数组</p>
@@ -267,7 +272,47 @@ for...of 可以简单、正确的遍历数组（不遍历原型上的 name 和 m
 
 <p><strong>for...of 遍历的是数组的值，不是索引</strong>  </p>
 </blockquote>
-  
+
+<h1 id="vs">可枚举 VS 可迭代</h1>
+
+<ul>
+<li>for...in 用于<strong>可枚举</strong>数据，比如对象、数组、字符串</li>
+<li>for...of 用于<strong>可迭代</strong>数据，比如数组、字符串、Map、Set</li>
+</ul>
+
+<h1 id="for-await-of">for await ...of 有什么作用</h1>
+
+<p>for await ...of 用于遍历多个 Promise  </p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">createPromise</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">resolve</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+      <span class="p">},</span> <span class="mi">1000</span><span class="p">)</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="p">(</span><span class="nx">async</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">p1</span> <span class="o">=</span> <span class="nx">createPromise</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">p2</span> <span class="o">=</span> <span class="nx">createPromise</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">p3</span> <span class="o">=</span> <span class="nx">createPromise</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+
+    <span class="c1">// const res1 = await p1;</span>
+    <span class="c1">// console.log(res1);  // 100</span>
+    <span class="c1">// const res2 = await p2;</span>
+    <span class="c1">// console.log(res2);  //200</span>
+    <span class="c1">// const res3 = await p3;</span>
+    <span class="c1">// console.log(res3);  //300</span>
+
+    <span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="p">[</span><span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">,</span> <span class="nx">p3</span><span class="p">];</span>
+
+    <span class="c1">// Promise.all(list).then(res =&gt; console.log(res));  // [100, 200, 3000]</span>
+
+    <span class="c1">// 和上面的 Promise.all() 方法等价</span>
+    <span class="k">for</span> <span class="nx">await</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">res</span> <span class="nx">of</span> <span class="nx">list</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})()</span>
+</code></pre></div>  
 	</div>
 	<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -372,11 +417,11 @@ for...of 可以简单、正确的遍历数组（不遍历原型上的 name 和 m
 		  
 		
 		  
-			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>24</sup></a></li>
+			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>25</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>44</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>45</sup></a></li>
 		  
 		
 		  
@@ -388,15 +433,15 @@ for...of 可以简单、正确的遍历数组（不遍历原型上的 name 和 m
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>93</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>95</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#CSS" title="CSS">CSS<sup>30</sup></a></li>
+			<li><a href="/categories/#CSS" title="CSS">CSS<sup>31</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#HTML" title="HTML">HTML<sup>5</sup></a></li>
+			<li><a href="/categories/#HTML" title="HTML">HTML<sup>6</sup></a></li>
 		  
 		
 		  
@@ -425,7 +470,7 @@ for...of 可以简单、正确的遍历数组（不遍历原型上的 name 和 m
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>33</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>34</sup></a></li>
 			
 		
 			
@@ -461,11 +506,11 @@ for...of 可以简单、正确的遍历数组（不遍历原型上的 name 和 m
 			
 		
 			
-				<li><a href="/tags/#standard" title="standard">standard<sup>7</sup></a></li>
+				<li><a href="/tags/#standard" title="standard">standard<sup>8</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#CSS-Basic" title="CSS-Basic">CSS-Basic<sup>6</sup></a></li>
+				<li><a href="/tags/#CSS-Basic" title="CSS-Basic">CSS-Basic<sup>7</sup></a></li>
 			
 		
 			
@@ -477,7 +522,7 @@ for...of 可以简单、正确的遍历数组（不遍历原型上的 name 和 m
 			
 		
 			
-				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>18</sup></a></li>
+				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>19</sup></a></li>
 			
 		
 			
@@ -493,11 +538,15 @@ for...of 可以简单、正确的遍历数组（不遍历原型上的 name 和 m
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>65</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>66</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#BOM" title="BOM">BOM<sup>16</sup></a></li>
+				<li><a href="/tags/#BOM" title="BOM">BOM<sup>17</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#JS-use" title="JS-use">JS-use<sup>2</sup></a></li>
 			
 		
 			

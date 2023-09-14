@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 选择排序
+title: JS算法-选择排序
 tags:
 - algorithm
 categories: JS

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 排序算法总结
+title: JS算法-排序算法总结
 tags:
 - algorithm
 categories: JS

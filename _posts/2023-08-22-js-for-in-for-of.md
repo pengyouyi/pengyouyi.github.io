@@ -10,6 +10,9 @@ description: for...in 和 for...of 的区别
 
 # for...in 和 for...of 的区别
 
+- for...in 遍历得到 key  
+- for...of 遍历得到 value  
+
 # for...in
 
 for...in 可以遍历对象和数组
@@ -122,3 +125,46 @@ for...of 遍历数组得到的是数组的每一项值,不是索引。
 >> **for...in 遍历的是对象的属性，以及原型链上的属性**  
 
 > **for...of 遍历的是数组的值，不是索引**  
+
+
+# 可枚举 VS 可迭代
+
+- for...in 用于**可枚举**数据，比如对象、数组、字符串
+- for...of 用于**可迭代**数据，比如数组、字符串、Map、Set
+
+
+# for await ...of 有什么作用
+
+for await ...of 用于遍历多个 Promise  
+
+```js
+function createPromise(val) {
+  return new Promise((resolve) => {
+      setTimeout(() => {
+          resolve(val)
+      }, 1000)
+  })
+}
+
+(async function() {
+    const p1 = createPromise(100);
+    const p2 = createPromise(200);
+    const p3 = createPromise(300);
+
+    // const res1 = await p1;
+    // console.log(res1);  // 100
+    // const res2 = await p2;
+    // console.log(res2);  //200
+    // const res3 = await p3;
+    // console.log(res3);  //300
+
+    const list = [p1, p2, p3];
+
+    // Promise.all(list).then(res => console.log(res));  // [100, 200, 3000]
+
+    // 和上面的 Promise.all() 方法等价
+    for await (let res of list) {
+      console.log(res)
+    }
+})()
+```

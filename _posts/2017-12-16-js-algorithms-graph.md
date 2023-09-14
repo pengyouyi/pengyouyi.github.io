@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 图的基础
+title: JS算法-图的基础
 tags:
 - algorithm
 categories: JS

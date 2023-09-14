@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 排序算法-希尔排序
+title: JS算法-排序算法-希尔排序
 tags:
 - algorithm
 categories: JS

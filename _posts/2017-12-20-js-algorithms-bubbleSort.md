@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 冒泡排序
+title: JS算法-冒泡排序
 tags:
 - algorithm
 categories: JS
