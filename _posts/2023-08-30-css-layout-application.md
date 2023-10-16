@@ -4,6 +4,7 @@ title: CSS CSS 场景应用-画三角形、解决1px
 tags:
 - Interview
 - layout
+- CSS-use
 categories: CSS
 description: CSS 面试题集合
 ---
@@ -90,7 +91,7 @@ transform: scale(0.5,0.5);
 
 ③ 使用图片：如果是内容固定不变情况下，使用将小于12px文字内容切出做图片，这样不影响兼容也不影响美观。 ✘
 
-# 如何解决 1px 问题？
+# Retina 屏幕的 1px 像素
 
 1px 问题指的是：在一些 Retina屏幕 的机型上，移动端页面的 1px 会变得很粗，呈现出不止 1px 的效果。原因很简单——CSS 中的 1px 并不能和移动设备上的 1px 划等号。它们之间的比例关系有一个专门的属性来描述：
 
@@ -103,7 +104,7 @@ cePixelRatio = 设备的物理像素 / CSS像素。
 
 **解决1px 问题的三种思路：**
 
-**<u>思路一：直接写 0.5px</u>**
+**<u>思路一：直接写 0.5px【不推荐】</u>**
 
 如果之前 1px 的样式这样写：
 ```
@@ -122,7 +123,7 @@ border:1px solid #333
 ```
 直接把 1px 改成 1/devicePixelRatio 后的值，这是目前为止最简单的一种方法。这种方法的缺陷在于兼容性不行，IOS 系统需要8及以上的版本，安卓系统则直接不兼容。
 
-**<u>思路二：伪元素先放大后缩小</u>**
+**<u>思路二：伪元素先放大后缩小【推荐】</u>**
 
 这个方法的可行性会更高，兼容性也更好。唯一的缺点是代码会变多。
 
@@ -146,6 +147,24 @@ border:1px solid #333
     }
 }
 ```
+法二： css 伪类 + transform 
+```css
+#box {
+    padding: 10px 0;
+    position: relative;
+}
+#box::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: #d9d9d9;
+    transform: scaleY(0.5);
+    transform-origin: 0 0;
+}
+```
 **<u>思路三：viewport 缩放来解决</u>**
 【不推荐使用】
 
@@ -164,7 +183,24 @@ metaEl.setAttribute('content', `width=device-width,user-scalable=no,initial-scal
 
 这样解决了，但这样做的副作用也很大，整个页面被缩放了。这时 1px 已经被处理成物理像素大小，这样的大小在手机上显示边框很合适。但是，一些原本不需要被缩小的内容，比如文字、图片等，也被无差别缩小掉了。
 
+**连环问：如果有 border-radius 怎么办**
 
+可以使用 `box-shadow` 设置
 
+- X 偏移量 0  
+- Y 偏移量 0  
+- 阴影模糊半径 0  
+- 阴影扩散半径 0.5px   
+- 阴影颜色  
+
+```css
+#box2 {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    /* border: 1px solid #d9d9d9; */
+    box-shadow: 0 0 0 0.5px #d9d9d9;
+}
+```
 
 

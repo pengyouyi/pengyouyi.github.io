@@ -7,7 +7,7 @@
     
     
     
-    <title>js中的if语句 | 彭友谊的博客</title>
+    <title>移动端H5点击有300ms延迟，该如何解决 | 彭友谊的博客</title>
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
@@ -22,12 +22,12 @@
     
     <meta property="og:type" content="article">
     
-    <meta property="og:title" content="js中的if语句">
+    <meta property="og:title" content="移动端H5点击有300ms延迟，该如何解决">
     <meta property="og:url" content="/js/2022/12/14/js-300ms-delay">
     <meta property="og:site_name" content="彭友谊的博客">
-    <meta property="og:description" content="js中的if语句">
+    <meta property="og:description" content="j移动端H5点击有300ms延迟，该如何解决">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="js中的if语句">
+    <meta name="twitter:title" content="移动端H5点击有300ms延迟，该如何解决">
     <meta name="twitter:description" content="page.description">
     <meta name="twitter:creator" content="@">
 
@@ -142,7 +142,7 @@
 	<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/js/2022/12/14/js-300ms-delay" title="js中的if语句" itemprop="url">js中的if语句</a>
+      <a href="/js/2022/12/14/js-300ms-delay" title="移动端H5点击有300ms延迟，该如何解决" itemprop="url">移动端H5点击有300ms延迟，该如何解决</a>
   </h1>
   <p class="article-author">By
        
@@ -161,144 +161,30 @@
 		
 		</div>
 		
-		<h1 id="js-if">js中的if语句</h1>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">statement</span>
-<span class="p">}</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">sattement1</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="nx">statement2</span>
-<span class="p">}</span>
-</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="k">if</span><span class="p">(</span><span class="nx">condition</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">statement1</span>
-<span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">statement2</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="nx">statement3</span>
-<span class="p">}</span>
+		<h1 id="h5-300ms">移动端H5点击有300ms延迟，该如何解决</h1>
+
+<p>背景：早期手机端查看页面有双击放大的效果。区分是 click 点击，还是要双击放大。</p>
+
+<p><strong>初期解决方案：FastClick</strong></p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">// FastClick 使用非常简单
+window.addEventListener("load",function(){
+  FastClick.attach(document.body)
+}, false)
 </code></pre></div>
-<p>其中condition可以是任意表达式，而且对这个表达式求值的结果不一定是布尔值。<br><br>
-ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转化为一个布尔值。</p>
+<p><strong>FastClick 原理</strong></p>
 
-<h1 id="boolean-rules">Boolean()转换rules</h1>
+<ul>
+<li>监听 touchend 事件（touchstart touchend 会先于 click 触发）<br></li>
+<li>使用 <strong>自定义DOM事件</strong> 模拟一个 click 事件<br></li>
+<li>把默认的 click 事件（300ms之后触发）禁止掉<br></li>
+</ul>
 
-<p>各种数据类型及其对应的转换规则。</p>
+<p><strong>现代浏览器的改进</strong></p>
 
-<table><thead>
-<tr>
-<th>数据类型</th>
-<th>转换为true的值</th>
-<th>转换为false的值</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Boolean</td>
-<td>true</td>
-<td>false</td>
-</tr>
-<tr>
-<td>Undefined</td>
-<td>不适用</td>
-<td>undefined</td>
-</tr>
-<tr>
-<td>String</td>
-<td>任何非空字符串</td>
-<td>&quot;&quot;(空字符串)</td>
-</tr>
-<tr>
-<td>Number</td>
-<td>任何非零数字值（包括负数、正负无穷大）</td>
-<td>0和NaN</td>
-</tr>
-<tr>
-<td>Object</td>
-<td>任何对象(包括{ }、[ ] )</td>
-<td>null</td>
-</tr>
-<tr>
-<td>Function</td>
-<td>all(所有的)</td>
-<td>no(无)</td>
-</tr>
-</tbody></table>
-
-<p>Boolean()转换未声明的变量会报错。</p>
-
-<h1 id="boolean-demo">Boolean()转换的demo</h1>
-
-<h2 id="boolean">Boolean类型</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">a</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">b</span><span class="p">));</span> <span class="c1">// false</span>
-</code></pre></div>
-<h2 id="undefined">Undefined类型</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>  
-<span class="kd">var</span> <span class="nx">d</span><span class="p">;</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">c</span><span class="p">));</span> <span class="c1">// false</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">d</span><span class="p">));</span> <span class="c1">// false</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span> <span class="c1">// Error: Uncaught ReferenceError: x is not defined</span>
-</code></pre></div>
-<h2 id="string">String类型</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="s2">"a"</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">str2</span> <span class="o">=</span> <span class="s2">" "</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">str3</span> <span class="o">=</span> <span class="s2">"false"</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">str4</span> <span class="o">=</span> <span class="s2">""</span><span class="p">;</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">str1</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">str2</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">str3</span><span class="p">));</span> <span class="c1">// true</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">str4</span><span class="p">));</span> <span class="c1">// false</span>
-</code></pre></div>
-<h2 id="number">Number类型</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">num1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">num2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">num3</span> <span class="o">=</span> <span class="kc">Infinity</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">num4</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Infinity</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">num5</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">num6</span> <span class="o">=</span> <span class="kc">NaN</span><span class="p">;</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num1</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num2</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num3</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num4</span><span class="p">));</span> <span class="c1">// true</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num5</span><span class="p">));</span> <span class="c1">// false</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">num6</span><span class="p">));</span> <span class="c1">// false</span>
-</code></pre></div>
-<h2 id="object">Object类型</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">name</span><span class="p">:</span> <span class="s2">"peng"</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{};</span>
-<span class="kd">var</span> <span class="nx">obj3</span> <span class="o">=</span> <span class="p">[];</span>
-
-<span class="kd">var</span> <span class="nx">obj4</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">obj1</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">obj2</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">obj3</span><span class="p">));</span> <span class="c1">// true</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">obj4</span><span class="p">));</span> <span class="c1">// false</span>
-</code></pre></div>
-<h2 id="function">Function类型</h2>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">f1</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){};</span>
-<span class="kd">var</span> <span class="nx">f2</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">f2</span><span class="p">(){};</span>
-<span class="kd">var</span> <span class="nx">f3</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span> <span class="k">return</span> <span class="kc">false</span> <span class="p">};</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">f1</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">f2</span><span class="p">));</span> <span class="c1">// true</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">f3</span><span class="p">));</span> <span class="c1">// true</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Boolean</span><span class="p">(</span><span class="nx">f3</span><span class="p">()));</span> <span class="c1">// false</span>
+<p><code>width=device-width</code> 有这个属性的手机端就不会出现 300ms 的延迟</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width,initial-scal=1.0"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
 </code></pre></div>  
 	</div>
 	<footer class="article-footer clearfix">
@@ -329,7 +215,9 @@ ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转化�
   <span></span> <!--<%- tags.join('') %>-->
   
   
-  <a href="/tags/#JS-Basic">JS-Basic</a>
+  <a href="/tags/#JS-use">JS-use</a>
+  
+  <a href="/tags/#BOM">BOM</a>
   
   </div>
 
@@ -339,7 +227,7 @@ ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转化�
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="/js/2022/12/14/js-300ms-delay" data-title="js中的if语句 | 彭友谊的博客" data-tsina="" class="share clearfix">
+	  <div data-url="/js/2022/12/14/js-300ms-delay" data-title="移动端H5点击有300ms延迟，该如何解决 | 彭友谊的博客" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -402,7 +290,7 @@ ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转化�
 		  
 		
 		  
-			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>25</sup></a></li>
+			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>26</sup></a></li>
 		  
 		
 		  
@@ -507,7 +395,7 @@ ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转化�
 			
 		
 			
-				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>19</sup></a></li>
+				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>18</sup></a></li>
 			
 		
 			
@@ -523,15 +411,15 @@ ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转化�
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>66</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>67</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#BOM" title="BOM">BOM<sup>17</sup></a></li>
+				<li><a href="/tags/#BOM" title="BOM">BOM<sup>19</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#JS-use" title="JS-use">JS-use<sup>2</sup></a></li>
+				<li><a href="/tags/#JS-use" title="JS-use">JS-use<sup>4</sup></a></li>
 			
 		
 			
@@ -592,6 +480,10 @@ ECMAScript会自动调用Boolean()转换函数将这个表达式的结果转化�
 		
 			
 				<li><a href="/tags/#JS" title="JS">JS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#CSS-use" title="CSS-use">CSS-use<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -229,7 +229,7 @@
 
 <p>③ 使用图片：如果是内容固定不变情况下，使用将小于12px文字内容切出做图片，这样不影响兼容也不影响美观。 ✘</p>
 
-<h1 id="1px">如何解决 1px 问题？</h1>
+<h1 id="retina-1px">Retina 屏幕的 1px 像素</h1>
 
 <p>1px 问题指的是：在一些 Retina屏幕 的机型上，移动端页面的 1px 会变得很粗，呈现出不止 1px 的效果。原因很简单——CSS 中的 1px 并不能和移动设备上的 1px 划等号。它们之间的比例关系有一个专门的属性来描述：</p>
 <div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nt">window</span><span class="nc">.devi</span>
@@ -240,7 +240,7 @@
 
 <p><strong>解决1px 问题的三种思路：</strong></p>
 
-<p><strong><u>思路一：直接写 0.5px</u></strong></p>
+<p><strong><u>思路一：直接写 0.5px【不推荐】</u></strong></p>
 
 <p>如果之前 1px 的样式这样写：</p>
 <div class="highlight"><pre><code class="language-" data-lang="">border:1px solid #333
@@ -255,7 +255,7 @@
 </code></pre></div>
 <p>直接把 1px 改成 1/devicePixelRatio 后的值，这是目前为止最简单的一种方法。这种方法的缺陷在于兼容性不行，IOS 系统需要8及以上的版本，安卓系统则直接不兼容。</p>
 
-<p><strong><u>思路二：伪元素先放大后缩小</u></strong></p>
+<p><strong><u>思路二：伪元素先放大后缩小【推荐】</u></strong></p>
 
 <p>这个方法的可行性会更高，兼容性也更好。唯一的缺点是代码会变多。</p>
 
@@ -277,6 +277,23 @@
     <span class="p">}</span>
 <span class="err">}</span>
 </code></pre></div>
+<p>法二： css 伪类 + transform </p>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nf">#box</span> <span class="p">{</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nf">#box</span><span class="nd">::before</span> <span class="p">{</span>
+    <span class="nl">content</span><span class="p">:</span> <span class="s2">''</span><span class="p">;</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">bottom</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">1px</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="m">#d9d9d9</span><span class="p">;</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">scaleY</span><span class="p">(</span><span class="m">0.5</span><span class="p">);</span>
+    <span class="nl">transform-origin</span><span class="p">:</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <p><strong><u>思路三：viewport 缩放来解决</u></strong><br>
 【不推荐使用】</p>
 
@@ -289,7 +306,26 @@
 <span class="nx">metaEl</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="err">`</span><span class="nx">width</span><span class="o">=</span><span class="nx">device</span><span class="o">-</span><span class="nx">width</span><span class="p">,</span><span class="nx">user</span><span class="o">-</span><span class="nx">scalable</span><span class="o">=</span><span class="nx">no</span><span class="p">,</span><span class="nx">initial</span><span class="o">-</span><span class="nx">scale</span><span class="o">=</span><span class="nx">$</span><span class="p">{</span><span class="nx">scale</span><span class="p">},</span><span class="nx">maximum</span><span class="o">-</span><span class="nx">scale</span><span class="o">=</span><span class="nx">$</span><span class="p">{</span><span class="nx">scale</span><span class="p">},</span><span class="nx">minimum</span><span class="o">-</span><span class="nx">scale</span><span class="o">=</span><span class="nx">$</span><span class="p">{</span><span class="nx">scale</span><span class="p">}</span><span class="err">`</span><span class="p">);</span>
 </code></pre></div>
 <p>这样解决了，但这样做的副作用也很大，整个页面被缩放了。这时 1px 已经被处理成物理像素大小，这样的大小在手机上显示边框很合适。但是，一些原本不需要被缩小的内容，比如文字、图片等，也被无差别缩小掉了。</p>
-  
+
+<p><strong>连环问：如果有 border-radius 怎么办</strong></p>
+
+<p>可以使用 <code>box-shadow</code> 设置</p>
+
+<ul>
+<li>X 偏移量 0<br></li>
+<li>Y 偏移量 0<br></li>
+<li>阴影模糊半径 0<br></li>
+<li>阴影扩散半径 0.5px<br></li>
+<li>阴影颜色<br></li>
+</ul>
+<div class="highlight"><pre><code class="language-css" data-lang="css"><span class="nf">#box2</span> <span class="p">{</span>
+    <span class="nl">margin-top</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+    <span class="nl">border-radius</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+    <span class="c">/* border: 1px solid #d9d9d9; */</span>
+    <span class="nl">box-shadow</span><span class="p">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0.5px</span> <span class="m">#d9d9d9</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>  
 	</div>
 	<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -322,6 +358,8 @@
   <a href="/tags/#Interview">Interview</a>
   
   <a href="/tags/#layout">layout</a>
+  
+  <a href="/tags/#CSS-use">CSS-use</a>
   
   </div>
 
@@ -394,7 +432,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>25</sup></a></li>
+			<li><a href="/categories/#HTTP" title="HTTP">HTTP<sup>26</sup></a></li>
 		  
 		
 		  
@@ -499,7 +537,7 @@
 			
 		
 			
-				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>19</sup></a></li>
+				<li><a href="/tags/#JS-Basic" title="JS-Basic">JS-Basic<sup>18</sup></a></li>
 			
 		
 			
@@ -515,15 +553,15 @@
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>66</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>67</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#BOM" title="BOM">BOM<sup>17</sup></a></li>
+				<li><a href="/tags/#BOM" title="BOM">BOM<sup>19</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/#JS-use" title="JS-use">JS-use<sup>2</sup></a></li>
+				<li><a href="/tags/#JS-use" title="JS-use">JS-use<sup>4</sup></a></li>
 			
 		
 			
@@ -584,6 +622,10 @@
 		
 			
 				<li><a href="/tags/#JS" title="JS">JS<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/#CSS-use" title="CSS-use">CSS-use<sup>1</sup></a></li>
 			
 		
 		</ul>
