@@ -565,7 +565,7 @@ HTML5引入async
 <script async src="script.js"></script>
 ```
 
-defer和async的区别：async是加载完成后自动执行，而defer需要等待页面完成后执行。
+【总结】defer和async的区别：async 是加载完成后自动执行，而 defer 需要等待页面完成后执行。
 
 **动态创建DOM方式：**
 
