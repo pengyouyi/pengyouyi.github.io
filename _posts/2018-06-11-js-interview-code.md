@@ -270,6 +270,22 @@ ES6新增数组api,方法2:
 Array.isArray(arr);
 ```
 
+## getType判断JS所有的数据类型
+
+手写一个getType函数，获取详细的数据类型。
+
+`Object.prototype.toString.call(x);` = '[object Array]'
+
+```js
+function getType(x){
+  const originType = Object.prototype.toString.call(x);  // '[object Undefined]'
+  const spaceIndex = originType.indexOf(' ');
+  const type = originType.slice(spaceIndex + 1,-1);
+  return type.toLowerCase();
+}
+console.log(getType(x))
+```
+
 ## 数组unique
 
 - 编写一个方法 去掉一个数组的重复元素 
@@ -378,6 +394,85 @@ arr.sort(function(){
 	return Math.random() - 0.5;
 })
 console.log(arr);
+```
+
+## Array Flatten 数组一级拍平
+
+- 写一个JS 函数，实现数组扁平化，只减少一级嵌套
+- 如输入[1,[2,[3]],4],输出[1,2,[3],4]
+
+【法一：遍历】
+
+**思路：**
+
+- 定义空数组 arr = [],遍历当前数组  
+- 如果 item 非数组，则累加到 arr  
+- 如果 item 是数组，则遍历之后累加到 arr
+
+```js
+var arr = [1,'test',[3,['Str'],9],2];
+
+function arrFlatten(arr) {
+  let res = [];
+  const len = arr.length;
+  for(let i = 0;i < len; i++) {
+    if(Array.isArray(arr[i])) {
+        for(let j = 0;j < arr[i].length;j++) {
+          res.push(arr[i][j])
+        }
+    } else {
+        res.push(arr[i])
+    }
+  }
+  return res
+}
+
+console.log(arrFlatten(arr));
+```
+【法二: 使用 concat】
+
+```js
+var arr = [1,'test',[3,['Str'],9],2];
+
+function arrFlatten2(arr) {
+  let res = [];
+  const len = arr.length;
+  for(let i = 0; i < len; i++) {
+    res = res.concat(arr[i]); // 使用concat不会改变原来的res数组,这里需要重新赋值
+  }
+  return res
+}
+console.log(arrFlatten2(arr));
+```
+
+## Array Flatten 数组深度扁平化
+
+写一个JS函数，实现数组扁平化，减少所有嵌套的层级
+
+思路
+
+- 先实现一级扁平化，然后递归调用，直到所有扁平
+
+```js
+var arr = [1,'test',[3,['Str'],9],2];
+function arrFlatten(arr) {
+  let res = [];
+  const len = arr.length;
+  for(let i = 0;i < len; i++) {
+    if(Array.isArray(arr[i])) {
+        let temp = arrFlatten(arr[i]);  // 递归
+        for(let j = 0; j < temp.length; j++) {
+            res.push(temp[j])
+        }
+        // res = res.concat(arrFlatten(arr[i]));  
+    } else {
+        res.push(arr[i])
+    }
+  }
+  return res
+}
+
+console.log(arrFlatten(arr));
 ```
 
 # Object

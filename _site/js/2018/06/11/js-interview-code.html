@@ -403,6 +403,19 @@
 <p>ES6新增数组api,方法2:</p>
 <div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
 </code></pre></div>
+<h2 id="gettype-js">getType判断JS所有的数据类型</h2>
+
+<p>手写一个getType函数，获取详细的数据类型。</p>
+
+<p><code>Object.prototype.toString.call(x);</code> = &#39;[object Array]&#39;</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">getType</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>
+  <span class="kr">const</span> <span class="nx">originType</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>  <span class="c1">// '[object Undefined]'</span>
+  <span class="kr">const</span> <span class="nx">spaceIndex</span> <span class="o">=</span> <span class="nx">originType</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">' '</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">originType</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">spaceIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">type</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getType</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span>
+</code></pre></div>
 <h2 id="unique">数组unique</h2>
 
 <ul>
@@ -495,6 +508,83 @@
     <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">;</span>
 <span class="p">})</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="array-flatten">Array Flatten 数组一级拍平</h2>
+
+<ul>
+<li>写一个JS 函数，实现数组扁平化，只减少一级嵌套</li>
+<li>如输入[1,[2,[3]],4],输出[1,2,[3],4]</li>
+</ul>
+
+<p>【法一：遍历】</p>
+
+<p><strong>思路：</strong></p>
+
+<ul>
+<li>定义空数组 arr = [],遍历当前数组<br></li>
+<li>如果 item 非数组，则累加到 arr<br></li>
+<li>如果 item 是数组，则遍历之后累加到 arr</li>
+</ul>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s1">'test'</span><span class="p">,[</span><span class="mi">3</span><span class="p">,[</span><span class="s1">'Str'</span><span class="p">],</span><span class="mi">9</span><span class="p">],</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">arrFlatten</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">res</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kr">const</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span><span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">res</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="nx">j</span><span class="p">])</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">res</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arrFlatten</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
+</code></pre></div>
+<p>【法二: 使用 concat】</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s1">'test'</span><span class="p">,[</span><span class="mi">3</span><span class="p">,[</span><span class="s1">'Str'</span><span class="p">],</span><span class="mi">9</span><span class="p">],</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">arrFlatten2</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">res</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kr">const</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">res</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span> <span class="c1">// 使用concat不会改变原来的res数组,这里需要重新赋值</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">res</span>
+<span class="p">}</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arrFlatten2</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
+</code></pre></div>
+<h2 id="array-flatten">Array Flatten 数组深度扁平化</h2>
+
+<p>写一个JS函数，实现数组扁平化，减少所有嵌套的层级</p>
+
+<p>思路</p>
+
+<ul>
+<li>先实现一级扁平化，然后递归调用，直到所有扁平</li>
+</ul>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s1">'test'</span><span class="p">,[</span><span class="mi">3</span><span class="p">,[</span><span class="s1">'Str'</span><span class="p">],</span><span class="mi">9</span><span class="p">],</span><span class="mi">2</span><span class="p">];</span>
+<span class="kd">function</span> <span class="nx">arrFlatten</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">res</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kr">const</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">arrFlatten</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>  <span class="c1">// 递归</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">temp</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">res</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">temp</span><span class="p">[</span><span class="nx">j</span><span class="p">])</span>
+        <span class="p">}</span>
+        <span class="c1">// res = res.concat(arrFlatten(arr[i]));  </span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">res</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arrFlatten</span><span class="p">(</span><span class="nx">arr</span><span class="p">));</span>
 </code></pre></div>
 <h1 id="object">Object</h1>
 
@@ -993,11 +1083,11 @@
 		  
 		
 		  
-			<li><a href="/categories/#Framework" title="Framework">Framework<sup>45</sup></a></li>
+			<li><a href="/categories/#Framework" title="Framework">Framework<sup>48</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/#Tool" title="Tool">Tool<sup>5</sup></a></li>
+			<li><a href="/categories/#Tool" title="Tool">Tool<sup>6</sup></a></li>
 		  
 		
 		  
@@ -1005,7 +1095,7 @@
 		  
 		
 		  
-			<li><a href="/categories/#JS" title="JS">JS<sup>99</sup></a></li>
+			<li><a href="/categories/#JS" title="JS">JS<sup>100</sup></a></li>
 		  
 		
 		  
@@ -1042,7 +1132,7 @@
 			
 		
 			
-				<li><a href="/tags/#vue" title="vue">vue<sup>34</sup></a></li>
+				<li><a href="/tags/#vue" title="vue">vue<sup>37</sup></a></li>
 			
 		
 			
@@ -1090,7 +1180,7 @@
 			
 		
 			
-				<li><a href="/tags/#optimize" title="optimize">optimize<sup>13</sup></a></li>
+				<li><a href="/tags/#optimize" title="optimize">optimize<sup>16</sup></a></li>
 			
 		
 			
@@ -1110,7 +1200,7 @@
 			
 		
 			
-				<li><a href="/tags/#Interview" title="Interview">Interview<sup>70</sup></a></li>
+				<li><a href="/tags/#Interview" title="Interview">Interview<sup>71</sup></a></li>
 			
 		
 			
@@ -1126,7 +1216,7 @@
 			
 		
 			
-				<li><a href="/tags/#algorithm" title="algorithm">algorithm<sup>10</sup></a></li>
+				<li><a href="/tags/#algorithm" title="algorithm">algorithm<sup>11</sup></a></li>
 			
 		
 			
